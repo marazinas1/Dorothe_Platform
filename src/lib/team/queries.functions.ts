@@ -13,20 +13,21 @@ export type PublicTeamMember = {
 
 export const listPublicTeam = createServerFn({ method: "GET" }).handler(
   async (): Promise<PublicTeamMember[]> => {
-    const { createPublicSupabase } = await import("@/lib/supabase/server-public");
-    const supabase = createPublicSupabase();
-    const { data, error } = await supabase
-      .from("profiles")
+    // Visitors have no access to the profiles table at all. The narrow
+    // profiles_public view (name, title, bio, photo, languages, specialisations
+    // of website-visible active staff) is read server-side only.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin
+      .from("profiles_public" as never)
       .select(
         "id, full_name, public_title, public_photo_url, languages_spoken, specializations, sort_order",
       )
-      .eq("show_on_website", true)
-      .eq("is_active", true)
       .order("sort_order", { ascending: true });
     if (error) throw new Error(`Failed to load team: ${error.message}`);
-    return (data ?? []) as PublicTeamMember[];
+    return (data ?? []) as unknown as PublicTeamMember[];
   },
 );
+
 
 export const publicTeamQueryOptions = queryOptions({
   queryKey: ["public_team"],
