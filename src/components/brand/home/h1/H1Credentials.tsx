@@ -1,5 +1,3 @@
-import { Reveal } from "@/components/shared/Reveal";
-
 import { credItems, type HomeTemplateProps } from "../types";
 
 /**
@@ -21,9 +19,8 @@ export function H1Credentials({ copy }: HomeTemplateProps) {
       {items.length > 0 ? (
         <div className="mt-14 grid border-t border-border md:grid-cols-3">
           {items.map((item, i) => (
-            <Reveal
+            <div
               key={i}
-              delay={i * 90}
               className="border-b border-border py-7 md:border-b-0 md:border-r md:pr-7 md:nth-[2]:pl-7 md:last:border-r-0 md:last:pl-7"
             >
               <h3 className="font-heading text-[19px]">{item.title}</h3>
@@ -33,7 +30,7 @@ export function H1Credentials({ copy }: HomeTemplateProps) {
               {item.tag ? (
                 <div className="mt-3.5 text-[12.5px] font-semibold text-accent">{item.tag}</div>
               ) : null}
-            </Reveal>
+            </div>
           ))}
         </div>
       ) : null}
