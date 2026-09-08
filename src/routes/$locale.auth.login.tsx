@@ -73,7 +73,9 @@ function LoginPage() {
   return (
     <AuthSplit
       eyebrow={t("admin.auth.login.eyebrow")}
-      brand={<SiteLogo settings={settings} tone="light" className="max-w-[18rem]" />}
+      brand={
+        <SiteLogo settings={settings} tone="light" size="sm" className="max-w-[18rem]" />
+      }
       tagline={settings?.site_name}
       note={t("admin.auth.login.note")}
     >
