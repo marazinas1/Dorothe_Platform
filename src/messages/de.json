@@ -49,7 +49,6 @@
       "hero_kicker": "{{agent}}",
       "hero_headline": "Ihr Zuhause in guten Händen",
       "hero_subline": "Sachverständige Wertermittlung, ehrliche Beratung und ein Verkauf, der Bestand hat — {{region_in}}.",
-      "statement": "Eine Immobilie wird einmal verkauft. Entscheidend ist, dass der erzielte Preis begründet ist.",
       "sell_title": "Sie möchten Ihre Immobilie verkaufen?",
       "sell_body": "Wir beginnen mit einer sachverständigen Wertermittlung vor Ort. Danach entscheiden Sie in Ruhe, ob und wann verkauft wird.",
       "buy_title": "Sie suchen ein Zuhause?",
@@ -68,7 +67,6 @@
       "valuation_title": "Was ist Ihre Immobilie heute wert?",
       "contact_title": "Kaufen oder verkaufen — sagen Sie mir, worum es geht.",
       "testi_title": "Das sagen Kundinnen und Kunden",
-      "facts": "20+ Jahre — im Beruf\nDEKRA — zertifizierte Sachverständige\n100% — persönliche Betreuung",
       "testi1_quote": "Lorem ipsum dolor sit amet — die Wertermittlung wurde verständlich erklärt und der Verkauf lief ohne Überraschungen.",
       "testi1_name": "Name",
       "testi1_town": "Ort",
@@ -552,7 +550,6 @@
         "expired": "Bitte melden Sie sich erneut an.",
         "eyebrow": "Administration",
         "note": "Nur für autorisierte Personen"
-
       },
       "forgot": {
         "title": "Passwort zurücksetzen",
@@ -581,7 +578,6 @@
         "weak": "Das Passwort erfüllt nicht die Anforderungen.",
         "invalidLink": "Der Link ist ungültig oder abgelaufen."
       }
-
     },
     "settings": {
       "title": "Einstellungen",
@@ -1282,7 +1278,6 @@
         "hero_kicker": "Kleine Zeile über der Überschrift",
         "hero_headline": "Überschrift",
         "hero_subline": "Begleitzeile",
-        "statement": "Aussage-Band",
         "sell_title": "Verkaufen — Titel",
         "sell_body": "Verkaufen — Text",
         "buy_title": "Kaufen — Titel",
@@ -1304,7 +1299,6 @@
         "valuation_body": "Wertermittlung — Text",
         "valuation_steps": "Wertermittlung — Schritte",
         "contact_title": "Kontakt — Überschrift",
-        "facts": "Faktenzeile (eine pro Zeile, „Wert — Bezeichnung“)",
         "testi_title": "Kundenstimmen — Überschrift",
         "testi1_quote": "Stimme 1",
         "testi1_name": "Stimme 1 — Name",
@@ -1326,26 +1320,23 @@
       },
       "templates": {
         "h1": {
-          "label": "Direkt",
+          "label": "Home V1",
           "description": "Amber, Tiefschwarz und warmes Papier. Aussage zuerst, dann Qualifikation und Stimmen."
         },
         "h2": {
-          "label": "Sachverständige",
+          "label": "Home V2",
           "description": "Warme Papiertöne, Serif-Überschriften, Qualifikation zuerst."
         },
         "h3": {
-          "label": "Vier Wände",
-          "description": "Großes Aufmacherfoto, Weinrot, ein Zitatband."
-        },
-        "h4": {
-          "label": "Modern",
+          "label": "Home V3",
           "description": "Ein großer Satz, feine Raster, orange Akzente."
-        },
-        "h5": {
-          "label": "Editorial",
-          "description": "Bildschirmfüllendes Foto, Faktenzeile, Stimmen auf dunklem Band."
         }
-      }
+      },
+      "edit": "Dieses Design bearbeiten",
+      "editHint": "Karte anklicken, um Texte und Fotos zu bearbeiten.",
+      "close": "Schließen",
+      "saved": "Gespeichert.",
+      "thumbLoading": "Vorschau lädt…"
     }
   },
   "pages": {

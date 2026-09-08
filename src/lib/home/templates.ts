@@ -10,14 +10,12 @@
  * Labels live in the message files, never here — no client wording in code.
  */
 
-export type HomeTemplateKey = "h1" | "h2" | "h3" | "h4" | "h5";
+export type HomeTemplateKey = "h1" | "h2" | "h3";
 
 export type HomeMediaSlot = "portrait" | "hero_photo" | "band_photo";
 
 export type HomeSectionKey =
   | "hero"
-  | "facts"
-  | "statement"
   | "paths"
   | "credentials"
   | "testimonials"
@@ -94,7 +92,16 @@ export const HOME_TEMPLATES: Record<HomeTemplateKey, HomeTemplateDef> = {
   },
   h2: {
     key: "h2",
-    sections: ["hero", "paths", "credentials", "listings", "sold", "valuation", "contact"],
+    sections: [
+      "hero",
+      "paths",
+      "credentials",
+      "testimonials",
+      "listings",
+      "sold",
+      "valuation",
+      "contact",
+    ],
     media: ["hero_photo", "portrait"],
     theme: {
       primary_color: "#24352A",
@@ -116,34 +123,14 @@ export const HOME_TEMPLATES: Record<HomeTemplateKey, HomeTemplateDef> = {
     key: "h3",
     sections: [
       "hero",
-      "statement",
       "paths",
       "credentials",
+      "testimonials",
       "listings",
       "sold",
       "valuation",
       "contact",
     ],
-    media: ["hero_photo", "portrait"],
-    theme: {
-      primary_color: "#5C2A2E",
-      secondary_color: "#EFE7DB",
-      accent_color: "#BE7A2E",
-      background_color: "#F6F1E9",
-      surface_color: "#EFE7DB",
-      text_color: "#2A211C",
-      muted_text_color: "#6B5F54",
-      border_color: "#DDD3C6",
-      font_heading: "newsreader",
-      font_body: "work-sans",
-      radius_scale: "rounded",
-      button_style: "pill",
-    },
-    chrome: { footerTone: "dark", heroOverlay: true },
-  },
-  h4: {
-    key: "h4",
-    sections: ["hero", "paths", "credentials", "listings", "sold", "valuation", "contact"],
     media: ["band_photo", "portrait"],
     theme: {
       primary_color: "#17140F",
@@ -160,23 +147,6 @@ export const HOME_TEMPLATES: Record<HomeTemplateKey, HomeTemplateDef> = {
       button_style: "square",
     },
     chrome: { footerTone: "light", heroOverlay: false },
-  },
-  h5: {
-    key: "h5",
-    sections: [
-      "hero",
-      "facts",
-      "paths",
-      "credentials",
-      "testimonials",
-      "listings",
-      "sold",
-      "valuation",
-      "contact",
-    ],
-    media: ["hero_photo", "portrait"],
-    theme: HOUSE_THEME,
-    chrome: { footerTone: "dark", heroOverlay: true },
   },
 };
 

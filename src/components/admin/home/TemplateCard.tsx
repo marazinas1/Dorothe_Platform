@@ -1,86 +1,94 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Check, Eye, Loader2 } from "lucide-react";
+import { Check, ExternalLink, Loader2, Pencil } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import type { HomeTemplateDef } from "@/lib/home/templates";
 
+import { TemplateThumb } from "./TemplateThumb";
+
 type Props = {
   template: HomeTemplateDef;
   isActive: boolean;
-  onPreview: () => Promise<void>;
+  previewUrl: string | null;
+  onEdit: () => void;
   onActivate: () => Promise<void>;
 };
 
 /**
- * One design in the gallery: its palette and typefaces at a glance, a preview
- * link, and the button that makes it the live home page.
+ * One design in the gallery. The whole card is the way in: clicking it opens
+ * the editor for that design. The miniature above the title is the real page,
+ * rendered small, so the owner recognises what she is choosing.
  */
-export function TemplateCard({ template, isActive, onPreview, onActivate }: Props) {
+export function TemplateCard({ template, isActive, previewUrl, onEdit, onActivate }: Props) {
   const { t } = useTranslation();
-  const [busy, setBusy] = useState<"preview" | "activate" | null>(null);
+  const [busy, setBusy] = useState(false);
 
-  async function run(kind: "preview" | "activate", fn: () => Promise<void>) {
-    setBusy(kind);
+  async function activate(e: React.MouseEvent) {
+    e.stopPropagation();
+    setBusy(true);
     try {
-      await fn();
+      await onActivate();
     } finally {
-      setBusy(null);
+      setBusy(false);
     }
   }
 
-  const theme = template.theme;
-  const swatches = [theme.background_color, theme.primary_color, theme.accent_color, theme.secondary_color];
-
   return (
-    <div className="flex flex-col rounded-[var(--radius)] border border-border bg-card p-5">
-      <div className="flex items-start justify-between gap-3">
-        <div>
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onEdit}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onEdit();
+        }
+      }}
+      className="group flex cursor-pointer flex-col overflow-hidden rounded-[var(--radius)] border border-border bg-card text-left transition-colors hover:border-foreground/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      <TemplateThumb url={previewUrl} />
+
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-start justify-between gap-3">
           <h3 className="font-heading text-lg font-semibold">
             {t(`admin.home.templates.${template.key}.label`)}
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {t(`admin.home.templates.${template.key}.description`)}
-          </p>
+          {isActive ? (
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
+              <Check className="h-3 w-3" />
+              {t("admin.home.live")}
+            </span>
+          ) : null}
         </div>
-        {isActive ? (
-          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
-            <Check className="h-3 w-3" />
-            {t("admin.home.live")}
-          </span>
-        ) : null}
-      </div>
+        <p className="mt-1.5 text-sm text-muted-foreground">
+          {t(`admin.home.templates.${template.key}.description`)}
+        </p>
 
-      <div className="mt-4 flex gap-1.5" aria-hidden>
-        {swatches.map((c) => (
-          <span
-            key={c}
-            className="h-7 w-7 rounded-[calc(var(--radius)/2)] border border-border"
-            style={{ backgroundColor: c }}
-          />
-        ))}
-      </div>
-      <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">
-        {theme.font_heading} · {theme.font_body}
-      </p>
-
-      <div className="mt-5 flex flex-wrap items-center gap-2">
-        <Button type="button" variant="outline" onClick={() => run("preview", onPreview)}>
-          {busy === "preview" ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Eye className="mr-2 h-4 w-4" />
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <Button type="button" variant="outline" onClick={(e) => { e.stopPropagation(); onEdit(); }}>
+            <Pencil className="mr-2 h-4 w-4" />
+            {t("admin.home.edit")}
+          </Button>
+          {previewUrl ? (
+            <a
+              href={previewUrl}
+              target="_blank"
+              rel="noopener"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              {t("admin.home.preview")}
+            </a>
+          ) : null}
+          {isActive ? null : (
+            <Button type="button" className="ml-auto" onClick={activate} disabled={busy}>
+              {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              {t("admin.home.setMain")}
+            </Button>
           )}
-          {t("admin.home.preview")}
-        </Button>
-        <Button
-          type="button"
-          onClick={() => run("activate", onActivate)}
-          disabled={isActive || busy !== null}
-        >
-          {busy === "activate" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-          {isActive ? t("admin.home.isMain") : t("admin.home.setMain")}
-        </Button>
+        </div>
       </div>
     </div>
   );
