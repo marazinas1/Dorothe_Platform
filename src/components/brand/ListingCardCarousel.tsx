@@ -22,6 +22,10 @@ type Props = {
   name: string;
   /** Cover loads eagerly on the first row of a page. */
   eager?: boolean;
+  /** Minimal 4:3 frame used by the direct home design. */
+  appearance?: "default" | "direct";
+  /** Optional location label over the photograph. */
+  caption?: string;
 };
 
 /** However many photos a listing carries, the dot row stays this short. */
@@ -44,7 +48,14 @@ const MAX_DOTS = 6;
  * The controls are hidden from keyboard and assistive tech on purpose: the card
  * is one tab stop and one target, and the full gallery lives on the detail page.
  */
-export function ListingCardCarousel({ images, locale, name, eager = false }: Props) {
+export function ListingCardCarousel({
+  images,
+  locale,
+  name,
+  eager = false,
+  appearance = "default",
+  caption,
+}: Props) {
   const { t } = useTranslation();
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [armed, setArmed] = useState(false);
@@ -59,7 +70,14 @@ export function ListingCardCarousel({ images, locale, name, eager = false }: Pro
   const total = slides.length;
 
   if (total === 0) {
-    return <div className="aspect-[3/2] w-full rounded-media bg-muted" />;
+    return (
+      <div
+        className={cn(
+          "w-full bg-muted",
+          appearance === "direct" ? "aspect-[4/3] rounded-[var(--radius)]" : "aspect-[3/2] rounded-media",
+        )}
+      />
+    );
   }
 
   // The clone of the cover, so the last -> first step is a normal slide move.
@@ -123,7 +141,10 @@ export function ListingCardCarousel({ images, locale, name, eager = false }: Pro
 
   return (
     <div
-      className="group/media relative aspect-[3/2] w-full overflow-hidden rounded-media bg-muted"
+      className={cn(
+        "group/media relative w-full overflow-hidden bg-muted",
+        appearance === "direct" ? "aspect-[4/3] rounded-[var(--radius)]" : "aspect-[3/2] rounded-media",
+      )}
       onPointerEnter={() => setArmed(true)}
       onTouchStart={() => setArmed(true)}
     >
@@ -183,6 +204,11 @@ export function ListingCardCarousel({ images, locale, name, eager = false }: Pro
             ))}
           </div>
         </>
+      ) : null}
+      {caption ? (
+        <span className="pointer-events-none absolute bottom-3.5 left-4 z-20 rounded-[3px] bg-foreground/35 px-2.5 py-1 text-[11.5px] text-primary-foreground">
+          {caption}
+        </span>
       ) : null}
     </div>
   );

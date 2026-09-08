@@ -6,7 +6,7 @@ import { ListingCardCarousel } from "@/components/brand/ListingCardCarousel";
 import { ListingCardSpecs } from "@/components/brand/ListingCardSpecs";
 import type { Locale } from "@/i18n/config";
 import type { PublicListing } from "@/lib/listings/queries.functions";
-import { formatDate, formatPrice } from "@/lib/listings/format";
+import { formatDate, formatPrice, pickLocalized } from "@/lib/listings/format";
 import { listingDisplayName, listingHeadline } from "@/lib/listings/display-title";
 import { moneyLabelKey } from "@/lib/listings/field-labels";
 import type { SiteSettings } from "@/types/site-settings";
@@ -20,6 +20,7 @@ type Props = {
   hidePrice?: boolean;
   /** Above-the-fold rows may load their cover eagerly. */
   eager?: boolean;
+  appearance?: "default" | "direct";
 };
 
 /**
@@ -42,6 +43,7 @@ export function ListingCard({
   size = "large",
   hidePrice = false,
   eager = false,
+  appearance = "default",
 }: Props) {
   const { t } = useTranslation();
   const drag = useRef<{ x: number; y: number } | null>(null);
@@ -64,6 +66,57 @@ export function ListingCard({
       "public",
     ),
   );
+  const direct = appearance === "direct";
+
+  if (direct) {
+    return (
+      <article
+        onPointerDown={(e) => {
+          drag.current = { x: e.clientX, y: e.clientY };
+        }}
+        onClickCapture={(e) => {
+          const start = drag.current;
+          drag.current = null;
+          if (start && Math.hypot(e.clientX - start.x, e.clientY - start.y) > 8) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }}
+        className="group relative flex h-full flex-col bg-background"
+      >
+        <ListingCardCarousel
+          images={listing.images}
+          locale={locale}
+          name={linkName}
+          eager={eager}
+          appearance="direct"
+          caption={listing.address_city ?? undefined}
+        />
+        <div className="flex flex-1 flex-col px-1 pt-5 pb-1">
+          <div className="flex min-h-5 flex-wrap gap-2.5 text-[12.5px] text-muted-foreground">
+            {listing.living_area != null ? <span>{listing.living_area} m²</span> : null}
+            {listing.rooms != null ? (
+              <span>{listing.rooms} {locale === "en" ? (listing.rooms === 1 ? "room" : "rooms") : "Zimmer"}</span>
+            ) : null}
+          </div>
+          <h3 className="mt-2.5 line-clamp-2 min-h-[2.64em] font-heading text-[17px] leading-[1.32] text-foreground">
+            <Link
+              to="/$locale/immobilien/$slug"
+              params={{ locale, slug: listing.slug }}
+              aria-label={headline ? undefined : linkName}
+              className="before:absolute before:inset-0 before:z-10 before:content-[''] group-hover:opacity-80"
+            >
+              {headline}
+            </Link>
+          </h3>
+          <div className="mt-2 text-[13px] text-muted-foreground">
+            {[listing.address_city, pickLocalized(settings.service_region, locale)].filter(Boolean).join(", ")}
+          </div>
+          {!hidePrice ? <div className="mt-2 text-[15px] font-semibold tabular-figures">{price}</div> : null}
+        </div>
+      </article>
+    );
+  }
 
   return (
     <article

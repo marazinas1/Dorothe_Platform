@@ -27,10 +27,11 @@ export function H1Home(props: HomeTemplateProps) {
         items={featured}
         title={copy.text("listings_title")}
         note={copy.text("listings_note")}
+        appearance="direct"
       />
-      <SoldStrip locale={locale} items={sold} settings={settings} hidePrice={hideSoldPrice} />
+      <SoldStrip locale={locale} items={sold} settings={settings} hidePrice={hideSoldPrice} appearance="direct" />
       <H1Valuation {...props} />
-      <ContactSection locale={locale} settings={settings} heading={copy.text("contact_title")} />
+      <ContactSection locale={locale} settings={settings} heading={copy.text("contact_title")} appearance="direct" />
     </>
   );
 }
