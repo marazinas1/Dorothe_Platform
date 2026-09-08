@@ -27,7 +27,7 @@ export function H5Valuation({ locale, copy }: HomeTemplateProps) {
               to="/$locale/immobilienbewertung"
               className="bg-background text-foreground"
             >
-              {t("home.valuation_cta")} →
+              {t("home.valuation_cta")}
             </HomeButton>
           </div>
         </div>
