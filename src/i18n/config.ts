@@ -19,7 +19,7 @@ export const MESSAGE_LOCALES = SUPPORTED_LOCALES;
  * Everywhere a real setting is available, site_settings.default_locale decides.
  * It matches the schema default of site_settings.default_locale.
  */
-export const FALLBACK_LOCALE: Locale = "de";
+export const FALLBACK_LOCALE: Locale = "en";
 
 export function isLocale(value: string | undefined | null): value is Locale {
   return !!value && (SUPPORTED_LOCALES as readonly string[]).includes(value);
