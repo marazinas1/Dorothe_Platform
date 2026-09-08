@@ -1,4 +1,3 @@
-import { Reveal } from "@/components/shared/Reveal";
 import { cn } from "@/lib/utils";
 
 import { testiItems, type HomeTemplateProps } from "./types";
@@ -23,9 +22,8 @@ export function HomeTestimonials({
           {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
           <div className="mt-12 grid border-t border-primary-foreground/20 md:grid-cols-3">
             {items.map((item, i) => (
-              <Reveal
+              <div
                 key={i}
-                delay={i * 90}
                 className="border-b border-primary-foreground/20 py-7 md:border-b-0 md:border-r md:pr-7 md:last:border-r-0"
               >
                 <Stars className="text-accent" />
@@ -33,7 +31,7 @@ export function HomeTestimonials({
                 <div className="mt-5 text-[13px] opacity-60">
                   {[item.name, item.town].filter(Boolean).join(" · ")}
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
@@ -47,9 +45,8 @@ export function HomeTestimonials({
         {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
         <div className="mt-12 grid gap-7 md:grid-cols-3">
           {items.map((item, i) => (
-            <Reveal
+            <div
               key={i}
-              delay={i * 90}
               className="flex flex-col rounded-[var(--radius)] bg-background px-[26px] py-[30px]"
             >
               <Stars className="text-accent" />
@@ -60,7 +57,7 @@ export function HomeTestimonials({
                   <div className="text-[12.5px] text-muted-foreground">{item.town}</div>
                 ) : null}
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
