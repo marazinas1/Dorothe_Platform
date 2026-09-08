@@ -13,7 +13,7 @@ export function H1Hero({ locale, settings, copy, media }: HomeTemplateProps) {
   const kicker = copy.text("hero_kicker");
 
   return (
-    <section className="mx-auto max-w-[1220px] px-6 pt-16 pb-20 lg:px-8 lg:pt-20 lg:pb-24">
+    <section className="mx-auto max-w-[1220px] px-6 pt-16 pb-20 lg:px-8 lg:pt-2 lg:pb-24">
       <div className="grid items-center gap-12 lg:grid-cols-[1fr_0.82fr] lg:gap-16">
         <div>
           {kicker ? <div className="eyebrow text-muted-foreground">{kicker}</div> : null}
