@@ -44,11 +44,27 @@ function ResetPasswordPage() {
     };
   }, []);
 
+  function passwordErrorKey(err: PasswordValidationError): string {
+    switch (err) {
+      case "tooShort":
+        return "admin.auth.reset.tooShort";
+      case "noUppercase":
+        return "admin.auth.reset.noUppercase";
+      case "noLowercase":
+        return "admin.auth.reset.noLowercase";
+      case "noDigit":
+        return "admin.auth.reset.noDigit";
+      default:
+        return "admin.auth.reset.weak";
+    }
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (password.length < 8) {
-      setError(t("admin.auth.reset.tooShort"));
+    const validation = validatePassword(password);
+    if (validation) {
+      setError(t(passwordErrorKey(validation)));
       return;
     }
     if (password !== confirm) {
@@ -59,7 +75,12 @@ function ResetPasswordPage() {
     const { error: upErr } = await supabase.auth.updateUser({ password });
     setBusy(false);
     if (upErr) {
-      setError(upErr.message);
+      const msg = upErr.message.toLowerCase();
+      if (msg.includes("compromised") || msg.includes("known to be weak") || msg.includes("hibp")) {
+        setError(t("admin.auth.reset.leaked"));
+      } else {
+        setError(upErr.message);
+      }
       return;
     }
     setDone(true);
@@ -68,6 +89,7 @@ function ResetPasswordPage() {
       1200,
     );
   }
+
 
   return (
     <AuthCard>
