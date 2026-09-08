@@ -9,6 +9,7 @@ import { LegalLinks } from "@/components/public/LegalLinks";
 import { SiteLogo } from "@/components/brand/SiteLogo";
 import { HomeLink } from "@/components/shared/HomeLink";
 import type { Locale } from "@/i18n/config";
+import { homeTemplate } from "@/lib/home/templates";
 import { areasAreConfigured, serviceAreas } from "@/lib/homepage/plan";
 import type { SiteSettings } from "@/types/site-settings";
 
@@ -27,15 +28,18 @@ export function PublicChrome({
   locale,
   settings,
   heroOverlay = false,
-  footerTone = "light",
+  footerTone,
   children,
 }: Props) {
+  // Site chrome follows the active home design, so header and footer match the
+  // page a visitor lands on — on every route, not only the home page.
+  const tone = footerTone ?? homeTemplate(settings.active_home_template).chrome.footerTone;
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <SiteNav locale={locale} settings={settings} overlay={heroOverlay} />
       {/* The header is fixed, so pages without a hero need the height back. */}
       <main className={heroOverlay ? "flex-1" : "flex-1 pt-24 md:pt-28"}>{children}</main>
-      <Footer locale={locale} settings={settings} tone={footerTone} />
+      <Footer locale={locale} settings={settings} tone={tone} />
     </div>
   );
 }
@@ -55,7 +59,7 @@ function Footer({
     <footer
       className={
         dark
-          ? "mt-24 bg-primary text-primary-foreground"
+          ? "mt-24 bg-primary text-primary-foreground [&_.text-muted-foreground]:text-primary-foreground/70"
           : "mt-24 border-t border-border/60 bg-background"
       }
     >
