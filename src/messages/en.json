@@ -81,6 +81,7 @@
     }
   },
   "nav": {
+    "home": "Home",
     "listings": "Properties",
     "sold": "Sold",
     "valuation": "Valuation",

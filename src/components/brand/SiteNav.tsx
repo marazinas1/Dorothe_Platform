@@ -24,6 +24,7 @@ export function useNavItems() {
   const { t } = useTranslation();
   const teamEnabled = useFeatureFlag("team");
   return [
+    { to: "/$locale" as const, label: t("nav.home") },
     { to: "/$locale/immobilien" as const, label: t("nav.listings") },
     // Selling replaces the valuation link: an owner weighs "should I sell",
     // not "I need a valuation". Sold work is evidence, so it is linked from
