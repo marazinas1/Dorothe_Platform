@@ -7,7 +7,7 @@ import {
   LayoutDashboard,
   Building2,
   Inbox,
-  Users,
+  UserCog,
   Home,
   BarChart3,
   Settings,
@@ -39,14 +39,39 @@ interface NavItem {
   flag?: string;
 }
 
-const ITEMS: NavItem[] = [
-  { key: "dashboard", to: "/$locale/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
-  { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
-  { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
-  { key: "users", to: "/$locale/admin/users", icon: Users, permission: "user.manage" },
-  { key: "content", to: "/$locale/admin/content", icon: Home, permission: "settings.edit" },
-  { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
-  { key: "settings", to: "/$locale/admin/settings", icon: Settings, permission: "settings.edit" },
+interface NavGroup {
+  /** Translation key under admin.nav.groups. */
+  label: "workspace" | "website" | "settings";
+  items: NavItem[];
+}
+
+/**
+ * Grouped so the panel reads like the product: the day-to-day workspace first,
+ * then the pages of the public site, then configuration.
+ */
+const GROUPS: NavGroup[] = [
+  {
+    label: "workspace",
+    items: [
+      { key: "dashboard", to: "/$locale/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
+      { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
+      { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
+      { key: "users", to: "/$locale/admin/users", icon: UserCog, permission: "user.manage" },
+    ],
+  },
+  {
+    label: "website",
+    items: [
+      { key: "content", to: "/$locale/admin/content", icon: Home, permission: "settings.edit" },
+      { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
+    ],
+  },
+  {
+    label: "settings",
+    items: [
+      { key: "settings", to: "/$locale/admin/settings", icon: Settings, permission: "settings.edit" },
+    ],
+  },
 ];
 
 function NavRow({ item, locale }: { item: NavItem; locale: Locale }) {
@@ -92,16 +117,18 @@ export function AdminSidebar({ email, roleLabel }: { email: string; roleLabel: s
     <Sidebar collapsible="icon">
       <AdminSidebarHeader />
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>{t("admin.nav.group")}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {ITEMS.map((item) => (
-                <NavRow key={item.key} item={item} locale={locale} />
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {GROUPS.map((group) => (
+          <SidebarGroup key={group.label}>
+            <SidebarGroupLabel>{t(`admin.nav.groups.${group.label}`)}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {group.items.map((item) => (
+                  <NavRow key={item.key} item={item} locale={locale} />
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
       <AdminSidebarFooter email={email} roleLabel={roleLabel} />
     </Sidebar>

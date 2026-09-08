@@ -464,7 +464,12 @@
       "settings": "Einstellungen",
       "viewSite": "Website ansehen",
       "users": "Benutzer",
-      "group": "Verwalten"
+      "group": "Verwalten",
+      "groups": {
+        "workspace": "Arbeitsbereich",
+        "website": "Die Website",
+        "settings": "Einstellungen"
+      }
     },
     "pages": {
       "dashboard": "Übersicht",
