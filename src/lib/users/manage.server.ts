@@ -165,11 +165,14 @@ export async function inviteOrCreateUser(
 
   // Email delivery unavailable: create the account and hand over credentials.
   const tempPassword = generateTempPassword();
+  // Defensive check: generated credentials must also satisfy the platform policy.
+  passwordSchema.parse(tempPassword);
   const created = await db.auth.admin.createUser({
     email,
     password: tempPassword,
     email_confirm: true,
   });
+
   if (created.error) throw new Error(created.error.message);
   await setFullName(db, email, input.fullName);
 
