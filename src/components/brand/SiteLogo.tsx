@@ -37,11 +37,19 @@ export function SiteLogo({
   className,
   size = "md",
   variant = "original",
+  interactive = false,
 }: Props) {
   const fallback =
     tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
   const src = tone === "light" ? fallback : logoSrc(variant, fallback);
-  if (!src) return <BrandMark settings={settings} tone={tone} className={className} />;
+  if (!src)
+    return (
+      <BrandMark
+        settings={settings}
+        tone={tone}
+        className={cn(interactive && INTERACTIVE_CLASS, className)}
+      />
+    );
 
   return (
     <img
@@ -50,6 +58,7 @@ export function SiteLogo({
       className={cn(
         size === "sm" ? "h-12 md:h-14" : "h-16 md:h-20",
         "w-auto object-contain transition-[height] duration-500 ease-out",
+        interactive && INTERACTIVE_CLASS,
         className,
       )}
       loading="eager"

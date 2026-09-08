@@ -75,7 +75,7 @@ function Footer({
       <div className="mx-auto grid max-w-[1220px] gap-11 px-6 pt-11 pb-[30px] md:grid-cols-[1.3fr_1fr_1fr] lg:px-8">
         <div>
           <HomeLink locale={locale} label={settings.site_name}>
-            <SiteLogo settings={settings} />
+            <SiteLogo settings={settings} interactive />
           </HomeLink>
           {settings.address_street ? (
             <p className="mt-3 text-sm text-muted-foreground">
