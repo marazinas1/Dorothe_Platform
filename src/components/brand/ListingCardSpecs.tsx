@@ -31,18 +31,27 @@ const ICONS: Record<CardSpecIcon, typeof Maximize> = {
   bathrooms: Bath,
 };
 
-export function ListingCardSpecs({ listing, areaUnit, locale }: Props) {
+export function ListingCardSpecs({ listing, areaUnit, locale, compact = false }: Props) {
   const { t } = useTranslation();
   const { specs, energyClass } = cardSpecs(listing, areaUnit, locale);
 
   return (
-    <ul className="flex min-h-[1.75rem] flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+    <ul
+      className={cn(
+        "flex min-h-[1.75rem] flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground",
+        compact && "min-h-[1.25rem] gap-x-3 gap-y-1 text-xs",
+      )}
+    >
       {specs.map((spec) => {
         const Icon = ICONS[spec.key];
         const label = t(spec.labelKey);
         return (
           <li key={spec.key} className="inline-flex items-center gap-1.5" title={label}>
-            <Icon className="h-4 w-4 shrink-0" strokeWidth={1.5} aria-hidden="true" />
+            <Icon
+              className={cn("h-4 w-4 shrink-0", compact && "h-3.5 w-3.5")}
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
             <span className="sr-only">{label}</span>
             <span className="tabular-figures">{spec.value}</span>
           </li>
@@ -54,6 +63,7 @@ export function ListingCardSpecs({ listing, areaUnit, locale }: Props) {
           <span
             className={cn(
               "inline-flex items-center rounded-full border px-2 py-0.5 text-xs",
+              compact && "px-1.5 py-0 text-[10px]",
               energyClassTone(energyClass),
             )}
             aria-hidden="true"
@@ -66,3 +76,4 @@ export function ListingCardSpecs({ listing, areaUnit, locale }: Props) {
     </ul>
   );
 }
+
