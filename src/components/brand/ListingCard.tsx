@@ -16,13 +16,19 @@ type Props = {
   listing: PublicListing;
   locale: Locale;
   settings: SiteSettings;
-  /** Density only: `compact` drops the description and tightens the type. */
-  size?: "large" | "compact";
+  /**
+   * Density:
+   * - `large` — full homepage/catalog row
+   * - `compact` — archive grids, agent listings, catalogue density
+   * - `small` — homepage recently sold proof points, two per row
+   */
+  size?: "large" | "compact" | "small";
   /** Suppress the price row (achieved prices on closed properties). */
   hidePrice?: boolean;
   /** Above-the-fold rows may load their cover eagerly. */
   eager?: boolean;
 };
+
 
 /**
  * The one listing card — homepage, catalogue, sold archive, related block and
@@ -102,27 +108,42 @@ export function ListingCard({
         className={
           size === "large"
             ? "flex flex-1 flex-col px-5 pt-5 pb-5"
-            : "flex flex-1 flex-col px-4 pt-4 pb-4"
+            : size === "compact"
+              ? "flex flex-1 flex-col px-4 pt-4 pb-4"
+              : "flex flex-1 flex-col px-3.5 pt-3.5 pb-3.5"
         }
       >
         <div className="flex items-baseline justify-between gap-4">
-          <span className="eyebrow truncate text-muted-foreground">{listing.address_city}</span>
+          <span
+            className={
+              size === "small"
+                ? "eyebrow truncate text-xs text-muted-foreground"
+                : "eyebrow truncate text-muted-foreground"
+            }
+          >
+            {listing.address_city}
+          </span>
           <span
             className={
               tone.badge?.accent
-                ? "eyebrow shrink-0 text-primary"
-                : "eyebrow shrink-0 text-muted-foreground"
+                ? size === "small"
+                  ? "eyebrow shrink-0 text-xs text-primary"
+                  : "eyebrow shrink-0 text-primary"
+                : size === "small"
+                  ? "eyebrow shrink-0 text-xs text-muted-foreground"
+                  : "eyebrow shrink-0 text-muted-foreground"
             }
           >
             {tone.status}
           </span>
         </div>
 
-        <div className="mt-4">
+        <div className={size === "small" ? "mt-3" : "mt-4"}>
           <ListingCardSpecs
             listing={listing}
             areaUnit={settings.area_unit}
             locale={locale}
+            compact={size === "small"}
           />
         </div>
 
@@ -130,7 +151,9 @@ export function ListingCard({
           className={
             size === "large"
               ? "mt-4 line-clamp-2 min-h-[2.5em] font-heading text-2xl leading-tight text-foreground"
-              : "mt-4 line-clamp-2 min-h-[2.5em] font-heading text-xl leading-tight text-foreground"
+              : size === "compact"
+                ? "mt-4 line-clamp-2 min-h-[2.5em] font-heading text-xl leading-tight text-foreground"
+                : "mt-3 line-clamp-2 min-h-[2.5em] font-heading text-lg leading-tight text-foreground"
           }
           title={headline || undefined}
         >
@@ -146,16 +169,32 @@ export function ListingCard({
           </Link>
         </h3>
 
-        {place ? <p className="mt-2 text-sm text-muted-foreground">{place}</p> : null}
+        {place ? (
+          <p
+            className={
+              size === "small"
+                ? "mt-1.5 text-xs text-muted-foreground"
+                : "mt-2 text-sm text-muted-foreground"
+            }
+          >
+            {place}
+          </p>
+        ) : null}
 
-        {/* The compact card is a proof point, not a pitch: no description. */}
+        {/* The compact/small card is a proof point, not a pitch: no description. */}
         {size === "large" ? (
           <p className="mt-2 line-clamp-2 min-h-[3.25em] text-sm leading-relaxed text-muted-foreground">
             {description}
           </p>
         ) : null}
 
-        <div className="mt-auto flex items-baseline justify-between gap-6 border-t border-border/70 pt-4 text-sm">
+        <div
+          className={
+            size === "small"
+              ? "mt-auto flex items-baseline justify-between gap-6 border-t border-border/70 pt-3 text-xs"
+              : "mt-auto flex items-baseline justify-between gap-6 border-t border-border/70 pt-4 text-sm"
+          }
+        >
           {/* On closed properties the price row disappears rather than reading
               "on request" — the sale is over, there is nothing to ask. */}
           {hidePrice ? (
@@ -173,6 +212,7 @@ export function ListingCard({
           ) : null}
         </div>
       </div>
+
     </article>
   );
 }

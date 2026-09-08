@@ -5,3 +5,8 @@
  */
 export const LISTING_CARD_GRID =
   "grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3";
+
+/** Homepage sold proof-point block: two narrower cards that read as archive. */
+export const SOLD_CARD_GRID =
+  "grid grid-cols-1 gap-x-5 gap-y-8 md:grid-cols-2";
+

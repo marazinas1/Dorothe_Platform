@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
-import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
+import { SOLD_CARD_GRID } from "@/lib/homepage/card-grid";
 import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
@@ -22,7 +22,9 @@ type Props = {
 /**
  * Sold properties as credibility proof. Same card as everywhere else — the
  * archive reading (muted photograph, sold marker, no asking price) comes from
- * the listing's own status, not from a second component.
+ * the listing's own status, not from a second component. Rendered in a
+ * two-column, smaller-card layout so it visually steps back from the active
+ * listings above.
  */
 export function SoldStrip({ locale, items, settings, hidePrice = false }: Props) {
   const { t } = useTranslation();
@@ -37,14 +39,14 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
         </p>
       </div>
 
-      <div className={LISTING_CARD_GRID}>
-        {items.slice(0, 3).map((l, i) => (
+      <div className={SOLD_CARD_GRID}>
+        {items.slice(0, 2).map((l, i) => (
           <Reveal key={l.id} delay={i * 90} className="h-full">
             <ListingCard
               listing={l}
               locale={locale}
               settings={settings}
-              size="compact"
+              size="small"
               hidePrice={hidePrice}
             />
           </Reveal>
@@ -63,3 +65,4 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
     </section>
   );
 }
+
