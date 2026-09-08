@@ -57,19 +57,18 @@ export interface HomeTemplateDef {
 }
 
 /**
- * Amber / ink / paper: the house palette. Amber is the only saturated colour,
- * ink carries authority, paper stays warm rather than grey. Corners are 4px —
- * precise without reading playful.
+ * Halliday-neutral house palette: clean white and soft-grey surfaces, with
+ * amber reserved for Dorothe's brand accent. Corners remain precise at 4px.
  */
 const HOUSE_THEME: HomeTemplateTheme = {
   primary_color: "#221D17",
-  secondary_color: "#EFE8D9",
+  secondary_color: "#F9F9F9",
   accent_color: "#B8752B",
-  background_color: "#F7F3EC",
-  surface_color: "#EFE8D9",
-  text_color: "#221D17",
-  muted_text_color: "#6B6155",
-  border_color: "#DCD3C3",
+  background_color: "#FFFFFF",
+  surface_color: "#FFFFFF",
+  text_color: "#141414",
+  muted_text_color: "#595959",
+  border_color: "#E6E6E6",
   font_heading: "fraunces",
   font_body: "ibm-plex-sans",
   radius_scale: "precise",
