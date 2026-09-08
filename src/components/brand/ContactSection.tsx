@@ -48,7 +48,7 @@ export function ContactSection({ locale, settings, heading, appearance = "defaul
               <DirectTab active={tab === "seller"} onClick={() => setTab("seller")}>{t("inquiry.seller.tab")}</DirectTab>
               <DirectTab active={tab === "buyer"} onClick={() => setTab("buyer")}>{t("inquiry.buyer.tab")}</DirectTab>
             </div>
-            <div className="mt-6"><ShortInquiryForm key={tab} mode={tab} locale={locale} /></div>
+            <div className="mt-6"><ShortInquiryForm key={tab} mode={tab} locale={locale} appearance="direct" /></div>
           </div>
         </div>
       </section>

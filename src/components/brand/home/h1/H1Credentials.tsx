@@ -24,7 +24,7 @@ export function H1Credentials({ copy }: HomeTemplateProps) {
             <Reveal
               key={i}
               delay={i * 90}
-              className="border-b border-border py-7 md:border-b-0 md:border-r md:pr-7 md:last:border-r-0"
+              className="border-b border-border py-7 md:border-b-0 md:border-r md:pr-7 md:nth-[2]:pl-7 md:last:border-r-0 md:last:pl-7"
             >
               <h3 className="font-heading text-[19px]">{item.title}</h3>
               <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted-foreground">

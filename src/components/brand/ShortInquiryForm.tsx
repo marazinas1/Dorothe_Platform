@@ -15,6 +15,7 @@ const labelCls = "block text-[11px] uppercase tracking-[0.16em] text-muted-foreg
 type Props = {
   mode: "seller" | "buyer";
   locale: Locale;
+  appearance?: "default" | "direct";
 };
 
 /**
@@ -22,7 +23,7 @@ type Props = {
  * message. Deliberately short — the qualifying intake form lives on the
  * valuation page, where the visitor has already decided.
  */
-export function ShortInquiryForm({ mode, locale }: Props) {
+export function ShortInquiryForm({ mode, locale, appearance = "default" }: Props) {
   const { t } = useTranslation();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const consent = useConsent();
@@ -66,8 +67,8 @@ export function ShortInquiryForm({ mode, locale }: Props) {
   const id = (f: string) => `${mode}-short-${f}`;
 
   return (
-    <form onSubmit={onSubmit} className="space-y-10">
-      <div className="grid gap-8 md:grid-cols-2">
+    <form onSubmit={onSubmit} className={appearance === "direct" ? "space-y-6" : "space-y-10"}>
+      <div className={appearance === "direct" ? "grid gap-5 md:grid-cols-2" : "grid gap-8 md:grid-cols-2"}>
         <div>
           <label className={labelCls} htmlFor={id("name")}>
             {t("inquiry.name")}
@@ -100,7 +101,7 @@ export function ShortInquiryForm({ mode, locale }: Props) {
             id={id("message")}
             name="message"
             rows={4}
-            className={`${inputCls} resize-none pt-3`}
+            className={`${inputCls} resize-none pt-3 ${appearance === "direct" ? "min-h-[92px]" : ""}`}
           />
         </div>
       </div>

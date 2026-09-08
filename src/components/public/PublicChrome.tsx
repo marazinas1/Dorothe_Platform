@@ -38,7 +38,7 @@ export function PublicChrome({
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <SiteNav locale={locale} settings={settings} overlay={heroOverlay} />
       {/* The header is fixed, so pages without a hero need the height back. */}
-      <main className={heroOverlay ? "flex-1" : "flex-1 pt-24 md:pt-28"}>{children}</main>
+      <main className={heroOverlay ? "flex-1" : "flex-1 pt-[86px]"}>{children}</main>
       <Footer locale={locale} settings={settings} tone={tone} />
     </div>
   );
@@ -59,12 +59,12 @@ function Footer({
     <footer
       className={
         dark
-          ? "mt-24 bg-primary text-primary-foreground [&_.text-muted-foreground]:text-primary-foreground/70"
-          : "mt-24 border-t border-border/60 bg-background"
+          ? "bg-primary text-primary-foreground [&_.text-muted-foreground]:text-primary-foreground/70"
+          : "border-t border-border/60 bg-background"
       }
     >
       {/* Local links belong on every page, not only the homepage. */}
-      <div className="mx-auto max-w-[1400px] px-0 pt-12">
+      <div className="mx-auto max-w-[1220px] px-0 pt-12">
         <AreaLinks
           locale={locale}
           cities={serviceAreas(settings, [])}
@@ -72,7 +72,7 @@ function Footer({
           tone="footer"
         />
       </div>
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-6 py-14 md:grid-cols-3 lg:px-10">
+      <div className="mx-auto grid max-w-[1220px] gap-11 px-6 pt-11 pb-[30px] md:grid-cols-[1.3fr_1fr_1fr] lg:px-8">
         <div>
           <HomeLink locale={locale} label={settings.site_name}>
             <SiteLogo settings={settings} />
@@ -102,7 +102,7 @@ function Footer({
             settings={settings}
             className="mb-4 flex gap-4 md:justify-end"
           />
-          <div>
+          <div className="border-t border-primary-foreground/20 pt-6 text-[12.5px]">
             © {new Date().getFullYear()} {settings.legal_name ?? settings.site_name}.{" "}
             {t("footer.rights")}.
           </div>
