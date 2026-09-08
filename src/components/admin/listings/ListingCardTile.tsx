@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
 import { ImageOff } from "lucide-react";
 
-import { pickLocalized, formatPrice, formatArea } from "@/lib/listings/format";
+import { ListingCardSpecs } from "@/components/brand/ListingCardSpecs";
+import { pickLocalized, formatPrice } from "@/lib/listings/format";
 import type { AdminListingRow } from "@/lib/listings/admin.functions";
 import type { Locale } from "@/i18n/config";
 import { statusTone, TONE_DOT_CLASS } from "@/lib/listings/status-options";
@@ -18,6 +19,11 @@ function coverUrl(row: AdminListingRow): string | null {
   return primary ? variantUrl(primary.variants, "card") : null;
 }
 
+/**
+ * The admin tile speaks the same visual language as the public card: 3:2
+ * photograph, eyebrow row, the shared icon figures, then the price — plus the
+ * management row the public site does not have.
+ */
 export function ListingCardTile({
   row,
   locale,
@@ -31,26 +37,19 @@ export function ListingCardTile({
   const cover = coverUrl(row);
   const tone = statusTone(row.status);
 
-  const figures = [
-    row.rooms != null ? `${row.rooms} ${t("admin.listings.figures.rooms")}` : null,
-    row.bedrooms != null ? `${row.bedrooms} ${t("admin.listings.figures.bedrooms")}` : null,
-    row.bathrooms != null ? `${row.bathrooms} ${t("admin.listings.figures.bathrooms")}` : null,
-    row.living_area != null ? formatArea(row.living_area, "sqm", locale as Locale) : null,
-  ].filter(Boolean) as string[];
-
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card">
+    <article className="flex h-full flex-col overflow-hidden rounded-media border border-border bg-card">
       <Link
         to="/$locale/admin/listings/$id"
         params={{ locale, id: row.id }}
-        className="relative block aspect-[4/3] overflow-hidden bg-muted"
+        className="group relative block aspect-[3/2] overflow-hidden bg-muted"
       >
         {cover ? (
           <img
             src={cover}
             alt=""
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
           <span className="flex h-full w-full flex-col items-center justify-center gap-1 text-muted-foreground/70">
@@ -58,36 +57,42 @@ export function ListingCardTile({
             <span className="text-[11px]">{t("admin.listings.noImages")}</span>
           </span>
         )}
-        <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/85 px-2.5 py-1 text-[11px] tracking-[0.02em] text-foreground backdrop-blur-sm">
+        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-media bg-background/90 px-2.5 py-1 text-[11px] uppercase tracking-[0.12em] text-foreground backdrop-blur-sm">
           <span aria-hidden className={`h-1.5 w-1.5 rounded-full ${TONE_DOT_CLASS[tone]}`} />
           {t(`listings.status.${row.status}`)}
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col gap-3 p-4">
-        <div>
+      <div className="flex flex-1 flex-col px-4 pt-4 pb-4">
+        <div className="flex items-baseline justify-between gap-4">
+          <span className="eyebrow truncate text-muted-foreground">{row.address_city}</span>
+          <span className="eyebrow shrink-0 text-muted-foreground">
+            {t(`listings.dealType.${row.deal_type}`)}
+          </span>
+        </div>
+
+        <div className="mt-3">
+          <ListingCardSpecs listing={row} areaUnit="sqm" locale={locale as Locale} />
+        </div>
+
+        <h3 className="mt-3 line-clamp-2 min-h-[2.5em] font-heading text-lg leading-tight">
           <Link
             to="/$locale/admin/listings/$id"
             params={{ locale, id: row.id }}
-            className="font-heading text-base underline-offset-4 hover:underline"
+            className="underline-offset-4 hover:underline"
           >
             {pickLocalized(row.title, locale) || t("admin.listings.untitled")}
           </Link>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            {t(`listings.propertyType.${row.property_type}`)}
-            {row.address_city ? ` · ${row.address_city}` : ""}
-            {` · ${t(`listings.dealType.${row.deal_type}`)}`}
-            {row.reference_code
-              ? ` · ${t("listings.detail.reference_short")} ${row.reference_code}`
-              : ""}
-          </p>
-        </div>
+        </h3>
 
-        {figures.length > 0 ? (
-          <p className="text-xs text-muted-foreground">{figures.join(" · ")}</p>
-        ) : null}
+        <p className="mt-2 text-xs text-muted-foreground">
+          {t(`listings.propertyType.${row.property_type}`)}
+          {row.reference_code
+            ? ` · ${t("listings.detail.reference_short")} ${row.reference_code}`
+            : ""}
+        </p>
 
-        <p className="text-sm">
+        <p className="mt-3 text-sm tabular-figures">
           {formatPrice(row.price, currency, locale as Locale, {
             onRequest: row.price_on_request,
             onRequestLabel: t("listings.on_request"),

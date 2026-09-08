@@ -22,10 +22,10 @@ type Props = {
   name: string;
   /** Cover loads eagerly on the first row of a page. */
   eager?: boolean;
-  /** Minimal 4:3 frame used by the direct home design. */
-  appearance?: "default" | "direct";
-  /** Optional location label over the photograph. */
-  caption?: string;
+  /** Status marker over the photograph, decided in card-tone.ts. */
+  badge?: { label: string; accent: boolean } | null;
+  /** Closed properties read as archive: the photograph is desaturated. */
+  muted?: boolean;
 };
 
 /** However many photos a listing carries, the dot row stays this short. */
@@ -53,8 +53,8 @@ export function ListingCardCarousel({
   locale,
   name,
   eager = false,
-  appearance = "default",
-  caption,
+  badge = null,
+  muted = false,
 }: Props) {
   const { t } = useTranslation();
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -73,8 +73,7 @@ export function ListingCardCarousel({
     return (
       <div
         className={cn(
-          "w-full bg-muted",
-          appearance === "direct" ? "aspect-[4/3] rounded-none" : "aspect-[3/2] rounded-media",
+          "aspect-[3/2] w-full bg-muted",
         )}
       />
     );
@@ -142,8 +141,8 @@ export function ListingCardCarousel({
   return (
     <div
       className={cn(
-        "group/media relative w-full overflow-hidden bg-muted",
-        appearance === "direct" ? "aspect-[4/3] rounded-none" : "aspect-[3/2] rounded-media",
+        "group/media relative aspect-[3/2] w-full overflow-hidden bg-muted",
+        muted && "grayscale transition-[filter] duration-500 group-hover:grayscale-0",
       )}
       onPointerEnter={() => setArmed(true)}
       onTouchStart={() => setArmed(true)}
@@ -205,9 +204,16 @@ export function ListingCardCarousel({
           </div>
         </>
       ) : null}
-      {caption ? (
-        <span className="pointer-events-none absolute bottom-3.5 left-4 z-20 rounded-[3px] bg-foreground/35 px-2.5 py-1 text-[11.5px] text-primary-foreground">
-          {caption}
+      {badge ? (
+        <span
+          className={cn(
+            "pointer-events-none absolute bottom-3.5 left-4 z-20 rounded-media px-2.5 py-1 text-[11px] uppercase tracking-[0.12em]",
+            badge.accent
+              ? "bg-primary text-primary-foreground"
+              : "bg-card/90 text-foreground",
+          )}
+        >
+          {badge.label}
         </span>
       ) : null}
     </div>
