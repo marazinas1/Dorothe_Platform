@@ -10,7 +10,10 @@ type Props = {
   listing: Parameters<typeof cardSpecs>[0];
   areaUnit: "sqm" | "sqft";
   locale: Locale;
+  /** Smaller icons/text for the homepage sold proof block. */
+  compact?: boolean;
 };
+
 
 /**
  * Icon + number, the convention buyers know from the portals: a ruler for
