@@ -1,6 +1,8 @@
 // Cookieless first-party pageview collector. Public by design (the site pings
 // it anonymously) and always silent: analytics must never affect the site.
 import { createFileRoute } from "@tanstack/react-router";
+// Loads the `server` route-option type augmentation.
+import type {} from "@tanstack/react-start";
 
 import {
   deviceFrom,
