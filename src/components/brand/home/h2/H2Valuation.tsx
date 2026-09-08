@@ -23,7 +23,7 @@ export function H2Valuation({ locale, copy }: HomeTemplateProps) {
             {copy.text("valuation_body")}
           </p>
           <div className="mt-8">
-            <HomeButton locale={locale} to="/$locale/immobilienbewertung" tone="accent">
+            <HomeButton locale={locale} to="/$locale/immobilienbewertung" tone="on-dark">
               {t("home.valuation_cta")}
             </HomeButton>
           </div>

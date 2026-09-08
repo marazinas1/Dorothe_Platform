@@ -5,6 +5,7 @@ import { ConsentCheckbox } from "@/components/public/ConsentCheckbox";
 import { useConsent } from "@/lib/inquiry/use-consent";
 
 import { submitBuyerInquiry } from "@/lib/inquiry/submit.functions";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 const inputCls =
   "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-sm text-foreground outline-none transition-colors duration-300 focus:border-foreground";
@@ -128,7 +129,7 @@ export function BuyerInquiryForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex h-12 items-center justify-center bg-primary px-8 text-[11px] uppercase tracking-[0.18em] text-primary-foreground transition-opacity duration-300 hover:opacity-85 disabled:opacity-60"
+        className={actionButtonClass()}
       >
         {status === "submitting" ? t("inquiry.submitting") : t("inquiry.buyer.submit")}
       </button>

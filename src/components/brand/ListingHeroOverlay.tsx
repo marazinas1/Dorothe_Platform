@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Props = {
   title: string;
@@ -26,7 +27,7 @@ export function ListingHeroOverlay({ title, locationLine, contactHref }: Props) 
       </div>
       <a
         href={contactHref}
-        className="pointer-events-auto inline-flex flex-none items-center justify-center rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground transition-colors duration-500 ease-out hover:bg-primary/85"
+        className={actionButtonClass("primary", "pointer-events-auto flex-none")}
       >
         {t("listings.detail.contact_agent")}
       </a>

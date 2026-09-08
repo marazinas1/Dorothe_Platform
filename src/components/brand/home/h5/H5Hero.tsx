@@ -32,7 +32,7 @@ export function H5Hero({ locale, settings, copy, media }: HomeTemplateProps) {
             {copy.text("hero_subline")}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <HomeButton locale={locale} to="/$locale/immobilienbewertung" tone="accent">
+            <HomeButton locale={locale} to="/$locale/immobilienbewertung">
               {t("home.hero_cta")}
             </HomeButton>
             <HomeTextLink locale={locale} to="/$locale/immobilien" className="text-white">

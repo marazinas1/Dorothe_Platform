@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import brokerPlaceholder from "@/assets/broker-placeholder.jpg";
 import type { Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Props = {
   locale: Locale;
@@ -97,7 +98,7 @@ export function AgentIntro({
           <Link
             to="/$locale/kontakt"
             params={{ locale }}
-            className="mt-10 inline-flex items-center rounded-full bg-primary px-7 py-3 text-sm text-primary-foreground transition-opacity duration-300 hover:opacity-90"
+            className={actionButtonClass("primary", "mt-10")}
           >
             {t("nav.contact")}
           </Link>

@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/config";
 import type { HeroLayout, SiteSettings } from "@/types/site-settings";
 
 import { Signature } from "./Signature";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Props = {
   locale: Locale;
@@ -121,7 +122,7 @@ function HeroActions({ locale, className }: { locale: Locale; className?: string
         to="/$locale/verkaufen"
         hash="form"
         params={{ locale }}
-        className="eyebrow inline-flex h-12 items-center rounded-sm bg-primary px-7 text-primary-foreground transition-opacity duration-300 hover:opacity-90"
+        className={actionButtonClass()}
       >
         {t("home.hero_cta")}
       </Link>

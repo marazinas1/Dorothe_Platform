@@ -7,6 +7,7 @@ import { useConsent } from "@/lib/inquiry/use-consent";
 
 import type { Locale } from "@/i18n/config";
 import { submitBuyerInquiry, submitSellerInquiry } from "@/lib/inquiry/submit.functions";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 const inputCls =
   "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-sm text-foreground outline-none transition-colors duration-300 focus:border-foreground";
@@ -121,7 +122,7 @@ export function ShortInquiryForm({ mode, locale, appearance = "default" }: Props
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="eyebrow inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-primary-foreground transition-opacity duration-300 hover:opacity-90 disabled:opacity-60"
+          className={actionButtonClass()}
         >
           {status === "submitting" ? t("inquiry.submitting") : t("inquiry.submit")}
         </button>

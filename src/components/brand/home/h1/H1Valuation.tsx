@@ -26,9 +26,9 @@ export function H1Valuation({ locale, copy }: HomeTemplateProps) {
             <HomeButton
               locale={locale}
               to="/$locale/immobilienbewertung"
-              className="bg-background text-foreground"
+              tone="on-dark"
             >
-              {t("home.valuation_cta")} →
+              {t("home.valuation_cta")}
             </HomeButton>
           </div>
         </div>

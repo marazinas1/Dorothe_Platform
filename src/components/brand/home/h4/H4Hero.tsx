@@ -25,7 +25,7 @@ export function H4Hero({ locale, settings, copy, media }: HomeTemplateProps) {
             <div className="w-full shrink-0 pt-2 lg:w-[280px]">
               <p className="leading-relaxed text-muted-foreground">{copy.text("hero_subline")}</p>
               <div className="mt-6 flex flex-col items-start gap-3">
-                <HomeButton locale={locale} to="/$locale/immobilienbewertung" tone="accent">
+                <HomeButton locale={locale} to="/$locale/immobilienbewertung">
                   {t("home.hero_cta")}
                 </HomeButton>
                 <HomeTextLink locale={locale} to="/$locale/immobilien">

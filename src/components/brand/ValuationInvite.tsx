@@ -5,6 +5,7 @@ import { Reveal } from "@/components/shared/Reveal";
 import type { Locale } from "@/i18n/config";
 import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { ValuationOffer } from "@/types/site-settings";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Props = {
   locale: Locale;
@@ -39,7 +40,7 @@ export function ValuationInvite({ locale, offer }: Props) {
             to="/$locale/verkaufen"
             hash="form"
             params={{ locale }}
-            className="eyebrow mt-12 inline-flex h-14 items-center rounded-sm bg-primary px-9 text-primary-foreground transition-opacity duration-300 hover:opacity-90"
+            className={actionButtonClass("primary", "mt-12")}
           >
             {t("home.valuation_cta")}
           </Link>

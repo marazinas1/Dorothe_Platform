@@ -11,6 +11,7 @@ import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { submitBuyerInquiry } from "@/lib/inquiry/submit.functions";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 export const Route = createFileRoute("/$locale/kontakt")({
   loader: async ({ context, params }) => {
@@ -264,7 +265,7 @@ function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex h-12 items-center justify-center bg-primary px-8 text-[11px] uppercase tracking-[0.18em] text-primary-foreground transition-opacity duration-300 hover:opacity-85 disabled:opacity-60"
+        className={actionButtonClass()}
       >
         {status === "submitting"
           ? t("pages.contact.form_submitting")
