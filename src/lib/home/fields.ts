@@ -16,7 +16,14 @@ export interface HomeTextField {
   /** Undefined = used by every template. */
   templates?: HomeTemplateKey[];
   /** Grouping in the admin editor. */
-  group: "opening" | "paths" | "credentials" | "listings" | "valuation" | "contact";
+  group:
+    | "opening"
+    | "paths"
+    | "credentials"
+    | "testimonials"
+    | "listings"
+    | "valuation"
+    | "contact";
 }
 
 export const HOME_TEXT_FIELDS: HomeTextField[] = [
