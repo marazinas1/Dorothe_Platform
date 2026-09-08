@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i2next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthCard } from "@/components/brand/AuthCard";
 import { supabase } from "@/integrations/supabase/client";
+import { validatePassword, type PasswordValidationError } from "@/lib/auth/password-schema";
 import type { Locale } from "@/i18n/config";
+
 
 export const Route = createFileRoute("/$locale/auth/reset-password")({
   component: ResetPasswordPage,
