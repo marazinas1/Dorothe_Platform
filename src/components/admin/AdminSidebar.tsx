@@ -44,7 +44,7 @@ const ITEMS: NavItem[] = [
   { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
   { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
   { key: "users", to: "/$locale/admin/users", icon: Users, permission: "user.manage" },
-  { key: "content", to: "/$locale/admin/content", icon: FileText, permission: "content.edit", flag: "blog" },
+  { key: "content", to: "/$locale/admin/content", icon: Home, permission: "settings.edit" },
   { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
   { key: "settings", to: "/$locale/admin/settings", icon: Settings, permission: "settings.edit" },
 ];
