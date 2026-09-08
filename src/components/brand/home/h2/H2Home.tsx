@@ -2,6 +2,7 @@ import { ContactSection } from "@/components/brand/ContactSection";
 import { SoldStrip } from "@/components/brand/SoldStrip";
 
 import { HomeListings } from "../HomeListings";
+import { HomeTestimonials } from "../HomeTestimonials";
 import type { HomeTemplateProps } from "../types";
 import { H2Credentials } from "./H2Credentials";
 import { H2Hero } from "./H2Hero";
@@ -16,6 +17,7 @@ export function H2Home(props: HomeTemplateProps) {
       <H2Hero {...props} />
       <H2Paths {...props} />
       <H2Credentials {...props} />
+      <HomeTestimonials {...props} tone="paper" />
       <HomeListings
         locale={locale}
         settings={settings}

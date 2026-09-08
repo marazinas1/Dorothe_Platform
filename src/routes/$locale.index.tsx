@@ -18,6 +18,7 @@ import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 import { resolveHomePreview } from "@/lib/home/admin.functions";
 import { homeCopy, homeMediaBag } from "@/lib/home/content";
+import { homeJsonLd } from "@/lib/seo/home-jsonld";
 import { homeTemplate, homeTemplateKey } from "@/lib/home/templates";
 import { buildThemeVariables } from "@/lib/theme/tokens";
 import {
@@ -78,9 +79,23 @@ export const Route = createFileRoute("/$locale/")({
       ogDefaultImage: socialImage,
       ogType: "website",
     });
-    if (!preview) return head;
-    return { ...head, meta: [...(head.meta ?? []), { name: "robots", content: "noindex" }] };
+    const copy = homeCopy(settings, homeTemplateKey(preview ?? settings.active_home_template), locale);
+    const scripts = [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(homeJsonLd(settings, copy, `${origin}/${locale}`)),
+      },
+    ];
+    if (!preview) return { ...head, scripts };
+    return {
+      ...head,
+      scripts,
+      meta: [...(head.meta ?? []), { name: "robots", content: "noindex" }],
+    };
   },
+
+
+
   component: HomePage,
 });
 
