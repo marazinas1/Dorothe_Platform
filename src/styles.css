@@ -226,9 +226,15 @@
 
 .admin-density :is(h1, h2, h3, h4, h5, h6, .font-heading) {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.01em;
+}
+
+/* Page titles carry the most weight, matching the admin reference. */
+.admin-density h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .admin-density h1 {

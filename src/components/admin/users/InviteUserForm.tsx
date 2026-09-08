@@ -31,7 +31,7 @@ export function InviteUserForm({ pending, onInvite }: Props) {
 
   return (
     <form
-      className="flex flex-col gap-3 sm:flex-row sm:items-end"
+      className="flex flex-col gap-3 sm:flex-row sm:items-start"
       onSubmit={(event) => {
         event.preventDefault();
         if (!email.trim()) return;
@@ -43,9 +43,10 @@ export function InviteUserForm({ pending, onInvite }: Props) {
       }}
     >
       <div className="space-y-1.5 sm:w-48">
-        <Label htmlFor="invite-name">{t("admin.users.form.name")}</Label>
+        <Label htmlFor="invite-name" className="block h-5 leading-5">{t("admin.users.form.name")}</Label>
         <Input
           id="invite-name"
+          className="h-10"
           autoComplete="off"
           value={fullName}
           placeholder={t("admin.users.form.namePlaceholder")}
@@ -53,9 +54,10 @@ export function InviteUserForm({ pending, onInvite }: Props) {
         />
       </div>
       <div className="flex-1 space-y-1.5">
-        <Label htmlFor="invite-email">{t("admin.users.form.email")}</Label>
+        <Label htmlFor="invite-email" className="block h-5 leading-5">{t("admin.users.form.email")}</Label>
         <Input
           id="invite-email"
+          className="h-10"
           type="email"
           required
           autoComplete="off"
@@ -65,9 +67,9 @@ export function InviteUserForm({ pending, onInvite }: Props) {
         />
       </div>
       <div className="space-y-1.5 sm:w-40">
-        <Label htmlFor="invite-role">{t("admin.users.form.role")}</Label>
+        <Label htmlFor="invite-role" className="block h-5 leading-5">{t("admin.users.form.role")}</Label>
         <Select value={role} onValueChange={(value) => setRole(value as AssignableRole)}>
-          <SelectTrigger id="invite-role">
+          <SelectTrigger id="invite-role" className="h-10">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -79,14 +81,22 @@ export function InviteUserForm({ pending, onInvite }: Props) {
           </SelectContent>
         </Select>
       </div>
-      <Button type="submit" disabled={pending} title={t("admin.users.form.submit")}>
-        {pending ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <UserPlus className="h-4 w-4" />
-        )}
-        {t("admin.users.form.submit")}
-      </Button>
+      <div className="space-y-1.5">
+        <span aria-hidden className="block h-5" />
+        <Button
+          type="submit"
+          className="h-10"
+          disabled={pending}
+          title={t("admin.users.form.submit")}
+        >
+          {pending ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <UserPlus className="h-4 w-4" />
+          )}
+          {t("admin.users.form.submit")}
+        </Button>
+      </div>
     </form>
   );
 }
