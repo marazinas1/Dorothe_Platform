@@ -8,7 +8,7 @@ import { HOME_TEMPLATE_KEYS, HOME_TEMPLATES, type HomeTemplateKey } from "@/lib/
 import { useHomeAdmin } from "@/lib/home/use-home-admin";
 import { usePreviewUrls } from "@/lib/home/use-preview-urls";
 
-import { HomeTemplateSheet } from "./HomeTemplateSheet";
+import { HomeEditorWorkspace } from "./HomeEditorWorkspace";
 import { TemplateCard } from "./TemplateCard";
 
 /**
@@ -54,8 +54,9 @@ export function HomeAdminPage() {
         ))}
       </div>
 
-      <HomeTemplateSheet
+      <HomeEditorWorkspace
         template={editing}
+        previewUrl={editing ? previewUrl(editing) : null}
         onClose={() => setEditing(null)}
         home={home}
         locales={locales}

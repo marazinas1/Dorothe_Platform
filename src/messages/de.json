@@ -1336,7 +1336,9 @@
       "editHint": "Karte anklicken, um Texte und Fotos zu bearbeiten.",
       "close": "Schließen",
       "saved": "Gespeichert.",
-      "thumbLoading": "Vorschau lädt…"
+      "thumbLoading": "Vorschau lädt…",
+      "livePreview": "Live-Vorschau",
+      "refresh": "Aktualisieren"
     }
   },
   "pages": {
