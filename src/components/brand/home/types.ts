@@ -18,6 +18,42 @@ export interface HomeTemplateProps {
   hideSoldPrice: boolean;
 }
 
+export interface TestiItem {
+  quote: string;
+  name: string;
+  town: string;
+}
+
+/** Client quotes, in the order the owner filled them in. Empty ones drop out. */
+export function testiItems(copy: HomeCopy): TestiItem[] {
+  return [1, 2, 3]
+    .map((n) => ({
+      quote: copy.text(`testi${n}_quote`),
+      name: copy.text(`testi${n}_name`),
+      town: copy.text(`testi${n}_town`),
+    }))
+    .filter((item) => item.quote);
+}
+
+export interface FactItem {
+  value: string;
+  label: string;
+}
+
+/**
+ * The small fact strip: one line per fact, written as "value — label" in the
+ * admin. Anything without a separator becomes a label-less fact.
+ */
+export function factItems(copy: HomeCopy): FactItem[] {
+  return copy
+    .list("facts")
+    .map((line) => {
+      const [value, ...rest] = line.split("—");
+      return { value: value.trim(), label: rest.join("—").trim() };
+    })
+    .filter((f) => f.value);
+}
+
 export interface CredItem {
   title: string;
   body: string;

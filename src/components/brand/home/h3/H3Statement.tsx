@@ -5,7 +5,7 @@ import type { HomeTemplateProps } from "../types";
  * Only this design carries it, which is why its text lives in the design's own
  * extra field rather than in the shared set.
  */
-export function H2Statement({ settings, copy, media }: HomeTemplateProps) {
+export function H3Statement({ settings, copy, media }: HomeTemplateProps) {
   const statement = copy.text("statement");
   if (!statement) return null;
 

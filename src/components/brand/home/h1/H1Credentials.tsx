@@ -3,9 +3,9 @@ import { Reveal } from "@/components/shared/Reveal";
 import { credItems, type HomeTemplateProps } from "../types";
 
 /**
- * Qualification as three columns separated by hairlines: an argument set out on
- * paper rather than badges on a wall. The certification line under each column
- * carries the accent, so the evidence is what catches the eye.
+ * Qualification as an argument set out on paper: one paragraph in her own voice,
+ * then three hairline columns. The certificate line under each column carries
+ * the amber, so the evidence is what the eye lands on.
  */
 export function H1Credentials({ copy }: HomeTemplateProps) {
   const intro = copy.text("cred_intro");
@@ -13,9 +13,9 @@ export function H1Credentials({ copy }: HomeTemplateProps) {
   if (!intro && items.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-[1240px] px-6 py-20 lg:px-8 lg:py-24">
+    <section className="mx-auto max-w-[1220px] border-b border-border px-6 py-20 lg:px-8 lg:py-[88px]">
       {intro ? (
-        <p className="max-w-[52ch] text-lg leading-[1.68] text-muted-foreground">{intro}</p>
+        <p className="max-w-[60ch] text-lg leading-[1.65] text-muted-foreground">{intro}</p>
       ) : null}
 
       {items.length > 0 ? (
@@ -24,15 +24,14 @@ export function H1Credentials({ copy }: HomeTemplateProps) {
             <Reveal
               key={i}
               delay={i * 90}
-              className="border-b border-border py-8 md:border-b-0 md:border-r md:pr-8 md:last:border-r-0"
+              className="border-b border-border py-7 md:border-b-0 md:border-r md:pr-7 md:last:border-r-0"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/60 text-xs tabular-figures">
-                {String(i + 1).padStart(2, "0")}
-              </div>
-              <h3 className="mt-6 font-heading text-xl">{item.title}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{item.body}</p>
+              <h3 className="font-heading text-[19px]">{item.title}</h3>
+              <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted-foreground">
+                {item.body}
+              </p>
               {item.tag ? (
-                <div className="mt-4 text-[12.5px] font-medium text-accent">{item.tag}</div>
+                <div className="mt-3.5 text-[12.5px] font-semibold text-accent">{item.tag}</div>
               ) : null}
             </Reveal>
           ))}

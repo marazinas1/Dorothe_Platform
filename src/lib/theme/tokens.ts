@@ -17,6 +17,8 @@ import type { SiteSettings } from "@/types/site-settings";
 /** Corner radius scale keys stored in site_settings.radius_scale. */
 export const RADIUS_SCALES = {
   sharp: { base: "0.125rem", media: "0.25rem" },
+  /** 4px everywhere: precise without reading playful. */
+  precise: { base: "0.25rem", media: "0.25rem" },
   soft: { base: "0.5rem", media: "0.875rem" },
   rounded: { base: "0.875rem", media: "1.25rem" },
 } as const;

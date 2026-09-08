@@ -3,19 +3,19 @@ import { SoldStrip } from "@/components/brand/SoldStrip";
 
 import { HomeListings } from "../HomeListings";
 import type { HomeTemplateProps } from "../types";
-import { H2Credentials } from "./H2Credentials";
-import { H2Hero } from "./H2Hero";
-import { H2Paths } from "./H2Paths";
-import { H2Valuation } from "./H2Valuation";
+import { H4Credentials } from "./H4Credentials";
+import { H4Hero } from "./H4Hero";
+import { H4Paths } from "./H4Paths";
+import { H4Valuation } from "./H4Valuation";
 
-/** Design H2 — "the expert": paper tones, serif headlines, document rhythm. */
-export function H2Home(props: HomeTemplateProps) {
+/** Design H4 — "modern": one big sentence, hairline grids, orange accent. */
+export function H4Home(props: HomeTemplateProps) {
   const { locale, settings, copy, featured, sold, hideSoldPrice } = props;
   return (
     <>
-      <H2Hero {...props} />
-      <H2Paths {...props} />
-      <H2Credentials {...props} />
+      <H4Hero {...props} />
+      <H4Paths {...props} />
+      <H4Credentials {...props} />
       <HomeListings
         locale={locale}
         settings={settings}
@@ -23,13 +23,8 @@ export function H2Home(props: HomeTemplateProps) {
         title={copy.text("listings_title")}
         note={copy.text("listings_note")}
       />
-      <SoldStrip
-        locale={locale}
-        items={sold}
-        settings={settings}
-        hidePrice={hideSoldPrice}
-      />
-      <H2Valuation {...props} />
+      <SoldStrip locale={locale} items={sold} settings={settings} hidePrice={hideSoldPrice} />
+      <H4Valuation {...props} />
       <ContactSection locale={locale} settings={settings} heading={copy.text("contact_title")} />
     </>
   );

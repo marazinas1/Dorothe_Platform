@@ -16,14 +16,22 @@ export interface HomeTextField {
   /** Undefined = used by every template. */
   templates?: HomeTemplateKey[];
   /** Grouping in the admin editor. */
-  group: "opening" | "paths" | "credentials" | "listings" | "valuation" | "contact";
+  group:
+    | "opening"
+    | "paths"
+    | "credentials"
+    | "testimonials"
+    | "listings"
+    | "valuation"
+    | "contact";
 }
 
 export const HOME_TEXT_FIELDS: HomeTextField[] = [
   { key: "hero_kicker", kind: "line", group: "opening" },
   { key: "hero_headline", kind: "paragraph", group: "opening" },
   { key: "hero_subline", kind: "paragraph", group: "opening" },
-  { key: "statement", kind: "paragraph", templates: ["h2"], group: "opening" },
+  { key: "statement", kind: "paragraph", templates: ["h3"], group: "opening" },
+  { key: "facts", kind: "list", templates: ["h5"], group: "opening" },
   { key: "sell_title", kind: "line", group: "paths" },
   { key: "sell_body", kind: "paragraph", group: "paths" },
   { key: "buy_title", kind: "line", group: "paths" },
@@ -39,6 +47,16 @@ export const HOME_TEXT_FIELDS: HomeTextField[] = [
   { key: "cred3_title", kind: "line", group: "credentials" },
   { key: "cred3_body", kind: "paragraph", group: "credentials" },
   { key: "cred3_tag", kind: "line", group: "credentials" },
+  { key: "testi_title", kind: "line", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi1_quote", kind: "paragraph", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi1_name", kind: "line", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi1_town", kind: "line", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi2_quote", kind: "paragraph", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi2_name", kind: "line", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi2_town", kind: "line", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi3_quote", kind: "paragraph", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi3_name", kind: "line", templates: ["h1", "h5"], group: "testimonials" },
+  { key: "testi3_town", kind: "line", templates: ["h1", "h5"], group: "testimonials" },
   { key: "listings_title", kind: "line", group: "listings" },
   { key: "listings_note", kind: "paragraph", group: "listings" },
   { key: "valuation_title", kind: "line", group: "valuation" },
@@ -51,6 +69,7 @@ export const HOME_FIELD_GROUPS = [
   "opening",
   "paths",
   "credentials",
+  "testimonials",
   "listings",
   "valuation",
   "contact",
