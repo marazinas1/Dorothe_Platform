@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthCard } from "@/components/brand/AuthCard";
 import { supabase } from "@/integrations/supabase/client";
-import { validatePassword, type PasswordValidationError } from "@/lib/auth/password-schema";
+import { validatePassword } from "@/lib/auth/password-schema";
 import type { Locale } from "@/i18n/config";
 
 
