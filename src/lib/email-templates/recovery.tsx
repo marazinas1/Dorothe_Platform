@@ -49,6 +49,7 @@ export default RecoveryEmail
 const main = { backgroundColor: '#ffffff', fontFamily: "'IBM Plex Sans', Helvetica, Arial, sans-serif" }
 const container = { padding: '20px 25px' }
 const h1 = {
+  fontFamily: "Fraunces, Georgia, 'Times New Roman', serif",
   fontSize: '22px',
   fontWeight: 'bold' as const,
   color: '#221D17',
