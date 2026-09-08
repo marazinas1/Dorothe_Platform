@@ -73,11 +73,11 @@ export interface SiteSettings {
   /** Which built-in home page design is live ("h1" | "h2" | "h3"). */
   active_home_template: string;
   /** Shared, localized home page texts keyed by content field. */
-  home_content: Record<string, unknown>;
+  home_content: Record<string, any>;
   /** Per photo slot: design default or the owner's own upload. */
   home_media: Record<string, { mode?: string; url?: string }>;
   /** Fields that belong to one design only, keyed by design. */
-  home_template_extras: Record<string, unknown>;
+  home_template_extras: Record<string, any>;
 }
 
 export interface ValuationOffer {

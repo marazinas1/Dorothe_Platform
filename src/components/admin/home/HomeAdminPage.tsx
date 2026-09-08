@@ -47,13 +47,21 @@ export function HomeAdminPage() {
               key={key}
               template={HOME_TEMPLATES[key]}
               isActive={home.active === key}
-              onPreview={() => home.preview(key).catch(fail)}
-              onActivate={() =>
-                home
-                  .activate(key)
-                  .then(() => toast.success(t("admin.home.activated")))
-                  .catch(fail)
-              }
+              onPreview={async () => {
+                try {
+                  await home.preview(key);
+                } catch (e) {
+                  fail(e);
+                }
+              }}
+              onActivate={async () => {
+                try {
+                  await home.activate(key);
+                  toast.success(t("admin.home.activated"));
+                } catch (e) {
+                  fail(e);
+                }
+              }}
             />
           ))}
         </div>
