@@ -44,7 +44,21 @@
     "claim_personal_body": "Pricing, financing questions and the commercial side of a sale — discussed plainly, without jargon.",
     "claim_personal_evidence": "Dipl. Betriebswirtin (BA) · Versicherungsfachwirtin and Immobilienmaklerin (IHK)",
     "membership_line": "Member of the European Real Estate Academy.",
-    "credibility_kicker": "Why {{agent}}"
+    "credibility_kicker": "Why {{agent}}",
+    "defaults": {
+      "hero_kicker": "{{agent}}",
+      "hero_headline": "Your home in good hands",
+      "hero_subline": "Independent valuation, honest advice and a sale that holds up — {{region_in}}.",
+      "statement": "A property is sold once. What matters is that the figure it fetches can be justified.",
+      "sell_title": "Thinking of selling your property?",
+      "sell_body": "We start with an expert on-site valuation. You then decide, without pressure, whether and when to sell.",
+      "buy_title": "Looking for a home?",
+      "buy_body": "Every currently available property with full details, floor plans and energy data.",
+      "cred_title": "Why {{agent}}",
+      "listings_title": "Selected properties",
+      "valuation_title": "What is your property worth today?",
+      "contact_title": "Buying or selling — tell me where to start."
+    }
   },
   "nav": {
     "listings": "Properties",
@@ -1204,6 +1218,76 @@
         "deleteTitle": "Delete {{email}}?",
         "deleteBody": "This permanently deletes the account and cannot be undone. Listings and enquiries are not affected. Type DELETE to confirm.",
         "deleteAction": "Delete permanently"
+      }
+    },
+    "home": {
+      "title": "Home page",
+      "subtitle": "Choose a design and edit the words and photographs it shows.",
+      "designs": "Designs",
+      "content": "Words and photographs",
+      "live": "Live",
+      "preview": "Preview",
+      "setMain": "Set as main home page",
+      "isMain": "Current home page",
+      "activated": "This design is now your home page.",
+      "placeholder": "Leave empty to use the default line",
+      "listHint": "One item per line",
+      "groups": {
+        "opening": "Opening",
+        "paths": "Two paths",
+        "credentials": "Qualification",
+        "listings": "Properties",
+        "valuation": "Valuation",
+        "contact": "Contact"
+      },
+      "fields": {
+        "hero_kicker": "Small line above the headline",
+        "hero_headline": "Headline",
+        "hero_subline": "Supporting line",
+        "statement": "Statement band",
+        "sell_title": "Selling — title",
+        "sell_body": "Selling — text",
+        "buy_title": "Buying — title",
+        "buy_body": "Buying — text",
+        "cred_title": "Qualification — title",
+        "cred_intro": "Qualification — intro",
+        "cred1_title": "Point 1 — title",
+        "cred1_body": "Point 1 — text",
+        "cred1_tag": "Point 1 — certificate",
+        "cred2_title": "Point 2 — title",
+        "cred2_body": "Point 2 — text",
+        "cred2_tag": "Point 2 — certificate",
+        "cred3_title": "Point 3 — title",
+        "cred3_body": "Point 3 — text",
+        "cred3_tag": "Point 3 — certificate",
+        "listings_title": "Properties — title",
+        "listings_note": "Properties — note",
+        "valuation_title": "Valuation — title",
+        "valuation_body": "Valuation — text",
+        "valuation_steps": "Valuation — steps",
+        "contact_title": "Contact — heading"
+      },
+      "media": {
+        "portrait": "Portrait",
+        "hero_photo": "Opening photograph",
+        "band_photo": "Wide photograph",
+        "default": "Default",
+        "custom": "Choose your own",
+        "empty": "No photograph yet"
+      },
+      "templates": {
+        "h1": {
+          "label": "Expert",
+          "description": "Warm paper tones, serif headlines, qualification stated first."
+        },
+        "h2": {
+          "label": "Four walls",
+          "description": "Full-bleed opening photograph, wine red, a statement band."
+        },
+        "h3": {
+          "label": "Modern",
+          "description": "One large sentence, hairline grids, orange accent."
+        }
       }
     }
   },
