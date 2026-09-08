@@ -9,7 +9,7 @@ import { EmailChangeEmail } from '@/lib/email-templates/email-change'
 import { ReauthenticationEmail } from '@/lib/email-templates/reauthentication'
 
 // Configuration
-const SITE_NAME = "Dorothe_Platform"
+const SITE_NAME = "Immobilienberatung Dorothe Waltner"
 const SENDER_DOMAIN = "notify.dorothe.deerva.com"
 const ROOT_DOMAIN = "dorothe.deerva.com"
 const FROM_DOMAIN = "notify.dorothe.deerva.com"
