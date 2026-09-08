@@ -105,6 +105,13 @@ export const AnalyticsSchema = z.object({
 });
 export type AnalyticsInput = z.infer<typeof AnalyticsSchema>;
 
+export const HomeSchema = z.object({
+  home_content: jsonRecord,
+  home_media: jsonRecord,
+  home_template_extras: jsonRecord,
+});
+export type HomeInput = z.infer<typeof HomeSchema>;
+
 /** Backwards-compatible alias used elsewhere. */
 export const SiteSettingsSchema = GeneralSchema;
 
@@ -114,6 +121,7 @@ export const SITE_SETTINGS_SCHEMAS = {
   contact: ContactSchema,
   legal: LegalSchema,
   analytics: AnalyticsSchema,
+  home: HomeSchema,
 } as const;
 
 export type SettingsTabKey = keyof typeof SITE_SETTINGS_SCHEMAS;

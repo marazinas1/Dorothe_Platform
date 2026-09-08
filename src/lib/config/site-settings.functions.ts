@@ -9,6 +9,7 @@ import {
   ContactSchema,
   LegalSchema,
   AnalyticsSchema,
+  HomeSchema,
   type SettingsTabKey,
 } from "@/lib/validation/site-settings";
 
@@ -38,7 +39,8 @@ type UpdateInput =
   | { tab: "branding"; values: unknown }
   | { tab: "contact"; values: unknown }
   | { tab: "legal"; values: unknown }
-  | { tab: "analytics"; values: unknown };
+  | { tab: "analytics"; values: unknown }
+  | { tab: "home"; values: unknown };
 
 function parseByTab(input: UpdateInput): Record<string, unknown> {
   switch (input.tab) {
@@ -52,6 +54,8 @@ function parseByTab(input: UpdateInput): Record<string, unknown> {
       return LegalSchema.parse(input.values);
     case "analytics":
       return AnalyticsSchema.parse(input.values);
+    case "home":
+      return HomeSchema.parse(input.values);
   }
 }
 
@@ -64,6 +68,7 @@ export const updateSiteSettings = createServerFn({ method: "POST" })
       "contact",
       "legal",
       "analytics",
+      "home",
     ];
     if (!allowed.includes(input.tab as SettingsTabKey)) {
       throw new Error("Invalid tab");
