@@ -57,7 +57,8 @@
       "cred_title": "Why {{agent}}",
       "listings_title": "Selected properties",
       "valuation_title": "What is your property worth today?",
-      "contact_title": "Buying or selling — tell me where to start."
+      "contact_title": "Buying or selling — tell me where to start.",
+      "testi_title": "What clients say"
     }
   },
   "nav": {
@@ -1243,7 +1244,8 @@
         "credentials": "Qualification",
         "listings": "Properties",
         "valuation": "Valuation",
-        "contact": "Contact"
+        "contact": "Contact",
+        "testimonials": "Client voices"
       },
       "fields": {
         "hero_kicker": "Small line above the headline",
@@ -1270,7 +1272,18 @@
         "valuation_title": "Valuation — title",
         "valuation_body": "Valuation — text",
         "valuation_steps": "Valuation — steps",
-        "contact_title": "Contact — heading"
+        "contact_title": "Contact — heading",
+        "facts": "Fact strip (one per line, “value — label”)",
+        "testi_title": "Client voices — heading",
+        "testi1_quote": "Quote 1",
+        "testi1_name": "Quote 1 — name",
+        "testi1_town": "Quote 1 — town",
+        "testi2_quote": "Quote 2",
+        "testi2_name": "Quote 2 — name",
+        "testi2_town": "Quote 2 — town",
+        "testi3_quote": "Quote 3",
+        "testi3_name": "Quote 3 — name",
+        "testi3_town": "Quote 3 — town"
       },
       "media": {
         "portrait": "Portrait",
@@ -1282,16 +1295,24 @@
       },
       "templates": {
         "h1": {
+          "label": "Direct",
+          "description": "Amber, ink and warm paper. Claim first, then qualification and client voices."
+        },
+        "h2": {
           "label": "Expert",
           "description": "Warm paper tones, serif headlines, qualification stated first."
         },
-        "h2": {
+        "h3": {
           "label": "Four walls",
           "description": "Full-bleed opening photograph, wine red, a statement band."
         },
-        "h3": {
+        "h4": {
           "label": "Modern",
           "description": "One large sentence, hairline grids, orange accent."
+        },
+        "h5": {
+          "label": "Editorial",
+          "description": "Full-screen photograph, a fact strip, client voices on a dark band."
         }
       }
     }

@@ -57,7 +57,8 @@
       "cred_title": "Warum {{agent}}",
       "listings_title": "Ausgewählte Objekte",
       "valuation_title": "Was ist Ihre Immobilie heute wert?",
-      "contact_title": "Kaufen oder verkaufen — sagen Sie mir, worum es geht."
+      "contact_title": "Kaufen oder verkaufen — sagen Sie mir, worum es geht.",
+      "testi_title": "Das sagen Kundinnen und Kunden"
     }
   },
   "nav": {
@@ -1243,7 +1244,8 @@
         "credentials": "Qualifikation",
         "listings": "Objekte",
         "valuation": "Wertermittlung",
-        "contact": "Kontakt"
+        "contact": "Kontakt",
+        "testimonials": "Kundenstimmen"
       },
       "fields": {
         "hero_kicker": "Kleine Zeile über der Überschrift",
@@ -1270,7 +1272,18 @@
         "valuation_title": "Wertermittlung — Titel",
         "valuation_body": "Wertermittlung — Text",
         "valuation_steps": "Wertermittlung — Schritte",
-        "contact_title": "Kontakt — Überschrift"
+        "contact_title": "Kontakt — Überschrift",
+        "facts": "Faktenzeile (eine pro Zeile, „Wert — Bezeichnung“)",
+        "testi_title": "Kundenstimmen — Überschrift",
+        "testi1_quote": "Stimme 1",
+        "testi1_name": "Stimme 1 — Name",
+        "testi1_town": "Stimme 1 — Ort",
+        "testi2_quote": "Stimme 2",
+        "testi2_name": "Stimme 2 — Name",
+        "testi2_town": "Stimme 2 — Ort",
+        "testi3_quote": "Stimme 3",
+        "testi3_name": "Stimme 3 — Name",
+        "testi3_town": "Stimme 3 — Ort"
       },
       "media": {
         "portrait": "Porträt",
@@ -1282,16 +1295,24 @@
       },
       "templates": {
         "h1": {
-          "label": "Sachverständig",
-          "description": "Warme Papiertöne, Serifen-Überschriften, Qualifikation zuerst."
+          "label": "Direkt",
+          "description": "Amber, Tiefschwarz und warmes Papier. Aussage zuerst, dann Qualifikation und Stimmen."
         },
         "h2": {
-          "label": "Vier Wände",
-          "description": "Großes Auftaktfoto, Weinrot, ein Aussage-Band."
+          "label": "Sachverständige",
+          "description": "Warme Papiertöne, Serif-Überschriften, Qualifikation zuerst."
         },
         "h3": {
+          "label": "Vier Wände",
+          "description": "Großes Aufmacherfoto, Weinrot, ein Zitatband."
+        },
+        "h4": {
           "label": "Modern",
-          "description": "Ein großer Satz, feine Linien, oranger Akzent."
+          "description": "Ein großer Satz, feine Raster, orange Akzente."
+        },
+        "h5": {
+          "label": "Editorial",
+          "description": "Bildschirmfüllendes Foto, Faktenzeile, Stimmen auf dunklem Band."
         }
       }
     }
