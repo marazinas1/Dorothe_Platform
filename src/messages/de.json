@@ -58,7 +58,17 @@
       "listings_title": "Ausgewählte Objekte",
       "valuation_title": "Was ist Ihre Immobilie heute wert?",
       "contact_title": "Kaufen oder verkaufen — sagen Sie mir, worum es geht.",
-      "testi_title": "Das sagen Kundinnen und Kunden"
+      "testi_title": "Das sagen Kundinnen und Kunden",
+      "facts": "20+ Jahre — im Beruf\nDEKRA — zertifizierte Sachverständige\n100% — persönliche Betreuung",
+      "testi1_quote": "Lorem ipsum dolor sit amet — die Wertermittlung wurde verständlich erklärt und der Verkauf lief ohne Überraschungen.",
+      "testi1_name": "Name",
+      "testi1_town": "Ort",
+      "testi2_quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fragen wurden zu jedem Zeitpunkt klar beantwortet.",
+      "testi2_name": "Name",
+      "testi2_town": "Ort",
+      "testi3_quote": "Lorem ipsum dolor sit amet — ruhige, gut vorbereitete Beratung von der Besichtigung bis zum Notartermin.",
+      "testi3_name": "Name",
+      "testi3_town": "Ort"
     }
   },
   "nav": {

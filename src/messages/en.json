@@ -58,7 +58,17 @@
       "listings_title": "Selected properties",
       "valuation_title": "What is your property worth today?",
       "contact_title": "Buying or selling — tell me where to start.",
-      "testi_title": "What clients say"
+      "testi_title": "What clients say",
+      "facts": "20+ years — in the profession\nDEKRA — certified valuation expert\n100% — personal handling",
+      "testi1_quote": "Lorem ipsum dolor sit amet — the valuation was explained clearly and the sale went through without surprises.",
+      "testi1_name": "Client name",
+      "testi1_town": "Town",
+      "testi2_quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Questions were answered plainly and quickly at every step.",
+      "testi2_name": "Client name",
+      "testi2_town": "Town",
+      "testi3_quote": "Lorem ipsum dolor sit amet — calm, well-prepared advice from the first viewing to the notary appointment.",
+      "testi3_name": "Client name",
+      "testi3_town": "Town"
     }
   },
   "nav": {
