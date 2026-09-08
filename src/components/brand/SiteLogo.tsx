@@ -56,7 +56,7 @@ export function SiteLogo({
       src={src}
       alt={settings.site_name}
       className={cn(
-        size === "sm" ? "h-12 md:h-14" : "h-16 md:h-20",
+        size === "sm" ? "h-14 md:h-16" : "h-16 md:h-20",
         "w-auto object-contain transition-[height] duration-500 ease-out",
         interactive && INTERACTIVE_CLASS,
         className,
