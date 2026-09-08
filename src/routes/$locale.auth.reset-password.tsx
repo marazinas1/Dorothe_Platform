@@ -7,7 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthCard } from "@/components/brand/AuthCard";
 import { supabase } from "@/integrations/supabase/client";
+import { validatePassword } from "@/lib/auth/password-schema";
 import type { Locale } from "@/i18n/config";
+
 
 export const Route = createFileRoute("/$locale/auth/reset-password")({
   component: ResetPasswordPage,
@@ -45,10 +47,27 @@ function ResetPasswordPage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (password.length < 8) {
-      setError(t("admin.auth.reset.tooShort"));
+    const validation = validatePassword(password);
+    if (validation) {
+      switch (validation) {
+        case "tooShort":
+          setError(t("admin.auth.reset.tooShort"));
+          break;
+        case "noUppercase":
+          setError(t("admin.auth.reset.noUppercase"));
+          break;
+        case "noLowercase":
+          setError(t("admin.auth.reset.noLowercase"));
+          break;
+        case "noDigit":
+          setError(t("admin.auth.reset.noDigit"));
+          break;
+        default:
+          setError(t("admin.auth.reset.weak"));
+      }
       return;
     }
+
     if (password !== confirm) {
       setError(t("admin.auth.reset.mismatch"));
       return;
@@ -57,7 +76,12 @@ function ResetPasswordPage() {
     const { error: upErr } = await supabase.auth.updateUser({ password });
     setBusy(false);
     if (upErr) {
-      setError(upErr.message);
+      const msg = upErr.message.toLowerCase();
+      if (msg.includes("compromised") || msg.includes("known to be weak") || msg.includes("hibp")) {
+        setError(t("admin.auth.reset.leaked"));
+      } else {
+        setError(upErr.message);
+      }
       return;
     }
     setDone(true);
@@ -66,6 +90,7 @@ function ResetPasswordPage() {
       1200,
     );
   }
+
 
   return (
     <AuthCard>
@@ -80,12 +105,16 @@ function ResetPasswordPage() {
           <p className="text-sm">{t("admin.auth.reset.success")}</p>
         ) : (
           <form className="space-y-4" onSubmit={onSubmit}>
+            <p className="text-xs text-muted-foreground">
+              {t("admin.auth.reset.requirements")}
+            </p>
             <div className="space-y-1.5">
               <Label htmlFor="pw">{t("admin.auth.reset.password")}</Label>
               <Input
                 id="pw"
                 type="password"
                 required
+                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -96,6 +125,7 @@ function ResetPasswordPage() {
                 id="pw2"
                 type="password"
                 required
+                minLength={8}
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
               />
@@ -105,6 +135,7 @@ function ResetPasswordPage() {
               {busy ? t("admin.auth.reset.submitting") : t("admin.auth.reset.submit")}
             </Button>
           </form>
+
         )}
       </div>
     </AuthCard>

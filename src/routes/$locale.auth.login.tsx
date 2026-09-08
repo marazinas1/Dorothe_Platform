@@ -57,13 +57,17 @@ function LoginPage() {
         password,
       });
       if (signInError || !data.session) {
-        setError(
-          signInError?.message.toLowerCase().includes("invalid")
-            ? t("admin.auth.login.invalid")
-            : t("admin.auth.login.generic"),
-        );
+        const msg = signInError?.message.toLowerCase() ?? "";
+        if (msg.includes("compromised") || msg.includes("known to be weak") || msg.includes("hibp")) {
+          setError(t("admin.auth.login.leaked"));
+        } else if (msg.includes("invalid")) {
+          setError(t("admin.auth.login.invalid"));
+        } else {
+          setError(t("admin.auth.login.generic"));
+        }
         return;
       }
+
       // Best-effort last-login update; never blocks navigation.
       void updateLastLogin().catch(() => undefined);
       await qc.invalidateQueries({ queryKey: currentUserQueryOptions.queryKey });

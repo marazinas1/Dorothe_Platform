@@ -547,10 +547,12 @@
         "forgot": "Forgot password?",
         "invalid": "Invalid credentials.",
         "generic": "Sign-in failed.",
+        "leaked": "This password has appeared in a data breach. Please reset it or choose a different one.",
         "noaccess": "This account has no admin access.",
         "expired": "Please sign in again.",
         "eyebrow": "Administrator",
         "note": "Authorized personnel only"
+
       },
       "forgot": {
         "title": "Reset password",
@@ -569,10 +571,17 @@
         "submit": "Save password",
         "submitting": "Saving…",
         "success": "Password updated. Redirecting…",
+        "requirements": "At least 8 characters, one uppercase letter, one lowercase letter and one number.",
         "mismatch": "Passwords do not match.",
         "tooShort": "At least 8 characters.",
+        "noUppercase": "At least one uppercase letter.",
+        "noLowercase": "At least one lowercase letter.",
+        "noDigit": "At least one number.",
+        "leaked": "This password has appeared in a data breach. Please choose a different one.",
+        "weak": "Password does not meet the requirements.",
         "invalidLink": "The link is invalid or has expired."
       }
+
     },
     "settings": {
       "title": "Settings",

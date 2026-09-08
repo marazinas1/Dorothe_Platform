@@ -7,6 +7,7 @@ import { getRequest } from "@tanstack/react-start/server";
 import { assertPermission } from "@/lib/auth/require-permission.server";
 import type { Role } from "@/lib/auth/permissions";
 import type { AdminUser, InviteResult, UsersOverview } from "./types";
+import { passwordSchema } from "@/lib/auth/password-schema";
 import {
   assertCanAssign,
   assertCanManage,
@@ -15,6 +16,7 @@ import {
   requireManager,
   type Caller,
 } from "./guards.server";
+
 
 async function admin() {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -163,11 +165,14 @@ export async function inviteOrCreateUser(
 
   // Email delivery unavailable: create the account and hand over credentials.
   const tempPassword = generateTempPassword();
+  // Defensive check: generated credentials must also satisfy the platform policy.
+  passwordSchema.parse(tempPassword);
   const created = await db.auth.admin.createUser({
     email,
     password: tempPassword,
     email_confirm: true,
   });
+
   if (created.error) throw new Error(created.error.message);
   await setFullName(db, email, input.fullName);
 
