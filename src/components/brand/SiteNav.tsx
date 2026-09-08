@@ -77,9 +77,9 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
           <HomeLink
             locale={locale}
             label={settings.site_name}
-            className="min-w-0 shrink-0 transition-opacity duration-300 hover:opacity-80"
+            className="min-w-0 shrink-0"
           >
-            <SiteLogo settings={settings} size="sm" />
+            <SiteLogo settings={settings} size="sm" interactive />
           </HomeLink>
 
           <div className="hidden items-center gap-[34px] md:flex">

@@ -15,7 +15,16 @@ type Props = {
    * come from src/assets/brand via @/lib/theme/logo.
    */
   variant?: LogoVariant;
+  /**
+   * `interactive` is for logos that act as the home button: hover darkens the
+   * mark, mirroring the shared ActionButton fill -> darker-fill behaviour.
+   * Applies to any client logo without code changes.
+   */
+  interactive?: boolean;
 };
+
+const INTERACTIVE_CLASS =
+  "transition-[filter] duration-300 ease-out hover:brightness-[0.7]";
 
 /**
  * Renders the brand mark, falling back to site_settings.logo_url and then to
@@ -28,11 +37,19 @@ export function SiteLogo({
   className,
   size = "md",
   variant = "original",
+  interactive = false,
 }: Props) {
   const fallback =
     tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
   const src = tone === "light" ? fallback : logoSrc(variant, fallback);
-  if (!src) return <BrandMark settings={settings} tone={tone} className={className} />;
+  if (!src)
+    return (
+      <BrandMark
+        settings={settings}
+        tone={tone}
+        className={cn(interactive && INTERACTIVE_CLASS, className)}
+      />
+    );
 
   return (
     <img
@@ -41,6 +58,7 @@ export function SiteLogo({
       className={cn(
         size === "sm" ? "h-12 md:h-14" : "h-16 md:h-20",
         "w-auto object-contain transition-[height] duration-500 ease-out",
+        interactive && INTERACTIVE_CLASS,
         className,
       )}
       loading="eager"
