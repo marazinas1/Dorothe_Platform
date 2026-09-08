@@ -16,6 +16,9 @@
 @import "@fontsource-variable/inter/index.css";
 @import "@fontsource-variable/work-sans/index.css";
 @import "@fontsource-variable/dm-sans/index.css";
+@import "@fontsource-variable/ibm-plex-sans/index.css";
+@import "@fontsource-variable/newsreader/index.css";
+@import "@fontsource-variable/archivo/index.css";
 /* Script face, only ever used for the signature motif. */
 @import "@fontsource/tangerine/latin-400.css";
 @import "@fontsource/tangerine/latin-700.css";

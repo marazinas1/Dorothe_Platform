@@ -7,6 +7,7 @@
  * an older settings field → translated default → empty).
  */
 
+import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { copyVars } from "@/lib/config/site-copy";
 import type { SiteSettings } from "@/types/site-settings";
@@ -96,7 +97,7 @@ export function homeCopy(
       if (own) return own;
       const legacy = legacyText(settings, key, locale);
       if (legacy) return legacy;
-      const translated = translate(locale, `home.defaults.${key}`, vars);
+      const translated = translate(locale as Locale, `home.defaults.${key}`, vars);
       return translated === `home.defaults.${key}` ? "" : translated;
     },
     list: (key) => {
@@ -104,7 +105,7 @@ export function homeCopy(
       if (own.length > 0) return own;
       const legacy = legacyList(settings, key, locale);
       if (legacy.length > 0) return legacy;
-      const translated = translate(locale, `home.defaults.${key}`, vars);
+      const translated = translate(locale as Locale, `home.defaults.${key}`, vars);
       return translated === `home.defaults.${key}` || !translated
         ? []
         : translated.split("\n").map((l) => l.trim()).filter(Boolean);

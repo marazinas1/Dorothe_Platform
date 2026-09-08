@@ -60,6 +60,24 @@ export const FONT_REGISTRY: FontFamily[] = [
     stack: '"DM Sans Variable", ui-sans-serif, system-ui, sans-serif',
     roles: ["heading", "body"],
   },
+  {
+    key: "ibm-plex-sans",
+    label: "IBM Plex Sans",
+    stack: '"IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif',
+    roles: ["body"],
+  },
+  {
+    key: "newsreader",
+    label: "Newsreader",
+    stack: '"Newsreader Variable", Georgia, serif',
+    roles: ["heading"],
+  },
+  {
+    key: "archivo",
+    label: "Archivo",
+    stack: '"Archivo Variable", ui-sans-serif, system-ui, sans-serif',
+    roles: ["heading", "body"],
+  },
 ];
 
 export function fontsForRole(role: FontRole): FontFamily[] {
