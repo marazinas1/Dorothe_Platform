@@ -81,6 +81,7 @@
     }
   },
   "nav": {
+    "home": "Startseite",
     "listings": "Immobilien",
     "sold": "Verkauft",
     "valuation": "Immobilienbewertung",
