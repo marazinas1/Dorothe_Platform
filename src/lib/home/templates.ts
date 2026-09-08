@@ -10,15 +10,17 @@
  * Labels live in the message files, never here — no client wording in code.
  */
 
-export type HomeTemplateKey = "h1" | "h2" | "h3";
+export type HomeTemplateKey = "h1" | "h2" | "h3" | "h4" | "h5";
 
 export type HomeMediaSlot = "portrait" | "hero_photo" | "band_photo";
 
 export type HomeSectionKey =
   | "hero"
+  | "facts"
   | "statement"
   | "paths"
   | "credentials"
+  | "testimonials"
   | "listings"
   | "sold"
   | "valuation"
@@ -36,7 +38,7 @@ export interface HomeTemplateTheme {
   border_color: string;
   font_heading: string;
   font_body: string;
-  radius_scale: "sharp" | "soft" | "rounded";
+  radius_scale: "sharp" | "precise" | "soft" | "rounded";
   button_style: "square" | "rounded" | "pill";
 }
 
@@ -54,9 +56,45 @@ export interface HomeTemplateDef {
   };
 }
 
+/**
+ * Amber / ink / paper: the house palette. Amber is the only saturated colour,
+ * ink carries authority, paper stays warm rather than grey. Corners are 4px —
+ * precise without reading playful.
+ */
+const HOUSE_THEME: HomeTemplateTheme = {
+  primary_color: "#221D17",
+  secondary_color: "#EFE8D9",
+  accent_color: "#B8752B",
+  background_color: "#F7F3EC",
+  surface_color: "#EFE8D9",
+  text_color: "#221D17",
+  muted_text_color: "#6B6155",
+  border_color: "#DCD3C3",
+  font_heading: "fraunces",
+  font_body: "ibm-plex-sans",
+  radius_scale: "precise",
+  button_style: "rounded",
+};
+
 export const HOME_TEMPLATES: Record<HomeTemplateKey, HomeTemplateDef> = {
   h1: {
     key: "h1",
+    sections: [
+      "hero",
+      "paths",
+      "credentials",
+      "testimonials",
+      "listings",
+      "sold",
+      "valuation",
+      "contact",
+    ],
+    media: ["hero_photo", "portrait"],
+    theme: HOUSE_THEME,
+    chrome: { footerTone: "dark", heroOverlay: false },
+  },
+  h2: {
+    key: "h2",
     sections: ["hero", "paths", "credentials", "listings", "sold", "valuation", "contact"],
     media: ["hero_photo", "portrait"],
     theme: {
@@ -75,8 +113,8 @@ export const HOME_TEMPLATES: Record<HomeTemplateKey, HomeTemplateDef> = {
     },
     chrome: { footerTone: "dark", heroOverlay: false },
   },
-  h2: {
-    key: "h2",
+  h3: {
+    key: "h3",
     sections: [
       "hero",
       "statement",
@@ -104,8 +142,8 @@ export const HOME_TEMPLATES: Record<HomeTemplateKey, HomeTemplateDef> = {
     },
     chrome: { footerTone: "dark", heroOverlay: true },
   },
-  h3: {
-    key: "h3",
+  h4: {
+    key: "h4",
     sections: ["hero", "paths", "credentials", "listings", "sold", "valuation", "contact"],
     media: ["band_photo", "portrait"],
     theme: {
@@ -123,6 +161,23 @@ export const HOME_TEMPLATES: Record<HomeTemplateKey, HomeTemplateDef> = {
       button_style: "square",
     },
     chrome: { footerTone: "light", heroOverlay: false },
+  },
+  h5: {
+    key: "h5",
+    sections: [
+      "hero",
+      "facts",
+      "paths",
+      "credentials",
+      "testimonials",
+      "listings",
+      "sold",
+      "valuation",
+      "contact",
+    ],
+    media: ["hero_photo", "portrait"],
+    theme: HOUSE_THEME,
+    chrome: { footerTone: "dark", heroOverlay: true },
   },
 };
 
