@@ -74,7 +74,7 @@ export function ListingCardCarousel({
       <div
         className={cn(
           "w-full bg-muted",
-          appearance === "direct" ? "aspect-[4/3] rounded-[var(--radius)]" : "aspect-[3/2] rounded-media",
+          appearance === "direct" ? "aspect-[4/3] rounded-none" : "aspect-[3/2] rounded-media",
         )}
       />
     );
@@ -143,7 +143,7 @@ export function ListingCardCarousel({
     <div
       className={cn(
         "group/media relative w-full overflow-hidden bg-muted",
-        appearance === "direct" ? "aspect-[4/3] rounded-[var(--radius)]" : "aspect-[3/2] rounded-media",
+        appearance === "direct" ? "aspect-[4/3] rounded-none" : "aspect-[3/2] rounded-media",
       )}
       onPointerEnter={() => setArmed(true)}
       onTouchStart={() => setArmed(true)}
