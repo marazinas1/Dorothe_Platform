@@ -42,22 +42,22 @@ export function HomeTestimonials({
   }
 
   return (
-    <section className="bg-secondary py-20 lg:py-24">
-      <div className="mx-auto max-w-[1240px] px-6 lg:px-8">
+    <section className="bg-secondary py-20 lg:py-[88px]">
+      <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
         {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
         <div className="mt-12 grid gap-7 md:grid-cols-3">
           {items.map((item, i) => (
             <Reveal
               key={i}
               delay={i * 90}
-              className="flex flex-col rounded-[var(--radius)] bg-background p-7"
+              className="flex flex-col rounded-[var(--radius)] bg-background px-[26px] py-[30px]"
             >
               <Stars className="text-accent" />
-              <p className="mt-4 text-[15px] leading-relaxed">{item.quote}</p>
-              <div className="mt-6 border-t border-border pt-4">
-                <div className="text-sm font-medium">{item.name}</div>
+              <p className="mt-4 min-h-[88px] text-[14.5px] leading-[1.62]">{item.quote}</p>
+              <div className="mt-[22px] border-t border-border pt-4">
+                <div className="text-[13.5px] font-semibold">{item.name}</div>
                 {item.town ? (
-                  <div className="text-[13px] text-muted-foreground">{item.town}</div>
+                  <div className="text-[12.5px] text-muted-foreground">{item.town}</div>
                 ) : null}
               </div>
             </Reveal>
