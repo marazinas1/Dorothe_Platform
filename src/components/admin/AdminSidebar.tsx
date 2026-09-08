@@ -7,7 +7,7 @@ import {
   LayoutDashboard,
   Building2,
   Inbox,
-  Users,
+  UserCog,
   Home,
   BarChart3,
   Settings,
