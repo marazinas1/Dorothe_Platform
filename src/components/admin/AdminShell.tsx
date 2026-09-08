@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -20,6 +21,14 @@ export function AdminShell({
 }) {
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+
+  // Dropdowns and dialogs render into <body> through a portal, so the admin
+  // tokens have to reach the body too — otherwise menus pick up the public
+  // amber accent instead of the neutral admin one.
+  useEffect(() => {
+    document.body.classList.add("admin-density");
+    return () => document.body.classList.remove("admin-density");
+  }, []);
 
   const displayName = profile.full_name || profile.email || t("admin.topbar.unknownUser");
   const roleLabel = t(`admin.role.${profile.role}`);

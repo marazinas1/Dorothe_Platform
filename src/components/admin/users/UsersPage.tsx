@@ -3,7 +3,6 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-import type { Role } from "@/lib/auth/permissions";
 import type { InviteResult } from "@/lib/users/types";
 import {
   errorMessage,
@@ -40,7 +39,6 @@ export function UsersPage() {
         </h2>
         <div className="mt-4 space-y-4">
           <InviteUserForm
-            callerRole={data.callerRole}
             pending={m.invite.isPending}
             onInvite={(input) =>
               m.invite.mutate(input, {
@@ -64,9 +62,8 @@ export function UsersPage() {
             <UserRow
               key={user.id}
               user={user}
-              callerRole={data.callerRole}
               busy={busy}
-              onSetRole={(role: Role) =>
+              onSetRole={(role) =>
                 m.setRole.mutate(
                   { userId: user.id, role },
                   { onError: fail, onSuccess: () => toast.success(t("admin.users.saved")) },

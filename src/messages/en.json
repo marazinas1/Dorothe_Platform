@@ -1209,6 +1209,8 @@
         "lastOwner": "At least one owner account must remain."
       },
       "form": {
+        "name": "Name",
+        "namePlaceholder": "Full name",
         "email": "Email address",
         "emailPlaceholder": "name@example.com",
         "role": "Role",
