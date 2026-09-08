@@ -464,7 +464,12 @@
       "settings": "Settings",
       "viewSite": "View public site",
       "users": "Users",
-      "group": "Manage"
+      "group": "Manage",
+      "groups": {
+        "workspace": "Workspace",
+        "website": "The website",
+        "settings": "Settings"
+      }
     },
     "pages": {
       "dashboard": "Dashboard",
