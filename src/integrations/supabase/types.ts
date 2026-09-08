@@ -573,8 +573,29 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "listings_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "listings_created_by_fkey"
             columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_updated_by_fkey"
+            columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -583,7 +604,7 @@ export type Database = {
             foreignKeyName: "listings_updated_by_fkey"
             columns: ["updated_by"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "profiles_public"
             referencedColumns: ["id"]
           },
         ]
@@ -670,6 +691,13 @@ export type Database = {
             columns: ["profile_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "permissions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
             referencedColumns: ["id"]
           },
         ]
@@ -989,6 +1017,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "user_invitations_invited_by_fkey"
+            columns: ["invited_by"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
     }
@@ -1277,7 +1312,47 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "listings_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
         ]
+      }
+      profiles_public: {
+        Row: {
+          full_name: string | null
+          id: string | null
+          languages_spoken: string[] | null
+          public_bio: Json | null
+          public_photo_url: string | null
+          public_title: string | null
+          sort_order: number | null
+          specializations: string[] | null
+        }
+        Insert: {
+          full_name?: string | null
+          id?: string | null
+          languages_spoken?: string[] | null
+          public_bio?: Json | null
+          public_photo_url?: string | null
+          public_title?: string | null
+          sort_order?: number | null
+          specializations?: string[] | null
+        }
+        Update: {
+          full_name?: string | null
+          id?: string | null
+          languages_spoken?: string[] | null
+          public_bio?: Json | null
+          public_photo_url?: string | null
+          public_title?: string | null
+          sort_order?: number | null
+          specializations?: string[] | null
+        }
+        Relationships: []
       }
     }
     Functions: {

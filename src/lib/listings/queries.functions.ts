@@ -367,8 +367,10 @@ export type PublicDocument = {
 export const listPublicDocuments = createServerFn({ method: "GET" })
   .inputValidator((raw: unknown) => z.object({ listing_id: z.string().uuid() }).parse(raw))
   .handler(async ({ data }): Promise<PublicDocument[]> => {
-    const supabase = await getPublicClient();
-    const { data: rows, error } = await supabase
+    // Lead-gated documents are unreachable for visitors at database level, so
+    // the announce-but-don't-link list is assembled server-side.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows, error } = await supabaseAdmin
       .from("listing_documents_public")
       .select("id, type, filename, storage_path, requires_lead")
       .eq("listing_id", data.listing_id);
@@ -399,8 +401,8 @@ export function listingDocumentsQueryOptions(listingId: string, enabled: boolean
 export const signListingDocument = createServerFn({ method: "POST" })
   .inputValidator((raw: unknown) => z.object({ id: z.string().uuid() }).parse(raw))
   .handler(async ({ data }): Promise<string | null> => {
-    const supabase = await getPublicClient();
-    const { data: row } = await supabase
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row } = await supabaseAdmin
       .from("listing_documents_public")
       .select("storage_path, requires_lead")
       .eq("id", data.id)
@@ -409,9 +411,9 @@ export const signListingDocument = createServerFn({ method: "POST" })
     if (!path || (row as any)?.requires_lead) return null;
 
     const { DOCUMENTS_BUCKET } = await import("./media-paths");
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: signed } = await supabaseAdmin.storage
       .from(DOCUMENTS_BUCKET)
       .createSignedUrl(path, 300);
     return signed?.signedUrl ?? null;
   });
+
