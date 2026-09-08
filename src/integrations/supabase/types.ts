@@ -377,6 +377,14 @@ export type Database = {
           price_on_request: boolean
           price_period: string | null
           property_type: string
+          public_address_number: string | null
+          public_address_street: string | null
+          public_commission_note: string | null
+          public_commission_payer: string | null
+          public_commission_type: string | null
+          public_commission_value: number | null
+          public_geo_lat: number | null
+          public_geo_lng: number | null
           published_at: string | null
           reference_code: string | null
           rental_status: string | null
@@ -448,6 +456,14 @@ export type Database = {
           price_on_request?: boolean
           price_period?: string | null
           property_type: string
+          public_address_number?: string | null
+          public_address_street?: string | null
+          public_commission_note?: string | null
+          public_commission_payer?: string | null
+          public_commission_type?: string | null
+          public_commission_value?: number | null
+          public_geo_lat?: number | null
+          public_geo_lng?: number | null
           published_at?: string | null
           reference_code?: string | null
           rental_status?: string | null
@@ -519,6 +535,14 @@ export type Database = {
           price_on_request?: boolean
           price_period?: string | null
           property_type?: string
+          public_address_number?: string | null
+          public_address_street?: string | null
+          public_commission_note?: string | null
+          public_commission_payer?: string | null
+          public_commission_type?: string | null
+          public_commission_value?: number | null
+          public_geo_lat?: number | null
+          public_geo_lng?: number | null
           published_at?: string | null
           reference_code?: string | null
           rental_status?: string | null
@@ -1125,19 +1149,19 @@ export type Database = {
           additional_costs?: Json | null
           address_city?: string | null
           address_country?: string | null
-          address_number?: never
+          address_number?: string | null
           address_region?: string | null
-          address_street?: never
+          address_street?: string | null
           address_zip?: string | null
           agent_id?: string | null
           availability_date?: string | null
           bathrooms?: number | null
           bedrooms?: number | null
           commission_free?: boolean | null
-          commission_note?: never
-          commission_payer?: never
-          commission_type?: never
-          commission_value?: never
+          commission_note?: string | null
+          commission_payer?: string | null
+          commission_type?: string | null
+          commission_value?: number | null
           condition?: string | null
           content_sections?: Json | null
           created_at?: string | null
@@ -1148,8 +1172,8 @@ export type Database = {
           energy_exemption?: string | null
           features?: string[] | null
           floor?: number | null
-          geo_lat?: never
-          geo_lng?: never
+          geo_lat?: number | null
+          geo_lng?: number | null
           geo_precision?: string | null
           heating_costs_included?: boolean | null
           heating_type?: string | null
@@ -1187,19 +1211,19 @@ export type Database = {
           additional_costs?: Json | null
           address_city?: string | null
           address_country?: string | null
-          address_number?: never
+          address_number?: string | null
           address_region?: string | null
-          address_street?: never
+          address_street?: string | null
           address_zip?: string | null
           agent_id?: string | null
           availability_date?: string | null
           bathrooms?: number | null
           bedrooms?: number | null
           commission_free?: boolean | null
-          commission_note?: never
-          commission_payer?: never
-          commission_type?: never
-          commission_value?: never
+          commission_note?: string | null
+          commission_payer?: string | null
+          commission_type?: string | null
+          commission_value?: number | null
           condition?: string | null
           content_sections?: Json | null
           created_at?: string | null
@@ -1210,8 +1234,8 @@ export type Database = {
           energy_exemption?: string | null
           features?: string[] | null
           floor?: number | null
-          geo_lat?: never
-          geo_lng?: never
+          geo_lat?: number | null
+          geo_lng?: number | null
           geo_precision?: string | null
           heating_costs_included?: boolean | null
           heating_type?: string | null
