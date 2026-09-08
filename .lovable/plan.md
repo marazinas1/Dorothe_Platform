@@ -1,22 +1,29 @@
-# Neutral near-black primary buttons, amber reserved for accents
+# Amber mygtukai su gintarinės spalvos hover, be juodo peršokimo
 
-## Decision
+## Sprendimas
 
-Filled primary buttons switch from amber `#B8752B` to near-black ink `#221D17`, matching the Halliday-Architects visual language already used for the admin panel and site backgrounds. Amber remains as a small accent color (icon tags, underlined quiet links, hover states), so the brand stays warm without large amber surfaces.
+Paliekame primary mygtukus gintarinės spalvos (`#B8752B`), kaip ir buvo. Pataisome tik `hover` būseną: kai ant mygtuko užvedama pelė, jis nebeturi staigiai pereiti į juodą. Vietoje to hover išlieka gintarinės šeimos spalvų ribose — tamsesnis gintaras (`#8F5A1E`) arba šiek tiek pritempiamas fonas, bet be juodo.
 
-## Changes
+## Pakeitimai
 
-1. **Primary button style** (centralized in `ActionButton.tsx` / button tokens):
-   - Background: ink `#221D17` (existing `--foreground`-family token)
-   - Text: paper/white
-   - Hover: slightly softened ink (e.g. 85–90% opacity or a lighter ink token), no color shift to amber
-   - Corners stay 4px, height 48px, uppercase/wide tracking, no arrows, `cursor: pointer` — all unchanged
-2. **Dark-band variant** (used on dark sections): unchanged behavior — light background with dark text.
-3. **Amber stays as accent only**: icon tags in "Why her" / credentials, underlined quiet links (arrows allowed there), small highlights. No filled amber surfaces.
-4. Scope: public site only, presentation layer. The admin panel already uses black buttons — no change needed there. No data, schema, or logic changes.
+1. **`ActionButton.tsx` / button token'ai**:
+   - Filled primary fonas: išlieka `#B8752B` (amber).
+   - Hover fonas: pereinama į tamsesnį gintarą `#8F5A1E` arba `color-mix` su 15–20% juodo, bet ne į pilną `#221D17` ink.
+   - Tekstas hover metu išlieka šviesus (white/paper).
+   - 4px radius, 48px aukštis, uppercase/letter-spacing, be rodyklių — nesikeičia.
+2. **Quiet/underlined nuorodos** (pvz. „Request a valuation →"):
+   - Hover gali likti gintarinis pabraukimas arba teksto spalvos pasikeitimas, bet ne invertuoti į juodą.
+3. **Admin panelė** lieka su juodais mygtukais, kaip Halliday-Architects projekte — šis planas liečia tik public svetainę.
+4. **Scope**: tik presentation layer — `ActionButton.tsx`, galbūt `QuietLink.tsx` ir `src/styles.css` token'ai. Jokių duomenų, schemos ar business logic pakeitimų.
 
-## Technical details
+## Techniniai žingsniai
 
-- Edit `src/components/brand/ui/ActionButton.tsx` (and any token in `src/styles.css` that defines the amber primary fill) so the filled variant reads the ink token instead of amber.
-- Check every place the filled button renders (nav Contact, hero actions, valuation, inquiry forms "Send enquiry", listing detail rail, mobile drawer) to confirm they all inherit the centralized style — no per-instance overrides.
-- Verify: typecheck + build, then browser check at `/` and `/de` for color, 4px radius, 48px height, pointer cursor, and hover state.
+1. Peržiūrėti `src/components/brand/ui/ActionButton.tsx` ir rasti, kur hover nustatytas į juodą / ink spalvą.
+2. Pakeisti hover klasę/tašką į tamsesnį amber variantą (`hover:bg-amber-700` arba custom `--primary-hover` token).
+3. Patikrinti `QuietLink.tsx`, kad ir ten hover neperšoktų į juodą.
+4. Paleisti `typecheck` ir `build`.
+5. Naršyklės patikra `/` ir `/de`: mygtukai gintariniai, užvedus pelę lieka gintarinės šeimos, rodyklės neatsiranda filled mygtukuose, cursor rodo pointer.
+
+## Konsultacija
+
+Jei vėliau nuspręstumėte, kad gintariniai mygtukai vis dėlto per daug „šilti", galėsime juos vienu kartu perjungti į near-black (`#221D17`) keisdami tik tą patį `ActionButton.tsx` failą. Dabar darome mažiausią pataisą — hover spalvą.
