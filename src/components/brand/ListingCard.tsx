@@ -159,7 +159,7 @@ export function ListingCard({
           {/* On closed properties the price row disappears rather than reading
               "on request" — the sale is over, there is nothing to ask. */}
           {hidePrice ? (
-            <span className="text-muted-foreground">{tone.closed ? tone.status : ""}</span>
+            <span />
           ) : (
             <span className="font-body text-foreground">
               <span className="text-muted-foreground">{priceLabel}</span>{" "}
