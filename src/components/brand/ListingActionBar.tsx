@@ -6,6 +6,7 @@ import type { PublicListing } from "@/lib/listings/queries.functions";
 import { formatPrice } from "@/lib/listings/format";
 import { moneyLabelKey } from "@/lib/listings/field-labels";
 import type { SiteSettings } from "@/types/site-settings";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Props = {
   listing: PublicListing;
@@ -67,7 +68,7 @@ export function ListingActionBar({ listing, locale, settings, contactId }: Props
         <a
           href={`#${contactId}`}
           tabIndex={visible ? undefined : -1}
-          className="shrink-0 rounded-control bg-primary px-5 py-3 text-[11px] uppercase tracking-[0.18em] text-primary-foreground"
+          className={actionButtonClass("primary", "h-11 shrink-0 px-6")}
         >
           {t("listings.detail.contact_agent")}
         </a>

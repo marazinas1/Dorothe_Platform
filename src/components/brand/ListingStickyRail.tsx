@@ -6,6 +6,7 @@ import { formatArea, formatPrice } from "@/lib/listings/format";
 import { moneyLabelKey } from "@/lib/listings/field-labels";
 import { commissionRow } from "@/lib/listings/commission";
 import type { SiteSettings } from "@/types/site-settings";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Props = {
   listing: PublicListing;
@@ -88,7 +89,7 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
 
         <a
           href={contactHref}
-          className="mt-8 inline-flex w-full items-center justify-center rounded-control bg-primary px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-primary-foreground transition-opacity duration-300 hover:opacity-90"
+          className={actionButtonClass("primary", "mt-8 w-full")}
         >
           {t("listings.detail.contact_agent")}
         </a>

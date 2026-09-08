@@ -6,6 +6,7 @@ import { BrandMark } from "@/components/brand/BrandMark";
 import { LocaleSwitcher } from "@/components/shared/LocaleSwitcher";
 import type { Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Item = { to: "/$locale/immobilien" | string; label: string };
 
@@ -70,7 +71,7 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
           to="/$locale/kontakt"
           params={{ locale }}
           onClick={onClose}
-          className="rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground"
+          className={actionButtonClass()}
         >
           {t("nav.contact")}
         </Link>

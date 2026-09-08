@@ -10,6 +10,7 @@ import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import type { Locale } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/types/site-settings";
+import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 type Props = {
   locale: Locale;
@@ -105,7 +106,7 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             <Link
               to="/$locale/kontakt"
               params={{ locale }}
-              className="inline-flex items-center rounded-[var(--radius-button)] bg-accent px-6 py-[13px] text-[13.5px] font-semibold uppercase tracking-[0.04em] text-accent-foreground transition-colors duration-300 hover:bg-primary"
+              className={actionButtonClass()}
             >
               {t("nav.contact")}
             </Link>
