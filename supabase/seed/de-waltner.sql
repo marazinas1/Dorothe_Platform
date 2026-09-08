@@ -106,7 +106,10 @@ UPDATE public.site_settings SET
     {"key":"contact","enabled":true}
   ]'::jsonb,
 
-  logo_url         = 'https://pyuhysyizzmfvzdvbdnw.supabase.co/storage/v1/object/public/site-assets/brand/logo-4-waende-saar.png',
+  logo_url         = 'https://pyuhysyizzmfvzdvbdnw.supabase.co/storage/v1/object/public/site-assets/branding/logo-amber.png',
+  logo_dark_url    = 'https://pyuhysyizzmfvzdvbdnw.supabase.co/storage/v1/object/public/site-assets/branding/logo-amber.png',
+  favicon_url      = 'https://pyuhysyizzmfvzdvbdnw.supabase.co/storage/v1/object/public/site-assets/branding/favicon-amber.png',
+
   -- Seals stay off for this client: the certification already appears in the
   -- credentials list, and a single round badge reads as a sticker on an
   -- otherwise typographic page. The mechanism remains for clients who want it.
