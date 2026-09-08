@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { applySoldPricePolicy, soldPricesHidden } from "@/lib/homepage/plan";
 import { PublicChrome } from "@/components/public/PublicChrome";
 import { ListingCard } from "@/components/brand/ListingCard";
+import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -82,7 +83,7 @@ function SoldArchive() {
             {t("listings.sold_empty")}
           </div>
         ) : (
-          <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          <div className={`mt-16 ${LISTING_CARD_GRID}`}>
             {items.map((l) => (
               <ListingCard
                 key={l.id}

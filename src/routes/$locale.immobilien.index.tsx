@@ -9,6 +9,7 @@ import { ListingCard } from "@/components/brand/ListingCard";
 import { ListingsMap } from "@/components/brand/ListingsMap";
 
 import { FiltersBar } from "@/components/public/FiltersBar";
+import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -128,7 +129,7 @@ function ListingsIndex() {
             {t("listings.empty")}
           </div>
         ) : (
-          <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          <div className={`mt-12 ${LISTING_CARD_GRID}`}>
             {data.items.map((l) => (
               <ListingCard
                 key={l.id}

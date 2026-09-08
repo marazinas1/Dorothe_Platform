@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ListingCard } from "@/components/brand/ListingCard";
 import { Reveal } from "@/components/shared/Reveal";
 import type { Locale } from "@/i18n/config";
+import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
 
@@ -36,7 +37,7 @@ export function AgentListings({ locale, items, settings, heading }: Props) {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      <div className={LISTING_CARD_GRID}>
         {items.slice(0, 6).map((l, i) => (
           <Reveal key={l.id} delay={i * 90} className="h-full">
             <ListingCard listing={l} locale={locale} settings={settings} size="compact" />
