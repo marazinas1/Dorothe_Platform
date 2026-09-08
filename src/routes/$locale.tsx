@@ -30,7 +30,7 @@ export const Route = createFileRoute("/$locale")({
   component: LocaleLayout,
   errorComponent: ({ error }) => (
     <div className="p-8 text-sm text-destructive">
-      Failed to load: {error.message}
+      Failed to load: {error instanceof Error ? error.message : String(error)}
     </div>
   ),
   notFoundComponent: () => (
