@@ -96,10 +96,20 @@ async function recoveryLink(email: string, redirectTo: string): Promise<string |
   return data?.properties?.action_link ?? null;
 }
 
+/** Stores the invited person's name on their profile, when one was given. */
+async function setFullName(
+  db: SupabaseClient,
+  email: string,
+  fullName: string | undefined,
+): Promise<void> {
+  if (!fullName) return;
+  await db.from("profiles").update({ full_name: fullName }).ilike("email", email);
+}
+
 export async function inviteOrCreateUser(
   supabase: SupabaseClient,
   userId: string,
-  input: { email: string; role: Role },
+  input: { email: string; role: Role; fullName?: string },
 ): Promise<InviteResult> {
   const caller = await enter(supabase, userId);
   assertCanAssign(caller, input.role);
@@ -124,6 +134,7 @@ export async function inviteOrCreateUser(
     .maybeSingle();
 
   if (existing) {
+    await setFullName(db, email, input.fullName);
     return {
       email,
       role: input.role,
@@ -134,8 +145,12 @@ export async function inviteOrCreateUser(
     };
   }
 
-  const invited = await db.auth.admin.inviteUserByEmail(email, { redirectTo });
+  const invited = await db.auth.admin.inviteUserByEmail(email, {
+    redirectTo,
+    ...(input.fullName ? { data: { full_name: input.fullName } } : {}),
+  });
   if (!invited.error) {
+    await setFullName(db, email, input.fullName);
     return {
       email,
       role: input.role,
@@ -154,6 +169,7 @@ export async function inviteOrCreateUser(
     email_confirm: true,
   });
   if (created.error) throw new Error(created.error.message);
+  await setFullName(db, email, input.fullName);
 
   return {
     email,

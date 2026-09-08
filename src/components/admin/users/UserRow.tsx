@@ -11,16 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Role } from "@/lib/auth/permissions";
+import { ASSIGNABLE_ROLES, type AssignableRole } from "@/lib/users/assignable-roles";
 import type { AdminUser } from "@/lib/users/types";
 
 import { UserRowDialogs } from "./UserRowDialogs";
 
 interface Props {
   user: AdminUser;
-  callerRole: Role;
   busy: boolean;
-  onSetRole: (role: Role) => void;
+  onSetRole: (role: AssignableRole) => void;
   onRevoke: () => void;
   onRestore: () => void;
   onDelete: () => void;
@@ -28,7 +27,6 @@ interface Props {
 
 export function UserRow({
   user,
-  callerRole,
   busy,
   onSetRole,
   onRevoke,
@@ -38,36 +36,39 @@ export function UserRow({
   const { t } = useTranslation();
   const [confirm, setConfirm] = useState<"revoke" | "delete" | null>(null);
 
-  const roles: Role[] =
-    callerRole === "developer" ? ["developer", "owner", "editor"] : ["owner", "editor"];
-  const locked = !user.can_manage || busy;
+  const isDeveloper = user.role === "developer";
+  const locked = !user.can_manage || isDeveloper || busy;
   const reason = user.is_self
     ? t("admin.users.locked.self")
-    : !user.can_manage
+    : isDeveloper
       ? t("admin.users.locked.developer")
       : user.is_last_owner
         ? t("admin.users.locked.lastOwner")
         : undefined;
 
   return (
-    <li className="flex flex-col gap-3 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between">
-      <div className="min-w-0 flex-1">
+    <li className="flex flex-col gap-3 px-4 py-4 sm:px-6 md:flex-row md:flex-wrap md:items-center">
+      <div className="min-w-0 w-full md:flex-1">
         <div className="flex flex-wrap items-center gap-2">
-          <p className="truncate text-sm font-medium">{user.full_name ?? user.email}</p>
+          <span className="truncate text-sm font-medium">{user.full_name ?? user.email}</span>
           {user.is_self ? (
-            <Badge variant="secondary">{t("admin.users.badges.you")}</Badge>
-          ) : null}
-          {user.role === "developer" ? (
             <Badge variant="outline" className="gap-1">
               <ShieldCheck className="h-3 w-3" />
-              {t("admin.users.roles.developer")}
+              {t("admin.users.badges.you")}
             </Badge>
           ) : null}
+          <Badge variant="outline" className="gap-1">
+            <ShieldCheck className="h-3 w-3" />
+            {t(`admin.users.roles.${user.role}`)}
+          </Badge>
           {user.is_last_owner ? (
-            <Badge variant="outline">{t("admin.users.badges.lastOwner")}</Badge>
+            <Badge variant="outline" className="gap-1">
+              <ShieldCheck className="h-3 w-3" />
+              {t("admin.users.badges.lastOwner")}
+            </Badge>
           ) : null}
           {!user.is_active ? (
-            <Badge variant="destructive">{t("admin.users.badges.revoked")}</Badge>
+            <Badge variant="outline">{t("admin.users.badges.revoked")}</Badge>
           ) : null}
         </div>
         {user.full_name ? (
@@ -84,23 +85,29 @@ export function UserRow({
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2">
-        <Select
-          value={user.role}
-          disabled={locked}
-          onValueChange={(value) => onSetRole(value as Role)}
-        >
-          <SelectTrigger className="w-full sm:w-36" title={reason}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {roles.map((value) => (
-              <SelectItem key={value} value={value}>
-                {t(`admin.users.roles.${value}`)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div className="flex flex-wrap items-center gap-2 md:gap-3">
+        {isDeveloper ? (
+          <span className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+            {t("admin.users.roles.developer")}
+          </span>
+        ) : (
+          <Select
+            value={user.role}
+            disabled={locked}
+            onValueChange={(value) => onSetRole(value as AssignableRole)}
+          >
+            <SelectTrigger className="w-full sm:w-36" title={reason}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {ASSIGNABLE_ROLES.map((value) => (
+                <SelectItem key={value} value={value}>
+                  {t(`admin.users.roles.${value}`)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
 
         {user.is_active ? (
           <Button

@@ -1209,6 +1209,8 @@
         "lastOwner": "Mindestens ein Inhaber-Konto muss bestehen bleiben."
       },
       "form": {
+        "name": "Name",
+        "namePlaceholder": "Vollständiger Name",
         "email": "E-Mail-Adresse",
         "emailPlaceholder": "name@example.com",
         "role": "Rolle",

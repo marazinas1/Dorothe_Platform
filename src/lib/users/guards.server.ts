@@ -47,10 +47,13 @@ export function assertCanManage(
   }
 }
 
-/** Only a developer may hand out the developer role. */
-export function assertCanAssign(caller: Caller, role: Role): void {
-  if (role === "developer" && caller.role !== "developer") {
-    throw new Error("Only a developer may grant the developer role");
+/**
+ * The developer role is never handed out through the admin panel — the
+ * platform has exactly one developer account, created by the builder.
+ */
+export function assertCanAssign(_caller: Caller, role: Role): void {
+  if (role === "developer") {
+    throw new Error("The developer role cannot be granted");
   }
 }
 
