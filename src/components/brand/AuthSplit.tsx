@@ -18,7 +18,7 @@ type Props = {
  * logo on a calm ink panel at the right. The panel is hidden on mobile so
  * only the centred form remains.
  */
-export function AuthSplit({ children, eyebrow, brand, note }: Props) {
+export function AuthSplit({ children, eyebrow, brand, tagline, note }: Props) {
   return (
     <div className="grid min-h-screen grid-cols-1 bg-background lg:grid-cols-2">
       <div className="flex items-center justify-center px-5 py-14 sm:px-10">
@@ -33,7 +33,12 @@ export function AuthSplit({ children, eyebrow, brand, note }: Props) {
       </div>
 
       <div className="hidden flex-col items-center justify-center gap-8 bg-foreground px-10 lg:flex">
-        {brand}
+        <div className="flex flex-col items-center gap-4 text-center">
+          {brand}
+          {tagline ? (
+            <p className="text-xs tracking-[0.08em] text-background/70">{tagline}</p>
+          ) : null}
+        </div>
         <span className="h-px w-16 bg-background/40" />
         {note ? (
           <p className="text-[11px] uppercase tracking-[0.22em] text-background/60">{note}</p>
