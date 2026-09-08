@@ -6,7 +6,8 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { InviteResult, UsersOverview } from "./types";
 
-const roleSchema = z.enum(["developer", "owner", "editor"]);
+// Only owner/editor may be invited or assigned: the developer tier is fixed.
+const roleSchema = z.enum(["owner", "editor"]);
 
 export const listUsers = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -18,7 +19,13 @@ export const listUsers = createServerFn({ method: "GET" })
 export const inviteUser = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data) =>
-    z.object({ email: z.string().trim().email(), role: roleSchema }).parse(data),
+    z
+      .object({
+        email: z.string().trim().email(),
+        role: roleSchema,
+        fullName: z.string().trim().max(120).optional(),
+      })
+      .parse(data),
   )
   .handler(async ({ context, data }): Promise<InviteResult> => {
     const { inviteOrCreateUser } = await import("./manage.server");
