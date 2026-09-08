@@ -571,10 +571,17 @@
         "submit": "Passwort speichern",
         "submitting": "Wird gespeichert…",
         "success": "Passwort aktualisiert. Sie werden weitergeleitet…",
+        "requirements": "Mindestens 8 Zeichen, ein Großbuchstabe, ein Kleinbuchstabe und eine Zahl.",
         "mismatch": "Die Passwörter stimmen nicht überein.",
         "tooShort": "Mindestens 8 Zeichen.",
+        "noUppercase": "Mindestens ein Großbuchstabe.",
+        "noLowercase": "Mindestens ein Kleinbuchstabe.",
+        "noDigit": "Mindestens eine Zahl.",
+        "leaked": "Dieses Passwort wurde in einem Datenleck gefunden. Bitte wählen Sie ein anderes.",
+        "weak": "Das Passwort erfüllt nicht die Anforderungen.",
         "invalidLink": "Der Link ist ungültig oder abgelaufen."
       }
+
     },
     "settings": {
       "title": "Einstellungen",
