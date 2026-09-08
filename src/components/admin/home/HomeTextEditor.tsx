@@ -20,6 +20,13 @@ export function HomeTextEditor({ template, value, onChange }: Props) {
   const { t } = useTranslation();
   const fields = fieldsForTemplate(template);
 
+  /** An empty field falls back to this line on the page, so show it here too. */
+  const defaultFor = (key: string) => {
+    const k = `home.defaults.${key}`;
+    const line = t(k);
+    return line === k ? "" : line;
+  };
+
   return (
     <div className="space-y-8">
       {HOME_FIELD_GROUPS.map((group) => {
@@ -40,7 +47,7 @@ export function HomeTextEditor({ template, value, onChange }: Props) {
                     <Input
                       id={`home-${field.key}`}
                       value={value(field.key)}
-                      placeholder={t("admin.home.placeholder")}
+                      placeholder={defaultFor(field.key) || t("admin.home.placeholder")}
                       onChange={(e) => onChange(field.key, e.target.value, field.kind)}
                     />
                   ) : (
@@ -49,9 +56,10 @@ export function HomeTextEditor({ template, value, onChange }: Props) {
                       rows={field.kind === "list" ? 4 : 3}
                       value={value(field.key)}
                       placeholder={
-                        field.kind === "list"
+                        defaultFor(field.key) ||
+                        (field.kind === "list"
                           ? t("admin.home.listHint")
-                          : t("admin.home.placeholder")
+                          : t("admin.home.placeholder"))
                       }
                       onChange={(e) => onChange(field.key, e.target.value, field.kind)}
                     />
