@@ -104,12 +104,16 @@ function ResetPasswordPage() {
           <p className="text-sm">{t("admin.auth.reset.success")}</p>
         ) : (
           <form className="space-y-4" onSubmit={onSubmit}>
+            <p className="text-xs text-muted-foreground">
+              {t("admin.auth.reset.requirements")}
+            </p>
             <div className="space-y-1.5">
               <Label htmlFor="pw">{t("admin.auth.reset.password")}</Label>
               <Input
                 id="pw"
                 type="password"
                 required
+                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -120,6 +124,7 @@ function ResetPasswordPage() {
                 id="pw2"
                 type="password"
                 required
+                minLength={8}
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
               />
@@ -129,6 +134,7 @@ function ResetPasswordPage() {
               {busy ? t("admin.auth.reset.submitting") : t("admin.auth.reset.submit")}
             </Button>
           </form>
+
         )}
       </div>
     </AuthCard>
