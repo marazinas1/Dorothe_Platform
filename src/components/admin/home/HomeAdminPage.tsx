@@ -54,8 +54,9 @@ export function HomeAdminPage() {
         ))}
       </div>
 
-      <HomeTemplateSheet
+      <HomeEditorWorkspace
         template={editing}
+        previewUrl={editing ? previewUrl(editing) : null}
         onClose={() => setEditing(null)}
         home={home}
         locales={locales}
