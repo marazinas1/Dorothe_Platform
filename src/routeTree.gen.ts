@@ -9,49 +9,49 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
-import { Route as LocaleVerkauftRouteImport } from './routes/$locale.verkauft'
-import { Route as LocaleVerkaufenRouteImport } from './routes/$locale.verkaufen'
-import { Route as LocaleUeberMichRouteImport } from './routes/$locale.ueber-mich'
-import { Route as LocaleKontaktRouteImport } from './routes/$locale.kontakt'
-import { Route as LocaleImpressumRouteImport } from './routes/$locale.impressum'
-import { Route as LocaleImmobilienbewertungRouteImport } from './routes/$locale.immobilienbewertung'
-import { Route as LocaleErbenRouteImport } from './routes/$locale.erben'
-import { Route as LocaleDatenschutzRouteImport } from './routes/$locale.datenschutz'
-import { Route as LocaleAuthRouteImport } from './routes/$locale.auth'
-import { Route as LocaleAgbRouteImport } from './routes/$locale.agb'
 import { Route as LocaleAdminRouteImport } from './routes/$locale.admin'
-import { Route as LocaleImmobilienIndexRouteImport } from './routes/$locale.immobilien.index'
+import { Route as LocaleAgbRouteImport } from './routes/$locale.agb'
+import { Route as LocaleAuthRouteImport } from './routes/$locale.auth'
+import { Route as LocaleDatenschutzRouteImport } from './routes/$locale.datenschutz'
+import { Route as LocaleErbenRouteImport } from './routes/$locale.erben'
+import { Route as LocaleImmobilienbewertungRouteImport } from './routes/$locale.immobilienbewertung'
+import { Route as LocaleImpressumRouteImport } from './routes/$locale.impressum'
+import { Route as LocaleKontaktRouteImport } from './routes/$locale.kontakt'
+import { Route as LocaleUeberMichRouteImport } from './routes/$locale.ueber-mich'
+import { Route as LocaleVerkaufenRouteImport } from './routes/$locale.verkaufen'
+import { Route as LocaleVerkauftRouteImport } from './routes/$locale.verkauft'
 import { Route as LocaleAdminIndexRouteImport } from './routes/$locale.admin.index'
-import { Route as ApiPublicTrackViewRouteImport } from './routes/api/public/track-view'
-import { Route as LocaleImmobilienSlugRouteImport } from './routes/$locale.immobilien.$slug'
-import { Route as LocaleAuthResetPasswordRouteImport } from './routes/$locale.auth.reset-password'
-import { Route as LocaleAuthLoginRouteImport } from './routes/$locale.auth.login'
-import { Route as LocaleAuthForgotPasswordRouteImport } from './routes/$locale.auth.forgot-password'
-import { Route as LocaleAdminUsersRouteImport } from './routes/$locale.admin.users'
-import { Route as LocaleAdminSettingsRouteImport } from './routes/$locale.admin.settings'
-import { Route as LocaleAdminListingsRouteImport } from './routes/$locale.admin.listings'
-import { Route as LocaleAdminInquiriesRouteImport } from './routes/$locale.admin.inquiries'
-import { Route as LocaleAdminContentRouteImport } from './routes/$locale.admin.content'
 import { Route as LocaleAdminAnalyticsRouteImport } from './routes/$locale.admin.analytics'
-import { Route as LocaleAdminSettingsIndexRouteImport } from './routes/$locale.admin.settings.index'
-import { Route as LocaleAdminListingsIndexRouteImport } from './routes/$locale.admin.listings.index'
+import { Route as LocaleAdminContentRouteImport } from './routes/$locale.admin.content'
+import { Route as LocaleAdminInquiriesRouteImport } from './routes/$locale.admin.inquiries'
+import { Route as LocaleAdminListingsRouteImport } from './routes/$locale.admin.listings'
+import { Route as LocaleAdminSettingsRouteImport } from './routes/$locale.admin.settings'
+import { Route as LocaleAdminUsersRouteImport } from './routes/$locale.admin.users'
+import { Route as LocaleAuthForgotPasswordRouteImport } from './routes/$locale.auth.forgot-password'
+import { Route as LocaleAuthLoginRouteImport } from './routes/$locale.auth.login'
+import { Route as LocaleAuthResetPasswordRouteImport } from './routes/$locale.auth.reset-password'
+import { Route as LocaleImmobilienIndexRouteImport } from './routes/$locale.immobilien.index'
+import { Route as LocaleImmobilienSlugRouteImport } from './routes/$locale.immobilien.$slug'
+import { Route as ApiPublicTrackViewRouteImport } from './routes/api/public/track-view'
 import { Route as LocaleAdminInquiriesIndexRouteImport } from './routes/$locale.admin.inquiries.index'
-import { Route as LocaleAdminSettingsTabRouteImport } from './routes/$locale.admin.settings.$tab'
-import { Route as LocaleAdminListingsNewRouteImport } from './routes/$locale.admin.listings.new'
-import { Route as LocaleAdminListingsIdRouteImport } from './routes/$locale.admin.listings.$id'
 import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.admin.inquiries.$id'
+import { Route as LocaleAdminListingsIndexRouteImport } from './routes/$locale.admin.listings.index'
+import { Route as LocaleAdminListingsIdRouteImport } from './routes/$locale.admin.listings.$id'
+import { Route as LocaleAdminListingsNewRouteImport } from './routes/$locale.admin.listings.new'
+import { Route as LocaleAdminSettingsIndexRouteImport } from './routes/$locale.admin.settings.index'
+import { Route as LocaleAdminSettingsTabRouteImport } from './routes/$locale.admin.settings.$tab'
 
-const LocaleRoute = LocaleRouteImport.update({
-  id: '/$locale',
-  path: '/$locale',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocaleRoute = LocaleRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
@@ -59,29 +59,29 @@ const LocaleIndexRoute = LocaleIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleVerkauftRoute = LocaleVerkauftRouteImport.update({
-  id: '/verkauft',
-  path: '/verkauft',
+const LocaleAdminRoute = LocaleAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleVerkaufenRoute = LocaleVerkaufenRouteImport.update({
-  id: '/verkaufen',
-  path: '/verkaufen',
+const LocaleAgbRoute = LocaleAgbRouteImport.update({
+  id: '/agb',
+  path: '/agb',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleUeberMichRoute = LocaleUeberMichRouteImport.update({
-  id: '/ueber-mich',
-  path: '/ueber-mich',
+const LocaleAuthRoute = LocaleAuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleKontaktRoute = LocaleKontaktRouteImport.update({
-  id: '/kontakt',
-  path: '/kontakt',
+const LocaleDatenschutzRoute = LocaleDatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleImpressumRoute = LocaleImpressumRouteImport.update({
-  id: '/impressum',
-  path: '/impressum',
+const LocaleErbenRoute = LocaleErbenRouteImport.update({
+  id: '/erben',
+  path: '/erben',
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocaleImmobilienbewertungRoute =
@@ -90,34 +90,29 @@ const LocaleImmobilienbewertungRoute =
     path: '/immobilienbewertung',
     getParentRoute: () => LocaleRoute,
   } as any)
-const LocaleErbenRoute = LocaleErbenRouteImport.update({
-  id: '/erben',
-  path: '/erben',
+const LocaleImpressumRoute = LocaleImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleDatenschutzRoute = LocaleDatenschutzRouteImport.update({
-  id: '/datenschutz',
-  path: '/datenschutz',
+const LocaleKontaktRoute = LocaleKontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleAuthRoute = LocaleAuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const LocaleUeberMichRoute = LocaleUeberMichRouteImport.update({
+  id: '/ueber-mich',
+  path: '/ueber-mich',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleAgbRoute = LocaleAgbRouteImport.update({
-  id: '/agb',
-  path: '/agb',
+const LocaleVerkaufenRoute = LocaleVerkaufenRouteImport.update({
+  id: '/verkaufen',
+  path: '/verkaufen',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleAdminRoute = LocaleAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => LocaleRoute,
-} as any)
-const LocaleImmobilienIndexRoute = LocaleImmobilienIndexRouteImport.update({
-  id: '/immobilien/',
-  path: '/immobilien/',
+const LocaleVerkauftRoute = LocaleVerkauftRouteImport.update({
+  id: '/verkauft',
+  path: '/verkauft',
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocaleAdminIndexRoute = LocaleAdminIndexRouteImport.update({
@@ -125,50 +120,9 @@ const LocaleAdminIndexRoute = LocaleAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LocaleAdminRoute,
 } as any)
-const ApiPublicTrackViewRoute = ApiPublicTrackViewRouteImport.update({
-  id: '/api/public/track-view',
-  path: '/api/public/track-view',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LocaleImmobilienSlugRoute = LocaleImmobilienSlugRouteImport.update({
-  id: '/immobilien/$slug',
-  path: '/immobilien/$slug',
-  getParentRoute: () => LocaleRoute,
-} as any)
-const LocaleAuthResetPasswordRoute = LocaleAuthResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => LocaleAuthRoute,
-} as any)
-const LocaleAuthLoginRoute = LocaleAuthLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => LocaleAuthRoute,
-} as any)
-const LocaleAuthForgotPasswordRoute =
-  LocaleAuthForgotPasswordRouteImport.update({
-    id: '/forgot-password',
-    path: '/forgot-password',
-    getParentRoute: () => LocaleAuthRoute,
-  } as any)
-const LocaleAdminUsersRoute = LocaleAdminUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminSettingsRoute = LocaleAdminSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminListingsRoute = LocaleAdminListingsRouteImport.update({
-  id: '/listings',
-  path: '/listings',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminInquiriesRoute = LocaleAdminInquiriesRouteImport.update({
-  id: '/inquiries',
-  path: '/inquiries',
+const LocaleAdminAnalyticsRoute = LocaleAdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => LocaleAdminRoute,
 } as any)
 const LocaleAdminContentRoute = LocaleAdminContentRouteImport.update({
@@ -176,10 +130,83 @@ const LocaleAdminContentRoute = LocaleAdminContentRouteImport.update({
   path: '/content',
   getParentRoute: () => LocaleAdminRoute,
 } as any)
-const LocaleAdminAnalyticsRoute = LocaleAdminAnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
+const LocaleAdminInquiriesRoute = LocaleAdminInquiriesRouteImport.update({
+  id: '/inquiries',
+  path: '/inquiries',
   getParentRoute: () => LocaleAdminRoute,
+} as any)
+const LocaleAdminListingsRoute = LocaleAdminListingsRouteImport.update({
+  id: '/listings',
+  path: '/listings',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
+const LocaleAdminSettingsRoute = LocaleAdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
+const LocaleAdminUsersRoute = LocaleAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
+const LocaleAuthForgotPasswordRoute =
+  LocaleAuthForgotPasswordRouteImport.update({
+    id: '/forgot-password',
+    path: '/forgot-password',
+    getParentRoute: () => LocaleAuthRoute,
+  } as any)
+const LocaleAuthLoginRoute = LocaleAuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => LocaleAuthRoute,
+} as any)
+const LocaleAuthResetPasswordRoute = LocaleAuthResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => LocaleAuthRoute,
+} as any)
+const LocaleImmobilienIndexRoute = LocaleImmobilienIndexRouteImport.update({
+  id: '/immobilien/',
+  path: '/immobilien/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleImmobilienSlugRoute = LocaleImmobilienSlugRouteImport.update({
+  id: '/immobilien/$slug',
+  path: '/immobilien/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const ApiPublicTrackViewRoute = ApiPublicTrackViewRouteImport.update({
+  id: '/api/public/track-view',
+  path: '/api/public/track-view',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocaleAdminInquiriesIndexRoute =
+  LocaleAdminInquiriesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => LocaleAdminInquiriesRoute,
+  } as any)
+const LocaleAdminInquiriesIdRoute = LocaleAdminInquiriesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => LocaleAdminInquiriesRoute,
+} as any)
+const LocaleAdminListingsIndexRoute =
+  LocaleAdminListingsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => LocaleAdminListingsRoute,
+  } as any)
+const LocaleAdminListingsIdRoute = LocaleAdminListingsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => LocaleAdminListingsRoute,
+} as any)
+const LocaleAdminListingsNewRoute = LocaleAdminListingsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => LocaleAdminListingsRoute,
 } as any)
 const LocaleAdminSettingsIndexRoute =
   LocaleAdminSettingsIndexRouteImport.update({
@@ -187,37 +214,10 @@ const LocaleAdminSettingsIndexRoute =
     path: '/',
     getParentRoute: () => LocaleAdminSettingsRoute,
   } as any)
-const LocaleAdminListingsIndexRoute =
-  LocaleAdminListingsIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => LocaleAdminListingsRoute,
-  } as any)
-const LocaleAdminInquiriesIndexRoute =
-  LocaleAdminInquiriesIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => LocaleAdminInquiriesRoute,
-  } as any)
 const LocaleAdminSettingsTabRoute = LocaleAdminSettingsTabRouteImport.update({
   id: '/$tab',
   path: '/$tab',
   getParentRoute: () => LocaleAdminSettingsRoute,
-} as any)
-const LocaleAdminListingsNewRoute = LocaleAdminListingsNewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => LocaleAdminListingsRoute,
-} as any)
-const LocaleAdminListingsIdRoute = LocaleAdminListingsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => LocaleAdminListingsRoute,
-} as any)
-const LocaleAdminInquiriesIdRoute = LocaleAdminInquiriesIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => LocaleAdminInquiriesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -438,18 +438,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/$locale': {
-      id: '/$locale'
-      path: '/$locale'
-      fullPath: '/$locale'
-      preLoaderRoute: typeof LocaleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$locale': {
+      id: '/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/': {
@@ -459,67 +459,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleIndexRouteImport
       parentRoute: typeof LocaleRoute
     }
-    '/$locale/verkauft': {
-      id: '/$locale/verkauft'
-      path: '/verkauft'
-      fullPath: '/$locale/verkauft'
-      preLoaderRoute: typeof LocaleVerkauftRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/verkaufen': {
-      id: '/$locale/verkaufen'
-      path: '/verkaufen'
-      fullPath: '/$locale/verkaufen'
-      preLoaderRoute: typeof LocaleVerkaufenRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/ueber-mich': {
-      id: '/$locale/ueber-mich'
-      path: '/ueber-mich'
-      fullPath: '/$locale/ueber-mich'
-      preLoaderRoute: typeof LocaleUeberMichRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/kontakt': {
-      id: '/$locale/kontakt'
-      path: '/kontakt'
-      fullPath: '/$locale/kontakt'
-      preLoaderRoute: typeof LocaleKontaktRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/impressum': {
-      id: '/$locale/impressum'
-      path: '/impressum'
-      fullPath: '/$locale/impressum'
-      preLoaderRoute: typeof LocaleImpressumRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/immobilienbewertung': {
-      id: '/$locale/immobilienbewertung'
-      path: '/immobilienbewertung'
-      fullPath: '/$locale/immobilienbewertung'
-      preLoaderRoute: typeof LocaleImmobilienbewertungRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/erben': {
-      id: '/$locale/erben'
-      path: '/erben'
-      fullPath: '/$locale/erben'
-      preLoaderRoute: typeof LocaleErbenRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/datenschutz': {
-      id: '/$locale/datenschutz'
-      path: '/datenschutz'
-      fullPath: '/$locale/datenschutz'
-      preLoaderRoute: typeof LocaleDatenschutzRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/auth': {
-      id: '/$locale/auth'
-      path: '/auth'
-      fullPath: '/$locale/auth'
-      preLoaderRoute: typeof LocaleAuthRouteImport
+    '/$locale/admin': {
+      id: '/$locale/admin'
+      path: '/admin'
+      fullPath: '/$locale/admin'
+      preLoaderRoute: typeof LocaleAdminRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/$locale/agb': {
@@ -529,18 +473,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAgbRouteImport
       parentRoute: typeof LocaleRoute
     }
-    '/$locale/admin': {
-      id: '/$locale/admin'
-      path: '/admin'
-      fullPath: '/$locale/admin'
-      preLoaderRoute: typeof LocaleAdminRouteImport
+    '/$locale/auth': {
+      id: '/$locale/auth'
+      path: '/auth'
+      fullPath: '/$locale/auth'
+      preLoaderRoute: typeof LocaleAuthRouteImport
       parentRoute: typeof LocaleRoute
     }
-    '/$locale/immobilien/': {
-      id: '/$locale/immobilien/'
-      path: '/immobilien'
-      fullPath: '/$locale/immobilien/'
-      preLoaderRoute: typeof LocaleImmobilienIndexRouteImport
+    '/$locale/datenschutz': {
+      id: '/$locale/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/$locale/datenschutz'
+      preLoaderRoute: typeof LocaleDatenschutzRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/erben': {
+      id: '/$locale/erben'
+      path: '/erben'
+      fullPath: '/$locale/erben'
+      preLoaderRoute: typeof LocaleErbenRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/immobilienbewertung': {
+      id: '/$locale/immobilienbewertung'
+      path: '/immobilienbewertung'
+      fullPath: '/$locale/immobilienbewertung'
+      preLoaderRoute: typeof LocaleImmobilienbewertungRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/impressum': {
+      id: '/$locale/impressum'
+      path: '/impressum'
+      fullPath: '/$locale/impressum'
+      preLoaderRoute: typeof LocaleImpressumRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/kontakt': {
+      id: '/$locale/kontakt'
+      path: '/kontakt'
+      fullPath: '/$locale/kontakt'
+      preLoaderRoute: typeof LocaleKontaktRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/ueber-mich': {
+      id: '/$locale/ueber-mich'
+      path: '/ueber-mich'
+      fullPath: '/$locale/ueber-mich'
+      preLoaderRoute: typeof LocaleUeberMichRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/verkaufen': {
+      id: '/$locale/verkaufen'
+      path: '/verkaufen'
+      fullPath: '/$locale/verkaufen'
+      preLoaderRoute: typeof LocaleVerkaufenRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/verkauft': {
+      id: '/$locale/verkauft'
+      path: '/verkauft'
+      fullPath: '/$locale/verkauft'
+      preLoaderRoute: typeof LocaleVerkauftRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/$locale/admin/': {
@@ -550,67 +543,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminIndexRouteImport
       parentRoute: typeof LocaleAdminRoute
     }
-    '/api/public/track-view': {
-      id: '/api/public/track-view'
-      path: '/api/public/track-view'
-      fullPath: '/api/public/track-view'
-      preLoaderRoute: typeof ApiPublicTrackViewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/$locale/immobilien/$slug': {
-      id: '/$locale/immobilien/$slug'
-      path: '/immobilien/$slug'
-      fullPath: '/$locale/immobilien/$slug'
-      preLoaderRoute: typeof LocaleImmobilienSlugRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/auth/reset-password': {
-      id: '/$locale/auth/reset-password'
-      path: '/reset-password'
-      fullPath: '/$locale/auth/reset-password'
-      preLoaderRoute: typeof LocaleAuthResetPasswordRouteImport
-      parentRoute: typeof LocaleAuthRoute
-    }
-    '/$locale/auth/login': {
-      id: '/$locale/auth/login'
-      path: '/login'
-      fullPath: '/$locale/auth/login'
-      preLoaderRoute: typeof LocaleAuthLoginRouteImport
-      parentRoute: typeof LocaleAuthRoute
-    }
-    '/$locale/auth/forgot-password': {
-      id: '/$locale/auth/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/$locale/auth/forgot-password'
-      preLoaderRoute: typeof LocaleAuthForgotPasswordRouteImport
-      parentRoute: typeof LocaleAuthRoute
-    }
-    '/$locale/admin/users': {
-      id: '/$locale/admin/users'
-      path: '/users'
-      fullPath: '/$locale/admin/users'
-      preLoaderRoute: typeof LocaleAdminUsersRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/settings': {
-      id: '/$locale/admin/settings'
-      path: '/settings'
-      fullPath: '/$locale/admin/settings'
-      preLoaderRoute: typeof LocaleAdminSettingsRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/listings': {
-      id: '/$locale/admin/listings'
-      path: '/listings'
-      fullPath: '/$locale/admin/listings'
-      preLoaderRoute: typeof LocaleAdminListingsRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/inquiries': {
-      id: '/$locale/admin/inquiries'
-      path: '/inquiries'
-      fullPath: '/$locale/admin/inquiries'
-      preLoaderRoute: typeof LocaleAdminInquiriesRouteImport
+    '/$locale/admin/analytics': {
+      id: '/$locale/admin/analytics'
+      path: '/analytics'
+      fullPath: '/$locale/admin/analytics'
+      preLoaderRoute: typeof LocaleAdminAnalyticsRouteImport
       parentRoute: typeof LocaleAdminRoute
     }
     '/$locale/admin/content': {
@@ -620,26 +557,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminContentRouteImport
       parentRoute: typeof LocaleAdminRoute
     }
-    '/$locale/admin/analytics': {
-      id: '/$locale/admin/analytics'
-      path: '/analytics'
-      fullPath: '/$locale/admin/analytics'
-      preLoaderRoute: typeof LocaleAdminAnalyticsRouteImport
+    '/$locale/admin/inquiries': {
+      id: '/$locale/admin/inquiries'
+      path: '/inquiries'
+      fullPath: '/$locale/admin/inquiries'
+      preLoaderRoute: typeof LocaleAdminInquiriesRouteImport
       parentRoute: typeof LocaleAdminRoute
     }
-    '/$locale/admin/settings/': {
-      id: '/$locale/admin/settings/'
-      path: '/'
-      fullPath: '/$locale/admin/settings/'
-      preLoaderRoute: typeof LocaleAdminSettingsIndexRouteImport
-      parentRoute: typeof LocaleAdminSettingsRoute
+    '/$locale/admin/listings': {
+      id: '/$locale/admin/listings'
+      path: '/listings'
+      fullPath: '/$locale/admin/listings'
+      preLoaderRoute: typeof LocaleAdminListingsRouteImport
+      parentRoute: typeof LocaleAdminRoute
     }
-    '/$locale/admin/listings/': {
-      id: '/$locale/admin/listings/'
-      path: '/'
-      fullPath: '/$locale/admin/listings/'
-      preLoaderRoute: typeof LocaleAdminListingsIndexRouteImport
-      parentRoute: typeof LocaleAdminListingsRoute
+    '/$locale/admin/settings': {
+      id: '/$locale/admin/settings'
+      path: '/settings'
+      fullPath: '/$locale/admin/settings'
+      preLoaderRoute: typeof LocaleAdminSettingsRouteImport
+      parentRoute: typeof LocaleAdminRoute
+    }
+    '/$locale/admin/users': {
+      id: '/$locale/admin/users'
+      path: '/users'
+      fullPath: '/$locale/admin/users'
+      preLoaderRoute: typeof LocaleAdminUsersRouteImport
+      parentRoute: typeof LocaleAdminRoute
+    }
+    '/$locale/auth/forgot-password': {
+      id: '/$locale/auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/$locale/auth/forgot-password'
+      preLoaderRoute: typeof LocaleAuthForgotPasswordRouteImport
+      parentRoute: typeof LocaleAuthRoute
+    }
+    '/$locale/auth/login': {
+      id: '/$locale/auth/login'
+      path: '/login'
+      fullPath: '/$locale/auth/login'
+      preLoaderRoute: typeof LocaleAuthLoginRouteImport
+      parentRoute: typeof LocaleAuthRoute
+    }
+    '/$locale/auth/reset-password': {
+      id: '/$locale/auth/reset-password'
+      path: '/reset-password'
+      fullPath: '/$locale/auth/reset-password'
+      preLoaderRoute: typeof LocaleAuthResetPasswordRouteImport
+      parentRoute: typeof LocaleAuthRoute
+    }
+    '/$locale/immobilien/': {
+      id: '/$locale/immobilien/'
+      path: '/immobilien'
+      fullPath: '/$locale/immobilien/'
+      preLoaderRoute: typeof LocaleImmobilienIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/immobilien/$slug': {
+      id: '/$locale/immobilien/$slug'
+      path: '/immobilien/$slug'
+      fullPath: '/$locale/immobilien/$slug'
+      preLoaderRoute: typeof LocaleImmobilienSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/api/public/track-view': {
+      id: '/api/public/track-view'
+      path: '/api/public/track-view'
+      fullPath: '/api/public/track-view'
+      preLoaderRoute: typeof ApiPublicTrackViewRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/$locale/admin/inquiries/': {
       id: '/$locale/admin/inquiries/'
@@ -648,18 +634,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminInquiriesIndexRouteImport
       parentRoute: typeof LocaleAdminInquiriesRoute
     }
-    '/$locale/admin/settings/$tab': {
-      id: '/$locale/admin/settings/$tab'
-      path: '/$tab'
-      fullPath: '/$locale/admin/settings/$tab'
-      preLoaderRoute: typeof LocaleAdminSettingsTabRouteImport
-      parentRoute: typeof LocaleAdminSettingsRoute
+    '/$locale/admin/inquiries/$id': {
+      id: '/$locale/admin/inquiries/$id'
+      path: '/$id'
+      fullPath: '/$locale/admin/inquiries/$id'
+      preLoaderRoute: typeof LocaleAdminInquiriesIdRouteImport
+      parentRoute: typeof LocaleAdminInquiriesRoute
     }
-    '/$locale/admin/listings/new': {
-      id: '/$locale/admin/listings/new'
-      path: '/new'
-      fullPath: '/$locale/admin/listings/new'
-      preLoaderRoute: typeof LocaleAdminListingsNewRouteImport
+    '/$locale/admin/listings/': {
+      id: '/$locale/admin/listings/'
+      path: '/'
+      fullPath: '/$locale/admin/listings/'
+      preLoaderRoute: typeof LocaleAdminListingsIndexRouteImport
       parentRoute: typeof LocaleAdminListingsRoute
     }
     '/$locale/admin/listings/$id': {
@@ -669,12 +655,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminListingsIdRouteImport
       parentRoute: typeof LocaleAdminListingsRoute
     }
-    '/$locale/admin/inquiries/$id': {
-      id: '/$locale/admin/inquiries/$id'
-      path: '/$id'
-      fullPath: '/$locale/admin/inquiries/$id'
-      preLoaderRoute: typeof LocaleAdminInquiriesIdRouteImport
-      parentRoute: typeof LocaleAdminInquiriesRoute
+    '/$locale/admin/listings/new': {
+      id: '/$locale/admin/listings/new'
+      path: '/new'
+      fullPath: '/$locale/admin/listings/new'
+      preLoaderRoute: typeof LocaleAdminListingsNewRouteImport
+      parentRoute: typeof LocaleAdminListingsRoute
+    }
+    '/$locale/admin/settings/': {
+      id: '/$locale/admin/settings/'
+      path: '/'
+      fullPath: '/$locale/admin/settings/'
+      preLoaderRoute: typeof LocaleAdminSettingsIndexRouteImport
+      parentRoute: typeof LocaleAdminSettingsRoute
+    }
+    '/$locale/admin/settings/$tab': {
+      id: '/$locale/admin/settings/$tab'
+      path: '/$tab'
+      fullPath: '/$locale/admin/settings/$tab'
+      preLoaderRoute: typeof LocaleAdminSettingsTabRouteImport
+      parentRoute: typeof LocaleAdminSettingsRoute
     }
   }
 }
