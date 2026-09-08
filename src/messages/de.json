@@ -547,10 +547,12 @@
         "forgot": "Passwort vergessen?",
         "invalid": "Anmeldedaten sind ungültig.",
         "generic": "Anmeldung fehlgeschlagen.",
+        "leaked": "Dieses Passwort wurde in einem Datenleck gefunden. Bitte setzen Sie es zurück oder wählen Sie ein anderes.",
         "noaccess": "Dieses Konto hat keinen Admin-Zugriff.",
         "expired": "Bitte melden Sie sich erneut an.",
         "eyebrow": "Administration",
         "note": "Nur für autorisierte Personen"
+
       },
       "forgot": {
         "title": "Passwort zurücksetzen",

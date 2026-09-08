@@ -547,10 +547,12 @@
         "forgot": "Forgot password?",
         "invalid": "Invalid credentials.",
         "generic": "Sign-in failed.",
+        "leaked": "This password has appeared in a data breach. Please reset it or choose a different one.",
         "noaccess": "This account has no admin access.",
         "expired": "Please sign in again.",
         "eyebrow": "Administrator",
         "note": "Authorized personnel only"
+
       },
       "forgot": {
         "title": "Reset password",
