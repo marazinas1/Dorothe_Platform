@@ -43,6 +43,8 @@ import { Route as LocaleAdminListingsIdRouteImport } from './routes/$locale.admi
 import { Route as LocaleAdminListingsNewRouteImport } from './routes/$locale.admin.listings.new'
 import { Route as LocaleAdminSettingsIndexRouteImport } from './routes/$locale.admin.settings.index'
 import { Route as LocaleAdminSettingsTabRouteImport } from './routes/$locale.admin.settings.$tab'
+import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -219,6 +221,16 @@ const LocaleAdminSettingsTabRoute = LocaleAdminSettingsTabRouteImport.update({
   path: '/$tab',
   getParentRoute: () => LocaleAdminSettingsRoute,
 } as any)
+const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
+  id: '/lovable/email/auth/preview',
+  path: '/lovable/email/auth/preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
+  id: '/lovable/email/auth/webhook',
+  path: '/lovable/email/auth/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -252,6 +264,8 @@ export interface FileRoutesByFullPath {
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
+  '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
+  '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/$locale/admin/inquiries/': typeof LocaleAdminInquiriesIndexRoute
   '/$locale/admin/listings/': typeof LocaleAdminListingsIndexRoute
   '/$locale/admin/settings/': typeof LocaleAdminSettingsIndexRoute
@@ -283,6 +297,8 @@ export interface FileRoutesByTo {
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
+  '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
+  '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/$locale/admin/inquiries': typeof LocaleAdminInquiriesIndexRoute
   '/$locale/admin/listings': typeof LocaleAdminListingsIndexRoute
   '/$locale/admin/settings': typeof LocaleAdminSettingsIndexRoute
@@ -320,6 +336,8 @@ export interface FileRoutesById {
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
+  '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
+  '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/$locale/admin/inquiries/': typeof LocaleAdminInquiriesIndexRoute
   '/$locale/admin/listings/': typeof LocaleAdminListingsIndexRoute
   '/$locale/admin/settings/': typeof LocaleAdminSettingsIndexRoute
@@ -358,6 +376,8 @@ export interface FileRouteTypes {
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
     | '/$locale/admin/settings/$tab'
+    | '/lovable/email/auth/preview'
+    | '/lovable/email/auth/webhook'
     | '/$locale/admin/inquiries/'
     | '/$locale/admin/listings/'
     | '/$locale/admin/settings/'
@@ -389,6 +409,8 @@ export interface FileRouteTypes {
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
     | '/$locale/admin/settings/$tab'
+    | '/lovable/email/auth/preview'
+    | '/lovable/email/auth/webhook'
     | '/$locale/admin/inquiries'
     | '/$locale/admin/listings'
     | '/$locale/admin/settings'
@@ -425,6 +447,8 @@ export interface FileRouteTypes {
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
     | '/$locale/admin/settings/$tab'
+    | '/lovable/email/auth/preview'
+    | '/lovable/email/auth/webhook'
     | '/$locale/admin/inquiries/'
     | '/$locale/admin/listings/'
     | '/$locale/admin/settings/'
@@ -434,6 +458,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
   ApiPublicTrackViewRoute: typeof ApiPublicTrackViewRoute
+  LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
+  LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -676,6 +702,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminSettingsTabRouteImport
       parentRoute: typeof LocaleAdminSettingsRoute
     }
+    '/lovable/email/auth/preview': {
+      id: '/lovable/email/auth/preview'
+      path: '/lovable/email/auth/preview'
+      fullPath: '/lovable/email/auth/preview'
+      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/auth/webhook': {
+      id: '/lovable/email/auth/webhook'
+      path: '/lovable/email/auth/webhook'
+      fullPath: '/lovable/email/auth/webhook'
+      preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -801,6 +841,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
   ApiPublicTrackViewRoute: ApiPublicTrackViewRoute,
+  LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
+  LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
