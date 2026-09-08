@@ -15,7 +15,16 @@ type Props = {
    * come from src/assets/brand via @/lib/theme/logo.
    */
   variant?: LogoVariant;
+  /**
+   * `interactive` is for logos that act as the home button: hover darkens the
+   * mark, mirroring the shared ActionButton fill -> darker-fill behaviour.
+   * Applies to any client logo without code changes.
+   */
+  interactive?: boolean;
 };
+
+const INTERACTIVE_CLASS =
+  "transition-[filter] duration-300 ease-out hover:brightness-[0.7]";
 
 /**
  * Renders the brand mark, falling back to site_settings.logo_url and then to
