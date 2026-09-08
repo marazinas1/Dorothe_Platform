@@ -1336,7 +1336,9 @@
       "editHint": "Click the card to edit its words and photographs.",
       "close": "Close",
       "saved": "Saved.",
-      "thumbLoading": "Loading preview…"
+      "thumbLoading": "Loading preview…",
+      "livePreview": "Live preview",
+      "refresh": "Refresh"
     }
   },
   "pages": {
