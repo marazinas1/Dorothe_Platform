@@ -1,7 +1,5 @@
 import { useTranslation } from "react-i18next";
 
-import { Signature } from "@/components/brand/Signature";
-
 import { HomeButton, HomeTextLink } from "../HomeActions";
 import type { HomeTemplateProps } from "../types";
 
@@ -47,7 +45,9 @@ export function H1Hero({ locale, settings, copy, media }: HomeTemplateProps) {
             </div>
           ) : null}
           <div className="mt-4">
-            <Signature name={settings.primary_agent_name} size="md" />
+              {settings.primary_agent_name ? (
+                <div className="font-heading text-lg italic">{settings.primary_agent_name}</div>
+              ) : null}
             {settings.primary_agent_role ? (
               <div className="mt-0.5 text-[12.5px] text-muted-foreground">
                 {settings.primary_agent_role}

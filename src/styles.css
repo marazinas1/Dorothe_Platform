@@ -345,8 +345,8 @@
 /* Small uppercase label used instead of coloured badges. */
 @utility eyebrow {
   font-family: var(--font-body);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  font-size: 0.78125rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 

@@ -37,7 +37,7 @@ export function useNavItems() {
 }
 
 /**
- * Full-width fixed navigation bar: tall, transparent over a hero photo, and
+ * Full-width fixed navigation bar: compact, transparent over a hero photo, and
  * fading into a blurred surface once the page scrolls. Uppercase wide-tracked
  * links, one solid CTA on the right.
  */
@@ -66,11 +66,11 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
           : "border-b border-border/60 bg-background/90 backdrop-blur-md",
       )}
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
         <nav
           className={cn(
             "flex items-center justify-between transition-[height] duration-500 ease-out",
-            scrolled ? "h-20" : "h-24 md:h-28",
+            scrolled ? "h-[74px]" : "h-[86px]",
           )}
         >
           <HomeLink
@@ -78,17 +78,17 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             label={settings.site_name}
             className="min-w-0 shrink-0 transition-opacity duration-300 hover:opacity-80"
           >
-            <SiteLogo settings={settings} size={scrolled ? "sm" : "md"} />
+            <SiteLogo settings={settings} size="sm" />
           </HomeLink>
 
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-[34px] md:flex">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 params={{ locale }}
                 className={cn(
-                  "whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.15em] transition-colors duration-300",
+                  "whitespace-nowrap text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground",
                   "text-muted-foreground hover:text-foreground",
                 )}
                 activeProps={{ className: "text-foreground" }}
@@ -105,7 +105,7 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             <Link
               to="/$locale/kontakt"
               params={{ locale }}
-              className="inline-flex h-11 items-center rounded-md bg-primary px-6 text-[13px] font-medium uppercase tracking-[0.12em] text-primary-foreground transition-opacity duration-300 hover:opacity-90"
+              className="inline-flex items-center rounded-[var(--radius-button)] bg-accent px-6 py-[13px] text-[13.5px] font-semibold uppercase tracking-[0.04em] text-accent-foreground transition-colors duration-300 hover:bg-primary"
             >
               {t("nav.contact")}
             </Link>
