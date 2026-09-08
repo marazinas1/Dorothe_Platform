@@ -7,6 +7,8 @@ type Props = {
   eyebrow?: ReactNode;
   /** Brand mark rendered in the right-hand panel. */
   brand: ReactNode;
+  /** Site name shown in smaller type under the brand mark. */
+  tagline?: ReactNode;
   /** Quiet line under the brand mark ("authorised personnel only"). */
   note?: ReactNode;
 };
