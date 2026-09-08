@@ -1,5 +1,3 @@
-import { useTranslation } from "react-i18next";
-
 import { ListingCard } from "@/components/brand/ListingCard";
 import { Reveal } from "@/components/shared/Reveal";
 import type { Locale } from "@/i18n/config";
@@ -7,6 +5,7 @@ import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
+import { useTranslation } from "react-i18next";
 
 import { HomeTextLink } from "./HomeActions";
 
@@ -16,57 +15,17 @@ type Props = {
   items: PublicListing[];
   title: string;
   note?: string;
-  /** `feature` gives the first property the full width, the rest a row. */
-  variant?: "grid" | "feature";
   hidePrice?: boolean;
-  appearance?: "default" | "direct";
 };
 
 /**
- * The property block, shared by all designs: the card itself must stay one
- * component so specs, carousel and sold masking can never drift apart. A
- * design only chooses how the block is arranged and how its head reads.
+ * The property block, shared by every home design: the card itself must stay one
+ * component so specs, carousel and sold masking can never drift apart. A design
+ * only chooses how its head reads — never how a property is presented.
  */
-export function HomeListings({
-  locale,
-  settings,
-  items,
-  title,
-  note,
-  variant = "grid",
-  hidePrice = false,
-  appearance = "default",
-}: Props) {
+export function HomeListings({ locale, settings, items, title, note, hidePrice = false }: Props) {
   const { t } = useTranslation();
   if (items.length === 0) return null;
-
-  const [lead, ...rest] = items;
-
-  if (appearance === "direct") {
-    return (
-      <section className="mx-auto max-w-[1220px] px-6 pt-20 lg:px-8 lg:pt-[88px]">
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <h2 className="font-heading text-[clamp(1.7rem,2.6vw,2.2rem)]">{title}</h2>
-          <HomeTextLink locale={locale} to="/$locale/immobilien" className="shrink-0 normal-case tracking-normal">
-            {t("home.view_all")}
-          </HomeTextLink>
-        </div>
-        <div className="grid gap-px bg-border md:grid-cols-3">
-          {items.slice(0, 3).map((listing, i) => (
-            <ListingCard
-              key={listing.id}
-              listing={listing}
-              locale={locale}
-              settings={settings}
-              hidePrice={hidePrice}
-              eager={i === 0}
-              appearance="direct"
-            />
-          ))}
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1400px] px-6 lg:px-10`}>
@@ -84,48 +43,19 @@ export function HomeListings({
         </HomeTextLink>
       </div>
 
-      {variant === "feature" ? (
-        <div className="space-y-8">
-          <Reveal>
+      <div className={LISTING_CARD_GRID}>
+        {items.slice(0, 3).map((l, i) => (
+          <Reveal key={l.id} delay={i * 90} className="h-full">
             <ListingCard
-              listing={lead}
+              listing={l}
               locale={locale}
               settings={settings}
               hidePrice={hidePrice}
-              eager
+              eager={i === 0}
             />
           </Reveal>
-          {rest.length > 0 ? (
-            <div className="grid gap-8 md:grid-cols-2">
-              {rest.map((l, i) => (
-                <Reveal key={l.id} delay={i * 90} className="h-full">
-                  <ListingCard
-                    listing={l}
-                    locale={locale}
-                    settings={settings}
-                    size="compact"
-                    hidePrice={hidePrice}
-                  />
-                </Reveal>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      ) : (
-        <div className={LISTING_CARD_GRID}>
-          {items.map((l, i) => (
-            <Reveal key={l.id} delay={i * 90} className="h-full">
-              <ListingCard
-                listing={l}
-                locale={locale}
-                settings={settings}
-                hidePrice={hidePrice}
-                eager={i === 0}
-              />
-            </Reveal>
-          ))}
-        </div>
-      )}
+        ))}
+      </div>
     </section>
   );
 }
