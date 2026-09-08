@@ -8,7 +8,7 @@ import {
   Building2,
   Inbox,
   Users,
-  FileText,
+  Home,
   BarChart3,
   Settings,
 } from "lucide-react";
