@@ -36,8 +36,15 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  // A redirect reason from the admin gate is a status note, not a failed
+  // sign-in attempt: "noaccess" means the account lacks admin access,
+  // anything else means the session must be re-established.
   const [error, setError] = useState<string | null>(
-    search.error ? t("admin.auth.login.generic") : null,
+    search.error === "noaccess"
+      ? t("admin.auth.login.noaccess")
+      : search.error
+        ? t("admin.auth.login.expired")
+        : null,
   );
 
   async function onSubmit(e: React.FormEvent) {

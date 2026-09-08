@@ -547,6 +547,8 @@
         "forgot": "Forgot password?",
         "invalid": "Invalid credentials.",
         "generic": "Sign-in failed.",
+        "noaccess": "This account has no admin access.",
+        "expired": "Please sign in again.",
         "eyebrow": "Administrator",
         "note": "Authorized personnel only"
       },

@@ -547,6 +547,8 @@
         "forgot": "Passwort vergessen?",
         "invalid": "Anmeldedaten sind ungültig.",
         "generic": "Anmeldung fehlgeschlagen.",
+        "noaccess": "Dieses Konto hat keinen Admin-Zugriff.",
+        "expired": "Bitte melden Sie sich erneut an.",
         "eyebrow": "Administration",
         "note": "Nur für autorisierte Personen"
       },
