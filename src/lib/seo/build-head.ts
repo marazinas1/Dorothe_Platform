@@ -75,13 +75,13 @@ export function buildHead(input: SeoInput): HeadResult {
   for (const alt of enabledLocales) {
     links.push({
       rel: "alternate",
-      hreflang: alt,
+      hrefLang: alt,
       href: localizedUrl(origin, alt, bareSubpath),
     });
   }
   links.push({
     rel: "alternate",
-    hreflang: "x-default",
+    hrefLang: "x-default",
     href: localizedUrl(origin, defaultLocale, bareSubpath),
   });
 

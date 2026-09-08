@@ -102,7 +102,7 @@
   --clay: #a67c6d;
 
   --font-heading: "Fraunces Variable", "Fraunces", Georgia, serif;
-  --font-body: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Variable", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-script: "Tangerine", cursive;
 
   --radius: 0.5rem;
@@ -205,11 +205,10 @@
 }
 
 .admin-density :is(h1, h2, h3, h4, h5, h6, .font-heading) {
-  /* A tool reads better in the body face; still the same site_settings font. */
-  font-family: var(--font-body);
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-weight: 400;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .admin-density h1 {
@@ -260,7 +259,7 @@
     font-family: var(--font-heading);
     font-optical-sizing: none;
     font-weight: 400;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
     line-height: 1.05;
   }
 
