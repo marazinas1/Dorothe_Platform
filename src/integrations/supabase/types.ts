@@ -735,6 +735,7 @@ export type Database = {
         Row: {
           about_body: Json
           accent_color: string | null
+          active_home_template: string
           address_city: string | null
           address_country: string | null
           address_street: string | null
@@ -760,6 +761,9 @@ export type Database = {
           google_site_verification: string | null
           hero_headline: Json
           hero_subline: Json
+          home_content: Json
+          home_media: Json
+          home_template_extras: Json
           homepage_sections: Json
           id: string
           legal_impressum: Json
@@ -795,6 +799,7 @@ export type Database = {
         Insert: {
           about_body?: Json
           accent_color?: string | null
+          active_home_template?: string
           address_city?: string | null
           address_country?: string | null
           address_street?: string | null
@@ -820,6 +825,9 @@ export type Database = {
           google_site_verification?: string | null
           hero_headline?: Json
           hero_subline?: Json
+          home_content?: Json
+          home_media?: Json
+          home_template_extras?: Json
           homepage_sections?: Json
           id?: string
           legal_impressum?: Json
@@ -855,6 +863,7 @@ export type Database = {
         Update: {
           about_body?: Json
           accent_color?: string | null
+          active_home_template?: string
           address_city?: string | null
           address_country?: string | null
           address_street?: string | null
@@ -880,6 +889,9 @@ export type Database = {
           google_site_verification?: string | null
           hero_headline?: Json
           hero_subline?: Json
+          home_content?: Json
+          home_media?: Json
+          home_template_extras?: Json
           homepage_sections?: Json
           id?: string
           legal_impressum?: Json

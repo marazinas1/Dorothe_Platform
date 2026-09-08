@@ -11,6 +11,8 @@ import { ShortInquiryForm } from "./ShortInquiryForm";
 type Props = {
   locale: Locale;
   settings: SiteSettings;
+  /** Owner-written heading; falls back to the translated default. */
+  heading?: string;
 };
 
 type Tab = "buyer" | "seller";
@@ -21,7 +23,7 @@ type Tab = "buyer" | "seller";
  * Headline switches between solo and team wording based on the `team`
  * feature flag so an agency still reads correctly.
  */
-export function ContactSection({ locale, settings }: Props) {
+export function ContactSection({ locale, settings, heading }: Props) {
   const { t } = useTranslation();
   const teamEnabled = useFeatureFlag("team");
   const [tab, setTab] = useState<Tab>("seller");
@@ -34,7 +36,7 @@ export function ContactSection({ locale, settings }: Props) {
             {t("home.contact")}
           </div>
           <h2 className="text-section-sm mt-6">
-            {t(teamEnabled ? "home.contact_headline" : "home.contact_headline_solo")}
+            {heading || t(teamEnabled ? "home.contact_headline" : "home.contact_headline_solo")}
           </h2>
 
           <div className="mt-10 space-y-2 text-base text-foreground">

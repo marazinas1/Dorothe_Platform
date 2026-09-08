@@ -1,16 +1,8 @@
-import type { ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
-import { Hero } from "@/components/brand/Hero";
-import { TwoPaths } from "@/components/brand/TwoPaths";
-import { WhyHer } from "@/components/brand/WhyHer";
-import { ValuationInvite } from "@/components/brand/ValuationInvite";
-import { FeaturedListings } from "@/components/brand/FeaturedListings";
-import { SoldStrip } from "@/components/brand/SoldStrip";
-import { ContactSection } from "@/components/brand/ContactSection";
-import { TeamSection } from "@/components/brand/TeamSection";
+import { HomeTemplateView } from "@/components/brand/home/HomeTemplate";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -24,18 +16,26 @@ import { publicTeamQueryOptions } from "@/lib/team/queries.functions";
 import { featureFlagsQueryOptions } from "@/lib/config/feature-flags.functions";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
+import { resolveHomePreview } from "@/lib/home/admin.functions";
+import { homeCopy, homeMediaBag } from "@/lib/home/content";
+import { homeTemplate, homeTemplateKey } from "@/lib/home/templates";
+import { buildThemeVariables } from "@/lib/theme/tokens";
 import {
   HOMEPAGE_LISTING_LIMIT,
   applySoldPricePolicy,
-  buildHomepagePlan,
-  heroCopy,
   resolveSocialImage,
   soldPricesHidden,
-  valuationOffer,
 } from "@/lib/homepage/plan";
 
+type HomeSearch = { home?: string; t?: string };
+
 export const Route = createFileRoute("/$locale/")({
-  loader: async ({ context, params }) => {
+  validateSearch: (search: Record<string, unknown>): HomeSearch => ({
+    home: typeof search.home === "string" ? search.home : undefined,
+    t: typeof search.t === "string" ? search.t : undefined,
+  }),
+  loaderDeps: ({ search }) => ({ home: search.home, token: search.t }),
+  loader: async ({ context, params, deps }) => {
     const [settings, origin, featured] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
       getRequestOrigin(),
@@ -45,19 +45,28 @@ export const Route = createFileRoute("/$locale/")({
       context.queryClient.ensureQueryData(publicTeamQueryOptions),
       context.queryClient.ensureQueryData(featureFlagsQueryOptions),
     ]);
+
+    // A signed link may render a design that is not the live one. Without a
+    // valid token the parameter is ignored, so visitors always see the live page.
+    let preview: string | null = null;
+    if (deps.home && deps.token) {
+      preview = await resolveHomePreview({ data: { template: deps.home, token: deps.token } });
+    }
+
     return {
       settings,
       origin,
       locale: params.locale as Locale,
       socialImage: resolveSocialImage(settings, featured.items),
+      preview,
     };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return { meta: [{ title: "…" }] };
-    const { settings, origin, locale, socialImage } = loaderData;
+    const { settings, origin, locale, socialImage, preview } = loaderData;
     const vars = copyVars(settings, locale);
     const title = `${translate(locale, "home.title", vars)} — ${settings.site_name}`;
-    return buildHead({
+    const head = buildHead({
       origin,
       path: `/${locale}`,
       locale,
@@ -69,62 +78,56 @@ export const Route = createFileRoute("/$locale/")({
       ogDefaultImage: socialImage,
       ogType: "website",
     });
+    if (!preview) return head;
+    return { ...head, meta: [...(head.meta ?? []), { name: "robots", content: "noindex" }] };
   },
   component: HomePage,
 });
 
 /**
- * The homepage is a block library: `site_settings.homepage_sections` decides
- * which blocks appear and in which order. This file composes only — every
- * decision (hero layout, portrait interlock, price masking) is resolved in
- * @/lib/homepage/plan so a differently ordered client behaves identically.
+ * The home page renders one of the built-in designs. Which one is a client
+ * decision (`site_settings.active_home_template`), overridable per request only
+ * through a signed preview link. This file composes; every decision about copy,
+ * photographs and price policy is resolved in @/lib/home and @/lib/homepage.
  */
 function HomePage() {
   const { locale } = Route.useParams();
+  const { preview } = Route.useLoaderData();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: featured } = useSuspenseQuery(featuredListingsQueryOptions);
   const { data: sold } = useSuspenseQuery(recentSoldQueryOptions);
-  const { data: cities } = useSuspenseQuery(publicCitiesQueryOptions);
-  const { data: team } = useSuspenseQuery(publicTeamQueryOptions);
-  const { data: flags } = useSuspenseQuery(featureFlagsQueryOptions);
 
   const l = locale as Locale;
-  const sections = settings.homepage_sections ?? [];
-  const plan = buildHomepagePlan(settings, sections);
-  const copy = heroCopy(settings, l);
-  const teamEnabled = flags?.team?.enabled !== false;
-  const shown = featured.items.slice(0, HOMEPAGE_LISTING_LIMIT);
-  const soldShown = applySoldPricePolicy(sold.items.slice(0, HOMEPAGE_LISTING_LIMIT), settings);
-
-  const renderers: Record<string, () => ReactNode> = {
-    hero: () => (
-      <Hero
-        locale={l}
-        settings={settings}
-        layout={plan.heroLayout}
-        image={plan.heroImage}
-        headline={copy.headline}
-        subline={copy.subline}
-      />
-    ),
-    paths: () => <TwoPaths locale={l} />,
-    credibility: () => <WhyHer locale={l} settings={settings} />,
-    featured: () => <FeaturedListings locale={l} items={shown} settings={settings} />,
-    sold: () => <SoldStrip locale={l} items={soldShown} settings={settings} hidePrice={soldPricesHidden(settings)} />,
-    valuation: () => <ValuationInvite locale={l} offer={valuationOffer(settings, l)} />,
-    team: () => (teamEnabled && team.length > 0 ? <TeamSection members={team} /> : null),
-    contact: () => <ContactSection locale={l} settings={settings} />,
-  };
+  const key = homeTemplateKey(preview ?? settings.active_home_template);
+  const template = homeTemplate(key);
+  const copy = homeCopy(settings, key, l);
+  const media = homeMediaBag(settings);
 
   return (
-    <PublicChrome locale={l} settings={settings}>
-      {sections
-        .filter((s) => s.enabled)
-        .map((s, i) => {
-          const render = renderers[s.key];
-          if (!render) return null;
-          return <div key={`${s.key}-${i}`}>{render()}</div>;
-        })}
+    <PublicChrome
+      locale={l}
+      settings={settings}
+      heroOverlay={template.chrome.heroOverlay}
+      footerTone={template.chrome.footerTone}
+    >
+      {/* A preview shows the design's own palette without touching the live one. */}
+      {preview ? (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `:root{${buildThemeVariables({ ...settings, ...template.theme })}}`,
+          }}
+        />
+      ) : null}
+      <HomeTemplateView
+        template={key}
+        locale={l}
+        settings={settings}
+        copy={copy}
+        media={media}
+        featured={featured.items.slice(0, HOMEPAGE_LISTING_LIMIT)}
+        sold={applySoldPricePolicy(sold.items.slice(0, HOMEPAGE_LISTING_LIMIT), settings)}
+        hideSoldPrice={soldPricesHidden(settings)}
+      />
     </PublicChrome>
   );
 }

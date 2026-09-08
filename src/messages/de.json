@@ -44,7 +44,21 @@
     "claim_personal_body": "Preisfindung, Finanzierungsfragen und die kaufmännische Seite eines Verkaufs bespreche ich mit Ihnen sachlich und ohne Fachjargon.",
     "claim_personal_evidence": "Dipl. Betriebswirtin (BA) · Versicherungsfachwirtin und Immobilienmaklerin (IHK)",
     "membership_line": "Mitglied der Europäischen Immobilienakademie.",
-    "credibility_kicker": "Warum {{agent}}"
+    "credibility_kicker": "Warum {{agent}}",
+    "defaults": {
+      "hero_kicker": "{{agent}}",
+      "hero_headline": "Ihr Zuhause in guten Händen",
+      "hero_subline": "Sachverständige Wertermittlung, ehrliche Beratung und ein Verkauf, der Bestand hat — {{region_in}}.",
+      "statement": "Eine Immobilie wird einmal verkauft. Entscheidend ist, dass der erzielte Preis begründet ist.",
+      "sell_title": "Sie möchten Ihre Immobilie verkaufen?",
+      "sell_body": "Wir beginnen mit einer sachverständigen Wertermittlung vor Ort. Danach entscheiden Sie in Ruhe, ob und wann verkauft wird.",
+      "buy_title": "Sie suchen ein Zuhause?",
+      "buy_body": "Alle aktuell verfügbaren Objekte mit vollständigen Angaben, Grundrissen und Energiedaten.",
+      "cred_title": "Warum {{agent}}",
+      "listings_title": "Ausgewählte Objekte",
+      "valuation_title": "Was ist Ihre Immobilie heute wert?",
+      "contact_title": "Kaufen oder verkaufen — sagen Sie mir, worum es geht."
+    }
   },
   "nav": {
     "listings": "Immobilien",
@@ -457,7 +471,7 @@
       "listings": "Angebote",
       "inquiries": "Anfragen",
       "team": "Team",
-      "content": "Inhalte",
+      "content": "Startseite",
       "analytics": "Auswertung"
     },
     "analytics": {
@@ -1204,6 +1218,76 @@
         "deleteTitle": "{{email}} löschen?",
         "deleteBody": "Das Konto wird endgültig gelöscht und kann nicht wiederhergestellt werden. Objekte und Anfragen bleiben unberührt. Zur Bestätigung DELETE eingeben.",
         "deleteAction": "Endgültig löschen"
+      }
+    },
+    "home": {
+      "title": "Startseite",
+      "subtitle": "Wählen Sie ein Design und bearbeiten Sie Texte und Fotos.",
+      "designs": "Designs",
+      "content": "Texte und Fotos",
+      "live": "Aktiv",
+      "preview": "Vorschau",
+      "setMain": "Als Startseite festlegen",
+      "isMain": "Aktuelle Startseite",
+      "activated": "Dieses Design ist jetzt Ihre Startseite.",
+      "placeholder": "Leer lassen für den Standardtext",
+      "listHint": "Ein Punkt pro Zeile",
+      "groups": {
+        "opening": "Auftakt",
+        "paths": "Zwei Wege",
+        "credentials": "Qualifikation",
+        "listings": "Objekte",
+        "valuation": "Wertermittlung",
+        "contact": "Kontakt"
+      },
+      "fields": {
+        "hero_kicker": "Kleine Zeile über der Überschrift",
+        "hero_headline": "Überschrift",
+        "hero_subline": "Begleitzeile",
+        "statement": "Aussage-Band",
+        "sell_title": "Verkaufen — Titel",
+        "sell_body": "Verkaufen — Text",
+        "buy_title": "Kaufen — Titel",
+        "buy_body": "Kaufen — Text",
+        "cred_title": "Qualifikation — Titel",
+        "cred_intro": "Qualifikation — Einleitung",
+        "cred1_title": "Punkt 1 — Titel",
+        "cred1_body": "Punkt 1 — Text",
+        "cred1_tag": "Punkt 1 — Nachweis",
+        "cred2_title": "Punkt 2 — Titel",
+        "cred2_body": "Punkt 2 — Text",
+        "cred2_tag": "Punkt 2 — Nachweis",
+        "cred3_title": "Punkt 3 — Titel",
+        "cred3_body": "Punkt 3 — Text",
+        "cred3_tag": "Punkt 3 — Nachweis",
+        "listings_title": "Objekte — Titel",
+        "listings_note": "Objekte — Hinweis",
+        "valuation_title": "Wertermittlung — Titel",
+        "valuation_body": "Wertermittlung — Text",
+        "valuation_steps": "Wertermittlung — Schritte",
+        "contact_title": "Kontakt — Überschrift"
+      },
+      "media": {
+        "portrait": "Porträt",
+        "hero_photo": "Auftaktfoto",
+        "band_photo": "Breites Foto",
+        "default": "Standard",
+        "custom": "Eigenes wählen",
+        "empty": "Noch kein Foto"
+      },
+      "templates": {
+        "h1": {
+          "label": "Sachverständig",
+          "description": "Warme Papiertöne, Serifen-Überschriften, Qualifikation zuerst."
+        },
+        "h2": {
+          "label": "Vier Wände",
+          "description": "Großes Auftaktfoto, Weinrot, ein Aussage-Band."
+        },
+        "h3": {
+          "label": "Modern",
+          "description": "Ein großer Satz, feine Linien, oranger Akzent."
+        }
       }
     }
   },
