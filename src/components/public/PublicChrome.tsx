@@ -17,25 +17,48 @@ type Props = {
   settings: SiteSettings;
   /** Page opens with a full-bleed hero the header can sit on top of. */
   heroOverlay?: boolean;
+  /** The active home design decides whether the footer band is dark or light. */
+  footerTone?: "dark" | "light";
   children: ReactNode;
 };
 
 /** Site header + footer wrapper for public pages. */
-export function PublicChrome({ locale, settings, heroOverlay = false, children }: Props) {
+export function PublicChrome({
+  locale,
+  settings,
+  heroOverlay = false,
+  footerTone = "light",
+  children,
+}: Props) {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <SiteNav locale={locale} settings={settings} overlay={heroOverlay} />
       {/* The header is fixed, so pages without a hero need the height back. */}
       <main className={heroOverlay ? "flex-1" : "flex-1 pt-24 md:pt-28"}>{children}</main>
-      <Footer locale={locale} settings={settings} />
+      <Footer locale={locale} settings={settings} tone={footerTone} />
     </div>
   );
 }
 
-function Footer({ locale, settings }: { locale: Locale; settings: SiteSettings }) {
+function Footer({
+  locale,
+  settings,
+  tone,
+}: {
+  locale: Locale;
+  settings: SiteSettings;
+  tone: "dark" | "light";
+}) {
   const { t } = useTranslation();
+  const dark = tone === "dark";
   return (
-    <footer className="mt-24 border-t border-border/60 bg-background">
+    <footer
+      className={
+        dark
+          ? "mt-24 bg-primary text-primary-foreground"
+          : "mt-24 border-t border-border/60 bg-background"
+      }
+    >
       {/* Local links belong on every page, not only the homepage. */}
       <div className="mx-auto max-w-[1400px] px-0 pt-12">
         <AreaLinks
