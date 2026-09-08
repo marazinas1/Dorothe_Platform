@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
+import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
 import { homeMedia } from "@/lib/home/content";
 import { HOME_TEMPLATE_KEYS, HOME_TEMPLATES } from "@/lib/home/templates";
@@ -19,7 +21,10 @@ import { TemplateCard } from "./TemplateCard";
 export function HomeAdminPage() {
   const { t } = useTranslation();
   const [contentLocale, setContentLocale] = useState<string | null>(null);
-  const locales = useHomeLocales();
+  const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+  // Content locales come from the client's settings, never from code.
+  const enabled = (settings.enabled_locales ?? []).filter(Boolean);
+  const locales = enabled.length > 0 ? enabled : [settings.default_locale];
   const locale = contentLocale ?? locales[0];
   const home = useHomeAdmin(locale);
 
@@ -92,11 +97,4 @@ export function HomeAdminPage() {
       </section>
     </div>
   );
-}
-
-/** Content locales come from the client's settings, never from code. */
-function useHomeLocales(): string[] {
-  const { settings } = useHomeAdmin("");
-  const enabled = settings.enabled_locales?.filter(Boolean) ?? [];
-  return enabled.length > 0 ? enabled : [settings.default_locale];
 }
