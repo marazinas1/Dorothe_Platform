@@ -36,7 +36,7 @@ export function SoldStrip({ locale, items, settings, hidePrice = false, appearan
             const image = listing.images.find((item) => item.is_primary) ?? listing.images[0];
             return (
               <div key={listing.id} className="flex gap-[18px]">
-                <div className="aspect-[4/3] w-[130px] shrink-0 overflow-hidden rounded-[var(--radius)] bg-muted">
+                <div className="aspect-[4/3] w-[130px] shrink-0 overflow-hidden rounded-none bg-muted">
                   {image ? <img src={pickImageUrl(image.variants, "card") ?? ""} alt="" className="h-full w-full object-cover" loading="lazy" /> : null}
                 </div>
                 <div className="pt-1">
