@@ -67,7 +67,9 @@ export function buildThemeVariables(settings: SiteSettings): string {
     ["--muted", settings.secondary_color],
     ["--sidebar-accent", settings.secondary_color],
     ["--accent", settings.accent_color],
+    ["--accent-hover", `color-mix(in oklab, ${settings.accent_color}, black 18%)`],
     ["--background", settings.background_color],
+
     ["--card", settings.surface_color],
     ["--popover", settings.surface_color],
     ["--sidebar", settings.surface_color],

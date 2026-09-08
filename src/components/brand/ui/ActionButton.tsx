@@ -31,10 +31,11 @@ export function actionButtonClass(tone: ActionTone = "primary", className?: stri
     "disabled:cursor-default disabled:opacity-60",
     tone === "on-dark"
       ? "bg-background text-foreground hover:bg-secondary"
-      : "bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground",
+      : "bg-accent text-accent-foreground hover:bg-[var(--accent-hover)] hover:text-accent-foreground",
     className,
   );
 }
+
 
 export function ActionLink({
   locale,
