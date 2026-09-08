@@ -25,7 +25,7 @@ UPDATE public.site_settings SET
   -- German is the primary language; English exists so a non-German visitor can
   -- still navigate the site. The panel interface language is per user and lives
   -- on profiles.admin_locale, unrelated to these.
-  default_locale   = 'de',
+  default_locale   = 'en',
   enabled_locales  = ARRAY['de','en'],
   service_region   = '{"de":"Saarland","en":"the Saarland"}'::jsonb,
   service_region_in = '{"de":"im Saarland","en":"in Saarland"}'::jsonb,
@@ -43,8 +43,8 @@ UPDATE public.site_settings SET
   radius_scale     = 'soft',
   button_style     = 'rounded',
   -- Font registry keys (src/lib/theme/fonts.ts), never raw CSS stacks.
-  font_heading     = 'fraunces',
-  font_body        = 'inter',
+  font_heading     = 'urbanist',
+  font_body        = 'urbanist',
   contact_email    = 'dorothe.waltner@gmail.com',
   contact_phone    = '0160 4444047',
   whatsapp         = NULL,

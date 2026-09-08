@@ -73,6 +73,12 @@ export const FONT_REGISTRY: FontFamily[] = [
     roles: ["heading"],
   },
   {
+    key: "urbanist",
+    label: "Urbanist",
+    stack: '"Urbanist Variable", ui-sans-serif, system-ui, sans-serif',
+    roles: ["heading", "body"],
+  },
+  {
     key: "archivo",
     label: "Archivo",
     stack: '"Archivo Variable", ui-sans-serif, system-ui, sans-serif',
