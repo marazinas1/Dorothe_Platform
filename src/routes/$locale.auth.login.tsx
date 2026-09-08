@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthSplit } from "@/components/brand/AuthSplit";
-import { AuthProviderSlot } from "@/components/brand/AuthProviderSlot";
-import { BrandMark } from "@/components/brand/BrandMark";
+import { SiteLogo } from "@/components/brand/SiteLogo";
 import { supabase } from "@/integrations/supabase/client";
 import { updateLastLogin } from "@/lib/auth/last-login.functions";
 import { currentUserQueryOptions } from "@/lib/auth/current-user.functions";
@@ -26,15 +25,6 @@ export const Route = createFileRoute("/$locale/auth/login")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions),
   component: LoginPage,
 });
-
-/** Photography for the right column, taken from client configuration. */
-function pickAuthImage(settings: {
-  homepage_sections: { key: string; image?: string }[];
-  primary_agent_photo_url: string | null;
-}) {
-  const hero = settings.homepage_sections.find((s) => s.key === "hero")?.image;
-  return hero ?? settings.primary_agent_photo_url ?? null;
-}
 
 function LoginPage() {
   const { t } = useTranslation();
@@ -82,9 +72,9 @@ function LoginPage() {
 
   return (
     <AuthSplit
-      imageUrl={pickAuthImage(settings)}
-      imageAlt={t("admin.auth.login.image_alt")}
-      brand={<BrandMark settings={settings} />}
+      eyebrow={t("admin.auth.login.eyebrow")}
+      brand={<SiteLogo settings={settings} tone="light" className="max-w-[18rem]" />}
+      note={t("admin.auth.login.note")}
     >
       <h1 className="font-heading text-4xl md:text-5xl">{t("admin.auth.login.title")}</h1>
       <p className="mt-3 text-sm text-muted-foreground">
@@ -135,7 +125,6 @@ function LoginPage() {
         </div>
       </form>
 
-      <AuthProviderSlot />
     </AuthSplit>
   );
 }
