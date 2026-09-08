@@ -16,13 +16,19 @@ type Props = {
   listing: PublicListing;
   locale: Locale;
   settings: SiteSettings;
-  /** Density only: `compact` drops the description and tightens the type. */
-  size?: "large" | "compact";
+  /**
+   * Density:
+   * - `large` — full homepage/catalog row
+   * - `compact` — archive grids, agent listings, catalogue density
+   * - `small` — homepage recently sold proof points, two per row
+   */
+  size?: "large" | "compact" | "small";
   /** Suppress the price row (achieved prices on closed properties). */
   hidePrice?: boolean;
   /** Above-the-fold rows may load their cover eagerly. */
   eager?: boolean;
 };
+
 
 /**
  * The one listing card — homepage, catalogue, sold archive, related block and
