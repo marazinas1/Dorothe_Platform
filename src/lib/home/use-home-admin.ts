@@ -6,20 +6,16 @@ import {
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
 
-import { activateHomeTemplate, createHomePreviewLink } from "./admin.functions";
-import { homeTemplateKey, type HomeTemplateKey } from "./templates";
-
 type Bag = Record<string, unknown>;
 
 /**
- * Admin-side state for home page management: which design is live, the editable
- * copy and photograph slots, and the three actions (preview, activate, save).
- * All shaping of the stored JSON happens here so the UI stays presentational.
+ * Admin-side state for the home page: the editable copy and photograph slots,
+ * plus saving. All shaping of the stored JSON happens here so the UI stays
+ * presentational.
  */
 export function useHomeAdmin(locale: string) {
   const qc = useQueryClient();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
-  const active = homeTemplateKey(settings.active_home_template);
 
   const [content, setContent] = useState<Bag>(() => ({ ...(settings.home_content ?? {}) }));
   const [media, setMedia] = useState<Bag>(() => ({ ...(settings.home_media ?? {}) }));
@@ -57,29 +53,10 @@ export function useHomeAdmin(locale: string) {
 
   async function save() {
     await updateSiteSettings({
-      data: {
-        tab: "home",
-        values: {
-          home_content: content,
-          home_media: media,
-          home_template_extras: settings.home_template_extras ?? {},
-        },
-      },
+      data: { tab: "home", values: { home_content: content, home_media: media } },
     });
     await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
   }
 
-  async function activate(template: HomeTemplateKey) {
-    await activateHomeTemplate({ data: { template } });
-    await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
-  }
-
-  /** Opens the signed preview in a new tab; nothing is activated. */
-  async function preview(template: HomeTemplateKey) {
-    const link = await createHomePreviewLink({ data: { template } });
-    const url = `/${locale}?home=${link.template}&t=${encodeURIComponent(link.token)}`;
-    window.open(url, "_blank", "noopener");
-  }
-
-  return { settings, active, value, setValue, mediaEntry, setMediaEntry, save, activate, preview };
+  return { settings, value, setValue, mediaEntry, setMediaEntry, save };
 }

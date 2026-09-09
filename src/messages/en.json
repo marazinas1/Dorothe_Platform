@@ -689,29 +689,13 @@
             "title": "Blog",
             "description": "Enable the blog."
           },
-          "area_pages": {
-            "title": "Area pages",
-            "description": "SEO pages per city or district."
-          },
           "testimonials": {
             "title": "Testimonials",
             "description": "Show customer testimonials."
           },
-          "saved_search": {
-            "title": "Saved search",
-            "description": "Let users save searches."
-          },
-          "mortgage_calc": {
-            "title": "Mortgage calculator",
-            "description": "Show a mortgage calculator."
-          },
-          "virtual_tours": {
-            "title": "Virtual tours",
-            "description": "Embed 3D/video tours."
-          },
-          "crm_sync": {
-            "title": "CRM sync",
-            "description": "Forward inquiries to the CRM."
+          "listing_documents": {
+            "title": "Listing documents",
+            "description": "Offer floor plans and energy certificates as downloads on a listing page."
           }
         }
       },
@@ -1255,14 +1239,6 @@
     },
     "home": {
       "title": "Home page",
-      "subtitle": "Choose a design and edit the words and photographs it shows.",
-      "designs": "Designs",
-      "content": "Words and photographs",
-      "live": "Live",
-      "preview": "Preview",
-      "setMain": "Set as main home page",
-      "isMain": "Current home page",
-      "activated": "This design is now your home page.",
       "placeholder": "Leave empty to use the default line",
       "listHint": "One item per line",
       "groups": {
@@ -1313,32 +1289,15 @@
       "media": {
         "portrait": "Portrait",
         "hero_photo": "Opening photograph",
-        "band_photo": "Wide photograph",
         "default": "Default",
         "custom": "Choose your own",
         "empty": "No photograph yet"
       },
-      "templates": {
-        "h1": {
-          "label": "Home V1",
-          "description": "Amber, ink and warm paper. Claim first, then qualification and client voices."
-        },
-        "h2": {
-          "label": "Home V2",
-          "description": "Warm paper tones, serif headlines, qualification stated first."
-        },
-        "h3": {
-          "label": "Home V3",
-          "description": "One large sentence, hairline grids, orange accent."
-        }
-      },
-      "edit": "Edit this design",
-      "editHint": "Click the card to edit its words and photographs.",
-      "close": "Close",
+      "editHint": "Edit the words and photographs of your home page. Property cards come from Listings.",
       "saved": "Saved.",
-      "thumbLoading": "Loading preview…",
       "livePreview": "Live preview",
-      "refresh": "Refresh"
+      "refresh": "Refresh",
+      "openPage": "Open page"
     }
   },
   "pages": {

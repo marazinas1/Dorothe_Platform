@@ -12,7 +12,7 @@ import { translate } from "@/i18n/config";
 import { copyVars } from "@/lib/config/site-copy";
 import type { SiteSettings } from "@/types/site-settings";
 
-import type { HomeMediaSlot, HomeTemplateKey } from "./templates";
+import type { HomeMediaSlot } from "./layout";
 
 type LocaleMap = Record<string, unknown>;
 
@@ -72,24 +72,15 @@ export interface HomeCopy {
 }
 
 /**
- * Builds the copy bag for one template + locale. Translated defaults come from
+ * Builds the copy bag for one locale. Translated defaults come from
  * the message files (`home.defaults.<key>`), so a fresh clone reads as a
  * finished page before the owner has written a single line.
  */
-export function homeCopy(
-  settings: SiteSettings,
-  template: HomeTemplateKey,
-  locale: string,
-): HomeCopy {
+export function homeCopy(settings: SiteSettings, locale: string): HomeCopy {
   const content = (settings.home_content ?? {}) as Record<string, unknown>;
-  const extras = ((settings.home_template_extras ?? {}) as Record<string, unknown>)[
-    template
-  ] as Record<string, unknown> | undefined;
   const vars = copyVars(settings, locale);
 
-  const raw = (key: string): unknown =>
-    pick(extras?.[key], locale, settings.default_locale) ??
-    pick(content[key], locale, settings.default_locale);
+  const raw = (key: string): unknown => pick(content[key], locale, settings.default_locale);
 
   return {
     text: (key) => {
@@ -113,7 +104,7 @@ export function homeCopy(
   };
 }
 
-/** Per-slot photograph: an own upload wins, otherwise the design default. */
+/** Per-slot photograph: an own upload wins, otherwise the house default. */
 export function homeMedia(settings: SiteSettings, slot: HomeMediaSlot): string | null {
   const media = (settings.home_media ?? {}) as Record<
     string,
@@ -133,13 +124,11 @@ export function homeMedia(settings: SiteSettings, slot: HomeMediaSlot): string |
 export interface HomeMediaBag {
   portrait: string | null;
   hero: string | null;
-  band: string | null;
 }
 
 export function homeMediaBag(settings: SiteSettings): HomeMediaBag {
   return {
     portrait: homeMedia(settings, "portrait"),
     hero: homeMedia(settings, "hero_photo"),
-    band: homeMedia(settings, "band_photo"),
   };
 }

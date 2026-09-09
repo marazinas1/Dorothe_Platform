@@ -108,7 +108,6 @@ export type AnalyticsInput = z.infer<typeof AnalyticsSchema>;
 export const HomeSchema = z.object({
   home_content: jsonRecord,
   home_media: jsonRecord,
-  home_template_extras: jsonRecord,
 });
 export type HomeInput = z.infer<typeof HomeSchema>;
 

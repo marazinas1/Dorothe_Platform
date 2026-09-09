@@ -3,22 +3,20 @@ import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { HOME_FIELD_GROUPS, fieldsForTemplate } from "@/lib/home/fields";
-import type { HomeTemplateKey } from "@/lib/home/templates";
+import { HOME_FIELD_GROUPS, HOME_TEXT_FIELDS } from "@/lib/home/fields";
 
 type Props = {
-  template: HomeTemplateKey;
   value: (key: string) => string;
   onChange: (key: string, next: string, kind: "line" | "paragraph" | "list") => void;
 };
 
 /**
- * The words of the live design, grouped the way the page reads. An empty field
- * is not a hole: the page falls back to the design's own default line.
+ * The words of the home page, grouped the way the page reads. An empty field
+ * is not a hole: the page falls back to its translated default line.
  */
-export function HomeTextEditor({ template, value, onChange }: Props) {
+export function HomeTextEditor({ value, onChange }: Props) {
   const { t } = useTranslation();
-  const fields = fieldsForTemplate(template);
+  const fields = HOME_TEXT_FIELDS;
 
   /** An empty field falls back to this line on the page, so show it here too. */
   const defaultFor = (key: string) => {

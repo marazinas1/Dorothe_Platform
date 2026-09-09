@@ -45,7 +45,6 @@ UPDATE public.site_settings SET
   -- Font registry keys (src/lib/theme/fonts.ts), never raw CSS stacks.
   font_heading     = 'fraunces',
   font_body        = 'ibm-plex-sans',
-  active_home_template = 'h1',
   contact_email    = 'dorothe.waltner@gmail.com',
   contact_phone    = '0160 4444047',
   whatsapp         = NULL,
