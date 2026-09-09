@@ -12,6 +12,8 @@ import {
   BarChart3,
   Settings,
   Quote,
+  Newspaper,
+
 } from "lucide-react";
 
 import {
