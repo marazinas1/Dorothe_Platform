@@ -702,6 +702,101 @@ export type Database = {
           },
         ]
       }
+      post_slug_history: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_slug_history_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          body: Json
+          cover_alt: Json
+          cover_path: string | null
+          created_at: string
+          created_by: string | null
+          excerpt: Json
+          id: string
+          meta_description: Json
+          meta_title: Json
+          published_at: string | null
+          slug: string
+          status: string
+          title: Json
+          updated_at: string
+        }
+        Insert: {
+          body?: Json
+          cover_alt?: Json
+          cover_path?: string | null
+          created_at?: string
+          created_by?: string | null
+          excerpt?: Json
+          id?: string
+          meta_description?: Json
+          meta_title?: Json
+          published_at?: string | null
+          slug: string
+          status?: string
+          title?: Json
+          updated_at?: string
+        }
+        Update: {
+          body?: Json
+          cover_alt?: Json
+          cover_path?: string | null
+          created_at?: string
+          created_by?: string | null
+          excerpt?: Json
+          id?: string
+          meta_description?: Json
+          meta_title?: Json
+          published_at?: string | null
+          slug?: string
+          status?: string
+          title?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           admin_locale: string | null
@@ -1430,6 +1525,10 @@ export type Database = {
         Returns: string
       }
       map_energy_source_text: { Args: { _input: string }; Returns: string }
+      post_unique_slug: {
+        Args: { _base: string; _id: string }
+        Returns: string
+      }
       slugify: { Args: { _input: string }; Returns: string }
       storage_can_edit_listing_object: {
         Args: { _bucket: string; _name: string }
