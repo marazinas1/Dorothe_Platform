@@ -40,8 +40,10 @@ interface NavItem {
     | "users"
     | "content"
     | "testimonials"
+    | "posts"
     | "analytics"
     | "settings";
+
   to: string;
   icon: React.ComponentType<{ className?: string }>;
   permission: PermissionKey;
