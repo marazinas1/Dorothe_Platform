@@ -45,6 +45,7 @@ function InheritancePage() {
   const { locale } = Route.useParams();
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+  const copy = usePageCopy("inheritance", locale as Locale);
 
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>

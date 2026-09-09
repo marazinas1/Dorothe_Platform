@@ -15,7 +15,6 @@ import {
   Newspaper,
   Handshake,
   Scale,
-  Calculator,
   User,
   Mail,
 
@@ -48,7 +47,6 @@ interface NavItem {
     | "content"
     | "selling"
     | "inheritance"
-    | "valuation"
     | "about"
     | "contact"
     | "testimonials"
@@ -91,7 +89,6 @@ const GROUPS: NavGroup[] = [
       { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
       { key: "selling", to: "/$locale/admin/pages/$page", page: "selling", icon: Handshake, permission: "settings.edit" },
       { key: "inheritance", to: "/$locale/admin/pages/$page", page: "inheritance", icon: Scale, permission: "settings.edit" },
-      { key: "valuation", to: "/$locale/admin/pages/$page", page: "valuation", icon: Calculator, permission: "settings.edit" },
       { key: "about", to: "/$locale/admin/pages/$page", page: "about", icon: User, permission: "settings.edit" },
       { key: "contact", to: "/$locale/admin/pages/$page", page: "contact", icon: Mail, permission: "settings.edit" },
       {

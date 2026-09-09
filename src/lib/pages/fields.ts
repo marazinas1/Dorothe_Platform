@@ -6,7 +6,7 @@
  * its translated default line.
  */
 
-export type PageKey = "selling" | "inheritance" | "valuation" | "about" | "contact";
+export type PageKey = "selling" | "inheritance" | "about" | "contact";
 
 export type PageFieldKind = "line" | "paragraph" | "list";
 
@@ -83,23 +83,6 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
       para("credential_body", "pages.inheritance.credential_body"),
       line("contact_title", "pages.inheritance.contact_title", "closing"),
       para("contact_body", "pages.inheritance.contact_body", "closing"),
-    ],
-  },
-  {
-    key: "valuation",
-    path: "immobilienbewertung",
-    mediaSlots: [],
-    fields: [
-      line("kicker", "pages.valuation.kicker", "opening"),
-      para("headline", "pages.valuation.headline", "opening"),
-      para("intro", "pages.valuation.intro", "opening"),
-      line("steps_title", "pages.valuation.steps_title"),
-      line("deliverables_title", "pages.valuation.deliverables_title"),
-      list("deliverables", "pages.valuation.deliverables"),
-      line("credentials_title", "pages.valuation.credentials_title"),
-      para("credentials_note", "pages.valuation.credentials_note"),
-      line("form_title", "pages.valuation.form_title", "form"),
-      para("form_intro", "pages.valuation.form_intro", "form"),
     ],
   },
   {

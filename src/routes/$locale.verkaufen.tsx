@@ -47,6 +47,7 @@ function SellingPage() {
   const { locale } = Route.useParams();
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+  const copy = usePageCopy("selling", locale as Locale);
   const steps = t("pages.selling.steps", { returnObjects: true }) as Step[];
   const services = copy.lines("services");
 

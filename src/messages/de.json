@@ -513,7 +513,6 @@
       "posts": "Ratgeber-Beiträge",
       "selling": "Verkaufen",
       "inheritance": "Erben",
-      "valuation": "Bewertung",
       "about": "Über mich",
       "contact": "Kontakt"
     },
@@ -1392,18 +1391,6 @@
           "credential_body": "Text Qualifikation",
           "contact_title": "Überschrift Kontakt",
           "contact_body": "Text Kontakt"
-        },
-        "valuation": {
-          "kicker": "Kicker-Zeile",
-          "headline": "Überschrift",
-          "intro": "Einleitung",
-          "steps_title": "Überschrift Ablauf",
-          "deliverables_title": "Überschrift Inhalte",
-          "deliverables": "Inhalte (eine pro Zeile)",
-          "credentials_title": "Überschrift Qualifikation",
-          "credentials_note": "Hinweis Qualifikation",
-          "form_title": "Überschrift Formular",
-          "form_intro": "Einleitung Formular"
         },
         "about": {
           "kicker": "Kicker-Zeile",

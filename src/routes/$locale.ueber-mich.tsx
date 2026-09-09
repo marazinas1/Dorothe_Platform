@@ -73,6 +73,7 @@ function AboutPage() {
   const { locale } = Route.useParams();
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+  const copy = usePageCopy("about", locale as Locale);
   const { data: team } = useSuspenseQuery(publicTeamQueryOptions);
   const { data: active } = useSuspenseQuery(activeListingsQueryOptions);
   const { data: sold } = useSuspenseQuery(recentSoldQueryOptions);

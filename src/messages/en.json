@@ -513,7 +513,6 @@
       "posts": "Advice articles",
       "selling": "Selling",
       "inheritance": "Inheritance",
-      "valuation": "Valuation",
       "about": "About",
       "contact": "Contact"
     },
@@ -1392,18 +1391,6 @@
           "credential_body": "Credentials text",
           "contact_title": "Contact heading",
           "contact_body": "Contact text"
-        },
-        "valuation": {
-          "kicker": "Kicker line",
-          "headline": "Headline",
-          "intro": "Introduction",
-          "steps_title": "Steps heading",
-          "deliverables_title": "Deliverables heading",
-          "deliverables": "Deliverables (one per line)",
-          "credentials_title": "Credentials heading",
-          "credentials_note": "Credentials note",
-          "form_title": "Form heading",
-          "form_intro": "Form introduction"
         },
         "about": {
           "kicker": "Kicker line",

@@ -49,6 +49,7 @@ function ContactPage() {
   const { locale } = Route.useParams();
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+  const copy = usePageCopy("contact", locale as Locale);
   const teamEnabled = useFeatureFlag("team");
 
   const hours = t("pages.contact.hours_default", { returnObjects: true }) as Hours[];
