@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as ProbeStaticRouteImport } from './routes/probe-static'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAdminRouteImport } from './routes/$locale.admin'
@@ -60,6 +61,11 @@ const IndexRoute = IndexRouteImport.update({
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProbeStaticRoute = ProbeStaticRouteImport.update({
+  id: '/probe-static',
+  path: '/probe-static',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -271,6 +277,7 @@ const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/probe-static': typeof ProbeStaticRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
@@ -314,6 +321,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/probe-static': typeof ProbeStaticRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/agb': typeof LocaleAgbRoute
   '/$locale/auth': typeof LocaleAuthRouteWithChildren
@@ -355,6 +363,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/probe-static': typeof ProbeStaticRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
@@ -401,6 +410,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/probe-static'
     | '/sitemap.xml'
     | '/$locale/admin'
     | '/$locale/agb'
@@ -444,6 +454,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/probe-static'
     | '/sitemap.xml'
     | '/$locale/agb'
     | '/$locale/auth'
@@ -484,6 +495,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/probe-static'
     | '/sitemap.xml'
     | '/$locale/admin'
     | '/$locale/agb'
@@ -529,6 +541,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  ProbeStaticRoute: typeof ProbeStaticRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicTrackViewRoute: typeof ApiPublicTrackViewRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -549,6 +562,13 @@ declare module '@tanstack/react-router' {
       path: '/$locale'
       fullPath: '/$locale'
       preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/probe-static': {
+      id: '/probe-static'
+      path: '/probe-static'
+      fullPath: '/probe-static'
+      preLoaderRoute: typeof ProbeStaticRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -965,6 +985,7 @@ const LocaleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  ProbeStaticRoute: ProbeStaticRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicTrackViewRoute: ApiPublicTrackViewRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
