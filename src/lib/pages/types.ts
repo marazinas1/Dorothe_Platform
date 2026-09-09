@@ -1,8 +1,11 @@
 /** Stored copy and photographs for one static public page (core). */
+export type PageLocalized = Record<string, string | string[]>;
+export type PageMediaEntry = { mode: "default" | "custom"; url: string };
+
 export interface PageContentRow {
   page: string;
-  content: Record<string, unknown>;
-  media: Record<string, unknown>;
+  content: Record<string, PageLocalized>;
+  media: Record<string, PageMediaEntry>;
 }
 
 export const PAGE_CONTENT_COLUMNS = "page, content, media";
