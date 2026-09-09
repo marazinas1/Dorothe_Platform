@@ -972,6 +972,42 @@ export type Database = {
         }
         Relationships: []
       }
+      testimonials: {
+        Row: {
+          author_detail: string
+          author_name: string
+          created_at: string
+          id: string
+          published: boolean
+          quote: Json
+          show_on_home: boolean
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          author_detail?: string
+          author_name?: string
+          created_at?: string
+          id?: string
+          published?: boolean
+          quote?: Json
+          show_on_home?: boolean
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          author_detail?: string
+          author_name?: string
+          created_at?: string
+          id?: string
+          published?: boolean
+          quote?: Json
+          show_on_home?: boolean
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_invitations: {
         Row: {
           accepted_at: string | null
