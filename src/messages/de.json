@@ -689,29 +689,13 @@
             "title": "Blog",
             "description": "Blog aktivieren."
           },
-          "area_pages": {
-            "title": "Standortseiten",
-            "description": "SEO-Seiten pro Stadt oder Bezirk."
-          },
           "testimonials": {
             "title": "Referenzen",
             "description": "Kundenstimmen anzeigen."
           },
-          "saved_search": {
-            "title": "Suchagent",
-            "description": "Nutzer können Suchen speichern."
-          },
-          "mortgage_calc": {
-            "title": "Finanzierungsrechner",
-            "description": "Zinsrechner einblenden."
-          },
-          "virtual_tours": {
-            "title": "Virtuelle Touren",
-            "description": "3D-/Video-Touren einbetten."
-          },
-          "crm_sync": {
-            "title": "CRM-Sync",
-            "description": "Anfragen an das CRM übermitteln."
+          "listing_documents": {
+            "title": "Objektdokumente",
+            "description": "Grundrisse und Energieausweise als Download auf der Objektseite anbieten."
           }
         }
       },
@@ -1255,14 +1239,6 @@
     },
     "home": {
       "title": "Startseite",
-      "subtitle": "Wählen Sie ein Design und bearbeiten Sie Texte und Fotos.",
-      "designs": "Designs",
-      "content": "Texte und Fotos",
-      "live": "Aktiv",
-      "preview": "Vorschau",
-      "setMain": "Als Startseite festlegen",
-      "isMain": "Aktuelle Startseite",
-      "activated": "Dieses Design ist jetzt Ihre Startseite.",
       "placeholder": "Leer lassen für den Standardtext",
       "listHint": "Ein Punkt pro Zeile",
       "groups": {
@@ -1313,32 +1289,15 @@
       "media": {
         "portrait": "Porträt",
         "hero_photo": "Auftaktfoto",
-        "band_photo": "Breites Foto",
         "default": "Standard",
         "custom": "Eigenes wählen",
         "empty": "Noch kein Foto"
       },
-      "templates": {
-        "h1": {
-          "label": "Home V1",
-          "description": "Amber, Tiefschwarz und warmes Papier. Aussage zuerst, dann Qualifikation und Stimmen."
-        },
-        "h2": {
-          "label": "Home V2",
-          "description": "Warme Papiertöne, Serif-Überschriften, Qualifikation zuerst."
-        },
-        "h3": {
-          "label": "Home V3",
-          "description": "Ein großer Satz, feine Raster, orange Akzente."
-        }
-      },
-      "edit": "Dieses Design bearbeiten",
-      "editHint": "Karte anklicken, um Texte und Fotos zu bearbeiten.",
-      "close": "Schließen",
+      "editHint": "Bearbeiten Sie Texte und Fotos Ihrer Startseite. Objektkarten kommen aus den Objekten.",
       "saved": "Gespeichert.",
-      "thumbLoading": "Vorschau lädt…",
       "livePreview": "Live-Vorschau",
-      "refresh": "Aktualisieren"
+      "refresh": "Aktualisieren",
+      "openPage": "Seite öffnen"
     }
   },
   "pages": {
