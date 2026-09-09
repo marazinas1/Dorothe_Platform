@@ -10,8 +10,10 @@ import { pageContentQueryOptions } from "./queries.functions";
 import { resolvePage } from "./resolve";
 import type { PageFieldKind } from "./fields";
 
-type Bag = Record<string, Record<string, string | string[]>>;
-type MediaBag = Record<string, { mode: "default" | "custom"; url: string }>;
+import type { PageContentRow } from "./types";
+
+type Bag = PageContentRow["content"];
+type MediaBag = PageContentRow["media"];
 
 /**
  * Admin state for one static page: its stored copy, its photograph slots and

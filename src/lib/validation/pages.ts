@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { PAGE_KEYS } from "@/lib/pages/fields";
 
-const PageKeySchema = z.string().refine((v) => PAGE_KEYS.includes(v), "unknown page");
+const PageKeySchema = z.string().refine((v) => (PAGE_KEYS as string[]).includes(v), "unknown page");
 
 export const PageContentSelectSchema = z.object({ page: PageKeySchema });
 

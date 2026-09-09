@@ -11,19 +11,17 @@ import type { Locale } from "@/i18n/config";
 import { pageDefinition, type PageDefinition } from "./fields";
 import type { PageContentRow, ResolvedPage } from "./types";
 
-type LocaleMap = Record<string, unknown>;
 type Vars = Record<string, string | number | null | undefined>;
 
 function stored(
-  content: Record<string, unknown>,
+  content: PageContentRow["content"],
   field: string,
   locale: string,
   fallbackLocale: string,
 ): unknown {
   const entry = content[field];
   if (!entry || typeof entry !== "object") return undefined;
-  const map = entry as LocaleMap;
-  return map[locale] ?? map[fallbackLocale];
+  return entry[locale] ?? entry[fallbackLocale];
 }
 
 function asText(value: unknown): string {
@@ -85,7 +83,7 @@ export function resolvePage(
       return asList(typeof raw === "string" ? raw : undefined);
     },
     media(slot) {
-      const entry = (media[slot] ?? {}) as { mode?: string; url?: string };
+    const entry = media[slot];
       if (entry.mode === "custom" && entry.url?.trim()) return entry.url.trim();
       return mediaDefaults[slot] ?? null;
     },
