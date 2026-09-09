@@ -90,7 +90,8 @@
     "admin": "Verwaltung",
     "menu": "Menü",
     "close": "Menü schließen",
-    "inheritance": "Erben & Immobilien"
+    "inheritance": "Erben & Immobilien",
+    "blog": "Ratgeber"
   },
   "listings": {
     "title": "Immobilien",
@@ -508,7 +509,8 @@
         "workspace": "Arbeitsbereich",
         "website": "Die Website",
         "settings": "Einstellungen"
-      }
+      },
+      "posts": "Ratgeber-Beiträge"
     },
     "pages": {
       "dashboard": "Übersicht",
@@ -1318,6 +1320,29 @@
       "livePreview": "Live-Vorschau",
       "refresh": "Aktualisieren",
       "openPage": "Seite öffnen"
+    },
+    "posts": {
+      "title": "Ratgeber-Beiträge",
+      "hint": "Beiträge für den öffentlichen Ratgeber. Nur veröffentlichte Beiträge sind sichtbar; der Menüpunkt erscheint, sobald einer vorhanden ist.",
+      "add": "Beitrag hinzufügen",
+      "titleField": "Überschrift",
+      "excerpt": "Kurze Einleitung",
+      "body": "Text",
+      "bodyHint": "Zwischen Absätzen eine leere Zeile lassen.",
+      "metaTitle": "Titel für Suchmaschinen",
+      "metaDescription": "Beschreibung für Suchmaschinen",
+      "cover": "Titelbild (Link)",
+      "coverAlt": "Bildbeschreibung",
+      "date": "Veröffentlichungsdatum",
+      "slug": "Webadresse",
+      "slugAuto": "Wird aus der Überschrift erzeugt",
+      "published": "Veröffentlicht",
+      "draft": "Entwurf",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "cancel": "Abbrechen",
+      "confirmDelete": "Diesen Beitrag löschen?",
+      "empty": "Noch keine Beiträge."
     }
   },
   "pages": {
@@ -1516,5 +1541,16 @@
     "CH": "Schweiz",
     "IS": "Island",
     "US": "Vereinigte Staaten"
+  },
+  "blog": {
+    "title": "Ratgeber",
+    "intro": "Praktische Hinweise zum Verkaufen, Kaufen und Erben von Immobilien.",
+    "meta_description": "Praktische Beiträge zum Verkaufen, Kaufen und Erben von Immobilien {{region_in}}.",
+    "empty": "Noch keine Beiträge veröffentlicht.",
+    "detail": {
+      "back": "Zurück zu allen Beiträgen",
+      "unavailable_title": "Beitrag nicht verfügbar",
+      "unavailable_body": "Dieser Beitrag ist nicht mehr veröffentlicht."
+    }
   }
 }

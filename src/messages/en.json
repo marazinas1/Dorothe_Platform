@@ -90,7 +90,8 @@
     "admin": "Admin",
     "menu": "Menu",
     "close": "Close menu",
-    "inheritance": "Inheritance & property"
+    "inheritance": "Inheritance & property",
+    "blog": "Advice"
   },
   "listings": {
     "title": "Properties",
@@ -508,7 +509,8 @@
         "workspace": "Workspace",
         "website": "The website",
         "settings": "Settings"
-      }
+      },
+      "posts": "Advice articles"
     },
     "pages": {
       "dashboard": "Dashboard",
@@ -1318,6 +1320,29 @@
       "livePreview": "Live preview",
       "refresh": "Refresh",
       "openPage": "Open page"
+    },
+    "posts": {
+      "title": "Advice articles",
+      "hint": "Articles for the public advice section. Only published articles are visible, and the menu link appears once one exists.",
+      "add": "Add article",
+      "titleField": "Headline",
+      "excerpt": "Short intro",
+      "body": "Text",
+      "bodyHint": "Leave an empty line between paragraphs.",
+      "metaTitle": "Search engine title",
+      "metaDescription": "Search engine description",
+      "cover": "Cover picture (link)",
+      "coverAlt": "Picture description",
+      "date": "Publication date",
+      "slug": "Web address",
+      "slugAuto": "Created from the headline",
+      "published": "Published",
+      "draft": "Draft",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "confirmDelete": "Delete this article?",
+      "empty": "No articles yet."
     }
   },
   "pages": {
@@ -1516,5 +1541,16 @@
     "CH": "Switzerland",
     "IS": "Iceland",
     "US": "United States"
+  },
+  "blog": {
+    "title": "Advice",
+    "intro": "Practical notes on selling, buying and inheriting property.",
+    "meta_description": "Practical articles on selling, buying and inheriting property {{region_in}}.",
+    "empty": "No articles published yet.",
+    "detail": {
+      "back": "Back to all articles",
+      "unavailable_title": "Article unavailable",
+      "unavailable_body": "This article is no longer published."
+    }
   }
 }
