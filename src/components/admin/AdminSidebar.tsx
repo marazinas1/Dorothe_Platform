@@ -82,8 +82,16 @@ const GROUPS: NavGroup[] = [
         permission: "settings.edit",
         flag: "testimonials",
       },
+      {
+        key: "posts",
+        to: "/$locale/admin/posts",
+        icon: Newspaper,
+        permission: "settings.edit",
+        flag: "blog",
+      },
     ],
   },
+
   {
     label: "settings",
     items: [
