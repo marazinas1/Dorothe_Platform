@@ -479,6 +479,7 @@
       "listings": "Listings",
       "inquiries": "Inquiries",
       "content": "Content",
+      "testimonials": "Testimonials",
       "analytics": "Analytics",
       "settings": "Settings",
       "viewSite": "View public site",
@@ -1426,7 +1427,8 @@
       "our_properties": "Our properties",
       "email_label": "Email",
       "phone_label": "Phone",
-      "seals_title": "Certified expertise"
+      "seals_title": "Certified expertise",
+      "testimonials_title": "What clients say"
     },
     "contact": {
       "title": "Contact",
