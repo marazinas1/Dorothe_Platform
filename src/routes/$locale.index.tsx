@@ -18,6 +18,9 @@ import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 import { homeCopy, homeMediaBag } from "@/lib/home/content";
 import { homeJsonLd } from "@/lib/seo/home-jsonld";
+import { publicTestimonialsQueryOptions } from "@/lib/testimonials/queries.functions";
+import { homeTestiItems } from "@/lib/testimonials/resolve";
+import { fallbackTestiItems } from "@/lib/testimonials/fallback";
 import { HOME_CHROME } from "@/lib/home/layout";
 import {
   HOMEPAGE_LISTING_LIMIT,
@@ -28,10 +31,11 @@ import {
 
 export const Route = createFileRoute("/$locale/")({
   loader: async ({ context, params }) => {
-    const [settings, origin, featured] = await Promise.all([
+    const [settings, origin, featured, testimonials] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
       getRequestOrigin(),
       context.queryClient.ensureQueryData(featuredListingsQueryOptions),
+      context.queryClient.ensureQueryData(publicTestimonialsQueryOptions),
       context.queryClient.ensureQueryData(recentSoldQueryOptions),
       context.queryClient.ensureQueryData(publicCitiesQueryOptions),
       context.queryClient.ensureQueryData(publicTeamQueryOptions),
@@ -43,11 +47,12 @@ export const Route = createFileRoute("/$locale/")({
       origin,
       locale: params.locale as Locale,
       socialImage: resolveSocialImage(settings, featured.items),
+      testimonials,
     };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return { meta: [{ title: "…" }] };
-    const { settings, origin, locale, socialImage } = loaderData;
+    const { settings, origin, locale, socialImage, testimonials } = loaderData;
     const vars = copyVars(settings, locale);
     const title = `${translate(locale, "home.title", vars)} — ${settings.site_name}`;
     const head = buildHead({
@@ -63,12 +68,14 @@ export const Route = createFileRoute("/$locale/")({
       ogType: "website",
     });
     const copy = homeCopy(settings, locale);
+    const homeVoices = homeTestiItems(testimonials, locale);
+    const voices = homeVoices.length ? homeVoices : fallbackTestiItems(copy);
     return {
       ...head,
       scripts: [
         {
           type: "application/ld+json",
-          children: JSON.stringify(homeJsonLd(settings, copy, `${origin}/${locale}`)),
+          children: JSON.stringify(homeJsonLd(settings, homeVoices, `${origin}/${locale}`)),
         },
       ],
     };
@@ -86,10 +93,13 @@ function HomePage() {
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: featured } = useSuspenseQuery(featuredListingsQueryOptions);
   const { data: sold } = useSuspenseQuery(recentSoldQueryOptions);
+  const { data: testimonials } = useSuspenseQuery(publicTestimonialsQueryOptions);
 
   const l = locale as Locale;
   const copy = homeCopy(settings, l);
   const media = homeMediaBag(settings);
+  const curated = homeTestiItems(testimonials, l);
+  const voices = curated.length ? curated : fallbackTestiItems(copy);
 
   return (
     <PublicChrome
@@ -106,6 +116,7 @@ function HomePage() {
         featured={featured.items.slice(0, HOMEPAGE_LISTING_LIMIT)}
         sold={applySoldPricePolicy(sold.items.slice(0, HOMEPAGE_LISTING_LIMIT), settings)}
         hideSoldPrice={soldPricesHidden(settings)}
+        testimonials={voices}
       />
     </PublicChrome>
   );

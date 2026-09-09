@@ -1,17 +1,24 @@
-import type { HomeCopy } from "@/lib/home/content";
-import { testiItems } from "@/components/brand/home/types";
+import type { TestiItem } from "@/lib/testimonials/types";
 import type { SiteSettings } from "@/types/site-settings";
+
+/** Below this, an aggregate rating would claim more than the page can show. */
+const MIN_REVIEWS_FOR_AGGREGATE = 3;
 
 /**
  * Structured data for the home page: the practice itself, plus the client
- * voices the page already shows. Identical for every design, so choosing a
- * design never changes what search engines understand about the business.
- * Nothing is invented — a review only appears when its quote is filled in.
+ * voices the page actually shows. Nothing is invented — a review only appears
+ * when its quote is filled in, and the aggregate rating only once there are
+ * enough published voices to support it.
  */
-export function homeJsonLd(settings: SiteSettings, copy: HomeCopy, canonical: string) {
-  const reviews = testiItems(copy).map((item) => ({
+export function homeJsonLd(
+  settings: SiteSettings,
+  testimonials: TestiItem[],
+  canonical: string,
+) {
+  const reviews = testimonials.map((item) => ({
     "@type": "Review",
     reviewBody: item.quote,
+    reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
     ...(item.name ? { author: { "@type": "Person", name: item.name } } : {}),
   }));
 
@@ -39,5 +46,15 @@ export function homeJsonLd(settings: SiteSettings, copy: HomeCopy, canonical: st
         }
       : {}),
     ...(reviews.length ? { review: reviews } : {}),
+    ...(reviews.length >= MIN_REVIEWS_FOR_AGGREGATE
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: 5,
+            bestRating: 5,
+            reviewCount: reviews.length,
+          },
+        }
+      : {}),
   };
 }

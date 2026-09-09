@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import type { HomeCopy, HomeMediaBag } from "@/lib/home/content";
 import type { PublicListing } from "@/lib/listings/queries.functions";
+import type { TestiItem } from "@/lib/testimonials/types";
 import type { SiteSettings } from "@/types/site-settings";
 
 /**
@@ -16,24 +17,10 @@ export interface HomeTemplateProps {
   featured: PublicListing[];
   sold: PublicListing[];
   hideSoldPrice: boolean;
+  /** The curated client voices, already localised and capped. */
+  testimonials: TestiItem[];
 }
 
-export interface TestiItem {
-  quote: string;
-  name: string;
-  town: string;
-}
-
-/** Client quotes, in the order the owner filled them in. Empty ones drop out. */
-export function testiItems(copy: HomeCopy): TestiItem[] {
-  return [1, 2, 3]
-    .map((n) => ({
-      quote: copy.text(`testi${n}_quote`),
-      name: copy.text(`testi${n}_name`),
-      town: copy.text(`testi${n}_town`),
-    }))
-    .filter((item) => item.quote);
-}
 
 export interface FactItem {
   value: string;

@@ -460,6 +460,25 @@
     "forbiddenBody": "You do not have permission to access this area."
   },
   "admin": {
+    "testimonials": {
+      "title": "Testimonials",
+      "hint": "Client voices. Published quotes appear on the About page; up to three marked for the home page appear there.",
+      "add": "Add testimonial",
+      "quote": "Quote",
+      "name": "Name",
+      "detail": "Town or detail",
+      "published": "Published",
+      "draft": "Draft",
+      "showOnHome": "Show on home page",
+      "onHome": "On home page",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "confirmDelete": "Delete this testimonial?",
+      "empty": "No testimonials yet."
+    },
     "topbar": {
       "signOut": "Sign out",
       "toggleSidebar": "Toggle navigation",
@@ -479,6 +498,7 @@
       "listings": "Listings",
       "inquiries": "Inquiries",
       "content": "Content",
+      "testimonials": "Testimonials",
       "analytics": "Analytics",
       "settings": "Settings",
       "viewSite": "View public site",
@@ -1426,7 +1446,8 @@
       "our_properties": "Our properties",
       "email_label": "Email",
       "phone_label": "Phone",
-      "seals_title": "Certified expertise"
+      "seals_title": "Certified expertise",
+      "testimonials_title": "What clients say"
     },
     "contact": {
       "title": "Contact",

@@ -29,6 +29,7 @@ import { Route as LocaleAdminContentRouteImport } from './routes/$locale.admin.c
 import { Route as LocaleAdminInquiriesRouteImport } from './routes/$locale.admin.inquiries'
 import { Route as LocaleAdminListingsRouteImport } from './routes/$locale.admin.listings'
 import { Route as LocaleAdminSettingsRouteImport } from './routes/$locale.admin.settings'
+import { Route as LocaleAdminTestimonialsRouteImport } from './routes/$locale.admin.testimonials'
 import { Route as LocaleAdminUsersRouteImport } from './routes/$locale.admin.users'
 import { Route as LocaleAuthForgotPasswordRouteImport } from './routes/$locale.auth.forgot-password'
 import { Route as LocaleAuthLoginRouteImport } from './routes/$locale.auth.login'
@@ -147,6 +148,11 @@ const LocaleAdminSettingsRoute = LocaleAdminSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => LocaleAdminRoute,
 } as any)
+const LocaleAdminTestimonialsRoute = LocaleAdminTestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
 const LocaleAdminUsersRoute = LocaleAdminUsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -252,6 +258,7 @@ export interface FileRoutesByFullPath {
   '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
   '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
   '/$locale/admin/settings': typeof LocaleAdminSettingsRouteWithChildren
+  '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
   '/$locale/admin/users': typeof LocaleAdminUsersRoute
   '/$locale/auth/forgot-password': typeof LocaleAuthForgotPasswordRoute
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
@@ -285,6 +292,7 @@ export interface FileRoutesByTo {
   '/$locale': typeof LocaleIndexRoute
   '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
   '/$locale/admin/content': typeof LocaleAdminContentRoute
+  '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
   '/$locale/admin/users': typeof LocaleAdminUsersRoute
   '/$locale/auth/forgot-password': typeof LocaleAuthForgotPasswordRoute
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
@@ -324,6 +332,7 @@ export interface FileRoutesById {
   '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
   '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
   '/$locale/admin/settings': typeof LocaleAdminSettingsRouteWithChildren
+  '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
   '/$locale/admin/users': typeof LocaleAdminUsersRoute
   '/$locale/auth/forgot-password': typeof LocaleAuthForgotPasswordRoute
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
@@ -364,6 +373,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries'
     | '/$locale/admin/listings'
     | '/$locale/admin/settings'
+    | '/$locale/admin/testimonials'
     | '/$locale/admin/users'
     | '/$locale/auth/forgot-password'
     | '/$locale/auth/login'
@@ -397,6 +407,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/admin/analytics'
     | '/$locale/admin/content'
+    | '/$locale/admin/testimonials'
     | '/$locale/admin/users'
     | '/$locale/auth/forgot-password'
     | '/$locale/auth/login'
@@ -435,6 +446,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries'
     | '/$locale/admin/listings'
     | '/$locale/admin/settings'
+    | '/$locale/admin/testimonials'
     | '/$locale/admin/users'
     | '/$locale/auth/forgot-password'
     | '/$locale/auth/login'
@@ -604,6 +616,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminSettingsRouteImport
       parentRoute: typeof LocaleAdminRoute
     }
+    '/$locale/admin/testimonials': {
+      id: '/$locale/admin/testimonials'
+      path: '/testimonials'
+      fullPath: '/$locale/admin/testimonials'
+      preLoaderRoute: typeof LocaleAdminTestimonialsRouteImport
+      parentRoute: typeof LocaleAdminRoute
+    }
     '/$locale/admin/users': {
       id: '/$locale/admin/users'
       path: '/users'
@@ -766,6 +785,7 @@ interface LocaleAdminRouteChildren {
   LocaleAdminInquiriesRoute: typeof LocaleAdminInquiriesRouteWithChildren
   LocaleAdminListingsRoute: typeof LocaleAdminListingsRouteWithChildren
   LocaleAdminSettingsRoute: typeof LocaleAdminSettingsRouteWithChildren
+  LocaleAdminTestimonialsRoute: typeof LocaleAdminTestimonialsRoute
   LocaleAdminUsersRoute: typeof LocaleAdminUsersRoute
   LocaleAdminIndexRoute: typeof LocaleAdminIndexRoute
 }
@@ -776,6 +796,7 @@ const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
   LocaleAdminInquiriesRoute: LocaleAdminInquiriesRouteWithChildren,
   LocaleAdminListingsRoute: LocaleAdminListingsRouteWithChildren,
   LocaleAdminSettingsRoute: LocaleAdminSettingsRouteWithChildren,
+  LocaleAdminTestimonialsRoute: LocaleAdminTestimonialsRoute,
   LocaleAdminUsersRoute: LocaleAdminUsersRoute,
   LocaleAdminIndexRoute: LocaleAdminIndexRoute,
 }

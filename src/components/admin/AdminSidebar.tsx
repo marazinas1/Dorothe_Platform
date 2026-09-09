@@ -11,6 +11,7 @@ import {
   Home,
   BarChart3,
   Settings,
+  Quote,
 } from "lucide-react";
 
 import {
@@ -32,7 +33,15 @@ import type { PermissionKey } from "@/lib/auth/permissions";
 import type { Locale } from "@/i18n/config";
 
 interface NavItem {
-  key: "dashboard" | "listings" | "inquiries" | "users" | "content" | "analytics" | "settings";
+  key:
+    | "dashboard"
+    | "listings"
+    | "inquiries"
+    | "users"
+    | "content"
+    | "testimonials"
+    | "analytics"
+    | "settings";
   to: string;
   icon: React.ComponentType<{ className?: string }>;
   permission: PermissionKey;
@@ -64,6 +73,13 @@ const GROUPS: NavGroup[] = [
     items: [
       { key: "content", to: "/$locale/admin/content", icon: Home, permission: "settings.edit" },
       { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
+      {
+        key: "testimonials",
+        to: "/$locale/admin/testimonials",
+        icon: Quote,
+        permission: "settings.edit",
+        flag: "testimonials",
+      },
     ],
   },
   {
