@@ -8,6 +8,8 @@ import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
+import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
+import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { submitBuyerInquiry } from "@/lib/inquiry/submit.functions";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
@@ -17,6 +19,7 @@ export const Route = createFileRoute("/$locale/kontakt")({
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("contact")),
       getRequestOrigin(),
     ]);
     return { settings, origin, locale: params.locale as Locale };
@@ -61,7 +64,7 @@ function ContactPage() {
       <section className="mx-auto max-w-[1400px] px-6 pt-24 lg:px-10">
         <div className="max-w-3xl">
           <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            {t("pages.contact.kicker")}
+            {copy.text("kicker")}
           </div>
           <h1 className="mt-6 font-heading text-4xl leading-[1.05] md:text-6xl">
             {t(teamEnabled ? "pages.contact.headline_team" : "pages.contact.headline_solo")}
@@ -73,7 +76,7 @@ function ContactPage() {
         <div className="grid grid-cols-1 gap-14 border-y border-border py-14 md:grid-cols-3">
           <div>
             <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {t("pages.contact.address_title")}
+              {copy.text("address_title")}
             </div>
             {settings.address_street ? (
               <p className="mt-6 text-base leading-relaxed text-foreground">
@@ -87,7 +90,7 @@ function ContactPage() {
           </div>
           <div>
             <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {t("pages.contact.channels_title")}
+              {copy.text("channels_title")}
             </div>
             <div className="mt-6 space-y-2 text-base text-foreground">
               {settings.contact_email ? (
@@ -116,7 +119,7 @@ function ContactPage() {
           </div>
           <div>
             <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {t("pages.contact.hours_title")}
+              {copy.text("hours_title")}
             </div>
             <dl className="mt-6 space-y-2 text-base text-foreground">
               {hours.map((h, i) => (
@@ -132,13 +135,13 @@ function ContactPage() {
 
       <section className="mx-auto mt-24 max-w-[1400px] px-6 lg:px-10">
         <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          {t("pages.contact.map_title")}
+          {copy.text("map_title")}
         </div>
         <div className="mt-6 aspect-[16/9] w-full overflow-hidden border border-border bg-muted">
           {mapUrl ? (
             <iframe
               src={mapUrl}
-              title={t("pages.contact.map_title")}
+              title={copy.text("map_title")}
               className="h-full w-full"
               loading="lazy"
             />
@@ -154,10 +157,10 @@ function ContactPage() {
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {t("pages.contact.kicker")}
+              {copy.text("kicker")}
             </div>
             <h2 className="mt-6 font-heading text-3xl leading-[1.05] md:text-5xl">
-              {t("pages.contact.form_title")}
+              {copy.text("form_title")}
             </h2>
             <p className="mt-6 max-w-sm text-sm text-muted-foreground">
               {t(teamEnabled ? "pages.contact.form_intro_team" : "pages.contact.form_intro_solo")}

@@ -10,6 +10,8 @@ import { SellerInquiryForm } from "@/components/brand/SellerInquiryForm";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
+import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
+import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
@@ -17,6 +19,7 @@ export const Route = createFileRoute("/$locale/verkaufen")({
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("selling")),
       getRequestOrigin(),
     ]);
     return { settings, origin, locale: params.locale as Locale };
@@ -45,27 +48,27 @@ function SellingPage() {
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const steps = t("pages.selling.steps", { returnObjects: true }) as Step[];
-  const services = t("pages.selling.services", { returnObjects: true }) as string[];
+  const services = copy.lines("services");
 
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
       <PageIntro
-        kicker={t("pages.selling.kicker")}
-        headline={t("pages.selling.headline")}
-        lead={t("pages.selling.intro")}
+        kicker={copy.text("kicker")}
+        headline={copy.text("headline")}
+        lead={copy.text("intro")}
       />
 
-      <NumberedSteps title={t("pages.selling.steps_title")} steps={steps} />
+      <NumberedSteps title={copy.text("steps_title")} steps={steps} />
 
       <TextSection
-        title={t("pages.selling.services_title")}
-        body={t("pages.selling.services_body")}
+        title={copy.text("services_title")}
+        body={copy.text("services_body")}
         items={services}
       />
 
       <TextSection
-        title={t("pages.selling.costs_title")}
-        body={t("pages.selling.costs_body")}
+        title={copy.text("costs_title")}
+        body={copy.text("costs_body")}
       />
 
       <section
@@ -74,12 +77,12 @@ function SellingPage() {
       >
         <div className="grid grid-cols-1 gap-14 border-t border-border pt-16 md:grid-cols-12 lg:pt-24">
           <div className="md:col-span-4">
-            <div className="eyebrow text-muted-foreground">{t("pages.selling.kicker")}</div>
+            <div className="eyebrow text-muted-foreground">{copy.text("kicker")}</div>
             <h2 className="text-section-lg mt-8 max-w-[18ch] text-balance">
-              {t("pages.selling.form_title")}
+              {copy.text("form_title")}
             </h2>
             <p className="text-lead mt-8 max-w-[42ch] text-muted-foreground">
-              {t("pages.selling.form_intro")}
+              {copy.text("form_intro")}
             </p>
           </div>
           <div className="md:col-span-8">
@@ -90,8 +93,8 @@ function SellingPage() {
 
       <div className="pb-32">
         <TextSection
-          title={t("pages.selling.proof_title")}
-          body={t("pages.selling.proof_body")}
+          title={copy.text("proof_title")}
+          body={copy.text("proof_body")}
           quiet
         >
           <Link
