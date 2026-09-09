@@ -12,6 +12,8 @@ import {
   BarChart3,
   Settings,
   Quote,
+  Newspaper,
+
 } from "lucide-react";
 
 import {
@@ -40,8 +42,10 @@ interface NavItem {
     | "users"
     | "content"
     | "testimonials"
+    | "posts"
     | "analytics"
     | "settings";
+
   to: string;
   icon: React.ComponentType<{ className?: string }>;
   permission: PermissionKey;
@@ -80,8 +84,16 @@ const GROUPS: NavGroup[] = [
         permission: "settings.edit",
         flag: "testimonials",
       },
+      {
+        key: "posts",
+        to: "/$locale/admin/posts",
+        icon: Newspaper,
+        permission: "settings.edit",
+        flag: "blog",
+      },
     ],
   },
+
   {
     label: "settings",
     items: [

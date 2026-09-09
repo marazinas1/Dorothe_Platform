@@ -1,6 +1,10 @@
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { publicPostsQueryOptions } from "@/lib/posts/queries.functions";
+
 
 import { SiteLogo } from "@/components/brand/SiteLogo";
 import { HomeLink } from "@/components/shared/HomeLink";
@@ -23,6 +27,10 @@ type Props = {
 export function useNavItems() {
   const { t } = useTranslation();
   const teamEnabled = useFeatureFlag("team");
+  const blogEnabled = useFeatureFlag("blog");
+  // The advice section is only worth a menu slot once something is published.
+  const { data: posts } = useQuery({ ...publicPostsQueryOptions, enabled: blogEnabled });
+  const showBlog = blogEnabled && (posts?.length ?? 0) > 0;
   return [
     { to: "/$locale" as const, label: t("nav.home") },
     { to: "/$locale/immobilien" as const, label: t("nav.listings") },
@@ -31,12 +39,14 @@ export function useNavItems() {
     // the homepage and Über mich rather than the main menu.
     { to: "/$locale/verkaufen" as const, label: t("nav.selling") },
     { to: "/$locale/erben" as const, label: t("nav.inheritance") },
+    ...(showBlog ? [{ to: "/$locale/ratgeber" as const, label: t("nav.blog") }] : []),
     {
       to: "/$locale/ueber-mich" as const,
       label: t(teamEnabled ? "nav.about_team" : "nav.about_solo"),
     },
   ];
 }
+
 
 /**
  * Full-width fixed navigation bar: compact, transparent over a hero photo, and

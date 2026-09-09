@@ -28,6 +28,7 @@ import { Route as LocaleAdminAnalyticsRouteImport } from './routes/$locale.admin
 import { Route as LocaleAdminContentRouteImport } from './routes/$locale.admin.content'
 import { Route as LocaleAdminInquiriesRouteImport } from './routes/$locale.admin.inquiries'
 import { Route as LocaleAdminListingsRouteImport } from './routes/$locale.admin.listings'
+import { Route as LocaleAdminPostsRouteImport } from './routes/$locale.admin.posts'
 import { Route as LocaleAdminSettingsRouteImport } from './routes/$locale.admin.settings'
 import { Route as LocaleAdminTestimonialsRouteImport } from './routes/$locale.admin.testimonials'
 import { Route as LocaleAdminUsersRouteImport } from './routes/$locale.admin.users'
@@ -36,6 +37,8 @@ import { Route as LocaleAuthLoginRouteImport } from './routes/$locale.auth.login
 import { Route as LocaleAuthResetPasswordRouteImport } from './routes/$locale.auth.reset-password'
 import { Route as LocaleImmobilienIndexRouteImport } from './routes/$locale.immobilien.index'
 import { Route as LocaleImmobilienSlugRouteImport } from './routes/$locale.immobilien.$slug'
+import { Route as LocaleRatgeberIndexRouteImport } from './routes/$locale.ratgeber.index'
+import { Route as LocaleRatgeberSlugRouteImport } from './routes/$locale.ratgeber.$slug'
 import { Route as ApiPublicTrackViewRouteImport } from './routes/api/public/track-view'
 import { Route as LocaleAdminInquiriesIndexRouteImport } from './routes/$locale.admin.inquiries.index'
 import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.admin.inquiries.$id'
@@ -143,6 +146,11 @@ const LocaleAdminListingsRoute = LocaleAdminListingsRouteImport.update({
   path: '/listings',
   getParentRoute: () => LocaleAdminRoute,
 } as any)
+const LocaleAdminPostsRoute = LocaleAdminPostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
 const LocaleAdminSettingsRoute = LocaleAdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -182,6 +190,16 @@ const LocaleImmobilienIndexRoute = LocaleImmobilienIndexRouteImport.update({
 const LocaleImmobilienSlugRoute = LocaleImmobilienSlugRouteImport.update({
   id: '/immobilien/$slug',
   path: '/immobilien/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleRatgeberIndexRoute = LocaleRatgeberIndexRouteImport.update({
+  id: '/ratgeber/',
+  path: '/ratgeber/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleRatgeberSlugRoute = LocaleRatgeberSlugRouteImport.update({
+  id: '/ratgeber/$slug',
+  path: '/ratgeber/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
 const ApiPublicTrackViewRoute = ApiPublicTrackViewRouteImport.update({
@@ -257,6 +275,7 @@ export interface FileRoutesByFullPath {
   '/$locale/admin/content': typeof LocaleAdminContentRoute
   '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
   '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
+  '/$locale/admin/posts': typeof LocaleAdminPostsRoute
   '/$locale/admin/settings': typeof LocaleAdminSettingsRouteWithChildren
   '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
   '/$locale/admin/users': typeof LocaleAdminUsersRoute
@@ -264,9 +283,11 @@ export interface FileRoutesByFullPath {
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
+  '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
+  '/$locale/ratgeber/': typeof LocaleRatgeberIndexRoute
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
@@ -292,15 +313,18 @@ export interface FileRoutesByTo {
   '/$locale': typeof LocaleIndexRoute
   '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
   '/$locale/admin/content': typeof LocaleAdminContentRoute
+  '/$locale/admin/posts': typeof LocaleAdminPostsRoute
   '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
   '/$locale/admin/users': typeof LocaleAdminUsersRoute
   '/$locale/auth/forgot-password': typeof LocaleAuthForgotPasswordRoute
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
+  '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin': typeof LocaleAdminIndexRoute
   '/$locale/immobilien': typeof LocaleImmobilienIndexRoute
+  '/$locale/ratgeber': typeof LocaleRatgeberIndexRoute
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
@@ -331,6 +355,7 @@ export interface FileRoutesById {
   '/$locale/admin/content': typeof LocaleAdminContentRoute
   '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
   '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
+  '/$locale/admin/posts': typeof LocaleAdminPostsRoute
   '/$locale/admin/settings': typeof LocaleAdminSettingsRouteWithChildren
   '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
   '/$locale/admin/users': typeof LocaleAdminUsersRoute
@@ -338,9 +363,11 @@ export interface FileRoutesById {
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
+  '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
+  '/$locale/ratgeber/': typeof LocaleRatgeberIndexRoute
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
@@ -372,6 +399,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/content'
     | '/$locale/admin/inquiries'
     | '/$locale/admin/listings'
+    | '/$locale/admin/posts'
     | '/$locale/admin/settings'
     | '/$locale/admin/testimonials'
     | '/$locale/admin/users'
@@ -379,9 +407,11 @@ export interface FileRouteTypes {
     | '/$locale/auth/login'
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
+    | '/$locale/ratgeber/$slug'
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
+    | '/$locale/ratgeber/'
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
@@ -407,15 +437,18 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/admin/analytics'
     | '/$locale/admin/content'
+    | '/$locale/admin/posts'
     | '/$locale/admin/testimonials'
     | '/$locale/admin/users'
     | '/$locale/auth/forgot-password'
     | '/$locale/auth/login'
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
+    | '/$locale/ratgeber/$slug'
     | '/api/public/track-view'
     | '/$locale/admin'
     | '/$locale/immobilien'
+    | '/$locale/ratgeber'
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
@@ -445,6 +478,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/content'
     | '/$locale/admin/inquiries'
     | '/$locale/admin/listings'
+    | '/$locale/admin/posts'
     | '/$locale/admin/settings'
     | '/$locale/admin/testimonials'
     | '/$locale/admin/users'
@@ -452,9 +486,11 @@ export interface FileRouteTypes {
     | '/$locale/auth/login'
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
+    | '/$locale/ratgeber/$slug'
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
+    | '/$locale/ratgeber/'
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
@@ -609,6 +645,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminListingsRouteImport
       parentRoute: typeof LocaleAdminRoute
     }
+    '/$locale/admin/posts': {
+      id: '/$locale/admin/posts'
+      path: '/posts'
+      fullPath: '/$locale/admin/posts'
+      preLoaderRoute: typeof LocaleAdminPostsRouteImport
+      parentRoute: typeof LocaleAdminRoute
+    }
     '/$locale/admin/settings': {
       id: '/$locale/admin/settings'
       path: '/settings'
@@ -663,6 +706,20 @@ declare module '@tanstack/react-router' {
       path: '/immobilien/$slug'
       fullPath: '/$locale/immobilien/$slug'
       preLoaderRoute: typeof LocaleImmobilienSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/ratgeber/': {
+      id: '/$locale/ratgeber/'
+      path: '/ratgeber'
+      fullPath: '/$locale/ratgeber/'
+      preLoaderRoute: typeof LocaleRatgeberIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/ratgeber/$slug': {
+      id: '/$locale/ratgeber/$slug'
+      path: '/ratgeber/$slug'
+      fullPath: '/$locale/ratgeber/$slug'
+      preLoaderRoute: typeof LocaleRatgeberSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/api/public/track-view': {
@@ -784,6 +841,7 @@ interface LocaleAdminRouteChildren {
   LocaleAdminContentRoute: typeof LocaleAdminContentRoute
   LocaleAdminInquiriesRoute: typeof LocaleAdminInquiriesRouteWithChildren
   LocaleAdminListingsRoute: typeof LocaleAdminListingsRouteWithChildren
+  LocaleAdminPostsRoute: typeof LocaleAdminPostsRoute
   LocaleAdminSettingsRoute: typeof LocaleAdminSettingsRouteWithChildren
   LocaleAdminTestimonialsRoute: typeof LocaleAdminTestimonialsRoute
   LocaleAdminUsersRoute: typeof LocaleAdminUsersRoute
@@ -795,6 +853,7 @@ const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
   LocaleAdminContentRoute: LocaleAdminContentRoute,
   LocaleAdminInquiriesRoute: LocaleAdminInquiriesRouteWithChildren,
   LocaleAdminListingsRoute: LocaleAdminListingsRouteWithChildren,
+  LocaleAdminPostsRoute: LocaleAdminPostsRoute,
   LocaleAdminSettingsRoute: LocaleAdminSettingsRouteWithChildren,
   LocaleAdminTestimonialsRoute: LocaleAdminTestimonialsRoute,
   LocaleAdminUsersRoute: LocaleAdminUsersRoute,
@@ -835,7 +894,9 @@ interface LocaleRouteChildren {
   LocaleVerkauftRoute: typeof LocaleVerkauftRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleImmobilienSlugRoute: typeof LocaleImmobilienSlugRoute
+  LocaleRatgeberSlugRoute: typeof LocaleRatgeberSlugRoute
   LocaleImmobilienIndexRoute: typeof LocaleImmobilienIndexRoute
+  LocaleRatgeberIndexRoute: typeof LocaleRatgeberIndexRoute
 }
 
 const LocaleRouteChildren: LocaleRouteChildren = {
@@ -852,7 +913,9 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleVerkauftRoute: LocaleVerkauftRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleImmobilienSlugRoute: LocaleImmobilienSlugRoute,
+  LocaleRatgeberSlugRoute: LocaleRatgeberSlugRoute,
   LocaleImmobilienIndexRoute: LocaleImmobilienIndexRoute,
+  LocaleRatgeberIndexRoute: LocaleRatgeberIndexRoute,
 }
 
 const LocaleRouteWithChildren =
