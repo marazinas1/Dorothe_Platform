@@ -19,8 +19,8 @@ export const Route = createFileRoute("/$locale/kontakt")({
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
-      context.queryClient.ensureQueryData(pageContentQueryOptions("contact")),
       getRequestOrigin(),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("contact")),
     ]);
     return { settings, origin, locale: params.locale as Locale };
   },

@@ -17,8 +17,8 @@ export const Route = createFileRoute("/$locale/erben")({
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
-      context.queryClient.ensureQueryData(pageContentQueryOptions("inheritance")),
       getRequestOrigin(),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("inheritance")),
     ]);
     return { settings, origin, locale: params.locale as Locale };
   },

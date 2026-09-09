@@ -19,8 +19,8 @@ export const Route = createFileRoute("/$locale/verkaufen")({
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
-      context.queryClient.ensureQueryData(pageContentQueryOptions("selling")),
       getRequestOrigin(),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("selling")),
     ]);
     return { settings, origin, locale: params.locale as Locale };
   },

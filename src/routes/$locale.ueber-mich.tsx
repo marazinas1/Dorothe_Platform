@@ -35,13 +35,13 @@ export const Route = createFileRoute("/$locale/ueber-mich")({
   loader: async ({ context, params }) => {
     const [settings, origin, flags] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
-      context.queryClient.ensureQueryData(pageContentQueryOptions("about")),
       getRequestOrigin(),
       context.queryClient.ensureQueryData(featureFlagsQueryOptions),
       context.queryClient.ensureQueryData(publicTeamQueryOptions),
       context.queryClient.ensureQueryData(publicTestimonialsQueryOptions),
       context.queryClient.ensureQueryData(activeListingsQueryOptions),
       context.queryClient.ensureQueryData(recentSoldQueryOptions),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("about")),
     ]);
     return { settings, origin, flags, locale: params.locale as Locale };
   },
