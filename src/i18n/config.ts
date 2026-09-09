@@ -109,3 +109,20 @@ export function translate(
     return value == null ? match : String(value);
   });
 }
+
+/**
+ * Raw lookup for non-string nodes (lists of lines). Returns undefined on a
+ * miss, so callers can fall back without string comparisons.
+ */
+export function translateValue(locale: Locale, key: string): unknown {
+  const dict = locale === "de" ? de : en;
+  let node: unknown = dict;
+  for (const part of key.split(".")) {
+    if (node && typeof node === "object" && part in (node as Record<string, unknown>)) {
+      node = (node as Record<string, unknown>)[part];
+    } else {
+      return undefined;
+    }
+  }
+  return node;
+}
