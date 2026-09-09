@@ -510,7 +510,12 @@
         "website": "Die Website",
         "settings": "Einstellungen"
       },
-      "posts": "Ratgeber-Beiträge"
+      "posts": "Ratgeber-Beiträge",
+      "selling": "Verkaufen",
+      "inheritance": "Erben",
+      "valuation": "Bewertung",
+      "about": "Über mich",
+      "contact": "Kontakt"
     },
     "pages": {
       "dashboard": "Übersicht",
@@ -1343,6 +1348,83 @@
       "cancel": "Abbrechen",
       "confirmDelete": "Diesen Beitrag löschen?",
       "empty": "Noch keine Beiträge."
+    },
+    "pageEditor": {
+      "editHint": "Die Texte und Bilder dieser Seite. Ein leeres Feld behält die bisherige Zeile.",
+      "placeholder": "Leer lassen, um die bisherige Zeile zu behalten",
+      "listHint": "Eine Zeile pro Eintrag",
+      "refresh": "Vorschau neu laden",
+      "openPage": "Seite öffnen",
+      "unknown": "Diese Seite kann nicht bearbeitet werden.",
+      "groups": {
+        "opening": "Einstieg",
+        "body": "Seiteninhalt",
+        "form": "Formular",
+        "closing": "Abschluss"
+      },
+      "fields": {
+        "selling": {
+          "kicker": "Kicker-Zeile",
+          "headline": "Überschrift",
+          "intro": "Einleitung",
+          "steps_title": "Überschrift Ablauf",
+          "services_title": "Überschrift Leistungen",
+          "services_body": "Text Leistungen",
+          "services": "Leistungen (eine pro Zeile)",
+          "costs_title": "Überschrift Kosten",
+          "costs_body": "Text Kosten",
+          "proof_title": "Überschrift Nachweis",
+          "proof_body": "Text Nachweis",
+          "form_title": "Überschrift Formular",
+          "form_intro": "Einleitung Formular",
+          "cta_title": "Überschrift Abschluss",
+          "cta_body": "Text Abschluss"
+        },
+        "inheritance": {
+          "kicker": "Kicker-Zeile",
+          "headline": "Überschrift",
+          "intro": "Einleitung",
+          "appraisal_title": "Überschrift Wertermittlung",
+          "appraisal_body": "Text Wertermittlung",
+          "community_title": "Überschrift Erbengemeinschaft",
+          "community_body": "Text Erbengemeinschaft",
+          "credential_title": "Überschrift Qualifikation",
+          "credential_body": "Text Qualifikation",
+          "contact_title": "Überschrift Kontakt",
+          "contact_body": "Text Kontakt"
+        },
+        "valuation": {
+          "kicker": "Kicker-Zeile",
+          "headline": "Überschrift",
+          "intro": "Einleitung",
+          "steps_title": "Überschrift Ablauf",
+          "deliverables_title": "Überschrift Inhalte",
+          "deliverables": "Inhalte (eine pro Zeile)",
+          "credentials_title": "Überschrift Qualifikation",
+          "credentials_note": "Hinweis Qualifikation",
+          "form_title": "Überschrift Formular",
+          "form_intro": "Einleitung Formular"
+        },
+        "about": {
+          "kicker": "Kicker-Zeile",
+          "headline": "Überschrift",
+          "paragraphs": "Absätze (einer pro Zeile)",
+          "qualifications_title": "Überschrift Qualifikationen",
+          "seals_title": "Überschrift Siegel",
+          "testimonials_title": "Überschrift Stimmen",
+          "contact_title": "Überschrift Kontakt"
+        },
+        "contact": {
+          "kicker": "Kicker-Zeile",
+          "headline": "Überschrift",
+          "address_title": "Überschrift Adresse",
+          "hours_title": "Überschrift Öffnungszeiten",
+          "channels_title": "Überschrift Kontaktwege",
+          "map_title": "Überschrift Karte",
+          "form_title": "Überschrift Formular",
+          "form_intro": "Einleitung Formular"
+        }
+      }
     }
   },
   "pages": {

@@ -510,7 +510,12 @@
         "website": "The website",
         "settings": "Settings"
       },
-      "posts": "Advice articles"
+      "posts": "Advice articles",
+      "selling": "Selling",
+      "inheritance": "Inheritance",
+      "valuation": "Valuation",
+      "about": "About",
+      "contact": "Contact"
     },
     "pages": {
       "dashboard": "Dashboard",
@@ -1343,6 +1348,83 @@
       "cancel": "Cancel",
       "confirmDelete": "Delete this article?",
       "empty": "No articles yet."
+    },
+    "pageEditor": {
+      "editHint": "The words and photographs of this page. Leave a field empty to keep the current line.",
+      "placeholder": "Leave empty to keep the current line",
+      "listHint": "One line per entry",
+      "refresh": "Refresh preview",
+      "openPage": "Open page",
+      "unknown": "This page cannot be edited.",
+      "groups": {
+        "opening": "Opening",
+        "body": "Page content",
+        "form": "Form",
+        "closing": "Closing"
+      },
+      "fields": {
+        "selling": {
+          "kicker": "Kicker line",
+          "headline": "Headline",
+          "intro": "Introduction",
+          "steps_title": "Steps heading",
+          "services_title": "Services heading",
+          "services_body": "Services text",
+          "services": "Services (one per line)",
+          "costs_title": "Costs heading",
+          "costs_body": "Costs text",
+          "proof_title": "Proof heading",
+          "proof_body": "Proof text",
+          "form_title": "Form heading",
+          "form_intro": "Form introduction",
+          "cta_title": "Closing heading",
+          "cta_body": "Closing text"
+        },
+        "inheritance": {
+          "kicker": "Kicker line",
+          "headline": "Headline",
+          "intro": "Introduction",
+          "appraisal_title": "Appraisal heading",
+          "appraisal_body": "Appraisal text",
+          "community_title": "Heirs heading",
+          "community_body": "Heirs text",
+          "credential_title": "Credentials heading",
+          "credential_body": "Credentials text",
+          "contact_title": "Contact heading",
+          "contact_body": "Contact text"
+        },
+        "valuation": {
+          "kicker": "Kicker line",
+          "headline": "Headline",
+          "intro": "Introduction",
+          "steps_title": "Steps heading",
+          "deliverables_title": "Deliverables heading",
+          "deliverables": "Deliverables (one per line)",
+          "credentials_title": "Credentials heading",
+          "credentials_note": "Credentials note",
+          "form_title": "Form heading",
+          "form_intro": "Form introduction"
+        },
+        "about": {
+          "kicker": "Kicker line",
+          "headline": "Headline",
+          "paragraphs": "Paragraphs (one per line)",
+          "qualifications_title": "Qualifications heading",
+          "seals_title": "Seals heading",
+          "testimonials_title": "Testimonials heading",
+          "contact_title": "Contact heading"
+        },
+        "contact": {
+          "kicker": "Kicker line",
+          "headline": "Headline",
+          "address_title": "Address heading",
+          "hours_title": "Opening hours heading",
+          "channels_title": "Contact channels heading",
+          "map_title": "Map heading",
+          "form_title": "Form heading",
+          "form_intro": "Form introduction"
+        }
+      }
     }
   },
   "pages": {
