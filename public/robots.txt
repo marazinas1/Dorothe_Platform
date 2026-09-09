@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /de/admin
+Disallow: /auth
+Disallow: /de/auth
+Disallow: /api/
+
+Sitemap: https://dorothe.deerva.com/sitemap.xml
