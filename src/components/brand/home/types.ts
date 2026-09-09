@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import type { HomeCopy, HomeMediaBag } from "@/lib/home/content";
 import type { PublicListing } from "@/lib/listings/queries.functions";
+import type { TestiItem } from "@/lib/testimonials/types";
 import type { SiteSettings } from "@/types/site-settings";
 
 /**

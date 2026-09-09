@@ -14,13 +14,17 @@ import { H1Valuation } from "./H1Valuation";
  * qualification, client voices, and only then the properties.
  */
 export function H1Home(props: HomeTemplateProps) {
-  const { locale, settings, copy, featured, sold, hideSoldPrice } = props;
+  const { locale, settings, copy, featured, sold, hideSoldPrice, testimonials } = props;
   return (
     <>
       <H1Hero {...props} />
       <H1Paths {...props} />
       <H1Credentials {...props} />
-      <HomeTestimonials {...props} tone="paper" />
+      <HomeTestimonials
+        items={testimonials}
+        title={copy.text("testi_title")}
+        tone="paper"
+      />
       <HomeListings
         locale={locale}
         settings={settings}
