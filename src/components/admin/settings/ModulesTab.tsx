@@ -9,10 +9,10 @@ import {
 } from "@/lib/config/feature-flags.functions";
 import { usePermission } from "@/lib/auth/use-permission";
 
+/** Only flags with real code behind them belong here. */
 const FLAG_KEYS = [
-  "sales", "rentals", "valuation", "sold_archive", "team", "blog",
-  "area_pages", "testimonials", "saved_search", "mortgage_calc",
-  "virtual_tours", "crm_sync",
+  "sales", "rentals", "valuation", "sold_archive", "team",
+  "testimonials", "listing_documents", "blog",
 ] as const;
 
 export function ModulesTab() {

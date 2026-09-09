@@ -70,14 +70,10 @@ export interface SiteSettings {
   show_sold_prices: boolean;
   /** Localized valuation offer used by the valuation block. */
   valuation_offer: Record<string, ValuationOffer>;
-  /** Which built-in home page design is live ("h1" | "h2" | "h3"). */
-  active_home_template: string;
-  /** Shared, localized home page texts keyed by content field. */
+  /** Localized home page texts keyed by content field. */
   home_content: Record<string, any>;
-  /** Per photo slot: design default or the owner's own upload. */
+  /** Per photo slot: house default or the owner's own upload. */
   home_media: Record<string, { mode?: string; url?: string }>;
-  /** Fields that belong to one design only, keyed by design. */
-  home_template_extras: Record<string, any>;
 }
 
 export interface ValuationOffer {
