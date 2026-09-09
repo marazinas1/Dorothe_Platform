@@ -92,7 +92,7 @@ export function PageEditorWorkspace({
             />
           ) : null}
 
-          <SaveButton onSave={admin.save} />
+          <SaveButton onSubmit={admin.save} />
         </div>
 
         <div className="hidden bg-muted/40 lg:block">
