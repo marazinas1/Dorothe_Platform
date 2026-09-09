@@ -13,6 +13,11 @@ import {
   Settings,
   Quote,
   Newspaper,
+  Handshake,
+  Scale,
+  Calculator,
+  User,
+  Mail,
 
 } from "lucide-react";
 
@@ -41,12 +46,19 @@ interface NavItem {
     | "inquiries"
     | "users"
     | "content"
+    | "selling"
+    | "inheritance"
+    | "valuation"
+    | "about"
+    | "contact"
     | "testimonials"
     | "posts"
     | "analytics"
     | "settings";
 
   to: string;
+  /** Set for the shared static-page editor route. */
+  page?: string;
   icon: React.ComponentType<{ className?: string }>;
   permission: PermissionKey;
   flag?: string;
@@ -77,6 +89,11 @@ const GROUPS: NavGroup[] = [
     items: [
       { key: "content", to: "/$locale/admin/content", icon: Home, permission: "settings.edit" },
       { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
+      { key: "selling", to: "/$locale/admin/pages/$page", page: "selling", icon: Handshake, permission: "settings.edit" },
+      { key: "inheritance", to: "/$locale/admin/pages/$page", page: "inheritance", icon: Scale, permission: "settings.edit" },
+      { key: "valuation", to: "/$locale/admin/pages/$page", page: "valuation", icon: Calculator, permission: "settings.edit" },
+      { key: "about", to: "/$locale/admin/pages/$page", page: "about", icon: User, permission: "settings.edit" },
+      { key: "contact", to: "/$locale/admin/pages/$page", page: "contact", icon: Mail, permission: "settings.edit" },
       {
         key: "testimonials",
         to: "/$locale/admin/testimonials",
@@ -114,7 +131,9 @@ function NavRow({ item, locale }: { item: NavItem; locale: Locale }) {
   if (!allowed) return null;
   if (item.flag && !flagOn) return null;
 
-  const resolved = item.to.replace("$locale", locale);
+  const resolved = item.to
+    .replace("$locale", locale)
+    .replace("$page", item.page ?? "");
   const isActive =
     item.to === "/$locale/admin"
       ? pathname === resolved
@@ -124,7 +143,11 @@ function NavRow({ item, locale }: { item: NavItem; locale: Locale }) {
   return (
     <SidebarMenuItem>
       <SidebarMenuButton asChild isActive={isActive} tooltip={t(`admin.nav.${item.key}`)}>
-        <Link to={item.to} params={{ locale }} className="flex items-center gap-2">
+        <Link
+          to={item.to}
+          params={{ locale, ...(item.page ? { page: item.page } : {}) } as never}
+          className="flex items-center gap-2"
+        >
           <item.icon className="h-4 w-4" />
           <span>{t(`admin.nav.${item.key}`)}</span>
           {badge > 0 ? (
