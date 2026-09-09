@@ -5,13 +5,14 @@
  * changes until the owner actually types something.
  */
 
-import { translate } from "@/i18n/config";
+import { translate, translateValue } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 
 import { pageDefinition, type PageDefinition } from "./fields";
 import type { PageContentRow, ResolvedPage } from "./types";
 
 type LocaleMap = Record<string, unknown>;
+type Vars = Record<string, string | number | null | undefined>;
 
 function stored(
   content: Record<string, unknown>,
@@ -37,18 +38,8 @@ function asList(value: unknown): string[] {
   return text ? text.split("\n").map((l) => l.trim()).filter(Boolean) : [];
 }
 
-function defaultText(definition: PageDefinition, field: string, locale: Locale): string {
-  const spec = definition.fields.find((f) => f.key === field);
-  if (!spec) return "";
-  const value = translate(locale, spec.i18n);
-  return typeof value === "string" ? value : "";
-}
-
-function defaultList(definition: PageDefinition, field: string, locale: Locale): string[] {
-  const spec = definition.fields.find((f) => f.key === field);
-  if (!spec) return [];
-  const value = translate(locale, spec.i18n, { returnObjects: true }) as unknown;
-  return asList(value);
+function specFor(definition: PageDefinition | undefined, field: string) {
+  return definition?.fields.find((f) => f.key === field);
 }
 
 /**
@@ -60,27 +51,50 @@ export function resolvePage(
   row: PageContentRow | null,
   locale: Locale,
   defaultLocale: string,
-  mediaDefaults: Record<string, string | null> = {},
+  options: { mediaDefaults?: Record<string, string | null>; vars?: Vars } = {},
 ): ResolvedPage {
   const definition = pageDefinition(pageKey);
   const content = row?.content ?? {};
   const media = row?.media ?? {};
+  const mediaDefaults = options.mediaDefaults ?? {};
 
   return {
     text(field) {
       const own = asText(stored(content, field, locale, defaultLocale));
       if (own) return own;
-      return definition ? defaultText(definition, field, locale) : "";
+      const spec = specFor(definition, field);
+      if (!spec) return "";
+      const translated = translate(locale, spec.i18n, options.vars);
+      return translated === spec.i18n ? "" : translated;
     },
     lines(field) {
       const own = asList(stored(content, field, locale, defaultLocale));
       if (own.length > 0) return own;
-      return definition ? defaultList(definition, field, locale) : [];
+      const spec = specFor(definition, field);
+      if (!spec) return [];
+      const raw = translateValue(locale, spec.i18n);
+      if (Array.isArray(raw)) {
+        return raw
+          .map((v) =>
+            typeof v === "string"
+              ? (options.vars ? interpolate(v, options.vars) : v).trim()
+              : "",
+          )
+          .filter(Boolean);
+      }
+      return asList(typeof raw === "string" ? raw : undefined);
     },
     media(slot) {
       const entry = (media[slot] ?? {}) as { mode?: string; url?: string };
-      if (entry.mode === "custom" && entry.url) return entry.url;
+      if (entry.mode === "custom" && entry.url?.trim()) return entry.url.trim();
       return mediaDefaults[slot] ?? null;
     },
   };
+}
+
+function interpolate(value: string, vars: Vars): string {
+  return value.replace(/\{\{\s*(\w+)\s*\}\}/g, (match, name: string) => {
+    const v = vars[name];
+    return v == null ? match : String(v);
+  });
 }
