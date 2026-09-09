@@ -28,7 +28,7 @@ export function PageTextEditor({ definition, value, onChange, placeholder }: Pro
         return (
           <section key={group}>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              {t(`admin.pages.groups.${group}`)}
+              {t(`admin.pageEditor.groups.${group}`)}
             </h3>
             <div className="mt-4 grid gap-4">
               {fields.map((field) => {
@@ -37,13 +37,13 @@ export function PageTextEditor({ definition, value, onChange, placeholder }: Pro
                 return (
                   <div key={field.key} className="grid gap-1.5">
                     <Label htmlFor={id} className="text-sm">
-                      {t(`admin.pages.fields.${definition.key}.${field.key}`)}
+                      {t(`admin.pageEditor.fields.${definition.key}.${field.key}`)}
                     </Label>
                     {field.kind === "line" ? (
                       <Input
                         id={id}
                         value={value(field.key)}
-                        placeholder={hint || t("admin.pages.placeholder")}
+                        placeholder={hint || t("admin.pageEditor.placeholder")}
                         onChange={(e) => onChange(field.key, e.target.value, field.kind)}
                       />
                     ) : (
@@ -54,8 +54,8 @@ export function PageTextEditor({ definition, value, onChange, placeholder }: Pro
                         placeholder={
                           hint ||
                           (field.kind === "list"
-                            ? t("admin.pages.listHint")
-                            : t("admin.pages.placeholder"))
+                            ? t("admin.pageEditor.listHint")
+                            : t("admin.pageEditor.placeholder"))
                         }
                         onChange={(e) => onChange(field.key, e.target.value, field.kind)}
                       />

@@ -24,7 +24,7 @@ export function PageAdminPage({ page }: { page: string }) {
   const admin = usePageAdmin(page, locale);
 
   if (!definition) {
-    return <p className="text-sm text-muted-foreground">{t("admin.pages.unknown")}</p>;
+    return <p className="text-sm text-muted-foreground">{t("admin.pageEditor.unknown")}</p>;
   }
 
   return (
@@ -33,7 +33,7 @@ export function PageAdminPage({ page }: { page: string }) {
         <h1 className="text-2xl font-semibold tracking-tight">
           {t(`admin.nav.${definition.key}`)}
         </h1>
-        <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.pages.editHint")}</p>
+        <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.pageEditor.editHint")}</p>
       </header>
 
       <PageEditorWorkspace
