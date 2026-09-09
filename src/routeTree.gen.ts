@@ -45,6 +45,7 @@ import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.adm
 import { Route as LocaleAdminListingsIndexRouteImport } from './routes/$locale.admin.listings.index'
 import { Route as LocaleAdminListingsIdRouteImport } from './routes/$locale.admin.listings.$id'
 import { Route as LocaleAdminListingsNewRouteImport } from './routes/$locale.admin.listings.new'
+import { Route as LocaleAdminPagesPageRouteImport } from './routes/$locale.admin.pages.$page'
 import { Route as LocaleAdminSettingsIndexRouteImport } from './routes/$locale.admin.settings.index'
 import { Route as LocaleAdminSettingsTabRouteImport } from './routes/$locale.admin.settings.$tab'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -234,6 +235,11 @@ const LocaleAdminListingsNewRoute = LocaleAdminListingsNewRouteImport.update({
   path: '/new',
   getParentRoute: () => LocaleAdminListingsRoute,
 } as any)
+const LocaleAdminPagesPageRoute = LocaleAdminPagesPageRouteImport.update({
+  id: '/pages/$page',
+  path: '/pages/$page',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
 const LocaleAdminSettingsIndexRoute =
   LocaleAdminSettingsIndexRouteImport.update({
     id: '/',
@@ -291,6 +297,7 @@ export interface FileRoutesByFullPath {
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
+  '/$locale/admin/pages/$page': typeof LocaleAdminPagesPageRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -328,6 +335,7 @@ export interface FileRoutesByTo {
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
+  '/$locale/admin/pages/$page': typeof LocaleAdminPagesPageRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -371,6 +379,7 @@ export interface FileRoutesById {
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
+  '/$locale/admin/pages/$page': typeof LocaleAdminPagesPageRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -415,6 +424,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
+    | '/$locale/admin/pages/$page'
     | '/$locale/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -452,6 +462,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
+    | '/$locale/admin/pages/$page'
     | '/$locale/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -494,6 +505,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
+    | '/$locale/admin/pages/$page'
     | '/$locale/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -764,6 +776,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminListingsNewRouteImport
       parentRoute: typeof LocaleAdminListingsRoute
     }
+    '/$locale/admin/pages/$page': {
+      id: '/$locale/admin/pages/$page'
+      path: '/pages/$page'
+      fullPath: '/$locale/admin/pages/$page'
+      preLoaderRoute: typeof LocaleAdminPagesPageRouteImport
+      parentRoute: typeof LocaleAdminRoute
+    }
     '/$locale/admin/settings/': {
       id: '/$locale/admin/settings/'
       path: '/'
@@ -846,6 +865,7 @@ interface LocaleAdminRouteChildren {
   LocaleAdminTestimonialsRoute: typeof LocaleAdminTestimonialsRoute
   LocaleAdminUsersRoute: typeof LocaleAdminUsersRoute
   LocaleAdminIndexRoute: typeof LocaleAdminIndexRoute
+  LocaleAdminPagesPageRoute: typeof LocaleAdminPagesPageRoute
 }
 
 const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
@@ -858,6 +878,7 @@ const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
   LocaleAdminTestimonialsRoute: LocaleAdminTestimonialsRoute,
   LocaleAdminUsersRoute: LocaleAdminUsersRoute,
   LocaleAdminIndexRoute: LocaleAdminIndexRoute,
+  LocaleAdminPagesPageRoute: LocaleAdminPagesPageRoute,
 }
 
 const LocaleAdminRouteWithChildren = LocaleAdminRoute._addFileChildren(
