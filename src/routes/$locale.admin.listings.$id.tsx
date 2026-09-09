@@ -12,6 +12,7 @@ import { scrollToField } from "@/lib/listings/scroll-to-field";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 
 export const Route = createFileRoute("/$locale/admin/listings/$id")({
+  staticData: { sitemap: false },
   // ?field=<anchor> lets the dashboard hand over to the exact field to fix.
   validateSearch: (search: Record<string, unknown>): { field?: string } =>
     typeof search.field === "string" ? { field: search.field } : {},

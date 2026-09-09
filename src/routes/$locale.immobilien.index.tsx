@@ -52,6 +52,7 @@ function listingsQueryOptions(s: ListingsSearch) {
 }
 
 export const Route = createFileRoute("/$locale/immobilien/")({
+  staticData: { sitemap: true },
   validateSearch: zodValidator(listingsSearchSchema),
   search: {
     // Strip any param that equals its default so shared/bookmarked URLs

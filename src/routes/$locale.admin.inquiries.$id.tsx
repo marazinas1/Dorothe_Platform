@@ -7,6 +7,7 @@ import { InquiryDetail } from "@/components/admin/inquiries/InquiryDetail";
 import { adminInquiryQueryOptions } from "@/lib/inquiries/admin.functions";
 
 export const Route = createFileRoute("/$locale/admin/inquiries/$id")({
+  staticData: { sitemap: false },
   component: InquiryDetailPage,
 });
 

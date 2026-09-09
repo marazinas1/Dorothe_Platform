@@ -6,6 +6,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
  * old links, portal profiles and printed material keep working.
  */
 export const Route = createFileRoute("/$locale/immobilienbewertung")({
+  staticData: { sitemap: false },
   beforeLoad: ({ params }) => {
     throw redirect({
       to: "/$locale/verkaufen",

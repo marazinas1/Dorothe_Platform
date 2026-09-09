@@ -9,6 +9,7 @@ import { adminListingsQueryOptions } from "@/lib/listings/admin.functions";
 import { cleanupAbandonedDrafts } from "@/lib/listings/autodraft.functions";
 
 export const Route = createFileRoute("/$locale/admin/listings/")({
+  staticData: { sitemap: false },
   // Auto-created drafts that were never filled in are removed here, so the
   // "photos first" flow cannot silently pile up junk rows.
   loader: async ({ context }) => {

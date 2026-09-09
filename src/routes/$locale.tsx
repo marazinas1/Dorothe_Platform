@@ -10,6 +10,7 @@ import { featureFlagsQueryOptions } from "@/lib/config/feature-flags.functions";
 import { usePageTracking } from "@/lib/analytics/use-page-tracking";
 
 export const Route = createFileRoute("/$locale")({
+  staticData: { sitemap: false },
   beforeLoad: async ({ params }) => {
     const settings = await getSiteSettings();
     const enabled = settings.enabled_locales;

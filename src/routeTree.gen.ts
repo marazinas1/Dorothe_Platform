@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAdminRouteImport } from './routes/$locale.admin'
 import { Route as LocaleAgbRouteImport } from './routes/$locale.agb'
@@ -45,6 +46,7 @@ import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.adm
 import { Route as LocaleAdminListingsIndexRouteImport } from './routes/$locale.admin.listings.index'
 import { Route as LocaleAdminListingsIdRouteImport } from './routes/$locale.admin.listings.$id'
 import { Route as LocaleAdminListingsNewRouteImport } from './routes/$locale.admin.listings.new'
+import { Route as LocaleAdminPagesPageRouteImport } from './routes/$locale.admin.pages.$page'
 import { Route as LocaleAdminSettingsIndexRouteImport } from './routes/$locale.admin.settings.index'
 import { Route as LocaleAdminSettingsTabRouteImport } from './routes/$locale.admin.settings.$tab'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -58,6 +60,11 @@ const IndexRoute = IndexRouteImport.update({
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
@@ -234,6 +241,11 @@ const LocaleAdminListingsNewRoute = LocaleAdminListingsNewRouteImport.update({
   path: '/new',
   getParentRoute: () => LocaleAdminListingsRoute,
 } as any)
+const LocaleAdminPagesPageRoute = LocaleAdminPagesPageRouteImport.update({
+  id: '/pages/$page',
+  path: '/pages/$page',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
 const LocaleAdminSettingsIndexRoute =
   LocaleAdminSettingsIndexRouteImport.update({
     id: '/',
@@ -259,6 +271,7 @@ const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
   '/$locale/auth': typeof LocaleAuthRouteWithChildren
@@ -291,6 +304,7 @@ export interface FileRoutesByFullPath {
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
+  '/$locale/admin/pages/$page': typeof LocaleAdminPagesPageRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -300,6 +314,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/agb': typeof LocaleAgbRoute
   '/$locale/auth': typeof LocaleAuthRouteWithChildren
   '/$locale/datenschutz': typeof LocaleDatenschutzRoute
@@ -328,6 +343,7 @@ export interface FileRoutesByTo {
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
+  '/$locale/admin/pages/$page': typeof LocaleAdminPagesPageRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -339,6 +355,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
   '/$locale/auth': typeof LocaleAuthRouteWithChildren
@@ -371,6 +388,7 @@ export interface FileRoutesById {
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
+  '/$locale/admin/pages/$page': typeof LocaleAdminPagesPageRoute
   '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -383,6 +401,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/sitemap.xml'
     | '/$locale/admin'
     | '/$locale/agb'
     | '/$locale/auth'
@@ -415,6 +434,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
+    | '/$locale/admin/pages/$page'
     | '/$locale/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -424,6 +444,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/sitemap.xml'
     | '/$locale/agb'
     | '/$locale/auth'
     | '/$locale/datenschutz'
@@ -452,6 +473,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
+    | '/$locale/admin/pages/$page'
     | '/$locale/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -462,6 +484,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/sitemap.xml'
     | '/$locale/admin'
     | '/$locale/agb'
     | '/$locale/auth'
@@ -494,6 +517,7 @@ export interface FileRouteTypes {
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
+    | '/$locale/admin/pages/$page'
     | '/$locale/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -505,6 +529,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicTrackViewRoute: typeof ApiPublicTrackViewRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -524,6 +549,13 @@ declare module '@tanstack/react-router' {
       path: '/$locale'
       fullPath: '/$locale'
       preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/': {
@@ -764,6 +796,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAdminListingsNewRouteImport
       parentRoute: typeof LocaleAdminListingsRoute
     }
+    '/$locale/admin/pages/$page': {
+      id: '/$locale/admin/pages/$page'
+      path: '/pages/$page'
+      fullPath: '/$locale/admin/pages/$page'
+      preLoaderRoute: typeof LocaleAdminPagesPageRouteImport
+      parentRoute: typeof LocaleAdminRoute
+    }
     '/$locale/admin/settings/': {
       id: '/$locale/admin/settings/'
       path: '/'
@@ -846,6 +885,7 @@ interface LocaleAdminRouteChildren {
   LocaleAdminTestimonialsRoute: typeof LocaleAdminTestimonialsRoute
   LocaleAdminUsersRoute: typeof LocaleAdminUsersRoute
   LocaleAdminIndexRoute: typeof LocaleAdminIndexRoute
+  LocaleAdminPagesPageRoute: typeof LocaleAdminPagesPageRoute
 }
 
 const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
@@ -858,6 +898,7 @@ const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
   LocaleAdminTestimonialsRoute: LocaleAdminTestimonialsRoute,
   LocaleAdminUsersRoute: LocaleAdminUsersRoute,
   LocaleAdminIndexRoute: LocaleAdminIndexRoute,
+  LocaleAdminPagesPageRoute: LocaleAdminPagesPageRoute,
 }
 
 const LocaleAdminRouteWithChildren = LocaleAdminRoute._addFileChildren(
@@ -924,6 +965,7 @@ const LocaleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicTrackViewRoute: ApiPublicTrackViewRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

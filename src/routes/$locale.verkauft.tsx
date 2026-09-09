@@ -35,6 +35,7 @@ const soldOpts = queryOptions({
 });
 
 export const Route = createFileRoute("/$locale/verkauft")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),

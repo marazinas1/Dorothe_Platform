@@ -34,6 +34,7 @@ function slugQueryOptions(slug: string, preview?: string) {
 }
 
 export const Route = createFileRoute("/$locale/immobilien/$slug")({
+  staticData: { sitemap: true },
   // Optional search param: links to this route must not be forced to pass one.
   validateSearch: (search: Record<string, unknown>): { preview?: string } =>
     typeof search.preview === "string" ? { preview: search.preview } : {},

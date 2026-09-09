@@ -11,6 +11,7 @@ const TABS = ["general", "branding", "contact", "legal", "modules", "analytics"]
 type Tab = (typeof TABS)[number];
 
 export const Route = createFileRoute("/$locale/admin/settings/$tab")({
+  staticData: { sitemap: false },
   beforeLoad: ({ params }) => {
     if (!(TABS as readonly string[]).includes(params.tab)) throw notFound();
   },

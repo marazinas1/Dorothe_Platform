@@ -12,7 +12,7 @@ import { SUPPORTED_LOCALES, FALLBACK_LOCALE } from "./i18n/config";
  */
 const PREFIXED = SUPPORTED_LOCALES.filter((l) => l !== FALLBACK_LOCALE);
 /** Paths the router must never re-prefix: server endpoints and RPC calls. */
-const RESERVED = ["/api", "/_serverFn", "/_build", "/@"];
+const RESERVED = ["/api", "/_serverFn", "/_build", "/@", "/lovable", "/sitemap.xml", "/robots.txt"];
 
 function firstSegment(pathname: string): string {
   return pathname.split("/")[1] ?? "";

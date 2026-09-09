@@ -8,14 +8,18 @@ import { TextSection } from "@/components/brand/TextSection";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
+import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
+import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
 export const Route = createFileRoute("/$locale/erben")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
       getRequestOrigin(),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("inheritance")),
     ]);
     return { settings, origin, locale: params.locale as Locale };
   },
@@ -42,35 +46,36 @@ function InheritancePage() {
   const { locale } = Route.useParams();
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+  const copy = usePageCopy("inheritance", locale as Locale);
 
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
       <PageIntro
-        kicker={t("pages.inheritance.kicker")}
-        headline={t("pages.inheritance.headline")}
-        lead={t("pages.inheritance.intro")}
+        kicker={copy.text("kicker")}
+        headline={copy.text("headline")}
+        lead={copy.text("intro")}
       />
 
       <TextSection
-        title={t("pages.inheritance.appraisal_title")}
-        body={t("pages.inheritance.appraisal_body")}
+        title={copy.text("appraisal_title")}
+        body={copy.text("appraisal_body")}
       />
 
       <TextSection
-        title={t("pages.inheritance.community_title")}
-        body={t("pages.inheritance.community_body")}
+        title={copy.text("community_title")}
+        body={copy.text("community_body")}
       />
 
       <TextSection
-        title={t("pages.inheritance.credential_title")}
-        body={t("pages.inheritance.credential_body")}
+        title={copy.text("credential_title")}
+        body={copy.text("credential_body")}
         quiet
       />
 
       <div className="pb-32">
         <TextSection
-          title={t("pages.inheritance.contact_title")}
-          body={t("pages.inheritance.contact_body")}
+          title={copy.text("contact_title")}
+          body={copy.text("contact_body")}
           quiet
         >
           <Link

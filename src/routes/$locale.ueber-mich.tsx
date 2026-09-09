@@ -16,6 +16,8 @@ import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
+import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
+import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { featureFlagsQueryOptions } from "@/lib/config/feature-flags.functions";
 import { publicTeamQueryOptions } from "@/lib/team/queries.functions";
 import { publicTestimonialsQueryOptions } from "@/lib/testimonials/queries.functions";
@@ -30,6 +32,7 @@ import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
 export const Route = createFileRoute("/$locale/ueber-mich")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin, flags] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
@@ -39,6 +42,7 @@ export const Route = createFileRoute("/$locale/ueber-mich")({
       context.queryClient.ensureQueryData(publicTestimonialsQueryOptions),
       context.queryClient.ensureQueryData(activeListingsQueryOptions),
       context.queryClient.ensureQueryData(recentSoldQueryOptions),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("about")),
     ]);
     return { settings, origin, flags, locale: params.locale as Locale };
   },
@@ -70,6 +74,7 @@ function AboutPage() {
   const { locale } = Route.useParams();
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+  const copy = usePageCopy("about", locale as Locale);
   const { data: team } = useSuspenseQuery(publicTeamQueryOptions);
   const { data: active } = useSuspenseQuery(activeListingsQueryOptions);
   const { data: sold } = useSuspenseQuery(recentSoldQueryOptions);
@@ -100,7 +105,7 @@ function AboutPage() {
 
       <QualificationsList
         className="mt-32"
-        title={t("pages.about.solo.qualifications_title")}
+        title={copy.text("qualifications_title")}
         items={qualifications}
       />
 
@@ -108,7 +113,7 @@ function AboutPage() {
         className="mt-16"
         locale={l}
         items={settings.seals ?? []}
-        title={t("pages.about.seals_title")}
+        title={copy.text("seals_title")}
       />
 
 
@@ -116,7 +121,7 @@ function AboutPage() {
 
       <TestimonialsCarousel
         items={testiItems(testimonials, l)}
-        title={t("pages.about.testimonials_title")}
+        title={copy.text("testimonials_title")}
       />
 
       <AgentListings

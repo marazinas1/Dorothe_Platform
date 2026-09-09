@@ -11,6 +11,7 @@ import { legalHead } from "@/lib/legal/legal-head";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 
 export const Route = createFileRoute("/$locale/impressum")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),

@@ -6,6 +6,7 @@ import { InquiriesList } from "@/components/admin/inquiries/InquiriesList";
 import { adminInquiriesQueryOptions } from "@/lib/inquiries/admin.functions";
 
 export const Route = createFileRoute("/$locale/admin/inquiries/")({
+  staticData: { sitemap: false },
   component: InquiriesIndex,
 });
 

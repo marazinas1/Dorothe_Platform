@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/$locale/auth")({
+  staticData: { sitemap: "exclude-subtree" },
   component: AuthLayout,
 });
 
