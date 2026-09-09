@@ -41,6 +41,7 @@ import { Route as LocaleImmobilienIndexRouteImport } from './routes/$locale.immo
 import { Route as LocaleImmobilienSlugRouteImport } from './routes/$locale.immobilien.$slug'
 import { Route as LocaleRatgeberIndexRouteImport } from './routes/$locale.ratgeber.index'
 import { Route as LocaleRatgeberSlugRouteImport } from './routes/$locale.ratgeber.$slug'
+import { Route as ApiPublicProbeRouteImport } from './routes/api/public/probe'
 import { Route as ApiPublicTrackViewRouteImport } from './routes/api/public/track-view'
 import { Route as LocaleAdminInquiriesIndexRouteImport } from './routes/$locale.admin.inquiries.index'
 import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.admin.inquiries.$id'
@@ -215,6 +216,11 @@ const LocaleRatgeberSlugRoute = LocaleRatgeberSlugRouteImport.update({
   path: '/ratgeber/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
+const ApiPublicProbeRoute = ApiPublicProbeRouteImport.update({
+  id: '/api/public/probe',
+  path: '/api/public/probe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicTrackViewRoute = ApiPublicTrackViewRouteImport.update({
   id: '/api/public/track-view',
   path: '/api/public/track-view',
@@ -304,6 +310,7 @@ export interface FileRoutesByFullPath {
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
+  '/api/public/probe': typeof ApiPublicProbeRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
@@ -344,6 +351,7 @@ export interface FileRoutesByTo {
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
+  '/api/public/probe': typeof ApiPublicProbeRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin': typeof LocaleAdminIndexRoute
   '/$locale/immobilien': typeof LocaleImmobilienIndexRoute
@@ -390,6 +398,7 @@ export interface FileRoutesById {
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
+  '/api/public/probe': typeof ApiPublicProbeRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
@@ -437,6 +446,7 @@ export interface FileRouteTypes {
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
     | '/$locale/ratgeber/$slug'
+    | '/api/public/probe'
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
@@ -477,6 +487,7 @@ export interface FileRouteTypes {
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
     | '/$locale/ratgeber/$slug'
+    | '/api/public/probe'
     | '/api/public/track-view'
     | '/$locale/admin'
     | '/$locale/immobilien'
@@ -522,6 +533,7 @@ export interface FileRouteTypes {
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
     | '/$locale/ratgeber/$slug'
+    | '/api/public/probe'
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
@@ -543,6 +555,7 @@ export interface RootRouteChildren {
   LocaleRoute: typeof LocaleRouteWithChildren
   ProbeStaticRoute: typeof ProbeStaticRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicProbeRoute: typeof ApiPublicProbeRoute
   ApiPublicTrackViewRoute: typeof ApiPublicTrackViewRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -774,6 +787,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleRatgeberSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/api/public/probe': {
+      id: '/api/public/probe'
+      path: '/api/public/probe'
+      fullPath: '/api/public/probe'
+      preLoaderRoute: typeof ApiPublicProbeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/track-view': {
       id: '/api/public/track-view'
       path: '/api/public/track-view'
@@ -987,6 +1007,7 @@ const rootRouteChildren: RootRouteChildren = {
   LocaleRoute: LocaleRouteWithChildren,
   ProbeStaticRoute: ProbeStaticRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicProbeRoute: ApiPublicProbeRoute,
   ApiPublicTrackViewRoute: ApiPublicTrackViewRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
