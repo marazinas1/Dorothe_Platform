@@ -460,6 +460,25 @@
     "forbiddenBody": "Sie haben keine Berechtigung für diesen Bereich."
   },
   "admin": {
+    "testimonials": {
+      "title": "Kundenstimmen",
+      "hint": "Veröffentlichte Stimmen erscheinen auf der Über-mich-Seite; bis zu drei markierte auch auf der Startseite.",
+      "add": "Stimme hinzufügen",
+      "quote": "Zitat",
+      "name": "Name",
+      "detail": "Ort oder Detail",
+      "published": "Veröffentlicht",
+      "draft": "Entwurf",
+      "showOnHome": "Auf der Startseite zeigen",
+      "onHome": "Auf der Startseite",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "cancel": "Abbrechen",
+      "moveUp": "Nach oben",
+      "moveDown": "Nach unten",
+      "confirmDelete": "Diese Kundenstimme löschen?",
+      "empty": "Noch keine Kundenstimmen."
+    },
     "topbar": {
       "signOut": "Abmelden",
       "toggleSidebar": "Navigation umschalten",
