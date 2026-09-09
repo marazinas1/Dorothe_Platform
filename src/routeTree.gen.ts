@@ -36,6 +36,7 @@ import { Route as LocaleAuthLoginRouteImport } from './routes/$locale.auth.login
 import { Route as LocaleAuthResetPasswordRouteImport } from './routes/$locale.auth.reset-password'
 import { Route as LocaleImmobilienIndexRouteImport } from './routes/$locale.immobilien.index'
 import { Route as LocaleImmobilienSlugRouteImport } from './routes/$locale.immobilien.$slug'
+import { Route as LocaleRatgeberIndexRouteImport } from './routes/$locale.ratgeber.index'
 import { Route as ApiPublicTrackViewRouteImport } from './routes/api/public/track-view'
 import { Route as LocaleAdminInquiriesIndexRouteImport } from './routes/$locale.admin.inquiries.index'
 import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.admin.inquiries.$id'
@@ -184,6 +185,11 @@ const LocaleImmobilienSlugRoute = LocaleImmobilienSlugRouteImport.update({
   path: '/immobilien/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleRatgeberIndexRoute = LocaleRatgeberIndexRouteImport.update({
+  id: '/ratgeber/',
+  path: '/ratgeber/',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const ApiPublicTrackViewRoute = ApiPublicTrackViewRouteImport.update({
   id: '/api/public/track-view',
   path: '/api/public/track-view',
@@ -267,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
+  '/$locale/ratgeber/': typeof LocaleRatgeberIndexRoute
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
@@ -301,6 +308,7 @@ export interface FileRoutesByTo {
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin': typeof LocaleAdminIndexRoute
   '/$locale/immobilien': typeof LocaleImmobilienIndexRoute
+  '/$locale/ratgeber': typeof LocaleRatgeberIndexRoute
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
@@ -341,6 +349,7 @@ export interface FileRoutesById {
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
+  '/$locale/ratgeber/': typeof LocaleRatgeberIndexRoute
   '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
   '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
   '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
@@ -382,6 +391,7 @@ export interface FileRouteTypes {
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
+    | '/$locale/ratgeber/'
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
@@ -416,6 +426,7 @@ export interface FileRouteTypes {
     | '/api/public/track-view'
     | '/$locale/admin'
     | '/$locale/immobilien'
+    | '/$locale/ratgeber'
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
@@ -455,6 +466,7 @@ export interface FileRouteTypes {
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
+    | '/$locale/ratgeber/'
     | '/$locale/admin/inquiries/$id'
     | '/$locale/admin/listings/$id'
     | '/$locale/admin/listings/new'
@@ -665,6 +677,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleImmobilienSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/ratgeber/': {
+      id: '/$locale/ratgeber/'
+      path: '/ratgeber'
+      fullPath: '/$locale/ratgeber/'
+      preLoaderRoute: typeof LocaleRatgeberIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/api/public/track-view': {
       id: '/api/public/track-view'
       path: '/api/public/track-view'
@@ -836,6 +855,7 @@ interface LocaleRouteChildren {
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleImmobilienSlugRoute: typeof LocaleImmobilienSlugRoute
   LocaleImmobilienIndexRoute: typeof LocaleImmobilienIndexRoute
+  LocaleRatgeberIndexRoute: typeof LocaleRatgeberIndexRoute
 }
 
 const LocaleRouteChildren: LocaleRouteChildren = {
@@ -853,6 +873,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleImmobilienSlugRoute: LocaleImmobilienSlugRoute,
   LocaleImmobilienIndexRoute: LocaleImmobilienIndexRoute,
+  LocaleRatgeberIndexRoute: LocaleRatgeberIndexRoute,
 }
 
 const LocaleRouteWithChildren =
