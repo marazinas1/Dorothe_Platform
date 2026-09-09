@@ -10,6 +10,7 @@ import { AdminI18nProvider } from "@/i18n/admin-provider";
 import { AdminShell } from "@/components/admin/AdminShell";
 
 export const Route = createFileRoute("/$locale/admin")({
+  staticData: { sitemap: "exclude-subtree" },
   // Client-only gate: the Supabase session lives in localStorage, which the
   // server cannot read, so gating during SSR would loop back to login on every
   // hard refresh. The gate confirms a real session, then verifies the profile

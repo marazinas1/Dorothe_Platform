@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Locale } from "@/i18n/config";
 
 export const Route = createFileRoute("/$locale/auth/forgot-password")({
+  staticData: { sitemap: false },
   component: ForgotPasswordPage,
 });
 

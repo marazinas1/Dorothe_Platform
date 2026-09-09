@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAdminRouteImport } from './routes/$locale.admin'
 import { Route as LocaleAgbRouteImport } from './routes/$locale.agb'
@@ -59,6 +60,11 @@ const IndexRoute = IndexRouteImport.update({
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
@@ -265,6 +271,7 @@ const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
   '/$locale/auth': typeof LocaleAuthRouteWithChildren
@@ -307,6 +314,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/agb': typeof LocaleAgbRoute
   '/$locale/auth': typeof LocaleAuthRouteWithChildren
   '/$locale/datenschutz': typeof LocaleDatenschutzRoute
@@ -347,6 +355,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
   '/$locale/auth': typeof LocaleAuthRouteWithChildren
@@ -392,6 +401,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/sitemap.xml'
     | '/$locale/admin'
     | '/$locale/agb'
     | '/$locale/auth'
@@ -434,6 +444,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/sitemap.xml'
     | '/$locale/agb'
     | '/$locale/auth'
     | '/$locale/datenschutz'
@@ -473,6 +484,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/sitemap.xml'
     | '/$locale/admin'
     | '/$locale/agb'
     | '/$locale/auth'
@@ -517,6 +529,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicTrackViewRoute: typeof ApiPublicTrackViewRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -536,6 +549,13 @@ declare module '@tanstack/react-router' {
       path: '/$locale'
       fullPath: '/$locale'
       preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/': {
@@ -945,6 +965,7 @@ const LocaleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicTrackViewRoute: ApiPublicTrackViewRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

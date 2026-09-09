@@ -16,6 +16,7 @@ import { buildHead } from "@/lib/seo/build-head";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 
 export const Route = createFileRoute("/$locale/kontakt")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),

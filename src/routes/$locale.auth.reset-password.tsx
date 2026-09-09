@@ -12,6 +12,7 @@ import type { Locale } from "@/i18n/config";
 
 
 export const Route = createFileRoute("/$locale/auth/reset-password")({
+  staticData: { sitemap: false },
   component: ResetPasswordPage,
 });
 

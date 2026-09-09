@@ -30,6 +30,7 @@ import {
 } from "@/lib/homepage/plan";
 
 export const Route = createFileRoute("/$locale/")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin, featured, testimonials] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),

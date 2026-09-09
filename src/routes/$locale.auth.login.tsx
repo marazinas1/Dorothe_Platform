@@ -21,6 +21,7 @@ const searchSchema = z.object({
 });
 
 export const Route = createFileRoute("/$locale/auth/login")({
+  staticData: { sitemap: false },
   validateSearch: (s) => searchSchema.parse(s),
   loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions),
   component: LoginPage,

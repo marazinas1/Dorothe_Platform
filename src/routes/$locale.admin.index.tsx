@@ -11,6 +11,7 @@ import { metricsQueryOptions } from "@/lib/dashboard/admin.functions";
 import { DEFAULT_PERIOD, resolvePeriod, type PeriodPreset } from "@/lib/dashboard/period";
 
 export const Route = createFileRoute("/$locale/admin/")({
+  staticData: { sitemap: false },
   component: Dashboard,
 });
 

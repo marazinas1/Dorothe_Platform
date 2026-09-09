@@ -15,6 +15,7 @@ import {
 const noContent = () => new Response(null, { status: 204 });
 
 export const Route = createFileRoute("/api/public/track-view")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {

@@ -15,6 +15,7 @@ import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
 export const Route = createFileRoute("/$locale/ratgeber/")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),

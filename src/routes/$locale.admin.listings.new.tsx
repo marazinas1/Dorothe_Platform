@@ -9,6 +9,7 @@ import { EMPTY_VALUES } from "@/components/admin/listings/listing-form-state";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 
 export const Route = createFileRoute("/$locale/admin/listings/new")({
+  staticData: { sitemap: false },
   component: NewListing,
 });
 

@@ -32,6 +32,7 @@ import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
 export const Route = createFileRoute("/$locale/ueber-mich")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin, flags] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),

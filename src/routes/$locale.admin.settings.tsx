@@ -5,6 +5,7 @@ import { usePermission } from "@/lib/auth/use-permission";
 import { SettingsTabs } from "@/components/admin/settings/SettingsTabs";
 
 export const Route = createFileRoute("/$locale/admin/settings")({
+  staticData: { sitemap: false },
   component: SettingsLayout,
 });
 

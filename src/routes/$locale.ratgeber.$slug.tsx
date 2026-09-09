@@ -14,6 +14,7 @@ import { buildHead } from "@/lib/seo/build-head";
 import { postJsonLd } from "@/lib/seo/post-jsonld";
 
 export const Route = createFileRoute("/$locale/ratgeber/$slug")({
+  staticData: { sitemap: true },
   loader: async ({ context, params }) => {
     const [settings, origin, row] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
