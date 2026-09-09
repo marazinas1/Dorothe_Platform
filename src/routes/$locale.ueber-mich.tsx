@@ -11,12 +11,15 @@ import { TrustSeals } from "@/components/brand/TrustSeals";
 import { ContactSection } from "@/components/brand/ContactSection";
 import { SoldStrip } from "@/components/brand/SoldStrip";
 import { TeamSection } from "@/components/brand/TeamSection";
+import { TestimonialsCarousel } from "@/components/brand/TestimonialsCarousel";
 import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { featureFlagsQueryOptions } from "@/lib/config/feature-flags.functions";
 import { publicTeamQueryOptions } from "@/lib/team/queries.functions";
+import { publicTestimonialsQueryOptions } from "@/lib/testimonials/queries.functions";
+import { testiItems } from "@/lib/testimonials/resolve";
 import {
   activeListingsQueryOptions,
   recentSoldQueryOptions,
@@ -33,6 +36,7 @@ export const Route = createFileRoute("/$locale/ueber-mich")({
       getRequestOrigin(),
       context.queryClient.ensureQueryData(featureFlagsQueryOptions),
       context.queryClient.ensureQueryData(publicTeamQueryOptions),
+      context.queryClient.ensureQueryData(publicTestimonialsQueryOptions),
       context.queryClient.ensureQueryData(activeListingsQueryOptions),
       context.queryClient.ensureQueryData(recentSoldQueryOptions),
     ]);
@@ -69,6 +73,7 @@ function AboutPage() {
   const { data: team } = useSuspenseQuery(publicTeamQueryOptions);
   const { data: active } = useSuspenseQuery(activeListingsQueryOptions);
   const { data: sold } = useSuspenseQuery(recentSoldQueryOptions);
+  const { data: testimonials } = useSuspenseQuery(publicTestimonialsQueryOptions);
   const teamEnabled = useFeatureFlag("team");
   const l = locale as Locale;
 
@@ -108,6 +113,11 @@ function AboutPage() {
 
 
       {showTeamGrid ? <TeamSection members={team} /> : null}
+
+      <TestimonialsCarousel
+        items={testiItems(testimonials, l)}
+        title={t("pages.about.testimonials_title")}
+      />
 
       <AgentListings
         locale={l}
