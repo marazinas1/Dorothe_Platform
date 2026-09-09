@@ -1,19 +1,20 @@
 import { cn } from "@/lib/utils";
-
-import { testiItems, type HomeTemplateProps } from "./types";
+import type { TestiItem } from "@/lib/testimonials/types";
 
 /**
  * Client voices — the one trust element a solo practice cannot borrow from a
- * company brand. Shared by every design that shows it: `paper` renders quiet
- * cards on the deeper paper band, `ink` an inverted band with hairline columns.
+ * company brand. Presentational only: the quotes arrive as props.
  */
 export function HomeTestimonials({
-  copy,
+  items,
+  title,
   tone = "paper",
-}: HomeTemplateProps & { tone?: "paper" | "ink" }) {
-  const items = testiItems(copy);
+}: {
+  items: TestiItem[];
+  title?: string;
+  tone?: "paper" | "ink";
+}) {
   if (items.length === 0) return null;
-  const title = copy.text("testi_title");
 
   if (tone === "ink") {
     return (
@@ -65,7 +66,7 @@ export function HomeTestimonials({
   );
 }
 
-function Stars({ className }: { className?: string }) {
+export function Stars({ className }: { className?: string }) {
   return (
     <div className={cn("text-sm tracking-[2px]", className)} aria-hidden>
       ★★★★★
