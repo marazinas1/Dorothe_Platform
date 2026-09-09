@@ -37,6 +37,7 @@ import { Route as LocaleAuthResetPasswordRouteImport } from './routes/$locale.au
 import { Route as LocaleImmobilienIndexRouteImport } from './routes/$locale.immobilien.index'
 import { Route as LocaleImmobilienSlugRouteImport } from './routes/$locale.immobilien.$slug'
 import { Route as LocaleRatgeberIndexRouteImport } from './routes/$locale.ratgeber.index'
+import { Route as LocaleRatgeberSlugRouteImport } from './routes/$locale.ratgeber.$slug'
 import { Route as ApiPublicTrackViewRouteImport } from './routes/api/public/track-view'
 import { Route as LocaleAdminInquiriesIndexRouteImport } from './routes/$locale.admin.inquiries.index'
 import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.admin.inquiries.$id'
@@ -190,6 +191,11 @@ const LocaleRatgeberIndexRoute = LocaleRatgeberIndexRouteImport.update({
   path: '/ratgeber/',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleRatgeberSlugRoute = LocaleRatgeberSlugRouteImport.update({
+  id: '/ratgeber/$slug',
+  path: '/ratgeber/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const ApiPublicTrackViewRoute = ApiPublicTrackViewRouteImport.update({
   id: '/api/public/track-view',
   path: '/api/public/track-view',
@@ -270,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
+  '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
@@ -305,6 +312,7 @@ export interface FileRoutesByTo {
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
+  '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin': typeof LocaleAdminIndexRoute
   '/$locale/immobilien': typeof LocaleImmobilienIndexRoute
@@ -346,6 +354,7 @@ export interface FileRoutesById {
   '/$locale/auth/login': typeof LocaleAuthLoginRoute
   '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
+  '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
   '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
@@ -388,6 +397,7 @@ export interface FileRouteTypes {
     | '/$locale/auth/login'
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
+    | '/$locale/ratgeber/$slug'
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
@@ -423,6 +433,7 @@ export interface FileRouteTypes {
     | '/$locale/auth/login'
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
+    | '/$locale/ratgeber/$slug'
     | '/api/public/track-view'
     | '/$locale/admin'
     | '/$locale/immobilien'
@@ -463,6 +474,7 @@ export interface FileRouteTypes {
     | '/$locale/auth/login'
     | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
+    | '/$locale/ratgeber/$slug'
     | '/api/public/track-view'
     | '/$locale/admin/'
     | '/$locale/immobilien/'
@@ -684,6 +696,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleRatgeberIndexRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/ratgeber/$slug': {
+      id: '/$locale/ratgeber/$slug'
+      path: '/ratgeber/$slug'
+      fullPath: '/$locale/ratgeber/$slug'
+      preLoaderRoute: typeof LocaleRatgeberSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/api/public/track-view': {
       id: '/api/public/track-view'
       path: '/api/public/track-view'
@@ -854,6 +873,7 @@ interface LocaleRouteChildren {
   LocaleVerkauftRoute: typeof LocaleVerkauftRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleImmobilienSlugRoute: typeof LocaleImmobilienSlugRoute
+  LocaleRatgeberSlugRoute: typeof LocaleRatgeberSlugRoute
   LocaleImmobilienIndexRoute: typeof LocaleImmobilienIndexRoute
   LocaleRatgeberIndexRoute: typeof LocaleRatgeberIndexRoute
 }
@@ -872,6 +892,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleVerkauftRoute: LocaleVerkauftRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleImmobilienSlugRoute: LocaleImmobilienSlugRoute,
+  LocaleRatgeberSlugRoute: LocaleRatgeberSlugRoute,
   LocaleImmobilienIndexRoute: LocaleImmobilienIndexRoute,
   LocaleRatgeberIndexRoute: LocaleRatgeberIndexRoute,
 }
