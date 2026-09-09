@@ -75,7 +75,7 @@ export const Route = createFileRoute("/$locale/")({
       scripts: [
         {
           type: "application/ld+json",
-          children: JSON.stringify(homeJsonLd(settings, voices, `${origin}/${locale}`)),
+          children: JSON.stringify(homeJsonLd(settings, homeVoices, `${origin}/${locale}`)),
         },
       ],
     };
