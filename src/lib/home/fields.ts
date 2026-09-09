@@ -1,20 +1,14 @@
 /**
  * The editable home page content model (core).
  *
- * One shared set of fields serves every template: the owner writes the texts
- * once and switching designs never loses them. A field that only one design
- * shows declares that in `templates`.
+ * One set of fields for the one home page, grouped the way the page reads.
  */
-
-import type { HomeTemplateKey } from "./templates";
 
 export type HomeFieldKind = "line" | "paragraph" | "list";
 
 export interface HomeTextField {
   key: string;
   kind: HomeFieldKind;
-  /** Undefined = used by every template. */
-  templates?: HomeTemplateKey[];
   /** Grouping in the admin editor. */
   group:
     | "opening"
@@ -72,7 +66,3 @@ export const HOME_FIELD_GROUPS = [
   "valuation",
   "contact",
 ] as const;
-
-export function fieldsForTemplate(template: HomeTemplateKey): HomeTextField[] {
-  return HOME_TEXT_FIELDS.filter((f) => !f.templates || f.templates.includes(template));
-}

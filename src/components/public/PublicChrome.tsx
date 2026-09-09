@@ -9,7 +9,7 @@ import { LegalLinks } from "@/components/public/LegalLinks";
 import { SiteLogo } from "@/components/brand/SiteLogo";
 import { HomeLink } from "@/components/shared/HomeLink";
 import type { Locale } from "@/i18n/config";
-import { homeTemplate } from "@/lib/home/templates";
+import { HOME_CHROME } from "@/lib/home/layout";
 import { areasAreConfigured, serviceAreas } from "@/lib/homepage/plan";
 import type { SiteSettings } from "@/types/site-settings";
 
@@ -33,7 +33,7 @@ export function PublicChrome({
 }: Props) {
   // Site chrome follows the active home design, so header and footer match the
   // page a visitor lands on — on every route, not only the home page.
-  const tone = footerTone ?? homeTemplate(settings.active_home_template).chrome.footerTone;
+  const tone = footerTone ?? HOME_CHROME.footerTone;
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <SiteNav locale={locale} settings={settings} overlay={heroOverlay} />
