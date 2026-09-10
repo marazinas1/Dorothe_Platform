@@ -1387,6 +1387,20 @@
       "coverRemove": "Bild entfernen",
       "coverHint": "JPG oder PNG — die Größe wird automatisch angepasst."
     },
+    "copyEditor": {
+      "currentlyShown": "Aktuell sichtbar",
+      "defaultLabel": "Standardtext",
+      "writeOwn": "Eigenen Text schreiben…",
+      "edited": "Geändert",
+      "reset": "Zurücksetzen",
+      "setDefault": "Als Standard festlegen",
+      "lockedHint": "Für dieses Feld ist ein Standard festgelegt. Klicken, um ihn durch den aktuellen Text zu ersetzen.",
+      "unlockedHint": "Noch kein Standard festgelegt. Klicken, um den aktuellen Text festzuschreiben.",
+      "lockAll": "Alle aktuellen Texte als Standard festlegen",
+      "lockedCount": "{{locked}} von {{total}} Feldern haben einen festen Standard",
+      "showMore": "Mehr anzeigen",
+      "showLess": "Weniger anzeigen"
+    },
     "pageEditor": {
       "editHint": "Die Texte und Bilder dieser Seite. Ein leeres Feld behält die bisherige Zeile.",
       "placeholder": "Leer lassen, um die bisherige Zeile zu behalten",
