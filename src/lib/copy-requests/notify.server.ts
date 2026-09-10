@@ -2,9 +2,7 @@
 // the default. Sending is best effort — the request is stored either way.
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-const SITE_NAME = "Immobilienberatung Dorothe Waltner";
-const FROM_DOMAIN = "notify.dorothe.deerva.com";
-const ADMIN_URL = "https://dorothe.deerva.com/admin";
+import { ADMIN_URL, SENDER_DOMAIN, fromAddress } from "@/lib/email/sender";
 
 type Payload = {
   scope: "home" | "page";
@@ -34,6 +32,13 @@ export async function notifyDeveloperOfDefaultRequest(
     const apiKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey) return;
 
+    const { data: settings } = await supabase
+      .from("site_settings")
+      .select("site_name")
+      .limit(1)
+      .maybeSingle();
+    const siteName = (settings as { site_name?: string } | null)?.site_name ?? "Website";
+
     const where = payload.scope === "home" ? "Home page" : `Page: ${payload.page ?? "-"}`;
     const wording = Array.isArray(payload.requested_text)
       ? payload.requested_text.join("\n")
@@ -60,8 +65,8 @@ export async function notifyDeveloperOfDefaultRequest(
         sendLovableEmail(
           {
             to,
-            from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-            sender_domain: FROM_DOMAIN,
+            from: fromAddress(siteName),
+            sender_domain: SENDER_DOMAIN,
             subject: "New default wording request",
             html,
             text,
