@@ -8,7 +8,7 @@ import type { Locale } from "@/i18n/config";
 import { adminPageContentQueryOptions, savePageContent, savePageDefaults } from "./admin.functions";
 import { pageContentQueryOptions } from "./queries.functions";
 import { resolvePage } from "./resolve";
-import type { PageFieldKind } from "./fields";
+import { pageDefinition, type PageFieldKind } from "./fields";
 
 import type { PageContentRow } from "./types";
 
@@ -139,14 +139,53 @@ export function usePageAdmin(page: string, locale: string) {
     await invalidate();
   }
 
+  const fields = pageDefinition(page)?.fields ?? [];
+
+  /** True once a developer froze this field's wording for this locale. */
+  function isLocked(key: string): boolean {
+    const raw = ((row?.defaults ?? {}) as Bag)[key]?.[locale];
+    if (Array.isArray(raw)) return raw.length > 0;
+    return typeof raw === "string" && raw.trim().length > 0;
+  }
+
+  /**
+   * Developer-only: freeze the wording the page shows right now for every field
+   * at once. Overrides are folded into the defaults, so the page stays the same.
+   */
+  async function lockAllDefaults() {
+    const defaults = { ...((row?.defaults ?? {}) as Bag) };
+    let nextContent = content;
+
+    for (const field of fields) {
+      const current = value(field.key) || placeholder(field.key);
+      if (!current.trim()) continue;
+      const stored =
+        field.kind === "list"
+          ? current.split("\n").map((l) => l.trim()).filter(Boolean)
+          : current;
+      defaults[field.key] = { ...(defaults[field.key] ?? {}), [locale]: stored as never };
+      nextContent = withoutOverride(nextContent, field.key);
+    }
+
+    setContent(nextContent);
+    await savePageDefaults({
+      data: { page, defaults: defaults as never, content: nextContent as never },
+    });
+    await invalidate();
+  }
+
   return {
     settings,
     value,
     placeholder,
     setValue,
     hasOverride,
+    isLocked,
+    lockedCount: fields.filter((f) => isLocked(f.key)).length,
+    fieldCount: fields.length,
     resetValue,
     setAsDefault,
+    lockAllDefaults,
     mediaEntry,
     setMediaEntry,
     resolved,
