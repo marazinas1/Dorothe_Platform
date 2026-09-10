@@ -514,7 +514,8 @@
       "selling": "Verkaufen",
       "inheritance": "Erben",
       "about": "Über mich",
-      "contact": "Kontakt"
+      "contact": "Kontakt",
+      "calendar": "Kalender"
     },
     "pages": {
       "dashboard": "Übersicht",
@@ -1400,6 +1401,52 @@
           "form_title": "Überschrift Formular",
           "form_intro": "Einleitung Formular"
         }
+      }
+    },
+    "calendar": {
+      "title": "Kalender",
+      "hint": "Ihre Besichtigungen, Termine und persönliche Zeit. Nur Sie sehen das — auf der Website erscheint nichts.",
+      "add": "Neuer Eintrag",
+      "today": "Heute",
+      "prev": "Voriger Monat",
+      "next": "Nächster Monat",
+      "emptyDay": "Für diesen Tag ist nichts geplant.",
+      "confirmDelete": "Diesen Eintrag löschen?",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "kind": {
+        "viewing": "Besichtigung",
+        "meeting": "Termin",
+        "personal": "Persönlich"
+      },
+      "status": {
+        "planned": "Geplant",
+        "confirmed": "Bestätigt",
+        "done": "Erledigt",
+        "cancelled": "Abgesagt"
+      },
+      "weekday": {
+        "mon": "Mo",
+        "tue": "Di",
+        "wed": "Mi",
+        "thu": "Do",
+        "fri": "Fr",
+        "sat": "Sa",
+        "sun": "So"
+      },
+      "field": {
+        "day": "Datum",
+        "start": "Von",
+        "end": "Bis",
+        "kind": "Art",
+        "status": "Status",
+        "listing": "Objekt",
+        "noListing": "Kein Objekt",
+        "clientName": "Name",
+        "clientPhone": "Telefon",
+        "location": "Ort",
+        "note": "Notiz"
       }
     }
   },

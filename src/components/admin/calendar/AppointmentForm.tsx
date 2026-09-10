@@ -66,13 +66,7 @@ export function AppointmentForm({ initial, listings, locale, onSave, onCancel }:
     setDraft((current) => ({ ...current, ...patch }));
 
   return (
-    <form
-      className="space-y-4 rounded-lg border border-border p-4"
-      onSubmit={(event) => {
-        event.preventDefault();
-        void onSave(draft);
-      }}
-    >
+    <div className="space-y-4 rounded-lg border border-border p-4">
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="space-y-1.5">
           <Label>{t("admin.calendar.field.day")}</Label>
@@ -183,11 +177,11 @@ export function AppointmentForm({ initial, listings, locale, onSave, onCancel }:
       </div>
 
       <div className="flex gap-2">
-        <SaveButton />
-        <Button type="button" variant="outline" onClick={onCancel}>
-          {t("admin.common.cancel")}
+        <SaveButton onSubmit={() => onSave(draft)} />
+        <Button type="button" variant="ghost" onClick={onCancel}>
+          {t("admin.calendar.cancel")}
         </Button>
       </div>
-    </form>
+    </div>
   );
 }

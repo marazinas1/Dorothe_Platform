@@ -45,7 +45,7 @@ export function DayList({ rows, locale, onEdit, onDelete }: Props) {
                 variant="ghost"
                 size="icon"
                 onClick={() => onEdit(row)}
-                aria-label={t("admin.common.edit")}
+                aria-label={t("admin.calendar.edit")}
               >
                 <Pencil className="h-4 w-4" />
               </Button>
@@ -54,7 +54,7 @@ export function DayList({ rows, locale, onEdit, onDelete }: Props) {
                 variant="ghost"
                 size="icon"
                 onClick={() => onDelete(row)}
-                aria-label={t("admin.common.delete")}
+                aria-label={t("admin.calendar.delete")}
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
