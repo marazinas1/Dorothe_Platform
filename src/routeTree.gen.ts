@@ -26,6 +26,7 @@ import { Route as LocaleVerkaufenRouteImport } from './routes/$locale.verkaufen'
 import { Route as LocaleVerkauftRouteImport } from './routes/$locale.verkauft'
 import { Route as LocaleAdminIndexRouteImport } from './routes/$locale.admin.index'
 import { Route as LocaleAdminAnalyticsRouteImport } from './routes/$locale.admin.analytics'
+import { Route as LocaleAdminCalendarRouteImport } from './routes/$locale.admin.calendar'
 import { Route as LocaleAdminContentRouteImport } from './routes/$locale.admin.content'
 import { Route as LocaleAdminInquiriesRouteImport } from './routes/$locale.admin.inquiries'
 import { Route as LocaleAdminListingsRouteImport } from './routes/$locale.admin.listings'
@@ -136,6 +137,11 @@ const LocaleAdminIndexRoute = LocaleAdminIndexRouteImport.update({
 const LocaleAdminAnalyticsRoute = LocaleAdminAnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => LocaleAdminRoute,
+} as any)
+const LocaleAdminCalendarRoute = LocaleAdminCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => LocaleAdminRoute,
 } as any)
 const LocaleAdminContentRoute = LocaleAdminContentRouteImport.update({
@@ -285,6 +291,7 @@ export interface FileRoutesByFullPath {
   '/$locale/verkauft': typeof LocaleVerkauftRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
+  '/$locale/admin/calendar': typeof LocaleAdminCalendarRoute
   '/$locale/admin/content': typeof LocaleAdminContentRoute
   '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
   '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
@@ -327,6 +334,7 @@ export interface FileRoutesByTo {
   '/$locale/verkauft': typeof LocaleVerkauftRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
+  '/$locale/admin/calendar': typeof LocaleAdminCalendarRoute
   '/$locale/admin/content': typeof LocaleAdminContentRoute
   '/$locale/admin/posts': typeof LocaleAdminPostsRoute
   '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
@@ -369,6 +377,7 @@ export interface FileRoutesById {
   '/$locale/verkauft': typeof LocaleVerkauftRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
+  '/$locale/admin/calendar': typeof LocaleAdminCalendarRoute
   '/$locale/admin/content': typeof LocaleAdminContentRoute
   '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
   '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
@@ -415,6 +424,7 @@ export interface FileRouteTypes {
     | '/$locale/verkauft'
     | '/$locale/'
     | '/$locale/admin/analytics'
+    | '/$locale/admin/calendar'
     | '/$locale/admin/content'
     | '/$locale/admin/inquiries'
     | '/$locale/admin/listings'
@@ -457,6 +467,7 @@ export interface FileRouteTypes {
     | '/$locale/verkauft'
     | '/$locale'
     | '/$locale/admin/analytics'
+    | '/$locale/admin/calendar'
     | '/$locale/admin/content'
     | '/$locale/admin/posts'
     | '/$locale/admin/testimonials'
@@ -498,6 +509,7 @@ export interface FileRouteTypes {
     | '/$locale/verkauft'
     | '/$locale/'
     | '/$locale/admin/analytics'
+    | '/$locale/admin/calendar'
     | '/$locale/admin/content'
     | '/$locale/admin/inquiries'
     | '/$locale/admin/listings'
@@ -654,6 +666,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/$locale/admin/analytics'
       preLoaderRoute: typeof LocaleAdminAnalyticsRouteImport
+      parentRoute: typeof LocaleAdminRoute
+    }
+    '/$locale/admin/calendar': {
+      id: '/$locale/admin/calendar'
+      path: '/calendar'
+      fullPath: '/$locale/admin/calendar'
+      preLoaderRoute: typeof LocaleAdminCalendarRouteImport
       parentRoute: typeof LocaleAdminRoute
     }
     '/$locale/admin/content': {
@@ -877,6 +896,7 @@ const LocaleAdminSettingsRouteWithChildren =
 
 interface LocaleAdminRouteChildren {
   LocaleAdminAnalyticsRoute: typeof LocaleAdminAnalyticsRoute
+  LocaleAdminCalendarRoute: typeof LocaleAdminCalendarRoute
   LocaleAdminContentRoute: typeof LocaleAdminContentRoute
   LocaleAdminInquiriesRoute: typeof LocaleAdminInquiriesRouteWithChildren
   LocaleAdminListingsRoute: typeof LocaleAdminListingsRouteWithChildren
@@ -890,6 +910,7 @@ interface LocaleAdminRouteChildren {
 
 const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
   LocaleAdminAnalyticsRoute: LocaleAdminAnalyticsRoute,
+  LocaleAdminCalendarRoute: LocaleAdminCalendarRoute,
   LocaleAdminContentRoute: LocaleAdminContentRoute,
   LocaleAdminInquiriesRoute: LocaleAdminInquiriesRouteWithChildren,
   LocaleAdminListingsRoute: LocaleAdminListingsRouteWithChildren,

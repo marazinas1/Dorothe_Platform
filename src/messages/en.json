@@ -514,7 +514,8 @@
       "selling": "Selling",
       "inheritance": "Inheritance",
       "about": "About",
-      "contact": "Contact"
+      "contact": "Contact",
+      "calendar": "Calendar"
     },
     "pages": {
       "dashboard": "Dashboard",
@@ -1400,6 +1401,52 @@
           "form_title": "Form heading",
           "form_intro": "Form introduction"
         }
+      }
+    },
+    "calendar": {
+      "title": "Calendar",
+      "hint": "Your viewings, meetings and personal time. Only you see this — nothing appears on the website.",
+      "add": "New entry",
+      "today": "Today",
+      "prev": "Previous month",
+      "next": "Next month",
+      "emptyDay": "Nothing planned for this day.",
+      "confirmDelete": "Delete this entry?",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "kind": {
+        "viewing": "Viewing",
+        "meeting": "Meeting",
+        "personal": "Personal"
+      },
+      "status": {
+        "planned": "Planned",
+        "confirmed": "Confirmed",
+        "done": "Done",
+        "cancelled": "Cancelled"
+      },
+      "weekday": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+      },
+      "field": {
+        "day": "Date",
+        "start": "From",
+        "end": "Until",
+        "kind": "Type",
+        "status": "Status",
+        "listing": "Property",
+        "noListing": "No property",
+        "clientName": "Name",
+        "clientPhone": "Phone",
+        "location": "Place",
+        "note": "Note"
       }
     }
   },
