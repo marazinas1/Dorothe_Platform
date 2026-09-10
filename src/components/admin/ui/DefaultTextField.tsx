@@ -72,6 +72,11 @@ export function DefaultTextField({
               {t("admin.copyEditor.edited")}
             </span>
           ) : null}
+          {requestStatus ? (
+            <span className="rounded-md border border-border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              {t(`admin.copyEditor.request.${requestStatus}`)}
+            </span>
+          ) : null}
         </div>
         <div className="flex items-center gap-1">
           {edited ? (
