@@ -1,15 +1,16 @@
 /**
- * Design token engine (core).
+ * Design token engine (core) — PUBLIC SITE ONLY.
  *
- * ONE design system for the whole platform: the public site and the admin
- * panel read the same tokens. Everything a clone may change — surface and text
- * colours, accent, fonts, corner radii, button shape — is a value in
- * site_settings and is emitted here as CSS custom properties on :root.
- * Nothing about a client's look lives in CSS or in components.
+ * Everything a clone may change — surface and text colours, accent, fonts,
+ * corner radii, button shape — is a value in site_settings and is emitted here
+ * as CSS custom properties on :root. Nothing about a client's look lives in
+ * CSS or in components.
  *
- * The admin's only allowed difference is a denser type/spacing scale
- * (`.admin-density` in src/styles.css) — a scale, not a second theme.
+ * The admin is the platform's second design system and deliberately ignores
+ * these values: `.admin-theme` in src/styles.css defines a fixed admin look
+ * that is identical in every clone.
  */
+
 
 import { resolveFontStack } from "./fonts";
 import type { SiteSettings } from "@/types/site-settings";

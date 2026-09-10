@@ -33,13 +33,13 @@ export function HomeMediaEditor({ slots, entry, onChange, resolved, scope = "hom
         const value = entry(slot);
         const shown = value.mode === "custom" ? value.url : resolved(slot);
         return (
-          <div key={slot} className="overflow-hidden rounded-[var(--radius)] border border-border bg-card">
-            <div className="border-b border-border px-4 py-3">
-              <Label className="text-sm font-semibold">{t(`admin.home.media.${slot}`)}</Label>
+          <div key={slot} className="overflow-hidden rounded-[0.875rem] border border-border bg-card">
+            <div className="border-b border-border px-5 py-3.5">
+              <Label className="text-sm font-bold">{t(`admin.home.media.${slot}`)}</Label>
               <p className="mt-1 text-xs text-muted-foreground">{t("admin.home.media.uploadHelp")}</p>
             </div>
 
-            <div className="aspect-[4/3] w-full overflow-hidden bg-muted/60">
+            <div className="aspect-[4/3] w-full overflow-hidden bg-accent">
               {shown ? (
                 <img src={shown} alt="" className="h-full w-full object-cover" />
               ) : (
@@ -50,35 +50,37 @@ export function HomeMediaEditor({ slots, entry, onChange, resolved, scope = "hom
               )}
             </div>
 
-            <div className="space-y-3 p-4">
-              <div className="flex gap-4 text-sm">
-                {(["default", "custom"] as const).map((mode) => (
-                  <label key={mode} className="inline-flex items-center gap-2">
-                    <input
-                      type="radio"
-                      className="accent-[var(--primary)]"
-                      checked={value.mode === mode}
-                      onChange={() => onChange(slot, { ...value, mode })}
-                    />
-                    {t(`admin.home.media.${mode}`)}
-                  </label>
-                ))}
-              </div>
+            <div className="space-y-3 p-5">
+              <p className="text-xs text-muted-foreground">
+                {value.mode === "custom"
+                  ? t("admin.home.media.custom")
+                  : t("admin.home.media.default")}
+              </p>
 
-              {value.mode === "custom" ? (
+              <div className="flex flex-wrap items-center gap-2">
                 <ImageUploadField
                   path={pageMediaPath(scope, slot)}
-                  onUploaded={(url) => onChange(slot, { mode: "custom", url: url ?? "" })}
-                  removable={Boolean(value.url)}
+                  onUploaded={(url) =>
+                    onChange(slot, url ? { mode: "custom", url } : { mode: "default", url: "" })
+                  }
+                  removable={false}
+                  replace={value.mode === "custom"}
                 />
-              ) : shown ? (
-                <Button type="button" variant="outline" size="sm" onClick={() => onChange(slot, { mode: "default", url: "" })}>
-                  <RotateCcw className="h-4 w-4" />
-                  {t("admin.home.media.restoreDefault")}
-                </Button>
-              ) : null}
+                {value.mode === "custom" ? (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => onChange(slot, { mode: "default", url: "" })}
+                  >
+                    <RotateCcw className="h-3.5 w-3.5" />
+                    {t("admin.home.media.restoreDefault")}
+                  </Button>
+                ) : null}
+              </div>
             </div>
           </div>
+
         );
       })}
     </div>

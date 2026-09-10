@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Loader2, Trash2, Upload } from "lucide-react";
+import { ImageOff, Loader2, Trash2, Upload } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -23,13 +23,24 @@ interface Props {
   onChange: (url: string | null) => void;
   /** Dark logos sit on a dark plate so they stay visible while choosing. */
   dark?: boolean;
+  /** Square frame for icon-shaped images such as the browser icon. */
+  square?: boolean;
 }
 
 /**
- * One brand image: uploaded straight from the computer, optimised in the
- * browser and filed under a stable path so replacing it updates the whole site.
+ * One brand image, presented the way the admin presents every picture: a real
+ * preview box, one clear upload button, and a quiet remove shown only once a
+ * picture of your own is in place.
  */
-export function BrandAssetField({ kind, label, help, value, onChange, dark }: Props) {
+export function BrandAssetField({
+  kind,
+  label,
+  help,
+  value,
+  onChange,
+  dark,
+  square,
+}: Props) {
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
@@ -57,9 +68,9 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
   }
 
   return (
-    <div className="space-y-2 rounded-[var(--radius)] border border-border p-4">
+    <div className="space-y-3 rounded-[0.875rem] border border-border bg-card p-5">
       <div>
-        <Label>{label}</Label>
+        <Label className="text-sm font-bold">{label}</Label>
         {help ? <p className="mt-1 text-xs text-muted-foreground">{help}</p> : null}
       </div>
 
@@ -75,59 +86,42 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
         }}
       />
 
-      {value ? (
-        <div className="flex items-start gap-3">
-          <div
-            className={`flex aspect-[4/3] w-36 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius)] border border-border p-3 ${
-              dark ? "bg-foreground" : "bg-muted/30"
-            }`}
-          >
-            <img src={value} alt="" className="max-h-full max-w-full object-contain" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Button
-              type="button"
-              size="sm"
-              variant="outline"
-              disabled={busy}
-              onClick={() => inputRef.current?.click()}
-            >
-              {busy ? (
-                <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
-              ) : (
-                <Upload className="h-3.5 w-3.5" />
-              )}
-              {t("admin.settings.brand.replace")}
-            </Button>
-            <Button
-              type="button"
-              size="sm"
-          variant="outline"
-              disabled={busy}
-              onClick={() => onChange(null)}
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-              {t("admin.settings.brand.remove")}
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <button
-          type="button"
-          disabled={busy}
-          onClick={() => inputRef.current?.click()}
-          className="flex min-h-32 w-full flex-col items-center justify-center gap-2 rounded-[var(--radius)] border border-dashed border-border bg-muted/30 px-4 py-6 text-center transition-colors hover:bg-muted/50 disabled:cursor-progress"
+      <div className="flex flex-wrap items-center gap-3">
+        <div
+          className={`admin-media-frame shrink-0 p-2 ${square ? "size-16" : "h-16 w-28"}`}
+          style={dark ? { background: "var(--foreground)" } : undefined}
         >
-          {busy ? (
-            <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+
+          {value ? (
+            <img src={value} alt="" className="max-h-full max-w-full object-contain" />
           ) : (
-            <Upload className="h-5 w-5 text-muted-foreground" />
+            <ImageOff className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
           )}
-          <span className="text-sm">{t("admin.settings.brand.upload")}</span>
-        </button>
-      )}
+        </div>
+        <Button type="button" size="sm" disabled={busy} onClick={() => inputRef.current?.click()}>
+          {busy ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Upload className="h-3.5 w-3.5" />
+          )}
+          {value ? t("admin.settings.brand.replace") : t("admin.settings.brand.upload")}
+        </Button>
+        {value ? (
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            disabled={busy}
+            onClick={() => onChange(null)}
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+            {t("admin.settings.brand.remove")}
+          </Button>
+        ) : null}
+      </div>
 
       {error ? <p className="text-xs text-destructive">{error}</p> : null}
     </div>
   );
 }
+
