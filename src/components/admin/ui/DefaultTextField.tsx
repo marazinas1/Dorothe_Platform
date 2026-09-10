@@ -44,9 +44,11 @@ export function DefaultTextField({
   value,
   placeholder,
   isLocked = false,
+  requestStatus = null,
   onChange,
   onReset,
   onSetDefault,
+  onRequestDefault,
 }: Props) {
   const { t } = useTranslation();
   const user = useCurrentUser();
