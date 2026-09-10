@@ -43,6 +43,7 @@ function NewListing() {
         status={null}
         slug={null}
         publishedEver={false}
+        featured={false}
         images={[]}
       />
     </div>

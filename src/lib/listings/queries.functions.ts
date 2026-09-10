@@ -257,17 +257,27 @@ const featuredBase = {
   limit: 6,
 };
 
+/** How many properties the home page shows at most. */
+const HOME_SLOTS = 3;
+
 export const featuredListingsQueryOptions = queryOptions({
   queryKey: ["listings", "featured"],
   queryFn: async () => {
     const flagged = await listPublicListings({
       data: { ...featuredBase, featured: true },
     } as any);
-    // A young portfolio may have nothing flagged yet. Falling back to the
-    // newest public listings keeps the homepage section honest instead of
-    // silently disappearing while properties exist.
-    if (flagged.items.length > 0) return flagged;
-    return listPublicListings({ data: { ...featuredBase } } as any);
+    if (flagged.items.length >= HOME_SLOTS) return flagged;
+
+    // Fewer picks than slots — top the section up with the newest public
+    // listings, so the home page never looks half-empty while properties
+    // exist, and the broker's own picks always come first.
+    const recent = await listPublicListings({ data: { ...featuredBase } } as any);
+    const chosen = new Set(flagged.items.map((item: any) => item.id));
+    const filler = recent.items.filter((item: any) => !chosen.has(item.id));
+    return {
+      items: [...flagged.items, ...filler],
+      total: flagged.total + filler.length,
+    };
   },
   staleTime: 30_000,
 });

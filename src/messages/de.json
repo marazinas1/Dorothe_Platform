@@ -1063,7 +1063,14 @@
         "draft": "Entwurf",
         "archived": "Archiviert"
       },
-      "slugUnlock": "Webadresse trotzdem ändern"
+      "slugUnlock": "Webadresse trotzdem ändern",
+      "home": {
+        "on": "Auf der Startseite",
+        "off": "Auf der Startseite zeigen",
+        "added": "Zur Startseite hinzugefügt.",
+        "removed": "Von der Startseite entfernt.",
+        "limitReached": "Die Startseite zeigt höchstens {{count}} Objekte. Bitte zuerst eines entfernen."
+      }
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",

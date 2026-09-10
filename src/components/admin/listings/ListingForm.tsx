@@ -38,12 +38,15 @@ export function ListingForm({
   status,
   slug,
   publishedEver,
+  featured,
   images,
 }: {
   initial: ListingFormValues;
   locales: string[];
   status: string | null;
   slug: string | null;
+  /** Pinned to the home page? */
+  featured: boolean;
   /** Has the listing ever been public? Then its slug is frozen. */
   publishedEver: boolean;
   images: ImageRecord[];
@@ -178,6 +181,7 @@ export function ListingForm({
           dealType={form.values.deal_type}
           checklist={checklist}
           publicLocale={navLocale}
+          featured={featured}
           onChanged={refreshListing}
         />
       ) : null}
