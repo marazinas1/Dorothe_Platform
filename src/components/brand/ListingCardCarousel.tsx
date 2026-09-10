@@ -140,10 +140,7 @@ export function ListingCardCarousel({
 
   return (
     <div
-      className={cn(
-        "group/media relative aspect-[3/2] w-full overflow-hidden bg-muted",
-        muted && "grayscale transition-[filter] duration-500 group-hover:grayscale-0",
-      )}
+      className="group/media relative aspect-[3/2] w-full overflow-hidden bg-muted"
       onPointerEnter={() => setArmed(true)}
       onTouchStart={() => setArmed(true)}
     >
