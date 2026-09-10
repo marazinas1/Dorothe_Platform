@@ -18,9 +18,7 @@ export function DefaultRequestQueue() {
   const { t } = useTranslation();
   const qc = useQueryClient();
   const user = useCurrentUser();
-  const q = useQuery(defaultTextRequestsQueryOptions);
-  const all = q.data ?? [];
-  if (typeof window !== "undefined") console.log("[dbg requests]", q.status, q.error, all.length);
+  const { data: all = [] } = useQuery(defaultTextRequestsQueryOptions);
   const [busy, setBusy] = useState<string | null>(null);
 
   if (user?.profile?.role !== "developer") return null;
