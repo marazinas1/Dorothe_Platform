@@ -614,11 +614,10 @@
       "denied": "Sie haben keine Berechtigung für die Einstellungen.",
       "tabs": {
         "general": "Allgemein",
-        "branding": "Branding",
         "contact": "Kontakt",
+        "texts": "Seitentexte",
         "legal": "Rechtliches",
-        "modules": "Module",
-        "analytics": "Analyse"
+        "modules": "Module"
       },
       "general": {
         "site_name": "Firmenname",
@@ -633,38 +632,6 @@
         "area_unit": "Flächeneinheit",
         "sqm": "Quadratmeter",
         "sqft": "Quadratfuß"
-      },
-      "branding": {
-        "logo_url": "Logo (URL)",
-        "logo_dark_url": "Logo dunkel (URL)",
-        "favicon_url": "Favicon (URL)",
-        "og_default_image": "Standard-OG-Bild (URL)",
-        "primary_color": "Primärfarbe",
-        "secondary_color": "Sekundärfarbe",
-        "accent_color": "Akzentfarbe",
-        "font_heading": "Überschriftschrift",
-        "font_body": "Fließtextschrift",
-        "preview": "Vorschau",
-        "preview_heading": "Musterüberschrift",
-        "preview_button": "Beispielaktion",
-        "preview_body": "So sehen Ihre Farben und Schriften auf der Seite aus.",
-        "background_color": "Hintergrund",
-        "surface_color": "Flächen (Karten)",
-        "text_color": "Text",
-        "muted_text_color": "Sekundärtext",
-        "border_color": "Rahmen",
-        "radius_scale": "Eckenradius",
-        "button_style": "Button-Form",
-        "radiusOption": {
-          "sharp": "Kantig",
-          "soft": "Weich",
-          "rounded": "Rund"
-        },
-        "buttonOption": {
-          "square": "Kantig",
-          "rounded": "Abgerundet",
-          "pill": "Pille"
-        }
       },
       "contact": {
         "contact_email": "E-Mail",
@@ -725,10 +692,21 @@
           }
         }
       },
-      "analytics": {
-        "google_analytics_id": "Google-Analytics-ID",
-        "google_site_verification": "Google-Site-Verification-Code",
-        "plausible_domain": "Plausible-Domain"
+      "brand": {
+        "logo": "Logo",
+        "logoHelp": "Erscheint im Seitenkopf und in diesem Bereich.",
+        "logoDark": "Logo für dunkle Flächen",
+        "logoDarkHelp": "Optional. Wird auf dunklem Hintergrund verwendet.",
+        "favicon": "Browser-Symbol",
+        "faviconHelp": "Das kleine Symbol im Browser-Tab.",
+        "ogImage": "Bild für das Teilen",
+        "ogImageHelp": "Wird beim Teilen einer Seite in sozialen Netzwerken verwendet.",
+        "upload": "Bild hochladen",
+        "replace": "Ersetzen",
+        "remove": "Entfernen"
+      },
+      "texts": {
+        "home": "Startseite"
       }
     },
     "listings": {

@@ -24,6 +24,7 @@ import {
 } from "@/lib/validation/site-settings";
 
 import { SaveButton } from "./SaveButton";
+import { BrandAssetsSection } from "./BrandAssetsSection";
 
 const COUNTRIES = CountrySchema.options;
 const AREA_UNITS = AreaUnitSchema.options;
@@ -75,6 +76,9 @@ export function GeneralTab() {
   }
 
   return (
+    <div className="space-y-8">
+      <BrandAssetsSection />
+
     <form className="space-y-4 max-w-2xl">
       <Field label={t("admin.settings.general.site_name")} error={form.formState.errors.site_name?.message}>
         <Input {...form.register("site_name")} />
@@ -147,6 +151,7 @@ export function GeneralTab() {
       </Field>
       <SaveButton onSubmit={save} />
     </form>
+    </div>
   );
 }
 

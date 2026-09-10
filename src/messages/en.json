@@ -614,11 +614,10 @@
       "denied": "You do not have permission to edit settings.",
       "tabs": {
         "general": "General",
-        "branding": "Branding",
         "contact": "Contact",
+        "texts": "Page texts",
         "legal": "Legal",
-        "modules": "Modules",
-        "analytics": "Analytics"
+        "modules": "Modules"
       },
       "general": {
         "site_name": "Company name",
@@ -633,38 +632,6 @@
         "area_unit": "Area unit",
         "sqm": "Square metres",
         "sqft": "Square feet"
-      },
-      "branding": {
-        "logo_url": "Logo URL",
-        "logo_dark_url": "Dark logo URL",
-        "favicon_url": "Favicon URL",
-        "og_default_image": "Default OG image URL",
-        "primary_color": "Primary color",
-        "secondary_color": "Secondary color",
-        "accent_color": "Accent color",
-        "font_heading": "Heading font",
-        "font_body": "Body font",
-        "preview": "Preview",
-        "preview_heading": "Sample heading",
-        "preview_button": "Sample action",
-        "preview_body": "This is how your colors and fonts look on the site.",
-        "background_color": "Background",
-        "surface_color": "Surface (cards)",
-        "text_color": "Text",
-        "muted_text_color": "Muted text",
-        "border_color": "Borders",
-        "radius_scale": "Corner radius",
-        "button_style": "Button shape",
-        "radiusOption": {
-          "sharp": "Sharp",
-          "soft": "Soft",
-          "rounded": "Rounded"
-        },
-        "buttonOption": {
-          "square": "Square",
-          "rounded": "Rounded",
-          "pill": "Pill"
-        }
       },
       "contact": {
         "contact_email": "Email",
@@ -725,10 +692,21 @@
           }
         }
       },
-      "analytics": {
-        "google_analytics_id": "Google Analytics ID",
-        "google_site_verification": "Google site verification code",
-        "plausible_domain": "Plausible domain"
+      "brand": {
+        "logo": "Logo",
+        "logoHelp": "Shown in the site header and in this panel.",
+        "logoDark": "Logo for dark backgrounds",
+        "logoDarkHelp": "Optional. Used where the background is dark.",
+        "favicon": "Browser icon",
+        "faviconHelp": "The small icon shown on the browser tab.",
+        "ogImage": "Sharing image",
+        "ogImageHelp": "Used when a page is shared on social media.",
+        "upload": "Upload an image",
+        "replace": "Replace",
+        "remove": "Remove"
+      },
+      "texts": {
+        "home": "Home page"
       }
     },
     "listings": {
