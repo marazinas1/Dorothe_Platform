@@ -181,8 +181,10 @@ export function ListingCardCarousel({
 
       {total > 1 ? (
         <>
-          {/* Above the title link's inset overlay, so no event gymnastics. */}
-          <div className="pointer-events-none absolute inset-0 z-20 hidden items-center justify-between px-3 opacity-0 transition-opacity duration-300 group-hover/media:opacity-100 md:flex">
+          {/* Above the title link's inset overlay, so no event gymnastics.
+              Always visible: browsing the photos never requires opening the
+              card, on every card the same way. */}
+          <div className="pointer-events-none absolute inset-0 z-20 hidden items-center justify-between px-3 md:flex">
             <Arrow dir="prev" label={t("listings.card.prev_photo")} onClick={() => step(-1)} />
             <Arrow dir="next" label={t("listings.card.next_photo")} onClick={() => step(1)} />
           </div>
