@@ -8,6 +8,7 @@ import type { SiteSettings } from "@/types/site-settings";
 
 import { Reveal } from "@/components/shared/Reveal";
 
+import { CardRail } from "./CardRail";
 import { ListingCard } from "./ListingCard";
 
 type Props = {
