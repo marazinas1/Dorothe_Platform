@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ImageUploadField } from "@/components/admin/ui/ImageUploadField";
+import { pageMediaPath } from "@/lib/branding/media-paths";
 import type { HomeMediaSlot } from "@/lib/home/layout";
 
 type Entry = { mode: "default" | "custom"; url: string };
@@ -12,13 +13,16 @@ type Props = {
   onChange: (slot: string, next: Entry) => void;
   /** What the page shows today when the slot is left on "default". */
   resolved: (slot: string) => string | null;
+  /** Folder these photographs belong to (home page or a named page). */
+  scope?: string;
 };
 
 /**
  * Photograph slots. Every slot keeps a working default, so choosing your own
- * picture is an option and never a requirement.
+ * picture is an option and never a requirement — and the picture is uploaded
+ * straight from the computer, exactly like a listing photograph.
  */
-export function HomeMediaEditor({ slots, entry, onChange, resolved }: Props) {
+export function HomeMediaEditor({ slots, entry, onChange, resolved, scope = "home" }: Props) {
   const { t } = useTranslation();
 
   return (
@@ -55,12 +59,13 @@ export function HomeMediaEditor({ slots, entry, onChange, resolved }: Props) {
             </div>
 
             {value.mode === "custom" ? (
-              <Input
-                className="mt-3"
-                value={value.url}
-                placeholder="https://…"
-                onChange={(e) => onChange(slot, { mode: "custom", url: e.target.value })}
-              />
+              <div className="mt-3">
+                <ImageUploadField
+                  path={pageMediaPath(scope, slot)}
+                  onUploaded={(url) => onChange(slot, { mode: "custom", url: url ?? "" })}
+                  removable={Boolean(value.url)}
+                />
+              </div>
             ) : null}
           </div>
         );
