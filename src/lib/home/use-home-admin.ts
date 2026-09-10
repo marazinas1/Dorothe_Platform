@@ -43,10 +43,11 @@ export function useHomeAdmin(locale: string) {
 
   /** The line the page shows when the field has no override. */
   function placeholder(key: string): string {
-    const list = homeDefaultList(settings, key, locale);
-    if (list.length > 0) return list.join("\n");
-    return homeDefaultText(settings, key, locale);
+    const line = homeDefaultText(settings, key, locale);
+    if (line) return line;
+    return homeDefaultList(settings, key, locale).join("\n");
   }
+
 
   function hasOverride(key: string): boolean {
     return value(key).trim().length > 0;
