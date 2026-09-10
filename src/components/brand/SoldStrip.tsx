@@ -45,7 +45,7 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
         </HomeTextLink>
       </div>
 
-      <CardRail perView={3} label={title}>
+      <CardRail perView={3} label={title} alwaysShowArrows>
         {items.map((l, i) => (
           <Reveal key={l.id} delay={Math.min(i, 2) * 90} className="h-full">
             <ListingCard

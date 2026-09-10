@@ -12,6 +12,8 @@ type Props = {
   /** Accessible name of the row. */
   label: string;
   className?: string;
+  /** Keep arrow buttons visible even when the row does not overflow. */
+  alwaysShowArrows?: boolean;
 };
 
 const BASIS: Record<2 | 3, string> = {
@@ -29,7 +31,13 @@ const BASIS: Record<2 | 3, string> = {
  * or how many exist. With few enough cards to fit, the arrows stay hidden and
  * the row reads as a plain grid.
  */
-export function CardRail({ children, perView = 3, label, className }: Props) {
+export function CardRail({
+  children,
+  perView = 3,
+  label,
+  className,
+  alwaysShowArrows = false,
+}: Props) {
   const { t } = useTranslation();
   const trackRef = useRef<HTMLUListElement | null>(null);
   const [overflow, setOverflow] = useState(false);
@@ -45,6 +53,7 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
   }, [children.length]);
 
   const step = (dir: 1 | -1) => {
+    if (!overflow) return;
     const track = trackRef.current;
     if (!track) return;
     const slot = track.firstElementChild as HTMLElement | null;
@@ -62,6 +71,8 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
   };
 
   if (children.length === 0) return null;
+
+  const showArrows = overflow || alwaysShowArrows;
 
   return (
     <div className={cn("relative", className)}>
@@ -84,12 +95,20 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
         ))}
       </ul>
 
-      {overflow ? (
-        <div className="mt-6 flex items-center justify-end gap-2">
-          <RailButton onClick={() => step(-1)} label={t("home.rail_prev")}>
+      {showArrows ? (
+        <div className="mt-8 flex items-center justify-end gap-2">
+          <RailButton
+            onClick={() => step(-1)}
+            label={t("home.rail_prev")}
+            disabled={!overflow}
+          >
             <ChevronLeft className="h-4 w-4" />
           </RailButton>
-          <RailButton onClick={() => step(1)} label={t("home.rail_next")}>
+          <RailButton
+            onClick={() => step(1)}
+            label={t("home.rail_next")}
+            disabled={!overflow}
+          >
             <ChevronRight className="h-4 w-4" />
           </RailButton>
         </div>
@@ -101,10 +120,12 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
 function RailButton({
   onClick,
   label,
+  disabled,
   children,
 }: {
   onClick: () => void;
   label: string;
+  disabled?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -112,7 +133,13 @@ function RailButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground transition-colors duration-200 hover:bg-secondary"
+      disabled={disabled}
+      className={cn(
+        "grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground transition-colors duration-200",
+        disabled
+          ? "cursor-default opacity-30"
+          : "hover:bg-secondary",
+      )}
     >
       {children}
     </button>
