@@ -16,6 +16,8 @@ interface Props {
   onUploaded: (url: string | null) => void;
   /** Hide the remove button where a picture cannot be cleared. */
   removable?: boolean;
+  /** Wording: a picture of your own is already in place. */
+  replace?: boolean;
   busyLabel?: string;
 }
 
@@ -23,7 +25,8 @@ interface Props {
  * Picking a picture from the computer, optimised in the browser and filed at a
  * stable path — the same flow used for listing photographs.
  */
-export function ImageUploadField({ path, onUploaded, removable = true }: Props) {
+export function ImageUploadField({ path, onUploaded, removable = true, replace }: Props) {
+
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
