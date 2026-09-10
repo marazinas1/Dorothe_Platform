@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { Lock, Undo2 } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
@@ -20,8 +19,9 @@ type Props = {
   onChange: (next: string) => void;
   onReset: () => void;
   onSetDefault: () => void;
-  /** Namespace for the reset / set-default labels. */
-  ns: string;
+  /** Wording of the two actions, supplied by the page's own editor. */
+  resetLabel: string;
+  setDefaultLabel: string;
 };
 
 /**
@@ -39,9 +39,9 @@ export function DefaultTextField({
   onChange,
   onReset,
   onSetDefault,
-  ns,
+  resetLabel,
+  setDefaultLabel,
 }: Props) {
-  const { t } = useTranslation();
   const user = useCurrentUser();
   const isDeveloper = user?.profile?.role === "developer";
 
@@ -61,7 +61,7 @@ export function DefaultTextField({
               onClick={onReset}
             >
               <Undo2 className="h-3 w-3" />
-              {t(`${ns}.resetToDefault`)}
+              {resetLabel}
             </Button>
           ) : null}
           {isDeveloper ? (
@@ -73,7 +73,7 @@ export function DefaultTextField({
               onClick={onSetDefault}
             >
               <Lock className="h-3 w-3" />
-              {t(`${ns}.setAsDefault`)}
+              {setDefaultLabel}
             </Button>
           ) : null}
         </div>

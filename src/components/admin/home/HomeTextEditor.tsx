@@ -35,7 +35,8 @@ export function HomeTextEditor({ value, placeholder, onChange, onReset, onSetDef
                 <DefaultTextField
                   key={field.key}
                   id={`home-${field.key}`}
-                  ns="admin.home"
+                  resetLabel={t("admin.home.resetToDefault")}
+                  setDefaultLabel={t("admin.home.setAsDefault")}
                   label={t(`admin.home.fields.${field.key}`)}
                   kind={field.kind}
                   value={value(field.key)}

@@ -43,7 +43,8 @@ export function PageTextEditor({
                 <DefaultTextField
                   key={field.key}
                   id={`page-${definition.key}-${field.key}`}
-                  ns="admin.pageEditor"
+                  resetLabel={t("admin.pageEditor.resetToDefault")}
+                  setDefaultLabel={t("admin.pageEditor.setAsDefault")}
                   label={t(`admin.pageEditor.fields.${definition.key}.${field.key}`)}
                   kind={field.kind}
                   value={value(field.key)}
