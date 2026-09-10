@@ -32,6 +32,13 @@ export async function notifyDeveloperOfDefaultRequest(
     const apiKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey) return;
 
+    const { data: settings } = await supabase
+      .from("site_settings")
+      .select("site_name")
+      .limit(1)
+      .maybeSingle();
+    const siteName = (settings as { site_name?: string } | null)?.site_name ?? "Website";
+
     const where = payload.scope === "home" ? "Home page" : `Page: ${payload.page ?? "-"}`;
     const wording = Array.isArray(payload.requested_text)
       ? payload.requested_text.join("\n")
@@ -58,8 +65,8 @@ export async function notifyDeveloperOfDefaultRequest(
         sendLovableEmail(
           {
             to,
-            from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-            sender_domain: FROM_DOMAIN,
+            from: fromAddress(siteName),
+            sender_domain: SENDER_DOMAIN,
             subject: "New default wording request",
             html,
             text,
