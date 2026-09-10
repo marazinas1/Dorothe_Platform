@@ -15,6 +15,7 @@ export const SEARCH_DEFAULTS = {
   sort: "newest",
   page: 1,
   view: "grid",
+  status: "available",
 } as const;
 
 /** URL search schema for the listings index. */
@@ -29,6 +30,7 @@ export const listingsSearchSchema = z.object({
   sort: fallback(z.string(), SEARCH_DEFAULTS.sort).default(SEARCH_DEFAULTS.sort),
   page: fallback(z.number(), SEARCH_DEFAULTS.page).default(SEARCH_DEFAULTS.page),
   view: fallback(z.string(), SEARCH_DEFAULTS.view).default(SEARCH_DEFAULTS.view),
+  status: fallback(z.string(), SEARCH_DEFAULTS.status).default(SEARCH_DEFAULTS.status),
 });
 
 export type ListingsSearch = z.infer<typeof listingsSearchSchema>;

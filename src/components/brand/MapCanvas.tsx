@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import { CARTO_LIGHT_STYLE, MARKER_COLOR, type MapPoint } from "@/lib/maps/carto";
+import { OSM_STYLE, MARKER_COLOR, type MapPoint } from "@/lib/maps/carto";
 
 type Props = {
   points: MapPoint[];
@@ -46,7 +46,7 @@ function popupHtml(p: MapPoint) {
 }
 
 /**
- * MapLibre canvas with CARTO raster tiles. Initialised lazily the first
+ * MapLibre canvas with OpenStreetMap raster tiles. Initialised lazily the first
  * time it scrolls into view so listing pages stay light.
  */
 export default function MapCanvas({
@@ -83,7 +83,7 @@ export default function MapCanvas({
     const startZoom = first?.precision === "approximate" ? Math.max(zoom - 2, 9) : zoom;
     const instance = new maplibregl.Map({
       container: holder.current,
-      style: CARTO_LIGHT_STYLE as any,
+      style: OSM_STYLE as any,
       center: startCenter,
       // The wheel never zooms: on a trackpad that hijacks the page scroll.
       // Zooming is the +/- buttons, pinch on touch, and double click.

@@ -40,6 +40,7 @@ export function FiltersBar({ locale, search, total }: Props) {
         sort: "newest",
         page: 1,
         view: "grid",
+        status: "available",
       },
     });
 

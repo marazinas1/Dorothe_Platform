@@ -2,21 +2,19 @@ import { Link, useParams, useRouterState } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { cn } from "@/lib/utils";
-import { usePermission } from "@/lib/auth/use-permission";
 import type { Locale } from "@/i18n/config";
 
 /**
- * Configuration in the order it is needed: identity first, then the words of
- * the public pages, then the legal texts, then the modules a developer toggles.
+ * Three tabs, nothing more: the business itself, the words of the public
+ * pages, and the legal texts. Modules are a code decision, not a setting.
  */
-const TABS = ["general", "contact", "texts", "legal", "modules"] as const;
+const TABS = ["business", "texts", "legal"] as const;
 export type SettingsTabId = (typeof TABS)[number];
 
 export function SettingsTabs() {
   const { locale } = useParams({ strict: false }) as { locale: Locale };
   const { t } = useTranslation();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const canDesign = usePermission("design.edit");
 
   return (
     <nav
@@ -24,7 +22,6 @@ export function SettingsTabs() {
       aria-label={t("admin.settings.title")}
     >
       {TABS.map((tab) => {
-        if (tab === "modules" && !canDesign) return null;
         const target = `/${locale}/admin/settings/${tab}`;
         const active = pathname === target;
         return (

@@ -2,22 +2,20 @@ import type { Locale } from "@/i18n/config";
 import { pickLocalized } from "@/lib/listings/format";
 
 /**
- * GDPR-friendly raster basemap: CARTO "light_all" monochrome tiles served
- * from the OSM data set. No API key, no Google, no tracking cookies.
+ * GDPR-friendly raster basemap: OpenStreetMap standard tiles, served
+ * straight from the OSM tile servers. No API key, no Google, no tracking
+ * cookies. (CARTO's light tiles started demanding an API key, which showed
+ * as an "API KEY REQUIRED" watermark, so we use OSM directly.)
  */
-export const CARTO_LIGHT_STYLE = {
+export const OSM_STYLE = {
   version: 8 as const,
   sources: {
     carto: {
       type: "raster" as const,
-      tiles: [
-        "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-        "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-        "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-      ],
+      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
       tileSize: 256,
       attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, © <a href="https://carto.com/attributions">CARTO</a>',
+        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   },
   layers: [{ id: "carto", type: "raster" as const, source: "carto" }],

@@ -5,6 +5,7 @@ import {
   siteSettingsQueryOptions,
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
+import { homeDefaultList, homeDefaultText } from "./content";
 
 type Bag = Record<string, unknown>;
 
@@ -25,12 +26,40 @@ export function useHomeAdmin(locale: string) {
     setMedia({ ...(settings.home_media ?? {}) });
   }, [settings]);
 
-  /** Stored per locale, so switching admin language never overwrites the other. */
-  function value(key: string): string {
+  function overrideFor(key: string): string {
     const entry = (content[key] ?? {}) as Record<string, unknown>;
     const raw = entry[locale];
     if (Array.isArray(raw)) return raw.join("\n");
     return typeof raw === "string" ? raw : "";
+  }
+
+  /** The line the page shows when the field has no override. */
+  function defaultFor(key: string): string {
+    const list = homeDefaultList(settings, key, locale);
+    if (list.length > 0) return list.join("\n");
+    return homeDefaultText(settings, key, locale);
+  }
+
+  /** The override when one exists, otherwise the live default. */
+  function value(key: string): string {
+    const own = overrideFor(key);
+    return own || defaultFor(key);
+  }
+
+  function hasOverride(key: string): boolean {
+    return overrideFor(key).trim().length > 0;
+  }
+
+  /** Drop the override for this locale: the field returns to the default. */
+  function resetValue(key: string) {
+    setContent((prev) => {
+      const entry = { ...((prev[key] ?? {}) as Record<string, unknown>) };
+      delete entry[locale];
+      const next = { ...prev };
+      if (Object.keys(entry).length === 0) delete next[key];
+      else next[key] = entry;
+      return next;
+    });
   }
 
   function setValue(key: string, next: string, kind: "line" | "paragraph" | "list") {
@@ -58,5 +87,5 @@ export function useHomeAdmin(locale: string) {
     await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
   }
 
-  return { settings, value, setValue, mediaEntry, setMediaEntry, save };
+  return { settings, value, setValue, hasOverride, resetValue, mediaEntry, setMediaEntry, save };
 }

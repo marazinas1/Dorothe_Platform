@@ -104,6 +104,25 @@ export function homeCopy(settings: SiteSettings, locale: string): HomeCopy {
   };
 }
 
+/** The default a field falls back to when no override is stored — legacy
+ * settings first, then the translated `home.defaults` messages. Used by the
+ * admin editor so it shows exactly what the page shows. */
+export function homeDefaultText(settings: SiteSettings, key: string, locale: string): string {
+  const legacy = legacyText(settings, key, locale);
+  if (legacy) return legacy;
+  const translated = translate(locale as Locale, `home.defaults.${key}`, copyVars(settings, locale));
+  return translated === `home.defaults.${key}` ? "" : translated;
+}
+
+export function homeDefaultList(settings: SiteSettings, key: string, locale: string): string[] {
+  const legacy = legacyList(settings, key, locale);
+  if (legacy.length > 0) return legacy;
+  const translated = translate(locale as Locale, `home.defaults.${key}`, copyVars(settings, locale));
+  return translated === `home.defaults.${key}` || !translated
+    ? []
+    : translated.split("\n").map((l) => l.trim()).filter(Boolean);
+}
+
 /** Per-slot photograph: an own upload wins, otherwise the house default. */
 export function homeMedia(settings: SiteSettings, slot: HomeMediaSlot): string | null {
   const media = (settings.home_media ?? {}) as Record<
