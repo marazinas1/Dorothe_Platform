@@ -96,8 +96,8 @@ export function resolvePage(
     },
 
     media(slot) {
-    const entry = media[slot];
-      if (entry.mode === "custom" && entry.url?.trim()) return entry.url.trim();
+      const entry = media[slot];
+      if (entry?.mode === "custom" && entry.url?.trim()) return entry.url.trim();
       return mediaDefaults[slot] ?? null;
     },
   };
