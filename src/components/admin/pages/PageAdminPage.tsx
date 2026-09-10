@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
-import { pageDefinition } from "@/lib/pages/fields";
+import { pageDefinition, type PageDefinition } from "@/lib/pages/fields";
 import { usePageAdmin } from "@/lib/pages/use-page-admin";
 
 import { PageEditorWorkspace } from "./PageEditorWorkspace";
