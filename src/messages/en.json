@@ -275,7 +275,9 @@
       "reserved": "Reserved",
       "sold": "Sold",
       "rented": "Rented",
-      "archived": "Archived"
+      "archived": "Archived",
+      "active_sale": "For sale",
+      "active_rent": "For rent"
     },
     "propertyType": {
       "apartment": "Apartment",
@@ -894,7 +896,9 @@
         "reserved": "Mark reserved",
         "sold": "Mark sold",
         "rented": "Mark rented",
-        "archived": "Archive"
+        "archived": "Archive",
+        "active_sale": "Publish for sale",
+        "active_rent": "Publish for rent"
       },
       "images": {
         "dropHere": "To position {{position}}",
@@ -1353,7 +1357,8 @@
       "livePreview": "Live preview",
       "refresh": "Refresh",
       "openPage": "Open page",
-      "resetToDefault": "Reset to default"
+      "resetToDefault": "Reset to default",
+      "setAsDefault": "Set as default"
     },
     "posts": {
       "title": "Articles",
@@ -1446,7 +1451,8 @@
           "form_intro": "Form introduction"
         }
       },
-      "resetToDefault": "Reset to default"
+      "resetToDefault": "Reset to default",
+      "setAsDefault": "Set as default"
     },
     "calendar": {
       "title": "Calendar",

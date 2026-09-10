@@ -275,7 +275,9 @@
       "reserved": "Reserviert",
       "sold": "Verkauft",
       "rented": "Vermietet",
-      "archived": "Archiviert"
+      "archived": "Archiviert",
+      "active_sale": "Zu verkaufen",
+      "active_rent": "Zu vermieten"
     },
     "propertyType": {
       "apartment": "Wohnung",
@@ -894,7 +896,9 @@
         "reserved": "Als reserviert markieren",
         "sold": "Als verkauft markieren",
         "rented": "Als vermietet markieren",
-        "archived": "Archivieren"
+        "archived": "Archivieren",
+        "active_sale": "Zum Verkauf veröffentlichen",
+        "active_rent": "Zur Vermietung veröffentlichen"
       },
       "images": {
         "dropHere": "Auf Position {{position}}",
@@ -1353,7 +1357,8 @@
       "livePreview": "Live-Vorschau",
       "refresh": "Aktualisieren",
       "openPage": "Seite öffnen",
-      "resetToDefault": "Auf Standard zurücksetzen"
+      "resetToDefault": "Auf Standard zurücksetzen",
+      "setAsDefault": "Als Standard festlegen"
     },
     "posts": {
       "title": "Artikel",
@@ -1446,7 +1451,8 @@
           "form_intro": "Einleitung Formular"
         }
       },
-      "resetToDefault": "Auf Standard zurücksetzen"
+      "resetToDefault": "Auf Standard zurücksetzen",
+      "setAsDefault": "Als Standard festlegen"
     },
     "calendar": {
       "title": "Kalender",
