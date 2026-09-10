@@ -23,7 +23,6 @@ import { homeTestiItems } from "@/lib/testimonials/resolve";
 import { fallbackTestiItems } from "@/lib/testimonials/fallback";
 import { HOME_CHROME } from "@/lib/home/layout";
 import {
-  HOMEPAGE_LISTING_LIMIT,
   applySoldPricePolicy,
   resolveSocialImage,
   soldPricesHidden,
