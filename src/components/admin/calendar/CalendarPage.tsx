@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useParams } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
+import { CalendarDays, ChevronLeft, ChevronRight, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -100,13 +100,14 @@ export function CalendarPage() {
         </Button>
         <Button
           type="button"
-          variant="ghost"
+          variant="outline"
           onClick={() => {
             const now = new Date();
             setCursor({ year: now.getFullYear(), month: now.getMonth() });
             setSelected(todayIso());
           }}
         >
+          <CalendarDays className="h-4 w-4" />
           {t("admin.calendar.today")}
         </Button>
       </div>

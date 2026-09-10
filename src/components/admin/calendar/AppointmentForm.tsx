@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { X } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -178,7 +179,8 @@ export function AppointmentForm({ initial, listings, locale, onSave, onCancel }:
 
       <div className="flex gap-2">
         <SaveButton onSubmit={() => onSave(draft)} />
-        <Button type="button" variant="ghost" onClick={onCancel}>
+        <Button type="button" variant="outline" onClick={onCancel}>
+          <X className="h-4 w-4" />
           {t("admin.calendar.cancel")}
         </Button>
       </div>
