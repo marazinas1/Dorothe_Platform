@@ -1,7 +1,7 @@
+import { CardRail } from "@/components/brand/CardRail";
 import { ListingCard } from "@/components/brand/ListingCard";
 import { Reveal } from "@/components/shared/Reveal";
 import type { Locale } from "@/i18n/config";
-import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
@@ -43,9 +43,9 @@ export function HomeListings({ locale, settings, items, title, note, hidePrice =
         </HomeTextLink>
       </div>
 
-      <div className={LISTING_CARD_GRID}>
-        {items.slice(0, 3).map((l, i) => (
-          <Reveal key={l.id} delay={i * 90} className="h-full">
+      <CardRail perView={3} label={title}>
+        {items.map((l, i) => (
+          <Reveal key={l.id} delay={Math.min(i, 2) * 90} className="h-full">
             <ListingCard
               listing={l}
               locale={locale}
@@ -55,7 +55,7 @@ export function HomeListings({ locale, settings, items, title, note, hidePrice =
             />
           </Reveal>
         ))}
-      </div>
+      </CardRail>
     </section>
   );
 }

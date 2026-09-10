@@ -2,13 +2,13 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
-import { SOLD_CARD_GRID } from "@/lib/homepage/card-grid";
 import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
 
 import { Reveal } from "@/components/shared/Reveal";
 
+import { CardRail } from "./CardRail";
 import { ListingCard } from "./ListingCard";
 
 type Props = {
@@ -39,9 +39,9 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
         </p>
       </div>
 
-      <div className={SOLD_CARD_GRID}>
-        {items.slice(0, 2).map((l, i) => (
-          <Reveal key={l.id} delay={i * 90} className="h-full">
+      <CardRail perView={2} label={t("home.recent_sales")} className="max-w-[860px]">
+        {items.map((l, i) => (
+          <Reveal key={l.id} delay={Math.min(i, 1) * 90} className="h-full">
             <ListingCard
               listing={l}
               locale={locale}
@@ -51,7 +51,7 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
             />
           </Reveal>
         ))}
-      </div>
+      </CardRail>
 
       <div className="mt-12">
         <Link

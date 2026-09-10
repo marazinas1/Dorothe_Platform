@@ -254,29 +254,26 @@ const featuredBase = {
   sort: "newest",
   page: 1,
   onlyStatus: [...PublicSaleStatuses],
-  limit: 6,
+  limit: 24,
 };
 
-/** How many properties the home page shows at most. */
-const HOME_SLOTS = 3;
-
+/**
+ * Every available property, in the order the home page should read them: the
+ * broker's own picks first, then the newest. The section shows three at a time
+ * and the rest are reachable by sliding sideways, so nothing is hidden.
+ */
 export const featuredListingsQueryOptions = queryOptions({
   queryKey: ["listings", "featured"],
   queryFn: async () => {
     const flagged = await listPublicListings({
       data: { ...featuredBase, featured: true },
     } as any);
-    if (flagged.items.length >= HOME_SLOTS) return flagged;
-
-    // Fewer picks than slots — top the section up with the newest public
-    // listings, so the home page never looks half-empty while properties
-    // exist, and the broker's own picks always come first.
     const recent = await listPublicListings({ data: { ...featuredBase } } as any);
     const chosen = new Set(flagged.items.map((item: any) => item.id));
-    const filler = recent.items.filter((item: any) => !chosen.has(item.id));
+    const rest = recent.items.filter((item: any) => !chosen.has(item.id));
     return {
-      items: [...flagged.items, ...filler],
-      total: flagged.total + filler.length,
+      items: [...flagged.items, ...rest],
+      total: flagged.items.length + rest.length,
     };
   },
   staleTime: 30_000,
@@ -298,7 +295,7 @@ export const recentSoldQueryOptions = queryOptions({
         sort: "newest",
         page: 1,
         onlyStatus: ["sold", "rented"],
-        limit: 6,
+        limit: 24,
       },
     } as any),
   staleTime: 60_000,

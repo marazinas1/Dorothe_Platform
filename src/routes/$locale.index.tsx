@@ -23,7 +23,6 @@ import { homeTestiItems } from "@/lib/testimonials/resolve";
 import { fallbackTestiItems } from "@/lib/testimonials/fallback";
 import { HOME_CHROME } from "@/lib/home/layout";
 import {
-  HOMEPAGE_LISTING_LIMIT,
   applySoldPricePolicy,
   resolveSocialImage,
   soldPricesHidden,
@@ -114,8 +113,8 @@ function HomePage() {
         settings={settings}
         copy={copy}
         media={media}
-        featured={featured.items.slice(0, HOMEPAGE_LISTING_LIMIT)}
-        sold={applySoldPricePolicy(sold.items.slice(0, HOMEPAGE_LISTING_LIMIT), settings)}
+        featured={featured.items}
+        sold={applySoldPricePolicy(sold.items, settings)}
         hideSoldPrice={soldPricesHidden(settings)}
         testimonials={voices}
       />
