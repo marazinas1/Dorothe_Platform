@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { zodValidator } from "@tanstack/zod-adapter";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
+import { CtaBand } from "@/components/brand/CtaBand";
 import { ListingCard } from "@/components/brand/ListingCard";
 import { ListingsMap } from "@/components/brand/ListingsMap";
 
@@ -174,6 +175,7 @@ function ListingsIndex() {
           <Link to="/$locale" params={{ locale }} />
         </span>
       </section>
+      <CtaBand locale={locale as Locale} settings={settings} />
     </PublicChrome>
   );
 }

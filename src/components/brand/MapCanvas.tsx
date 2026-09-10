@@ -11,6 +11,8 @@ type Props = {
   zoom?: number;
   className?: string;
   interactivePopups?: boolean;
+  /** Shows a "back to start" button that returns to this centre and zoom. */
+  resetLabel?: string;
 };
 
 function exactMarkerEl() {
@@ -53,8 +55,11 @@ export default function MapCanvas({
   zoom = 12,
   className,
   interactivePopups = false,
+  resetLabel,
 }: Props) {
   const holder = useRef<HTMLDivElement | null>(null);
+  const map = useRef<maplibregl.Map | null>(null);
+  const home = useRef<{ center: [number, number]; zoom: number } | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -73,15 +78,23 @@ export default function MapCanvas({
   useEffect(() => {
     if (!visible || !holder.current) return;
     const first = points[0];
-    const map = new maplibregl.Map({
+    const startCenter: [number, number] =
+      center ?? (first ? [first.lng, first.lat] : [10.45, 51.16]);
+    const startZoom = first?.precision === "approximate" ? Math.max(zoom - 2, 9) : zoom;
+    const instance = new maplibregl.Map({
       container: holder.current,
       style: CARTO_LIGHT_STYLE as any,
-      center: center ?? (first ? [first.lng, first.lat] : [10.45, 51.16]),
-      zoom: first?.precision === "approximate" ? Math.max(zoom - 2, 9) : zoom,
+      center: startCenter,
+      // The wheel never zooms: on a trackpad that hijacks the page scroll.
+      // Zooming is the +/- buttons, pinch on touch, and double click.
       scrollZoom: false,
+      zoom: startZoom,
       attributionControl: { compact: true },
     });
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+    instance.addControl(
+      new maplibregl.NavigationControl({ showCompass: false }),
+      "bottom-right",
+    );
 
     for (const p of points) {
       const el = p.precision === "exact" ? exactMarkerEl() : areaMarkerEl();
@@ -91,17 +104,40 @@ export default function MapCanvas({
           new maplibregl.Popup({ offset: 16, closeButton: false }).setHTML(popupHtml(p)),
         );
       }
-      marker.addTo(map);
+      marker.addTo(instance);
     }
 
     if (points.length > 1) {
       const bounds = new maplibregl.LngLatBounds();
       points.forEach((p) => bounds.extend([p.lng, p.lat]));
-      map.fitBounds(bounds, { padding: 64, maxZoom: 13, duration: 0 });
+      instance.fitBounds(bounds, { padding: 64, maxZoom: 13, duration: 0 });
     }
 
-    return () => map.remove();
+    map.current = instance;
+    home.current = { center: startCenter, zoom: startZoom };
+    return () => {
+      instance.remove();
+      map.current = null;
+    };
   }, [visible, points, center, zoom, interactivePopups]);
 
-  return <div ref={holder} className={className} />;
+  return (
+    <div className={`relative ${className ?? ""}`}>
+      <div ref={holder} className="h-full w-full" />
+      {resetLabel ? (
+        <button
+          type="button"
+          onClick={() => {
+            const start = home.current;
+            if (map.current && start) {
+              map.current.easeTo({ center: start.center, zoom: start.zoom, duration: 500 });
+            }
+          }}
+          className="absolute left-3 top-3 z-10 rounded-[var(--radius-button)] border border-border bg-background/95 px-3 py-2 text-xs text-foreground shadow-sm transition-colors hover:bg-secondary"
+        >
+          {resetLabel}
+        </button>
+      ) : null}
+    </div>
+  );
 }

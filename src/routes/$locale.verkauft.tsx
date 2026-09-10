@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { applySoldPricePolicy, soldPricesHidden } from "@/lib/homepage/plan";
 import { PublicChrome } from "@/components/public/PublicChrome";
+import { CtaBand } from "@/components/brand/CtaBand";
 import { ListingCard } from "@/components/brand/ListingCard";
 import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import type { Locale } from "@/i18n/config";
@@ -98,6 +99,7 @@ function SoldArchive() {
           </div>
         )}
       </section>
+      <CtaBand locale={locale as Locale} settings={settings} />
     </PublicChrome>
   );
 }

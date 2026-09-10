@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
+import { CtaBand } from "@/components/brand/CtaBand";
 import { PostList } from "@/components/brand/blog/PostList";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
@@ -59,6 +60,7 @@ function BlogIndex() {
         emptyLabel={t("blog.empty")}
         formatDate={(iso) => formatPostDate(iso, l)}
       />
+      <CtaBand locale={l} settings={settings} />
     </PublicChrome>
   );
 }

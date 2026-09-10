@@ -44,6 +44,9 @@ export function useNavItems() {
       to: "/$locale/ueber-mich" as const,
       label: t(teamEnabled ? "nav.about_team" : "nav.about_solo"),
     },
+    // Contact stays in the list as well as the filled button: people look for
+    // it in the menu out of habit.
+    { to: "/$locale/kontakt" as const, label: t("nav.contact") },
   ];
 }
 

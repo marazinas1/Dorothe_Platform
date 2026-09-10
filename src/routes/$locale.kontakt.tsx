@@ -14,6 +14,7 @@ import { submitBuyerInquiry } from "@/lib/inquiry/submit.functions";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { OfficeMap } from "@/components/brand/OfficeMap";
 
 export const Route = createFileRoute("/$locale/kontakt")({
   staticData: { sitemap: true },
@@ -55,11 +56,6 @@ function ContactPage() {
 
   const hours = t("pages.contact.hours_default", { returnObjects: true }) as Hours[];
 
-  const hasCoords =
-    typeof settings.geo_lat === "number" && typeof settings.geo_lng === "number";
-  const mapUrl = hasCoords
-    ? buildOsmEmbed(settings.geo_lat as number, settings.geo_lng as number)
-    : null;
 
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
@@ -136,26 +132,6 @@ function ContactPage() {
       </section>
 
       <section className="mx-auto mt-24 max-w-[1400px] px-6 lg:px-10">
-        <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          {copy.text("map_title")}
-        </div>
-        <div className="mt-6 aspect-[16/9] w-full overflow-hidden border border-border bg-muted">
-          {mapUrl ? (
-            <iframe
-              src={mapUrl}
-              title={copy.text("map_title")}
-              className="h-full w-full"
-              loading="lazy"
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center p-8 text-center text-sm text-muted-foreground">
-              {t("pages.contact.map_missing")}
-            </div>
-          )}
-        </div>
-      </section>
-
-      <section className="mx-auto mt-24 max-w-[1400px] px-6 pb-32 lg:px-10">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -173,17 +149,19 @@ function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* The map sits under the form: the visitor's first job is to write, the
+          second is to find the office. */}
+      <section className="mx-auto mt-24 max-w-[1400px] px-6 pb-32 lg:px-10">
+        <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+          {copy.text("map_title")}
+        </div>
+        <div className="mt-6">
+          <OfficeMap settings={settings} />
+        </div>
+      </section>
     </PublicChrome>
   );
-}
-
-function buildOsmEmbed(lat: number, lng: number): string {
-  const dLat = 0.006;
-  const dLng = 0.012;
-  const bbox = [lng - dLng, lat - dLat, lng + dLng, lat + dLat]
-    .map((n) => n.toFixed(6))
-    .join(",");
-  return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat.toFixed(6)},${lng.toFixed(6)}`;
 }
 
 const inputCls =

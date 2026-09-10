@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
+import { CtaBand } from "@/components/brand/CtaBand";
 import { PostArticle } from "@/components/brand/blog/PostArticle";
 import type { Locale } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -104,6 +105,7 @@ function PostDetail() {
           </Link>
         }
       />
+      <CtaBand locale={l} settings={settings} />
     </PublicChrome>
   );
 }

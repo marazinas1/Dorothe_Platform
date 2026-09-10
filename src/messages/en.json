@@ -649,7 +649,9 @@
         "opening_hours": "Opening hours (JSON)",
         "social": "Social links (JSON)",
         "json_help": "Stored as JSON.",
-        "json_invalid": "Invalid JSON."
+        "json_invalid": "Invalid JSON.",
+        "map_help": "Click the map or drag the pin to set the office location.",
+        "map_title": "Office location on the map"
       },
       "legal": {
         "impressum": "Imprint",
@@ -1621,7 +1623,8 @@
       "form_success": "Thanks — your message has arrived.",
       "form_error": "Could not send the message. Please try again.",
       "map_title": "Directions",
-      "map_missing": "The map appears once office coordinates are set."
+      "map_missing": "The map appears once office coordinates are set.",
+      "map_reset": "Back to office"
     },
     "inheritance": {
       "title": "Inherited property",
@@ -1664,5 +1667,12 @@
       "unavailable_title": "Article unavailable",
       "unavailable_body": "This article is no longer published."
     }
+  },
+  "cta": {
+    "kicker": "Next step",
+    "heading": "Thinking about selling — or looking for the right property?",
+    "body": "Send a short note about your property or what you are looking for. You get an honest assessment and a clear next step, not a sales pitch.",
+    "primary": "Get in touch",
+    "secondary": "or call"
   }
 }
