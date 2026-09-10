@@ -239,7 +239,7 @@ function Arrow({
       aria-hidden="true"
       title={label}
       onClick={onClick}
-      className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-card/85 text-foreground transition-opacity duration-300 hover:opacity-100"
+      className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-card/85 text-foreground opacity-80 transition-opacity duration-300 hover:opacity-100"
     >
       <Icon className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
     </button>
