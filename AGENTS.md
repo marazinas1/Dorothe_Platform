@@ -98,21 +98,25 @@ Rules:
 - Always try to achieve differentiation through configuration first, and add a
   variant or token before adding a bespoke component.
 
-## 5.1 One design system across the product
+## 5.1 Two design systems: fixed admin, per-client public site
 
-- The public site and the admin panel share a single visual language. There is no
-  separate admin theme.
-- Colours, accent, fonts, corner radii, button style and spacing scale all come
-  from `site_settings` tokens. Both surfaces read the same tokens, so changing one
-  value changes both.
-- The only permitted difference is scale: the admin may use a denser type scale
-  and tighter spacing, because a working tool shows more per screen. Same
-  tokens, tighter rhythm.
-- Never introduce a theme block, palette or accent that applies to only one side
-  of the product.
-- Test for this: changing the primary colour in `site_settings` must visibly
-  change both the public site and the admin. Anything that doesn't follow is a
-  hardcoded value and must move into tokens.
+- The product has **two** visual languages, deliberately separate:
+  - **Admin (inside)** — one fixed design system, identical in every clone. It
+    does not read client branding at all. Colours, fonts, radii, button shape
+    and control sizing are defined once in the admin theme scope
+    (`.admin-theme` in `src/styles.css`) and are never client-configurable.
+  - **Public site (outside)** — fully per-client, driven by `site_settings`
+    tokens through `ThemeStyleTag`.
+- Changing a client's primary colour, fonts or corner style must change the
+  public site only. The admin must look identical across clients.
+- Never let client tokens leak into the admin scope, and never put a
+  client-specific colour or font inside the admin theme.
+- Both sides still use semantic tokens. Components never hardcode colours or
+  fonts; the admin scope supplies the admin values, `:root`/`ThemeStyleTag` the
+  public ones.
+- The one exception carried over from the client theme is the logo, which is
+  brand identity rather than styling.
+
 
 ## 6. General
 

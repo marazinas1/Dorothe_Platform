@@ -79,8 +79,10 @@ Read `AGENTS.md` in the repo first. The rules that get violated most often:
    follow every clone. This has already happened once and needed a
    neutralising migration. Client content lives in
    `supabase/seed/<client>.sql` and in `site_settings`.
-3. **One design system** shared between public site and admin. Tokens, never
-   hardcoded colours or fonts.
+3. **Two design systems.** The admin has one fixed design system, identical in
+   every clone and never client-configurable; the public site is per-client
+   through `site_settings`. Tokens, never hardcoded colours or fonts.
+
 4. **Business logic in `/lib`.** Components render.
 5. **Files under 200 lines.**
 6. **SSR intact on public routes.** The admin subtree stays `ssr: false`.
