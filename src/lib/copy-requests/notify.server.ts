@@ -2,9 +2,7 @@
 // the default. Sending is best effort — the request is stored either way.
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-const SITE_NAME = "Immobilienberatung Dorothe Waltner";
-const FROM_DOMAIN = "notify.dorothe.deerva.com";
-const ADMIN_URL = "https://dorothe.deerva.com/admin";
+import { ADMIN_URL, SENDER_DOMAIN, fromAddress } from "@/lib/email/sender";
 
 type Payload = {
   scope: "home" | "page";
