@@ -59,7 +59,7 @@ export function ListingCardTile({
         )}
         <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-media bg-background/90 px-2.5 py-1 text-[11px] uppercase tracking-[0.12em] text-foreground backdrop-blur-sm">
           <span aria-hidden className={`h-1.5 w-1.5 rounded-full ${TONE_DOT_CLASS[tone]}`} />
-          {t(`listings.status.${row.status}`)}
+          {t(statusLabelKey(row.status, row.deal_type))}
         </span>
       </Link>
 

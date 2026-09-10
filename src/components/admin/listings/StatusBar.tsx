@@ -10,6 +10,7 @@ import { statusOptionsFor } from "@/lib/listings/status-options";
 import type { Checklist } from "@/lib/listings/publish-checklist";
 import { blockerSummary } from "@/lib/listings/blocker-summary";
 import { scrollToField } from "@/lib/listings/scroll-to-field";
+import { statusLabelKey, statusActionKey } from "@/lib/listings/status-label";
 import { PreviewButton } from "./PreviewButton";
 import { HomePickToggle } from "./HomePickToggle";
 import { useStatusChange } from "./use-status-change";
@@ -66,7 +67,7 @@ export function StatusBar({
           {t("admin.listings.fields.status")}
         </span>
         <StatusChip icon={isPublic ? "published" : "draft"} tone={isPublic ? "active" : "muted"}>
-          {t(`listings.status.${status ?? "draft"}`)}
+          {t(statusLabelKey(status, dealType))}
         </StatusChip>
 
         {isPublic && slug ? (
@@ -114,7 +115,7 @@ export function StatusBar({
               onClick={() => void apply(listingId, target as ListingStatus)}
             >
               <ArrowRightLeft className="h-4 w-4" />
-              {t(`admin.listings.statusAction.${target}`)}
+              {t(statusActionKey(target, dealType))}
             </Button>
           ))}
 

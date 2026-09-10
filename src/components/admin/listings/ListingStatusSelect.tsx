@@ -62,13 +62,13 @@ export function ListingStatusSelect({ row }: { row: AdminListingRow }) {
           ) : (
             <span aria-hidden className={`h-1.5 w-1.5 rounded-full ${TONE_DOT_CLASS[tone]}`} />
           )}
-          {t(`listings.status.${row.status}`)}
+          {t(statusLabelKey(row.status, row.deal_type))}
           {options.length > 0 ? <ChevronDown className="h-3 w-3 opacity-70" /> : null}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-56">
           <DropdownMenuItem disabled className="opacity-100">
             <Check className="h-4 w-4" />
-            {t(`listings.status.${row.status}`)}
+            {t(statusLabelKey(row.status, row.deal_type))}
           </DropdownMenuItem>
           {options.map((target) => (
             <DropdownMenuItem key={target} onSelect={() => choose(target)}>
@@ -76,7 +76,7 @@ export function ListingStatusSelect({ row }: { row: AdminListingRow }) {
                 aria-hidden
                 className={`mr-2 h-1.5 w-1.5 rounded-full ${TONE_DOT_CLASS[statusTone(target)]}`}
               />
-              {t(`listings.status.${target}`)}
+              {t(statusLabelKey(target, row.deal_type))}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>

@@ -204,7 +204,7 @@ function ListingDetail() {
         {preview ? (
           <div className="bg-secondary px-6 py-2 text-center text-[11px] uppercase tracking-[0.16em] text-secondary-foreground">
             {t("listings.detail.preview_notice", {
-              status: t(`listings.status.${l.status}`),
+              status: t(statusLabelKey(l.status, l.deal_type)),
             })}
           </div>
         ) : null}
