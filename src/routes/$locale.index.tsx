@@ -114,8 +114,8 @@ function HomePage() {
         settings={settings}
         copy={copy}
         media={media}
-        featured={featured.items.slice(0, HOMEPAGE_LISTING_LIMIT)}
-        sold={applySoldPricePolicy(sold.items.slice(0, HOMEPAGE_LISTING_LIMIT), settings)}
+        featured={featured.items}
+        sold={applySoldPricePolicy(sold.items, settings)}
         hideSoldPrice={soldPricesHidden(settings)}
         testimonials={voices}
       />
