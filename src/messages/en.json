@@ -1063,7 +1063,14 @@
         "draft": "Draft",
         "archived": "Archived"
       },
-      "slugUnlock": "Change web address anyway"
+      "slugUnlock": "Change web address anyway",
+      "home": {
+        "on": "On home page",
+        "off": "Show on home page",
+        "added": "Added to the home page.",
+        "removed": "Removed from the home page.",
+        "limitReached": "The home page shows at most {{count}} properties. Remove one first."
+      }
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",

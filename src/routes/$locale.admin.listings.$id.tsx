@@ -55,6 +55,7 @@ function EditListing() {
         status={(listing.status as string) ?? null}
         slug={(listing.slug as string) ?? null}
         publishedEver={Boolean(listing.published_at)}
+        featured={Boolean(listing.is_featured)}
         images={data.images as unknown as ImageRecord[]}
       />
     </div>
