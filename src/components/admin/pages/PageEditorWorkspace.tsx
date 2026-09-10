@@ -95,6 +95,7 @@ export function PageEditorWorkspace({
               entry={admin.mediaEntry}
               onChange={admin.setMediaEntry}
               resolved={(slot) => admin.resolved.media(slot)}
+              scope={definition.key}
             />
           ) : null}
 

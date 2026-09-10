@@ -18,3 +18,12 @@ export function brandAssetPath(kind: BrandAssetKind, variant: string): string {
 export function siteAssetUrl(supabaseUrl: string, path: string): string {
   return `${supabaseUrl}/storage/v1/object/public/${SITE_ASSETS_BUCKET}/${path}`;
 }
+
+/**
+ * Stable path for a page photograph slot, so replacing a picture overwrites the
+ * old file instead of piling up copies.
+ */
+export function pageMediaPath(scope: string, slot: string): string {
+  const safe = (v: string) => v.replace(/[^a-z0-9_-]/gi, "-").toLowerCase();
+  return `pages/${safe(scope)}-${safe(slot)}.webp`;
+}
