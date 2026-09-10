@@ -1099,12 +1099,12 @@
         "label": "Change status"
       },
       "statusGroups": {
-        "active": "Active",
+        "active": "On the market",
         "coming_soon": "Coming soon",
         "reserved": "Reserved",
         "closed": "Sold & rented",
-        "draft": "Draft",
-        "archived": "Archived"
+        "draft": "Drafts",
+        "archived": "Archive"
       },
       "slugUnlock": "Change web address anyway",
       "home": {

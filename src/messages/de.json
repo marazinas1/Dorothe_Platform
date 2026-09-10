@@ -1099,12 +1099,12 @@
         "label": "Status ändern"
       },
       "statusGroups": {
-        "active": "Aktiv",
+        "active": "Am Markt",
         "coming_soon": "Demnächst",
         "reserved": "Reserviert",
-        "closed": "Verkauft & Vermietet",
-        "draft": "Entwurf",
-        "archived": "Archiviert"
+        "closed": "Verkauft & vermietet",
+        "draft": "Entwürfe",
+        "archived": "Archiv"
       },
       "slugUnlock": "Webadresse trotzdem ändern",
       "home": {
