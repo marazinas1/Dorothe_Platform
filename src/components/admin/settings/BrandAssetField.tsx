@@ -88,10 +88,10 @@ export function BrandAssetField({
 
       <div className="flex flex-wrap items-center gap-3">
         <div
-          className={`admin-media-frame shrink-0 p-2 ${square ? "size-16" : "h-16 w-28"} ${
-            dark ? "bg-foreground" : ""
-          }`}
+          className={`admin-media-frame shrink-0 p-2 ${square ? "size-16" : "h-16 w-28"}`}
+          style={dark ? { background: "var(--foreground)" } : undefined}
         >
+
           {value ? (
             <img src={value} alt="" className="max-h-full max-w-full object-contain" />
           ) : (
