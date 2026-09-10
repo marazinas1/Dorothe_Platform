@@ -63,13 +63,15 @@ REQUIRED“ užrašo (dabar matosi ir admin dalyje).
 | Opening hours (JSON) | Darbo laikas | Perrašau į paprastas savaitės dienų eiles: nuo / iki + „Uždaryta“ |
 | Social links (JSON) | Facebook / LinkedIn nuorodos | Perrašau į atskirus laukus: Facebook, LinkedIn, Instagram |
 
-Struktūra po pertvarkos:
+Struktūra po pertvarkos — tik trys skirtukai:
 1. **Business** (General + Contact sujungta): logotipai ir favicon, pavadinimas,
    kontaktai, adresas su žemėlapiu, darbo laikas, socialiniai tinklai.
 2. **Page texts** — tekstai pagal puslapius.
 3. **Legal** — Impressum, privatumas, AGB.
-4. **Modules** — kas rodoma svetainėje (nuoma, blogas, atsiliepimai, archyvas).
-   **Matomas tik developeriui**, Dorothe šio skirtuko nemato.
+
+**Modules skirtukas ištrinamas visiškai** — nerodomas nei Dorothei, nei
+developeriui. Moduliai (nuoma, blogas, atsiliepimai, archyvas) lieka įjungti
+duomenų bazėje; jei ką reikės išjungti, pakeisiu kode.
 
 Techninius laukus (country, locales, currency, area unit) matys tik developeris;
 Dorothei jų visai nebus.
