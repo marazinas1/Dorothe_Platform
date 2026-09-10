@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Pencil, Trash2 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { StatusChip } from "@/components/admin/ui/StatusChip";
 import { pickLocalized } from "@/lib/listings/format";
 import { formatPostDate } from "@/lib/posts/date";
 import type { PostRow as Row } from "@/lib/posts/types";
@@ -25,9 +25,13 @@ export function PostRow({ row, locale, onEdit, onDelete }: Props) {
         <p className="truncate text-sm font-medium">{title || "—"}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           {row.status === "published" ? (
-            <Badge variant="secondary">{t("admin.posts.published")}</Badge>
+            <StatusChip icon="published" tone="active">
+              {t("admin.posts.published")}
+            </StatusChip>
           ) : (
-            <Badge variant="outline">{t("admin.posts.draft")}</Badge>
+            <StatusChip icon="draft" tone="muted">
+              {t("admin.posts.draft")}
+            </StatusChip>
           )}
           {date ? <span>{date}</span> : null}
           <span className="truncate">/{row.slug}</span>
