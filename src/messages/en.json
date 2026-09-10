@@ -1399,7 +1399,24 @@
       "lockAll": "Lock all current wording as default",
       "lockedCount": "{{locked}} of {{total}} fields have a locked default",
       "showMore": "Show more",
-      "showLess": "Show less"
+      "showLess": "Show less",
+      "request": {
+        "action": "Request as default",
+        "hint": "Send this wording to the developer to be locked in as the default.",
+        "sent": "Sent for approval",
+        "pending": "Requested",
+        "approved": "Approved",
+        "declined": "Declined",
+        "dismiss": "Got it",
+        "approve": "Approve",
+        "decline": "Decline",
+        "home": "Home page",
+        "queueHeading": "Default wording requests",
+        "notice": {
+          "approved": "Your wording for {{field}} ({{locale}}) is now the default.",
+          "declined": "Your wording for {{field}} ({{locale}}) was not made the default. It still shows on the site."
+        }
+      }
     },
     "pageEditor": {
       "editHint": "The words and photographs of this page. Leave a field empty to keep the current line.",

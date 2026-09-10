@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Lock, LockOpen, Undo2 } from "lucide-react";
+import { Lock, LockOpen, Send, Undo2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Input } from "@/components/ui/input";
@@ -20,9 +20,13 @@ type Props = {
   placeholder: string;
   /** True once a developer has frozen this field's default wording. */
   isLocked?: boolean;
+  /** Outcome of the owner's own "make this the default" request, if any. */
+  requestStatus?: "pending" | "approved" | "declined" | null;
   onChange: (next: string) => void;
   onReset: () => void;
   onSetDefault: () => void;
+  /** Owner path: ask the developer to lock this wording in. */
+  onRequestDefault?: () => void;
 };
 
 const COLLAPSE_AT = 180;
@@ -40,9 +44,11 @@ export function DefaultTextField({
   value,
   placeholder,
   isLocked = false,
+  requestStatus = null,
   onChange,
   onReset,
   onSetDefault,
+  onRequestDefault,
 }: Props) {
   const { t } = useTranslation();
   const user = useCurrentUser();
@@ -64,6 +70,11 @@ export function DefaultTextField({
           {edited ? (
             <span className="rounded-md border border-border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
               {t("admin.copyEditor.edited")}
+            </span>
+          ) : null}
+          {requestStatus ? (
+            <span className="rounded-md border border-border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              {t(`admin.copyEditor.request.${requestStatus}`)}
             </span>
           ) : null}
         </div>
@@ -93,6 +104,19 @@ export function DefaultTextField({
             >
               {isLocked ? <Lock className="h-3 w-3" /> : <LockOpen className="h-3 w-3" />}
               {t("admin.copyEditor.setDefault")}
+            </Button>
+          ) : onRequestDefault ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="h-6 px-2 text-xs"
+              disabled={!edited || requestStatus === "pending"}
+              onClick={onRequestDefault}
+              title={t("admin.copyEditor.request.hint")}
+            >
+              <Send className="h-3 w-3" />
+              {t("admin.copyEditor.request.action")}
             </Button>
           ) : null}
         </div>

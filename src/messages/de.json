@@ -1399,7 +1399,24 @@
       "lockAll": "Alle aktuellen Texte als Standard festlegen",
       "lockedCount": "{{locked}} von {{total}} Feldern haben einen festen Standard",
       "showMore": "Mehr anzeigen",
-      "showLess": "Weniger anzeigen"
+      "showLess": "Weniger anzeigen",
+      "request": {
+        "action": "Als Standard vorschlagen",
+        "hint": "Diesen Text an den Entwickler senden, damit er als Standard festgelegt wird.",
+        "sent": "Zur Freigabe gesendet",
+        "pending": "Angefragt",
+        "approved": "Freigegeben",
+        "declined": "Abgelehnt",
+        "dismiss": "Verstanden",
+        "approve": "Freigeben",
+        "decline": "Ablehnen",
+        "home": "Startseite",
+        "queueHeading": "Anfragen für Standardtexte",
+        "notice": {
+          "approved": "Ihr Text für {{field}} ({{locale}}) ist jetzt der Standard.",
+          "declined": "Ihr Text für {{field}} ({{locale}}) wurde nicht als Standard festgelegt. Er wird weiter auf der Website angezeigt."
+        }
+      }
     },
     "pageEditor": {
       "editHint": "Die Texte und Bilder dieser Seite. Ein leeres Feld behält die bisherige Zeile.",
