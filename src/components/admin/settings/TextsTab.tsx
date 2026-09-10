@@ -33,7 +33,7 @@ export function TextsTab() {
                 : "border-border text-muted-foreground hover:text-foreground",
             )}
           >
-            {t(`admin.nav.${id === "home" ? "content" : id}`)}
+            {id === "home" ? t("admin.settings.texts.home") : t(`admin.nav.${id}`)}
           </button>
         ))}
       </div>
