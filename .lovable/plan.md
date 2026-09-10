@@ -69,6 +69,7 @@ Struktūra po pertvarkos:
 2. **Page texts** — tekstai pagal puslapius.
 3. **Legal** — Impressum, privatumas, AGB.
 4. **Modules** — kas rodoma svetainėje (nuoma, blogas, atsiliepimai, archyvas).
+   **Matomas tik developeriui**, Dorothe šio skirtuko nemato.
 
 Techninius laukus (country, locales, currency, area unit) matys tik developeris;
 Dorothei jų visai nebus.
