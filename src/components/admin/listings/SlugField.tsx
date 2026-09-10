@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Unlock } from "lucide-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
@@ -60,6 +61,7 @@ export function SlugField({
             className="mt-2"
             onClick={() => setUnlocked(true)}
           >
+            <Unlock className="h-4 w-4" />
             {t("admin.listings.slugUnlock")}
           </Button>
         </div>

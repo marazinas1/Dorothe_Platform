@@ -79,7 +79,7 @@ export function ListingCardActions({
         variant="secondary"
         onClick={() => navigate({ to: "/$locale/admin/listings/$id", params: { locale, id } })}
       >
-        <Pencil className="mr-2 h-3.5 w-3.5" />
+        <Pencil className="h-3.5 w-3.5" />
         {t("admin.listings.actions.edit")}
       </Button>
 
@@ -97,7 +97,7 @@ export function ListingCardActions({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-52">
           <DropdownMenuItem onSelect={() => void copyLink()}>
-            <Link2 className="mr-2 h-4 w-4" />
+            <Link2 className="h-4 w-4" />
             {t("admin.listings.actions.copyLink")}
           </DropdownMenuItem>
           <DropdownMenuItem
@@ -112,12 +112,12 @@ export function ListingCardActions({
               })
             }
           >
-            <Copy className="mr-2 h-4 w-4" />
+            <Copy className="h-4 w-4" />
             {t("admin.listings.actions.duplicate")}
           </DropdownMenuItem>
           {canArchive ? (
             <DropdownMenuItem onSelect={() => void apply(id, "archived")}>
-              <Archive className="mr-2 h-4 w-4" />
+              <Archive className="h-4 w-4" />
               {t("admin.listings.statusAction.archived")}
             </DropdownMenuItem>
           ) : null}
@@ -128,7 +128,7 @@ export function ListingCardActions({
               setConfirmOpen(true);
             }}
           >
-            <Trash2 className="mr-2 h-4 w-4" />
+            <Trash2 className="h-4 w-4" />
             {t("admin.listings.actions.delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>

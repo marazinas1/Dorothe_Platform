@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { X } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -97,7 +98,8 @@ export function TestimonialForm({ initial, locales, onSave, onCancel }: Props) {
 
       <div className="flex items-center gap-3">
         <SaveButton onSubmit={() => onSave(draft)} />
-        <Button type="button" variant="ghost" onClick={onCancel}>
+        <Button type="button" variant="outline" onClick={onCancel}>
+          <X className="h-4 w-4" />
           {t("admin.testimonials.cancel")}
         </Button>
       </div>

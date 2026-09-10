@@ -55,7 +55,7 @@ export function PreviewButton({
       {busy ? (
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       ) : (
-        <Eye className="mr-2 h-4 w-4" />
+        <Eye className="h-4 w-4" />
       )}
       {t("admin.listings.preview")}
     </Button>

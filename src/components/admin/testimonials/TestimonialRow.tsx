@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { ArrowDown, ArrowUp, Pencil, Trash2 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { StatusChip } from "@/components/admin/ui/StatusChip";
 import { pickLocalized } from "@/lib/listings/format";
 import type { TestimonialRow as Row } from "@/lib/testimonials/types";
 
@@ -25,12 +25,18 @@ export function TestimonialRow({ row, locale, onEdit, onDelete, onMove }: Props)
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span>{[row.author_name, row.author_detail].filter(Boolean).join(" · ") || "—"}</span>
           {row.published ? (
-            <Badge variant="secondary">{t("admin.testimonials.published")}</Badge>
+            <StatusChip icon="published" tone="active">
+              {t("admin.testimonials.published")}
+            </StatusChip>
           ) : (
-            <Badge variant="outline">{t("admin.testimonials.draft")}</Badge>
+            <StatusChip icon="draft" tone="muted">
+              {t("admin.testimonials.draft")}
+            </StatusChip>
           )}
           {row.show_on_home ? (
-            <Badge variant="secondary">{t("admin.testimonials.onHome")}</Badge>
+            <StatusChip icon="home" tone="active">
+              {t("admin.testimonials.onHome")}
+            </StatusChip>
           ) : null}
         </div>
       </div>

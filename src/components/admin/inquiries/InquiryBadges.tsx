@@ -1,26 +1,22 @@
 import { useTranslation } from "react-i18next";
 
-import { Badge } from "@/components/ui/badge";
+import { StatusChip } from "@/components/admin/ui/StatusChip";
 import { inquiryTypeKey, type InquiryStatus } from "@/lib/inquiries/types";
 
 export function InquiryTypeBadge({ type }: { type: string }) {
   const { t } = useTranslation();
   return (
-    <Badge variant="outline" className="font-normal">
-      {t(`admin.inquiries.types.${inquiryTypeKey(type)}`)}
-    </Badge>
+    <StatusChip icon="type">{t(`admin.inquiries.types.${inquiryTypeKey(type)}`)}</StatusChip>
   );
 }
 
 export function InquiryStatusBadge({ status }: { status: InquiryStatus }) {
   const { t } = useTranslation();
+  const icon = status === "new" ? "unread" : status === "handled" ? "published" : "read";
   return (
-    <Badge
-      variant={status === "new" ? "default" : status === "handled" ? "secondary" : "outline"}
-      className="font-normal"
-    >
+    <StatusChip icon={icon} tone={status === "new" ? "active" : "muted"}>
       {t(`admin.inquiries.status.${status}`)}
-    </Badge>
+    </StatusChip>
   );
 }
 

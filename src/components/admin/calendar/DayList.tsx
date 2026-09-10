@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Clock, MapPin, Phone, Pencil, Trash2 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { StatusChip } from "@/components/admin/ui/StatusChip";
 import { pickLocalized } from "@/lib/listings/format";
 import { shortTime, type AppointmentRow } from "@/lib/calendar/types";
 
@@ -35,10 +35,13 @@ export function DayList({ rows, locale, onEdit, onDelete }: Props) {
               {shortTime(row.start_time)}
               {row.end_time ? `–${shortTime(row.end_time)}` : ""}
             </span>
-            <Badge variant="outline">{t(`admin.calendar.kind.${row.kind}`)}</Badge>
-            <Badge variant={row.status === "cancelled" ? "outline" : "secondary"}>
+            <StatusChip icon="type">{t(`admin.calendar.kind.${row.kind}`)}</StatusChip>
+            <StatusChip
+              icon={row.status === "cancelled" ? "cancelled" : "confirmed"}
+              tone={row.status === "cancelled" ? "muted" : "active"}
+            >
               {t(`admin.calendar.status.${row.status}`)}
-            </Badge>
+            </StatusChip>
             <div className="ml-auto flex gap-1">
               <Button
                 type="button"

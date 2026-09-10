@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ShieldCheck } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
+import { RotateCcw, Trash2, UserX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { StatusChip } from "@/components/admin/ui/StatusChip";
 import {
   Select,
   SelectContent,
@@ -52,23 +51,16 @@ export function UserRow({
         <div className="flex flex-wrap items-center gap-2">
           <span className="truncate text-sm font-medium">{user.full_name ?? user.email}</span>
           {user.is_self ? (
-            <Badge variant="outline" className="gap-1">
-              <ShieldCheck className="h-3 w-3" />
-              {t("admin.users.badges.you")}
-            </Badge>
+            <StatusChip icon="role">{t("admin.users.badges.you")}</StatusChip>
           ) : null}
-          <Badge variant="outline" className="gap-1">
-            <ShieldCheck className="h-3 w-3" />
-            {t(`admin.users.roles.${user.role}`)}
-          </Badge>
+          <StatusChip icon="role">{t(`admin.users.roles.${user.role}`)}</StatusChip>
           {user.is_last_owner ? (
-            <Badge variant="outline" className="gap-1">
-              <ShieldCheck className="h-3 w-3" />
-              {t("admin.users.badges.lastOwner")}
-            </Badge>
+            <StatusChip icon="role">{t("admin.users.badges.lastOwner")}</StatusChip>
           ) : null}
           {!user.is_active ? (
-            <Badge variant="outline">{t("admin.users.badges.revoked")}</Badge>
+            <StatusChip icon="cancelled" tone="muted">
+              {t("admin.users.badges.revoked")}
+            </StatusChip>
           ) : null}
         </div>
         {user.full_name ? (
@@ -117,22 +109,25 @@ export function UserRow({
             title={reason ?? t("admin.users.actions.revoke")}
             onClick={() => setConfirm("revoke")}
           >
+            <UserX className="h-4 w-4" />
             {t("admin.users.actions.revoke")}
           </Button>
         ) : (
           <Button variant="outline" size="sm" disabled={locked} onClick={onRestore}>
+            <RotateCcw className="h-4 w-4" />
             {t("admin.users.actions.restore")}
           </Button>
         )}
 
         <Button
-          variant="ghost"
+          variant="outline"
           size="sm"
           className="text-destructive hover:text-destructive"
           disabled={locked}
           title={reason}
           onClick={() => setConfirm("delete")}
         >
+          <Trash2 className="h-4 w-4" />
           {t("admin.users.actions.delete")}
         </Button>
       </div>

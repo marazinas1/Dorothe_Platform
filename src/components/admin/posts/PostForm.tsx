@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { X } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -174,7 +175,8 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
 
       <div className="flex items-center gap-3">
         <SaveButton onSubmit={() => onSave(draft)} />
-        <Button type="button" variant="ghost" onClick={onCancel}>
+        <Button type="button" variant="outline" onClick={onCancel}>
+          <X className="h-4 w-4" />
           {t("admin.posts.cancel")}
         </Button>
       </div>

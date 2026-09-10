@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Check, Mail, MailOpen, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -57,6 +57,7 @@ export function InquiryDetail({
               disabled={mutation.isPending}
               onClick={() => mutation.mutate("read")}
             >
+              <MailOpen className="h-4 w-4" />
               {t("admin.inquiries.detail.mark_open")}
             </Button>
           ) : (
@@ -65,6 +66,7 @@ export function InquiryDetail({
               disabled={mutation.isPending}
               onClick={() => mutation.mutate("handled")}
             >
+              <Check className="h-4 w-4" />
               {t("admin.inquiries.detail.mark_handled")}
             </Button>
           )}
@@ -76,7 +78,7 @@ export function InquiryDetail({
         <div className="flex flex-wrap gap-2">
           <Button asChild variant="outline" size="sm">
             <a href={`mailto:${inquiry.email}`}>
-              <Mail className="mr-2 h-4 w-4" />
+              <Mail className="h-4 w-4" />
               {inquiry.email}
             </a>
           </Button>
@@ -84,13 +86,13 @@ export function InquiryDetail({
             <>
               <Button asChild variant="outline" size="sm">
                 <a href={`tel:${inquiry.phone}`}>
-                  <Phone className="mr-2 h-4 w-4" />
+                  <Phone className="h-4 w-4" />
                   {inquiry.phone}
                 </a>
               </Button>
               <Button asChild variant="outline" size="sm">
                 <a href={waLink(inquiry.phone)} target="_blank" rel="noreferrer">
-                  <MessageCircle className="mr-2 h-4 w-4" />
+                  <MessageCircle className="h-4 w-4" />
                   {t("admin.inquiries.detail.whatsapp")}
                 </a>
               </Button>

@@ -53,7 +53,7 @@ export function ListingStatusSelect({ row }: { row: AdminListingRow }) {
     <div className="min-w-0">
       <DropdownMenu>
         <DropdownMenuTrigger
-          className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-[12px] font-medium tracking-[0.01em] transition-opacity hover:opacity-80 disabled:opacity-60 ${TONE_BADGE_CLASS[tone]}`}
+          className={`inline-flex h-6 items-center gap-1.5 rounded-md border px-2 text-xs font-medium leading-none transition-opacity hover:opacity-80 disabled:opacity-60 ${TONE_BADGE_CLASS[tone]}`}
           disabled={busy !== null || options.length === 0}
           aria-label={t("admin.listings.statusSelect.label")}
         >
@@ -67,7 +67,7 @@ export function ListingStatusSelect({ row }: { row: AdminListingRow }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-56">
           <DropdownMenuItem disabled className="opacity-100">
-            <Check className="mr-2 h-4 w-4" />
+            <Check className="h-4 w-4" />
             {t(`listings.status.${row.status}`)}
           </DropdownMenuItem>
           {options.map((target) => (

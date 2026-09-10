@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import { ClientOnly } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Loader2, MapPin } from "lucide-react";
+import { Loader2, MapPin, Pencil } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -101,7 +101,7 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
           {status === "searching" ? (
             <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
           ) : (
-            <MapPin className="mr-2 h-3.5 w-3.5" />
+            <MapPin className="h-3.5 w-3.5" />
           )}
           {status === "notFound" || status === "limited" || status === "failed"
             ? t("admin.listings.geocode.retry")
@@ -110,10 +110,11 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
         <Button
           type="button"
           size="sm"
-          variant="ghost"
+          variant="outline"
           className="ml-auto"
           onClick={() => setManual((prev) => !prev)}
         >
+          <Pencil className="h-4 w-4" />
           {manual
             ? t("admin.listings.geocode.useAutomatic")
             : t("admin.listings.geocode.editManually")}
