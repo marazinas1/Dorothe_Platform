@@ -201,10 +201,10 @@
  * ThemeStyleTag), so re-branding a client changes the public site only.
  * The one thing that still comes from the client is the logo.
  *
- * Everything below is scoped to `.admin-theme`, which AdminShell puts on the
+ * Everything below is scoped to `.admin-theme.admin-theme`, which AdminShell puts on the
  * admin wrapper and on <body> so Radix portals (dialogs, menus, toasts) match.
  */
-.admin-theme {
+.admin-theme.admin-theme {
   /* Fixed admin palette. Never client-configurable. */
   --admin-linen: oklch(0.972 0.008 84.6);
   --admin-white: oklch(0.995 0.003 84.6);
@@ -264,70 +264,70 @@
   line-height: 1.5;
 }
 
-.admin-theme :is(h1, h2, h3, h4, h5, h6, .font-heading) {
+.admin-theme.admin-theme :is(h1, h2, h3, h4, h5, h6, .font-heading) {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
-.admin-theme h1 {
+.admin-theme.admin-theme h1 {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.015em;
 }
 
-.admin-theme h2 {
+.admin-theme.admin-theme h2 {
   font-size: 1.125rem;
 }
 
-.admin-theme h3 {
+.admin-theme.admin-theme h3 {
   font-size: 1rem;
 }
 
-.admin-theme main {
+.admin-theme.admin-theme main {
   background: var(--background);
 }
 
-.admin-theme [data-slot="input"],
-.admin-theme [data-slot="textarea"],
-.admin-theme [data-slot="select-trigger"] {
+.admin-theme.admin-theme [data-slot="input"],
+.admin-theme.admin-theme [data-slot="textarea"],
+.admin-theme.admin-theme [data-slot="select-trigger"] {
   min-height: 2.75rem;
   border-radius: 0.875rem;
   background: var(--card);
 }
 
-.admin-theme [data-slot="input"]:focus-visible,
-.admin-theme [data-slot="textarea"]:focus-visible,
-.admin-theme [data-slot="select-trigger"]:focus-visible {
+.admin-theme.admin-theme [data-slot="input"]:focus-visible,
+.admin-theme.admin-theme [data-slot="textarea"]:focus-visible,
+.admin-theme.admin-theme [data-slot="select-trigger"]:focus-visible {
   border-color: var(--admin-sage);
   box-shadow: 0 0 0 3px var(--admin-sage-tint);
 }
 
 /* Pill buttons: filled sage primary, quiet neutral outline, ghost for rare. */
-.admin-theme [data-slot="button"] {
+.admin-theme.admin-theme [data-slot="button"] {
   min-height: 2.5rem;
   border-radius: 999px;
   font-weight: 600;
 }
 
-.admin-theme [data-slot="badge"] {
+.admin-theme.admin-theme [data-slot="badge"] {
   border-radius: 999px;
 }
 
-.admin-theme [data-sidebar="menu-button"] {
+.admin-theme.admin-theme [data-sidebar="menu-button"] {
   min-height: 2.625rem;
   border-radius: 0.75rem;
   font-weight: 500;
 }
 
-.admin-theme [data-sidebar="menu-button"][data-active="true"] {
+.admin-theme.admin-theme [data-sidebar="menu-button"][data-active="true"] {
   background: var(--admin-sage-tint);
   color: var(--admin-sage-deep);
   font-weight: 600;
 }
 
-.admin-theme [data-sidebar="group-label"] {
+.admin-theme.admin-theme [data-sidebar="group-label"] {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
