@@ -47,11 +47,16 @@ export async function applyDefaultTextRequest(
     );
     const content = withoutOverride((row.home_content ?? {}) as Bag, field_key, locale);
 
-    const { error: writeError } = await supabase
+    // Select back, so a write blocked by access rules cannot pass as a success.
+    const { data: written, error: writeError } = await supabase
       .from("site_settings")
       .update({ home_defaults: defaults, home_content: content } as never)
-      .eq("id", row.id);
-    if (writeError) throw new Error(`Update failed: ${writeError.message}`);
+      .eq("id", row.id)
+      .select("id")
+      .maybeSingle();
+    if (writeError || !written) {
+      throw new Error(`Update failed: ${writeError?.message ?? "no row updated"}`);
+    }
     return;
   }
 
@@ -68,11 +73,15 @@ export async function applyDefaultTextRequest(
   const defaults = withDefault((row?.defaults ?? {}) as Bag, field_key, locale, requested_text);
   const content = withoutOverride((row?.content ?? {}) as Bag, field_key, locale);
 
-  const { error: writeError } = await supabase
+  const { data: written, error: writeError } = await supabase
     .from("page_content")
     .upsert(
       { page, defaults, content, media: row?.media ?? {} } as never,
       { onConflict: "page" },
-    );
-  if (writeError) throw new Error(`Update failed: ${writeError.message}`);
+    )
+    .select("page")
+    .maybeSingle();
+  if (writeError || !written) {
+    throw new Error(`Update failed: ${writeError?.message ?? "no row updated"}`);
+  }
 }
