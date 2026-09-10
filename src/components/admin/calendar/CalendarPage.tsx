@@ -17,6 +17,8 @@ import type { AppointmentRow } from "@/lib/calendar/types";
 import { MonthGrid } from "./MonthGrid";
 import { DayList } from "./DayList";
 import { AppointmentForm, toAppointmentDraft, type AppointmentDraft } from "./AppointmentForm";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { AdminSection } from "@/components/admin/ui/AdminSection";
 
 /** Viewings, meetings and personal time in one internal calendar. */
 export function CalendarPage() {
@@ -63,18 +65,10 @@ export function CalendarPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
-            {t("admin.calendar.title")}
-          </h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.calendar.hint")}</p>
-        </div>
-        <Button type="button" onClick={() => setEditing(toAppointmentDraft(selected))}>
+      <AdminPageHeader icon={CalendarDays} title={t("admin.calendar.title")} description={t("admin.calendar.hint")} actions={<Button type="button" onClick={() => setEditing(toAppointmentDraft(selected))}>
           <Plus className="h-4 w-4" />
           {t("admin.calendar.add")}
-        </Button>
-      </header>
+        </Button>} />
 
       <div className="flex items-center gap-2">
         <Button
@@ -120,8 +114,7 @@ export function CalendarPage() {
         onSelect={setSelected}
       />
 
-      <section className="space-y-3">
-        <h2 className="text-sm font-semibold">{dayLabel(selected, i18n.language)}</h2>
+      <AdminSection title={dayLabel(selected, i18n.language)}>
         {editing ? (
           <AppointmentForm
             initial={editing}
@@ -137,7 +130,7 @@ export function CalendarPage() {
           onEdit={(row) => setEditing(toAppointmentDraft(selected, row))}
           onDelete={remove}
         />
-      </section>
+      </AdminSection>
     </div>
   );
 }

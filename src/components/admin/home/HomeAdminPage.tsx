@@ -6,6 +6,8 @@ import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { useHomeAdmin } from "@/lib/home/use-home-admin";
 
 import { HomeEditorWorkspace } from "./HomeEditorWorkspace";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { Home } from "lucide-react";
 
 /**
  * Home page management: one page, its words and photographs on the left and the
@@ -24,10 +26,7 @@ export function HomeAdminPage() {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight">{t("admin.home.title")}</h1>
-        <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.home.editHint")}</p>
-      </header>
+      <AdminPageHeader icon={Home} title={t("admin.home.title")} description={t("admin.home.editHint")} />
 
       <HomeEditorWorkspace
         home={home}

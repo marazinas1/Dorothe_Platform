@@ -72,7 +72,7 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
   const dateValue = draft.published_at ? draft.published_at.slice(0, 10) : "";
 
   return (
-    <div className="space-y-6 rounded-lg border border-border bg-card p-5">
+    <div className="space-y-6 rounded-[var(--radius)] border border-border bg-card p-5">
       {locales.map((loc) => (
         <div key={loc} className="space-y-4 border-b border-border/60 pb-5 last:border-0 last:pb-0">
           <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

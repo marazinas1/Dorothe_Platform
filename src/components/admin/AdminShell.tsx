@@ -39,7 +39,7 @@ export function AdminShell({
       <div className="admin-density flex min-h-screen w-full bg-background text-foreground">
         <AdminSidebar email={profile.email ?? displayName} roleLabel={roleLabel} />
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-3 sm:px-4">
+          <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-4 sm:px-6">
             <div className="flex min-w-0 items-center gap-3">
               <SidebarTrigger
                 aria-label={t("admin.topbar.toggleSidebar")}
@@ -51,7 +51,7 @@ export function AdminShell({
             </div>
             <AdminLocaleToggle current={interfaceLocale} />
           </header>
-          <main className="min-h-0 flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
+          <main className="min-h-0 flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">{children}</main>
         </div>
       </div>
     </SidebarProvider>

@@ -57,8 +57,11 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
   }
 
   return (
-    <div className="space-y-1.5">
-      <Label>{label}</Label>
+    <div className="space-y-2 rounded-[var(--radius)] border border-border p-4">
+      <div>
+        <Label>{label}</Label>
+        {help ? <p className="mt-1 text-xs text-muted-foreground">{help}</p> : null}
+      </div>
 
       <input
         ref={inputRef}
@@ -75,7 +78,7 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
       {value ? (
         <div className="flex items-start gap-3">
           <div
-            className={`flex h-20 w-32 shrink-0 items-center justify-center border border-border p-2 ${
+            className={`flex aspect-[4/3] w-36 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius)] border border-border p-3 ${
               dark ? "bg-foreground" : "bg-muted/30"
             }`}
           >
@@ -99,7 +102,7 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
             <Button
               type="button"
               size="sm"
-              variant="ghost"
+          variant="outline"
               disabled={busy}
               onClick={() => onChange(null)}
             >
@@ -113,7 +116,7 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
           type="button"
           disabled={busy}
           onClick={() => inputRef.current?.click()}
-          className="flex w-full flex-col items-center justify-center gap-1 border-2 border-dashed border-border bg-muted/20 px-4 py-6 text-center transition-colors hover:border-primary/50 hover:bg-muted/40 disabled:cursor-progress"
+          className="flex min-h-32 w-full flex-col items-center justify-center gap-2 rounded-[var(--radius)] border border-dashed border-border bg-muted/30 px-4 py-6 text-center transition-colors hover:bg-muted/50 disabled:cursor-progress"
         >
           {busy ? (
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
@@ -124,7 +127,6 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
         </button>
       )}
 
-      {help ? <p className="text-xs text-muted-foreground">{help}</p> : null}
       {error ? <p className="text-xs text-destructive">{error}</p> : null}
     </div>
   );

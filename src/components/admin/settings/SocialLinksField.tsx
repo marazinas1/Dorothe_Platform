@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 const NETWORKS = ["facebook", "linkedin", "instagram"] as const;
 
@@ -33,7 +32,6 @@ export function SocialLinksField({ value, onChange }: Props) {
 
   return (
     <div className="space-y-1.5">
-      <Label>{t("admin.settings.social.title")}</Label>
       <div className="grid gap-3 sm:grid-cols-3">
         {NETWORKS.map((n) => (
           <div key={n} className="space-y-1">
@@ -49,7 +47,6 @@ export function SocialLinksField({ value, onChange }: Props) {
           </div>
         ))}
       </div>
-      <p className="text-xs text-muted-foreground">{t("admin.settings.social.help")}</p>
     </div>
   );
 }

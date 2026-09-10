@@ -28,7 +28,7 @@ export function TrafficChart({ data, locale }: { data: Point[]; locale: string }
   }));
 
   return (
-    <div className="rounded-lg border border-border bg-card p-4">
+    <div className="rounded-[var(--radius)] border border-border bg-card p-4">
       <h2 className="mb-3 text-sm font-medium">{t("admin.analytics.traffic")}</h2>
       <div className="h-64 w-full">
         <ResponsiveContainer width="100%" height="100%">

@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 export function FirstRun({ locale }: { locale: string }) {
   const { t } = useTranslation();
   return (
-    <section className="rounded-lg border border-dashed border-border bg-muted/20 p-6">
+    <section className="rounded-[var(--radius)] border border-dashed border-border bg-muted/20 p-6">
       <h2 className="font-heading text-lg">{t("admin.dashboard.firstRun.title")}</h2>
       <p className="mt-1 max-w-prose text-sm text-muted-foreground">
         {t("admin.dashboard.firstRun.body")}

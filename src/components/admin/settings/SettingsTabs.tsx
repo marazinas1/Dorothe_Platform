@@ -18,7 +18,7 @@ export function SettingsTabs() {
 
   return (
     <nav
-      className="mb-6 flex flex-wrap gap-1 border-b border-border"
+      className="mb-8 inline-flex flex-wrap gap-1 rounded-[var(--radius)] border border-border bg-card p-1"
       aria-label={t("admin.settings.title")}
     >
       {TABS.map((tab) => {
@@ -30,10 +30,10 @@ export function SettingsTabs() {
             to="/$locale/admin/settings/$tab"
             params={{ locale, tab }}
             className={cn(
-              "border-b-2 px-3 py-2 text-sm transition-colors",
+              "rounded-[calc(var(--radius)*0.75)] px-3 py-2 text-sm font-medium transition-colors",
               active
-                ? "border-primary text-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground",
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
             {t(`admin.settings.tabs.${tab}`)}

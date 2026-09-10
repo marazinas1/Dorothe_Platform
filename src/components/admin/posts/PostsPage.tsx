@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { Plus } from "lucide-react";
+import { Newspaper, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -9,6 +9,8 @@ import { adminPostsQueryOptions, deletePost, savePost } from "@/lib/posts/admin.
 
 import { PostForm, toDraft, type PostDraft } from "./PostForm";
 import { PostRow } from "./PostRow";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
 
 /** Articles: write, publish, and keep older links working. */
 export function PostsPage() {
@@ -41,16 +43,10 @@ export function PostsPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{t("admin.posts.title")}</h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.posts.hint")}</p>
-        </div>
-        <Button type="button" onClick={() => setEditing(toDraft())}>
+      <AdminPageHeader icon={Newspaper} title={t("admin.posts.title")} description={t("admin.posts.hint")} actions={<Button type="button" onClick={() => setEditing(toDraft())}>
           <Plus className="h-4 w-4" />
           {t("admin.posts.add")}
-        </Button>
-      </header>
+        </Button>} />
 
       {editing ? (
         <PostForm
@@ -63,7 +59,7 @@ export function PostsPage() {
       ) : null}
 
       {rows.length === 0 ? (
-        <p className="text-sm text-muted-foreground">{t("admin.posts.empty")}</p>
+        <AdminEmptyState icon={Newspaper} title={t("admin.posts.empty")} />
       ) : (
         <ul className="space-y-3">
           {rows.map((row) => (

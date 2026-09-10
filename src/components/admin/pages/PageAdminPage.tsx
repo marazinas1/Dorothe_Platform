@@ -7,6 +7,8 @@ import { pageDefinition, type PageDefinition } from "@/lib/pages/fields";
 import { usePageAdmin } from "@/lib/pages/use-page-admin";
 
 import { PageEditorWorkspace } from "./PageEditorWorkspace";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { FileText } from "lucide-react";
 
 /**
  * One static public page: its words and photographs on the left, the page
@@ -37,12 +39,11 @@ function PageEditor({ definition }: { definition: PageDefinition }) {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {t(`admin.nav.${definition.key}`)}
-        </h1>
-        <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.pageEditor.editHint")}</p>
-      </header>
+      <AdminPageHeader
+        icon={FileText}
+        title={t(`admin.nav.${definition.key}`)}
+        description={t("admin.pageEditor.editHint")}
+      />
 
       <PageEditorWorkspace
         definition={definition}

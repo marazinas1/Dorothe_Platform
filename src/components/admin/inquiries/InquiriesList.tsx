@@ -6,6 +6,8 @@ import { pickLocalized } from "@/lib/listings/format";
 import { inquiryPreview, type AdminInquiryRow } from "@/lib/inquiries/types";
 import { cn } from "@/lib/utils";
 import { InquiryStatusBadge, InquiryTypeBadge, formatInquiryDate } from "./InquiryBadges";
+import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
+import { Inbox } from "lucide-react";
 
 export function InquiriesList({
   rows,
@@ -18,14 +20,12 @@ export function InquiriesList({
 
   if (rows.length === 0) {
     return (
-      <p className="rounded-lg border border-border px-4 py-10 text-center text-sm text-muted-foreground">
-        {t("admin.inquiries.empty")}
-      </p>
+      <AdminEmptyState icon={Inbox} title={t("admin.inquiries.empty")} />
     );
   }
 
   return (
-    <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border">
+    <ul className="divide-y divide-border overflow-hidden rounded-[var(--radius)] border border-border bg-card">
       {rows.map((row) => (
         <li
           key={row.id}

@@ -3,6 +3,7 @@ import { Clock, MapPin, Phone, Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/admin/ui/StatusChip";
+import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
 import { pickLocalized } from "@/lib/listings/format";
 import { shortTime, type AppointmentRow } from "@/lib/calendar/types";
 
@@ -19,14 +20,12 @@ export function DayList({ rows, locale, onEdit, onDelete }: Props) {
 
   if (rows.length === 0) {
     return (
-      <p className="rounded-lg border border-border px-4 py-10 text-center text-sm text-muted-foreground">
-        {t("admin.calendar.emptyDay")}
-      </p>
+      <AdminEmptyState icon={Clock} title={t("admin.calendar.emptyDay")} />
     );
   }
 
   return (
-    <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border">
+    <ul className="divide-y divide-border overflow-hidden rounded-[var(--radius)] border border-border">
       {rows.map((row) => (
         <li key={row.id} className="px-4 py-3">
           <div className="flex flex-wrap items-center gap-2">

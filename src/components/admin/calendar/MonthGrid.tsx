@@ -27,7 +27,7 @@ export function MonthGrid({ year, month, selected, rows, onSelect }: Props) {
   }
 
   return (
-    <div className="rounded-lg border border-border p-3">
+    <div className="rounded-[var(--radius)] border border-border bg-card p-3">
       <div className="grid grid-cols-7 gap-1 pb-2 text-center text-[11px] uppercase tracking-wide text-muted-foreground">
         {WEEKDAY_KEYS.map((key) => (
           <span key={key}>{t(`admin.calendar.weekday.${key}`)}</span>

@@ -15,6 +15,7 @@ import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 import { OfficeMap } from "@/components/brand/OfficeMap";
+import { openingHoursRows } from "@/lib/config/opening-hours-display";
 
 export const Route = createFileRoute("/$locale/kontakt")({
   staticData: { sitemap: true },
@@ -54,7 +55,10 @@ function ContactPage() {
   const copy = usePageCopy("contact", locale as Locale);
   const teamEnabled = useFeatureFlag("team");
 
-  const hours = t("pages.contact.hours_default", { returnObjects: true }) as Hours[];
+  const configuredHours = openingHoursRows(settings.opening_hours ?? {}, locale, t);
+  const fallbackHours = t("pages.contact.hours_default", { returnObjects: true }) as Hours[];
+  const hasConfiguredHours = Object.keys(settings.opening_hours ?? {}).some((key) => key !== "exceptions");
+  const hours = hasConfiguredHours ? configuredHours.weekly : fallbackHours;
 
 
   return (
@@ -127,6 +131,21 @@ function ContactPage() {
                 </div>
               ))}
             </dl>
+            {configuredHours.exceptions.length > 0 ? (
+              <div className="mt-5 border-t border-border pt-4">
+                <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                  {t("pages.contact.hours_exceptions")}
+                </div>
+                <dl className="mt-3 space-y-2 text-sm">
+                  {configuredHours.exceptions.map((row) => (
+                    <div key={`${row.day}-${row.time}`} className="flex justify-between gap-5">
+                      <dt className="text-muted-foreground">{row.day}</dt>
+                      <dd className="text-right tabular-figures">{row.time}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ) : null}
           </div>
         </div>
       </section>

@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 
 import { usePermission } from "@/lib/auth/use-permission";
 import { SettingsTabs } from "@/components/admin/settings/SettingsTabs";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { Settings } from "lucide-react";
 
 export const Route = createFileRoute("/$locale/admin/settings")({
   staticData: { sitemap: false },
@@ -21,8 +23,8 @@ function SettingsLayout() {
     );
   }
   return (
-    <div className="max-w-5xl">
-      <h1 className="text-2xl font-semibold">{t("admin.settings.title")}</h1>
+    <div className="max-w-6xl space-y-6">
+      <AdminPageHeader icon={Settings} title={t("admin.settings.title")} description={t("admin.settings.subtitle")} />
       <SettingsTabs />
       <Outlet />
     </div>

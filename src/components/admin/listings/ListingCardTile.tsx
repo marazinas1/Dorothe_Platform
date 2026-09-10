@@ -39,7 +39,7 @@ export function ListingCardTile({
   const tone = statusTone(row.status);
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-media border border-border bg-card">
+    <article className="flex h-full flex-col overflow-hidden rounded-[var(--radius)] border border-border bg-card">
       <Link
         to="/$locale/admin/listings/$id"
         params={{ locale, id: row.id }}

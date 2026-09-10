@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Check, Loader2, AlertTriangle } from "lucide-react";
+import { StatusChip } from "@/components/admin/ui/StatusChip";
 
 /**
  * Shell for one work queue group. It owns the three states a group can be in —
@@ -30,15 +31,13 @@ export function QueueGroup({
   const hidden = Math.max(count - shown, 0);
 
   return (
-    <section className="rounded-lg border border-border bg-card">
+    <section className="rounded-[var(--radius)] border border-border bg-card">
       <header className="flex items-center gap-2 border-b border-border px-4 py-3">
         <h3 className="font-heading text-base">{t(titleKey)}</h3>
         {loading ? (
           <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" aria-hidden />
         ) : count > 0 ? (
-          <span className="rounded-full border border-border bg-muted px-2 py-0.5 text-xs tabular-nums text-muted-foreground">
-            {count}
-          </span>
+          <StatusChip icon="dot" tone="muted" className="tabular-nums">{count}</StatusChip>
         ) : null}
       </header>
 

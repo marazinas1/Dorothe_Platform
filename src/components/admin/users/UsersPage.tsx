@@ -12,6 +12,10 @@ import {
 import { InviteResultPanel } from "./InviteResultPanel";
 import { InviteUserForm } from "./InviteUserForm";
 import { UserRow } from "./UserRow";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { AdminSection } from "@/components/admin/ui/AdminSection";
+import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
+import { UserPlus, Users } from "lucide-react";
 
 export function UsersPage() {
   const { t } = useTranslation();
@@ -28,16 +32,10 @@ export function UsersPage() {
 
   return (
     <div className="space-y-8">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight">{t("admin.users.title")}</h1>
-        <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.users.subtitle")}</p>
-      </header>
+      <AdminPageHeader icon={Users} title={t("admin.users.title")} description={t("admin.users.subtitle")} />
 
-      <section className="rounded-[var(--radius)] border border-border bg-card p-5 sm:p-6">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          {t("admin.users.invite.title")}
-        </h2>
-        <div className="mt-4 space-y-4">
+      <AdminSection icon={UserPlus} title={t("admin.users.invite.title")}>
+        <div className="space-y-4">
           <InviteUserForm
             pending={m.invite.isPending}
             onInvite={(input) =>
@@ -49,14 +47,9 @@ export function UsersPage() {
           />
           {result ? <InviteResultPanel result={result} /> : null}
         </div>
-      </section>
+      </AdminSection>
 
-      <section className="overflow-hidden rounded-[var(--radius)] border border-border bg-card">
-        <header className="border-b border-border px-4 py-4 sm:px-6">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {t("admin.users.list.title")}
-          </h2>
-        </header>
+      <AdminSection title={t("admin.users.list.title")} className="[&_.admin-section-body]:p-0">
         <ul className="divide-y divide-border">
           {data.users.map((user) => (
             <UserRow
@@ -90,12 +83,10 @@ export function UsersPage() {
             />
           ))}
           {data.users.length === 0 ? (
-            <li className="px-6 py-10 text-center text-sm text-muted-foreground">
-              {t("admin.users.list.empty")}
-            </li>
+            <li className="p-4"><AdminEmptyState icon={Users} title={t("admin.users.list.empty")} /></li>
           ) : null}
         </ul>
-      </section>
+      </AdminSection>
     </div>
   );
 }

@@ -18,17 +18,17 @@ export function AdminSidebarHeader() {
   const collapsed = state === "collapsed";
 
   return (
-    <SidebarHeader className="border-b border-sidebar-border">
+    <SidebarHeader className="border-b border-sidebar-border p-3">
       <Link
         to="/$locale/admin"
         params={{ locale }}
-        className="flex h-20 items-center px-2"
+        className="flex h-16 items-center px-1"
         aria-label={settings.site_name}
       >
         <SiteLogo
           settings={settings}
           size="sm"
-          className={collapsed ? "h-8 md:h-8" : "h-14 max-w-[13rem] md:h-16"}
+          className={collapsed ? "h-8 md:h-8" : "h-12 max-w-[12rem]"}
         />
       </Link>
     </SidebarHeader>

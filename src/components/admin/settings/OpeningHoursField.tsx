@@ -1,13 +1,17 @@
 import { useTranslation } from "react-i18next";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-
-export type DayHours = { from: string; to: string };
-export type OpeningHours = Record<string, DayHours>;
-
-const DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
+import {
+  readDayHours,
+  readHoursExceptions,
+  WEEKDAYS,
+  type DayHours,
+  type OpeningHours,
+  type Weekday,
+} from "@/lib/config/opening-hours";
+import { AdminSection } from "@/components/admin/ui/AdminSection";
+import { OpeningHoursExceptions } from "./OpeningHoursExceptions";
 
 type Props = {
   value: Record<string, unknown>;
@@ -22,19 +26,11 @@ type Props = {
 export function OpeningHoursField({ value, onChange }: Props) {
   const { t } = useTranslation();
 
-  const day = (d: string): DayHours | null => {
-    const raw = value?.[d];
-    if (!raw || typeof raw !== "object") return null;
-    const r = raw as Record<string, unknown>;
-    return {
-      from: typeof r.from === "string" ? r.from : "09:00",
-      to: typeof r.to === "string" ? r.to : "17:00",
-    };
-  };
+  const day = (d: (typeof WEEKDAYS)[number]) => readDayHours(value, d);
 
-  function setDay(d: string, next: DayHours | null) {
-    const hours: OpeningHours = {};
-    for (const key of DAYS) {
+  function setDay(d: Weekday, next: DayHours | null) {
+    const hours: OpeningHours = { exceptions: readHoursExceptions(value) };
+    for (const key of WEEKDAYS) {
       const cur = key === d ? next : day(key);
       if (cur) hours[key] = cur;
     }
@@ -42,10 +38,9 @@ export function OpeningHoursField({ value, onChange }: Props) {
   }
 
   return (
-    <div className="space-y-1.5">
-      <Label>{t("admin.settings.hours.title")}</Label>
+    <AdminSection title={t("admin.settings.hours.title")} description={t("admin.settings.hours.help")}>
       <div className="divide-y divide-border rounded-[var(--radius)] border border-border">
-        {DAYS.map((d) => {
+        {WEEKDAYS.map((d) => {
           const cur = day(d);
           const open = cur != null;
           return (
@@ -85,7 +80,17 @@ export function OpeningHoursField({ value, onChange }: Props) {
           );
         })}
       </div>
-      <p className="text-xs text-muted-foreground">{t("admin.settings.hours.help")}</p>
-    </div>
+      <OpeningHoursExceptions
+        value={readHoursExceptions(value)}
+        onChange={(exceptions) => {
+          const next: OpeningHours = { exceptions };
+          for (const key of WEEKDAYS) {
+            const hours = day(key);
+            if (hours) next[key] = hours;
+          }
+          onChange(next);
+        }}
+      />
+    </AdminSection>
   );
 }

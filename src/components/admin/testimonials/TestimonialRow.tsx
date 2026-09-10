@@ -19,7 +19,7 @@ export function TestimonialRow({ row, locale, onEdit, onDelete, onMove }: Props)
   const quote = pickLocalized(row.quote, locale, "en");
 
   return (
-    <li className="flex items-start gap-4 rounded-lg border border-border bg-card p-4">
+    <li className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:bg-muted/30">
       <div className="min-w-0 flex-1">
         <p className="line-clamp-3 text-sm">{quote || "—"}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">

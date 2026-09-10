@@ -68,7 +68,7 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
       </header>
 
       <div className="grid lg:grid-cols-[minmax(0,420px)_1fr]">
-        <div className="space-y-6 border-border p-4 sm:p-6 lg:max-h-[calc(100vh-14rem)] lg:overflow-y-auto lg:border-r">
+        <div className="space-y-8 border-border p-4 sm:p-6 lg:max-h-[calc(100vh-14rem)] lg:overflow-y-auto lg:border-r">
           <HomeTextEditor
             locale={locale}
             value={home.value}

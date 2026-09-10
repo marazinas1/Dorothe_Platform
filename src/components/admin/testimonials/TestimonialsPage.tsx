@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { Plus } from "lucide-react";
+import { Plus, Quote } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -14,6 +14,8 @@ import {
 
 import { TestimonialForm, toDraft, type TestimonialDraft } from "./TestimonialForm";
 import { TestimonialRow } from "./TestimonialRow";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
 
 /** Client voices: add, edit, order, and decide what the home page shows. */
 export function TestimonialsPage() {
@@ -38,18 +40,10 @@ export function TestimonialsPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
-            {t("admin.testimonials.title")}
-          </h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.testimonials.hint")}</p>
-        </div>
-        <Button type="button" onClick={() => setEditing(toDraft())}>
+      <AdminPageHeader icon={Quote} title={t("admin.testimonials.title")} description={t("admin.testimonials.hint")} actions={<Button type="button" onClick={() => setEditing(toDraft())}>
           <Plus className="h-4 w-4" />
           {t("admin.testimonials.add")}
-        </Button>
-      </header>
+        </Button>} />
 
       {editing ? (
         <TestimonialForm
@@ -61,7 +55,7 @@ export function TestimonialsPage() {
       ) : null}
 
       {rows.length === 0 ? (
-        <p className="text-sm text-muted-foreground">{t("admin.testimonials.empty")}</p>
+        <AdminEmptyState icon={Quote} title={t("admin.testimonials.empty")} />
       ) : (
         <ul className="space-y-3">
           {rows.map((row) => (
