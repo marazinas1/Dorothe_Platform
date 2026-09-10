@@ -166,7 +166,14 @@ export function ListingCardCarousel({
                   loading={i === 0 && eager ? "eager" : "lazy"}
                   width={1200}
                   height={800}
-                  className="h-full w-full object-cover"
+                  className={cn(
+                    "h-full w-full object-cover",
+                    // On the photo itself, not the container: a filter on the
+                    // container would trap the arrows and dots inside its
+                    // stacking context, under the card link overlay.
+                    muted &&
+                      "grayscale transition-[filter] duration-500 group-hover:grayscale-0",
+                  )}
                 />
               ) : (
                 <div className="h-full w-full bg-muted" />
