@@ -71,7 +71,7 @@ export function CalendarPage() {
           <p className="mt-1.5 text-sm text-muted-foreground">{t("admin.calendar.hint")}</p>
         </div>
         <Button type="button" onClick={() => setEditing(toAppointmentDraft(selected))}>
-          <Plus className="mr-2 h-4 w-4" />
+          <Plus className="h-4 w-4" />
           {t("admin.calendar.add")}
         </Button>
       </header>

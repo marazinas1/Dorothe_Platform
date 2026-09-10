@@ -36,7 +36,7 @@ export function SaveButton({ onSubmit, disabled, children }: Props) {
         disabled={disabled || state === "saving"}
       >
         {state === "saving" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {state === "saved" && <Check className="mr-2 h-4 w-4" />}
+        {state === "saved" && <Check className="h-4 w-4" />}
         {state === "saving"
           ? t("admin.settings.saving")
           : state === "saved"

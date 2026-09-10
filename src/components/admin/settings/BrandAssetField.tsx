@@ -92,7 +92,7 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
               {busy ? (
                 <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
               ) : (
-                <Upload className="mr-2 h-3.5 w-3.5" />
+                <Upload className="h-3.5 w-3.5" />
               )}
               {t("admin.settings.brand.replace")}
             </Button>
@@ -103,7 +103,7 @@ export function BrandAssetField({ kind, label, help, value, onChange, dark }: Pr
               disabled={busy}
               onClick={() => onChange(null)}
             >
-              <Trash2 className="mr-2 h-3.5 w-3.5" />
+              <Trash2 className="h-3.5 w-3.5" />
               {t("admin.settings.brand.remove")}
             </Button>
           </div>

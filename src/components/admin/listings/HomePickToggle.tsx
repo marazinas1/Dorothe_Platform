@@ -55,11 +55,11 @@ export function HomePickToggle({
     <Button
       type="button"
       size="sm"
-      variant={featured ? "secondary" : "ghost"}
+      variant={featured ? "secondary" : "outline"}
       disabled={disabled || busy}
       onClick={() => void toggle()}
     >
-      <Star className={`mr-2 h-3.5 w-3.5 ${featured ? "fill-current" : ""}`} />
+      <Star className={`h-4 w-4 ${featured ? "fill-current" : ""}`} />
       {featured ? t("admin.listings.home.on") : t("admin.listings.home.off")}
     </Button>
   );

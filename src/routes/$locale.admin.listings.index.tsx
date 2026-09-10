@@ -30,7 +30,7 @@ function ListingsIndex() {
         <h1 className="font-heading text-2xl">{t("admin.pages.listings")}</h1>
         <Button asChild>
           <Link to="/$locale/admin/listings/new" params={{ locale }}>
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus className="h-4 w-4" />
             {t("admin.listings.new")}
           </Link>
         </Button>

@@ -76,7 +76,7 @@ export function InquiryDetail({
         <div className="flex flex-wrap gap-2">
           <Button asChild variant="outline" size="sm">
             <a href={`mailto:${inquiry.email}`}>
-              <Mail className="mr-2 h-4 w-4" />
+              <Mail className="h-4 w-4" />
               {inquiry.email}
             </a>
           </Button>
@@ -84,13 +84,13 @@ export function InquiryDetail({
             <>
               <Button asChild variant="outline" size="sm">
                 <a href={`tel:${inquiry.phone}`}>
-                  <Phone className="mr-2 h-4 w-4" />
+                  <Phone className="h-4 w-4" />
                   {inquiry.phone}
                 </a>
               </Button>
               <Button asChild variant="outline" size="sm">
                 <a href={waLink(inquiry.phone)} target="_blank" rel="noreferrer">
-                  <MessageCircle className="mr-2 h-4 w-4" />
+                  <MessageCircle className="h-4 w-4" />
                   {t("admin.inquiries.detail.whatsapp")}
                 </a>
               </Button>

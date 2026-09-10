@@ -60,12 +60,12 @@ export function PageEditorWorkspace({
             size="sm"
             onClick={() => setFrameKey((n) => n + 1)}
           >
-            <RotateCw className="mr-2 h-3.5 w-3.5" />
+            <RotateCw className="h-3.5 w-3.5" />
             {t("admin.pageEditor.refresh")}
           </Button>
           <Button asChild type="button" variant="outline" size="sm">
             <a href={pageUrl} target="_blank" rel="noopener">
-              <ExternalLink className="mr-2 h-3.5 w-3.5" />
+              <ExternalLink className="h-3.5 w-3.5" />
               {t("admin.pageEditor.openPage")}
             </a>
           </Button>

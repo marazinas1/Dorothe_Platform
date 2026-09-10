@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
-import { AlertTriangle, ExternalLink } from "lucide-react";
+import { AlertTriangle, ExternalLink, Send, Undo2, ArrowRightLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { StatusChip } from "@/components/admin/ui/StatusChip";
 import type { ListingStatus } from "@/lib/listings/admin-schema";
 import { statusOptionsFor } from "@/lib/listings/status-options";
 import type { Checklist } from "@/lib/listings/publish-checklist";
@@ -65,9 +65,9 @@ export function StatusBar({
         <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
           {t("admin.listings.fields.status")}
         </span>
-        <Badge variant={isPublic ? "default" : "secondary"}>
+        <StatusChip icon={isPublic ? "published" : "draft"} tone={isPublic ? "active" : "muted"}>
           {t(`listings.status.${status ?? "draft"}`)}
-        </Badge>
+        </StatusChip>
 
         {isPublic && slug ? (
           <Link
@@ -109,10 +109,11 @@ export function StatusBar({
               key={target}
               type="button"
               size="sm"
-              variant="ghost"
+              variant="outline"
               disabled={locked}
               onClick={() => void apply(listingId, target as ListingStatus)}
             >
+              <ArrowRightLeft className="h-4 w-4" />
               {t(`admin.listings.statusAction.${target}`)}
             </Button>
           ))}
@@ -125,6 +126,7 @@ export function StatusBar({
               disabled={locked}
               onClick={() => void apply(listingId, "draft")}
             >
+              <Undo2 className="h-4 w-4" />
               {t("admin.listings.unpublish")}
             </Button>
           ) : null}
@@ -145,6 +147,7 @@ export function StatusBar({
                 void apply(listingId, "active");
               }}
             >
+              <Send className="h-4 w-4" />
               {t("admin.listings.publish")}
             </Button>
           ) : null}

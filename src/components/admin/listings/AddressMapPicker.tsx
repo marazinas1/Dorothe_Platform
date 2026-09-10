@@ -101,7 +101,7 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
           {status === "searching" ? (
             <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
           ) : (
-            <MapPin className="mr-2 h-3.5 w-3.5" />
+            <MapPin className="h-3.5 w-3.5" />
           )}
           {status === "notFound" || status === "limited" || status === "failed"
             ? t("admin.listings.geocode.retry")

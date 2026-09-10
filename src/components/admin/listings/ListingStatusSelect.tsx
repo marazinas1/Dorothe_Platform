@@ -67,7 +67,7 @@ export function ListingStatusSelect({ row }: { row: AdminListingRow }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-56">
           <DropdownMenuItem disabled className="opacity-100">
-            <Check className="mr-2 h-4 w-4" />
+            <Check className="h-4 w-4" />
             {t(`listings.status.${row.status}`)}
           </DropdownMenuItem>
           {options.map((target) => (
