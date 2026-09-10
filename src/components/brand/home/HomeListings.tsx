@@ -43,9 +43,9 @@ export function HomeListings({ locale, settings, items, title, note, hidePrice =
         </HomeTextLink>
       </div>
 
-      <div className={LISTING_CARD_GRID}>
-        {items.slice(0, 3).map((l, i) => (
-          <Reveal key={l.id} delay={i * 90} className="h-full">
+      <CardRail perView={3} label={title}>
+        {items.map((l, i) => (
+          <Reveal key={l.id} delay={Math.min(i, 2) * 90} className="h-full">
             <ListingCard
               listing={l}
               locale={locale}
@@ -55,7 +55,7 @@ export function HomeListings({ locale, settings, items, title, note, hidePrice =
             />
           </Reveal>
         ))}
-      </div>
+      </CardRail>
     </section>
   );
 }
