@@ -60,7 +60,7 @@ function Row({ row, locale }: { row: AppointmentRow; locale: string }) {
         {agendaDayLabel(row.day, locale)} {time}
       </span>
       <span className="text-sm text-muted-foreground">
-        {row.client_name || t(`admin.calendar.kinds.${row.kind}`)}
+        {row.client_name || t(`admin.calendar.kind.${row.kind}`)}
       </span>
       {row.location ? (
         <span className="ml-auto truncate text-xs text-muted-foreground">{row.location}</span>
