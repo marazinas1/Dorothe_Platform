@@ -76,6 +76,7 @@ export function PageEditorWorkspace({
         <div className="space-y-6 border-border p-4 sm:p-6 lg:max-h-[calc(100vh-14rem)] lg:overflow-y-auto lg:border-r">
           <PageTextEditor
             definition={definition}
+            locale={locale}
             value={admin.value}
             placeholder={admin.placeholder}
             isLocked={admin.isLocked}
