@@ -191,80 +191,146 @@
 }
 
 /*
- * ADMIN DENSITY — a scale, not a second theme.
+ * ADMIN THEME — the product's SECOND design system.
  *
- * There is exactly ONE design system: the admin reads the same tokens as the
- * public site (colours, fonts, radii come from site_settings via
- * ThemeStyleTag). The only difference the admin is allowed is a tighter type
- * scale, because a working tool needs more information per screen than a
- * marketing page.
+ * The admin is the working tool the owner uses every day, and it is identical
+ * in every clone: warm linen canvas, white sidebar, sage accent, Manrope.
+ * It deliberately reads NONE of the client tokens (site_settings /
+ * ThemeStyleTag), so re-branding a client changes the public site only.
+ * The one thing that still comes from the client is the logo.
+ *
+ * Everything below is scoped to `.admin-theme`, which AdminShell puts on the
+ * admin wrapper and on <body> so Radix portals (dialogs, menus, toasts) match.
  */
-.admin-density {
-  /* Quiet working surfaces derived from the same Dorothe ink/paper tokens. */
-  --card: color-mix(in oklab, var(--background) 16%, white);
-  --card-foreground: var(--foreground);
-  --popover: var(--card);
-  --popover-foreground: var(--foreground);
-  --muted: color-mix(in oklab, var(--secondary) 54%, var(--card));
-  --muted-foreground: color-mix(in oklab, var(--foreground) 58%, var(--background));
-  --sidebar: var(--card);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-accent: var(--muted);
-  --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: var(--border);
+.admin-theme {
+  /* Fixed admin palette. Never client-configurable. */
+  --admin-linen: oklch(0.972 0.008 84.6);
+  --admin-white: oklch(0.995 0.003 84.6);
+  --admin-ink: oklch(0.285 0.007 95.3);
+  --admin-stone: oklch(0.556 0.008 95.3);
+  --admin-line: oklch(0.911 0.013 82.4);
+  --admin-sage: oklch(0.553 0.037 150.3);
+  --admin-sage-deep: oklch(0.451 0.036 150.3);
+  --admin-sage-tint: oklch(0.945 0.014 150.3);
+
+  --font-heading: "Manrope Variable", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-heading);
+  --font-sans: var(--font-heading);
+
+  --radius: 0.875rem;
+  --radius-media: 0.875rem;
+  --radius-button: 999px;
+
+  --background: var(--admin-linen);
+  --foreground: var(--admin-ink);
+  --card: var(--admin-white);
+  --card-foreground: var(--admin-ink);
+  --popover: var(--admin-white);
+  --popover-foreground: var(--admin-ink);
+  --primary: var(--admin-sage);
+  --primary-foreground: var(--admin-white);
+  --secondary: var(--admin-white);
+  --secondary-foreground: var(--admin-ink);
+  --muted: oklch(0.94 0.008 82);
+  --muted-foreground: var(--admin-stone);
+  --accent: var(--admin-sage-tint);
+  --accent-foreground: var(--admin-sage-deep);
+  --destructive: oklch(0.58 0.2 27);
+  --destructive-foreground: var(--admin-white);
+  --border: var(--admin-line);
+  --input: var(--admin-line);
+  --ring: var(--admin-sage);
+
+  --chart-1: var(--admin-sage);
+  --chart-2: oklch(0.62 0.032 150.3);
+  --chart-3: var(--admin-sage-deep);
+  --chart-4: oklch(0.646 0.09 41.1);
+  --chart-5: oklch(0.7 0.05 84);
+
+  /* White sidebar with sage active state, as in the reference tool. */
+  --sidebar: var(--admin-white);
+  --sidebar-foreground: var(--admin-ink);
+  --sidebar-primary: var(--admin-sage-deep);
+  --sidebar-primary-foreground: var(--admin-white);
+  --sidebar-accent: var(--admin-sage-tint);
+  --sidebar-accent-foreground: var(--admin-sage-deep);
+  --sidebar-border: var(--admin-line);
+  --sidebar-ring: var(--admin-sage);
+
+  font-family: var(--font-body);
   font-size: 0.9375rem;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
-.admin-density :is(h1, h2, h3, h4, h5, h6, .font-heading) {
+.admin-theme :is(h1, h2, h3, h4, h5, h6, .font-heading) {
   font-family: var(--font-heading);
-  line-height: 1.15;
+  font-weight: 700;
+  line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
-/* Only the page title of the opened section is emphasised; the rest of the
- * page keeps its normal weights. */
-.admin-density h1 {
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.admin-density h1 {
+.admin-theme h1 {
   font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 
-.admin-density h2 {
-  font-size: 1.25rem;
+.admin-theme h2 {
+  font-size: 1.125rem;
 }
 
-.admin-density h3 {
-  font-size: 1.0625rem;
+.admin-theme h3 {
+  font-size: 1rem;
 }
 
-.admin-density main {
-  background: color-mix(in oklab, var(--background) 88%, var(--card));
+.admin-theme main {
+  background: var(--background);
 }
 
-.admin-density [data-slot="input"],
-.admin-density [data-slot="textarea"],
-.admin-density [data-slot="select-trigger"] {
-  min-height: 2.625rem;
-  border-radius: var(--radius);
+.admin-theme [data-slot="input"],
+.admin-theme [data-slot="textarea"],
+.admin-theme [data-slot="select-trigger"] {
+  min-height: 2.75rem;
+  border-radius: 0.875rem;
   background: var(--card);
 }
 
-.admin-density [data-slot="button"] {
-  min-height: 2.375rem;
+.admin-theme [data-slot="input"]:focus-visible,
+.admin-theme [data-slot="textarea"]:focus-visible,
+.admin-theme [data-slot="select-trigger"]:focus-visible {
+  border-color: var(--admin-sage);
+  box-shadow: 0 0 0 3px var(--admin-sage-tint);
+}
+
+/* Pill buttons: filled sage primary, quiet neutral outline, ghost for rare. */
+.admin-theme [data-slot="button"] {
+  min-height: 2.5rem;
+  border-radius: 999px;
   font-weight: 600;
 }
 
-.admin-density [data-sidebar="menu-button"] {
-  min-height: 2.625rem;
-  border-radius: var(--radius);
+.admin-theme [data-slot="badge"] {
+  border-radius: 999px;
 }
 
-.admin-density [data-sidebar="menu-button"][data-active="true"] {
-  box-shadow: inset 3px 0 0 var(--primary);
+.admin-theme [data-sidebar="menu-button"] {
+  min-height: 2.625rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+}
+
+.admin-theme [data-sidebar="menu-button"][data-active="true"] {
+  background: var(--admin-sage-tint);
+  color: var(--admin-sage-deep);
+  font-weight: 600;
+}
+
+.admin-theme [data-sidebar="group-label"] {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
 }
 
 .admin-page-header {
@@ -276,7 +342,7 @@
 }
 
 .admin-page-header h1 {
-  font-size: 1.75rem;
+  font-size: 1.625rem;
 }
 
 .admin-page-header p {
@@ -293,14 +359,14 @@
   justify-content: center;
   flex: none;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--card);
-  color: var(--muted-foreground);
+  border-radius: 0.75rem;
+  background: var(--admin-sage-tint);
+  color: var(--admin-sage-deep);
 }
 
 .admin-page-icon {
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
 }
 
 .admin-page-actions {
@@ -313,7 +379,7 @@
 .admin-section {
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 0.875rem;
   background: var(--card);
 }
 
@@ -323,13 +389,12 @@
   justify-content: space-between;
   gap: 1rem;
   border-bottom: 1px solid var(--border);
-  padding: 1rem 1.25rem;
+  padding: 1.125rem 1.375rem;
 }
 
 .admin-section-header h2 {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  font-weight: 650;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.4;
 }
 
@@ -340,7 +405,7 @@
 }
 
 .admin-section-body {
-  padding: 1.25rem;
+  padding: 1.375rem;
 }
 
 .admin-empty-state {
@@ -351,31 +416,29 @@
   justify-content: center;
   gap: 0.5rem;
   border: 1px dashed var(--border);
-  border-radius: var(--radius);
-  background: color-mix(in oklab, var(--muted) 44%, transparent);
+  border-radius: 0.875rem;
+  background: color-mix(in oklab, var(--admin-sage-tint) 45%, transparent);
   padding: 2rem;
   text-align: center;
 }
 
 .admin-empty-icon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   margin-bottom: 0.25rem;
 }
 
-/*
- * Controls in the admin sit on the ink/paper pair rather than the brand accent:
- * a tool should read as neutral chrome and keep the accent for the public site.
- * Both values still come from the shared tokens, so re-tinting site_settings
- * re-tints the admin too — no second palette is introduced.
- */
-.admin-density {
-  --primary: var(--foreground);
-  --primary-foreground: var(--background);
-  --ring: var(--foreground);
-  --sidebar-primary: var(--foreground);
-  --sidebar-primary-foreground: var(--background);
+/* Media card: preview box, one upload button, reset only when custom. */
+.admin-media-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  background: var(--admin-sage-tint);
 }
+
 
 
 
