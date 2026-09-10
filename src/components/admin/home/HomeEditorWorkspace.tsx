@@ -72,9 +72,13 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
           <HomeTextEditor
             value={home.value}
             placeholder={home.placeholder}
+            isLocked={home.isLocked}
+            lockedCount={home.lockedCount}
+            fieldCount={home.fieldCount}
             onChange={home.setValue}
             onReset={home.resetValue}
             onSetDefault={(key, kind) => void home.setAsDefault(key, kind)}
+            onLockAll={home.lockAllDefaults}
           />
 
 
