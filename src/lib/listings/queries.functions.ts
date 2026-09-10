@@ -130,9 +130,11 @@ export const listPublicListings = createServerFn({ method: "GET" })
         query = query.order("price", { ascending: false, nullsFirst: false });
         break;
       default:
+        // Admin-set order first (sort_order), then the newest upload. Upload
+        // time — not publication time — is what a broker expects to see.
         query = query
           .order("sort_order", { ascending: true })
-          .order("published_at", { ascending: false, nullsFirst: false });
+          .order("created_at", { ascending: false });
     }
 
     const limit = data.limit ?? PAGE_SIZE;

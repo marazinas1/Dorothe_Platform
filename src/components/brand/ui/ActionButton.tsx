@@ -21,6 +21,7 @@ export const ACTION_ROUTES = [
   "/$locale/kontakt",
   "/$locale/erben",
   "/$locale/ueber-mich",
+  "/$locale/verkauft",
 ] as const;
 
 export type ActionRoute = (typeof ACTION_ROUTES)[number];
