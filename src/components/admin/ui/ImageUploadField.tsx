@@ -68,7 +68,6 @@ export function ImageUploadField({ path, onUploaded, removable = true, replace }
         <Button
           type="button"
           size="sm"
-          variant="outline"
           disabled={busy}
           onClick={() => inputRef.current?.click()}
         >
@@ -77,13 +76,14 @@ export function ImageUploadField({ path, onUploaded, removable = true, replace }
           ) : (
             <Upload className="h-3.5 w-3.5" />
           )}
-          {t("admin.settings.brand.upload")}
+          {replace ? t("admin.settings.brand.replace") : t("admin.settings.brand.upload")}
         </Button>
         {removable ? (
           <Button
             type="button"
             size="sm"
             variant="ghost"
+
             disabled={busy}
             onClick={() => onUploaded(null)}
           >
