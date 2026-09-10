@@ -61,14 +61,17 @@ export const savePost = createServerFn({ method: "POST" })
         .update(patch as never)
         .eq("id", data.id);
       if (error) throw new Error(`Save failed: ${error.message}`);
-      return { ok: true as const };
+      return { ok: true as const, id: data.id };
     }
 
-    const { error } = await supabase
+    // The id comes back so a fresh article can immediately own its cover image.
+    const { data: created, error } = await supabase
       .from("posts")
-      .insert({ ...patch, created_by: userId } as never);
+      .insert({ ...patch, created_by: userId } as never)
+      .select("id")
+      .single();
     if (error) throw new Error(`Save failed: ${error.message}`);
-    return { ok: true as const };
+    return { ok: true as const, id: (created as { id: string }).id };
   });
 
 export const deletePost = createServerFn({ method: "POST" })

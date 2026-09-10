@@ -31,6 +31,14 @@ export function PostsPage() {
     setEditing(null);
   }
 
+  /** Uploading a cover needs an article row; create it quietly and keep editing. */
+  async function ensurePostId(draft: PostDraft) {
+    const result = await savePost({ data: draft });
+    setEditing((prev) => (prev ? { ...prev, id: result.id } : prev));
+    await refresh();
+    return result.id;
+  }
+
   return (
     <div className="max-w-4xl space-y-6">
       <header className="flex flex-wrap items-start justify-between gap-3">
@@ -50,6 +58,7 @@ export function PostsPage() {
           locales={locales}
           onSave={save}
           onCancel={() => setEditing(null)}
+          ensurePostId={ensurePostId}
         />
       ) : null}
 

@@ -1335,7 +1335,7 @@
       "bodyHint": "Zwischen Absätzen eine leere Zeile lassen.",
       "metaTitle": "Titel für Suchmaschinen",
       "metaDescription": "Beschreibung für Suchmaschinen",
-      "cover": "Titelbild (Link)",
+      "cover": "Titelbild",
       "coverAlt": "Bildbeschreibung",
       "date": "Veröffentlichungsdatum",
       "slug": "Webadresse",
@@ -1346,7 +1346,11 @@
       "delete": "Löschen",
       "cancel": "Abbrechen",
       "confirmDelete": "Diesen Beitrag löschen?",
-      "empty": "Noch keine Beiträge."
+      "empty": "Noch keine Beiträge.",
+      "coverUpload": "Titelbild hochladen",
+      "coverReplace": "Bild ersetzen",
+      "coverRemove": "Bild entfernen",
+      "coverHint": "JPG oder PNG — die Größe wird automatisch angepasst."
     },
     "pageEditor": {
       "editHint": "Die Texte und Bilder dieser Seite. Ein leeres Feld behält die bisherige Zeile.",
