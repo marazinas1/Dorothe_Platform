@@ -208,14 +208,14 @@
  */
 .admin-theme.admin-theme {
   /* Fixed admin palette. Never client-configurable. */
-  --admin-linen: oklch(0.972 0.008 84.6);
-  --admin-white: oklch(0.995 0.003 84.6);
+  --admin-linen: oklch(0.982 0.005 84.6);
+  --admin-white: oklch(0.999 0.002 84.6);
   --admin-ink: oklch(0.285 0.007 95.3);
   --admin-stone: oklch(0.556 0.008 95.3);
-  --admin-line: oklch(0.911 0.013 82.4);
+  --admin-line: oklch(0.925 0.011 82.4);
   --admin-sage: oklch(0.553 0.037 150.3);
   --admin-sage-deep: oklch(0.451 0.036 150.3);
-  --admin-sage-tint: oklch(0.945 0.014 150.3);
+  --admin-sage-tint: oklch(0.965 0.010 150.3);
 
   --font-heading: "Manrope Variable", "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-heading);
