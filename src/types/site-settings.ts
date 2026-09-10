@@ -72,8 +72,11 @@ export interface SiteSettings {
   valuation_offer: Record<string, ValuationOffer>;
   /** Localized home page texts keyed by content field. */
   home_content: Record<string, any>;
+  /** Locked-in default wording, set by the developer. */
+  home_defaults: Record<string, any>;
   /** Per photo slot: house default or the owner's own upload. */
   home_media: Record<string, { mode?: string; url?: string }>;
+
 }
 
 export interface ValuationOffer {

@@ -77,10 +77,12 @@ export function PageEditorWorkspace({
           <PageTextEditor
             definition={definition}
             value={admin.value}
+            placeholder={admin.placeholder}
             onChange={admin.setValue}
-            hasOverride={admin.hasOverride}
             onReset={admin.resetValue}
+            onSetDefault={(key, kind) => void admin.setAsDefault(key, kind)}
           />
+
 
           {definition.mediaSlots.length > 0 ? (
             <HomeMediaEditor

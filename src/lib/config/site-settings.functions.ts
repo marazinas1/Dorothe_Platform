@@ -11,6 +11,8 @@ import {
   LegalSchema,
   AnalyticsSchema,
   HomeSchema,
+  HomeDefaultsSchema,
+
   type SettingsTabKey,
 } from "@/lib/validation/site-settings";
 
@@ -105,3 +107,46 @@ export const updateSiteSettings = createServerFn({ method: "POST" })
     }
     return updated as unknown as SiteSettings;
   });
+
+/**
+ * Developer-only: freeze the current home wording as this clone's default and
+ * clear the override in the same write, so the field shows the new default
+ * greyed out.
+ */
+export const saveHomeDefaults = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => HomeDefaultsSchema.parse(input))
+  .handler(async ({ data, context }): Promise<SiteSettings> => {
+    const { supabase, userId } = context;
+    const { assertPermission } = await import("@/lib/auth/require-permission.server");
+    await assertPermission(supabase, userId, "settings.edit");
+
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", userId)
+      .maybeSingle();
+    if (profile?.role !== "developer") throw new Response("Forbidden", { status: 403 });
+
+    const { data: current, error: readError } = await supabase
+      .from("site_settings")
+      .select("id")
+      .limit(1)
+      .maybeSingle();
+    if (readError || !current) throw new Error("site_settings row missing");
+
+    const { data: updated, error } = await supabase
+      .from("site_settings")
+      .update({
+        home_defaults: data.home_defaults,
+        home_content: data.home_content,
+      } as never)
+      .eq("id", current.id)
+      .select("*")
+      .maybeSingle();
+    if (error || !updated) {
+      throw new Error(`Update failed: ${error?.message ?? "unknown"}`);
+    }
+    return updated as unknown as SiteSettings;
+  });
+

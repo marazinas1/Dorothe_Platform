@@ -718,6 +718,7 @@ export type Database = {
         Row: {
           content: Json
           created_at: string
+          defaults: Json
           id: string
           media: Json
           page: string
@@ -726,6 +727,7 @@ export type Database = {
         Insert: {
           content?: Json
           created_at?: string
+          defaults?: Json
           id?: string
           media?: Json
           page: string
@@ -734,6 +736,7 @@ export type Database = {
         Update: {
           content?: Json
           created_at?: string
+          defaults?: Json
           id?: string
           media?: Json
           page?: string
@@ -1025,6 +1028,7 @@ export type Database = {
           hero_headline: Json
           hero_subline: Json
           home_content: Json
+          home_defaults: Json
           home_media: Json
           homepage_sections: Json
           id: string
@@ -1087,6 +1091,7 @@ export type Database = {
           hero_headline?: Json
           hero_subline?: Json
           home_content?: Json
+          home_defaults?: Json
           home_media?: Json
           homepage_sections?: Json
           id?: string
@@ -1149,6 +1154,7 @@ export type Database = {
           hero_headline?: Json
           hero_subline?: Json
           home_content?: Json
+          home_defaults?: Json
           home_media?: Json
           homepage_sections?: Json
           id?: string

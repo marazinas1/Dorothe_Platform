@@ -123,6 +123,13 @@ export const HomeSchema = z.object({
 });
 export type HomeInput = z.infer<typeof HomeSchema>;
 
+/** Developer-only: the home wording locked in as this clone's default. */
+export const HomeDefaultsSchema = z.object({
+  home_defaults: jsonRecord,
+  home_content: jsonRecord,
+});
+
+
 /** Backwards-compatible alias used elsewhere. */
 export const SiteSettingsSchema = GeneralSchema;
 

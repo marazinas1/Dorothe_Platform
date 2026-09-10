@@ -9,13 +9,23 @@ export const PageContentSelectSchema = z.object({ page: PageKeySchema });
 /** Field → locale → text or list of lines. */
 const LocalizedValue = z.union([z.string(), z.array(z.string())]);
 
+const LocalizedBag = z.record(z.string(), z.record(z.string(), LocalizedValue));
+
 export const PageContentSaveSchema = z.object({
   page: PageKeySchema,
-  content: z.record(z.string(), z.record(z.string(), LocalizedValue)),
+  content: LocalizedBag,
   media: z.record(
     z.string(),
     z.object({ mode: z.enum(["default", "custom"]), url: z.string() }),
   ),
 });
 
+/** Developer-only: the wording locked in as this clone's default. */
+export const PageDefaultsSaveSchema = z.object({
+  page: PageKeySchema,
+  defaults: LocalizedBag,
+  content: LocalizedBag,
+});
+
 export type PageContentSaveInput = z.infer<typeof PageContentSaveSchema>;
+

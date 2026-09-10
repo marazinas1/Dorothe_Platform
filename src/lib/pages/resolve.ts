@@ -53,35 +53,48 @@ export function resolvePage(
 ): ResolvedPage {
   const definition = pageDefinition(pageKey);
   const content = row?.content ?? {};
+  const defaults = row?.defaults ?? {};
   const media = row?.media ?? {};
   const mediaDefaults = options.mediaDefaults ?? {};
+
+  /** Locked default, then the translated default line. */
+  function defaultText(field: string): string {
+    const locked = asText(stored(defaults, field, locale, defaultLocale));
+    if (locked) return locked;
+    const spec = specFor(definition, field);
+    if (!spec) return "";
+    const translated = translate(locale, spec.i18n, options.vars);
+    return translated === spec.i18n ? "" : translated;
+  }
+
+  function defaultLines(field: string): string[] {
+    const locked = asList(stored(defaults, field, locale, defaultLocale));
+    if (locked.length > 0) return locked;
+    const spec = specFor(definition, field);
+    if (!spec) return [];
+    const raw = translateValue(locale, spec.i18n);
+    if (Array.isArray(raw)) {
+      return raw
+        .map((v) =>
+          typeof v === "string"
+            ? (options.vars ? interpolate(v, options.vars) : v).trim()
+            : "",
+        )
+        .filter(Boolean);
+    }
+    return asList(typeof raw === "string" ? raw : undefined);
+  }
 
   return {
     text(field) {
       const own = asText(stored(content, field, locale, defaultLocale));
-      if (own) return own;
-      const spec = specFor(definition, field);
-      if (!spec) return "";
-      const translated = translate(locale, spec.i18n, options.vars);
-      return translated === spec.i18n ? "" : translated;
+      return own || defaultText(field);
     },
     lines(field) {
       const own = asList(stored(content, field, locale, defaultLocale));
-      if (own.length > 0) return own;
-      const spec = specFor(definition, field);
-      if (!spec) return [];
-      const raw = translateValue(locale, spec.i18n);
-      if (Array.isArray(raw)) {
-        return raw
-          .map((v) =>
-            typeof v === "string"
-              ? (options.vars ? interpolate(v, options.vars) : v).trim()
-              : "",
-          )
-          .filter(Boolean);
-      }
-      return asList(typeof raw === "string" ? raw : undefined);
+      return own.length > 0 ? own : defaultLines(field);
     },
+
     media(slot) {
     const entry = media[slot];
       if (entry.mode === "custom" && entry.url?.trim()) return entry.url.trim();
