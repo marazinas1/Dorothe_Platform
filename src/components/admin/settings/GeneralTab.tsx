@@ -79,7 +79,7 @@ export function GeneralTab() {
     <div className="space-y-8">
       <BrandAssetsSection />
 
-    <form className="space-y-4 max-w-2xl">
+    <form className="space-y-4">
       <Field label={t("admin.settings.general.site_name")} error={form.formState.errors.site_name?.message}>
         <Input {...form.register("site_name")} />
       </Field>

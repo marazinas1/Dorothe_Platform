@@ -53,7 +53,7 @@ export function BrandAssetsSection() {
 
   return (
     <section
-      className={`grid max-w-3xl gap-6 sm:grid-cols-2 ${saving ? "opacity-70" : ""}`}
+      className={`grid gap-6 sm:grid-cols-2 ${saving ? "opacity-70" : ""}`}
       aria-busy={saving}
     >
       <BrandAssetField

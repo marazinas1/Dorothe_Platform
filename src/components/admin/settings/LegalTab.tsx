@@ -45,7 +45,7 @@ export function LegalTab() {
   }
 
   return (
-    <form className="space-y-8 max-w-3xl">
+    <form className="space-y-8">
       {FIELDS.map((f) => (
         <div key={f.key} className="space-y-3">
           <h3 className="text-base font-semibold">{t(f.labelKey)}</h3>
