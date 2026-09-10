@@ -201,7 +201,9 @@
  * ThemeStyleTag), so re-branding a client changes the public site only.
  * The one thing that still comes from the client is the logo.
  *
- * Everything below is scoped to `.admin-theme.admin-theme`, which AdminShell puts on the
+ * Everything below is scoped to `.admin-theme`, doubled so it outranks the
+ * client `:root` overrides, and AdminShell puts it on the admin wrapper and on
+
  * admin wrapper and on <body> so Radix portals (dialogs, menus, toasts) match.
  */
 .admin-theme.admin-theme {
