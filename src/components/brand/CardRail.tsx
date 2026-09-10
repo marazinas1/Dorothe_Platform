@@ -84,16 +84,22 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
         ))}
       </ul>
 
-      {overflow ? (
-        <div className="mt-6 flex items-center justify-end gap-2">
-          <RailButton onClick={() => step(-1)} label={t("home.rail_prev")}>
-            <ChevronLeft className="h-4 w-4" />
-          </RailButton>
-          <RailButton onClick={() => step(1)} label={t("home.rail_next")}>
-            <ChevronRight className="h-4 w-4" />
-          </RailButton>
-        </div>
-      ) : null}
+      <div className="mt-8 flex items-center justify-end gap-2">
+        <RailButton
+          onClick={() => step(-1)}
+          label={t("home.rail_prev")}
+          disabled={!overflow}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </RailButton>
+        <RailButton
+          onClick={() => step(1)}
+          label={t("home.rail_next")}
+          disabled={!overflow}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </RailButton>
+      </div>
     </div>
   );
 }
@@ -101,10 +107,12 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
 function RailButton({
   onClick,
   label,
+  disabled,
   children,
 }: {
   onClick: () => void;
   label: string;
+  disabled?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -112,7 +120,13 @@ function RailButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground transition-colors duration-200 hover:bg-secondary"
+      disabled={disabled}
+      className={cn(
+        "grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground transition-colors duration-200",
+        disabled
+          ? "cursor-default opacity-30"
+          : "hover:bg-secondary",
+      )}
     >
       {children}
     </button>
