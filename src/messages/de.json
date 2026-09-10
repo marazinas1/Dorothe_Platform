@@ -1321,7 +1321,7 @@
       "openPage": "Seite öffnen"
     },
     "posts": {
-      "title": "Ratgeber-Beiträge",
+      "title": "Artikel",
       "hint": "Beiträge für den öffentlichen Ratgeber. Nur veröffentlichte Beiträge sind sichtbar; der Menüpunkt erscheint, sobald einer vorhanden ist.",
       "add": "Beitrag hinzufügen",
       "titleField": "Überschrift",
