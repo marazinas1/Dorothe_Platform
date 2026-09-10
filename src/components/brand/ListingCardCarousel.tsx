@@ -140,10 +140,7 @@ export function ListingCardCarousel({
 
   return (
     <div
-      className={cn(
-        "group/media relative aspect-[3/2] w-full overflow-hidden bg-muted",
-        muted && "grayscale transition-[filter] duration-500 group-hover:grayscale-0",
-      )}
+      className="group/media relative aspect-[3/2] w-full overflow-hidden bg-muted"
       onPointerEnter={() => setArmed(true)}
       onTouchStart={() => setArmed(true)}
     >
@@ -169,7 +166,14 @@ export function ListingCardCarousel({
                   loading={i === 0 && eager ? "eager" : "lazy"}
                   width={1200}
                   height={800}
-                  className="h-full w-full object-cover"
+                  className={cn(
+                    "h-full w-full object-cover",
+                    // On the photo itself, not the container: a filter on the
+                    // container would trap the arrows and dots inside its
+                    // stacking context, under the card link overlay.
+                    muted &&
+                      "grayscale transition-[filter] duration-500 group-hover:grayscale-0",
+                  )}
                 />
               ) : (
                 <div className="h-full w-full bg-muted" />
@@ -181,8 +185,10 @@ export function ListingCardCarousel({
 
       {total > 1 ? (
         <>
-          {/* Above the title link's inset overlay, so no event gymnastics. */}
-          <div className="pointer-events-none absolute inset-0 z-20 hidden items-center justify-between px-3 opacity-0 transition-opacity duration-300 group-hover/media:opacity-100 md:flex">
+          {/* Above the title link's inset overlay, so no event gymnastics.
+              Always visible: browsing the photos never requires opening the
+              card, on every card the same way. */}
+          <div className="pointer-events-none absolute inset-0 z-20 hidden items-center justify-between px-3 md:flex">
             <Arrow dir="prev" label={t("listings.card.prev_photo")} onClick={() => step(-1)} />
             <Arrow dir="next" label={t("listings.card.next_photo")} onClick={() => step(1)} />
           </div>
@@ -237,7 +243,7 @@ function Arrow({
       aria-hidden="true"
       title={label}
       onClick={onClick}
-      className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-card/85 text-foreground transition-opacity duration-300 hover:opacity-100"
+      className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-card/85 text-foreground opacity-80 transition-opacity duration-300 hover:opacity-100"
     >
       <Icon className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
     </button>
