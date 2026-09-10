@@ -104,6 +104,83 @@ export type Database = {
           },
         ]
       }
+      default_text_requests: {
+        Row: {
+          created_at: string
+          field_key: string
+          id: string
+          locale: string
+          page: string | null
+          requested_by: string | null
+          requested_text: Json
+          resolved_at: string | null
+          resolved_by: string | null
+          scope: string
+          seen_by_requester: boolean
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          field_key: string
+          id?: string
+          locale: string
+          page?: string | null
+          requested_by?: string | null
+          requested_text: Json
+          resolved_at?: string | null
+          resolved_by?: string | null
+          scope: string
+          seen_by_requester?: boolean
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          field_key?: string
+          id?: string
+          locale?: string
+          page?: string | null
+          requested_by?: string | null
+          requested_text?: Json
+          resolved_at?: string | null
+          resolved_by?: string | null
+          scope?: string
+          seen_by_requester?: boolean
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "default_text_requests_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "default_text_requests_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "default_text_requests_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "default_text_requests_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       feature_flags: {
         Row: {
           config: Json
