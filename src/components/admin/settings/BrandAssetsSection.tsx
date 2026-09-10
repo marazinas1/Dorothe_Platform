@@ -77,7 +77,9 @@ export function BrandAssetsSection() {
         help={label("faviconHelp")}
         value={current.favicon_url}
         onChange={(url) => void set("favicon_url", url)}
+        square
       />
+
       <BrandAssetField
         kind="og_default"
         label={label("ogImage")}
