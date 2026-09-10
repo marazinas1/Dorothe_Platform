@@ -103,16 +103,33 @@ export function BusinessTab() {
         },
       },
     });
+    // The map pin follows the address: coordinates are looked up on save, so the
+    // panel never asks for latitude and longitude.
+    let geo = { geo_lat: form.geo_lat, geo_lng: form.geo_lng };
+    const addressChanged =
+      form.address_street !== (data.address_street ?? "") ||
+      form.address_zip !== (data.address_zip ?? "") ||
+      form.address_city !== (data.address_city ?? "") ||
+      form.address_country !== (data.address_country ?? "");
+    if (addressChanged || (!form.geo_lat && !form.geo_lng)) {
+      const found = await geocodeAddress({
+        data: {
+          street: form.address_street,
+          zip: form.address_zip,
+          city: form.address_city,
+          country: form.address_country,
+        },
+      });
+      if (found.ok) geo = { geo_lat: String(found.lat), geo_lng: String(found.lng) };
+    }
     await updateSiteSettings({
-      data: { tab: "contact", values: ContactSchema.parse(form) },
+      data: { tab: "contact", values: ContactSchema.parse({ ...form, ...geo }) },
     });
     await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
   }
 
   return (
     <div className="space-y-10">
-      <BrandAssetsSection />
-
       <section className="space-y-4">
         <h2 className="text-sm font-semibold">{t("admin.settings.business.identity")}</h2>
         <div className="grid gap-4 sm:grid-cols-2">
