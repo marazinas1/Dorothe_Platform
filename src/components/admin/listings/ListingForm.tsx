@@ -178,6 +178,7 @@ export function ListingForm({
           dealType={form.values.deal_type}
           checklist={checklist}
           publicLocale={navLocale}
+          featured={featured}
           onChanged={refreshListing}
         />
       ) : null}

@@ -11,6 +11,7 @@ import type { Checklist } from "@/lib/listings/publish-checklist";
 import { blockerSummary } from "@/lib/listings/blocker-summary";
 import { scrollToField } from "@/lib/listings/scroll-to-field";
 import { PreviewButton } from "./PreviewButton";
+import { HomePickToggle } from "./HomePickToggle";
 import { useStatusChange } from "./use-status-change";
 
 /**
@@ -28,6 +29,7 @@ export function StatusBar({
   dealType,
   checklist,
   publicLocale,
+  featured,
   onChanged,
 }: {
   listingId: string;
@@ -39,6 +41,8 @@ export function StatusBar({
   checklist: Checklist;
   /** Locale for public links — the site's language, not the panel language. */
   publicLocale: string;
+  /** Whether this property is currently pinned to the home page. */
+  featured: boolean;
   onChanged: () => void;
 }) {
   const { t } = useTranslation();
@@ -82,6 +86,15 @@ export function StatusBar({
             <span className="text-xs text-muted-foreground">
               {t("admin.listings.saveBeforeStatus")}
             </span>
+          ) : null}
+
+          {isPublic ? (
+            <HomePickToggle
+              listingId={listingId}
+              featured={featured}
+              disabled={dirty}
+              onChanged={onChanged}
+            />
           ) : null}
 
           <PreviewButton
