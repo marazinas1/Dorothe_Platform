@@ -295,7 +295,7 @@ export const recentSoldQueryOptions = queryOptions({
         sort: "newest",
         page: 1,
         onlyStatus: ["sold", "rented"],
-        limit: 6,
+        limit: 24,
       },
     } as any),
   staleTime: 60_000,
