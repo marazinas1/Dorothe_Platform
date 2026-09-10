@@ -1,98 +1,104 @@
-# Admin kaip Dorothe darbo įrankis — planas iki pridavimo
+# Admin kaip Dorothe darbo įrankis — planas
 
 ## Ką patikrinau (faktai)
 
-- Svetainės meniu **jau turi** Contact (mygtukas dešinėje) ir Ratgeber/straipsnius (rodomas, nes blog flag įjungtas). Naujų puslapių kurti nereikia — reikia tik geriau išryškinti.
+- Svetainės meniu **jau turi** Kontaktus ir Ratgeber (straipsnius) — naujų puslapių kurti nereikia.
 - Skelbimai: 5 active, 2 sold, 1 rented, 2 draft (Schwalbach — trūksta „Energieträger"; Nonnweiler — trūksta „Endenergiewert").
-- Straipsnių dar nėra nė vieno. Atsiliepimų lentelė tuščia (homepage rodo pavyzdinį tekstą).
-- Home page kortelės rodomos pagal `is_featured` arba `coming_soon` — nėra ribos „3" ir nėra patogaus žymėjimo admin sąraše.
-- Atsiliepimai jau turi `show_on_home` ir `published` laukus — logika yra, tik reikia UI patobulinti.
-- Halliday jau turi tai, ko prašai: nuotraukų 3 lygiai (klientas → developerio užfiksuotas default → automatinis), „Set as default" tik developeriui, „Reset to default" savininkui. Tekstams tokios logikos ten **nėra** — tekstų default'ai gyvena kode. Pas mus reikia padaryti pilnesnę versiją: ir tekstams.
+- Straipsnių dar nėra nė vieno; atsiliepimų lentelė tuščia (svetainė rodo pavyzdinį tekstą).
+- Logo ir favicon jau ateina iš nustatymų (`site_settings`), bet įvedami **kaip URL tekstas** — nėra failo įkėlimo, todėl jų realiai patogiai pakeisti negalima.
+- Home kortelės rodomos pagal `is_featured` arba `coming_soon` — nėra ribos „3" ir nėra žymėjimo skelbimų sąraše.
+- Atsiliepimuose jau yra `published` ir `show_on_home`.
+- Šiuo metu admin meniu „The website" turi 8 punktus (Content, Listings, Selling, Inheritance, About, Contact, Testimonials, Posts) — būtent tai ir daro meniu netvarkingą.
+- Nustatymai dabar turi tabus: general, branding, contact, legal, modules, analytics. Branding leidžia klientui keisti spalvas, šriftus, kampų apvalinimą, mygtukų stilių.
+- Lumidenta kalendorius: `working_hours`, `schedule_exceptions`, `appointments` + mėnesio tinklelis; statusai laukia/patvirtinta/atvyko/neatvyko/atšaukta. Tinka perkelti apžiūroms.
 
 ## Etapai
 
-### 1 etapas — admin mygtukai ir vizualas (greita, matoma iškart)
-- Vienas mygtukų standartas visame admin: juodas/neutralus `default`, švarus `outline`, `ghost` antriniams veiksmams. Amber lieka tik viešoje svetainėje.
-- Vienodi tarpai, kortelės, antraštės, tuščių būsenų blokai, „Išsaugota" pranešimai.
-- Vienodas puslapio karkasas: antraštė + paaiškinimas + „Peržiūrėti puslapį" mygtukas dešinėje (kaip Halliday).
-
-### 2 etapas — admin meniu pertvarka pagal kasdienį darbą
-Nauja struktūra:
+### 1 etapas — meniu pertvarka pagal kasdienį darbą
+Nauja struktūra (tekstai išeina iš pirmo plano):
 
 ```text
 KASDIEN
-  Apžvalga        (ką reikia padaryti šiandien)
-  Užklausos       (su neperskaitytų burbulu)
+  Apžvalga
   Skelbimai
+  Užklausos      (su neperskaitytų burbulu)
+  Kalendorius    (5 etapas)
   Straipsniai
-  Kalendorius     (7 etapas, vėliau)
-
-SVETAINĖS TEKSTAI
-  Pradžia
-  Pardavimas
-  Palikimas
-  Apie mane
-  Kontaktai
   Atsiliepimai
-
-RETAI
   Analitika
-  Vartotojai
-  Nustatymai (bendri: logotipas, favicon, spalvos, kalbos, moduliai, teisė)
+
+NUSTATYMAI
+  Nustatymai     (viskas kita, tabuose)
 ```
 
-Skelbimai ir straipsniai pakyla į kasdienį bloką; tekstų redagavimas atskiriamas kaip „retesnis, bet nuoseklus pagal svetainės meniu".
+Skelbimai iškart antri; visi svetainės tekstų puslapiai išnyksta iš meniu.
 
-### 3 etapas — tekstų default'ai ir „Set as default" (svarbiausia dalis)
-Trys lygiai kiekvienam tekstui ir nuotraukai:
+### 2 etapas — Nustatymai su tabais (tekstai persikelia čia)
+Vieni Nustatymai, tabai tokia eile:
 
-1. Ką įrašė Dorothe (savininkė)
-2. Developerio užfiksuotas default
-3. Kode esantis pradinis tekstas
+```text
+Bendra      logotipas (įkėlimas), favicon (įkėlimas), pavadinimas, kalbos
+Kontaktai   telefonas, el. paštas, adresas, darbo laikas, socialiniai
+Tekstai     antriniai tabai pagal svetainės meniu:
+              Pradžia | Pardavimas | Palikimas | Apie mane | Kontaktai
+Teisė       Impressum, privatumas, taisyklės
+Moduliai    kas įjungta / išjungta (tik developeriui)
+```
 
-Elgesys:
-- Redaguojant lauke rodomas **tikrasis dabartinis svetainės tekstas** (ne tuščias laukas). Jei tekstas ateina iš default'o — rodomas pilkai su žymele „Numatytasis".
-- Savininkė gali: išsaugoti savo tekstą arba „Atstatyti numatytąjį".
-- Ištrynus lauką svetainė **niekada nelieka tuščia** — grįžta default.
-- Tik Developeris mato „Nustatyti kaip numatytąjį" — užfiksuoja dabartinį tekstą/nuotrauką kaip naują default.
-- Ta pati logika nuotraukoms (jau dalinai yra) ir visiems puslapiams.
+- Logotipas ir favicon — tikras failo įkėlimas, iškart matomas ir viešoje svetainėje, ir admin viršuje.
+- „Tekstai" tabe rodomi tie patys tekstai, kurie dabar yra svetainėje, su EN/DE ir gyva peržiūra — kaip dabar Home redaktorius, tik po Nustatymais.
 
-### 4 etapas — testinis straipsnis (draft)
-Sukurti vieną trumpą EN/DE straipsnį su viršelio nuotrauka ir palikti **draft** — Dorothe galės pati redaguoti, paspausti publikuoti ir realiu laiku pamatyti, kaip jis atsiranda svetainėje.
+### 3 etapas — spalvų ir techninių nustatymų išėmimas
+- Iš admin išimame: spalvas, šriftus, kampų apvalinimą, mygtukų stilių, spalvų peržiūrą.
+- Reikšmės nesikeičia — jos toliau lieka `site_settings` ir jas keisiu aš kode. Klientei tiesiog nebeliks šių laukų.
+- Rezultatas: klientė nebegali netyčia sugadinti svetainės išvaizdos.
 
-### 5 etapas — home page atranka
-- Skelbimų sąraše žvaigždutė „Rodyti pradžios puslapyje" su skaitliuku „3 iš 3".
-- Jei pažymėta mažiau nei 3 — automatiškai užpildoma naujausiais aktyviais, kad pradžios puslapis niekada neatrodytų tuščias.
-- Atsiliepimuose tas pats: visi eina į „Apie mane", pažymėti 3 — į pradžios puslapį, su ta pačia automatine atsarga.
+### 4 etapas — mygtukų ir vizualo suvienodinimas admin dalyje
+- Vienas standartas: juodas/neutralus pagrindinis, švarus outline, ghost antriniams. Gintarinė lieka tik viešoje svetainėje.
+- Vienodos antraštės, kortelės, tarpai, tuščios būsenos, „Išsaugota" pranešimai, visur „Peržiūrėti puslapį".
 
-### 6 etapas — Apžvalgos puslapis kaip darbų sąrašas
-Dorothe atsidaro admin ir mato: naujos užklausos, skelbimai be nuotraukų, draft'ai kuriuos reikia užbaigti, seniai neatnaujinti aktyvūs skelbimai, straipsnių draft'ai. Viskas su mygtuku „Tvarkyti".
+### 5 etapas — skelbimų statusai ir home atranka
+- Statuso pakeitimas vienu paspaudimu tiesiai iš skelbimų sąrašo: Aktyvus → Rezervuotas → Parduota / Išnuomota. Svetainėje objektas iškart peršoka į kitą kategoriją (kaip OCDG).
+- Skelbimų sąraše žvaigždutė „Rodyti pradžios puslapyje", su skaitliuku „3 iš 3".
+- Jei pažymėta mažiau nei 3 — automatiškai užpildoma naujausiais aktyviais, kad pradžia niekada neatrodytų tuščia.
+- Atsiliepimuose ta pati logika: visi eina į „Apie mane", pažymėti 3 — į pradžią.
 
-### 7 etapas — kalendorius (atskirai, po pridavimo)
-Apžiūros ir susitikimai, susieti su skelbimu ir užklausa. Padarysim po to, kai Dorothe patestuos pagrindą — kad nevilkintume perdavimo.
+### 6 etapas — kalendorius apžiūroms
+- Mėnesio tinklelis + dienos sąrašas, kaip Lumidentoje.
+- Įrašas: data ir laikas, tipas (apžiūra / susitikimas / asmeninis), objektas (nebūtinas), kliento vardas, telefonas, pastaba, statusas.
+- Iš užklausos galima iškart sukurti apžiūrą — užklausa ir apžiūra susijungia.
+- Darbo laiko nustatymo nekuriam (nėra viešo rezervavimo) — tai tik Dorothes vidinis kalendorius.
 
-### 8 etapas — užbaigimas
-- Du draft skelbimai: trūkstami energijos laukai (arba paliekam Dorothei įvesti).
-- Saugumo įspėjimų sutvarkymas.
+### 7 etapas — testinis straipsnis (draft)
+Vienas trumpas EN/DE straipsnis su viršelio nuotrauka, paliktas **draft** — Dorothe pati redaguos, paspaus publikuoti ir realiu laiku pamatys svetainėje.
+
+### 8 etapas — Apžvalga kaip darbų sąrašas
+Naujos užklausos, artimiausios apžiūros, skelbimai be nuotraukų, neužbaigti draft'ai, seniai neatnaujinti aktyvūs — kiekvienas su mygtuku „Tvarkyti".
+
+### 9 etapas — užbaigimas
+- Du draft skelbimai (trūkstami energijos laukai).
+- Saugumo įspėjimai.
 - Visų puslapių patikra EN/DE + telefone.
 - Kvietimas Dorothei + pasveikinimo laiškas EN/DE.
 
-## Mano įžvalgos: kas brokerei tikrai svarbu
+## Mano įžvalgos
 
-**Admin dalis.** Brokerė kasdien daro tris dalykus: atsako į užklausas, kelia/atnaujina skelbimą, keičia statusą. Viskas kita — kartą per mėnesį ar rečiau. Todėl tie trys turi būti pirmi ir prieinami vienu paspaudimu, o tekstų redagavimas — atskiroje dalyje. Telefone dažniausiai tikrinamos užklausos ir keičiamas statusas — tai turi veikti be zoominimo.
+Brokerė kasdien daro tris dalykus: atsako į užklausą, atnaujina skelbimą, pakeičia statusą. Ketvirtas — susitarti dėl apžiūros. Tekstus ji perrašys vieną kartą ir daugiau prie jų negrįš — todėl tavo sprendimas juos kišti po Nustatymais yra teisingas ir tai atitinka geriausią praktiką: kasdieniai veiksmai priekyje, vienkartinė konfigūracija gilyje.
 
-**Svetainės išorė.** Pirkėjui svarbu: kaina, m², kambariai, vieta, nuotraukos, ir „kas ta žmogus". Pardavėjui (kuris atneša pinigus) svarbu: pasitikėjimas — sertifikatai, atsiliepimai, aiškus procesas, greitas kontaktas. Todėl pardavimo kelias turi būti bent taip pat matomas kaip skelbimai, ir kiekviename puslapyje turi būti aiškus vienas veiksmas: „Prašau vertinimo".
+Spalvų atėmimas taip pat teisingas — tai vienintelis nustatymas, kuriuo klientas gali sugadinti visą svetainę ir net nesuprasti, kas atsitiko.
 
-**Straipsniai.** Vokietijoje veikia geriausiai praktiniai vietiniai straipsniai („Ką kainuoja notaras Saarlande", „Kaip dalintis paveldėtą namą") — jie atveda būtent pardavėjus, ne smalsuolius.
+Straipsniams Vokietijoje geriausiai veikia praktiniai vietiniai tekstai („Kiek kainuoja notaras Saarlande", „Kaip pasidalinti paveldėtą namą") — jie atveda pardavėjus, ne smalsuolius.
 
 ## Techninė dalis
 
-- Naujas `page_content_defaults` (page, slot, locale, value) + `page_media_defaults` tekstų/nuotraukų default'ams; rašo tik Developeris (RLS per `is_developer()`).
-- Skaitymo tvarka viena funkcija: klientas → default → kodo fallback. Tą pačią funkciją naudoja ir vieša svetainė, ir admin, kad niekada nesiskirtų.
-- Mygtukų standartas per `buttonVariants` variantus + admin tokenus `src/styles.css` — jokių hardcoded spalvų komponentuose.
-- Skelbimų home atranka per `is_featured` + serverio pusėje užpildymas iki 3.
-- Failai lieka po 200 eilučių; visa logika `/lib`, `/components/brand` tik atvaizduoja.
+- Meniu: `AdminSidebar` grupės perrašomos; `pages/$page` maršrutai lieka veikti, bet pasiekiami per Nustatymų „Tekstai" tabą.
+- Nustatymai: `SettingsTabs` → `general | contact | texts | legal | modules`; `texts` turi antrinį puslapio pasirinkimą ir naudoja esamą `PageEditorWorkspace` / `HomeEditorWorkspace`.
+- `BrandingTab` išimamas; spalvų/šriftų/radiuso reikšmės lieka DB ir `src/lib/theme/tokens.ts`.
+- Logo/favicon įkėlimas per `site-assets` bucket + `processImageFile`, kelias `site-assets/brand/...`.
+- Kalendoriui nauja migracija: `appointments` (+ pasirinktinis `listing_id`, `inquiry_id`), RLS per `is_staff()` / `current_user_has_permission()`, grants kaip visur.
+- Home atranka: `is_featured` + serverio pusėje užpildymas iki 3.
+- Failai po 200 eilučių; logika `/lib`, `/components/brand` tik atvaizduoja; jokių hardcoded spalvų.
 
 ## Pradedam nuo
 
-**1 + 2 etapo** (mygtukai ir meniu — iškart pamatysi skirtumą), tada **3 etapas** (default'ų logika), tada **4** (testinis straipsnis). Po kiekvieno patikrinam ir tik tada judam toliau.
+**1 + 2 + 3 etapo** viena banga (meniu, Nustatymai su tabais, spalvų išėmimas) — po jos iškart pamatysi tvarkingą admin. Tada 4, 5, 6, 7. Po kiekvieno patikrinam.
