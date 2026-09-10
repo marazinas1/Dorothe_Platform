@@ -56,6 +56,18 @@ export const GeneralSchema = z.object({
 });
 export type GeneralInput = z.infer<typeof GeneralSchema>;
 
+/**
+ * Brand images only. Colours, fonts and shape tokens are a developer concern
+ * and are deliberately not editable from the panel.
+ */
+export const BrandAssetsSchema = z.object({
+  logo_url: nullableUrl,
+  logo_dark_url: nullableUrl,
+  favicon_url: nullableUrl,
+  og_default_image: nullableUrl,
+});
+export type BrandAssetsInput = z.infer<typeof BrandAssetsSchema>;
+
 export const BrandingSchema = z.object({
   logo_url: nullableUrl,
   logo_dark_url: nullableUrl,
@@ -117,6 +129,7 @@ export const SiteSettingsSchema = GeneralSchema;
 export const SITE_SETTINGS_SCHEMAS = {
   general: GeneralSchema,
   branding: BrandingSchema,
+  brand_assets: BrandAssetsSchema,
   contact: ContactSchema,
   legal: LegalSchema,
   analytics: AnalyticsSchema,

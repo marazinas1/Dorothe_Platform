@@ -5,7 +5,11 @@ import { cn } from "@/lib/utils";
 import { usePermission } from "@/lib/auth/use-permission";
 import type { Locale } from "@/i18n/config";
 
-const TABS = ["general", "branding", "contact", "legal", "modules", "analytics"] as const;
+/**
+ * Configuration in the order it is needed: identity first, then the words of
+ * the public pages, then the legal texts, then the modules a developer toggles.
+ */
+const TABS = ["general", "contact", "texts", "legal", "modules"] as const;
 export type SettingsTabId = (typeof TABS)[number];
 
 export function SettingsTabs() {

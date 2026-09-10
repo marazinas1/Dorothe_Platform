@@ -8,16 +8,10 @@ import {
   Building2,
   Inbox,
   UserCog,
-  Home,
   BarChart3,
   Settings,
   Quote,
   Newspaper,
-  Handshake,
-  Scale,
-  User,
-  Mail,
-
 } from "lucide-react";
 
 import {
@@ -77,27 +71,8 @@ const GROUPS: NavGroup[] = [
     label: "workspace",
     items: [
       { key: "dashboard", to: "/$locale/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
-      { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
-      { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
-      { key: "users", to: "/$locale/admin/users", icon: UserCog, permission: "user.manage" },
-    ],
-  },
-  {
-    label: "website",
-    items: [
-      { key: "content", to: "/$locale/admin/content", icon: Home, permission: "settings.edit" },
       { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
-      { key: "selling", to: "/$locale/admin/pages/$page", page: "selling", icon: Handshake, permission: "settings.edit" },
-      { key: "inheritance", to: "/$locale/admin/pages/$page", page: "inheritance", icon: Scale, permission: "settings.edit" },
-      { key: "about", to: "/$locale/admin/pages/$page", page: "about", icon: User, permission: "settings.edit" },
-      { key: "contact", to: "/$locale/admin/pages/$page", page: "contact", icon: Mail, permission: "settings.edit" },
-      {
-        key: "testimonials",
-        to: "/$locale/admin/testimonials",
-        icon: Quote,
-        permission: "settings.edit",
-        flag: "testimonials",
-      },
+      { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
       {
         key: "posts",
         to: "/$locale/admin/posts",
@@ -105,9 +80,17 @@ const GROUPS: NavGroup[] = [
         permission: "settings.edit",
         flag: "blog",
       },
+      {
+        key: "testimonials",
+        to: "/$locale/admin/testimonials",
+        icon: Quote,
+        permission: "settings.edit",
+        flag: "testimonials",
+      },
+      { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
+      { key: "users", to: "/$locale/admin/users", icon: UserCog, permission: "user.manage" },
     ],
   },
-
   {
     label: "settings",
     items: [

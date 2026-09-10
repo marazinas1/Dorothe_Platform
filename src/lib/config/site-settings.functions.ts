@@ -6,6 +6,7 @@ import type { SiteSettings } from "@/types/site-settings";
 import {
   GeneralSchema,
   BrandingSchema,
+  BrandAssetsSchema,
   ContactSchema,
   LegalSchema,
   AnalyticsSchema,
@@ -37,6 +38,7 @@ export const siteSettingsQueryOptions = queryOptions({
 type UpdateInput =
   | { tab: "general"; values: unknown }
   | { tab: "branding"; values: unknown }
+  | { tab: "brand_assets"; values: unknown }
   | { tab: "contact"; values: unknown }
   | { tab: "legal"; values: unknown }
   | { tab: "analytics"; values: unknown }
@@ -48,6 +50,8 @@ function parseByTab(input: UpdateInput): Record<string, unknown> {
       return GeneralSchema.parse(input.values);
     case "branding":
       return BrandingSchema.parse(input.values);
+    case "brand_assets":
+      return BrandAssetsSchema.parse(input.values);
     case "contact":
       return ContactSchema.parse(input.values);
     case "legal":
@@ -65,6 +69,7 @@ export const updateSiteSettings = createServerFn({ method: "POST" })
     const allowed: SettingsTabKey[] = [
       "general",
       "branding",
+      "brand_assets",
       "contact",
       "legal",
       "analytics",
