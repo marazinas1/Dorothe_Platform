@@ -658,7 +658,7 @@
         "social": "Social links (JSON)",
         "json_help": "Stored as JSON.",
         "json_invalid": "Invalid JSON.",
-        "map_help": "Click the map or drag the pin to set the office location.",
+        "map_help": "The address above sets the map on the contact page.",
         "map_title": "Office location on the map"
       },
       "legal": {

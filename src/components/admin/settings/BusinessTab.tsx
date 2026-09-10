@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { geocodeAddress } from "@/lib/geo/geocode.functions";
 import {
   siteSettingsQueryOptions,
   updateSiteSettings,
@@ -14,7 +14,6 @@ import type { SiteSettings } from "@/types/site-settings";
 
 import { SaveButton } from "./SaveButton";
 import { BrandAssetsSection } from "./BrandAssetsSection";
-import { OfficePinField } from "./OfficePinField";
 import { OpeningHoursField } from "./OpeningHoursField";
 import { SocialLinksField } from "./SocialLinksField";
 import { TechnicalBlock } from "./TechnicalBlock";
@@ -104,16 +103,33 @@ export function BusinessTab() {
         },
       },
     });
+    // The map pin follows the address: coordinates are looked up on save, so the
+    // panel never asks for latitude and longitude.
+    let geo = { geo_lat: form.geo_lat, geo_lng: form.geo_lng };
+    const addressChanged =
+      form.address_street !== (data.address_street ?? "") ||
+      form.address_zip !== (data.address_zip ?? "") ||
+      form.address_city !== (data.address_city ?? "") ||
+      form.address_country !== (data.address_country ?? "");
+    if (addressChanged || (!form.geo_lat && !form.geo_lng)) {
+      const found = await geocodeAddress({
+        data: {
+          street: form.address_street,
+          zip: form.address_zip,
+          city: form.address_city,
+          country: form.address_country,
+        },
+      });
+      if (found.ok) geo = { geo_lat: String(found.lat), geo_lng: String(found.lng) };
+    }
     await updateSiteSettings({
-      data: { tab: "contact", values: ContactSchema.parse(form) },
+      data: { tab: "contact", values: ContactSchema.parse({ ...form, ...geo }) },
     });
     await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
   }
 
   return (
     <div className="space-y-10">
-      <BrandAssetsSection />
-
       <section className="space-y-4">
         <h2 className="text-sm font-semibold">{t("admin.settings.business.identity")}</h2>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -167,18 +183,9 @@ export function BusinessTab() {
             <Input value={form.address_country} onChange={(e) => set("address_country", e.target.value)} />
           </Field>
         </div>
-        <div className="space-y-1.5">
-          <Label>{t("admin.settings.contact.map_title")}</Label>
-          <OfficePinField
-            lat={form.geo_lat}
-            lng={form.geo_lng}
-            onMove={(lat, lng) => {
-              set("geo_lat", String(lat));
-              set("geo_lng", String(lng));
-            }}
-          />
-          <p className="text-xs text-muted-foreground">{t("admin.settings.contact.map_help")}</p>
-        </div>
+        <p className="text-xs text-muted-foreground">
+          {t("admin.settings.contact.map_help")}
+        </p>
       </section>
 
       <OpeningHoursField
@@ -187,9 +194,11 @@ export function BusinessTab() {
       />
       <SocialLinksField value={form.social} onChange={(next) => set("social", next)} />
 
-      {canDesign ? <TechnicalBlock data={data} /> : null}
-
       <SaveButton onSubmit={save} />
+
+      <BrandAssetsSection />
+
+      {canDesign ? <TechnicalBlock data={data} /> : null}
     </div>
   );
 }
