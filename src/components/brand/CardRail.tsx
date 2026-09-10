@@ -31,7 +31,13 @@ const BASIS: Record<2 | 3, string> = {
  * or how many exist. With few enough cards to fit, the arrows stay hidden and
  * the row reads as a plain grid.
  */
-export function CardRail({ children, perView = 3, label, className }: Props) {
+export function CardRail({
+  children,
+  perView = 3,
+  label,
+  className,
+  alwaysShowArrows = false,
+}: Props) {
   const { t } = useTranslation();
   const trackRef = useRef<HTMLUListElement | null>(null);
   const [overflow, setOverflow] = useState(false);
@@ -47,6 +53,7 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
   }, [children.length]);
 
   const step = (dir: 1 | -1) => {
+    if (!overflow) return;
     const track = trackRef.current;
     if (!track) return;
     const slot = track.firstElementChild as HTMLElement | null;
@@ -64,6 +71,8 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
   };
 
   if (children.length === 0) return null;
+
+  const showArrows = overflow || alwaysShowArrows;
 
   return (
     <div className={cn("relative", className)}>
@@ -86,22 +95,24 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
         ))}
       </ul>
 
-      <div className="mt-8 flex items-center justify-end gap-2">
-        <RailButton
-          onClick={() => step(-1)}
-          label={t("home.rail_prev")}
-          disabled={!overflow}
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </RailButton>
-        <RailButton
-          onClick={() => step(1)}
-          label={t("home.rail_next")}
-          disabled={!overflow}
-        >
-          <ChevronRight className="h-4 w-4" />
-        </RailButton>
-      </div>
+      {showArrows ? (
+        <div className="mt-8 flex items-center justify-end gap-2">
+          <RailButton
+            onClick={() => step(-1)}
+            label={t("home.rail_prev")}
+            disabled={!overflow}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </RailButton>
+          <RailButton
+            onClick={() => step(1)}
+            label={t("home.rail_next")}
+            disabled={!overflow}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </RailButton>
+        </div>
+      ) : null}
     </div>
   );
 }
