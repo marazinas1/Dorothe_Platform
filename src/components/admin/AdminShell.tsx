@@ -23,11 +23,11 @@ export function AdminShell({
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
 
   // Dropdowns and dialogs render into <body> through a portal, so the admin
-  // tokens have to reach the body too — otherwise menus pick up the public
-  // amber accent instead of the neutral admin one.
+  // theme has to reach the body too — otherwise menus pick up the client's
+  // public palette instead of the fixed admin one.
   useEffect(() => {
-    document.body.classList.add("admin-density");
-    return () => document.body.classList.remove("admin-density");
+    document.body.classList.add("admin-theme");
+    return () => document.body.classList.remove("admin-theme");
   }, []);
 
   const displayName = profile.full_name || profile.email || t("admin.topbar.unknownUser");
@@ -35,8 +35,9 @@ export function AdminShell({
 
   return (
     <SidebarProvider>
-      {/* One design system: same tokens as the public site, denser scale only. */}
-      <div className="admin-density flex min-h-screen w-full bg-background text-foreground">
+      {/* The admin has its own fixed design system, identical in every clone. */}
+      <div className="admin-theme flex min-h-screen w-full bg-background text-foreground">
+
         <AdminSidebar email={profile.email ?? displayName} roleLabel={roleLabel} />
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-4 sm:px-6">
