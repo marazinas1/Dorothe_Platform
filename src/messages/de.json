@@ -658,7 +658,7 @@
         "social": "Soziale Netzwerke (JSON)",
         "json_help": "Wird als JSON gespeichert.",
         "json_invalid": "Ungültiges JSON.",
-        "map_help": "Klicken Sie auf die Karte oder ziehen Sie die Nadel, um den Bürostandort zu setzen.",
+        "map_help": "Die Adresse oben bestimmt die Karte auf der Kontaktseite.",
         "map_title": "Bürostandort auf der Karte"
       },
       "legal": {
