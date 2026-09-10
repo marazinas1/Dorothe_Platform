@@ -183,18 +183,9 @@ export function BusinessTab() {
             <Input value={form.address_country} onChange={(e) => set("address_country", e.target.value)} />
           </Field>
         </div>
-        <div className="space-y-1.5">
-          <Label>{t("admin.settings.contact.map_title")}</Label>
-          <OfficePinField
-            lat={form.geo_lat}
-            lng={form.geo_lng}
-            onMove={(lat, lng) => {
-              set("geo_lat", String(lat));
-              set("geo_lng", String(lng));
-            }}
-          />
-          <p className="text-xs text-muted-foreground">{t("admin.settings.contact.map_help")}</p>
-        </div>
+        <p className="text-xs text-muted-foreground">
+          {t("admin.settings.contact.map_help")}
+        </p>
       </section>
 
       <OpeningHoursField
@@ -203,9 +194,11 @@ export function BusinessTab() {
       />
       <SocialLinksField value={form.social} onChange={(next) => set("social", next)} />
 
-      {canDesign ? <TechnicalBlock data={data} /> : null}
-
       <SaveButton onSubmit={save} />
+
+      <BrandAssetsSection />
+
+      {canDesign ? <TechnicalBlock data={data} /> : null}
     </div>
   );
 }
