@@ -7,6 +7,7 @@ import {
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
 import { homeDefaultList, homeDefaultText } from "./content";
+import { HOME_TEXT_FIELDS } from "./fields";
 
 type Bag = Record<string, unknown>;
 type Kind = "line" | "paragraph" | "list";
@@ -109,14 +110,55 @@ export function useHomeAdmin(locale: string) {
     await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
   }
 
+  /** True once a developer froze this field's wording for this locale. */
+  function isLocked(key: string): boolean {
+    const bag = (settings.home_defaults ?? {}) as Bag;
+    const entry = (bag[key] ?? {}) as Record<string, unknown>;
+    const raw = entry[locale];
+    if (Array.isArray(raw)) return raw.length > 0;
+    return typeof raw === "string" && raw.trim().length > 0;
+  }
+
+  const lockedCount = HOME_TEXT_FIELDS.filter((f) => isLocked(f.key)).length;
+
+  /**
+   * Developer-only: freeze the wording the page shows right now for every field
+   * at once. Overrides are folded into the defaults, so the page stays the same.
+   */
+  async function lockAllDefaults() {
+    const defaults = { ...((settings.home_defaults ?? {}) as Bag) };
+    let nextContent = content;
+
+    for (const field of HOME_TEXT_FIELDS) {
+      const current = value(field.key) || placeholder(field.key);
+      if (!current.trim()) continue;
+      const stored =
+        field.kind === "list"
+          ? current.split("\n").map((l) => l.trim()).filter(Boolean)
+          : current;
+      const entry = { ...((defaults[field.key] ?? {}) as Record<string, unknown>) };
+      entry[locale] = stored;
+      defaults[field.key] = entry;
+      nextContent = withoutOverride(nextContent, field.key);
+    }
+
+    setContent(nextContent);
+    await saveHomeDefaults({ data: { home_defaults: defaults, home_content: nextContent } });
+    await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
+  }
+
   return {
     settings,
     value,
     placeholder,
     setValue,
     hasOverride,
+    isLocked,
+    lockedCount,
+    fieldCount: HOME_TEXT_FIELDS.length,
     resetValue,
     setAsDefault,
+    lockAllDefaults,
     mediaEntry,
     setMediaEntry,
     save,

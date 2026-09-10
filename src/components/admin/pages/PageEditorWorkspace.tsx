@@ -78,9 +78,13 @@ export function PageEditorWorkspace({
             definition={definition}
             value={admin.value}
             placeholder={admin.placeholder}
+            isLocked={admin.isLocked}
+            lockedCount={admin.lockedCount}
+            fieldCount={admin.fieldCount}
             onChange={admin.setValue}
             onReset={admin.resetValue}
             onSetDefault={(key, kind) => void admin.setAsDefault(key, kind)}
+            onLockAll={admin.lockAllDefaults}
           />
 
 

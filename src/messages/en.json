@@ -1387,6 +1387,20 @@
       "coverRemove": "Remove picture",
       "coverHint": "JPG or PNG — it is resized automatically."
     },
+    "copyEditor": {
+      "currentlyShown": "Currently shown",
+      "defaultLabel": "Default wording",
+      "writeOwn": "Write your own wording…",
+      "edited": "Edited",
+      "reset": "Reset",
+      "setDefault": "Set as default",
+      "lockedHint": "A default is locked in for this field. Click to replace it with the current wording.",
+      "unlockedHint": "No default locked in yet. Click to freeze the current wording.",
+      "lockAll": "Lock all current wording as default",
+      "lockedCount": "{{locked}} of {{total}} fields have a locked default",
+      "showMore": "Show more",
+      "showLess": "Show less"
+    },
     "pageEditor": {
       "editHint": "The words and photographs of this page. Leave a field empty to keep the current line.",
       "placeholder": "Leave empty to keep the current line",
