@@ -68,7 +68,14 @@ export function CardRail({ children, perView = 3, label, className }: Props) {
       <ul
         ref={trackRef}
         aria-label={label}
-        className="-mx-1 flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className={cn(
+          "-mx-1 flex gap-5 overflow-x-auto overflow-y-hidden px-1 pb-2",
+          // Vertical page scrolling must never be captured by the row: proximity
+          // snapping instead of mandatory, no chaining sideways, and both axes
+          // stay pannable so a diagonal trackpad gesture keeps scrolling the page.
+          "snap-x snap-proximity overscroll-x-contain [touch-action:pan-x_pan-y]",
+          "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+        )}
       >
         {children.map((child, i) => (
           <li key={i} className={cn("shrink-0 snap-start", BASIS[perView])}>
