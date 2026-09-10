@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Lock, LockOpen, Undo2 } from "lucide-react";
+import { Lock, LockOpen, Send, Undo2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Input } from "@/components/ui/input";
@@ -20,9 +20,13 @@ type Props = {
   placeholder: string;
   /** True once a developer has frozen this field's default wording. */
   isLocked?: boolean;
+  /** Outcome of the owner's own "make this the default" request, if any. */
+  requestStatus?: "pending" | "approved" | "declined" | null;
   onChange: (next: string) => void;
   onReset: () => void;
   onSetDefault: () => void;
+  /** Owner path: ask the developer to lock this wording in. */
+  onRequestDefault?: () => void;
 };
 
 const COLLAPSE_AT = 180;
