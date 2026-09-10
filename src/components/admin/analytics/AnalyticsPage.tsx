@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Eye, Inbox, TrendingUp, Users } from "lucide-react";
+import { BarChart3, Eye, Inbox, TrendingUp, Users } from "lucide-react";
 
 import { analyticsSummaryQueryOptions } from "@/lib/analytics/admin.functions";
 import {
@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils";
 import { StatCard } from "./StatCard";
 import { BreakdownList } from "./BreakdownList";
 import { TrafficChart } from "./TrafficChart";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
 
 function RangePicker({
   value,
@@ -59,13 +61,7 @@ export function AnalyticsPage() {
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="font-heading text-2xl">{t("admin.analytics.title")}</h1>
-          <p className="text-sm text-muted-foreground">{t("admin.analytics.subtitle")}</p>
-        </div>
-        <RangePicker value={range} onChange={setRange} />
-      </div>
+      <AdminPageHeader icon={BarChart3} title={t("admin.analytics.title")} description={t("admin.analytics.subtitle")} actions={<RangePicker value={range} onChange={setRange} />} />
 
       {error ? (
         <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
@@ -74,9 +70,7 @@ export function AnalyticsPage() {
       ) : null}
 
       {isPending ? (
-        <div className="rounded-lg border border-border bg-card p-10 text-center text-sm text-muted-foreground">
-          {t("admin.analytics.loading")}
-        </div>
+        <AdminEmptyState icon={BarChart3} title={t("admin.analytics.loading")} />
       ) : (
         <>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">

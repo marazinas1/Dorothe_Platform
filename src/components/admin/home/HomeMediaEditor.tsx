@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
 
+import { ImageOff, RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { ImageUploadField } from "@/components/admin/ui/ImageUploadField";
 import { pageMediaPath } from "@/lib/branding/media-paths";
@@ -31,42 +33,51 @@ export function HomeMediaEditor({ slots, entry, onChange, resolved, scope = "hom
         const value = entry(slot);
         const shown = value.mode === "custom" ? value.url : resolved(slot);
         return (
-          <div key={slot} className="rounded-[var(--radius)] border border-border bg-card p-4">
-            <Label className="text-sm font-medium">{t(`admin.home.media.${slot}`)}</Label>
+          <div key={slot} className="overflow-hidden rounded-[var(--radius)] border border-border bg-card">
+            <div className="border-b border-border px-4 py-3">
+              <Label className="text-sm font-semibold">{t(`admin.home.media.${slot}`)}</Label>
+              <p className="mt-1 text-xs text-muted-foreground">{t("admin.home.media.uploadHelp")}</p>
+            </div>
 
-            <div className="mt-3 aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius)/1.5)] bg-muted">
+            <div className="aspect-[4/3] w-full overflow-hidden bg-muted/60">
               {shown ? (
                 <img src={shown} alt="" className="h-full w-full object-cover" />
               ) : (
-                <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
-                  {t("admin.home.media.empty")}
+                <div className="flex h-full flex-col items-center justify-center gap-2 text-xs text-muted-foreground">
+                  <ImageOff className="h-6 w-6" />
+                  <span>{t("admin.home.media.empty")}</span>
                 </div>
               )}
             </div>
 
-            <div className="mt-3 flex gap-4 text-sm">
-              {(["default", "custom"] as const).map((mode) => (
-                <label key={mode} className="inline-flex items-center gap-2">
-                  <input
-                    type="radio"
-                    className="accent-[var(--primary)]"
-                    checked={value.mode === mode}
-                    onChange={() => onChange(slot, { ...value, mode })}
-                  />
-                  {t(`admin.home.media.${mode}`)}
-                </label>
-              ))}
-            </div>
+            <div className="space-y-3 p-4">
+              <div className="flex gap-4 text-sm">
+                {(["default", "custom"] as const).map((mode) => (
+                  <label key={mode} className="inline-flex items-center gap-2">
+                    <input
+                      type="radio"
+                      className="accent-[var(--primary)]"
+                      checked={value.mode === mode}
+                      onChange={() => onChange(slot, { ...value, mode })}
+                    />
+                    {t(`admin.home.media.${mode}`)}
+                  </label>
+                ))}
+              </div>
 
-            {value.mode === "custom" ? (
-              <div className="mt-3">
+              {value.mode === "custom" ? (
                 <ImageUploadField
                   path={pageMediaPath(scope, slot)}
                   onUploaded={(url) => onChange(slot, { mode: "custom", url: url ?? "" })}
                   removable={Boolean(value.url)}
                 />
-              </div>
-            ) : null}
+              ) : shown ? (
+                <Button type="button" variant="outline" size="sm" onClick={() => onChange(slot, { mode: "default", url: "" })}>
+                  <RotateCcw className="h-4 w-4" />
+                  {t("admin.home.media.restoreDefault")}
+                </Button>
+              ) : null}
+            </div>
           </div>
         );
       })}

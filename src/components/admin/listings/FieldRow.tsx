@@ -58,7 +58,7 @@ export function SectionStep({
   );
 }
 
-/** Section container: hairline border, no shadow, Fraunces heading. */
+/** Shared section container matching every other admin workspace. */
 export function FormSection({
   title,
   description,
@@ -75,8 +75,9 @@ export function FormSection({
   return (
     <section
       id={anchor ? fieldAnchorId(anchor) : undefined}
-      className="scroll-mt-28 rounded-lg border border-border bg-card p-4 sm:p-6"
+      className="scroll-mt-28 overflow-hidden rounded-[var(--radius)] border border-border bg-card"
     >
+      <header className="border-b border-border px-4 py-4 sm:px-5">
       <h2 className="flex items-baseline gap-2 font-heading text-lg">
         {step !== null ? (
           <span className="text-sm font-medium text-muted-foreground">{step}</span>
@@ -86,7 +87,8 @@ export function FormSection({
       {description ? (
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>
       ) : null}
-      <div className="mt-4">{children}</div>
+      </header>
+      <div className="p-4 sm:p-5">{children}</div>
     </section>
   );
 }

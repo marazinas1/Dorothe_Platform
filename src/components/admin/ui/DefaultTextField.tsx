@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/lib/auth/use-permission";
+import { StatusChip } from "./StatusChip";
 
 export type FieldKind = "line" | "paragraph" | "list";
 
@@ -68,14 +69,14 @@ export function DefaultTextField({
             {label}
           </Label>
           {edited ? (
-            <span className="rounded-md border border-border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+            <StatusChip icon="draft" tone="muted">
               {t("admin.copyEditor.edited")}
-            </span>
+            </StatusChip>
           ) : null}
           {requestStatus ? (
-            <span className="rounded-md border border-border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+            <StatusChip icon={requestStatus === "approved" ? "published" : "pending"} tone={requestStatus === "approved" ? "active" : "muted"}>
               {t(`admin.copyEditor.request.${requestStatus}`)}
-            </span>
+            </StatusChip>
           ) : null}
         </div>
         <div className="flex items-center gap-1">
@@ -123,7 +124,7 @@ export function DefaultTextField({
       </div>
 
       {defaultText ? (
-        <div className="rounded-[calc(var(--radius)/1.5)] border border-dashed border-border bg-muted/40 px-3 py-2">
+        <div className="rounded-[var(--radius)] border border-dashed border-border bg-muted/40 px-3 py-3">
           <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">
             {isLocked ? <Lock className="h-3 w-3" /> : <LockOpen className="h-3 w-3" />}
             {edited ? t("admin.copyEditor.defaultLabel") : t("admin.copyEditor.currentlyShown")}

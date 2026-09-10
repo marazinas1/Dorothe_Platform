@@ -9,6 +9,8 @@ import { PeriodPicker } from "@/components/admin/dashboard/PeriodPicker";
 import { FirstRun } from "@/components/admin/dashboard/FirstRun";
 import { metricsQueryOptions } from "@/lib/dashboard/admin.functions";
 import { DEFAULT_PERIOD, resolvePeriod, type PeriodPreset } from "@/lib/dashboard/period";
+import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { LayoutDashboard } from "lucide-react";
 
 export const Route = createFileRoute("/$locale/admin/")({
   staticData: { sitemap: false },
@@ -27,7 +29,7 @@ function Dashboard() {
 
   return (
     <div className="space-y-8">
-      <h1 className="font-heading text-2xl">{t("admin.pages.dashboard")}</h1>
+      <AdminPageHeader icon={LayoutDashboard} title={t("admin.pages.dashboard")} description={t("admin.dashboard.subtitle")} />
 
       {empty ? <FirstRun locale={locale} /> : <WorkQueue locale={locale} />}
 

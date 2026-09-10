@@ -18,6 +18,7 @@ import { OpeningHoursField } from "./OpeningHoursField";
 import { SocialLinksField } from "./SocialLinksField";
 import { TechnicalBlock } from "./TechnicalBlock";
 import { SettingsField as Field } from "./SettingsField";
+import { AdminSection } from "@/components/admin/ui/AdminSection";
 
 type State = {
   site_name: string;
@@ -55,12 +56,7 @@ function toState(data: SiteSettings): State {
   };
 }
 
-/**
- * The everyday business settings in one place: brand images, name, contact
- * details, office address with map pin, opening hours and social links.
- * Technical platform values (country, locales, currency, area unit) are fixed
- * for this client and only surface for the developer below.
- */
+/** Everyday business details; technical platform values remain developer-only. */
 export function BusinessTab() {
   const { t } = useTranslation();
   const qc = useQueryClient();
@@ -103,8 +99,7 @@ export function BusinessTab() {
         },
       },
     });
-    // The map pin follows the address: coordinates are looked up on save, so the
-    // panel never asks for latitude and longitude.
+    // The public map follows the saved address.
     let geo = { geo_lat: form.geo_lat, geo_lng: form.geo_lng };
     const addressChanged =
       form.address_street !== (data.address_street ?? "") ||
@@ -130,8 +125,7 @@ export function BusinessTab() {
 
   return (
     <div className="space-y-10">
-      <section className="space-y-4">
-        <h2 className="text-sm font-semibold">{t("admin.settings.business.identity")}</h2>
+      <AdminSection title={t("admin.settings.business.identity")}>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label={t("admin.settings.general.site_name")}>
             <Input value={form.site_name} onChange={(e) => set("site_name", e.target.value)} />
@@ -154,10 +148,9 @@ export function BusinessTab() {
             </Field>
           ))}
         </div>
-      </section>
+      </AdminSection>
 
-      <section className="space-y-4">
-        <h2 className="text-sm font-semibold">{t("admin.settings.business.contact")}</h2>
+      <AdminSection title={t("admin.settings.business.contact")} description={t("admin.settings.contact.map_help")}>
         <div className="grid gap-4 sm:grid-cols-3">
           <Field label={t("admin.settings.contact.contact_email")}>
             <Input value={form.contact_email} onChange={(e) => set("contact_email", e.target.value)} />
@@ -183,20 +176,21 @@ export function BusinessTab() {
             <Input value={form.address_country} onChange={(e) => set("address_country", e.target.value)} />
           </Field>
         </div>
-        <p className="text-xs text-muted-foreground">
-          {t("admin.settings.contact.map_help")}
-        </p>
-      </section>
+      </AdminSection>
 
       <OpeningHoursField
         value={form.opening_hours}
         onChange={(next) => set("opening_hours", next)}
       />
-      <SocialLinksField value={form.social} onChange={(next) => set("social", next)} />
+      <AdminSection title={t("admin.settings.social.title")} description={t("admin.settings.social.help")}>
+        <SocialLinksField value={form.social} onChange={(next) => set("social", next)} />
+      </AdminSection>
 
       <SaveButton onSubmit={save} />
 
-      <BrandAssetsSection />
+      <AdminSection title={t("admin.settings.brand.sectionTitle")} description={t("admin.settings.brand.sectionHelp")}>
+        <BrandAssetsSection />
+      </AdminSection>
 
       {canDesign ? <TechnicalBlock data={data} /> : null}
     </div>

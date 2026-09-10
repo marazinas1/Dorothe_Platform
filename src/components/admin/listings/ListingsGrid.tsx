@@ -4,6 +4,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import type { AdminListingRow } from "@/lib/listings/admin.functions";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { ListingCardTile } from "./ListingCardTile";
+import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
+import { Building2 } from "lucide-react";
 
 export function ListingsGrid({
   rows,
@@ -17,9 +19,7 @@ export function ListingsGrid({
 
   if (rows.length === 0) {
     return (
-      <p className="rounded-lg border border-border px-4 py-10 text-center text-sm text-muted-foreground">
-        {t("admin.listings.empty")}
-      </p>
+      <AdminEmptyState icon={Building2} title={t("admin.listings.empty")} />
     );
   }
 

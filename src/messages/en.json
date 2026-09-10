@@ -716,7 +716,9 @@
         "ogImageHelp": "Used when a page is shared on social media.",
         "upload": "Upload an image",
         "replace": "Replace",
-        "remove": "Remove"
+        "remove": "Remove",
+        "sectionTitle": "Website images",
+        "sectionHelp": "Logo, browser icon and sharing image used throughout the website."
       },
       "texts": {
         "home": "Home page"
@@ -740,6 +742,16 @@
           "fri": "Friday",
           "sat": "Saturday",
           "sun": "Sunday"
+        },
+        "exceptions": {
+          "title": "Exceptions",
+          "help": "Add holidays, closures or different hours for a specific date.",
+          "add": "Add exception",
+          "date": "Date",
+          "from": "From",
+          "to": "To",
+          "note": "Note, e.g. holiday",
+          "remove": "Remove exception"
         }
       },
       "social": {
@@ -748,7 +760,8 @@
         "linkedin": "LinkedIn",
         "instagram": "Instagram",
         "help": "Shown as icons in the website footer. Leave empty to hide an icon."
-      }
+      },
+      "subtitle": "Manage business details, public page wording and legal information."
     },
     "listings": {
       "new": "New listing",
@@ -1113,7 +1126,8 @@
         "added": "Added to the home page.",
         "removed": "Removed from the home page.",
         "limitReached": "The home page shows at most {{count}} properties. Remove one first."
-      }
+      },
+      "pageHint": "Create properties, update their status and control what appears on the website."
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",
@@ -1233,7 +1247,8 @@
         "title": "Nothing here yet",
         "body": "As soon as the first property exists, this page shows what needs doing: unanswered enquiries, drafts that cannot go live yet and published properties with gaps.",
         "cta": "Create first property"
-      }
+      },
+      "subtitle": "Today’s work, recent activity and the figures that matter."
     },
     "users": {
       "title": "Users",
@@ -1350,7 +1365,9 @@
         "hero_photo": "Opening photograph",
         "default": "Default",
         "custom": "Choose your own",
-        "empty": "No photograph yet"
+        "empty": "No photograph yet",
+        "uploadHelp": "Upload a clear, high-resolution image. It will be optimised automatically.",
+        "restoreDefault": "Use default image"
       },
       "editHint": "Edit the words and photographs of your home page. Property cards come from Listings.",
       "saved": "Saved.",
@@ -1697,7 +1714,8 @@
       "form_error": "Could not send the message. Please try again.",
       "map_title": "Directions",
       "map_missing": "The map appears once office coordinates are set.",
-      "map_reset": "Back to office"
+      "map_reset": "Back to office",
+      "hours_exceptions": "Different hours"
     },
     "inheritance": {
       "title": "Inherited property",

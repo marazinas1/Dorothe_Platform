@@ -20,7 +20,7 @@ export function PostRow({ row, locale, onEdit, onDelete }: Props) {
   const date = formatPostDate(row.published_at, locale);
 
   return (
-    <li className="flex items-start gap-4 rounded-lg border border-border bg-card p-4">
+    <li className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:bg-muted/30">
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium">{title || "—"}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">

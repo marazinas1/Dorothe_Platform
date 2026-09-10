@@ -43,7 +43,7 @@ export function TestimonialForm({ initial, locales, onSave, onCancel }: Props) {
   const [draft, setDraft] = useState<TestimonialDraft>(initial);
 
   return (
-    <div className="space-y-5 rounded-lg border border-border bg-card p-5">
+    <div className="space-y-5 rounded-[var(--radius)] border border-border bg-card p-5">
       {locales.map((loc) => (
         <div key={loc} className="space-y-1.5">
           <Label htmlFor={`quote-${loc}`}>

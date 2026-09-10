@@ -716,7 +716,9 @@
         "ogImageHelp": "Wird beim Teilen einer Seite in sozialen Netzwerken verwendet.",
         "upload": "Bild hochladen",
         "replace": "Ersetzen",
-        "remove": "Entfernen"
+        "remove": "Entfernen",
+        "sectionTitle": "Bilder der Website",
+        "sectionHelp": "Logo, Browser-Symbol und Vorschaubild für die gesamte Website."
       },
       "texts": {
         "home": "Startseite"
@@ -740,6 +742,16 @@
           "fri": "Freitag",
           "sat": "Samstag",
           "sun": "Sonntag"
+        },
+        "exceptions": {
+          "title": "Ausnahmen",
+          "help": "Urlaub, Schließtage oder abweichende Zeiten für ein bestimmtes Datum eintragen.",
+          "add": "Ausnahme hinzufügen",
+          "date": "Datum",
+          "from": "Von",
+          "to": "Bis",
+          "note": "Hinweis, z. B. Urlaub",
+          "remove": "Ausnahme entfernen"
         }
       },
       "social": {
@@ -748,7 +760,8 @@
         "linkedin": "LinkedIn",
         "instagram": "Instagram",
         "help": "Erscheinen als Symbole im Fußbereich der Website. Leer lassen, um ein Symbol auszublenden."
-      }
+      },
+      "subtitle": "Unternehmensdaten, Seitentexte und rechtliche Angaben verwalten."
     },
     "listings": {
       "new": "Neues Objekt",
@@ -1113,7 +1126,8 @@
         "added": "Zur Startseite hinzugefügt.",
         "removed": "Von der Startseite entfernt.",
         "limitReached": "Die Startseite zeigt höchstens {{count}} Objekte. Bitte zuerst eines entfernen."
-      }
+      },
+      "pageHint": "Objekte anlegen, Status ändern und steuern, was auf der Website erscheint."
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",
@@ -1233,7 +1247,8 @@
         "title": "Noch nichts vorhanden",
         "body": "Sobald das erste Objekt existiert, zeigt diese Seite, was zu tun ist: offene Anfragen, Entwürfe, die noch nicht online gehen können, und veröffentlichte Objekte mit Lücken.",
         "cta": "Erstes Objekt anlegen"
-      }
+      },
+      "subtitle": "Heutige Aufgaben, letzte Aktivitäten und die wichtigsten Zahlen."
     },
     "users": {
       "title": "Benutzer",
@@ -1350,7 +1365,9 @@
         "hero_photo": "Auftaktfoto",
         "default": "Standard",
         "custom": "Eigenes wählen",
-        "empty": "Noch kein Foto"
+        "empty": "Noch kein Foto",
+        "uploadHelp": "Laden Sie ein klares, hochauflösendes Bild hoch. Es wird automatisch optimiert.",
+        "restoreDefault": "Standardbild verwenden"
       },
       "editHint": "Bearbeiten Sie Texte und Fotos Ihrer Startseite. Objektkarten kommen aus den Objekten.",
       "saved": "Gespeichert.",
@@ -1697,7 +1714,8 @@
       "form_error": "Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.",
       "map_title": "Anfahrt",
       "map_missing": "Kartenansicht wird verfügbar, sobald die Bürokoordinaten hinterlegt sind.",
-      "map_reset": "Zurück zum Büro"
+      "map_reset": "Zurück zum Büro",
+      "hours_exceptions": "Abweichende Zeiten"
     },
     "inheritance": {
       "title": "Erben & Immobilien",

@@ -13,7 +13,7 @@ export function BreakdownList({
   empty: string;
 }) {
   return (
-    <div className="rounded-lg border border-border bg-card p-4">
+    <div className="rounded-[var(--radius)] border border-border bg-card p-4">
       <h2 className="text-sm font-medium">{title}</h2>
       {rows.length === 0 ? (
         <p className="mt-3 text-sm text-muted-foreground">{empty}</p>

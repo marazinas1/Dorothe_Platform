@@ -25,10 +25,10 @@ export function AdminSidebarFooter({ email, roleLabel }: Props) {
   const signOut = useSignOut();
 
   return (
-    <SidebarFooter className="border-t border-sidebar-border">
-      <div className="px-2 py-1 group-data-[collapsible=icon]:hidden">
-        <div className="truncate text-xs text-muted-foreground">{email}</div>
-        <div className="text-[11px] uppercase tracking-wider text-muted-foreground/70">
+    <SidebarFooter className="gap-3 border-t border-sidebar-border p-3">
+      <div className="rounded-[var(--radius)] border border-sidebar-border bg-sidebar-accent/50 px-3 py-2.5 group-data-[collapsible=icon]:hidden">
+        <div className="truncate text-sm font-medium text-sidebar-foreground">{email}</div>
+        <div className="mt-0.5 text-[11px] uppercase tracking-wider text-muted-foreground">
           {roleLabel}
         </div>
       </div>
