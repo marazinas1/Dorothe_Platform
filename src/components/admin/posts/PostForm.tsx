@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
 import type { PostRow } from "@/lib/posts/types";
 
+import { CoverUploader } from "./CoverUploader";
+
 export interface PostDraft {
   id?: string;
   slug: string;
@@ -46,12 +48,22 @@ interface Props {
   locales: string[];
   onSave: (draft: PostDraft) => Promise<void>;
   onCancel: () => void;
+  /** Saves the draft when it has no id yet, so the cover can be filed under it. */
+  ensurePostId: (draft: PostDraft) => Promise<string>;
 }
 
 /** One article, one card: the words per language, the picture, the date. */
-export function PostForm({ initial, locales, onSave, onCancel }: Props) {
+export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: Props) {
   const { t } = useTranslation();
   const [draft, setDraft] = useState<PostDraft>(initial);
+
+  /** The cover needs an article to belong to; save the draft first if needed. */
+  async function coverPostId() {
+    if (draft.id) return draft.id;
+    const id = await ensurePostId(draft);
+    setDraft((p) => ({ ...p, id }));
+    return id;
+  }
 
   const set = (field: Field, loc: string, value: string) =>
     setDraft((p) => ({ ...p, [field]: { ...p[field], [loc]: value } }));
@@ -122,14 +134,11 @@ export function PostForm({ initial, locales, onSave, onCancel }: Props) {
       ))}
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5">
-          <Label htmlFor="post-cover">{t("admin.posts.cover")}</Label>
-          <Input
-            id="post-cover"
-            value={draft.cover_path ?? ""}
-            onChange={(e) => setDraft((p) => ({ ...p, cover_path: e.target.value }))}
-          />
-        </div>
+        <CoverUploader
+          value={draft.cover_path && draft.cover_path.length > 0 ? draft.cover_path : null}
+          onChange={(url) => setDraft((p) => ({ ...p, cover_path: url ?? "" }))}
+          ensurePostId={coverPostId}
+        />
         <div className="space-y-1.5">
           <Label htmlFor="post-date">{t("admin.posts.date")}</Label>
           <Input

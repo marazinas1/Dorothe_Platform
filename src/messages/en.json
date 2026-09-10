@@ -1335,7 +1335,7 @@
       "bodyHint": "Leave an empty line between paragraphs.",
       "metaTitle": "Search engine title",
       "metaDescription": "Search engine description",
-      "cover": "Cover picture (link)",
+      "cover": "Cover picture",
       "coverAlt": "Picture description",
       "date": "Publication date",
       "slug": "Web address",
@@ -1346,7 +1346,11 @@
       "delete": "Delete",
       "cancel": "Cancel",
       "confirmDelete": "Delete this article?",
-      "empty": "No articles yet."
+      "empty": "No articles yet.",
+      "coverUpload": "Upload a cover picture",
+      "coverReplace": "Replace picture",
+      "coverRemove": "Remove picture",
+      "coverHint": "JPG or PNG — it is resized automatically."
     },
     "pageEditor": {
       "editHint": "The words and photographs of this page. Leave a field empty to keep the current line.",
