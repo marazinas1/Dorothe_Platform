@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import { LISTING_QUEUE_KEYS } from "@/lib/dashboard/admin.functions";
+import { AgendaQueue } from "./AgendaQueue";
 import { InquiryQueue } from "./InquiryQueue";
 import { ListingQueue } from "./ListingQueue";
 
