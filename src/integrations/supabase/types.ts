@@ -14,6 +14,96 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          client_name: string
+          client_phone: string
+          created_at: string
+          created_by: string | null
+          day: string
+          end_time: string | null
+          id: string
+          inquiry_id: string | null
+          kind: string
+          listing_id: string | null
+          location: string
+          note: string
+          start_time: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          client_name?: string
+          client_phone?: string
+          created_at?: string
+          created_by?: string | null
+          day: string
+          end_time?: string | null
+          id?: string
+          inquiry_id?: string | null
+          kind?: string
+          listing_id?: string | null
+          location?: string
+          note?: string
+          start_time: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          client_name?: string
+          client_phone?: string
+          created_at?: string
+          created_by?: string | null
+          day?: string
+          end_time?: string | null
+          id?: string
+          inquiry_id?: string | null
+          kind?: string
+          listing_id?: string | null
+          location?: string
+          note?: string
+          start_time?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "inquiries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       feature_flags: {
         Row: {
           config: Json
