@@ -1,7 +1,7 @@
+import { CardRail } from "@/components/brand/CardRail";
 import { ListingCard } from "@/components/brand/ListingCard";
 import { Reveal } from "@/components/shared/Reveal";
 import type { Locale } from "@/i18n/config";
-import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
