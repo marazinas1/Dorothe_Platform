@@ -649,7 +649,9 @@
         "opening_hours": "Öffnungszeiten (JSON)",
         "social": "Soziale Netzwerke (JSON)",
         "json_help": "Wird als JSON gespeichert.",
-        "json_invalid": "Ungültiges JSON."
+        "json_invalid": "Ungültiges JSON.",
+        "map_help": "Klicken Sie auf die Karte oder ziehen Sie die Nadel, um den Bürostandort zu setzen.",
+        "map_title": "Bürostandort auf der Karte"
       },
       "legal": {
         "impressum": "Impressum",
@@ -1621,7 +1623,8 @@
       "form_success": "Danke — Ihre Nachricht ist angekommen.",
       "form_error": "Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.",
       "map_title": "Anfahrt",
-      "map_missing": "Kartenansicht wird verfügbar, sobald die Bürokoordinaten hinterlegt sind."
+      "map_missing": "Kartenansicht wird verfügbar, sobald die Bürokoordinaten hinterlegt sind.",
+      "map_reset": "Zurück zum Büro"
     },
     "inheritance": {
       "title": "Erben & Immobilien",
@@ -1664,5 +1667,12 @@
       "unavailable_title": "Beitrag nicht verfügbar",
       "unavailable_body": "Dieser Beitrag ist nicht mehr veröffentlicht."
     }
+  },
+  "cta": {
+    "kicker": "Nächster Schritt",
+    "heading": "Verkaufsgedanken — oder auf der Suche nach der passenden Immobilie?",
+    "body": "Schreiben Sie kurz, um welche Immobilie es geht oder was Sie suchen. Sie erhalten eine ehrliche Einschätzung und einen klaren nächsten Schritt, keine Verkaufsrede.",
+    "primary": "Kontakt aufnehmen",
+    "secondary": "oder anrufen"
   }
 }

@@ -14,6 +14,7 @@ import {
 import { ContactSchema } from "@/lib/validation/site-settings";
 
 import { SaveButton } from "./SaveButton";
+import { OfficePinField } from "./OfficePinField";
 
 type Values = {
   contact_email: string;
@@ -100,6 +101,22 @@ export function ContactTab() {
         <TF form={form} name="geo_lat" label={t("admin.settings.contact.geo_lat")} />
         <TF form={form} name="geo_lng" label={t("admin.settings.contact.geo_lng")} />
       </Row>
+      <div className="space-y-1.5">
+        <Label>{t("admin.settings.contact.map_title")}</Label>
+        {/* The pin writes back into the two fields above, which stay the
+            source of truth — and drive the map on the public contact page. */}
+        <OfficePinField
+          lat={form.watch("geo_lat")}
+          lng={form.watch("geo_lng")}
+          onMove={(lat, lng) => {
+            form.setValue("geo_lat", String(lat), { shouldDirty: true });
+            form.setValue("geo_lng", String(lng), { shouldDirty: true });
+          }}
+        />
+        <p className="text-xs text-muted-foreground">
+          {t("admin.settings.contact.map_help")}
+        </p>
+      </div>
       <div className="space-y-1.5">
         <Label>{t("admin.settings.contact.opening_hours")}</Label>
         <Textarea rows={5} value={hoursText} onChange={(e) => setHoursText(e.target.value)} />

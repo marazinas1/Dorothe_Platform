@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
+import { CtaBand } from "@/components/brand/CtaBand";
 import { PageIntro } from "@/components/brand/PageIntro";
 import { NumberedSteps, type Step } from "@/components/brand/NumberedSteps";
 import { TextSection } from "@/components/brand/TextSection";
@@ -108,6 +109,7 @@ function SellingPage() {
           </Link>
         </TextSection>
       </div>
+      <CtaBand locale={locale as Locale} settings={settings} />
     </PublicChrome>
   );
 }
