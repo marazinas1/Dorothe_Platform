@@ -12,6 +12,8 @@ type Props = {
   /** Accessible name of the row. */
   label: string;
   className?: string;
+  /** Keep arrow buttons visible even when the row does not overflow. */
+  alwaysShowArrows?: boolean;
 };
 
 const BASIS: Record<2 | 3, string> = {
