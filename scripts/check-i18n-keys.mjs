@@ -65,6 +65,14 @@ const HELPER_SOURCES = {
     file: "src/lib/listings/field-labels.ts",
     sets: { prefix: Object.values(LABEL_PREFIXES), field: ENUMS.moneyFields },
   },
+  statusLabelKey: {
+    file: "src/lib/listings/status-label.ts",
+    sets: { s: ENUMS.statuses },
+  },
+  statusActionKey: {
+    file: "src/lib/listings/status-label.ts",
+    sets: { target: ENUMS.statuses },
+  },
   areaLabelKey: {
     file: "src/lib/listings/field-labels.ts",
     sets: {
@@ -129,6 +137,13 @@ function helperKeys(name, { file, sets }) {
  * locale (used where the code falls back to the raw key on a miss).
  */
 const IDENTIFIERS = {
+  // src/components/admin/ui/DefaultTextField.tsx — shared editor actions.
+  "`${ns}.resetToDefault`": {
+    keys: ["admin.home.resetToDefault", "admin.pageEditor.resetToDefault"],
+  },
+  "`${ns}.setAsDefault`": {
+    keys: ["admin.home.setAsDefault", "admin.pageEditor.setAsDefault"],
+  },
   // src/lib/listings/publish-error.ts — names the fields the database named.
   key: { prefix: "admin.listings.energyFields" },
   // src/components/admin/listings/CommissionFields.tsx
