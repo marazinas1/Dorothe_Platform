@@ -1127,6 +1127,11 @@
         "heading": "To do",
         "failed": "Could not load this group.",
         "more": "{{count}} more not shown",
+        "agenda": {
+          "title": "Coming days",
+          "empty": "Nothing in the diary this week.",
+          "all": "Open calendar"
+        },
         "inquiries": {
           "title": "Unhandled enquiries",
           "empty": "Every enquiry has been handled.",

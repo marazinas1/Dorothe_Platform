@@ -1127,6 +1127,11 @@
         "heading": "Zu tun",
         "failed": "Diese Gruppe konnte nicht geladen werden.",
         "more": "{{count}} weitere nicht angezeigt",
+        "agenda": {
+          "title": "Nächste Tage",
+          "empty": "Diese Woche steht nichts im Kalender.",
+          "all": "Kalender öffnen"
+        },
         "inquiries": {
           "title": "Unbearbeitete Anfragen",
           "empty": "Alle Anfragen sind bearbeitet.",
