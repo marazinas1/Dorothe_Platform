@@ -5,8 +5,7 @@ import {
   siteSettingsQueryOptions,
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
-import { copyVars } from "@/lib/config/site-copy";
-import { translate, translateValue, type Locale } from "@/i18n/config";
+import { type Locale } from "@/i18n/config";
 
 type Bag = Record<string, unknown>;
 
@@ -36,10 +35,9 @@ export function useHomeAdmin(locale: string) {
 
   /** The line the page shows when the field has no override. */
   function defaultFor(key: string): string {
-    const vars = copyVars(settings, locale);
-    const list = translateValue(locale as Locale, `home.defaults.${key}`);
-    if (Array.isArray(list)) return list.map(String).join("\n");
-    return translate(locale as Locale, `home.defaults.${key}`, vars);
+    const list = homeDefaultList(settings, key, locale);
+    if (list.length > 0) return list.join("\n");
+    return homeDefaultText(settings, key, locale);
   }
 
   /** The override when one exists, otherwise the live default. */
