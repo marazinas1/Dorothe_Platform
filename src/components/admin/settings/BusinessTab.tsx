@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { geocodeAddress } from "@/lib/geo/geocode.functions";
 import {
   siteSettingsQueryOptions,
   updateSiteSettings,
@@ -14,7 +14,6 @@ import type { SiteSettings } from "@/types/site-settings";
 
 import { SaveButton } from "./SaveButton";
 import { BrandAssetsSection } from "./BrandAssetsSection";
-import { OfficePinField } from "./OfficePinField";
 import { OpeningHoursField } from "./OpeningHoursField";
 import { SocialLinksField } from "./SocialLinksField";
 import { TechnicalBlock } from "./TechnicalBlock";
