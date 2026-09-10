@@ -14,18 +14,26 @@ import { PageEditorWorkspace } from "./PageEditorWorkspace";
  */
 export function PageAdminPage({ page }: { page: string }) {
   const { t } = useTranslation();
+  const definition = pageDefinition(page);
+
+  // An unknown page has no stored copy to ask for, so nothing is fetched.
+  if (!definition) {
+    return <p className="text-sm text-muted-foreground">{t("admin.pageEditor.unknown")}</p>;
+  }
+
+  return <PageEditor definition={definition} />;
+}
+
+function PageEditor({ definition }: { definition: PageDefinition }) {
+  const { t } = useTranslation();
+  const page = definition.key;
   const [contentLocale, setContentLocale] = useState<string | null>(null);
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
-  const definition = pageDefinition(page);
 
   const enabled = (settings.enabled_locales ?? []).filter(Boolean);
   const locales = enabled.length > 0 ? enabled : [settings.default_locale];
   const locale = contentLocale ?? locales[0];
   const admin = usePageAdmin(page, locale);
-
-  if (!definition) {
-    return <p className="text-sm text-muted-foreground">{t("admin.pageEditor.unknown")}</p>;
-  }
 
   return (
     <div className="space-y-6">
