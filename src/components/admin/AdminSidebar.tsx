@@ -12,6 +12,7 @@ import {
   Settings,
   Quote,
   Newspaper,
+  CalendarDays,
 } from "lucide-react";
 
 import {
@@ -37,6 +38,7 @@ interface NavItem {
     | "dashboard"
     | "listings"
     | "inquiries"
+    | "calendar"
     | "users"
     | "content"
     | "selling"
@@ -73,6 +75,13 @@ const GROUPS: NavGroup[] = [
       { key: "dashboard", to: "/$locale/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
       { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
       { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
+      {
+        key: "calendar",
+        to: "/$locale/admin/calendar",
+        icon: CalendarDays,
+        permission: "inquiry.view.own",
+        flag: "calendar",
+      },
       {
         key: "posts",
         to: "/$locale/admin/posts",
