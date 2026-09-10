@@ -1,3 +1,4 @@
+import { CardRail } from "@/components/brand/CardRail";
 import { cn } from "@/lib/utils";
 import type { TestiItem } from "@/lib/testimonials/types";
 
