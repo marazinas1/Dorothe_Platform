@@ -22,6 +22,7 @@ import {
   TONE_DOT_CLASS,
 } from "@/lib/listings/status-options";
 import { useStatusChange } from "./use-status-change";
+import { statusLabelKey } from "@/lib/listings/status-label";
 
 /**
  * The single status control: it shows the current lifecycle state and switches

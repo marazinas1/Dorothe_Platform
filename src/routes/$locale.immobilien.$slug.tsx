@@ -19,6 +19,7 @@ import { useCountListingView } from "@/lib/listings/use-count-view";
 import { pickImageUrl } from "@/lib/listings/image";
 import { listingDisplayName } from "@/lib/listings/display-title";
 import { pickLocalized } from "@/lib/listings/format";
+import { statusLabelKey } from "@/lib/listings/status-label";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
