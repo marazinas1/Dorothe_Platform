@@ -105,6 +105,19 @@ export function DefaultTextField({
               {isLocked ? <Lock className="h-3 w-3" /> : <LockOpen className="h-3 w-3" />}
               {t("admin.copyEditor.setDefault")}
             </Button>
+          ) : onRequestDefault ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="h-6 px-2 text-xs"
+              disabled={!edited || requestStatus === "pending"}
+              onClick={onRequestDefault}
+              title={t("admin.copyEditor.request.hint")}
+            >
+              <Send className="h-3 w-3" />
+              {t("admin.copyEditor.request.action")}
+            </Button>
           ) : null}
         </div>
       </div>
