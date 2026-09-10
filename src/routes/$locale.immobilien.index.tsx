@@ -30,6 +30,12 @@ function keyFor(s: ListingsSearch) {
   return ["listings", "index", s] as const;
 }
 
+function statusesFor(status: string): string[] | undefined {
+  if (status === "archive") return ["sold", "rented"];
+  if (status === "all") return ["active", "coming_soon", "sold", "rented"];
+  return ["active", "coming_soon"];
+}
+
 function listingsQueryOptions(s: ListingsSearch) {
   return queryOptions({
     queryKey: keyFor(s),
@@ -45,7 +51,7 @@ function listingsQueryOptions(s: ListingsSearch) {
           area_min: s.area_min,
           sort: s.sort,
           page: s.page,
-          onlyStatus: ["active", "coming_soon"],
+          onlyStatus: statusesFor(s.status),
         },
       } as any),
     staleTime: 15_000,
@@ -113,18 +119,66 @@ function ListingsIndex() {
         </p>
 
 
-        <div className="mt-14">
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            {(["available", "archive", "all"] as const).map((st) => (
+              <button
+                key={st}
+                type="button"
+                onClick={() =>
+                  navigate({
+                    params: { locale },
+                    search: (prev: ListingsSearch) => ({ ...prev, status: st, page: 1 }),
+                  })
+                }
+                className={`rounded-full border px-4 py-1.5 text-sm transition-colors duration-300 ${
+                  search.status === st
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t(`listings.tabs.${st}`)}
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            {(["grid", "map"] as const).map((v) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() =>
+                  navigate({
+                    params: { locale },
+                    search: (prev: ListingsSearch) => ({ ...prev, view: v }),
+                  })
+                }
+                className={`rounded-full border px-4 py-1.5 text-sm transition-colors duration-300 ${
+                  search.view === v
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t(`listings.view.${v}`)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6">
           <FiltersBar locale={locale as Locale} search={search} total={data.total} />
         </div>
 
-        <div className="mt-8">
-          <ListingsMap
-            items={data.items}
-            locale={locale as Locale}
-            settings={settings}
-          />
-        </div>
 
+        {search.view === "map" ? (
+          <div className="mt-10">
+            <ListingsMap
+              items={data.items}
+              locale={locale as Locale}
+              settings={settings}
+              alwaysOpen
+            />
+          </div>
+        ) : null}
 
         {data.items.length === 0 ? (
           <div className="py-24 text-center text-sm text-muted-foreground">

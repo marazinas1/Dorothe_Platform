@@ -14,6 +14,8 @@ type Props = {
   items: PublicListing[];
   locale: Locale;
   settings: SiteSettings;
+  /** Render the map directly, without the show/hide toggle. */
+  alwaysOpen?: boolean;
 };
 
 function Skeleton() {
@@ -25,7 +27,7 @@ function Skeleton() {
  * geo_precision allows it; hidden listings carry no coordinates and are
  * therefore never plotted.
  */
-export function ListingsMap({ items, locale, settings }: Props) {
+export function ListingsMap({ items, locale, settings, alwaysOpen = false }: Props) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
@@ -46,6 +48,22 @@ export function ListingsMap({ items, locale, settings }: Props) {
 
   if (points.length === 0) return null;
 
+  const map = (
+    <div className="overflow-hidden rounded-media border border-border">
+      <ClientOnly fallback={<Skeleton />}>
+        <Suspense fallback={<Skeleton />}>
+          <MapCanvas
+            points={points}
+            interactivePopups
+            className="aspect-[16/9] w-full md:aspect-[21/9]"
+          />
+        </Suspense>
+      </ClientOnly>
+    </div>
+  );
+
+  if (alwaysOpen) return map;
+
   return (
     <div className="border-t border-border pt-6">
       <button
@@ -56,19 +74,7 @@ export function ListingsMap({ items, locale, settings }: Props) {
         {open ? t("listings.map.hide") : t("listings.map.show")} ({points.length})
       </button>
 
-      {open ? (
-        <div className="mt-6 overflow-hidden rounded-media border border-border">
-          <ClientOnly fallback={<Skeleton />}>
-            <Suspense fallback={<Skeleton />}>
-              <MapCanvas
-                points={points}
-                interactivePopups
-                className="aspect-[16/9] w-full md:aspect-[21/9]"
-              />
-            </Suspense>
-          </ClientOnly>
-        </div>
-      ) : null}
+      {open ? <div className="mt-6">{map}</div> : null}
     </div>
   );
 }

@@ -365,6 +365,11 @@
       "energy_certificate": "Energieausweis",
       "land_register": "Grundbuchauszug",
       "other": "Unterlage"
+    },
+    "tabs": {
+      "available": "Verfügbar",
+      "archive": "Verkauft & vermietet",
+      "all": "Alle"
     }
   },
   "inquiry": {
@@ -616,6 +621,7 @@
       "save": "Speichern",
       "denied": "Sie haben keine Berechtigung für die Einstellungen.",
       "tabs": {
+        "business": "Unternehmen",
         "general": "Allgemein",
         "contact": "Kontakt",
         "texts": "Seitentexte",
@@ -712,6 +718,34 @@
       },
       "texts": {
         "home": "Startseite"
+      },
+      "business": {
+        "identity": "Name & Erscheinung",
+        "contact": "Kontakt & Büro",
+        "region_name": "Regionsname",
+        "technical": "Technisch (für diese Website festgelegt)",
+        "technical_help": "Diese Werte steuern Prüfung und Preisformatierung. Sie ändern sich nur mit der Plattform — bitte den Entwickler fragen."
+      },
+      "hours": {
+        "title": "Öffnungszeiten",
+        "closed": "Geschlossen",
+        "help": "An welchen Tagen und zu welchen Zeiten sind Sie telefonisch erreichbar?",
+        "days": {
+          "mon": "Montag",
+          "tue": "Dienstag",
+          "wed": "Mittwoch",
+          "thu": "Donnerstag",
+          "fri": "Freitag",
+          "sat": "Samstag",
+          "sun": "Sonntag"
+        }
+      },
+      "social": {
+        "title": "Soziale Profile",
+        "facebook": "Facebook",
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram",
+        "help": "Erscheinen als Symbole im Fußbereich der Website. Leer lassen, um ein Symbol auszublenden."
       }
     },
     "listings": {
@@ -1318,7 +1352,8 @@
       "saved": "Gespeichert.",
       "livePreview": "Live-Vorschau",
       "refresh": "Aktualisieren",
-      "openPage": "Seite öffnen"
+      "openPage": "Seite öffnen",
+      "resetToDefault": "Auf Standard zurücksetzen"
     },
     "posts": {
       "title": "Artikel",
@@ -1410,7 +1445,8 @@
           "form_title": "Überschrift Formular",
           "form_intro": "Einleitung Formular"
         }
-      }
+      },
+      "resetToDefault": "Auf Standard zurücksetzen"
     },
     "calendar": {
       "title": "Kalender",
@@ -1540,22 +1576,22 @@
       "cta_title": "Bereit für den ersten Schritt?",
       "cta_body": "Der Prozess beginnt mit einer ehrlichen Bewertung. Kostenfrei, vertraulich, ohne Verpflichtung.",
       "cta_button": "Immobilie bewerten lassen",
-      "steps_title": "[Platzhalter] So läuft ein Verkauf ab",
-      "services_title": "[Platzhalter] Was ich mitbringe",
-      "services_body": "[Platzhalter] Ein Satz dazu, was im Mandat enthalten ist. Echter Text folgt.",
+      "steps_title": "So läuft ein Verkauf ab",
+      "services_title": "Was im Mandat enthalten ist",
+      "services_body": "Eine Ansprechpartnerin von der ersten Bewertung bis zum Notartermin — alles Folgende gehört zum Mandat, nicht extra.",
       "services": [
-        "[Platzhalter] Zertifizierte Wertermittlung",
-        "[Platzhalter] Professionelle Fotografie",
-        "[Platzhalter] Exposé",
-        "[Platzhalter] Portale und Käuferdatei"
+        "Zertifizierte Marktwertermittlung",
+        "Professionelle Fotografie und Grundrisse",
+        "Strukturiertes Exposé und Präsentation auf den führenden Portalen",
+        "Qualifizierte Käufersuche aus der aktiven Kundendatei"
       ],
-      "costs_title": "[Platzhalter] Was es kostet",
-      "costs_body": "[Platzhalter] Ein Satz zur Provision, klar beantwortet. Echter Text folgt.",
-      "form_title": "[Platzhalter] Bewertung anfordern",
-      "form_intro": "[Platzhalter] Ein Satz zum Formular. Echter Text folgt.",
-      "proof_title": "[Platzhalter] Bereits verkauft",
-      "proof_body": "[Platzhalter] Ein Satz zu den Referenzen als Nachweis. Echter Text folgt.",
-      "proof_link": "[Platzhalter] Zum Verkauft-Archiv"
+      "costs_title": "Was es kostet",
+      "costs_body": "Die Provision wird individuell vereinbart und vor Mandatsbeginn schriftlich festgehalten — ohne versteckte Zusatzkosten, fällig erst beim notariellen Verkauf.",
+      "form_title": "Bewertung anfordern",
+      "form_intro": "Nennen Sie mir das Wichtigste zu Ihrer Immobilie — ich antworte persönlich, in der Regel innerhalb eines Werktages.",
+      "proof_title": "Zuletzt verkauft",
+      "proof_body": "Eine Auswahl von Objekten, die ich im Saarland bewertet, vermarktet und verkauft habe.",
+      "proof_link": "Zum Verkauft-Archiv"
     },
     "about": {
       "meta_description_solo": "Über {{agent}} — Immobilienberatung {{region_in}} mit persönlicher Betreuung von der Bewertung bis zur Übergabe.",

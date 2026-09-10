@@ -365,6 +365,11 @@
       "energy_certificate": "Energy certificate",
       "land_register": "Land register extract",
       "other": "Document"
+    },
+    "tabs": {
+      "available": "Available",
+      "archive": "Sold & rented",
+      "all": "All"
     }
   },
   "inquiry": {
@@ -616,6 +621,7 @@
       "save": "Save",
       "denied": "You do not have permission to edit settings.",
       "tabs": {
+        "business": "Business",
         "general": "General",
         "contact": "Contact",
         "texts": "Page texts",
@@ -712,6 +718,34 @@
       },
       "texts": {
         "home": "Home page"
+      },
+      "business": {
+        "identity": "Name & identity",
+        "contact": "Contact & office",
+        "region_name": "Region name",
+        "technical": "Technical (fixed for this website)",
+        "technical_help": "These values drive validation and price formatting. They only change with the platform itself — ask your developer."
+      },
+      "hours": {
+        "title": "Opening hours",
+        "closed": "Closed",
+        "help": "The days and times you are reachable by phone.",
+        "days": {
+          "mon": "Monday",
+          "tue": "Tuesday",
+          "wed": "Wednesday",
+          "thu": "Thursday",
+          "fri": "Friday",
+          "sat": "Saturday",
+          "sun": "Sunday"
+        }
+      },
+      "social": {
+        "title": "Social profiles",
+        "facebook": "Facebook",
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram",
+        "help": "Shown as icons in the website footer. Leave empty to hide an icon."
       }
     },
     "listings": {
@@ -1318,7 +1352,8 @@
       "saved": "Saved.",
       "livePreview": "Live preview",
       "refresh": "Refresh",
-      "openPage": "Open page"
+      "openPage": "Open page",
+      "resetToDefault": "Reset to default"
     },
     "posts": {
       "title": "Articles",
@@ -1410,7 +1445,8 @@
           "form_title": "Form heading",
           "form_intro": "Form introduction"
         }
-      }
+      },
+      "resetToDefault": "Reset to default"
     },
     "calendar": {
       "title": "Calendar",
@@ -1540,22 +1576,22 @@
       "cta_title": "Ready for the first step?",
       "cta_body": "The process begins with an honest valuation. Free, confidential, no obligation.",
       "cta_button": "Request a valuation",
-      "steps_title": "[Placeholder] How a sale runs",
-      "services_title": "[Placeholder] What she brings",
-      "services_body": "[Placeholder] One line about what the mandate includes. Real copy to follow.",
+      "steps_title": "How a sale runs",
+      "services_title": "What a mandate includes",
+      "services_body": "One point of contact from the first valuation to the notary appointment — everything below is part of the mandate, not an extra.",
       "services": [
-        "[Placeholder] Certified valuation",
-        "[Placeholder] Professional photography",
-        "[Placeholder] Exposé",
-        "[Placeholder] Portals and buyer file"
+        "Certified market valuation",
+        "Professional photography and floor plans",
+        "A structured exposé and presentation on the leading portals",
+        "Qualified buyer search from an active client file"
       ],
-      "costs_title": "[Placeholder] What it costs",
-      "costs_body": "[Placeholder] One line answering the commission question. Real copy to follow.",
-      "form_title": "[Placeholder] Request a valuation",
-      "form_intro": "[Placeholder] One line about the form. Real copy to follow.",
-      "proof_title": "[Placeholder] Already sold",
-      "proof_body": "[Placeholder] One line about sold work as proof. Real copy to follow.",
-      "proof_link": "[Placeholder] See the sold archive"
+      "costs_title": "What it costs",
+      "costs_body": "The commission is agreed individually and fixed in writing before the mandate starts — no hidden extras, and nothing is due until the sale is notarised.",
+      "form_title": "Request a valuation",
+      "form_intro": "Tell me the essentials about your property — I reply personally, usually within one working day.",
+      "proof_title": "Recently sold",
+      "proof_body": "A selection of properties I have valued, marketed and sold in the Saarland.",
+      "proof_link": "Browse the sold archive"
     },
     "about": {
       "meta_description_solo": "About {{agent}} — a solo real estate advisor {{region_in}} with personal support from valuation to handover.",

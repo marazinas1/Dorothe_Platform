@@ -14,7 +14,6 @@ export interface HomeTextField {
     | "opening"
     | "paths"
     | "credentials"
-    | "testimonials"
     | "listings"
     | "valuation"
     | "contact";
@@ -39,16 +38,6 @@ export const HOME_TEXT_FIELDS: HomeTextField[] = [
   { key: "cred3_title", kind: "line", group: "credentials" },
   { key: "cred3_body", kind: "paragraph", group: "credentials" },
   { key: "cred3_tag", kind: "line", group: "credentials" },
-  { key: "testi_title", kind: "line", group: "testimonials" },
-  { key: "testi1_quote", kind: "paragraph", group: "testimonials" },
-  { key: "testi1_name", kind: "line", group: "testimonials" },
-  { key: "testi1_town", kind: "line", group: "testimonials" },
-  { key: "testi2_quote", kind: "paragraph", group: "testimonials" },
-  { key: "testi2_name", kind: "line", group: "testimonials" },
-  { key: "testi2_town", kind: "line", group: "testimonials" },
-  { key: "testi3_quote", kind: "paragraph", group: "testimonials" },
-  { key: "testi3_name", kind: "line", group: "testimonials" },
-  { key: "testi3_town", kind: "line", group: "testimonials" },
   { key: "listings_title", kind: "line", group: "listings" },
   { key: "listings_note", kind: "paragraph", group: "listings" },
   { key: "valuation_title", kind: "line", group: "valuation" },
@@ -61,7 +50,6 @@ export const HOME_FIELD_GROUPS = [
   "opening",
   "paths",
   "credentials",
-  "testimonials",
   "listings",
   "valuation",
   "contact",

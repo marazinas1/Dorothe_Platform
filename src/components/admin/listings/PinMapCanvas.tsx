@@ -2,10 +2,10 @@ import { useEffect, useRef } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import { CARTO_LIGHT_STYLE, MARKER_COLOR } from "@/lib/maps/carto";
+import { OSM_STYLE, MARKER_COLOR } from "@/lib/maps/carto";
 
 /**
- * Editable pin map for the admin. Same GDPR-friendly CARTO basemap as the
+ * Editable pin map for the admin. Same GDPR-friendly OSM basemap as the
  * public site; the marker is draggable so an imprecise geocode can be corrected
  * by hand — which is also the fallback when the lookup service is unavailable.
  */
@@ -28,7 +28,7 @@ export default function PinMapCanvas({
     if (!holder.current || map.current) return;
     const instance = new maplibregl.Map({
       container: holder.current,
-      style: CARTO_LIGHT_STYLE as never,
+      style: OSM_STYLE as never,
       center: [lng, lat],
       zoom: 15,
       attributionControl: { compact: true },

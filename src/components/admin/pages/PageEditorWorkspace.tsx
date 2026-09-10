@@ -78,9 +78,8 @@ export function PageEditorWorkspace({
             definition={definition}
             value={admin.value}
             onChange={admin.setValue}
-            placeholder={(key, kind) =>
-              kind === "list" ? admin.resolved.lines(key).join("\n") : admin.resolved.text(key)
-            }
+            hasOverride={admin.hasOverride}
+            onReset={admin.resetValue}
           />
 
           {definition.mediaSlots.length > 0 ? (
