@@ -1,4 +1,4 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import {
   createDefaultTextRequest,
@@ -16,7 +16,9 @@ type Scope = "home" | "page";
  */
 export function useDefaultRequests(scope: Scope, page: string | null, locale: string) {
   const qc = useQueryClient();
-  const { data: all } = useSuspenseQuery(defaultTextRequestsQueryOptions);
+  // Client-only: these reads need the signed-in bearer token, which server
+  // rendering does not have.
+  const { data: all = [] } = useQuery({ ...defaultTextRequestsQueryOptions, enabled: true });
 
   const mine = all.filter(
     (r) => r.scope === scope && (scope === "home" || r.page === page) && r.locale === locale,

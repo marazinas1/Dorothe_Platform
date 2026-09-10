@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Check, X } from "lucide-react";
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/lib/auth/use-permission";
@@ -18,7 +18,7 @@ export function DefaultRequestQueue() {
   const { t } = useTranslation();
   const qc = useQueryClient();
   const user = useCurrentUser();
-  const { data: all } = useSuspenseQuery(defaultTextRequestsQueryOptions);
+  const { data: all = [] } = useQuery(defaultTextRequestsQueryOptions);
   const [busy, setBusy] = useState<string | null>(null);
 
   if (user?.profile?.role !== "developer") return null;
