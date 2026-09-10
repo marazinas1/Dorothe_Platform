@@ -5,10 +5,12 @@ export type PageMediaEntry = { mode: "default" | "custom"; url: string };
 export interface PageContentRow {
   page: string;
   content: Record<string, PageLocalized>;
+  /** Wording the developer locked in as this clone's default. */
+  defaults: Record<string, PageLocalized>;
   media: Record<string, PageMediaEntry>;
 }
 
-export const PAGE_CONTENT_COLUMNS = "page, content, media";
+export const PAGE_CONTENT_COLUMNS = "page, content, defaults, media";
 
 /** What a public page component receives: resolved lines and lists. */
 export interface ResolvedPage {

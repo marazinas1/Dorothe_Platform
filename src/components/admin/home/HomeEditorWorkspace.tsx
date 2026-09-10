@@ -71,10 +71,12 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
         <div className="space-y-6 border-border p-4 sm:p-6 lg:max-h-[calc(100vh-14rem)] lg:overflow-y-auto lg:border-r">
           <HomeTextEditor
             value={home.value}
+            placeholder={home.placeholder}
             onChange={home.setValue}
-            hasOverride={home.hasOverride}
             onReset={home.resetValue}
+            onSetDefault={(key, kind) => void home.setAsDefault(key, kind)}
           />
+
 
           <HomeMediaEditor
             slots={HOME_MEDIA_SLOTS}

@@ -65,6 +65,14 @@ const HELPER_SOURCES = {
     file: "src/lib/listings/field-labels.ts",
     sets: { prefix: Object.values(LABEL_PREFIXES), field: ENUMS.moneyFields },
   },
+  statusLabelKey: {
+    file: "src/lib/listings/status-label.ts",
+    sets: { s: ENUMS.statuses },
+  },
+  statusActionKey: {
+    file: "src/lib/listings/status-label.ts",
+    sets: { target: ENUMS.statuses },
+  },
   areaLabelKey: {
     file: "src/lib/listings/field-labels.ts",
     sets: {

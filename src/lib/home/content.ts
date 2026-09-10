@@ -64,6 +64,13 @@ function legacyList(settings: SiteSettings, key: string, locale: string): string
   return asList(offer?.deliverables);
 }
 
+/** Wording the developer locked in as the default for this clone. */
+function lockedDefault(settings: SiteSettings, key: string, locale: string): unknown {
+  const bag = (settings.home_defaults ?? {}) as Record<string, unknown>;
+  return pick(bag[key], locale, settings.default_locale);
+}
+
+
 export interface HomeCopy {
   /** Resolved single string for a content key. */
   text: (key: string) => string;
@@ -78,7 +85,8 @@ export interface HomeCopy {
  */
 export function homeCopy(settings: SiteSettings, locale: string): HomeCopy {
   const content = (settings.home_content ?? {}) as Record<string, unknown>;
-  const vars = copyVars(settings, locale);
+
+
 
   const raw = (key: string): unknown => pick(content[key], locale, settings.default_locale);
 
@@ -86,28 +94,23 @@ export function homeCopy(settings: SiteSettings, locale: string): HomeCopy {
     text: (key) => {
       const own = asText(raw(key));
       if (own) return own;
-      const legacy = legacyText(settings, key, locale);
-      if (legacy) return legacy;
-      const translated = translate(locale as Locale, `home.defaults.${key}`, vars);
-      return translated === `home.defaults.${key}` ? "" : translated;
+      return homeDefaultText(settings, key, locale);
     },
     list: (key) => {
       const own = asList(raw(key));
       if (own.length > 0) return own;
-      const legacy = legacyList(settings, key, locale);
-      if (legacy.length > 0) return legacy;
-      const translated = translate(locale as Locale, `home.defaults.${key}`, vars);
-      return translated === `home.defaults.${key}` || !translated
-        ? []
-        : translated.split("\n").map((l) => l.trim()).filter(Boolean);
+      return homeDefaultList(settings, key, locale);
     },
   };
 }
 
-/** The default a field falls back to when no override is stored — legacy
- * settings first, then the translated `home.defaults` messages. Used by the
- * admin editor so it shows exactly what the page shows. */
+/** The default a field falls back to when no override is stored: the wording
+ * the developer locked in, then older settings fields, then the translated
+ * `home.defaults` messages. Used by the admin editor as the greyed-out line, so
+ * it always shows exactly what the page shows. */
 export function homeDefaultText(settings: SiteSettings, key: string, locale: string): string {
+  const locked = asText(lockedDefault(settings, key, locale));
+  if (locked) return locked;
   const legacy = legacyText(settings, key, locale);
   if (legacy) return legacy;
   const translated = translate(locale as Locale, `home.defaults.${key}`, copyVars(settings, locale));
@@ -115,6 +118,8 @@ export function homeDefaultText(settings: SiteSettings, key: string, locale: str
 }
 
 export function homeDefaultList(settings: SiteSettings, key: string, locale: string): string[] {
+  const locked = asList(lockedDefault(settings, key, locale));
+  if (locked.length > 0) return locked;
   const legacy = legacyList(settings, key, locale);
   if (legacy.length > 0) return legacy;
   const translated = translate(locale as Locale, `home.defaults.${key}`, copyVars(settings, locale));
@@ -122,6 +127,7 @@ export function homeDefaultList(settings: SiteSettings, key: string, locale: str
     ? []
     : translated.split("\n").map((l) => l.trim()).filter(Boolean);
 }
+
 
 /** Per-slot photograph: an own upload wins, otherwise the house default. */
 export function homeMedia(settings: SiteSettings, slot: HomeMediaSlot): string | null {

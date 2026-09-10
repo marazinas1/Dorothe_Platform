@@ -19,6 +19,7 @@ import { useCountListingView } from "@/lib/listings/use-count-view";
 import { pickImageUrl } from "@/lib/listings/image";
 import { listingDisplayName } from "@/lib/listings/display-title";
 import { pickLocalized } from "@/lib/listings/format";
+import { statusLabelKey } from "@/lib/listings/status-label";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
@@ -204,7 +205,7 @@ function ListingDetail() {
         {preview ? (
           <div className="bg-secondary px-6 py-2 text-center text-[11px] uppercase tracking-[0.16em] text-secondary-foreground">
             {t("listings.detail.preview_notice", {
-              status: t(`listings.status.${l.status}`),
+              status: t(statusLabelKey(l.status, l.deal_type)),
             })}
           </div>
         ) : null}
