@@ -1,80 +1,104 @@
-# Prieš atidavimą Dorothei: tekstai, Properties puslapis, UI/UX auditas
+# Prieš atidavimą Dorothei: tekstai, atsiliepimai, Properties, Settings supaprastinimas
 
 ## 1. Kas tie „[Placeholder]“
 
-Selling puslapyje yra 13 laikinų tekstų, kurie viešai rodomi su žymomis
-`[Placeholder]` / `[Platzhalter]`: sekcijų antraštės „What she brings“,
-„What it costs“, formos įvadas, „Already sold“ blokas ir 4 paslaugų punktai.
-Jie buvo įrašyti kaip griaučiai ir liko neperrašyti.
+Selling puslapyje 13 laikinų tekstų rodomi viešai su žymomis
+`[Placeholder]` / `[Platzhalter]`: „What she brings“, „What it costs“, formos
+įvadas, „Already sold“ blokas ir 4 paslaugų punktai. Jie buvo įrašyti kaip
+griaučiai ir liko neperrašyti.
 
-Sutvarkymas: parašau realius profesionalius EN + DE tekstus tuo pačiu stiliumi,
-kaip likusi Selling dalis (aštuoni žingsniai). Komisija formuluojama neutraliai
-(„provizija sutariama individualiai, aiškiai raštu prieš mandatą“) — be procento,
-kol Dorothe nepatvirtins. Tekstai lieka redaguojami per Settings → Page texts.
+Parašau realius EN + DE tekstus tuo pačiu stiliumi kaip likusi Selling dalis.
+Provizija formuluojama neutraliai („sutariama individualiai, raštu prieš
+mandatą“) — be procento, kol Dorothe nepatvirtins.
 
-Taip pat: 3 atsiliepimai vis dar turi „Lorem ipsum“ fallback tekstą (rodomas,
-kol `testimonials` tabelė tuščia). Perrašau į normalius neutralius atsiliepimus,
-kad niekas nematytų lorem ipsum; kai Dorothe įrašys tikrus — fallback išnyksta.
+## 2. Atsiliepimai — iš kur jie ateina (svarbu)
 
-## 2. Properties puslapis (dabar rodo tik 5 objektus)
+Dabar 3 lorem ipsum atsiliepimai NEATEINA iš duomenų bazės: `testimonials`
+tabelė tuščia, todėl viešoji svetainė rodo tekstinį fallback iš vertimų failo.
+Todėl admin dalyje rašo „No testimonials yet“ — Dorothe jų nemato ir negali
+pataisyti.
 
-Priežastis: puslapis užklausia tik `active` + `coming_soon` statusus, todėl
-parduoti / išnuomoti objektai nerodomi, o filtruose nėra statuso pasirinkimo.
+Sutvarkymas: įrašau 3 tikras eiles į `testimonials` (EN + DE, tie patys lorem
+ipsum tekstai, `published = true`, `show_on_home = true`). Tada:
+- Admin → Testimonials rodo 3 įrašus, kuriuos ji redaguoja ir iš karto mato
+  svetainėje;
+- fallback iš vertimų nebenaudojamas, kai eilės yra (paliekamas tik tam
+  atvejui, jei viską ištrintų);
+- `home_content` testi1/2/3 laukai išimami iš Home page redaktoriaus, kad
+  nebūtų dviejų vietų tam pačiam turiniui.
 
-Padarysiu:
-- Statuso chip'ai virš tinklelės: **Available** (numatyta) / **Sold & rented** / **All**,
-  URL parametras `status`, kad nuoroda būtų dalinama, plius kiekio skaitiklis.
-- Parduoti objektai rodomi toje pačioje tinklelėje su SOLD / RENTED ženkleliu
-  (ta pati kortelė kaip visur), naujausi pirmi.
-- `/verkauft` archyvas lieka kaip yra ir gauna nuorodą iš chip'ų.
-- Puslapiavimas ir tušti rezultatai veikia su visais chip'ais.
+## 3. Properties puslapis (dabar rodo tik 5 objektus)
 
-## 3. Žemėlapis
+Priežastis: užklausiami tik `active` + `coming_soon` statusai, filtruose nėra
+statuso.
 
-Dabar žemėlapis yra po nematomu tekstiniu perjungikliu „Show map (n)“ — lengva
-nepastebėti.
+- Statuso chip'ai: **Available** (numatyta) / **Sold & rented** / **All**,
+  URL parametras, kiekio skaitiklis.
+- Parduoti/išnuomoti rodomi toje pačioje tinklelėje su SOLD / RENTED ženkleliu.
+- `/verkauft` archyvas lieka ir gauna nuorodą iš chip'ų.
 
-Padarysiu pasaulinį standartą (ImmoScout / Zillow):
-- Segmentuotas perjungiklis **List / Map** filtrų juostos dešinėje.
-- List numatytai (geriau SEO ir greitis), Map — pilno pločio žemėlapis su
-  spustelėjamais taškais ir kortelės popup'u.
-- Mobiliajame — tas pats perjungiklis, žemėlapis per visą ekrano plotį.
-- Ratukas nezoomina (kaip Contact puslapyje), zoom + / − mygtukais, plius
-  „Reset view“ į regiono vaizdą.
-- Objektai be koordinačių (hidden precision) tiesiog nepatenka į žemėlapį.
+## 4. Žemėlapis
 
-## 4. Viso UI/UX + tekstų auditas (EN ir DE)
+Vietoje beveik nepastebimo teksto „Show map“ — segmentuotas **List / Map**
+perjungiklis filtrų juostoje (kaip ImmoScout / Zillow). List numatytai, Map —
+pilnas plotis, ratukas nezoomina, zoom + / − mygtukais, „Reset view“ mygtukas.
+Taip pat sutvarkau žemėlapio plytelių tiekėją, kad nebeliktų „API KEY
+REQUIRED“ užrašo (dabar matosi ir admin dalyje).
 
-Atlieku sisteminę patikrą ir sutvarkau tai, kas randama:
-- Visi vieši puslapiai EN ir DE: Home, Properties, objekto detalė, Selling,
-  Inheritance, About, Contact, Sold, Advice + straipsnis, Impressum,
-  Datenschutz, AGB — antraštės, meta, CTA, tuščios būsenos.
-- Trūkstami / nesutampantys vertimai, likę angliški tekstai DE versijoje,
-  neteisingi kabučių ir brūkšnių stiliai (DE „…“, EN “…”).
-- Vienodi mygtukai ir nuorodų stiliai visur (viena mygtuko sistema, vienodi
-  „→“ nuorodų variantai), vienodi sekcijų tarpai.
-- Vienodi kortelių tinkleliai ir vienodi antgalvių formatai visuose sąrašuose.
-- Prieinamumas: `label`/`id` sąsajos formose ir kalendoriuje, alt tekstai,
-  fokuso rėmeliai, mygtukų `aria-label`.
-- Mobilus vaizdas: navigacijos šuo, karuselių slinkimas, filtrai, žemėlapis.
-- 404 / tuščios būsenos tekstai abiem kalbomis.
+## 5. Settings: ką reiškia kiekvienas laukas ir ką siūlau
 
-Radinius, kurių negaliu nuspręsti pats (pvz. reali komisija, tikri
-atsiliepimai, dviejų objektų energijos duomenys), surašau tau atskirai —
-jų neišradinėju.
+| Laukas | Ką daro | Sprendimas |
+| --- | --- | --- |
+| Site name | Svetainės pavadinimas antraštėse ir Google rezultatuose | Lieka |
+| Legal name | Juridinis vardas Impressum ir Google struktūrizuotuose duomenyse | Lieka |
+| Country | Nustato, kokių Energieausweis laukų reikalauja sistema (DE) ir adreso šalį | Paslėpti — fiksuota DE, developerio dalykas |
+| Default locale | Kuri kalba yra pagrindinė (URL be prefikso, atsarginis tekstas) | Paslėpti; kai atiduosiu, perstatau į DE |
+| Enabled locales | Kokios kalbos veikia (EN, DE) | Paslėpti |
+| Service region (en/de) | Regiono vardas, įterpiamas į tekstus („{{region}}“ → Saarland) | Lieka, bet perkelta prie tekstų ir pavadinta „Region name“ |
+| Currency | Kokia valiuta rodomos kainos (EUR) | Paslėpti |
+| Area unit | m² ar sq ft | Paslėpti |
+| Logo, dark logo, favicon, OG image | Paveikslai visoje svetainėje ir admin dalyje | Lieka, viršuje |
+| Contact email / phone / WhatsApp | Rodomi kontaktuose, CTA blokuose, formose | Lieka |
+| Address + Latitude/Longitude + žemėlapio smeigtukė | Biuro adresas ir taškas žemėlapyje | Lieka (smeigtukė kaip dabar) |
+| Opening hours (JSON) | Darbo laikas | Perrašau į paprastas savaitės dienų eiles: nuo / iki + „Uždaryta“ |
+| Social links (JSON) | Facebook / LinkedIn nuorodos | Perrašau į atskirus laukus: Facebook, LinkedIn, Instagram |
+
+Struktūra po pertvarkos:
+1. **Business** (General + Contact sujungta): logotipai ir favicon, pavadinimas,
+   kontaktai, adresas su žemėlapiu, darbo laikas, socialiniai tinklai.
+2. **Page texts** — tekstai pagal puslapius.
+3. **Legal** — Impressum, privatumas, AGB.
+4. **Modules** — kas rodoma svetainėje (nuoma, blogas, atsiliepimai, archyvas).
+
+Techninius laukus (country, locales, currency, area unit) matys tik developeris;
+Dorothei jų visai nebus.
+
+## 6. Page texts — kad rodytų tai, kas tikrai svetainėje
+
+Dabar redaktorius rodo numatytus tekstus pilkai kaip užuominas, o įrašytos
+reikšmės tuščios — atrodo, tarsi tekstai nesutampa su svetaine. Padarysiu:
+- Numatytas tekstas įkeliamas į laukus kaip tikra reikšmė, todėl matai lygiai
+  tai, ką rodo svetainė (kaip Halliday projekte).
+- Lieka tik svarbiausi laukai: antraštė, paantraštė, pagrindinės sekcijų
+  antraštės ir įžanginiai sakiniai. Antriniai ir techniniai laukai išimami.
+- Kiekvienas laukas ir kiekvienas puslapis gauna **„Reset to default“** —
+  matomą tik developeriui, kad grąžintų pradinį tekstą.
+
+## 7. Viso UI/UX + tekstų auditas (EN ir DE)
+
+Visi vieši puslapiai ir admin ekranai: trūkstami/nepervesti tekstai, likusios
+angliškos vietos DE versijoje, vienodi mygtukai ir nuorodos, vienodi tarpai ir
+sekcijų antgalviai, prieinamumas (label/id, alt, fokusas), mobilus vaizdas,
+tuščios būsenos ir 404. Radinius, kurių negaliu nuspręsti pats (reali provizija,
+tikri atsiliepimai, dviejų objektų energijos duomenys), surašau atskirai.
 
 ## Techninė dalis
 
-- `src/messages/en.json`, `de.json` — Selling copy, testimonial fallback,
-  audito tekstų taisymai; `check:i18n` turi būti žalias.
-- `src/lib/listings/search-schema.ts` — naujas `status` ir `view` param'ai
-  su default'ais ir canonical URL logika.
-- `src/lib/listings/queries.functions.ts` — statuso žemėlapis chip'ams
-  (`available` → active/coming_soon, `archive` → sold/rented, `all` → visi).
-- `src/routes/$locale.immobilien.index.tsx` — chip'ai, List/Map perjungiklis,
-  rezultatų sekcija.
-- `src/components/public/FiltersBar.tsx` — statuso chip'ai + view toggle.
-- `src/components/brand/ListingsMap.tsx`, `MapCanvas.tsx` — pilno pločio
-  režimas, reset, be wheel-zoom.
-- Patikra: `check:i18n`, TypeScript, build, plus Playwright peržiūra EN/DE
-  desktop ir mobile.
+- `src/messages/en.json`, `de.json` — Selling copy + audito taisymai; `check:i18n` žalias.
+- `run_sql` — 3 `testimonials` eilės (EN/DE, published, show_on_home).
+- `src/lib/testimonials/fallback.ts` + Home fields — fallback tik kai tabelė tuščia; testi* laukai išimti.
+- `src/lib/listings/search-schema.ts`, `queries.functions.ts` — `status` ir `view` param'ai + statusų žemėlapis.
+- `src/routes/$locale.immobilien.index.tsx`, `FiltersBar.tsx`, `ListingsMap.tsx`, `MapCanvas.tsx` — chip'ai, List/Map, plytelių tiekėjas.
+- Settings: `GeneralTab` + `ContactTab` → vienas `BusinessTab`; nauji `OpeningHoursField`, `SocialLinksField`; developer-only blokas; `SettingsTabs` atnaujintas.
+- `src/lib/pages/*`, `PageTextEditor` — numatytos reikšmės kaip realios, trumpesnis laukų sąrašas, `Reset to default` developeriui.
+- Patikra: `check:i18n`, TypeScript, build, Playwright EN/DE desktop + mobile.
