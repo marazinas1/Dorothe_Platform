@@ -5,7 +5,6 @@ import {
   siteSettingsQueryOptions,
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
-import { type Locale } from "@/i18n/config";
 import { homeDefaultList, homeDefaultText } from "./content";
 
 type Bag = Record<string, unknown>;
