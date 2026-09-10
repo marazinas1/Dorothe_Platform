@@ -23,6 +23,7 @@ export type AdminListingRow = {
   property_type: string;
   price: number | null;
   price_on_request: boolean | null;
+  is_featured: boolean | null;
   address_city: string | null;
   reference_code: string | null;
   rooms: number | null;
@@ -44,7 +45,7 @@ export const listAdminListings = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("listings")
       .select(
-        "id, slug, status, deal_type, property_type, price, price_on_request, address_city, reference_code, rooms, bedrooms, bathrooms, living_area, title, commission_free, commission_value, energy, energy_exemption, updated_at, listing_images(variants, is_primary, sort_order)",
+        "id, slug, status, deal_type, property_type, price, price_on_request, is_featured, address_city, reference_code, rooms, bedrooms, bathrooms, living_area, title, commission_free, commission_value, energy, energy_exemption, updated_at, listing_images(variants, is_primary, sort_order)",
       )
       .order("updated_at", { ascending: false });
     if (error) throw new Error(error.message);
@@ -174,4 +175,43 @@ export const reorderListingImages = createServerFn({ method: "POST" })
       if (error) throw new Error(error.message);
     }
     return { ok: true as const };
+  });
+
+const FeaturedInput = z.object({
+  id: z.string().uuid(),
+  featured: z.boolean(),
+});
+
+/** At most this many properties may be pinned to the home page. */
+export const HOME_PICK_LIMIT = 3;
+
+/**
+ * Pin or unpin a listing from the home page. The limit is enforced here rather
+ * than in the form, so it holds whichever screen the broker uses.
+ */
+export const setListingFeatured = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => FeaturedInput.parse(input))
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    await assertCanEditListing(supabase, userId, data.id);
+
+    if (data.featured) {
+      const { count, error: countError } = await supabase
+        .from("listings")
+        .select("id", { count: "exact", head: true })
+        .eq("is_featured", true)
+        .neq("id", data.id);
+      if (countError) throw new Error(countError.message);
+      if ((count ?? 0) >= HOME_PICK_LIMIT) throw new Error("HOME_PICK_LIMIT");
+    }
+
+    const { data: updated, error } = await supabase
+      .from("listings")
+      .update({ is_featured: data.featured } as never)
+      .eq("id", data.id)
+      .select("id, is_featured")
+      .maybeSingle();
+    if (error || !updated) throw new Error(error?.message ?? "Update failed");
+    return updated as { id: string; is_featured: boolean };
   });
