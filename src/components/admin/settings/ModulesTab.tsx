@@ -41,7 +41,7 @@ export function ModulesTab() {
   }
 
   return (
-    <div className="space-y-3 max-w-3xl">
+    <div className="space-y-3">
       {error && <p className="text-sm text-destructive">{error}</p>}
       {FLAG_KEYS.map((key) => {
         const enabled = Boolean(flags?.[key]?.enabled);

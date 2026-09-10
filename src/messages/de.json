@@ -512,7 +512,7 @@
         "website": "Die Website",
         "settings": "Einstellungen"
       },
-      "posts": "Ratgeber-Beiträge",
+      "posts": "Artikel",
       "selling": "Verkaufen",
       "inheritance": "Erben",
       "about": "Über mich",
@@ -1321,7 +1321,7 @@
       "openPage": "Seite öffnen"
     },
     "posts": {
-      "title": "Ratgeber-Beiträge",
+      "title": "Artikel",
       "hint": "Beiträge für den öffentlichen Ratgeber. Nur veröffentlichte Beiträge sind sichtbar; der Menüpunkt erscheint, sobald einer vorhanden ist.",
       "add": "Beitrag hinzufügen",
       "titleField": "Überschrift",

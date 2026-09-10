@@ -512,7 +512,7 @@
         "website": "The website",
         "settings": "Settings"
       },
-      "posts": "Advice articles",
+      "posts": "Articles",
       "selling": "Selling",
       "inheritance": "Inheritance",
       "about": "About",
@@ -1321,7 +1321,7 @@
       "openPage": "Open page"
     },
     "posts": {
-      "title": "Advice articles",
+      "title": "Articles",
       "hint": "Articles for the public advice section. Only published articles are visible, and the menu link appears once one exists.",
       "add": "Add article",
       "titleField": "Headline",

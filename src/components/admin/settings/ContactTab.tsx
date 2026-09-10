@@ -85,7 +85,7 @@ export function ContactTab() {
   }
 
   return (
-    <form className="space-y-4 max-w-3xl">
+    <form className="space-y-4">
       <Row>
         <TF form={form} name="contact_email" label={t("admin.settings.contact.contact_email")} />
         <TF form={form} name="contact_phone" label={t("admin.settings.contact.contact_phone")} />
