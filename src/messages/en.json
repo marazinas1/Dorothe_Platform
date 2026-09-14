@@ -1796,5 +1796,10 @@
     "body": "Send a short note about your property or what you are looking for. You get an honest assessment and a clear next step, not a sales pitch.",
     "primary": "Get in touch",
     "secondary": "or call"
+  },
+  "maintenance": {
+    "banner": "Maintenance mode is on — you see the website because you are signed in. Visitors see an update notice.",
+    "previewAsVisitor": "Preview as a visitor",
+    "turnOff": "Turn off"
   }
 }
