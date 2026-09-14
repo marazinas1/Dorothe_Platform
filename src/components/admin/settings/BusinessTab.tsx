@@ -13,7 +13,6 @@ import { usePermission } from "@/lib/auth/use-permission";
 import type { SiteSettings } from "@/types/site-settings";
 
 import { SaveButton } from "./SaveButton";
-import { BrandAssetsSection } from "./BrandAssetsSection";
 import { OpeningHoursField } from "./OpeningHoursField";
 import { SocialLinksField } from "./SocialLinksField";
 import { TechnicalBlock } from "./TechnicalBlock";
@@ -187,10 +186,6 @@ export function BusinessTab() {
       </AdminSection>
 
       <SaveButton onSubmit={save} />
-
-      <AdminSection title={t("admin.settings.brand.sectionTitle")} description={t("admin.settings.brand.sectionHelp")}>
-        <BrandAssetsSection />
-      </AdminSection>
 
       {canDesign ? <TechnicalBlock data={data} /> : null}
     </div>

@@ -60,7 +60,7 @@ interface NavItem {
 
 interface NavGroup {
   /** Translation key under admin.nav.groups. */
-  label: "workspace" | "website" | "settings";
+  label: "daily" | "manage" | "settings";
   items: NavItem[];
 }
 
@@ -70,10 +70,9 @@ interface NavGroup {
  */
 const GROUPS: NavGroup[] = [
   {
-    label: "workspace",
+    label: "daily",
     items: [
       { key: "dashboard", to: "/$locale/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
-      { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
       { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
       {
         key: "calendar",
@@ -82,13 +81,14 @@ const GROUPS: NavGroup[] = [
         permission: "inquiry.view.own",
         flag: "calendar",
       },
-      {
-        key: "posts",
-        to: "/$locale/admin/posts",
-        icon: Newspaper,
-        permission: "settings.edit",
-        flag: "blog",
-      },
+      { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
+    ],
+  },
+  {
+    label: "manage",
+    items: [
+      { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
+      { key: "posts", to: "/$locale/admin/posts", icon: Newspaper, permission: "settings.edit" },
       {
         key: "testimonials",
         to: "/$locale/admin/testimonials",
@@ -96,13 +96,12 @@ const GROUPS: NavGroup[] = [
         permission: "settings.edit",
         flag: "testimonials",
       },
-      { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
-      { key: "users", to: "/$locale/admin/users", icon: UserCog, permission: "user.manage" },
     ],
   },
   {
     label: "settings",
     items: [
+      { key: "users", to: "/$locale/admin/users", icon: UserCog, permission: "user.manage" },
       { key: "settings", to: "/$locale/admin/settings", icon: Settings, permission: "settings.edit" },
     ],
   },

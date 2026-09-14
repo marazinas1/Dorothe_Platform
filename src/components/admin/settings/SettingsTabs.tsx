@@ -8,7 +8,18 @@ import type { Locale } from "@/i18n/config";
  * Three tabs, nothing more: the business itself, the words of the public
  * pages, and the legal texts. Modules are a code decision, not a setting.
  */
-const TABS = ["business", "texts", "legal"] as const;
+const TABS = [
+  "business",
+  "appearance",
+  "home",
+  "properties",
+  "selling",
+  "inheritance",
+  "about",
+  "contact",
+  "legal",
+  "maintenance",
+] as const;
 export type SettingsTabId = (typeof TABS)[number];
 
 export function SettingsTabs() {
@@ -18,7 +29,7 @@ export function SettingsTabs() {
 
   return (
     <nav
-      className="mb-8 inline-flex flex-wrap gap-1 rounded-[var(--radius)] border border-border bg-card p-1"
+      className="mb-8 flex max-w-full gap-1 overflow-x-auto rounded-[var(--radius)] border border-border bg-card p-1"
       aria-label={t("admin.settings.title")}
     >
       {TABS.map((tab) => {
@@ -30,7 +41,7 @@ export function SettingsTabs() {
             to="/$locale/admin/settings/$tab"
             params={{ locale, tab }}
             className={cn(
-              "rounded-[calc(var(--radius)*0.75)] px-3 py-2 text-sm font-medium transition-colors",
+              "shrink-0 rounded-[calc(var(--radius)*0.75)] px-3 py-2 text-sm font-medium transition-colors",
               active
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",

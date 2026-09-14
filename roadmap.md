@@ -1,9 +1,9 @@
-# Roadmap — Lumidenta-style administration
+# Roadmap — Deerva admin standard
 
-- [x] Shared admin visual foundation and page hierarchy
-- [x] Sidebar, navigation, signed-in identity, and mobile shell alignment
-- [x] Consistent sections, controls, chips, buttons, and empty states
-- [x] Home/page media cards and default-text presentation
-- [x] Dashboard, listings, inquiries, calendar, articles, testimonials, analytics, users, and settings pass
-- [x] Weekly opening hours with dated exceptions and public Contact display
-- [x] Final type, translation, build, and browser verification
+- [x] Reorder and rename the admin navigation to DAILY / MANAGE / SETTINGS
+- [x] Rebuild Settings as Business / Appearance / public-page tabs / Legal / Maintenance
+- [x] Keep one settings-driven logo and add a shared logo-size control
+- [x] Recompose Overview as Needs attention / Numbers / Quick actions
+- [x] Add maintenance mode with an admin preview bypass
+- [ ] Standardize admin controls, empty states, confirmations, save feedback, and unsaved-change warnings
+- [ ] Verify EN/DE, desktop/mobile, authenticated admin, and public maintenance behavior

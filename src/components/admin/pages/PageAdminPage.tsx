@@ -14,7 +14,7 @@ import { FileText } from "lucide-react";
  * One static public page: its words and photographs on the left, the page
  * itself beside them.
  */
-export function PageAdminPage({ page }: { page: string }) {
+export function PageAdminPage({ page, embedded = false }: { page: string; embedded?: boolean }) {
   const { t } = useTranslation();
   const definition = pageDefinition(page);
 
@@ -23,10 +23,10 @@ export function PageAdminPage({ page }: { page: string }) {
     return <p className="text-sm text-muted-foreground">{t("admin.pageEditor.unknown")}</p>;
   }
 
-  return <PageEditor definition={definition} />;
+  return <PageEditor definition={definition} embedded={embedded} />;
 }
 
-function PageEditor({ definition }: { definition: PageDefinition }) {
+function PageEditor({ definition, embedded }: { definition: PageDefinition; embedded: boolean }) {
   const { t } = useTranslation();
   const page = definition.key;
   const [contentLocale, setContentLocale] = useState<string | null>(null);
@@ -39,11 +39,13 @@ function PageEditor({ definition }: { definition: PageDefinition }) {
 
   return (
     <div className="space-y-6">
-      <AdminPageHeader
-        icon={FileText}
-        title={t(`admin.nav.${definition.key}`)}
-        description={t("admin.pageEditor.editHint")}
-      />
+      {!embedded ? (
+        <AdminPageHeader
+          icon={FileText}
+          title={t(`admin.nav.${definition.key}`)}
+          description={t("admin.pageEditor.editHint")}
+        />
+      ) : null}
 
       <PageEditorWorkspace
         definition={definition}

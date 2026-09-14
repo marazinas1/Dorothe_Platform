@@ -1114,7 +1114,9 @@ export type Database = {
           legal_privacy: Json
           legal_terms: Json
           logo_dark_url: string | null
+          logo_size: number
           logo_url: string | null
+          maintenance_mode: boolean
           muted_text_color: string | null
           og_default_image: string | null
           opening_hours: Json
@@ -1177,7 +1179,9 @@ export type Database = {
           legal_privacy?: Json
           legal_terms?: Json
           logo_dark_url?: string | null
+          logo_size?: number
           logo_url?: string | null
+          maintenance_mode?: boolean
           muted_text_color?: string | null
           og_default_image?: string | null
           opening_hours?: Json
@@ -1240,7 +1244,9 @@ export type Database = {
           legal_privacy?: Json
           legal_terms?: Json
           logo_dark_url?: string | null
+          logo_size?: number
           logo_url?: string | null
+          maintenance_mode?: boolean
           muted_text_color?: string | null
           og_default_image?: string | null
           opening_hours?: Json
