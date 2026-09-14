@@ -515,8 +515,8 @@
       "users": "Users",
       "group": "Manage",
       "groups": {
-        "workspace": "Workspace",
-        "website": "The website",
+        "daily": "Daily",
+        "manage": "Manage",
         "settings": "Settings"
       },
       "posts": "Articles",
@@ -624,10 +624,17 @@
       "denied": "You do not have permission to edit settings.",
       "tabs": {
         "business": "Business",
+        "appearance": "Appearance",
+        "home": "Home",
+        "properties": "Properties",
+        "selling": "Selling",
+        "inheritance": "Inheritance",
+        "about": "About",
         "general": "General",
         "contact": "Contact",
         "texts": "Page texts",
         "legal": "Legal",
+        "maintenance": "Maintenance",
         "modules": "Modules"
       },
       "general": {
@@ -718,7 +725,22 @@
         "replace": "Replace",
         "remove": "Remove",
         "sectionTitle": "Website images",
-        "sectionHelp": "Logo, browser icon and sharing image used throughout the website."
+        "sectionHelp": "Logo, browser icon and sharing image used throughout the website.",
+        "size": "Logo size",
+        "sizeHelp": "One shared size for the public website, sign-in and admin panel."
+      },
+      "properties": {
+        "title": "Properties page",
+        "help": "Property cards and filters come directly from your listings.",
+        "body": "Add, edit, reorder and change statuses under Properties. The public page updates automatically.",
+        "open": "Open properties page"
+      },
+      "maintenance": {
+        "title": "Maintenance mode",
+        "help": "Temporarily hide the public website while work is in progress. Signed-in staff keep access.",
+        "label": "Hide the public website",
+        "on": "Visitors currently see a maintenance notice.",
+        "off": "The public website is available to visitors."
       },
       "texts": {
         "home": "Home page"
@@ -1177,6 +1199,15 @@
       }
     },
     "dashboard": {
+      "needsAttention": "Needs attention",
+      "quick": {
+        "title": "Quick actions",
+        "help": "Start the most common tasks.",
+        "property": "Add property",
+        "inquiries": "Review enquiries",
+        "appointment": "Add appointment",
+        "article": "Write article"
+      },
       "queue": {
         "heading": "To do",
         "failed": "Could not load this group.",

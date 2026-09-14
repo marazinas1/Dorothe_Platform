@@ -515,8 +515,8 @@
       "users": "Benutzer",
       "group": "Verwalten",
       "groups": {
-        "workspace": "Arbeitsbereich",
-        "website": "Die Website",
+        "daily": "Täglich",
+        "manage": "Verwalten",
         "settings": "Einstellungen"
       },
       "posts": "Artikel",
@@ -624,10 +624,17 @@
       "denied": "Sie haben keine Berechtigung für die Einstellungen.",
       "tabs": {
         "business": "Unternehmen",
+        "appearance": "Erscheinungsbild",
+        "home": "Startseite",
+        "properties": "Immobilien",
+        "selling": "Verkaufen",
+        "inheritance": "Erben",
+        "about": "Über mich",
         "general": "Allgemein",
         "contact": "Kontakt",
         "texts": "Seitentexte",
         "legal": "Rechtliches",
+        "maintenance": "Wartung",
         "modules": "Module"
       },
       "general": {
@@ -718,7 +725,22 @@
         "replace": "Ersetzen",
         "remove": "Entfernen",
         "sectionTitle": "Bilder der Website",
-        "sectionHelp": "Logo, Browser-Symbol und Vorschaubild für die gesamte Website."
+        "sectionHelp": "Logo, Browser-Symbol und Vorschaubild für die gesamte Website.",
+        "size": "Logogröße",
+        "sizeHelp": "Eine gemeinsame Größe für Website, Anmeldung und Admin-Bereich."
+      },
+      "properties": {
+        "title": "Immobilienseite",
+        "help": "Objektkarten und Filter kommen direkt aus Ihren Angeboten.",
+        "body": "Objekte werden unter Angebote angelegt, bearbeitet, sortiert und im Status geändert. Die öffentliche Seite aktualisiert sich automatisch.",
+        "open": "Immobilienseite öffnen"
+      },
+      "maintenance": {
+        "title": "Wartungsmodus",
+        "help": "Blendet die öffentliche Website während Arbeiten vorübergehend aus. Angemeldete Mitarbeiter behalten Zugriff.",
+        "label": "Öffentliche Website ausblenden",
+        "on": "Besucher sehen derzeit einen Wartungshinweis.",
+        "off": "Die öffentliche Website ist für Besucher erreichbar."
       },
       "texts": {
         "home": "Startseite"
@@ -1177,6 +1199,15 @@
       }
     },
     "dashboard": {
+      "needsAttention": "Zu erledigen",
+      "quick": {
+        "title": "Schnellzugriff",
+        "help": "Die häufigsten Aufgaben direkt starten.",
+        "property": "Objekt anlegen",
+        "inquiries": "Anfragen prüfen",
+        "appointment": "Termin anlegen",
+        "article": "Artikel schreiben"
+      },
       "queue": {
         "heading": "Zu tun",
         "failed": "Diese Gruppe konnte nicht geladen werden.",

@@ -8,6 +8,7 @@ import {
 } from "@/lib/config/site-settings.functions";
 import { featureFlagsQueryOptions } from "@/lib/config/feature-flags.functions";
 import { usePageTracking } from "@/lib/analytics/use-page-tracking";
+import { MaintenanceGate } from "@/components/public/MaintenanceGate";
 
 export const Route = createFileRoute("/$locale")({
   staticData: { sitemap: false },
@@ -41,10 +42,13 @@ export const Route = createFileRoute("/$locale")({
 
 function LocaleLayout() {
   const { locale } = Route.useParams();
+  const { settings } = Route.useLoaderData();
   usePageTracking();
   return (
     <I18nProvider locale={locale as Locale}>
-      <Outlet />
+      <MaintenanceGate locale={locale as Locale} settings={settings}>
+        <Outlet />
+      </MaintenanceGate>
     </I18nProvider>
   );
 }
