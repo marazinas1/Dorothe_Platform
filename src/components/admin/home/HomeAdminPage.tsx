@@ -14,7 +14,7 @@ import { Home } from "lucide-react";
  * real page beside them. Property cards are not edited here — they come from
  * Listings.
  */
-export function HomeAdminPage() {
+export function HomeAdminPage({ embedded = false }: { embedded?: boolean }) {
   const { t } = useTranslation();
   const [contentLocale, setContentLocale] = useState<string | null>(null);
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
@@ -26,7 +26,7 @@ export function HomeAdminPage() {
 
   return (
     <div className="space-y-6">
-      <AdminPageHeader icon={Home} title={t("admin.home.title")} description={t("admin.home.editHint")} />
+      {!embedded ? <AdminPageHeader icon={Home} title={t("admin.home.title")} description={t("admin.home.editHint")} /> : null}
 
       <HomeEditorWorkspace
         home={home}

@@ -38,14 +38,14 @@ function TabPage() {
     case "appearance":
       return <AppearanceTab />;
     case "home":
-      return <HomeAdminPage />;
+      return <HomeAdminPage embedded />;
     case "properties":
       return <PropertiesCopyTab />;
     case "selling":
     case "inheritance":
     case "about":
     case "contact":
-      return <PageAdminPage page={tab} />;
+      return <PageAdminPage page={tab} embedded />;
     case "legal":
       return <LegalTab />;
     case "maintenance":
