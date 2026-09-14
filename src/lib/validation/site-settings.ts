@@ -65,6 +65,7 @@ export const BrandAssetsSchema = z.object({
   logo_dark_url: nullableUrl,
   favicon_url: nullableUrl,
   og_default_image: nullableUrl,
+  logo_size: z.number().int().min(60).max(140),
 });
 export type BrandAssetsInput = z.infer<typeof BrandAssetsSchema>;
 
@@ -121,6 +122,7 @@ export const HomeSchema = z.object({
   home_content: jsonRecord,
   home_media: jsonRecord,
 });
+export const MaintenanceSchema = z.object({ maintenance_mode: z.boolean() });
 export type HomeInput = z.infer<typeof HomeSchema>;
 
 /** Developer-only: the home wording locked in as this clone's default. */
@@ -141,6 +143,7 @@ export const SITE_SETTINGS_SCHEMAS = {
   legal: LegalSchema,
   analytics: AnalyticsSchema,
   home: HomeSchema,
+  maintenance: MaintenanceSchema,
 } as const;
 
 export type SettingsTabKey = keyof typeof SITE_SETTINGS_SCHEMAS;

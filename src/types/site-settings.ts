@@ -18,6 +18,10 @@ export interface SiteSettings {
   logo_dark_url: string | null;
   favicon_url: string | null;
   og_default_image: string | null;
+  /** Shared logo scale used by public, auth, and admin chrome. */
+  logo_size: number;
+  /** Temporarily replaces public pages with a service notice. */
+  maintenance_mode: boolean;
   primary_color: string | null;
   secondary_color: string | null;
   accent_color: string | null;

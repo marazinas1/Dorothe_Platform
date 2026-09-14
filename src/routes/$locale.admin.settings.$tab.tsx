@@ -3,8 +3,13 @@ import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { BusinessTab } from "@/components/admin/settings/BusinessTab";
 import { TextsTab } from "@/components/admin/settings/TextsTab";
 import { LegalTab } from "@/components/admin/settings/LegalTab";
+import { AppearanceTab } from "@/components/admin/settings/AppearanceTab";
+import { MaintenanceTab } from "@/components/admin/settings/MaintenanceTab";
+import { HomeAdminPage } from "@/components/admin/home/HomeAdminPage";
+import { PageAdminPage } from "@/components/admin/pages/PageAdminPage";
+import { PropertiesCopyTab } from "@/components/admin/settings/PropertiesCopyTab";
 
-const TABS = ["business", "texts", "legal"] as const;
+const TABS = ["business", "appearance", "home", "properties", "selling", "inheritance", "about", "contact", "legal", "maintenance"] as const;
 type Tab = (typeof TABS)[number];
 
 /** Retired tab ids keep their old bookmarks: land on the merged Business tab. */
@@ -31,9 +36,20 @@ function TabPage() {
   switch (tab) {
     case "business":
       return <BusinessTab />;
-    case "texts":
-      return <TextsTab />;
+    case "appearance":
+      return <AppearanceTab />;
+    case "home":
+      return <HomeAdminPage />;
+    case "properties":
+      return <PropertiesCopyTab />;
+    case "selling":
+    case "inheritance":
+    case "about":
+    case "contact":
+      return <PageAdminPage page={tab} />;
     case "legal":
       return <LegalTab />;
+    case "maintenance":
+      return <MaintenanceTab />;
   }
 }

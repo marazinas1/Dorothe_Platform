@@ -42,6 +42,7 @@ export function SiteLogo({
   const fallback =
     tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
   const src = tone === "light" ? fallback : logoSrc(variant, fallback);
+  const scale = Math.min(140, Math.max(60, settings.logo_size ?? 100)) / 100;
   if (!src)
     return (
       <BrandMark
@@ -61,6 +62,7 @@ export function SiteLogo({
         interactive && INTERACTIVE_CLASS,
         className,
       )}
+      style={{ transform: `scale(${scale})` }}
       loading="eager"
       decoding="async"
     />
