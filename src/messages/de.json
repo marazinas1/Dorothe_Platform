@@ -1796,5 +1796,11 @@
     "body": "Schreiben Sie kurz, um welche Immobilie es geht oder was Sie suchen. Sie erhalten eine ehrliche Einschätzung und einen klaren nächsten Schritt, keine Verkaufsrede.",
     "primary": "Kontakt aufnehmen",
     "secondary": "oder anrufen"
+  },
+  "maintenance": {
+    "banner": "Wartungsmodus ist aktiv — Sie sehen die Website, weil Sie angemeldet sind. Besucher sehen einen Hinweis.",
+    "previewAsVisitor": "Als Besucher ansehen",
+    "turnOff": "Ausschalten"
   }
 }
+
