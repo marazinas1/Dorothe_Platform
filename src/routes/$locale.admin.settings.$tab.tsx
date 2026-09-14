@@ -1,7 +1,6 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 
 import { BusinessTab } from "@/components/admin/settings/BusinessTab";
-import { TextsTab } from "@/components/admin/settings/TextsTab";
 import { LegalTab } from "@/components/admin/settings/LegalTab";
 import { AppearanceTab } from "@/components/admin/settings/AppearanceTab";
 import { MaintenanceTab } from "@/components/admin/settings/MaintenanceTab";
@@ -13,7 +12,7 @@ const TABS = ["business", "appearance", "home", "properties", "selling", "inheri
 type Tab = (typeof TABS)[number];
 
 /** Retired tab ids keep their old bookmarks: land on the merged Business tab. */
-const LEGACY = new Set(["general", "contact", "modules", "branding", "analytics"]);
+const LEGACY = new Set(["general", "texts", "modules", "branding", "analytics"]);
 
 export const Route = createFileRoute("/$locale/admin/settings/$tab")({
   staticData: { sitemap: false },

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { WorkQueue } from "@/components/admin/dashboard/WorkQueue";
+import { QuickActions } from "@/components/admin/dashboard/QuickActions";
 import { MetricsPanel } from "@/components/admin/dashboard/MetricsPanel";
 import { PeriodPicker } from "@/components/admin/dashboard/PeriodPicker";
 import { FirstRun } from "@/components/admin/dashboard/FirstRun";
@@ -31,7 +32,10 @@ function Dashboard() {
     <div className="space-y-8">
       <AdminPageHeader icon={LayoutDashboard} title={t("admin.pages.dashboard")} description={t("admin.dashboard.subtitle")} />
 
-      {empty ? <FirstRun locale={locale} /> : <WorkQueue locale={locale} />}
+        <section className="space-y-4">
+          <h2 className="font-heading text-lg">{t("admin.dashboard.needsAttention")}</h2>
+          {empty ? <FirstRun locale={locale} /> : <WorkQueue locale={locale} />}
+        </section>
 
       <section className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
@@ -42,6 +46,7 @@ function Dashboard() {
         </div>
         <MetricsPanel period={period} />
       </section>
+        <QuickActions locale={locale} />
     </div>
   );
 }

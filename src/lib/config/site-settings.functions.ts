@@ -45,7 +45,7 @@ type UpdateInput =
   | { tab: "contact"; values: unknown }
   | { tab: "legal"; values: unknown }
   | { tab: "analytics"; values: unknown }
-  | { tab: "home"; values: unknown };
+  | { tab: "home"; values: unknown }
   | { tab: "maintenance"; values: unknown };
 
 function parseByTab(input: UpdateInput): Record<string, unknown> {

@@ -65,6 +65,14 @@ export function BrandAssetsSection() {
         value={current.logo_url}
         onChange={(url) => void set("logo_url", url)}
       />
+      <BrandAssetField
+        kind="logo_dark"
+        label={label("logoDark")}
+        help={label("logoDarkHelp")}
+        value={current.logo_dark_url}
+        onChange={(url) => void set("logo_dark_url", url)}
+        dark
+      />
       <div className="space-y-3 rounded-[0.875rem] border border-border bg-card p-5 sm:col-span-2">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -85,14 +93,6 @@ export function BrandAssetsSection() {
           onChange={(event) => void set("logo_size", Number(event.target.value))}
         />
       </div>
-      <BrandAssetField
-        kind="logo_dark"
-        label={label("logoDark")}
-        help={label("logoDarkHelp")}
-        value={current.logo_dark_url}
-        onChange={(url) => void set("logo_dark_url", url)}
-        dark
-      />
       <BrandAssetField
         kind="favicon"
         label={label("favicon")}
