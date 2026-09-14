@@ -29,6 +29,10 @@ export const Route = createFileRoute("/$locale")({
     ]);
     return { settings };
   },
+  head: ({ loaderData }) =>
+    loaderData?.settings.maintenance_mode
+      ? { meta: [{ name: "robots", content: "noindex,nofollow" }] }
+      : {},
   component: LocaleLayout,
   errorComponent: ({ error }) => (
     <div className="p-8 text-sm text-destructive">
