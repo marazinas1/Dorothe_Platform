@@ -1,9 +1,13 @@
 # Roadmap — Deerva admin standard
 
-- [x] Reorder and rename the admin navigation to DAILY / MANAGE / SETTINGS
-- [x] Rebuild Settings as Business / Appearance / public-page tabs / Legal / Maintenance
-- [x] Keep one settings-driven logo and add a shared logo-size control
-- [x] Recompose Overview as Needs attention / Numbers / Quick actions
-- [x] Add maintenance mode with an admin preview bypass
-- [ ] Standardize admin controls, empty states, confirmations, save feedback, and unsaved-change warnings
-- [ ] Verify EN/DE, desktop/mobile, authenticated admin, and public maintenance behavior
+- [x] Admin navigation groups WORKSPACE / MANAGE / SETTINGS, "Back to site" footer
+- [x] Admin tokens: core roles only, project font and radius, no pills
+- [x] Shared AdminTabs (underline style) used by Settings
+- [x] Settings: Business & appearance first (brand images + maintenance card), page tabs in public-menu order, Contact last
+- [x] Properties and Advice became real page editors
+- [x] Full-width admin pages and shell padding px-4 py-6 md:px-6 md:py-8
+- [x] Shared ConfirmDialog replaces window.confirm; UnsavedChangesGuard on business settings
+- [x] FRONTEND.md and AGENTS.md section 5.1 updated
+- [ ] Extend UnsavedChangesGuard to the listing, article, testimonial and page editors
+- [ ] Replace hidden permission-gated buttons with short read-only explanations everywhere
+- [ ] Mobile pass across every admin screen
