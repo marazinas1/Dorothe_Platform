@@ -9,13 +9,11 @@ import {
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
 import { GeneralSchema, ContactSchema } from "@/lib/validation/site-settings";
-import { usePermission } from "@/lib/auth/use-permission";
 import type { SiteSettings } from "@/types/site-settings";
 
 import { SaveButton } from "./SaveButton";
 import { OpeningHoursField } from "./OpeningHoursField";
 import { SocialLinksField } from "./SocialLinksField";
-import { TechnicalBlock } from "./TechnicalBlock";
 import { SettingsField as Field } from "./SettingsField";
 import { AdminSection } from "@/components/admin/ui/AdminSection";
 import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
@@ -61,7 +59,6 @@ export function BusinessForm() {
   const { t } = useTranslation();
   const qc = useQueryClient();
   const { data } = useSuspenseQuery(siteSettingsQueryOptions);
-  const canDesign = usePermission("design.edit");
 
   const [form, setForm] = useState<State>(() => toState(data));
   useEffect(() => setForm(toState(data)), [data]);
@@ -190,8 +187,6 @@ export function BusinessForm() {
       </AdminSection>
 
       <SaveButton onSubmit={save} />
-
-      {canDesign ? <TechnicalBlock data={data} /> : null}
     </div>
   );
 }
