@@ -16,6 +16,7 @@ import { TestimonialForm, toDraft, type TestimonialDraft } from "./TestimonialFo
 import { TestimonialRow } from "./TestimonialRow";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
+import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 
 /** Client voices: add, edit, order, and decide what the home page shows. */
 export function TestimonialsPage() {
@@ -24,6 +25,7 @@ export function TestimonialsPage() {
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: rows } = useSuspenseQuery(adminTestimonialsQueryOptions);
   const [editing, setEditing] = useState<TestimonialDraft | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
 
   const enabled = (settings.enabled_locales ?? []).filter(Boolean);
   const locales = enabled.length > 0 ? enabled : [settings.default_locale];
@@ -64,11 +66,12 @@ export function TestimonialsPage() {
               row={row}
               locale={locales[0]}
               onEdit={() => setEditing(toDraft(row))}
-              onDelete={async () => {
-                if (!window.confirm(t("admin.testimonials.confirmDelete"))) return;
-                await deleteTestimonial({ data: { id: row.id } });
-                await refresh();
-              }}
+              onDelete={() =>
+                setPendingDelete({
+                  id: row.id,
+                  name: row.author_name || t("admin.confirm.untitled"),
+                })
+              }
               onMove={async (direction) => {
                 await moveTestimonial({ data: { id: row.id, direction } });
                 await refresh();
@@ -77,6 +80,18 @@ export function TestimonialsPage() {
           ))}
         </ul>
       )}
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        onOpenChange={(open) => (open ? null : setPendingDelete(null))}
+        title={t("admin.testimonials.confirmDeleteTitle")}
+        description={t("admin.testimonials.confirmDeleteBody", { name: pendingDelete?.name ?? "" })}
+        onConfirm={async () => {
+          if (!pendingDelete) return;
+          await deleteTestimonial({ data: { id: pendingDelete.id } });
+          await refresh();
+        }}
+      />
     </div>
   );
 }

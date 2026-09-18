@@ -60,7 +60,7 @@ interface NavItem {
 
 interface NavGroup {
   /** Translation key under admin.nav.groups. */
-  label: "daily" | "manage" | "settings";
+  label: "workspace" | "manage" | "settings";
   items: NavItem[];
 }
 
@@ -70,7 +70,7 @@ interface NavGroup {
  */
 const GROUPS: NavGroup[] = [
   {
-    label: "daily",
+    label: "workspace",
     items: [
       { key: "dashboard", to: "/$locale/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
       { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },

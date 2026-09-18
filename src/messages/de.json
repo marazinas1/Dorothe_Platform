@@ -487,7 +487,9 @@
       "moveUp": "Nach oben",
       "moveDown": "Nach unten",
       "confirmDelete": "Diese Kundenstimme löschen?",
-      "empty": "Noch keine Kundenstimmen."
+      "empty": "Noch keine Kundenstimmen.",
+      "confirmDeleteTitle": "Diese Bewertung löschen?",
+      "confirmDeleteBody": "Die Bewertung von {{name}} wird gelöscht und nicht mehr auf der Website gezeigt."
     },
     "topbar": {
       "signOut": "Abmelden",
@@ -515,7 +517,7 @@
       "users": "Benutzer",
       "group": "Verwalten",
       "groups": {
-        "daily": "Täglich",
+        "workspace": "Arbeitsbereich",
         "manage": "Verwalten",
         "settings": "Einstellungen"
       },
@@ -524,7 +526,10 @@
       "inheritance": "Erben",
       "about": "Über mich",
       "contact": "Kontakt",
-      "calendar": "Kalender"
+      "calendar": "Kalender",
+      "backToSite": "Zurück zur Website",
+      "properties": "Immobilien",
+      "blog": "Ratgeber"
     },
     "pages": {
       "dashboard": "Übersicht",
@@ -623,7 +628,7 @@
       "save": "Speichern",
       "denied": "Sie haben keine Berechtigung für die Einstellungen.",
       "tabs": {
-        "business": "Unternehmen",
+        "business": "Unternehmen & Auftritt",
         "appearance": "Erscheinungsbild",
         "home": "Startseite",
         "properties": "Immobilien",
@@ -635,7 +640,8 @@
         "texts": "Seitentexte",
         "legal": "Rechtliches",
         "maintenance": "Wartung",
-        "modules": "Module"
+        "modules": "Module",
+        "blog": "Ratgeber"
       },
       "general": {
         "site_name": "Firmenname",
@@ -727,7 +733,9 @@
         "sectionTitle": "Bilder der Website",
         "sectionHelp": "Logo, Browser-Symbol und Vorschaubild für die gesamte Website.",
         "size": "Logogröße",
-        "sizeHelp": "Eine gemeinsame Größe für Website, Anmeldung und Admin-Bereich."
+        "sizeHelp": "Eine gemeinsame Größe für Website, Anmeldung und Admin-Bereich.",
+        "title": "Auftritt",
+        "help": "Logo, Favicon und das Bild, das beim Teilen einer Seite erscheint."
       },
       "properties": {
         "title": "Immobilienseite",
@@ -1433,7 +1441,9 @@
       "coverUpload": "Titelbild hochladen",
       "coverReplace": "Bild ersetzen",
       "coverRemove": "Bild entfernen",
-      "coverHint": "JPG oder PNG — die Größe wird automatisch angepasst."
+      "coverHint": "JPG oder PNG — die Größe wird automatisch angepasst.",
+      "confirmDeleteTitle": "Diesen Beitrag löschen?",
+      "confirmDeleteBody": "„{{name}}“ wird gelöscht und verschwindet von der Website. Das kann nicht rückgängig gemacht werden."
     },
     "copyEditor": {
       "currentlyShown": "Aktuell sichtbar",
@@ -1528,6 +1538,16 @@
           "map_title": "Überschrift Karte",
           "form_title": "Überschrift Formular",
           "form_intro": "Einleitung Formular"
+        },
+        "properties": {
+          "headline": "Seitentitel",
+          "intro": "Einleitungstext",
+          "empty": "Text, wenn keine Immobilie gelistet ist"
+        },
+        "blog": {
+          "headline": "Seitentitel",
+          "intro": "Einleitungstext",
+          "empty": "Text, wenn kein Beitrag veröffentlicht ist"
         }
       },
       "resetToDefault": "Auf Standard zurücksetzen",
@@ -1577,7 +1597,19 @@
         "clientPhone": "Telefon",
         "location": "Ort",
         "note": "Notiz"
-      }
+      },
+      "confirmDeleteTitle": "Diesen Termin löschen?",
+      "confirmDeleteBody": "Der Termin mit {{name}} wird aus Ihrem Kalender entfernt."
+    },
+    "confirm": {
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "untitled": "dieser Eintrag"
+    },
+    "unsaved": {
+      "title": "Nicht gespeicherte Änderungen",
+      "body": "Es gibt noch nicht gespeicherte Änderungen. Wenn Sie jetzt gehen, gehen sie verloren.",
+      "leave": "Ohne Speichern verlassen"
     }
   },
   "pages": {
@@ -1803,4 +1835,3 @@
     "turnOff": "Ausschalten"
   }
 }
-

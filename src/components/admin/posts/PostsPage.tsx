@@ -11,6 +11,7 @@ import { PostForm, toDraft, type PostDraft } from "./PostForm";
 import { PostRow } from "./PostRow";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
+import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 
 /** Articles: write, publish, and keep older links working. */
 export function PostsPage() {
@@ -19,6 +20,7 @@ export function PostsPage() {
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: rows } = useSuspenseQuery(adminPostsQueryOptions);
   const [editing, setEditing] = useState<PostDraft | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<{ id: string; title: string } | null>(null);
 
   const enabled = (settings.enabled_locales ?? []).filter(Boolean);
   const locales = enabled.length > 0 ? enabled : [settings.default_locale];
@@ -68,15 +70,28 @@ export function PostsPage() {
               row={row}
               locale={locales[0]}
               onEdit={() => setEditing(toDraft(row))}
-              onDelete={async () => {
-                if (!window.confirm(t("admin.posts.confirmDelete"))) return;
-                await deletePost({ data: { id: row.id } });
-                await refresh();
-              }}
+              onDelete={() =>
+                setPendingDelete({
+                  id: row.id,
+                  title: row.title?.[locales[0]] ?? t("admin.confirm.untitled"),
+                })
+              }
             />
           ))}
         </ul>
       )}
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        onOpenChange={(open) => (open ? null : setPendingDelete(null))}
+        title={t("admin.posts.confirmDeleteTitle")}
+        description={t("admin.posts.confirmDeleteBody", { name: pendingDelete?.title ?? "" })}
+        onConfirm={async () => {
+          if (!pendingDelete) return;
+          await deletePost({ data: { id: pendingDelete.id } });
+          await refresh();
+        }}
+      />
     </div>
   );
 }

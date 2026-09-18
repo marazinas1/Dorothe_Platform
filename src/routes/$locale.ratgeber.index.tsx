@@ -9,6 +9,8 @@ import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { publicPostsQueryOptions } from "@/lib/posts/queries.functions";
+import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
+import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { postViews } from "@/lib/posts/resolve";
 import { formatPostDate } from "@/lib/posts/date";
 import { copyVars } from "@/lib/config/site-copy";
@@ -22,6 +24,7 @@ export const Route = createFileRoute("/$locale/ratgeber/")({
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
       getRequestOrigin(),
       context.queryClient.ensureQueryData(publicPostsQueryOptions),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("blog")),
     ]);
     return { settings, origin, locale: params.locale as Locale };
   },
@@ -49,15 +52,16 @@ function BlogIndex() {
   const l = locale as Locale;
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: rows } = useSuspenseQuery(publicPostsQueryOptions);
+  const copy = usePageCopy("blog", l);
 
   return (
     <PublicChrome locale={l} settings={settings}>
       <PostList
         posts={postViews(rows, l)}
         locale={l}
-        title={t("blog.title")}
-        intro={t("blog.intro")}
-        emptyLabel={t("blog.empty")}
+        title={copy.text("headline")}
+        intro={copy.text("intro")}
+        emptyLabel={copy.text("empty")}
         formatDate={(iso) => formatPostDate(iso, l)}
       />
       <CtaBand locale={l} settings={settings} />

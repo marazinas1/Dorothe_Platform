@@ -18,6 +18,7 @@ import { MonthGrid } from "./MonthGrid";
 import { DayList } from "./DayList";
 import { AppointmentForm, toAppointmentDraft, type AppointmentDraft } from "./AppointmentForm";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
+import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 import { AdminSection } from "@/components/admin/ui/AdminSection";
 
 /** Viewings, meetings and personal time in one internal calendar. */
@@ -57,10 +58,10 @@ export function CalendarPage() {
     setEditing(null);
   }
 
-  async function remove(row: AppointmentRow) {
-    if (!window.confirm(t("admin.calendar.confirmDelete"))) return;
-    await deleteAppointment({ data: { id: row.id } });
-    await refresh();
+  const [pendingDelete, setPendingDelete] = useState<AppointmentRow | null>(null);
+
+  function remove(row: AppointmentRow) {
+    setPendingDelete(row);
   }
 
   return (
@@ -131,6 +132,18 @@ export function CalendarPage() {
           onDelete={remove}
         />
       </AdminSection>
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        onOpenChange={(open) => (open ? null : setPendingDelete(null))}
+        title={t("admin.calendar.confirmDeleteTitle")}
+        description={t("admin.calendar.confirmDeleteBody", { name: pendingDelete?.client_name || t("admin.confirm.untitled") })}
+        onConfirm={async () => {
+          if (!pendingDelete) return;
+          await deleteAppointment({ data: { id: pendingDelete.id } });
+          await refresh();
+        }}
+      />
     </div>
   );
 }
