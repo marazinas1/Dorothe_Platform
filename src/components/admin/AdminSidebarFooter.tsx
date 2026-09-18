@@ -1,6 +1,6 @@
 import { Link, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { ExternalLink, LogOut } from "lucide-react";
+import { ArrowLeft, LogOut } from "lucide-react";
 
 import {
   SidebarFooter,
@@ -33,16 +33,14 @@ export function AdminSidebarFooter({ email, roleLabel }: Props) {
       </div>
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton asChild tooltip={t("admin.nav.viewSite")}>
+          <SidebarMenuButton asChild tooltip={t("admin.nav.backToSite")}>
             <Link
               to="/$locale"
               params={{ locale }}
-              target="_blank"
-              rel="noreferrer"
               className="flex items-center gap-2"
             >
-              <ExternalLink className="h-4 w-4" />
-              <span>{t("admin.nav.viewSite")}</span>
+              <ArrowLeft className="h-4 w-4" />
+              <span>{t("admin.nav.backToSite")}</span>
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>

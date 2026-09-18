@@ -6,7 +6,13 @@
  * its translated default line.
  */
 
-export type PageKey = "selling" | "inheritance" | "about" | "contact";
+export type PageKey =
+  | "properties"
+  | "selling"
+  | "inheritance"
+  | "blog"
+  | "about"
+  | "contact";
 
 export type PageFieldKind = "line" | "paragraph" | "list";
 
@@ -46,6 +52,16 @@ const list = (
 
 export const PAGE_DEFINITIONS: PageDefinition[] = [
   {
+    key: "properties",
+    path: "immobilien",
+    mediaSlots: [],
+    fields: [
+      para("headline", "listings.title", "opening"),
+      para("intro", "listings.description", "opening"),
+      line("empty", "listings.empty", "closing"),
+    ],
+  },
+  {
     key: "selling",
     path: "verkaufen",
     mediaSlots: [],
@@ -83,6 +99,16 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
       para("credential_body", "pages.inheritance.credential_body"),
       line("contact_title", "pages.inheritance.contact_title", "closing"),
       para("contact_body", "pages.inheritance.contact_body", "closing"),
+    ],
+  },
+  {
+    key: "blog",
+    path: "ratgeber",
+    mediaSlots: [],
+    fields: [
+      para("headline", "blog.title", "opening"),
+      para("intro", "blog.intro", "opening"),
+      line("empty", "blog.empty", "closing"),
     ],
   },
   {

@@ -23,6 +23,8 @@ import {
   type ListingsSearch,
 } from "@/lib/listings/search-schema";
 import { copyVars } from "@/lib/config/site-copy";
+import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
+import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
 
@@ -72,6 +74,7 @@ export const Route = createFileRoute("/$locale/immobilien/")({
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
       getRequestOrigin(),
       context.queryClient.ensureQueryData(listingsQueryOptions(deps)),
+      context.queryClient.ensureQueryData(pageContentQueryOptions("properties")),
     ]);
     return { settings, origin, locale: params.locale as Locale, search: deps };
   },
@@ -102,6 +105,7 @@ function ListingsIndex() {
   const navigate = useNavigate({ from: "/$locale/immobilien/" });
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data } = useSuspenseQuery(listingsQueryOptions(search));
+  const copy = usePageCopy("properties", locale as Locale);
 
   const totalPages = Math.max(1, Math.ceil(data.total / PAGE_SIZE));
   const gotoPage = (n: number) =>
@@ -113,9 +117,9 @@ function ListingsIndex() {
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
       <section className="mx-auto max-w-[1400px] px-6 pt-24 lg:px-10">
-        <h1 className="font-heading text-5xl md:text-6xl">{t("listings.title")}</h1>
+        <h1 className="font-heading text-5xl md:text-6xl">{copy.text("headline")}</h1>
         <p className="mt-4 max-w-xl text-base text-muted-foreground">
-          {t("listings.description", copyVars(settings, locale as Locale))}
+          {copy.text("intro")}
         </p>
 
 
@@ -182,7 +186,7 @@ function ListingsIndex() {
 
         {data.items.length === 0 ? (
           <div className="py-24 text-center text-sm text-muted-foreground">
-            {t("listings.empty")}
+            {copy.text("empty")}
           </div>
         ) : (
           <div className={`mt-12 ${LISTING_CARD_GRID}`}>

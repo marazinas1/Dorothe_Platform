@@ -16,14 +16,20 @@ function SettingsLayout() {
   const canEdit = usePermission("settings.edit");
   if (!canEdit) {
     return (
-      <div>
-        <h1 className="text-2xl font-semibold">{t("admin.settings.title")}</h1>
-        <p className="mt-2 text-sm text-destructive">{t("admin.settings.denied")}</p>
+      <div className="w-full space-y-4">
+        <AdminPageHeader
+          icon={Settings}
+          title={t("admin.settings.title")}
+          description={t("admin.settings.subtitle")}
+        />
+        <p className="rounded-[var(--radius)] border border-border bg-muted p-4 text-sm text-muted-foreground">
+          {t("admin.settings.denied")}
+        </p>
       </div>
     );
   }
   return (
-    <div className="max-w-6xl space-y-6">
+    <div className="w-full space-y-6">
       <AdminPageHeader icon={Settings} title={t("admin.settings.title")} description={t("admin.settings.subtitle")} />
       <SettingsTabs />
       <Outlet />

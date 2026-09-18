@@ -487,7 +487,9 @@
       "moveUp": "Move up",
       "moveDown": "Move down",
       "confirmDelete": "Delete this testimonial?",
-      "empty": "No testimonials yet."
+      "empty": "No testimonials yet.",
+      "confirmDeleteTitle": "Delete this testimonial?",
+      "confirmDeleteBody": "The testimonial from {{name}} will be deleted and no longer shown on the website."
     },
     "topbar": {
       "signOut": "Sign out",
@@ -515,7 +517,7 @@
       "users": "Users",
       "group": "Manage",
       "groups": {
-        "daily": "Daily",
+        "workspace": "Workspace",
         "manage": "Manage",
         "settings": "Settings"
       },
@@ -524,7 +526,10 @@
       "inheritance": "Inheritance",
       "about": "About",
       "contact": "Contact",
-      "calendar": "Calendar"
+      "calendar": "Calendar",
+      "backToSite": "Back to site",
+      "properties": "Properties",
+      "blog": "Advice"
     },
     "pages": {
       "dashboard": "Dashboard",
@@ -623,19 +628,20 @@
       "save": "Save",
       "denied": "You do not have permission to edit settings.",
       "tabs": {
-        "business": "Business",
+        "business": "Business & appearance",
         "appearance": "Appearance",
         "home": "Home",
         "properties": "Properties",
         "selling": "Selling",
         "inheritance": "Inheritance",
-        "about": "About",
+        "about": "About me",
         "general": "General",
         "contact": "Contact",
         "texts": "Page texts",
         "legal": "Legal",
         "maintenance": "Maintenance",
-        "modules": "Modules"
+        "modules": "Modules",
+        "blog": "Advice"
       },
       "general": {
         "site_name": "Company name",
@@ -727,7 +733,9 @@
         "sectionTitle": "Website images",
         "sectionHelp": "Logo, browser icon and sharing image used throughout the website.",
         "size": "Logo size",
-        "sizeHelp": "One shared size for the public website, sign-in and admin panel."
+        "sizeHelp": "One shared size for the public website, sign-in and admin panel.",
+        "title": "Appearance",
+        "help": "Logo, favicon and the image used when a page is shared."
       },
       "properties": {
         "title": "Properties page",
@@ -1433,7 +1441,9 @@
       "coverUpload": "Upload a cover picture",
       "coverReplace": "Replace picture",
       "coverRemove": "Remove picture",
-      "coverHint": "JPG or PNG — it is resized automatically."
+      "coverHint": "JPG or PNG — it is resized automatically.",
+      "confirmDeleteTitle": "Delete this article?",
+      "confirmDeleteBody": "“{{name}}” will be deleted and disappear from the public website. This cannot be undone."
     },
     "copyEditor": {
       "currentlyShown": "Currently shown",
@@ -1528,6 +1538,16 @@
           "map_title": "Map heading",
           "form_title": "Form heading",
           "form_intro": "Form introduction"
+        },
+        "properties": {
+          "headline": "Page title",
+          "intro": "Intro text",
+          "empty": "Text when no property is listed"
+        },
+        "blog": {
+          "headline": "Page title",
+          "intro": "Intro text",
+          "empty": "Text when no article is published"
         }
       },
       "resetToDefault": "Reset to default",
@@ -1577,7 +1597,19 @@
         "clientPhone": "Phone",
         "location": "Place",
         "note": "Note"
-      }
+      },
+      "confirmDeleteTitle": "Delete this appointment?",
+      "confirmDeleteBody": "The appointment with {{name}} will be removed from your calendar."
+    },
+    "confirm": {
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "untitled": "this entry"
+    },
+    "unsaved": {
+      "title": "Unsaved changes",
+      "body": "You have changes that are not saved yet. If you leave now they will be lost.",
+      "leave": "Leave without saving"
     }
   },
   "pages": {
