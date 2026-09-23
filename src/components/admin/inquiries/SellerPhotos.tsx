@@ -6,7 +6,7 @@ export function SellerPhotos({ urls }: { urls: string[] }) {
   if (urls.length === 0) return null;
   return (
     <section className="space-y-2">
-      <h2 className="font-heading text-lg">{t("admin.inquiries.detail.photos")}</h2>
+      <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.inquiries.detail.photos")}</h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {urls.map((url, i) => (
           <a
@@ -14,7 +14,7 @@ export function SellerPhotos({ urls }: { urls: string[] }) {
             href={url}
             target="_blank"
             rel="noreferrer"
-            className="block overflow-hidden rounded-lg border border-border bg-muted"
+            className="block overflow-hidden rounded-[var(--radius)] border border-border bg-muted"
           >
             <img
               src={url}

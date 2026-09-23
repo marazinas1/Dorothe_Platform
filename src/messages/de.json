@@ -470,6 +470,9 @@
     "forbiddenBody": "Sie haben keine Berechtigung für diesen Bereich."
   },
   "admin": {
+    "common": {
+      "close": "Schließen"
+    },
     "testimonials": {
       "title": "Kundenstimmen",
       "hint": "Veröffentlichte Stimmen erscheinen auf der Über-mich-Seite; bis zu drei markierte auch auf der Startseite.",
@@ -635,13 +638,17 @@
         "selling": "Verkaufen",
         "inheritance": "Erben",
         "about": "Über mich",
+        "about_us": "Über uns",
         "general": "Allgemein",
         "contact": "Kontakt",
         "texts": "Seitentexte",
         "legal": "Rechtliches",
         "maintenance": "Wartung",
         "modules": "Module",
-        "blog": "Ratgeber"
+        "blog": "Ratgeber",
+        "imprint": "Impressum",
+        "privacy": "Datenschutz",
+        "terms": "AGB"
       },
       "general": {
         "site_name": "Firmenname",
@@ -974,7 +981,9 @@
         "uploadHint": "Fotos hierher ziehen oder klicken – bis zu 50 auf einmal.",
         "technicalNote": "Fotos werden im Browser vorbereitet: aufrecht gedreht, für Detailseite und Karten verkleinert, in WebP umgewandelt, EXIF- und GPS-Daten entfernt. Das Original bleibt privat und wird nie veröffentlicht.",
         "technicalTitle": "Was mit den Fotos passiert",
-        "dragHandle": "Zum Sortieren ziehen"
+        "dragHandle": "Zum Sortieren ziehen",
+        "deleteTitle": "Foto entfernen?",
+        "deleteBody": "Dieses Foto wird aus dem Objekt und von der öffentlichen Website entfernt."
       },
       "preview": "Vorschau",
       "publish": "Veröffentlichen",

@@ -3,6 +3,7 @@ import { Check, ChevronDown, Minus } from "lucide-react";
 
 import type { Checklist, ChecklistItem } from "@/lib/listings/publish-checklist";
 import { scrollToField } from "@/lib/listings/scroll-to-field";
+import { Button } from "@/components/ui/button";
 
 /**
  * The publish checklist doubles as the form's navigation: every outstanding item
@@ -69,10 +70,11 @@ function labelFor(item: ChecklistItem, t: (key: string) => string): string {
 
 function ChecklistRow({ item, label }: { item: ChecklistItem; label: string }) {
   return (
-    <button
+    <Button
       type="button"
+      variant="ghost"
       onClick={() => scrollToField(item.anchor)}
-      className="flex w-full items-start gap-2 rounded-md px-1.5 py-1 text-left text-sm hover:bg-muted"
+      className="flex h-auto w-full items-start justify-start gap-2 px-1.5 py-1 text-left text-sm hover:bg-muted"
     >
       {item.done ? (
         <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
@@ -80,6 +82,6 @@ function ChecklistRow({ item, label }: { item: ChecklistItem; label: string }) {
         <Minus className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
       )}
       <span className={item.done ? "text-muted-foreground" : "text-foreground"}>{label}</span>
-    </button>
+    </Button>
   );
 }

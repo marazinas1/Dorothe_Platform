@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ArrowDown, ArrowUp, Pencil, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronDown, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/admin/ui/StatusChip";
@@ -12,14 +12,15 @@ interface Props {
   onEdit: () => void;
   onDelete: () => void;
   onMove: (direction: "up" | "down") => void;
+  expanded: boolean;
 }
 
-export function TestimonialRow({ row, locale, onEdit, onDelete, onMove }: Props) {
+export function TestimonialRow({ row, locale, onEdit, onDelete, onMove, expanded }: Props) {
   const { t } = useTranslation();
   const quote = pickLocalized(row.quote, locale, "en");
 
   return (
-    <li className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:bg-muted/30">
+    <div className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:bg-muted/30">
       <div className="min-w-0 flex-1">
         <p className="line-clamp-3 text-sm">{quote || "—"}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
@@ -61,12 +62,14 @@ export function TestimonialRow({ row, locale, onEdit, onDelete, onMove }: Props)
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
+          size="sm"
+          variant="outline"
           aria-label={t("admin.testimonials.edit")}
+          aria-expanded={expanded}
           onClick={onEdit}
         >
-          <Pencil className="h-4 w-4" />
+          {expanded ? t("admin.common.close") : t("admin.testimonials.edit")}
+          <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
         </Button>
         <Button
           type="button"
@@ -78,6 +81,6 @@ export function TestimonialRow({ row, locale, onEdit, onDelete, onMove }: Props)
           <Trash2 className="h-4 w-4" />
         </Button>
       </div>
-    </li>
+    </div>
   );
 }

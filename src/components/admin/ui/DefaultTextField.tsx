@@ -131,13 +131,15 @@ export function DefaultTextField({
           </div>
           <p className="mt-1 whitespace-pre-line text-sm text-muted-foreground/80">{shown}</p>
           {long ? (
-            <button
+            <Button
               type="button"
+              variant="link"
+              size="sm"
               onClick={() => setExpanded((v) => !v)}
-              className="mt-1 text-xs font-medium text-muted-foreground underline"
+              className="mt-1 h-auto p-0 text-xs font-medium text-muted-foreground underline"
             >
               {expanded ? t("admin.copyEditor.showLess") : t("admin.copyEditor.showMore")}
-            </button>
+            </Button>
           ) : null}
         </div>
       ) : null}

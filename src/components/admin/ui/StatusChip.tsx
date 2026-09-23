@@ -61,7 +61,7 @@ export function StatusChip({ icon, tone = "neutral", children, className, title 
     <span
       title={title}
       className={cn(
-        "inline-flex h-6 shrink-0 items-center gap-1.5 rounded-md border px-2 text-xs font-medium leading-none",
+        "inline-flex h-6 shrink-0 items-center gap-1.5 rounded-[var(--radius)] border px-2 text-xs font-medium leading-none",
         TONES[tone],
         className,
       )}

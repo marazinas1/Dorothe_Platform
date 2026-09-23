@@ -37,7 +37,7 @@ export function DefaultRequestQueue() {
 
   return (
     <section className="rounded-[var(--radius)] border border-border bg-card p-4">
-      <h2 className="font-heading text-lg">{t("admin.copyEditor.request.queueHeading")}</h2>
+      <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.copyEditor.request.queueHeading")}</h2>
       <div className="mt-3 grid gap-3">
         {pending.map((row) => (
           <div key={row.id} className="rounded-[calc(var(--radius)/1.5)] border border-border p-3">

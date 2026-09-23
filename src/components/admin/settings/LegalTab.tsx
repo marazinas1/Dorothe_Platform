@@ -10,6 +10,7 @@ import {
 } from "@/lib/config/site-settings.functions";
 
 import { SaveButton } from "./SaveButton";
+import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 
 type Field = "legal_impressum" | "legal_privacy" | "legal_terms";
 const FIELDS: Array<{ key: Field; labelKey: string }> = [
@@ -18,7 +19,7 @@ const FIELDS: Array<{ key: Field; labelKey: string }> = [
   { key: "legal_terms", labelKey: "admin.settings.legal.terms" },
 ];
 
-export function LegalTab() {
+export function LegalTab({ field }: { field?: Field }) {
   const { t } = useTranslation();
   const qc = useQueryClient();
   const { data } = useSuspenseQuery(siteSettingsQueryOptions);
@@ -29,6 +30,13 @@ export function LegalTab() {
     legal_privacy: fill(locales, data.legal_privacy),
     legal_terms: fill(locales, data.legal_terms),
   }));
+  const initial = {
+    legal_impressum: fill(locales, data.legal_impressum),
+    legal_privacy: fill(locales, data.legal_privacy),
+    legal_terms: fill(locales, data.legal_terms),
+  };
+  const dirty = JSON.stringify(state) !== JSON.stringify(initial);
+  const visibleFields = field ? FIELDS.filter((item) => item.key === field) : FIELDS;
 
   useEffect(() => {
     setState({
@@ -46,7 +54,8 @@ export function LegalTab() {
 
   return (
     <form className="space-y-8">
-      {FIELDS.map((f) => (
+      <UnsavedChangesGuard dirty={dirty} />
+      {visibleFields.map((f) => (
         <div key={f.key} className="space-y-3">
           <h3 className="text-base font-semibold">{t(f.labelKey)}</h3>
           {locales.map((loc) => (

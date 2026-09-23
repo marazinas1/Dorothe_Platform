@@ -44,9 +44,9 @@ export function AdminShell({
             <div className="flex min-w-0 items-center gap-3">
               <SidebarTrigger
                 aria-label={t("admin.topbar.toggleSidebar")}
-                className="text-foreground"
+                className="text-foreground md:hidden"
               />
-              <span className="truncate text-sm font-medium tracking-tight">
+              <span className="truncate text-base font-extrabold uppercase">
                 {t("admin.topbar.title", { site: settings.site_name })}
               </span>
             </div>

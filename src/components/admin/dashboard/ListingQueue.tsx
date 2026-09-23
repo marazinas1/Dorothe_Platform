@@ -117,7 +117,7 @@ function ReasonChip({
       to="/$locale/admin/listings/$id"
       params={{ locale, id }}
       search={{ field: reason.anchor }}
-      className="rounded-full border border-border bg-muted/60 px-2 py-0.5 text-xs text-muted-foreground hover:border-primary/40 hover:text-foreground"
+      className="rounded-[var(--radius)] border border-border bg-muted/60 px-2 py-0.5 text-xs text-muted-foreground hover:border-primary/40 hover:text-foreground"
     >
       {named}
     </Link>

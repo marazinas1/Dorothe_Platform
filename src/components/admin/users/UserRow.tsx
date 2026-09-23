@@ -132,6 +132,10 @@ export function UserRow({
         </Button>
       </div>
 
+      {reason ? (
+        <p className="w-full text-xs text-muted-foreground md:text-right">{reason}</p>
+      ) : null}
+
       <UserRowDialogs
         email={user.email}
         open={confirm}

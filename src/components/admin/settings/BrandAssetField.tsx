@@ -68,7 +68,7 @@ export function BrandAssetField({
   }
 
   return (
-    <div className="space-y-3 rounded-[0.875rem] border border-border bg-card p-5">
+    <div className="space-y-3 rounded-[var(--radius)] border border-border bg-card p-5">
       <div>
         <Label className="text-sm font-bold">{label}</Label>
         {help ? <p className="mt-1 text-xs text-muted-foreground">{help}</p> : null}

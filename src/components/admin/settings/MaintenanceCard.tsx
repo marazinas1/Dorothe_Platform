@@ -9,8 +9,6 @@ import {
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
 
-import { SaveButton } from "./SaveButton";
-
 /**
  * Small enough to stay visible at the bottom of Business & appearance: a title,
  * one sentence, the switch on the same line, and its own save.
@@ -25,12 +23,6 @@ export function MaintenanceCard() {
     setEnabled(Boolean(data.maintenance_mode));
   }, [data.maintenance_mode]);
 
-  async function save() {
-    await updateSiteSettings({ data: { tab: "maintenance", values: { maintenance_mode: enabled } } });
-    await qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey });
-    toast.success(t("admin.settings.saved"));
-  }
-
   return (
     <section className="rounded-[var(--radius)] border border-border bg-card p-5">
       <div className="flex items-start justify-between gap-6">
@@ -42,7 +34,19 @@ export function MaintenanceCard() {
         </div>
         <Switch
           checked={enabled}
-          onCheckedChange={setEnabled}
+          onCheckedChange={(next) => {
+            const previous = enabled;
+            setEnabled(next);
+            void updateSiteSettings({
+              data: { tab: "maintenance", values: { maintenance_mode: next } },
+            })
+              .then(() => qc.invalidateQueries({ queryKey: siteSettingsQueryOptions.queryKey }))
+              .then(() => toast.success(t("admin.settings.saved")))
+              .catch((error) => {
+                setEnabled(previous);
+                toast.error(error instanceof Error ? error.message : t("admin.settings.saveError"));
+              });
+          }}
           aria-label={t("admin.settings.maintenance.label")}
         />
       </div>
@@ -51,9 +55,6 @@ export function MaintenanceCard() {
           ? t("admin.settings.maintenance.on")
           : t("admin.settings.maintenance.off")}
       </p>
-      <div className="mt-4">
-        <SaveButton onSubmit={save} />
-      </div>
     </section>
   );
 }

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
+import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 import { pickLocalized } from "@/lib/listings/format";
 import {
   APPOINTMENT_KINDS,
@@ -63,11 +64,13 @@ const selectClass =
 export function AppointmentForm({ initial, listings, locale, onSave, onCancel }: Props) {
   const { t } = useTranslation();
   const [draft, setDraft] = useState(initial);
+  const dirty = JSON.stringify(draft) !== JSON.stringify(initial);
   const set = (patch: Partial<AppointmentDraft>) =>
     setDraft((current) => ({ ...current, ...patch }));
 
   return (
-    <div className="space-y-4 rounded-lg border border-border p-4">
+    <div className="space-y-4 rounded-[var(--radius)] border border-border p-4">
+      <UnsavedChangesGuard dirty={dirty} />
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="space-y-1.5">
           <Label>{t("admin.calendar.field.day")}</Label>

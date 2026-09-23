@@ -73,7 +73,7 @@ export function BrandAssetsSection() {
         onChange={(url) => void set("logo_dark_url", url)}
         dark
       />
-      <div className="space-y-3 rounded-[0.875rem] border border-border bg-card p-5 sm:col-span-2">
+      <div className="space-y-3 rounded-[var(--radius)] border border-border bg-card p-5 sm:col-span-2">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="text-sm font-bold">{label("size")}</p>

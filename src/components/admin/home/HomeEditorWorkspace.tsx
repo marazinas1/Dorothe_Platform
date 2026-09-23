@@ -5,6 +5,7 @@ import { ExternalLink, RotateCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
+import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 import { homeMedia } from "@/lib/home/content";
 import { HOME_MEDIA_SLOTS } from "@/lib/home/layout";
 import type { useHomeAdmin } from "@/lib/home/use-home-admin";
@@ -30,21 +31,20 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
 
   return (
     <div className="overflow-hidden rounded-[var(--radius)] border border-border bg-card">
+      <UnsavedChangesGuard dirty={home.dirty} />
       <header className="flex flex-wrap items-center gap-2 border-b border-border px-4 py-3">
         {locales.length > 1
           ? locales.map((l) => (
-              <button
+              <Button
                 key={l}
                 type="button"
+                variant={l === locale ? "default" : "outline"}
+                size="sm"
                 onClick={() => onLocale(l)}
-                className={`rounded-[calc(var(--radius)/1.5)] border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider ${
-                  l === locale
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border text-muted-foreground"
-                }`}
+                className="text-xs font-semibold uppercase"
               >
                 {l}
-              </button>
+              </Button>
             ))
           : null}
 

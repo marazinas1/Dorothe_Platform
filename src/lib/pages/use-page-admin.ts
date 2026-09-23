@@ -30,6 +30,9 @@ export function usePageAdmin(page: string, locale: string) {
 
   const [content, setContent] = useState<Bag>(() => ({ ...((row?.content ?? {}) as Bag) }));
   const [media, setMedia] = useState<MediaBag>(() => ({ ...((row?.media ?? {}) as MediaBag) }));
+  const dirty =
+    JSON.stringify(content) !== JSON.stringify(row?.content ?? {}) ||
+    JSON.stringify(media) !== JSON.stringify(row?.media ?? {});
 
   useEffect(() => {
     setContent({ ...((row?.content ?? {}) as Bag) });
@@ -176,6 +179,7 @@ export function usePageAdmin(page: string, locale: string) {
 
   return {
     settings,
+    dirty,
     value,
     placeholder,
     setValue,

@@ -57,7 +57,7 @@ export function ImageCard({
     <div
       data-photo-index={index}
       onPointerDown={(e) => onPointerDown(index, e)}
-      className={`group relative select-none overflow-hidden rounded-lg border-2 bg-card transition-[transform,opacity,box-shadow] focus-within:ring-2 focus-within:ring-ring ${
+      className={`group relative select-none overflow-hidden rounded-[var(--radius)] border-2 bg-card transition-[transform,opacity,box-shadow] focus-within:ring-2 focus-within:ring-ring ${
         isDragged
           ? "z-10 scale-[1.03] border-primary opacity-70 shadow-lg"
           : isTarget

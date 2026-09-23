@@ -28,6 +28,9 @@ export function useHomeAdmin(locale: string) {
 
   const [content, setContent] = useState<Bag>(() => ({ ...(settings.home_content ?? {}) }));
   const [media, setMedia] = useState<Bag>(() => ({ ...(settings.home_media ?? {}) }));
+  const dirty =
+    JSON.stringify(content) !== JSON.stringify(settings.home_content ?? {}) ||
+    JSON.stringify(media) !== JSON.stringify(settings.home_media ?? {});
 
   useEffect(() => {
     setContent({ ...(settings.home_content ?? {}) });
@@ -149,6 +152,7 @@ export function useHomeAdmin(locale: string) {
 
   return {
     settings,
+    dirty,
     value,
     placeholder,
     setValue,

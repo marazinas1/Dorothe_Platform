@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
+import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 import type { PostRow } from "@/lib/posts/types";
 
 import { CoverUploader } from "./CoverUploader";
@@ -57,6 +58,7 @@ interface Props {
 export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: Props) {
   const { t } = useTranslation();
   const [draft, setDraft] = useState<PostDraft>(initial);
+  const dirty = JSON.stringify(draft) !== JSON.stringify(initial);
 
   /** The cover needs an article to belong to; save the draft first if needed. */
   async function coverPostId() {
@@ -73,6 +75,7 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
 
   return (
     <div className="space-y-6 rounded-[var(--radius)] border border-border bg-card p-5">
+      <UnsavedChangesGuard dirty={dirty} />
       {locales.map((loc) => (
         <div key={loc} className="space-y-4 border-b border-border/60 pb-5 last:border-0 last:pb-0">
           <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
