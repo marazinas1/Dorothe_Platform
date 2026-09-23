@@ -69,9 +69,11 @@ Tabai bus viena scrollinama eilė su bendra apatine linija ir aktyvaus tabo pabr
 4. **Selling**
 5. **Inheritance**
 6. **Advice**
-7. **About me**
-8. **Legal**
-9. **Contact**
+7. **About me / About us** — pagal tą patį aktyvų viešo meniu pavadinimą
+8. **Imprint**
+9. **Privacy policy**
+10. **Terms**
+11. **Contact**
 
 `Business & appearance` struktūra:
 
@@ -91,6 +93,7 @@ Puslapių tabai:
 - Nuotraukos kortelė rodys thumbnail, dabartinį šaltinį ir `Edit / Close`; išskleista būsena visada rodys `Your choice → Studio default → Built-in`, aktyviam sluoksniui — `Showing` badge.
 - Išlaikysiu esamą owner override → developer default → built-in fallback logiką ir išvalysiu pakeisto / atstatyto failo saugyklos objektą pagal dabartines taisykles.
 - Kiekvienas laukas ir media slotas bus patikrintas iki realaus viešo vartotojo, kad nėra išsisaugančių, bet nieko nekeičiančių laukų.
+- Trys footer dokumentai nebebus slepiami po techniniu `Legal` pavadinimu: kiekvienas gaus savo viešos nuorodos pavadinimą ir išlaikys dabartinį teisinio turinio saugojimą.
 - `Contact` lieka paskutinis; atskiro bendro `Images` stalčiaus nebus.
 
 ### 8. Users ir teisių atvaizdavimas
@@ -107,6 +110,7 @@ Puslapių tabai:
 - Jis saugos ir nuo browser uždarymo, ir nuo navigacijos admin viduje.
 - Save mygtukų plotis nesikeis tarp `Save / Saving / Saved`; sėkmė ir klaida bus aiškiai pranešta, o validation klaida neišvalys įvestų reikšmių.
 - Reset / Close veiksmai, kurie praranda pakeitimus, prašys aiškaus patvirtinimo be `window.confirm`.
+- Listing nuotraukos pašalinimas taip pat naudos bendrą dialogą, aiškiai įvardijantį, kad nuotrauka dings iš skelbimo ir viešos svetainės.
 
 ### 10. Responsive ir prieinamumas
 
@@ -121,6 +125,7 @@ Puslapių tabai:
 - Vieša svetainė, SSR, puslapių turinys, listing / inquiry / calendar verslo taisyklės, duomenų schema ir RLS šiame darbe nekeičiami.
 - Nauji matomi tekstai bus tik EN ir DE žodynuose.
 - Route failai liks kompozicijai, logika — core `/lib`, o admin komponentai neimportuos brand komponentų.
+- Nebenaudojamas senasis atskiras page-editor maršrutas ir likę ankstesnės `Content` navigacijos tipai bus pašalinti, nes puslapių turinys gyvena tik `Site settings`.
 - Keturi anksčiau užfiksuoti saugumo radiniai dėl anoniminių listing duomenų ir eilučių apimties lieka atskiras darbas; ši pertvarka jų tyliai nekeis.
 - Įkelti PDF naudojami tik kaip vizualinis etalonas ir nebus talpinami svetainėje.
 
