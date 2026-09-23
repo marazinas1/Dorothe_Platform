@@ -36,7 +36,7 @@ export function SettingsTabs() {
       items={TABS.map((tab) => ({
         id: tab,
         label: tab === "about"
-          ? t("admin.settings.tabs.about", { defaultValue: teamEnabled ? "About us" : "About me" })
+          ? t(teamEnabled ? "admin.settings.tabs.about_us" : "admin.settings.tabs.about")
           : t(`admin.settings.tabs.${tab}`),
         to: "/$locale/admin/settings/$tab",
         params: { locale, tab },
