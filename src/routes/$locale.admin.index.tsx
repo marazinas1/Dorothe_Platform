@@ -33,13 +33,13 @@ function Dashboard() {
       <AdminPageHeader icon={LayoutDashboard} title={t("admin.pages.dashboard")} description={t("admin.dashboard.subtitle")} />
 
         <section className="space-y-4">
-          <h2 className="font-heading text-lg">{t("admin.dashboard.needsAttention")}</h2>
+          <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.dashboard.needsAttention")}</h2>
           {empty ? <FirstRun locale={locale} /> : <WorkQueue locale={locale} />}
         </section>
 
       <section className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
-          <h2 className="font-heading text-lg">{t("admin.dashboard.metrics.heading")}</h2>
+          <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.dashboard.metrics.heading")}</h2>
           <div className="ml-auto">
             <PeriodPicker value={period} onChange={setPeriod} />
           </div>

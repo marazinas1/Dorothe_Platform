@@ -13,7 +13,9 @@ const TABS = [
   "inheritance",
   "blog",
   "about",
-  "legal",
+  "imprint",
+  "privacy",
+  "terms",
   "contact",
 ] as const;
 type Tab = (typeof TABS)[number];
@@ -27,6 +29,7 @@ const LEGACY = new Set([
   "analytics",
   "appearance",
   "maintenance",
+    "legal",
 ]);
 
 export const Route = createFileRoute("/$locale/admin/settings/$tab")({
@@ -52,8 +55,12 @@ function TabPage() {
       return <BusinessTab />;
     case "home":
       return <HomeAdminPage embedded />;
-    case "legal":
-      return <LegalTab />;
+    case "imprint":
+      return <LegalTab field="legal_impressum" />;
+    case "privacy":
+      return <LegalTab field="legal_privacy" />;
+    case "terms":
+      return <LegalTab field="legal_terms" />;
     default:
       return <PageAdminPage page={tab} embedded />;
   }

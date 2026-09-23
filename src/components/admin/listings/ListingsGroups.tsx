@@ -20,7 +20,7 @@ export function ListingsGroups({
 
   if (groups.length === 0) {
     return (
-      <p className="rounded-lg border border-border px-4 py-10 text-center text-sm text-muted-foreground">
+      <p className="rounded-[var(--radius)] border border-border px-4 py-10 text-center text-sm text-muted-foreground">
         {t("admin.listings.empty")}
       </p>
     );

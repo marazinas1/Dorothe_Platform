@@ -26,9 +26,9 @@ export function BusinessTab() {
         <BrandAssetsSection />
       </AdminSection>
 
-      <MaintenanceCard />
-
       {canDesign ? <TechnicalBlock data={data} /> : null}
+
+      <MaintenanceCard />
     </div>
   );
 }

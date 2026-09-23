@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Pencil, Trash2 } from "lucide-react";
+import { ChevronDown, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/admin/ui/StatusChip";
@@ -12,15 +12,16 @@ interface Props {
   locale: string;
   onEdit: () => void;
   onDelete: () => void;
+  expanded: boolean;
 }
 
-export function PostRow({ row, locale, onEdit, onDelete }: Props) {
+export function PostRow({ row, locale, onEdit, onDelete, expanded }: Props) {
   const { t } = useTranslation();
   const title = pickLocalized(row.title, locale, "de");
   const date = formatPostDate(row.published_at, locale);
 
   return (
-    <li className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:bg-muted/30">
+    <div className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:bg-muted/30">
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium">{title || "—"}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
@@ -40,12 +41,14 @@ export function PostRow({ row, locale, onEdit, onDelete }: Props) {
       <div className="flex shrink-0 items-center gap-1">
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
+          size="sm"
+          variant="outline"
           aria-label={t("admin.posts.edit")}
+          aria-expanded={expanded}
           onClick={onEdit}
         >
-          <Pencil className="h-4 w-4" />
+          {expanded ? t("admin.common.close") : t("admin.posts.edit")}
+          <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
         </Button>
         <Button
           type="button"
@@ -57,6 +60,6 @@ export function PostRow({ row, locale, onEdit, onDelete }: Props) {
           <Trash2 className="h-4 w-4" />
         </Button>
       </div>
-    </li>
+    </div>
   );
 }

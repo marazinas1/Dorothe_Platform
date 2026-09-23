@@ -23,6 +23,7 @@ import { ImageCard, type ImageRecord } from "./ImageCard";
 import { fileExtension } from "./listing-image-url";
 import { usePhotoReorder } from "@/lib/listings/use-photo-reorder";
 import { useImageOrder } from "./use-image-order";
+import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 
@@ -43,6 +44,7 @@ export function ImageManager({
   const { t } = useTranslation();
   const [busy, setBusy] = useState(false);
   const [dragging, setDragging] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<ImageRecord | null>(null);
 
   const [jobs, setJobs] = useState<Job[]>([]);
   const filesRef = useRef(new Map<string, File>());
@@ -185,8 +187,9 @@ export function ImageManager({
         }}
       />
 
-      <button
+      <Button
         type="button"
+        variant="outline"
         disabled={busy}
         onClick={() => inputRef.current?.click()}
         onDragOver={(e) => {
@@ -199,7 +202,7 @@ export function ImageManager({
           setDragging(false);
           if (e.dataTransfer.files?.length) void uploadFiles(e.dataTransfer.files);
         }}
-        className={`flex w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-6 py-14 text-center transition-colors ${
+        className={`flex h-auto w-full flex-col items-center justify-center gap-2 border-2 border-dashed px-6 py-14 text-center transition-colors ${
           dragging
             ? "border-primary bg-primary/5"
             : "border-border bg-muted/20 hover:border-primary/50 hover:bg-muted/40"
@@ -216,7 +219,7 @@ export function ImageManager({
         <span className="text-xs text-muted-foreground">
           {t("admin.listings.images.dropzoneMeta")}
         </span>
-      </button>
+      </Button>
 
 
 
@@ -289,16 +292,27 @@ export function ImageManager({
                 onPointerDown={reorder.start}
                 onMove={move}
                 onMakeCover={makeCover}
-                onDelete={remove}
+                onDelete={setPendingDelete}
               />
             ))}
           </div>
         </>
       ) : jobs.length === 0 ? (
-        <div className="mt-3 rounded-xl border border-dashed border-border px-6 py-8 text-center text-sm text-muted-foreground">
+        <div className="mt-3 rounded-[var(--radius)] border border-dashed border-border px-6 py-8 text-center text-sm text-muted-foreground">
           {t("admin.listings.images.empty")}
         </div>
       ) : null}
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        onOpenChange={(open) => (open ? null : setPendingDelete(null))}
+        title={t("admin.listings.images.deleteTitle")}
+        description={t("admin.listings.images.deleteBody")}
+        onConfirm={async () => {
+          if (!pendingDelete) return;
+          await remove(pendingDelete);
+        }}
+      />
 
     </FormSection>
   );

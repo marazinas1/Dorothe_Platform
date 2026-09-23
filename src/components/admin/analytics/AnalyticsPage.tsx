@@ -17,6 +17,7 @@ import { BreakdownList } from "./BreakdownList";
 import { TrafficChart } from "./TrafficChart";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
+import { Button } from "@/components/ui/button";
 
 function RangePicker({
   value,
@@ -27,22 +28,24 @@ function RangePicker({
 }) {
   const { t } = useTranslation();
   return (
-    <div className="inline-flex rounded-full border border-border bg-muted/40 p-0.5" role="group">
+    <div className="inline-flex gap-1 border-b border-border" role="group">
       {ANALYTICS_RANGES.map((range) => (
-        <button
+        <Button
           key={range}
           type="button"
           onClick={() => onChange(range)}
           aria-pressed={range === value}
+          variant="ghost"
+          size="sm"
           className={cn(
-            "rounded-full px-3 py-1 text-xs transition-colors",
+            "rounded-none border-b-2 px-3 text-xs transition-colors",
             range === value
-              ? "bg-card text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground",
+              ? "border-primary text-foreground"
+              : "border-transparent text-muted-foreground hover:text-foreground",
           )}
         >
           {t("admin.analytics.range", { count: range })}
-        </button>
+        </Button>
       ))}
     </div>
   );

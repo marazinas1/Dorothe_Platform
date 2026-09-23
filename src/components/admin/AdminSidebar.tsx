@@ -40,7 +40,6 @@ interface NavItem {
     | "inquiries"
     | "calendar"
     | "users"
-    | "content"
     | "selling"
     | "inheritance"
     | "about"
@@ -153,7 +152,7 @@ export function AdminSidebar({ email, roleLabel }: { email: string; roleLabel: s
   const { t } = useTranslation();
   const { locale } = useParams({ strict: false }) as { locale: Locale };
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="offcanvas" className="[--sidebar-width:16rem]">
       <AdminSidebarHeader />
       <SidebarContent>
         {GROUPS.map((group) => (

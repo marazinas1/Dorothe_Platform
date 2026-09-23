@@ -50,7 +50,7 @@ export function PostsPage() {
           {t("admin.posts.add")}
         </Button>} />
 
-      {editing ? (
+      {editing && !editing.id ? (
         <PostForm
           initial={editing}
           locales={locales}
@@ -64,20 +64,34 @@ export function PostsPage() {
         <AdminEmptyState icon={Newspaper} title={t("admin.posts.empty")} />
       ) : (
         <ul className="space-y-3">
-          {rows.map((row) => (
-            <PostRow
-              key={row.id}
-              row={row}
-              locale={locales[0]}
-              onEdit={() => setEditing(toDraft(row))}
-              onDelete={() =>
-                setPendingDelete({
-                  id: row.id,
-                  title: row.title?.[locales[0]] ?? t("admin.confirm.untitled"),
-                })
-              }
-            />
-          ))}
+          {rows.map((row) => {
+            const expanded = editing?.id === row.id;
+            return (
+              <li key={row.id} className="space-y-3">
+                <PostRow
+                  row={row}
+                  locale={locales[0]}
+                  expanded={expanded}
+                  onEdit={() => setEditing(expanded ? null : toDraft(row))}
+                  onDelete={() =>
+                    setPendingDelete({
+                      id: row.id,
+                      title: row.title?.[locales[0]] ?? t("admin.confirm.untitled"),
+                    })
+                  }
+                />
+                {expanded ? (
+                  <PostForm
+                    initial={editing ?? toDraft(row)}
+                    locales={locales}
+                    onSave={save}
+                    onCancel={() => setEditing(null)}
+                    ensurePostId={ensurePostId}
+                  />
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       )}
 

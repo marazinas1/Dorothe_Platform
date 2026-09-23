@@ -13,7 +13,7 @@ export function FirstRun({ locale }: { locale: string }) {
   const { t } = useTranslation();
   return (
     <section className="rounded-[var(--radius)] border border-dashed border-border bg-muted/20 p-6">
-      <h2 className="font-heading text-lg">{t("admin.dashboard.firstRun.title")}</h2>
+      <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.dashboard.firstRun.title")}</h2>
       <p className="mt-1 max-w-prose text-sm text-muted-foreground">
         {t("admin.dashboard.firstRun.body")}
       </p>

@@ -39,7 +39,7 @@ export function ListingsTable({
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
 
   return (
-    <div className="overflow-hidden rounded-lg border border-border">
+    <div className="overflow-hidden rounded-[var(--radius)] border border-border">
       <Table>
         <TableHeader>
           <TableRow>

@@ -21,7 +21,7 @@ export function QuickActions({ locale }: { locale: string }) {
             key={key}
             to={to}
             params={{ locale }}
-            className="group flex min-h-24 flex-col justify-between rounded-xl border border-border bg-background p-4 transition-colors hover:border-primary/35 hover:bg-primary/5"
+            className="group flex min-h-24 flex-col justify-between rounded-[var(--radius)] border border-border bg-background p-4 transition-colors hover:border-primary/35 hover:bg-muted"
           >
             <Icon className="h-5 w-5 text-primary" aria-hidden />
             <span className="mt-5 text-sm font-semibold">{t(`admin.dashboard.quick.${key}`)}</span>

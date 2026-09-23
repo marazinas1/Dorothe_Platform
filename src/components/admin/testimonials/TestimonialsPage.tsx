@@ -47,7 +47,7 @@ export function TestimonialsPage() {
           {t("admin.testimonials.add")}
         </Button>} />
 
-      {editing ? (
+      {editing && !editing.id ? (
         <TestimonialForm
           initial={editing}
           locales={locales}
@@ -60,24 +60,37 @@ export function TestimonialsPage() {
         <AdminEmptyState icon={Quote} title={t("admin.testimonials.empty")} />
       ) : (
         <ul className="space-y-3">
-          {rows.map((row) => (
-            <TestimonialRow
-              key={row.id}
-              row={row}
-              locale={locales[0]}
-              onEdit={() => setEditing(toDraft(row))}
-              onDelete={() =>
-                setPendingDelete({
-                  id: row.id,
-                  name: row.author_name || t("admin.confirm.untitled"),
-                })
-              }
-              onMove={async (direction) => {
-                await moveTestimonial({ data: { id: row.id, direction } });
-                await refresh();
-              }}
-            />
-          ))}
+          {rows.map((row) => {
+            const expanded = editing?.id === row.id;
+            return (
+              <li key={row.id} className="space-y-3">
+                <TestimonialRow
+                  row={row}
+                  locale={locales[0]}
+                  expanded={expanded}
+                  onEdit={() => setEditing(expanded ? null : toDraft(row))}
+                  onDelete={() =>
+                    setPendingDelete({
+                      id: row.id,
+                      name: row.author_name || t("admin.confirm.untitled"),
+                    })
+                  }
+                  onMove={async (direction) => {
+                    await moveTestimonial({ data: { id: row.id, direction } });
+                    await refresh();
+                  }}
+                />
+                {expanded ? (
+                  <TestimonialForm
+                    initial={editing ?? toDraft(row)}
+                    locales={locales}
+                    onSave={save}
+                    onCancel={() => setEditing(null)}
+                  />
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       )}
 

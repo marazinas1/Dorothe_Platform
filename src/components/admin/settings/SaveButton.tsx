@@ -34,6 +34,7 @@ export function SaveButton({ onSubmit, disabled, children }: Props) {
         type="button"
         onClick={handleClick}
         disabled={disabled || state === "saving"}
+        className="min-w-28"
       >
         {state === "saving" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         {state === "saved" && <Check className="h-4 w-4" />}

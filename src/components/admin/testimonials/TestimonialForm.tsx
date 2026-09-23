@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
+import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 import type { TestimonialRow } from "@/lib/testimonials/types";
 
 export interface TestimonialDraft {
@@ -41,9 +42,11 @@ interface Props {
 export function TestimonialForm({ initial, locales, onSave, onCancel }: Props) {
   const { t } = useTranslation();
   const [draft, setDraft] = useState<TestimonialDraft>(initial);
+  const dirty = JSON.stringify(draft) !== JSON.stringify(initial);
 
   return (
     <div className="space-y-5 rounded-[var(--radius)] border border-border bg-card p-5">
+      <UnsavedChangesGuard dirty={dirty} />
       {locales.map((loc) => (
         <div key={loc} className="space-y-1.5">
           <Label htmlFor={`quote-${loc}`}>

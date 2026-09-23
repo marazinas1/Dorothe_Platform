@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { monthGrid, todayIso } from "@/lib/calendar/month";
 import type { AppointmentRow } from "@/lib/calendar/types";
+import { Button } from "@/components/ui/button";
 
 const WEEKDAY_KEYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 
@@ -37,12 +38,13 @@ export function MonthGrid({ year, month, selected, rows, onSelect }: Props) {
         {cells.map((cell) => {
           const count = counts.get(cell.iso) ?? 0;
           return (
-            <button
+            <Button
               key={cell.iso}
               type="button"
               onClick={() => onSelect(cell.iso)}
+              variant="ghost"
               className={cn(
-                "flex h-16 flex-col items-center justify-center gap-1 rounded-md border border-transparent text-sm transition-colors",
+                "flex h-16 min-w-0 flex-col items-center justify-center gap-1 border border-transparent p-1 text-sm transition-colors",
                 cell.inMonth ? "text-foreground" : "text-muted-foreground/50",
                 cell.iso === today && "border-border font-semibold",
                 cell.iso === selected
@@ -54,7 +56,7 @@ export function MonthGrid({ year, month, selected, rows, onSelect }: Props) {
               {count > 0 ? (
                 <span
                   className={cn(
-                    "rounded-full px-1.5 text-[10px]",
+                    "rounded-[var(--radius)] px-1.5 text-[10px]",
                     cell.iso === selected
                       ? "bg-primary-foreground/20"
                       : "bg-muted text-muted-foreground",
@@ -65,7 +67,7 @@ export function MonthGrid({ year, month, selected, rows, onSelect }: Props) {
               ) : (
                 <span className="h-[14px]" />
               )}
-            </button>
+            </Button>
           );
         })}
       </div>

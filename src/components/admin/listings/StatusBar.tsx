@@ -61,7 +61,7 @@ export function StatusBar({
   const publishBlocked = blocking.length > 0;
 
   return (
-    <div className="rounded-lg border border-border bg-card">
+    <div className="rounded-[var(--radius)] border border-border bg-card">
       <div className="flex flex-wrap items-center gap-3 px-4 py-3">
         <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
           {t("admin.listings.fields.status")}

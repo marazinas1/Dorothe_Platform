@@ -31,6 +31,7 @@ import { ChecklistRail } from "./ChecklistRail";
 import { StatusBar } from "./StatusBar";
 import { SaveBar } from "./SaveBar";
 import type { ImageRecord } from "./ImageCard";
+import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 
 export function ListingForm({
   initial,
@@ -165,6 +166,7 @@ export function ListingForm({
         void save();
       }}
     >
+      <UnsavedChangesGuard dirty={form.dirty && autosave.state.status !== "saving"} />
       <h1 className="font-heading text-2xl">
         {form.values.title?.[lang]?.trim() ||
           Object.values(form.values.title ?? {}).find((v) => v.trim())?.trim() ||

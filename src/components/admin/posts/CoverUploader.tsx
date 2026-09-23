@@ -114,11 +114,12 @@ export function CoverUploader({ value, onChange, ensurePostId }: Props) {
           </div>
         </div>
       ) : (
-        <button
+        <Button
           type="button"
+          variant="outline"
           disabled={busy}
           onClick={() => inputRef.current?.click()}
-          className="flex w-full flex-col items-center justify-center gap-1 border-2 border-dashed border-border bg-muted/20 px-4 py-8 text-center transition-colors hover:border-primary/50 hover:bg-muted/40 disabled:cursor-progress"
+          className="flex h-auto w-full flex-col items-center justify-center gap-1 border-2 border-dashed border-border bg-muted/20 px-4 py-8 text-center transition-colors hover:border-primary/50 hover:bg-muted/40 disabled:cursor-progress"
         >
           {busy ? (
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
@@ -129,7 +130,7 @@ export function CoverUploader({ value, onChange, ensurePostId }: Props) {
           <span className="text-xs text-muted-foreground">
             {t("admin.posts.coverHint")}
           </span>
-        </button>
+        </Button>
       )}
 
       {error ? <p className="text-xs text-destructive">{error}</p> : null}

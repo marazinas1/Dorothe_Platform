@@ -470,6 +470,9 @@
     "forbiddenBody": "You do not have permission to access this area."
   },
   "admin": {
+    "common": {
+      "close": "Close"
+    },
     "testimonials": {
       "title": "Testimonials",
       "hint": "Client voices. Published quotes appear on the About page; up to three marked for the home page appear there.",
@@ -641,7 +644,10 @@
         "legal": "Legal",
         "maintenance": "Maintenance",
         "modules": "Modules",
-        "blog": "Advice"
+        "blog": "Advice",
+        "imprint": "Imprint",
+        "privacy": "Privacy policy",
+        "terms": "Terms"
       },
       "general": {
         "site_name": "Company name",
@@ -974,7 +980,9 @@
         "uploadHint": "Drag photos here or click to select — up to 50 at once.",
         "technicalNote": "Photos are prepared in your browser: turned upright, resized for the detail page and cards, converted to WebP, and all EXIF and GPS data removed. Your original is kept privately and never published.",
         "technicalTitle": "What happens to your photos",
-        "dragHandle": "Drag to reorder"
+        "dragHandle": "Drag to reorder",
+        "deleteTitle": "Remove photograph?",
+        "deleteBody": "This photograph will be removed from the listing and the public website."
       },
       "preview": "Preview",
       "publish": "Publish",

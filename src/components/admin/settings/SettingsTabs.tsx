@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { AdminTabs } from "@/components/admin/ui/AdminTabs";
 import type { Locale } from "@/i18n/config";
+import { useFeatureFlag } from "@/hooks/use-feature-flag";
 
 /**
  * Business & appearance first, then one tab per public page in the exact order
@@ -16,7 +17,9 @@ const TABS = [
   "inheritance",
   "blog",
   "about",
-  "legal",
+  "imprint",
+  "privacy",
+  "terms",
   "contact",
 ] as const;
 export type SettingsTabId = (typeof TABS)[number];
@@ -25,13 +28,16 @@ export function SettingsTabs() {
   const { locale } = useParams({ strict: false }) as { locale: Locale };
   const { t } = useTranslation();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const teamEnabled = useFeatureFlag("team");
 
   return (
     <AdminTabs
       label={t("admin.settings.title")}
       items={TABS.map((tab) => ({
         id: tab,
-        label: t(`admin.settings.tabs.${tab}`),
+        label: tab === "about"
+          ? t("admin.settings.tabs.about", { defaultValue: teamEnabled ? "About us" : "About me" })
+          : t(`admin.settings.tabs.${tab}`),
         to: "/$locale/admin/settings/$tab",
         params: { locale, tab },
         active: pathname === `/${locale}/admin/settings/${tab}`,

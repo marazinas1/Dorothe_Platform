@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { MESSAGE_LOCALES, type Locale } from "@/i18n/config";
 import { setAdminLocale } from "@/lib/auth/admin-locale.functions";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 /**
  * Interface language of the panel — a per-user preference stored on the profile,
@@ -40,21 +41,23 @@ export function AdminLocaleToggle({ current }: { current: Locale }) {
       className="flex items-center gap-0.5 rounded-md border border-border p-0.5"
     >
       {MESSAGE_LOCALES.map((loc) => (
-        <button
+        <Button
           key={loc}
           type="button"
           disabled={busy}
           aria-pressed={loc === current}
           onClick={() => void choose(loc)}
+          variant="ghost"
+          size="sm"
           className={cn(
-            "rounded px-2 py-0.5 text-xs font-medium uppercase tracking-wide transition-colors disabled:opacity-60",
+            "h-7 px-2 text-xs font-medium uppercase transition-colors disabled:opacity-60",
             loc === current
               ? "bg-secondary text-secondary-foreground"
               : "text-muted-foreground hover:text-foreground",
           )}
         >
           {loc}
-        </button>
+        </Button>
       ))}
     </div>
   );

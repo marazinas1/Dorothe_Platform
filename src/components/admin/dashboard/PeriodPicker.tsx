@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import { PERIOD_PRESETS, type PeriodPreset } from "@/lib/dashboard/period";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 /** Period selector for the metrics half. Presets only — no invented ranges. */
 export function PeriodPicker({
@@ -14,25 +15,27 @@ export function PeriodPicker({
   const { t } = useTranslation();
   return (
     <div
-      className="inline-flex rounded-full border border-border bg-muted/40 p-0.5"
+      className="inline-flex gap-1 border-b border-border"
       role="group"
       aria-label={t("admin.dashboard.metrics.period")}
     >
       {PERIOD_PRESETS.map((preset) => (
-        <button
+        <Button
           key={preset}
           type="button"
           onClick={() => onChange(preset)}
           aria-pressed={preset === value}
+          variant="ghost"
+          size="sm"
           className={cn(
-            "rounded-full px-3 py-1 text-xs transition-colors",
+            "rounded-none border-b-2 px-3 text-xs transition-colors",
             preset === value
-              ? "bg-card text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground",
+              ? "border-primary text-foreground"
+              : "border-transparent text-muted-foreground hover:text-foreground",
           )}
         >
           {t(`admin.dashboard.period.${preset}`)}
-        </button>
+        </Button>
       ))}
     </div>
   );
