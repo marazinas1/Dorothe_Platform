@@ -9,8 +9,8 @@
 - [x] Align Users and permission-aware read-only states
 - [x] Add unsaved-change and destructive-action protection to every editor
 - [x] Remove retired content routes and dead navigation types
-- [ ] Verify every admin route on desktop, tablet and phone
-- [ ] Run TypeScript, i18n, tests and final build checks
+- [x] Verify every admin route on desktop, tablet and phone
+- [x] Run TypeScript, i18n, tests and final build checks
 
 Blocked outside this work:
 - Security findings: raw listings/assets exposure and appointment/inquiry row scoping
