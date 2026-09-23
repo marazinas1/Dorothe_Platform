@@ -21,7 +21,6 @@ import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 type State = {
   site_name: string;
   legal_name: string;
-  service_region: Record<string, string>;
   contact_email: string;
   contact_phone: string;
   whatsapp: string;
@@ -39,7 +38,6 @@ function toState(data: SiteSettings): State {
   return {
     site_name: data.site_name,
     legal_name: data.legal_name ?? "",
-    service_region: { ...(data.service_region ?? {}) },
     contact_email: data.contact_email ?? "",
     contact_phone: data.contact_phone ?? "",
     whatsapp: data.whatsapp ?? "",
@@ -68,10 +66,6 @@ export function BusinessForm() {
   const set = <K extends keyof State>(key: K, next: State[K]) =>
     setForm((prev) => ({ ...prev, [key]: next }));
 
-  const locales = data.enabled_locales?.length
-    ? data.enabled_locales
-    : [data.default_locale];
-
   async function save() {
     GeneralSchema.parse({
       site_name: form.site_name,
@@ -79,7 +73,7 @@ export function BusinessForm() {
       country: data.country,
       default_locale: data.default_locale,
       enabled_locales: data.enabled_locales,
-      service_region: form.service_region,
+      service_region: data.service_region,
       currency: data.currency,
       area_unit: data.area_unit,
     });
@@ -92,7 +86,7 @@ export function BusinessForm() {
           country: data.country,
           default_locale: data.default_locale,
           enabled_locales: data.enabled_locales,
-          service_region: form.service_region,
+          service_region: data.service_region,
           currency: data.currency,
           area_unit: data.area_unit,
         },
@@ -133,20 +127,6 @@ export function BusinessForm() {
           <Field label={t("admin.settings.general.legal_name")}>
             <Input value={form.legal_name} onChange={(e) => set("legal_name", e.target.value)} />
           </Field>
-          {locales.map((loc) => (
-            <Field
-              key={loc}
-              label={`${t("admin.settings.business.region_name")} (${loc.toUpperCase()})`}
-              help={t("admin.settings.general.service_region_help")}
-            >
-              <Input
-                value={form.service_region[loc] ?? ""}
-                onChange={(e) =>
-                  set("service_region", { ...form.service_region, [loc]: e.target.value })
-                }
-              />
-            </Field>
-          ))}
         </div>
       </AdminSection>
 
