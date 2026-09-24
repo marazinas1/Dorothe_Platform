@@ -60,7 +60,7 @@ export function LegalTab({ field }: { field?: Field }) {
           <h3 className="text-base font-semibold">{t(f.labelKey)}</h3>
           {locales.map((loc) => (
             <div key={loc} className="space-y-1.5">
-              <Label>{loc.toUpperCase()}</Label>
+              <Label>{t(`locale.${loc}`, { defaultValue: loc })}</Label>
               <Textarea
                 rows={6}
                 value={state[f.key][loc] ?? ""}

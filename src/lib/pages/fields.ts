@@ -63,7 +63,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     fields: [
       para("headline", "listings.title", "opening", true),
       para("intro", "listings.description", "opening", true),
-      line("empty", "listings.empty", "closing", true),
+      line("empty", "listings.empty", "closing"),
     ],
   },
   {
@@ -71,7 +71,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "verkaufen",
     mediaSlots: [],
     fields: [
-      line("kicker", "pages.selling.kicker", "opening", true),
+      line("kicker", "pages.selling.kicker", "opening"),
       para("headline", "pages.selling.headline", "opening", true),
       para("intro", "pages.selling.intro", "opening", true),
       line("steps_title", "pages.selling.steps_title"),
@@ -84,8 +84,8 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
       para("proof_body", "pages.selling.proof_body"),
       line("form_title", "pages.selling.form_title", "form"),
       para("form_intro", "pages.selling.form_intro", "form"),
-      line("cta_title", "pages.selling.cta_title", "closing", true),
-      para("cta_body", "pages.selling.cta_body", "closing", true),
+      line("cta_title", "pages.selling.cta_title", "closing"),
+      para("cta_body", "pages.selling.cta_body", "closing"),
     ],
   },
   {
@@ -93,7 +93,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "erben",
     mediaSlots: [],
     fields: [
-      line("kicker", "pages.inheritance.kicker", "opening", true),
+      line("kicker", "pages.inheritance.kicker", "opening"),
       para("headline", "pages.inheritance.headline", "opening", true),
       para("intro", "pages.inheritance.intro", "opening", true),
       line("appraisal_title", "pages.inheritance.appraisal_title"),
@@ -113,21 +113,21 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     fields: [
       para("headline", "blog.title", "opening", true),
       para("intro", "blog.intro", "opening", true),
-      line("empty", "blog.empty", "closing", true),
+      line("empty", "blog.empty", "closing"),
     ],
   },
   {
     key: "about",
     path: "ueber-mich",
-    mediaSlots: ["portrait"],
+    mediaSlots: [],
     fields: [
-      line("kicker", "pages.about.kicker", "opening", true),
+      line("kicker", "pages.about.kicker", "opening"),
       para("headline", "pages.about.solo.headline", "opening", true),
       list("paragraphs", "pages.about.solo.paragraphs", "body", true),
       line("qualifications_title", "pages.about.solo.qualifications_title"),
       line("seals_title", "pages.about.seals_title"),
       line("testimonials_title", "pages.about.testimonials_title"),
-      line("contact_title", "pages.about.contact_title_solo", "closing", true),
+      line("contact_title", "pages.about.contact_title_solo", "closing"),
     ],
   },
   {
@@ -135,13 +135,13 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "kontakt",
     mediaSlots: [],
     fields: [
-      line("kicker", "pages.contact.kicker", "opening", true),
+      line("kicker", "pages.contact.kicker", "opening"),
       para("headline", "pages.contact.headline_solo", "opening", true),
       line("address_title", "pages.contact.address_title"),
       line("hours_title", "pages.contact.hours_title"),
       line("channels_title", "pages.contact.channels_title"),
       line("map_title", "pages.contact.map_title"),
-      line("form_title", "pages.contact.form_title", "form", true),
+      line("form_title", "pages.contact.form_title", "form"),
       para("form_intro", "pages.contact.form_intro_solo", "form", true),
     ],
   },

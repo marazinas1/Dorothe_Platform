@@ -29,7 +29,7 @@ export function MoreDetailsSection({
   const detailNumbers = fieldsAtLevel(shape, NUMERIC_KEYS, "details");
 
   return (
-    <details className="rounded-lg border border-border bg-card">
+    <details className="rounded-[var(--radius)] border border-border bg-card">
       <summary className="cursor-pointer px-4 py-3 sm:px-6">
         <span className="font-heading text-lg">{t("admin.listings.sections.more")}</span>
         <span className="ml-2 text-xs text-muted-foreground">

@@ -82,8 +82,7 @@ function AboutPage() {
   const teamEnabled = useFeatureFlag("team");
   const l = locale as Locale;
 
-  const scope = teamEnabled ? "pages.about.team" : "pages.about.solo";
-  const paragraphs = t(`${scope}.paragraphs`, { returnObjects: true }) as string[];
+  const paragraphs = copy.lines("paragraphs");
   const qualifications = teamEnabled ? [] : (settings.qualifications ?? []);
 
   const name =
@@ -97,6 +96,7 @@ function AboutPage() {
         locale={l}
         settings={settings}
         name={name}
+        headline={copy.text("headline")}
         bio={bio}
         paragraphs={paragraphs}
         eyebrow={settings.primary_agent_role ?? undefined}

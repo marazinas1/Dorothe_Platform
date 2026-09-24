@@ -26,7 +26,7 @@ export interface HomeTextField {
 }
 
 export const HOME_TEXT_FIELDS: HomeTextField[] = [
-  { key: "hero_kicker", kind: "line", group: "opening", editable: true },
+  { key: "hero_kicker", kind: "line", group: "opening" },
   { key: "hero_headline", kind: "paragraph", group: "opening", editable: true },
   { key: "hero_subline", kind: "paragraph", group: "opening", editable: true },
   { key: "sell_title", kind: "line", group: "paths" },
@@ -50,7 +50,7 @@ export const HOME_TEXT_FIELDS: HomeTextField[] = [
   { key: "valuation_title", kind: "line", group: "valuation", editable: true },
   { key: "valuation_body", kind: "paragraph", group: "valuation", editable: true },
   { key: "valuation_steps", kind: "list", group: "valuation" },
-  { key: "contact_title", kind: "line", group: "contact", editable: true },
+  { key: "contact_title", kind: "line", group: "contact" },
 ];
 
 export const HOME_SETTINGS_FIELDS = HOME_TEXT_FIELDS.filter((field) => field.editable);

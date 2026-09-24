@@ -11,13 +11,13 @@ import {
   percentChange,
   type AnalyticsRange,
 } from "@/lib/analytics/summary";
-import { cn } from "@/lib/utils";
 import { StatCard } from "./StatCard";
 import { BreakdownList } from "./BreakdownList";
 import { TrafficChart } from "./TrafficChart";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
-import { Button } from "@/components/ui/button";
+import { AdminErrorState } from "@/components/admin/ui/AdminErrorState";
+import { AdminTabButtons } from "@/components/admin/ui/AdminTabButtons";
 
 function RangePicker({
   value,
@@ -27,35 +27,23 @@ function RangePicker({
   onChange: (next: AnalyticsRange) => void;
 }) {
   const { t } = useTranslation();
-  return (
-    <div className="inline-flex gap-1 border-b border-border" role="group">
-      {ANALYTICS_RANGES.map((range) => (
-        <Button
-          key={range}
-          type="button"
-          onClick={() => onChange(range)}
-          aria-pressed={range === value}
-          variant="ghost"
-          size="sm"
-          className={cn(
-            "rounded-none border-b-2 px-3 text-xs transition-colors",
-            range === value
-              ? "border-primary text-foreground"
-              : "border-transparent text-muted-foreground hover:text-foreground",
-          )}
-        >
-          {t("admin.analytics.range", { count: range })}
-        </Button>
-      ))}
-    </div>
-  );
+  return <AdminTabButtons
+    label={t("admin.analytics.title")}
+    items={ANALYTICS_RANGES.map((range) => ({
+      id: range,
+      label: t("admin.analytics.range", { count: range }),
+    }))}
+    value={value}
+    onChange={onChange}
+  />;
 }
 
 export function AnalyticsPage() {
   const { t } = useTranslation();
   const { locale } = useParams({ from: "/$locale/admin/analytics" });
   const [range, setRange] = useState<AnalyticsRange>(30);
-  const { data, isPending, error } = useQuery(analyticsSummaryQueryOptions(range));
+  const query = useQuery(analyticsSummaryQueryOptions(range));
+  const { data, isPending, error } = query;
 
   const views = Number(data?.totals?.views ?? 0);
   const visitors = Number(data?.totals?.visitors ?? 0);
@@ -67,9 +55,12 @@ export function AnalyticsPage() {
       <AdminPageHeader icon={BarChart3} title={t("admin.analytics.title")} description={t("admin.analytics.subtitle")} actions={<RangePicker value={range} onChange={setRange} />} />
 
       {error ? (
-        <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
-          {t("admin.analytics.error")} {error instanceof Error ? error.message : ""}
-        </div>
+        <AdminErrorState
+          title={t("admin.analytics.error")}
+          detail={error instanceof Error ? error.message : undefined}
+          retryLabel={t("errors.tryAgain")}
+          onRetry={() => void query.refetch()}
+        />
       ) : null}
 
       {isPending ? (

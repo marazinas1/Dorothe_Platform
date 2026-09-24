@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import { ExternalLink, RotateCw } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
@@ -21,12 +20,10 @@ type Props = {
 };
 
 /**
- * The fields on the left, the real page on the right, so every change can be
- * checked against the finished look.
+ * Full-width page-spine editor with a direct link to the public page.
  */
 export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) {
   const { t } = useTranslation();
-  const [frameKey, setFrameKey] = useState(0);
   const pageUrl = `/${locale}`;
 
   return (
@@ -49,15 +46,6 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
           : null}
 
         <div className="ml-auto flex items-center gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() => setFrameKey((n) => n + 1)}
-          >
-            <RotateCw className="h-3.5 w-3.5" />
-            {t("admin.home.refresh")}
-          </Button>
           <Button asChild type="button" variant="outline" size="sm">
             <a href={pageUrl} target="_blank" rel="noopener">
               <ExternalLink className="h-3.5 w-3.5" />
@@ -67,8 +55,7 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
         </div>
       </header>
 
-      <div className="grid lg:grid-cols-[minmax(0,420px)_1fr]">
-        <div className="space-y-8 border-border p-4 sm:p-6 lg:max-h-[calc(100vh-14rem)] lg:overflow-y-auto lg:border-r">
+      <div className="space-y-8 p-4 sm:p-6">
           <HomeTextEditor
             locale={locale}
             value={home.value}
@@ -93,23 +80,9 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
           <SaveButton
             onSubmit={async () => {
               await home.save();
-              setFrameKey((n) => n + 1);
               toast.success(t("admin.home.saved"));
             }}
           />
-        </div>
-
-        <div className="hidden bg-muted lg:block">
-          <div className="admin-label border-b border-border px-4 py-2 font-semibold text-muted-foreground">
-            {t("admin.home.livePreview")}
-          </div>
-          <iframe
-            key={frameKey}
-            src={pageUrl}
-            title={t("admin.home.livePreview")}
-            className="h-[calc(100vh-17rem)] w-full border-0 bg-background"
-          />
-        </div>
       </div>
     </div>
   );

@@ -766,7 +766,11 @@
         "contact": "Contact & office",
         "region_name": "Region name",
         "technical": "Technical (fixed for this website)",
-        "technical_help": "These values drive validation and price formatting. They only change with the platform itself — ask your developer."
+        "technical_help": "These values drive validation and price formatting. They only change with the platform itself — ask your developer.",
+        "agent_name": "Agent name",
+        "agent_role": "Agent role",
+        "agent_photo": "Agent portrait",
+        "agent_photo_help": "Used consistently on the home page, About page and listing contact areas."
       },
       "hours": {
         "title": "Opening hours",

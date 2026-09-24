@@ -69,7 +69,7 @@ function ContactPage() {
             {copy.text("kicker")}
           </div>
           <h1 className="mt-6 font-heading text-4xl leading-[1.05] md:text-6xl">
-            {t(teamEnabled ? "pages.contact.headline_team" : "pages.contact.headline_solo")}
+            {copy.text("headline")}
           </h1>
         </div>
       </section>
@@ -160,7 +160,7 @@ function ContactPage() {
               {copy.text("form_title")}
             </h2>
             <p className="mt-6 max-w-sm text-sm text-muted-foreground">
-              {t(teamEnabled ? "pages.contact.form_intro_team" : "pages.contact.form_intro_solo")}
+              {copy.text("form_intro")}
             </p>
           </div>
           <div className="md:col-span-8">

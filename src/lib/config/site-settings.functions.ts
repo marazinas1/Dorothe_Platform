@@ -5,6 +5,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { SiteSettings } from "@/types/site-settings";
 import {
   GeneralSchema,
+  IdentitySchema,
   BrandingSchema,
   BrandAssetsSchema,
   ContactSchema,
@@ -39,6 +40,7 @@ export const siteSettingsQueryOptions = queryOptions({
 });
 
 type UpdateInput =
+  | { tab: "identity"; values: unknown }
   | { tab: "general"; values: unknown }
   | { tab: "branding"; values: unknown }
   | { tab: "brand_assets"; values: unknown }
@@ -50,6 +52,8 @@ type UpdateInput =
 
 function parseByTab(input: UpdateInput): Record<string, unknown> {
   switch (input.tab) {
+    case "identity":
+      return IdentitySchema.parse(input.values);
     case "general":
       return GeneralSchema.parse(input.values);
     case "branding":
@@ -73,6 +77,7 @@ export const updateSiteSettings = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: UpdateInput) => {
     const allowed: SettingsTabKey[] = [
+      "identity",
       "general",
       "branding",
       "brand_assets",

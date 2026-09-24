@@ -25,6 +25,8 @@ interface Props {
   dark?: boolean;
   /** Square frame for icon-shaped images such as the browser icon. */
   square?: boolean;
+  /** Optional entity-owned storage path for non-brand photographs. */
+  pathForVariant?: (variant: string) => string;
 }
 
 /**
@@ -40,6 +42,7 @@ export function BrandAssetField({
   onChange,
   dark,
   square,
+  pathForVariant,
 }: Props) {
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -54,7 +57,7 @@ export function BrandAssetField({
       // The largest variant available keeps logos crisp on retina screens.
       const variant =
         processed.variants.find((v) => v.key === "detail") ?? processed.variants[0]!;
-      const path = brandAssetPath(kind, variant.key);
+      const path = pathForVariant?.(variant.key) ?? brandAssetPath(kind, variant.key);
       const { error: uploadError } = await supabase.storage
         .from(SITE_ASSETS_BUCKET)
         .upload(path, variant.blob, { contentType: "image/webp", upsert: true });
