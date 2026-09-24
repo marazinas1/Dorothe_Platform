@@ -12,6 +12,8 @@ export type HomeFieldKind = "line" | "paragraph" | "list";
 export interface HomeTextField {
   key: string;
   kind: HomeFieldKind;
+  /** Only the frequently changed page spine appears in Settings. */
+  editable?: boolean;
   /** Grouping in the admin editor — one group per page section. */
   group:
     | "opening"
@@ -24,9 +26,9 @@ export interface HomeTextField {
 }
 
 export const HOME_TEXT_FIELDS: HomeTextField[] = [
-  { key: "hero_kicker", kind: "line", group: "opening" },
-  { key: "hero_headline", kind: "paragraph", group: "opening" },
-  { key: "hero_subline", kind: "paragraph", group: "opening" },
+  { key: "hero_kicker", kind: "line", group: "opening", editable: true },
+  { key: "hero_headline", kind: "paragraph", group: "opening", editable: true },
+  { key: "hero_subline", kind: "paragraph", group: "opening", editable: true },
   { key: "sell_title", kind: "line", group: "paths" },
   { key: "sell_body", kind: "paragraph", group: "paths" },
   { key: "buy_title", kind: "line", group: "paths" },
@@ -45,11 +47,13 @@ export const HOME_TEXT_FIELDS: HomeTextField[] = [
   { key: "testi_title", kind: "line", group: "testimonials" },
   { key: "listings_title", kind: "line", group: "listings" },
   { key: "listings_note", kind: "paragraph", group: "listings" },
-  { key: "valuation_title", kind: "line", group: "valuation" },
-  { key: "valuation_body", kind: "paragraph", group: "valuation" },
+  { key: "valuation_title", kind: "line", group: "valuation", editable: true },
+  { key: "valuation_body", kind: "paragraph", group: "valuation", editable: true },
   { key: "valuation_steps", kind: "list", group: "valuation" },
-  { key: "contact_title", kind: "line", group: "contact" },
+  { key: "contact_title", kind: "line", group: "contact", editable: true },
 ];
+
+export const HOME_SETTINGS_FIELDS = HOME_TEXT_FIELDS.filter((field) => field.editable);
 
 /** Section order in the editor — identical to the page's own order. */
 export const HOME_FIELD_GROUPS = [

@@ -7,7 +7,7 @@ import {
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
 import { homeDefaultList, homeDefaultText } from "./content";
-import { HOME_TEXT_FIELDS } from "./fields";
+import { HOME_SETTINGS_FIELDS } from "./fields";
 
 type Bag = Record<string, unknown>;
 type Kind = "line" | "paragraph" | "list";
@@ -122,7 +122,7 @@ export function useHomeAdmin(locale: string) {
     return typeof raw === "string" && raw.trim().length > 0;
   }
 
-  const lockedCount = HOME_TEXT_FIELDS.filter((f) => isLocked(f.key)).length;
+  const lockedCount = HOME_SETTINGS_FIELDS.filter((f) => isLocked(f.key)).length;
 
   /**
    * Developer-only: freeze the wording the page shows right now for every field
@@ -132,7 +132,7 @@ export function useHomeAdmin(locale: string) {
     const defaults = { ...((settings.home_defaults ?? {}) as Bag) };
     let nextContent = content;
 
-    for (const field of HOME_TEXT_FIELDS) {
+    for (const field of HOME_SETTINGS_FIELDS) {
       const current = value(field.key) || placeholder(field.key);
       if (!current.trim()) continue;
       const stored =
@@ -159,7 +159,7 @@ export function useHomeAdmin(locale: string) {
     hasOverride,
     isLocked,
     lockedCount,
-    fieldCount: HOME_TEXT_FIELDS.length,
+    fieldCount: HOME_SETTINGS_FIELDS.length,
     resetValue,
     setAsDefault,
     lockAllDefaults,

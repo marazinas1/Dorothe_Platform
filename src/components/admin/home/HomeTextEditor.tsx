@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-import { HOME_FIELD_GROUPS, HOME_TEXT_FIELDS } from "@/lib/home/fields";
+import { HOME_FIELD_GROUPS, HOME_SETTINGS_FIELDS } from "@/lib/home/fields";
 import { DefaultTextField } from "@/components/admin/ui/DefaultTextField";
 import { LockAllDefaultsBar } from "@/components/admin/ui/LockAllDefaultsBar";
 import { DefaultRequestNotices } from "@/components/admin/copy/DefaultRequestNotices";
@@ -56,11 +56,11 @@ export function HomeTextEditor({
       <LockAllDefaultsBar locked={lockedCount} total={fieldCount} onLockAll={onLockAll} />
 
       {HOME_FIELD_GROUPS.map((group) => {
-        const groupFields = HOME_TEXT_FIELDS.filter((f) => f.group === group);
+        const groupFields = HOME_SETTINGS_FIELDS.filter((f) => f.group === group);
         if (groupFields.length === 0) return null;
         return (
           <section key={group}>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="admin-section-title text-muted-foreground">
               {t(`admin.home.groups.${group}`)}
             </h3>
             <div className="mt-4 grid gap-4">

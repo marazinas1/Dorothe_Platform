@@ -260,6 +260,7 @@
   --sidebar-primary: #ffffff;
   --sidebar-primary-foreground: #000000;
   --sidebar-accent: rgb(255 255 255 / 0.1);
+  --sidebar-active: rgb(255 255 255 / 0.15);
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: rgb(255 255 255 / 0.1);
   --sidebar-ring: #ffffff;

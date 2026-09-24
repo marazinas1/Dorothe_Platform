@@ -58,11 +58,11 @@ export function PageTextEditor({
       <LockAllDefaultsBar locked={lockedCount} total={fieldCount} onLockAll={onLockAll} />
 
       {PAGE_FIELD_GROUPS.map((group) => {
-        const fields = definition.fields.filter((f) => f.group === group);
+        const fields = definition.fields.filter((f) => f.group === group && f.editable);
         if (fields.length === 0) return null;
         return (
           <section key={group}>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="admin-section-title text-muted-foreground">
               {t(`admin.pageEditor.groups.${group}`)}
             </h3>
             <div className="mt-4 grid gap-4">
