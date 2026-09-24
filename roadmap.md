@@ -1,10 +1,10 @@
 # Roadmap — active Deerva admin alignment
 
-- [ ] Apply `data-admin-theme="noir"` to admin, auth and portalled controls
-- [ ] Move admin typography to Noir voice tokens and enforce 4 px radii
-- [ ] Standardise shared 2 px underline tabs and expandable editors
-- [ ] Align Settings page stubs and media presentation with the content model
-- [ ] Verify admin/auth routes and confirm the public site is unchanged
+- [x] Apply `data-admin-theme="noir"` to admin, auth and portalled controls
+- [x] Move admin typography to Noir voice tokens and enforce 4 px radii
+- [x] Standardise shared 2 px underline tabs and expandable editors
+- [x] Align Settings page stubs and media presentation with the content model
+- [x] Verify admin/auth routes and confirm the public site is unchanged
 
 - [x] Apply the fixed Noir theme and full-width 256 px desktop sidebar
 - [x] Standardise shared headers, sections, tabs, badges, states and controls
