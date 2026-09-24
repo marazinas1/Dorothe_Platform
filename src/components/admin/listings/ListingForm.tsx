@@ -136,8 +136,6 @@ export function ListingForm({
     enabled: !!listingId,
     save: () => save({ silent: true }),
   });
-
-
   function refreshListing() {
     if (listingId) void queryClient.invalidateQueries(adminListingQueryOptions(listingId));
   }
@@ -188,8 +186,6 @@ export function ListingForm({
         refreshListing={refreshListing}
         onError={(message) => toast.error(message)}
       />
-
-
       <SaveBar
         dirty={form.dirty}
         saving={saving}

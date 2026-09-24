@@ -50,7 +50,7 @@ export function TestimonialForm({ initial, locales, onSave, onCancel }: Props) {
       {locales.map((loc) => (
         <div key={loc} className="space-y-1.5">
           <Label htmlFor={`quote-${loc}`}>
-            {t("admin.testimonials.quote")} · {loc.toUpperCase()}
+            {t("admin.testimonials.quote")} · {t(`locale.${loc}`, { defaultValue: loc })}
           </Label>
           <Textarea
             id={`quote-${loc}`}
