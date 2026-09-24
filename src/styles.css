@@ -20,8 +20,6 @@
 @import "@fontsource-variable/newsreader/index.css";
 @import "@fontsource-variable/archivo/index.css";
 @import "@fontsource-variable/urbanist/index.css";
-/* Manrope is the fixed admin typeface — not part of the client font registry. */
-@import "@fontsource-variable/manrope/index.css";
 /* Script face, only ever used for the signature motif. */
 @import "@fontsource/tangerine/latin-400.css";
 @import "@fontsource/tangerine/latin-700.css";
@@ -201,11 +199,9 @@
  * introduces a second typeface or its own shape language, and it expresses
  * colour only through the core semantic roles. No project-specific aliases.
  *
- * Scoped to `.admin-theme`, doubled so it outranks the client `:root`
- * overrides; AdminShell puts it on the admin wrapper and on <body> so Radix
- * portals (dialogs, menus, toasts) match.
+ * Scoped through `data-admin-theme`, also placed on <body> so portals match.
  */
-.admin-theme.admin-theme {
+:where([data-admin-theme="noir"]) {
   /* Core roles only. Fixed values, never client-configurable. */
   --background: #fafafa;
   --foreground: #111111;
@@ -233,9 +229,19 @@
   --input: #e0e0e0;
   --ring: #000000;
 
-  /* Headings use the project sans; no separate admin typeface. */
+  --font-body: "Urbanist Variable", "Urbanist", ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-body);
-  /* One shape for inputs, buttons and cards — the project radius. */
+  --admin-label-transform: uppercase;
+  --admin-label-tracking: 0.14em;
+  --admin-label-size: 0.625rem;
+  --admin-tab-transform: uppercase;
+  --admin-tab-tracking: 0.12em;
+  --admin-tab-size: 0.75rem;
+  --admin-tab-weight: 700;
+  --admin-group-transform: uppercase;
+  --admin-group-tracking: 0.2em;
+
+  /* One shape for inputs, buttons and cards. */
   --radius: 0.25rem;
   --radius-sm: 0.25rem;
   --radius-md: 0.25rem;
@@ -263,82 +269,107 @@
   line-height: 1.5;
 }
 
-.admin-theme.admin-theme :is(h1, h2, h3, h4, h5, h6, .font-heading) {
+:where([data-admin-theme="noir"]) :is(h1, h2, h3, h4, h5, h6, .font-heading) {
   font-family: var(--font-sans);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0;
 }
 
-.admin-theme.admin-theme h1 {
+:where([data-admin-theme="noir"]) h1 {
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 0;
 }
 
-.admin-theme.admin-theme h2 {
+:where([data-admin-theme="noir"]) h2 {
   font-size: 1.125rem;
 }
 
-.admin-theme.admin-theme h3 {
+:where([data-admin-theme="noir"]) h3 {
   font-size: 1rem;
 }
 
-.admin-theme.admin-theme main {
+:where([data-admin-theme="noir"]) main {
   background: var(--background);
 }
 
-.admin-theme.admin-theme [data-slot="input"],
-.admin-theme.admin-theme [data-slot="textarea"],
-.admin-theme.admin-theme [data-slot="select-trigger"] {
+:where([data-admin-theme="noir"]) [data-slot="input"],
+:where([data-admin-theme="noir"]) [data-slot="textarea"],
+:where([data-admin-theme="noir"]) [data-slot="select-trigger"] {
   min-height: 2.5rem;
   border-radius: var(--radius);
   background: var(--card);
 }
 
-.admin-theme.admin-theme [data-slot="input"]:focus-visible,
-.admin-theme.admin-theme [data-slot="textarea"]:focus-visible,
-.admin-theme.admin-theme [data-slot="select-trigger"]:focus-visible {
+:where([data-admin-theme="noir"]) [data-slot="input"]:focus-visible,
+:where([data-admin-theme="noir"]) [data-slot="textarea"]:focus-visible,
+:where([data-admin-theme="noir"]) [data-slot="select-trigger"]:focus-visible {
   border-color: var(--ring);
   box-shadow: 0 0 0 3px var(--accent);
 }
 
-.admin-theme.admin-theme [data-slot="button"] {
+:where([data-admin-theme="noir"]) [data-slot="button"] {
   min-height: 2.5rem;
   border-radius: var(--radius);
   font-weight: 600;
 }
 
-.admin-theme.admin-theme [data-slot="badge"] {
+:where([data-admin-theme="noir"]) [data-slot="badge"] {
   border-radius: var(--radius-sm);
 }
 
-.admin-theme.admin-theme [data-sidebar="menu-button"] {
+:where([data-admin-theme="noir"]) [data-sidebar="menu-button"] {
   min-height: 2.5rem;
   border-radius: var(--radius);
   font-weight: 500;
 }
 
-.admin-theme.admin-theme [data-sidebar="menu-button"]:hover {
+:where([data-admin-theme="noir"]) [data-sidebar="menu-button"]:hover {
   background: var(--sidebar-accent);
   color: var(--sidebar-accent-foreground);
 }
 
-.admin-theme.admin-theme [data-sidebar="menu-button"][data-active="true"] {
-  background: rgb(255 255 255 / 0.15);
+:where([data-admin-theme="noir"]) [data-sidebar="menu-button"][data-active="true"] {
+  background: var(--sidebar-active);
   color: var(--sidebar-accent-foreground);
   font-weight: 600;
 }
 
-.admin-theme.admin-theme [data-sidebar="group-label"] {
-  font-size: 0.625rem;
+:where([data-admin-theme="noir"]) [data-sidebar="group-label"] {
+  font-size: var(--admin-label-size);
   font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  letter-spacing: var(--admin-group-tracking);
+  text-transform: var(--admin-group-transform);
   opacity: 0.75;
 }
 
-/* Tabs: a transparent row on one hairline, with a 3px underline when active. */
+/* Shared Noir typography voices. Components never encode casing or tracking. */
+.admin-label {
+  font-size: var(--admin-label-size);
+  letter-spacing: var(--admin-label-tracking);
+  text-transform: var(--admin-label-transform);
+}
+
+.admin-section-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: var(--admin-tab-tracking);
+  text-transform: var(--admin-tab-transform);
+}
+
+.admin-group-label {
+  font-size: var(--admin-label-size);
+  letter-spacing: var(--admin-group-tracking);
+  text-transform: var(--admin-group-transform);
+}
+
+.admin-topbar-title {
+  letter-spacing: 0;
+  text-transform: var(--admin-group-transform);
+}
+
+/* Tabs: a transparent row on one hairline, with a 2px active underline. */
 .admin-tabs {
   position: relative;
   display: flex;
@@ -357,10 +388,10 @@
   flex: none;
   padding: 0.625rem 0.125rem 0.75rem;
   color: var(--muted-foreground);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: var(--admin-tab-size);
+  font-weight: var(--admin-tab-weight);
+  letter-spacing: var(--admin-tab-tracking);
+  text-transform: var(--admin-tab-transform);
   white-space: nowrap;
   cursor: pointer;
   transition: color 150ms ease;
@@ -380,7 +411,7 @@
   position: absolute;
   inset-inline: 0;
   bottom: -1px;
-  height: 3px;
+  height: 2px;
   background: var(--primary);
 }
 
@@ -468,7 +499,7 @@
   justify-content: center;
   gap: 0.5rem;
   border: 1px dashed var(--border);
-  border-radius: 0.875rem;
+  border-radius: var(--radius);
   background: var(--muted);
   padding: 2rem;
   text-align: center;
@@ -487,7 +518,7 @@
   justify-content: center;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 0.875rem;
+  border-radius: var(--radius);
   background: var(--muted);
 }
 
