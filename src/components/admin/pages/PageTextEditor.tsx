@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { ChevronDown } from "lucide-react";
 
 import { PAGE_FIELD_GROUPS, type PageDefinition } from "@/lib/pages/fields";
 import { DefaultTextField } from "@/components/admin/ui/DefaultTextField";
@@ -61,11 +62,14 @@ export function PageTextEditor({
         const fields = definition.fields.filter((f) => f.group === group && f.editable);
         if (fields.length === 0) return null;
         return (
-          <section key={group}>
-            <h3 className="admin-section-title text-muted-foreground">
-              {t(`admin.pageEditor.groups.${group}`)}
-            </h3>
-            <div className="mt-4 grid gap-4">
+          <details key={group} className="group rounded-[var(--radius)] border border-border bg-card">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4">
+              <span className="admin-section-title text-muted-foreground">
+                {t(`admin.pageEditor.groups.${group}`)}
+              </span>
+              <ChevronDown className="h-4 w-4 text-muted-foreground transition-transform group-open:rotate-180" />
+            </summary>
+            <div className="grid gap-4 border-t border-border p-4">
               {fields.map((field) => (
                 <DefaultTextField
                   key={field.key}
@@ -83,7 +87,7 @@ export function PageTextEditor({
                 />
               ))}
             </div>
-          </section>
+          </details>
         );
       })}
     </div>
