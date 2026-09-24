@@ -56,6 +56,14 @@ export const GeneralSchema = z.object({
 });
 export type GeneralInput = z.infer<typeof GeneralSchema>;
 
+export const IdentitySchema = z.object({
+  site_name: z.string().trim().min(1).max(200),
+  legal_name: nullableText(200),
+  primary_agent_name: nullableText(200),
+  primary_agent_role: nullableText(200),
+  primary_agent_photo_url: nullableUrl,
+});
+
 /**
  * Brand images only. Colours, fonts and shape tokens are a developer concern
  * and are deliberately not editable from the panel.
@@ -136,6 +144,7 @@ export const HomeDefaultsSchema = z.object({
 export const SiteSettingsSchema = GeneralSchema;
 
 export const SITE_SETTINGS_SCHEMAS = {
+  identity: IdentitySchema,
   general: GeneralSchema,
   branding: BrandingSchema,
   brand_assets: BrandAssetsSchema,

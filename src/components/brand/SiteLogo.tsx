@@ -30,7 +30,6 @@ export function SiteLogo({
   interactive = false,
 }: Props) {
   const src = logoSrc("original", settings.logo_url);
-  const scale = Math.min(140, Math.max(60, settings.logo_size ?? 100)) / 100;
   if (!src)
     return (
       <BrandMark
@@ -49,7 +48,6 @@ export function SiteLogo({
         interactive && INTERACTIVE_CLASS,
         className,
       )}
-      style={{ transform: `scale(${scale})` }}
       loading="eager"
       decoding="async"
     />

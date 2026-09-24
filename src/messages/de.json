@@ -766,7 +766,11 @@
         "contact": "Kontakt & Büro",
         "region_name": "Regionsname",
         "technical": "Technisch (für diese Website festgelegt)",
-        "technical_help": "Diese Werte steuern Prüfung und Preisformatierung. Sie ändern sich nur mit der Plattform — bitte den Entwickler fragen."
+        "technical_help": "Diese Werte steuern Prüfung und Preisformatierung. Sie ändern sich nur mit der Plattform — bitte den Entwickler fragen.",
+        "agent_name": "Name der Maklerin",
+        "agent_role": "Rolle der Maklerin",
+        "agent_photo": "Porträt der Maklerin",
+        "agent_photo_help": "Wird einheitlich auf der Startseite, der Über-mich-Seite und in den Objektkontakten verwendet."
       },
       "hours": {
         "title": "Öffnungszeiten",

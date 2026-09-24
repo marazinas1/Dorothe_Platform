@@ -27,3 +27,9 @@ export function pageMediaPath(scope: string, slot: string): string {
   const safe = (v: string) => v.replace(/[^a-z0-9_-]/gi, "-").toLowerCase();
   return `pages/${safe(scope)}-${safe(slot)}.webp`;
 }
+
+/** The primary agent portrait belongs to the settings entity, not branding. */
+export function agentPortraitPath(settingsId: string, variant: string): string {
+  const safeId = settingsId.replace(/[^a-z0-9_-]/gi, "-").toLowerCase();
+  return `agent/${safeId}/portrait-${variant}.webp`;
+}

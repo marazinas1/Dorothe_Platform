@@ -3,12 +3,14 @@ import { useTranslation } from "react-i18next";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
+import { BrandAssetField } from "./BrandAssetField";
+import { agentPortraitPath } from "@/lib/branding/media-paths";
 import { geocodeAddress } from "@/lib/geo/geocode.functions";
 import {
   siteSettingsQueryOptions,
   updateSiteSettings,
 } from "@/lib/config/site-settings.functions";
-import { GeneralSchema, ContactSchema } from "@/lib/validation/site-settings";
+import { IdentitySchema, ContactSchema } from "@/lib/validation/site-settings";
 import type { SiteSettings } from "@/types/site-settings";
 
 import { SaveButton } from "./SaveButton";
@@ -21,6 +23,9 @@ import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 type State = {
   site_name: string;
   legal_name: string;
+  primary_agent_name: string;
+  primary_agent_role: string;
+  primary_agent_photo_url: string | null;
   contact_email: string;
   contact_phone: string;
   whatsapp: string;
@@ -38,6 +43,9 @@ function toState(data: SiteSettings): State {
   return {
     site_name: data.site_name,
     legal_name: data.legal_name ?? "",
+    primary_agent_name: data.primary_agent_name ?? "",
+    primary_agent_role: data.primary_agent_role ?? "",
+    primary_agent_photo_url: data.primary_agent_photo_url,
     contact_email: data.contact_email ?? "",
     contact_phone: data.contact_phone ?? "",
     whatsapp: data.whatsapp ?? "",
@@ -67,30 +75,15 @@ export function BusinessForm() {
     setForm((prev) => ({ ...prev, [key]: next }));
 
   async function save() {
-    GeneralSchema.parse({
+    const identity = IdentitySchema.parse({
       site_name: form.site_name,
       legal_name: form.legal_name,
-      country: data.country,
-      default_locale: data.default_locale,
-      enabled_locales: data.enabled_locales,
-      service_region: data.service_region,
-      currency: data.currency,
-      area_unit: data.area_unit,
+      primary_agent_name: form.primary_agent_name,
+      primary_agent_role: form.primary_agent_role,
+      primary_agent_photo_url: form.primary_agent_photo_url,
     });
     await updateSiteSettings({
-      data: {
-        tab: "general",
-        values: {
-          site_name: form.site_name,
-          legal_name: form.legal_name,
-          country: data.country,
-          default_locale: data.default_locale,
-          enabled_locales: data.enabled_locales,
-          service_region: data.service_region,
-          currency: data.currency,
-          area_unit: data.area_unit,
-        },
-      },
+      data: { tab: "identity", values: identity },
     });
     // The public map follows the saved address.
     let geo = { geo_lat: form.geo_lat, geo_lng: form.geo_lng };
@@ -127,6 +120,22 @@ export function BusinessForm() {
           <Field label={t("admin.settings.general.legal_name")}>
             <Input value={form.legal_name} onChange={(e) => set("legal_name", e.target.value)} />
           </Field>
+          <Field label={t("admin.settings.business.agent_name")}>
+            <Input value={form.primary_agent_name} onChange={(e) => set("primary_agent_name", e.target.value)} />
+          </Field>
+          <Field label={t("admin.settings.business.agent_role")}>
+            <Input value={form.primary_agent_role} onChange={(e) => set("primary_agent_role", e.target.value)} />
+          </Field>
+          <div className="sm:col-span-2">
+            <BrandAssetField
+              kind="logo"
+              label={t("admin.settings.business.agent_photo")}
+              help={t("admin.settings.business.agent_photo_help")}
+              value={form.primary_agent_photo_url}
+              onChange={(url) => set("primary_agent_photo_url", url)}
+              pathForVariant={(variant) => agentPortraitPath(data.id, variant)}
+            />
+          </div>
         </div>
       </AdminSection>
 
