@@ -5,8 +5,7 @@ export type LogoVariant = "mono" | "original";
 
 /**
  * Bundled fallback marks, used only until a client uploads their own logo.
- * The logo configured in site_settings always wins, so changing it in the
- * admin changes the public site, the admin panel and the sign-in screen.
+ * The configured primary logo always wins everywhere in the platform.
  */
 const FILES: Record<LogoVariant, string> = {
   original: logoOriginal.url,

@@ -95,7 +95,6 @@ function LoginPage() {
           <SiteLogo
             settings={settings}
             tone="light"
-            size="sm"
             className="max-w-[18rem]"
             interactive
           />

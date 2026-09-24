@@ -9,7 +9,7 @@ export function MaintenancePage({ locale, settings }: { locale: Locale; settings
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-6 py-16 text-foreground">
       <section className="mx-auto max-w-xl text-center">
-        <div className="mb-10 flex justify-center"><SiteLogo settings={settings} size="sm" /></div>
+        <div className="mb-10 flex justify-center"><SiteLogo settings={settings} /></div>
         <Wrench className="mx-auto h-7 w-7 text-primary" aria-hidden />
         <h1 className="mt-6 font-heading text-4xl sm:text-5xl">
           {german ? "Wir sind bald wieder da." : "We’ll be back shortly."}

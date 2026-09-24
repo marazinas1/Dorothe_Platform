@@ -7,9 +7,7 @@ import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import type { Locale } from "@/i18n/config";
 
 /**
- * The brand mark above the admin menu, linking back to the dashboard. Same
- * source as the public site (site_settings + src/assets/brand), so a clone
- * changes nothing here.
+ * The shared brand mark above the admin menu, linking back to the dashboard.
  */
 export function AdminSidebarHeader() {
   const { locale } = useParams({ strict: false }) as { locale: Locale };
@@ -24,8 +22,7 @@ export function AdminSidebarHeader() {
       >
         <SiteLogo
           settings={settings}
-          size="sm"
-          className="h-12 max-w-[12rem] brightness-0 invert"
+          className="max-w-[12rem]"
         />
       </Link>
     </SidebarHeader>
