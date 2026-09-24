@@ -41,7 +41,7 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
                 variant={l === locale ? "default" : "outline"}
                 size="sm"
                 onClick={() => onLocale(l)}
-                className="text-xs font-semibold uppercase"
+                className="admin-label font-semibold"
               >
                 {l}
               </Button>
@@ -100,7 +100,7 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
         </div>
 
         <div className="hidden bg-muted lg:block">
-          <div className="border-b border-border px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <div className="admin-label border-b border-border px-4 py-2 font-semibold text-muted-foreground">
             {t("admin.home.livePreview")}
           </div>
           <iframe
