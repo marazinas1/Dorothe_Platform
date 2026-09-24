@@ -16,6 +16,8 @@ type Props = {
   /** Eyebrow above the name; falls back to the translated kicker. */
   eyebrow?: string;
   name: string;
+  /** Editable page headline; the agent name remains the image identity. */
+  headline?: string;
   /** Solo forks show the signature motif; agency forks pass false. */
   showSignature?: boolean;
 };
@@ -32,6 +34,7 @@ export function AgentIntro({
   paragraphs = [],
   eyebrow,
   name,
+  headline,
   showSignature = true,
 }: Props) {
   const { t } = useTranslation();
@@ -56,7 +59,9 @@ export function AgentIntro({
 
         <div className="md:col-span-7">
           <div className="eyebrow text-muted-foreground">{role}</div>
-          <h1 className="mt-5 font-heading text-4xl leading-[1.05] md:text-6xl">{name}</h1>
+          <h1 className="mt-5 font-heading text-4xl leading-[1.05] md:text-6xl">
+            {headline || name}
+          </h1>
           {/* Signature intentionally not rendered here — it lives in the homepage hero. */}
 
           <div className="mt-8 space-y-6 text-base leading-relaxed text-foreground">

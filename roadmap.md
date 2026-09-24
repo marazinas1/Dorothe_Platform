@@ -20,3 +20,12 @@
 
 Blocked outside this work:
 - Security findings: raw listings/assets exposure and appointment/inquiry row scoping
+
+## Approved admin content-model completion
+
+- [ ] Reduce Settings to the finite Deerva page spine
+- [ ] Wire every remaining editable field to its public consumer
+- [ ] Unify agent portrait and canonical logo controls
+- [ ] Remove iframe previews from page editors
+- [ ] Finish shared admin controls, Noir surfaces and read-only states
+- [ ] Verify admin and public routes across responsive viewports

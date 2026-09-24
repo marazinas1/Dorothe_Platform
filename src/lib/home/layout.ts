@@ -8,7 +8,7 @@
 
 export type HomeMediaSlot = "portrait" | "hero_photo";
 
-export const HOME_MEDIA_SLOTS: HomeMediaSlot[] = ["hero_photo", "portrait"];
+export const HOME_MEDIA_SLOTS: HomeMediaSlot[] = ["hero_photo"];
 
 export const HOME_CHROME = {
   /** The footer band is the darker, warmer surface. */
