@@ -86,9 +86,9 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
                 : t("admin.listings.geocode.noAddress");
 
   return (
-    <div id={fieldAnchorId("map")} className="scroll-mt-28 rounded-md border border-border">
+    <div id={fieldAnchorId("map")} className="scroll-mt-28 rounded-[var(--radius)] border border-border">
       <div className="flex flex-wrap items-center gap-3 px-3 py-2">
-        <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <span className="admin-label font-medium text-muted-foreground">
           {t("admin.listings.geocode.title")}
         </span>
         <Button

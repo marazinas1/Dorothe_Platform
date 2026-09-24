@@ -25,14 +25,14 @@ export function FiguresSection({ form }: { form: ListingFormApi }) {
     <FormSection anchor="price" title={t("admin.listings.sections.figures")}>
       <div className="grid gap-8">
         <div className="grid gap-4">
-          <h3 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <h3 className="admin-label font-medium text-muted-foreground">
             {t("admin.listings.groups.price")}
           </h3>
           <PriceGroup form={form} />
         </div>
         {openNumbers.length > 0 ? (
           <div className="grid gap-4 border-t border-border pt-6">
-            <h3 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <h3 className="admin-label font-medium text-muted-foreground">
               {t("admin.listings.groups.size")}
             </h3>
             <NumberFields form={form} keys={openNumbers} />

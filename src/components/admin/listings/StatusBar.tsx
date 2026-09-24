@@ -63,7 +63,7 @@ export function StatusBar({
   return (
     <div className="rounded-[var(--radius)] border border-border bg-card">
       <div className="flex flex-wrap items-center gap-3 px-4 py-3">
-        <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        <span className="admin-label text-muted-foreground">
           {t("admin.listings.fields.status")}
         </span>
         <StatusChip icon={isPublic ? "published" : "draft"} tone={isPublic ? "active" : "muted"}>

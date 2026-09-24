@@ -99,7 +99,7 @@ export function EquipmentSection({ form }: { form: ListingFormApi }) {
 
         {available.length > 0 ? (
           <fieldset className="grid gap-3">
-            <legend className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <legend className="admin-label font-medium text-muted-foreground">
               {t("admin.listings.fields.features")}
             </legend>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -107,7 +107,7 @@ export function EquipmentSection({ form }: { form: ListingFormApi }) {
                 <label
                   key={key}
                   htmlFor={`feature-${key}`}
-                  className="flex cursor-pointer items-center gap-2.5 rounded-md border border-border px-3 py-2 text-sm"
+                  className="flex cursor-pointer items-center gap-2.5 rounded-[var(--radius)] border border-border px-3 py-2 text-sm"
                 >
                   <Checkbox
                     id={`feature-${key}`}

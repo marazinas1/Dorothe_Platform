@@ -29,10 +29,10 @@ export function ListingsGroups({
   return (
     <div className="space-y-8">
       {groups.map((group) => (
-        <details key={group.key} open={!group.collapsedByDefault} className="group">
+        <details key={group.key} className="group">
           <summary className="mb-3 flex cursor-pointer list-none items-center gap-2">
             <ChevronRight className="h-3.5 w-3.5 text-muted-foreground transition-transform group-open:rotate-90" />
-            <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="admin-label text-muted-foreground">
               {t(`admin.listings.statusGroups.${group.key}`)}
             </span>
             <span className="text-[11px] text-muted-foreground/70">{group.rows.length}</span>

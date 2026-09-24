@@ -78,7 +78,7 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
       <UnsavedChangesGuard dirty={dirty} />
       {locales.map((loc) => (
         <div key={loc} className="space-y-4 border-b border-border/60 pb-5 last:border-0 last:pb-0">
-          <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <div className="admin-label font-semibold text-muted-foreground">
             {loc.toUpperCase()}
           </div>
           <div className="space-y-1.5">

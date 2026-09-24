@@ -114,7 +114,7 @@ export function LocationSection({ form }: { form: ListingFormApi }) {
         <AddressMapPicker form={form} />
 
         <div className="space-y-2">
-          <Label className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <Label className="admin-label font-medium text-muted-foreground">
             {t("admin.listings.fields.geo_precision")}
           </Label>
           <RadioGroup
