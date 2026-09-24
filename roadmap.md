@@ -23,9 +23,9 @@ Blocked outside this work:
 
 ## Approved admin content-model completion
 
-- [ ] Reduce Settings to the finite Deerva page spine
-- [ ] Wire every remaining editable field to its public consumer
-- [ ] Unify agent portrait and canonical logo controls
-- [ ] Remove iframe previews from page editors
-- [ ] Finish shared admin controls, Noir surfaces and read-only states
+- [x] Reduce Settings to the finite Deerva page spine
+- [x] Wire every remaining editable field to its public consumer
+- [x] Unify agent portrait and canonical logo controls
+- [x] Remove iframe previews from page editors
+- [x] Finish shared admin controls and Noir surfaces
 - [ ] Verify admin and public routes across responsive viewports

@@ -70,10 +70,8 @@ export const IdentitySchema = z.object({
  */
 export const BrandAssetsSchema = z.object({
   logo_url: nullableUrl,
-  logo_dark_url: nullableUrl,
   favicon_url: nullableUrl,
   og_default_image: nullableUrl,
-  logo_size: z.number().int().min(60).max(140),
 });
 export type BrandAssetsInput = z.infer<typeof BrandAssetsSchema>;
 

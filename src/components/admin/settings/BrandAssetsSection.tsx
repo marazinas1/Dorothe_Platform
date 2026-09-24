@@ -12,10 +12,8 @@ import { BrandAssetField } from "./BrandAssetField";
 
 type Assets = {
   logo_url: string | null;
-  logo_dark_url: string | null;
   favicon_url: string | null;
   og_default_image: string | null;
-  logo_size: number;
 };
 
 /**
@@ -30,10 +28,8 @@ export function BrandAssetsSection() {
 
   const current: Assets = {
     logo_url: data.logo_url,
-    logo_dark_url: data.logo_dark_url,
     favicon_url: data.favicon_url,
     og_default_image: data.og_default_image,
-    logo_size: data.logo_size ?? 100,
   };
 
   async function set(key: keyof Assets, value: string | number | null) {
