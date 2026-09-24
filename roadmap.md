@@ -28,4 +28,4 @@ Blocked outside this work:
 - [x] Unify agent portrait and canonical logo controls
 - [x] Remove iframe previews from page editors
 - [x] Finish shared admin controls and Noir surfaces
-- [ ] Verify admin and public routes across responsive viewports
+- [x] Verify admin and public routes across responsive viewports
