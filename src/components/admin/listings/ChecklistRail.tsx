@@ -40,7 +40,7 @@ export function ChecklistRail({ checklist }: { checklist: Checklist }) {
   return (
     <>
       {/* Mobile: one collapsed line that says how much is left. */}
-      <details className="rounded-lg border border-border bg-muted/30 p-4 lg:hidden">
+      <details className="rounded-[var(--radius)] border border-border bg-muted/30 p-4 lg:hidden">
         <summary className="flex cursor-pointer items-center gap-2 text-sm font-medium">
           <ChevronDown className="h-4 w-4" aria-hidden />
           {t("admin.listings.checklist.title")}
@@ -53,7 +53,7 @@ export function ChecklistRail({ checklist }: { checklist: Checklist }) {
         <div className="mt-3">{body}</div>
       </details>
 
-      <aside className="hidden lg:sticky lg:top-6 lg:block lg:self-start lg:rounded-lg lg:border lg:border-border lg:bg-muted/30 lg:p-4">
+      <aside className="hidden lg:sticky lg:top-6 lg:block lg:self-start lg:rounded-[var(--radius)] lg:border lg:border-border lg:bg-muted/30 lg:p-4">
         <h2 className="font-heading text-base">{t("admin.listings.checklist.title")}</h2>
         {body}
       </aside>

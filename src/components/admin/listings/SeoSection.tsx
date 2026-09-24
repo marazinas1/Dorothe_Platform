@@ -5,8 +5,8 @@ import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow } from "./FieldRow";
 
 /**
- * SEO metadata, collapsed by default — it matters, but it is the last thing a
- * broker fills in. Empty fields fall back to the title and description.
+ * SEO metadata is already inside the collapsed More details editor. Keeping
+ * it unframed avoids nesting an editor card inside another editor card.
  */
 export function SeoSection({ form, lang }: { form: ListingFormApi; lang: string }) {
   const { t } = useTranslation();
@@ -14,11 +14,8 @@ export function SeoSection({ form, lang }: { form: ListingFormApi; lang: string 
   const suffix = ` (${lang.toUpperCase()})`;
 
   return (
-    <details className="rounded-lg border border-border bg-card">
-      <summary className="cursor-pointer px-4 py-3 font-heading text-lg sm:px-6">
-        {t("admin.listings.sections.seo")}
-      </summary>
-      <div className="grid gap-4 border-t border-border px-4 py-4 sm:grid-cols-2 sm:px-6">
+    <section className="grid gap-4 border-t border-border pt-5 sm:grid-cols-2">
+      <h3 className="admin-section-title sm:col-span-2">{t("admin.listings.sections.seo")}</h3>
         <FieldRow
           label={t("admin.listings.fields.meta_title") + suffix}
           help={t("admin.listings.help.meta")}
@@ -34,7 +31,6 @@ export function SeoSection({ form, lang }: { form: ListingFormApi; lang: string 
             onChange={(e) => form.setTranslated("meta_description", lang, e.target.value)}
           />
         </FieldRow>
-      </div>
-    </details>
+    </section>
   );
 }

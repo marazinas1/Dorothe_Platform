@@ -38,7 +38,7 @@ export function AdminLocaleToggle({ current }: { current: Locale }) {
       role="group"
       aria-label={t("admin.topbar.interfaceLanguage")}
       title={t("admin.topbar.interfaceLanguageHint")}
-      className="flex items-center gap-0.5 rounded-md border border-border p-0.5"
+      className="flex items-center gap-0.5 rounded-[var(--radius)] border border-border p-0.5"
     >
       {MESSAGE_LOCALES.map((loc) => (
         <Button

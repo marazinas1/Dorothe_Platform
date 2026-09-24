@@ -37,7 +37,7 @@ export function CommissionFields({
       : "admin.listings.fields.commission_free";
 
   return (
-    <div className="grid gap-4 rounded-md border border-border p-3" >
+    <div className="grid gap-4 rounded-[var(--radius)] border border-border p-3">
       <label className="flex items-center justify-between gap-4 text-sm">
         <span>
           <span className="font-medium">{t(freeKey)}</span>
