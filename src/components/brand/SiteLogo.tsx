@@ -1,5 +1,5 @@
 import { BrandMark } from "@/components/brand/BrandMark";
-import { logoSrc, type LogoVariant } from "@/lib/theme/logo";
+import { logoSrc } from "@/lib/theme/logo";
 import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/types/site-settings";
 
@@ -8,13 +8,6 @@ type Props = {
   /** `light` is for use over hero photography. */
   tone?: "dark" | "light";
   className?: string;
-  /** Rendered height of the logo image. */
-  size?: "sm" | "md";
-  /**
-   * `mono` is the one-colour header mark, `original` the supplied file. Both
-   * come from src/assets/brand via @/lib/theme/logo.
-   */
-  variant?: LogoVariant;
   /**
    * `interactive` is for logos that act as the home button: hover darkens the
    * mark, mirroring the shared ActionButton fill -> darker-fill behaviour.
@@ -27,21 +20,16 @@ const INTERACTIVE_CLASS =
   "transition-[filter] duration-300 ease-out hover:brightness-[0.7]";
 
 /**
- * Renders the brand mark, falling back to site_settings.logo_url and then to
- * the typographic BrandMark. A client that needs a light variant over
- * photography uploads it as logo_dark_url.
+ * Renders one canonical uploaded logo at one shared size throughout public,
+ * auth and admin chrome. Backgrounds may differ; the logo file never does.
  */
 export function SiteLogo({
   settings,
   tone = "dark",
   className,
-  size = "md",
-  variant = "original",
   interactive = false,
 }: Props) {
-  const fallback =
-    tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
-  const src = tone === "light" ? fallback : logoSrc(variant, fallback);
+  const src = logoSrc("original", settings.logo_url);
   const scale = Math.min(140, Math.max(60, settings.logo_size ?? 100)) / 100;
   if (!src)
     return (
@@ -57,8 +45,7 @@ export function SiteLogo({
       src={src}
       alt={settings.site_name}
       className={cn(
-        size === "sm" ? "h-14 md:h-16" : "h-16 md:h-20",
-        "w-auto object-contain transition-[height] duration-500 ease-out",
+        "h-16 w-auto max-w-full object-contain",
         interactive && INTERACTIVE_CLASS,
         className,
       )}
