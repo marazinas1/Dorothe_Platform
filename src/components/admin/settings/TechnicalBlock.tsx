@@ -10,7 +10,7 @@ export function TechnicalBlock({ data }: { data: SiteSettings }) {
   const { t } = useTranslation();
   return (
     <section className="space-y-3 rounded-[var(--radius)] border border-dashed border-border p-4">
-      <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+      <h2 className="admin-section-title text-muted-foreground">
         {t("admin.settings.business.technical")}
       </h2>
       <div className="grid gap-3 text-sm sm:grid-cols-2">

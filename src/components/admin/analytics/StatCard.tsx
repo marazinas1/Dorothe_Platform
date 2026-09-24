@@ -21,7 +21,7 @@ export function StatCard({
   return (
     <div className="rounded-[var(--radius)] border border-border bg-card p-4">
       <div className="flex items-center justify-between">
-        <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
+        <p className="admin-label text-muted-foreground">{label}</p>
         <Icon className="h-4 w-4 text-muted-foreground" />
       </div>
       <p className="mt-1 font-heading text-2xl tabular-nums">

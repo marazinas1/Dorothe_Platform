@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 export function AuthCard({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md rounded-media border border-border bg-card p-8">
+      <div className="w-full max-w-md rounded-[var(--radius)] border border-border bg-card p-8">
         {children}
       </div>
     </div>

@@ -125,7 +125,7 @@ export function DefaultTextField({
 
       {defaultText ? (
         <div className="rounded-[var(--radius)] border border-dashed border-border bg-muted/40 px-3 py-3">
-          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+          <div className="admin-label flex items-center gap-1.5 font-semibold text-muted-foreground/70">
             {isLocked ? <Lock className="h-3 w-3" /> : <LockOpen className="h-3 w-3" />}
             {edited ? t("admin.copyEditor.defaultLabel") : t("admin.copyEditor.currentlyShown")}
           </div>

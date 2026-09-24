@@ -79,7 +79,7 @@ export function UserRow({
 
       <div className="flex flex-wrap items-center gap-2 md:gap-3">
         {isDeveloper ? (
-          <span className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+          <span className="admin-label text-muted-foreground">
             {t("admin.users.roles.developer")}
           </span>
         ) : (

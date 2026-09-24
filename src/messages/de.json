@@ -471,7 +471,8 @@
   },
   "admin": {
     "common": {
-      "close": "Schließen"
+      "close": "Schließen",
+      "edit": "Bearbeiten"
     },
     "testimonials": {
       "title": "Kundenstimmen",
@@ -1413,6 +1414,10 @@
         "hero_photo": "Auftaktfoto",
         "default": "Standard",
         "custom": "Eigenes wählen",
+        "yourChoice": "Ihre Auswahl",
+        "studioDefault": "Studio-Standard",
+        "builtIn": "Integriert",
+        "showing": "Wird angezeigt",
         "empty": "Noch kein Foto",
         "uploadHelp": "Laden Sie ein klares, hochauflösendes Bild hoch. Es wird automatisch optimiert.",
         "restoreDefault": "Standardbild verwenden"

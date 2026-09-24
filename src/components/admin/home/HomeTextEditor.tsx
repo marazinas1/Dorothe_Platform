@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { ChevronDown } from "lucide-react";
 
-import { HOME_FIELD_GROUPS, HOME_TEXT_FIELDS } from "@/lib/home/fields";
+import { HOME_FIELD_GROUPS, HOME_SETTINGS_FIELDS } from "@/lib/home/fields";
 import { DefaultTextField } from "@/components/admin/ui/DefaultTextField";
 import { LockAllDefaultsBar } from "@/components/admin/ui/LockAllDefaultsBar";
 import { DefaultRequestNotices } from "@/components/admin/copy/DefaultRequestNotices";
@@ -56,14 +57,17 @@ export function HomeTextEditor({
       <LockAllDefaultsBar locked={lockedCount} total={fieldCount} onLockAll={onLockAll} />
 
       {HOME_FIELD_GROUPS.map((group) => {
-        const groupFields = HOME_TEXT_FIELDS.filter((f) => f.group === group);
+        const groupFields = HOME_SETTINGS_FIELDS.filter((f) => f.group === group);
         if (groupFields.length === 0) return null;
         return (
-          <section key={group}>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              {t(`admin.home.groups.${group}`)}
-            </h3>
-            <div className="mt-4 grid gap-4">
+          <details key={group} className="group rounded-[var(--radius)] border border-border bg-card">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4">
+              <span className="admin-section-title text-muted-foreground">
+                {t(`admin.home.groups.${group}`)}
+              </span>
+              <ChevronDown className="h-4 w-4 text-muted-foreground transition-transform group-open:rotate-180" />
+            </summary>
+            <div className="grid gap-4 border-t border-border p-4">
               {groupFields.map((field) => (
                 <DefaultTextField
                   key={field.key}
@@ -81,7 +85,7 @@ export function HomeTextEditor({
                 />
               ))}
             </div>
-          </section>
+          </details>
         );
       })}
     </div>

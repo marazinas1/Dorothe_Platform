@@ -142,7 +142,7 @@ export function usePageAdmin(page: string, locale: string) {
     await invalidate();
   }
 
-  const fields = pageDefinition(page)?.fields ?? [];
+  const fields = (pageDefinition(page)?.fields ?? []).filter((field) => field.editable);
 
   /** True once a developer froze this field's wording for this locale. */
   function isLocked(key: string): boolean {

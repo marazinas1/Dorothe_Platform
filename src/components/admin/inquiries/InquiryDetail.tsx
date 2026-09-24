@@ -103,7 +103,7 @@ export function InquiryDetail({
 
       {inquiry.listing ? (
         <section className="space-y-1">
-          <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.inquiries.detail.listing")}</h2>
+          <h2 className="admin-section-title">{t("admin.inquiries.detail.listing")}</h2>
           <Link
             to="/$locale/admin/listings/$id"
             params={{ locale, id: inquiry.listing.id }}
@@ -116,14 +116,14 @@ export function InquiryDetail({
 
       {inquiry.message ? (
         <section className="space-y-2">
-          <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.inquiries.detail.message")}</h2>
+          <h2 className="admin-section-title">{t("admin.inquiries.detail.message")}</h2>
           <p className="whitespace-pre-wrap text-sm leading-relaxed">{inquiry.message}</p>
         </section>
       ) : null}
 
       {details.length > 0 ? (
         <section className="space-y-2">
-          <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.inquiries.detail.details")}</h2>
+          <h2 className="admin-section-title">{t("admin.inquiries.detail.details")}</h2>
           <dl className="divide-y divide-border overflow-hidden rounded-[var(--radius)] border border-border text-sm">
             {details.map(([key, value]) => (
               <div key={key} className="flex gap-4 px-4 py-2">

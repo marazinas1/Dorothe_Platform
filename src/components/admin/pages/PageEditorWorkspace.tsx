@@ -46,7 +46,7 @@ export function PageEditorWorkspace({
                 variant={l === locale ? "default" : "outline"}
                 size="sm"
                 onClick={() => onLocale(l)}
-                className="text-xs font-semibold uppercase"
+                className="admin-label font-semibold"
               >
                 {l}
               </Button>

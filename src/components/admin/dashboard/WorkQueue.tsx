@@ -16,7 +16,7 @@ export function WorkQueue({ locale }: { locale: string }) {
   return (
     <section className="space-y-4">
       <DefaultRequestQueue />
-      <h2 className="text-sm font-bold uppercase tracking-[0.12em]">{t("admin.dashboard.queue.heading")}</h2>
+      <h2 className="admin-section-title">{t("admin.dashboard.queue.heading")}</h2>
       <div className="grid items-start gap-4 lg:grid-cols-2">
         <AgendaQueue locale={locale} />
         <InquiryQueue locale={locale} />

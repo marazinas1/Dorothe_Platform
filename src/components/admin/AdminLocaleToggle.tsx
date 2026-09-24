@@ -50,7 +50,7 @@ export function AdminLocaleToggle({ current }: { current: Locale }) {
           variant="ghost"
           size="sm"
           className={cn(
-            "h-7 px-2 text-xs font-medium uppercase transition-colors disabled:opacity-60",
+            "admin-label h-7 px-2 font-medium transition-colors disabled:opacity-60",
             loc === current
               ? "bg-secondary text-secondary-foreground"
               : "text-muted-foreground hover:text-foreground",

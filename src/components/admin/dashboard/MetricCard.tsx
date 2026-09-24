@@ -18,7 +18,7 @@ export function MetricCard({
 }) {
   return (
     <div className="rounded-[var(--radius)] border border-border bg-card p-4">
-      <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
+      <p className="admin-label text-muted-foreground">{label}</p>
       <p className="mt-1 font-heading text-2xl tabular-nums">
         {value === null || value === "" ? (
           <span className="text-muted-foreground">&mdash;</span>

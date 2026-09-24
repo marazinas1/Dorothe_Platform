@@ -29,7 +29,7 @@ export function FieldRow({
       id={anchor ? fieldAnchorId(anchor) : undefined}
       className={`space-y-1.5 scroll-mt-28 ${className}`}
     >
-      <Label className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+      <Label className="admin-label font-medium text-muted-foreground">
         {label}
       </Label>
       {children}
@@ -78,7 +78,7 @@ export function FormSection({
       className="scroll-mt-28 overflow-hidden rounded-[var(--radius)] border border-border bg-card"
     >
       <header className="border-b border-border px-4 py-4 sm:px-5">
-      <h2 className="flex items-baseline gap-2 text-sm font-bold uppercase tracking-[0.12em]">
+      <h2 className="admin-section-title flex items-baseline gap-2">
         {step !== null ? (
           <span className="text-sm font-medium text-muted-foreground">{step}</span>
         ) : null}

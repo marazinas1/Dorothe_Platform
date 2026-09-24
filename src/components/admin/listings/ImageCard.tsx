@@ -94,7 +94,7 @@ export function ImageCard({
         </span>
 
         {index === 0 && !isTarget ? (
-          <span className="absolute right-1 top-1 rounded bg-primary px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-primary-foreground shadow-sm">
+          <span className="admin-label absolute right-1 top-1 rounded-[var(--radius)] bg-primary px-2 py-0.5 font-semibold text-primary-foreground shadow-sm">
             {t("admin.listings.images.cover")}
           </span>
         ) : null}

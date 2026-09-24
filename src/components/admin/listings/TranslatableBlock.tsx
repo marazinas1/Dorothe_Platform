@@ -80,7 +80,7 @@ export function TranslatableBlock({
 
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div className="grid min-w-0 gap-1.5">
-            <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="admin-label text-muted-foreground">
               {t("admin.listings.contentLanguage")}
             </span>
             <Tabs value={lang} onValueChange={onLangChange}>

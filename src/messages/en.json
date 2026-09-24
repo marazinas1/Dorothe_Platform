@@ -471,7 +471,8 @@
   },
   "admin": {
     "common": {
-      "close": "Close"
+      "close": "Close",
+      "edit": "Edit"
     },
     "testimonials": {
       "title": "Testimonials",
@@ -1413,6 +1414,10 @@
         "hero_photo": "Opening photograph",
         "default": "Default",
         "custom": "Choose your own",
+        "yourChoice": "Your choice",
+        "studioDefault": "Studio default",
+        "builtIn": "Built-in",
+        "showing": "Showing",
         "empty": "No photograph yet",
         "uploadHelp": "Upload a clear, high-resolution image. It will be optimised automatically.",
         "restoreDefault": "Use default image"

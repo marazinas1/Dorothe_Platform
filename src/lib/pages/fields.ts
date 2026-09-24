@@ -22,6 +22,8 @@ export interface PageField {
   group: "opening" | "body" | "form" | "closing";
   /** Translation key holding the default line. */
   i18n: string;
+  /** Settings exposes only the small, frequently changed page spine. */
+  editable?: boolean;
 }
 
 export interface PageDefinition {
@@ -36,19 +38,22 @@ const line = (
   key: string,
   i18n: string,
   group: PageField["group"] = "body",
-): PageField => ({ key, kind: "line", group, i18n });
+  editable = false,
+): PageField => ({ key, kind: "line", group, i18n, editable });
 
 const para = (
   key: string,
   i18n: string,
   group: PageField["group"] = "body",
-): PageField => ({ key, kind: "paragraph", group, i18n });
+  editable = false,
+): PageField => ({ key, kind: "paragraph", group, i18n, editable });
 
 const list = (
   key: string,
   i18n: string,
   group: PageField["group"] = "body",
-): PageField => ({ key, kind: "list", group, i18n });
+  editable = false,
+): PageField => ({ key, kind: "list", group, i18n, editable });
 
 export const PAGE_DEFINITIONS: PageDefinition[] = [
   {
@@ -56,9 +61,9 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "immobilien",
     mediaSlots: [],
     fields: [
-      para("headline", "listings.title", "opening"),
-      para("intro", "listings.description", "opening"),
-      line("empty", "listings.empty", "closing"),
+      para("headline", "listings.title", "opening", true),
+      para("intro", "listings.description", "opening", true),
+      line("empty", "listings.empty", "closing", true),
     ],
   },
   {
@@ -66,9 +71,9 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "verkaufen",
     mediaSlots: [],
     fields: [
-      line("kicker", "pages.selling.kicker", "opening"),
-      para("headline", "pages.selling.headline", "opening"),
-      para("intro", "pages.selling.intro", "opening"),
+      line("kicker", "pages.selling.kicker", "opening", true),
+      para("headline", "pages.selling.headline", "opening", true),
+      para("intro", "pages.selling.intro", "opening", true),
       line("steps_title", "pages.selling.steps_title"),
       line("services_title", "pages.selling.services_title"),
       para("services_body", "pages.selling.services_body"),
@@ -79,8 +84,8 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
       para("proof_body", "pages.selling.proof_body"),
       line("form_title", "pages.selling.form_title", "form"),
       para("form_intro", "pages.selling.form_intro", "form"),
-      line("cta_title", "pages.selling.cta_title", "closing"),
-      para("cta_body", "pages.selling.cta_body", "closing"),
+      line("cta_title", "pages.selling.cta_title", "closing", true),
+      para("cta_body", "pages.selling.cta_body", "closing", true),
     ],
   },
   {
@@ -88,17 +93,17 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "erben",
     mediaSlots: [],
     fields: [
-      line("kicker", "pages.inheritance.kicker", "opening"),
-      para("headline", "pages.inheritance.headline", "opening"),
-      para("intro", "pages.inheritance.intro", "opening"),
+      line("kicker", "pages.inheritance.kicker", "opening", true),
+      para("headline", "pages.inheritance.headline", "opening", true),
+      para("intro", "pages.inheritance.intro", "opening", true),
       line("appraisal_title", "pages.inheritance.appraisal_title"),
       para("appraisal_body", "pages.inheritance.appraisal_body"),
       line("community_title", "pages.inheritance.community_title"),
       para("community_body", "pages.inheritance.community_body"),
       line("credential_title", "pages.inheritance.credential_title"),
       para("credential_body", "pages.inheritance.credential_body"),
-      line("contact_title", "pages.inheritance.contact_title", "closing"),
-      para("contact_body", "pages.inheritance.contact_body", "closing"),
+      line("contact_title", "pages.inheritance.contact_title", "closing", true),
+      para("contact_body", "pages.inheritance.contact_body", "closing", true),
     ],
   },
   {
@@ -106,9 +111,9 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "ratgeber",
     mediaSlots: [],
     fields: [
-      para("headline", "blog.title", "opening"),
-      para("intro", "blog.intro", "opening"),
-      line("empty", "blog.empty", "closing"),
+      para("headline", "blog.title", "opening", true),
+      para("intro", "blog.intro", "opening", true),
+      line("empty", "blog.empty", "closing", true),
     ],
   },
   {
@@ -116,13 +121,13 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "ueber-mich",
     mediaSlots: ["portrait"],
     fields: [
-      line("kicker", "pages.about.kicker", "opening"),
-      para("headline", "pages.about.solo.headline", "opening"),
-      list("paragraphs", "pages.about.solo.paragraphs"),
+      line("kicker", "pages.about.kicker", "opening", true),
+      para("headline", "pages.about.solo.headline", "opening", true),
+      list("paragraphs", "pages.about.solo.paragraphs", "body", true),
       line("qualifications_title", "pages.about.solo.qualifications_title"),
       line("seals_title", "pages.about.seals_title"),
       line("testimonials_title", "pages.about.testimonials_title"),
-      line("contact_title", "pages.about.contact_title_solo", "closing"),
+      line("contact_title", "pages.about.contact_title_solo", "closing", true),
     ],
   },
   {
@@ -130,14 +135,14 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
     path: "kontakt",
     mediaSlots: [],
     fields: [
-      line("kicker", "pages.contact.kicker", "opening"),
-      para("headline", "pages.contact.headline_solo", "opening"),
+      line("kicker", "pages.contact.kicker", "opening", true),
+      para("headline", "pages.contact.headline_solo", "opening", true),
       line("address_title", "pages.contact.address_title"),
       line("hours_title", "pages.contact.hours_title"),
       line("channels_title", "pages.contact.channels_title"),
       line("map_title", "pages.contact.map_title"),
-      line("form_title", "pages.contact.form_title", "form"),
-      para("form_intro", "pages.contact.form_intro_solo", "form"),
+      line("form_title", "pages.contact.form_title", "form", true),
+      para("form_intro", "pages.contact.form_intro_solo", "form", true),
     ],
   },
 ];
