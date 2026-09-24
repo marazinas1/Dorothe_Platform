@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { AdminThemeScope } from "@/components/admin/AdminThemeScope";
 
 export const Route = createFileRoute("/$locale/auth")({
   staticData: { sitemap: "exclude-subtree" },
@@ -10,5 +11,11 @@ export const Route = createFileRoute("/$locale/auth")({
  * two-column split, the password screens centre a paper card.
  */
 function AuthLayout() {
-  return <Outlet />;
+  return (
+    <AdminThemeScope>
+      <main className="min-h-screen bg-background font-sans text-foreground">
+        <Outlet />
+      </main>
+    </AdminThemeScope>
+  );
 }

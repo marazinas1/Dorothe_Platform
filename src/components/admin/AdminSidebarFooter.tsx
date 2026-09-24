@@ -27,7 +27,7 @@ export function AdminSidebarFooter({ email, roleLabel }: Props) {
     <SidebarFooter className="gap-3 border-t border-sidebar-border p-4">
       <div className="px-2 py-2">
         <div className="truncate text-xs font-medium text-sidebar-accent-foreground">{email}</div>
-        <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-sidebar-foreground">
+        <div className="admin-group-label mt-1 text-sidebar-foreground">
           {roleLabel}
         </div>
       </div>

@@ -24,7 +24,7 @@ export function AuthSplit({ children, eyebrow, brand, tagline, note }: Props) {
       <div className="flex items-center justify-center px-5 py-14 sm:px-10">
         <div className="w-full max-w-[26rem]">
           {eyebrow ? (
-            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            <p className="admin-label text-muted-foreground">
               {eyebrow}
             </p>
           ) : null}
@@ -36,12 +36,12 @@ export function AuthSplit({ children, eyebrow, brand, tagline, note }: Props) {
         <div className="flex flex-col items-center gap-4 text-center">
           {brand}
           {tagline ? (
-            <p className="text-xs tracking-[0.08em] text-background/70">{tagline}</p>
+            <p className="text-xs text-primary-foreground/70">{tagline}</p>
           ) : null}
         </div>
-        <span className="h-px w-16 bg-background/40" />
+        <span className="h-px w-16 bg-primary-foreground/40" />
         {note ? (
-          <p className="text-[11px] uppercase tracking-[0.22em] text-background/60">{note}</p>
+          <p className="admin-label text-primary-foreground/60">{note}</p>
         ) : null}
       </div>
     </div>

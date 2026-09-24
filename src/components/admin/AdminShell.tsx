@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -9,6 +8,7 @@ import type { VerifiedAdminProfile } from "@/lib/auth/admin-gate.server";
 
 import { AdminSidebar } from "./AdminSidebar";
 import { AdminLocaleToggle } from "./AdminLocaleToggle";
+import { AdminThemeScope } from "./AdminThemeScope";
 
 export function AdminShell({
   children,
@@ -22,21 +22,13 @@ export function AdminShell({
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
 
-  // Dropdowns and dialogs render into <body> through a portal, so the admin
-  // theme has to reach the body too — otherwise menus pick up the client's
-  // public palette instead of the fixed admin one.
-  useEffect(() => {
-    document.body.classList.add("admin-theme");
-    return () => document.body.classList.remove("admin-theme");
-  }, []);
-
   const displayName = profile.full_name || profile.email || t("admin.topbar.unknownUser");
   const roleLabel = t(`admin.role.${profile.role}`);
 
   return (
-    <SidebarProvider>
-      {/* The admin has its own fixed design system, identical in every clone. */}
-      <div className="admin-theme flex min-h-screen w-full bg-background text-foreground">
+    <AdminThemeScope>
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full bg-background font-sans text-foreground">
 
         <AdminSidebar email={profile.email ?? displayName} roleLabel={roleLabel} />
         <div className="flex min-w-0 flex-1 flex-col">
@@ -46,7 +38,7 @@ export function AdminShell({
                 aria-label={t("admin.topbar.toggleSidebar")}
                 className="text-foreground md:hidden"
               />
-              <span className="truncate text-base font-extrabold uppercase">
+              <span className="admin-topbar-title truncate text-base font-extrabold">
                 {t("admin.topbar.title", { site: settings.site_name })}
               </span>
             </div>
@@ -56,7 +48,8 @@ export function AdminShell({
             {children}
           </main>
         </div>
-      </div>
-    </SidebarProvider>
+        </div>
+      </SidebarProvider>
+    </AdminThemeScope>
   );
 }

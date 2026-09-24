@@ -1,8 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import { cn } from "@/lib/utils";
-
 export interface AdminTabItem {
   id: string;
   label: ReactNode;
@@ -20,20 +18,15 @@ export interface AdminTabItem {
 export function AdminTabs({ label, items }: { label: string; items: AdminTabItem[] }) {
   return (
     <nav aria-label={label} className="relative -mb-px w-full overflow-x-auto">
-      <div className="flex w-max min-w-full items-stretch gap-6 border-b border-border">
+      <div className="admin-tabs w-max min-w-full">
         {items.map((item) => (
           <Link
             key={item.id}
             to={item.to}
             params={item.params as never}
             aria-current={item.active ? "page" : undefined}
-            className={cn(
-              "relative shrink-0 whitespace-nowrap px-0.5 pb-3 pt-1 text-sm transition-colors",
-              "after:absolute after:inset-x-0 after:-bottom-px after:h-[3px] after:content-['']",
-              item.active
-                ? "font-medium text-foreground after:bg-primary"
-                : "text-muted-foreground after:bg-transparent hover:text-foreground",
-            )}
+            data-active={item.active}
+            className="admin-tab"
           >
             {item.label}
           </Link>

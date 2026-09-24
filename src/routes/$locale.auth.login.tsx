@@ -111,7 +111,7 @@ function LoginPage() {
 
       <form className="mt-10 space-y-5" onSubmit={onSubmit}>
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-[11px] uppercase tracking-[0.16em]">
+          <Label htmlFor="email" className="admin-label">
             {t("admin.auth.login.email")}
           </Label>
           <Input
@@ -121,11 +121,11 @@ function LoginPage() {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="h-11 rounded-md border-border bg-card"
+            className="h-11 border-border bg-card"
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-[11px] uppercase tracking-[0.16em]">
+          <Label htmlFor="password" className="admin-label">
             {t("admin.auth.login.password")}
           </Label>
           <Input
@@ -135,11 +135,11 @@ function LoginPage() {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="h-11 rounded-md border-border bg-card"
+            className="h-11 border-border bg-card"
           />
         </div>
         {error ? <p className="text-sm text-destructive">{error}</p> : null}
-        <Button type="submit" disabled={busy} className="h-11 w-full rounded-md">
+        <Button type="submit" disabled={busy} className="h-11 w-full">
           {busy ? t("admin.auth.login.submitting") : t("admin.auth.login.submit")}
         </Button>
         <div className="pt-1">
