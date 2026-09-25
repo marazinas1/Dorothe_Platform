@@ -452,7 +452,8 @@
     "social": {
       "facebook": "Dorothe Waltner auf Facebook",
       "linkedin": "Dorothe Waltner auf LinkedIn"
-    }
+    },
+    "badge": "Plattform entwickelt und betreut von Deerva"
   },
   "locale": {
     "switch": "Sprache wechseln",
@@ -545,38 +546,48 @@
     },
     "analytics": {
       "title": "Auswertung",
-      "subtitle": "Eigene Zugriffsmessung. Ohne Cookies, ohne Dienste Dritter.",
+      "subtitle": "Eigene Besuchsmessung der Live-Website. Ohne Cookies, ohne Dienste Dritter.",
       "range": "{{count}} Tage",
       "loading": "Auswertung wird geladen…",
       "error": "Auswertung konnte nicht geladen werden.",
       "vsPrevious": "gegenüber Vorperiode",
       "traffic": "Zugriffe",
       "views": "Seitenaufrufe",
-      "visitors": "Eindeutige Besucher",
       "inquiries": "Anfragen",
       "conversion": "Konversion",
       "topPages": "Häufigste Seiten",
-      "sources": "Zugriffsquellen",
       "devices": "Geräte",
       "emptyPages": "Noch keine Seitenaufrufe erfasst.",
-      "emptySources": "Noch keine Quellen erfasst.",
       "emptyDevices": "Noch keine Geräte erfasst.",
-      "emptyHint": "Besuche der öffentlichen Website erscheinen hier innerhalb einer Minute.",
-      "source": {
-        "direct": "Direkt",
-        "google": "Google",
-        "search": "Andere Suche",
-        "facebook": "Facebook",
-        "instagram": "Instagram",
-        "linkedin": "LinkedIn",
-        "portals": "Immobilienportale",
-        "other": "Andere Websites"
-      },
+      "emptyHint": "Besuche erscheinen hier, sobald jemand einige Sekunden auf der Live-Website verbringt.",
       "device": {
         "desktop": "Desktop",
         "mobile": "Mobil",
         "tablet": "Tablet",
         "unknown": "Unbekannt"
+      },
+      "visits": "Besuche",
+      "singlePage": "Besuche mit einer Seite",
+      "avgTime": "Ø aktive Zeit",
+      "pagesPerVisit": "Seiten pro Besuch",
+      "channels": "Kanäle",
+      "referrers": "Verweisende Websites",
+      "countries": "Länder",
+      "emptyReferrers": "Noch keine verweisenden Websites.",
+      "emptyCountries": "Noch keine Länder erfasst.",
+      "conversionHelp": "Anfragen pro 100 Besuche.",
+      "methodTitle": "So werden Besuche gezählt",
+      "method": "Gemessen wird nur die Live-Website. Ein Besuch zählt nach 5 Sekunden oder dem ersten Scrollen, Tippen oder Tastendruck und endet nach 30 Minuten Inaktivität. Angemeldete Mitarbeitende, Vorschauseiten und automatisierte Browser sind ausgeschlossen. Keine Cookies, keine gespeicherte IP-Adresse, keine websiteübergreifende Identität; Daten älter als 14 Monate werden gelöscht. Die Methode folgt IAB/MRC-, DAA- und EDPB-Leitlinien, ist aber keine akkreditierte Messung.",
+      "channel": {
+        "direct": "Direkt",
+        "organic_search": "Organische Suche",
+        "paid_search": "Bezahlte Suche",
+        "organic_social": "Soziale Medien",
+        "paid_social": "Bezahlte soziale Medien",
+        "referral": "Verweis",
+        "email": "E-Mail",
+        "ai_assistant": "KI-Assistent",
+        "other_campaign": "Andere Kampagne"
       }
     },
     "auth": {

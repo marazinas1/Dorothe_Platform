@@ -12,10 +12,10 @@ import {
 interface Point {
   day: string;
   views: number;
-  visitors: number;
+  visits: number;
 }
 
-/** Views and unique visitors per day. Colours come from the theme tokens. */
+/** Views and visits per day. Colours come from the theme tokens. */
 export function TrafficChart({ data, locale }: { data: Point[]; locale: string }) {
   const { t } = useTranslation();
   const rows = data.map((p) => ({
@@ -80,8 +80,8 @@ export function TrafficChart({ data, locale }: { data: Point[]; locale: string }
             />
             <Area
               type="monotone"
-              dataKey="visitors"
-              name={t("admin.analytics.visitors")}
+              dataKey="visits"
+              name={t("admin.analytics.visits")}
               stroke="var(--accent)"
               fill="url(#analyticsVisitors)"
               strokeWidth={2}
