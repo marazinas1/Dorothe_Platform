@@ -1636,6 +1636,36 @@
       "title": "Unsaved changes",
       "body": "You have changes that are not saved yet. If you leave now they will be lost.",
       "leave": "Leave without saving"
+    },
+    "media": {
+      "yourChoice": "Your choice",
+      "studioDefault": "Studio default",
+      "builtIn": "Built-in",
+      "showing": "Showing",
+      "noChoice": "Nothing chosen",
+      "noStudio": "No studio default",
+      "noBuiltIn": "No built-in photograph",
+      "showing_chosen": "Currently showing your choice",
+      "showing_default": "Currently showing the studio default",
+      "showing_builtIn": "Currently showing the built-in photograph",
+      "resetToDefault": "Reset to default",
+      "saved": "Photograph updated.",
+      "reset": "Photograph reset to default.",
+      "studioSaved": "Studio default set.",
+      "studioCleared": "Studio default removed.",
+      "clearStudio": "Clear studio default",
+      "studioLocked": "The studio default is set by your developer.",
+      "error": "Could not save. Please try again.",
+      "slots": {
+        "home_hero_photo": {
+          "label": "Opening photograph",
+          "help": "The large photograph beside the opening words of the home page. Remember to press Save."
+        },
+        "about_portrait": {
+          "label": "Portrait",
+          "help": "Your portrait on the About me page. It also appears beside the enquiry form on every property page. Saved immediately."
+        }
+      }
     }
   },
   "pages": {
