@@ -26,6 +26,7 @@ import { adminListingsQueryOptions } from "@/lib/listings/admin.functions";
 import { deleteListing, duplicateListing } from "@/lib/listings/admin-mutations.functions";
 import { statusOptionsFor } from "@/lib/listings/status-options";
 import { useStatusChange } from "./use-status-change";
+import { usePermission } from "@/lib/auth/use-permission";
 
 /** Edit (primary) plus an overflow menu: copy public link, duplicate, delete. */
 export function ListingCardActions({
@@ -42,6 +43,7 @@ export function ListingCardActions({
   dealType: string;
 }) {
   const { t } = useTranslation();
+  const canDelete = usePermission("listing.delete");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [busy, setBusy] = useState(false);
@@ -121,7 +123,7 @@ export function ListingCardActions({
               {t("admin.listings.statusAction.archived")}
             </DropdownMenuItem>
           ) : null}
-          <DropdownMenuItem
+          {canDelete ? <DropdownMenuItem
             className="text-destructive focus:text-destructive"
             onSelect={(event) => {
               event.preventDefault();
@@ -130,7 +132,7 @@ export function ListingCardActions({
           >
             <Trash2 className="h-4 w-4" />
             {t("admin.listings.actions.delete")}
-          </DropdownMenuItem>
+          </DropdownMenuItem> : null}
         </DropdownMenuContent>
       </DropdownMenu>
 
