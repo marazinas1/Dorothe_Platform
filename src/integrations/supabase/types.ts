@@ -823,37 +823,55 @@ export type Database = {
       }
       page_views: {
         Row: {
+          channel: string
           country: string | null
           created_at: string
           day: string
           device: string
+          engaged_seconds: number
           id: string
           path: string
           referrer_host: string | null
+          session_id: string | null
           source: string
-          visitor_hash: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          visitor_hash: string | null
         }
         Insert: {
+          channel?: string
           country?: string | null
           created_at?: string
           day?: string
           device?: string
+          engaged_seconds?: number
           id?: string
           path: string
           referrer_host?: string | null
+          session_id?: string | null
           source?: string
-          visitor_hash: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          visitor_hash?: string | null
         }
         Update: {
+          channel?: string
           country?: string | null
           created_at?: string
           day?: string
           device?: string
+          engaged_seconds?: number
           id?: string
           path?: string
           referrer_host?: string | null
+          session_id?: string | null
           source?: string
-          visitor_hash?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          visitor_hash?: string | null
         }
         Relationships: []
       }
@@ -1735,6 +1753,7 @@ export type Database = {
         Args: { _base: string; _id: string }
         Returns: string
       }
+      purge_old_page_views: { Args: never; Returns: undefined }
       slugify: { Args: { _input: string }; Returns: string }
       storage_can_edit_listing_object: {
         Args: { _bucket: string; _name: string }
