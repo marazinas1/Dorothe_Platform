@@ -7,7 +7,7 @@ import { useFeatureFlag } from "@/hooks/use-feature-flag";
 
 /**
  * Business & appearance first, then one tab per public page in the exact order
- * and with the exact names the site menu uses, and Contact last.
+ * and with the exact names the site menu uses, then the legal pages last.
  */
 const TABS = [
   "business",
@@ -17,10 +17,10 @@ const TABS = [
   "inheritance",
   "blog",
   "about",
+  "contact",
   "imprint",
   "privacy",
   "terms",
-  "contact",
 ] as const;
 export type SettingsTabId = (typeof TABS)[number];
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { usePermission } from "@/lib/auth/use-permission";
 import { Plus, Quote } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,8 @@ import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 /** Client voices: add, edit, order, and decide what the home page shows. */
 export function TestimonialsPage() {
   const { t } = useTranslation();
+  // Deleting is a manager action; editors see no delete control.
+  const canDelete = usePermission(\"settings.edit\");
   const qc = useQueryClient();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: rows } = useSuspenseQuery(adminTestimonialsQueryOptions);
@@ -69,12 +72,12 @@ export function TestimonialsPage() {
                   locale={locales[0]}
                   expanded={expanded}
                   onEdit={() => setEditing(expanded ? null : toDraft(row))}
-                  onDelete={() =>
+                  onDelete={canDelete ? () =>
                     setPendingDelete({
                       id: row.id,
                       name: row.author_name || t("admin.confirm.untitled"),
                     })
-                  }
+                  : undefined}
                   onMove={async (direction) => {
                     await moveTestimonial({ data: { id: row.id, direction } });
                     await refresh();

@@ -121,7 +121,7 @@ export function ListingCardActions({
               {t("admin.listings.statusAction.archived")}
             </DropdownMenuItem>
           ) : null}
-          <DropdownMenuItem
+          {canDelete ? <DropdownMenuItem
             className="text-destructive focus:text-destructive"
             onSelect={(event) => {
               event.preventDefault();
@@ -130,7 +130,7 @@ export function ListingCardActions({
           >
             <Trash2 className="h-4 w-4" />
             {t("admin.listings.actions.delete")}
-          </DropdownMenuItem>
+          </DropdownMenuItem> : null}
         </DropdownMenuContent>
       </DropdownMenu>
 

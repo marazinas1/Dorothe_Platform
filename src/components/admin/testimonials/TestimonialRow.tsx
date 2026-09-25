@@ -10,7 +10,8 @@ interface Props {
   row: Row;
   locale: string;
   onEdit: () => void;
-  onDelete: () => void;
+  /** Omitted when the signed-in role may not delete. */
+  onDelete?: () => void;
   onMove: (direction: "up" | "down") => void;
   expanded: boolean;
 }
@@ -71,6 +72,7 @@ export function TestimonialRow({ row, locale, onEdit, onDelete, onMove, expanded
           {expanded ? t("admin.common.close") : t("admin.testimonials.edit")}
           <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
         </Button>
+        {onDelete ? (
         <Button
           type="button"
           size="icon"
@@ -80,6 +82,7 @@ export function TestimonialRow({ row, locale, onEdit, onDelete, onMove, expanded
         >
           <Trash2 className="h-4 w-4" />
         </Button>
+        ) : null}
       </div>
     </div>
   );

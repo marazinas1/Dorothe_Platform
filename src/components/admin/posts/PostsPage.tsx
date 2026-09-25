@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { usePermission } from "@/lib/auth/use-permission";
 import { Newspaper, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,8 @@ import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 /** Articles: write, publish, and keep older links working. */
 export function PostsPage() {
   const { t } = useTranslation();
+  // Deleting is a manager action; editors see no delete control.
+  const canDelete = usePermission(\"settings.edit\");
   const qc = useQueryClient();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: rows } = useSuspenseQuery(adminPostsQueryOptions);
@@ -73,12 +76,12 @@ export function PostsPage() {
                   locale={locales[0]}
                   expanded={expanded}
                   onEdit={() => setEditing(expanded ? null : toDraft(row))}
-                  onDelete={() =>
+                  onDelete={canDelete ? () =>
                     setPendingDelete({
                       id: row.id,
                       title: row.title?.[locales[0]] ?? t("admin.confirm.untitled"),
                     })
-                  }
+                  : undefined}
                 />
                 {expanded ? (
                   <PostForm
