@@ -231,6 +231,8 @@
 
   --font-body: "Urbanist Variable", "Urbanist", ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-body);
+  /* Re-declared here: the root value was resolved with the public font. */
+  --font-sans: var(--font-body);
   --admin-label-transform: uppercase;
   --admin-label-tracking: 0.14em;
   --admin-label-size: 0.625rem;
