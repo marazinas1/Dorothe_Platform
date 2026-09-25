@@ -8,6 +8,7 @@ import { SocialLinks } from "@/components/brand/SocialLinks";
 import { LegalLinks } from "@/components/public/LegalLinks";
 import { SiteLogo } from "@/components/brand/SiteLogo";
 import { HomeLink } from "@/components/shared/HomeLink";
+import { DeervaBadge } from "@/components/public/DeervaBadge";
 import type { Locale } from "@/i18n/config";
 import { HOME_CHROME } from "@/lib/home/layout";
 import { areasAreConfigured, serviceAreas } from "@/lib/homepage/plan";
@@ -110,6 +111,7 @@ function Footer({
             locale={locale}
             className="mt-2 flex flex-wrap gap-4 md:justify-end"
           />
+          <DeervaBadge label={t("footer.badge")} />
           <div className="mt-2 flex gap-4 md:justify-end">
             <Link to="/$locale/admin" params={{ locale }} className="hover:text-foreground">
               {t("nav.admin")}

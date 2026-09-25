@@ -452,7 +452,8 @@
     "social": {
       "facebook": "Dorothe Waltner on Facebook",
       "linkedin": "Dorothe Waltner on LinkedIn"
-    }
+    },
+    "badge": "Platform developed and maintained by Deerva"
   },
   "locale": {
     "switch": "Switch language",
@@ -545,38 +546,48 @@
     },
     "analytics": {
       "title": "Analytics",
-      "subtitle": "First-party traffic data. No cookies, no third-party tracking.",
+      "subtitle": "First-party visit data from the live site. No cookies, no third-party tracking.",
       "range": "{{count}} days",
       "loading": "Loading analytics…",
       "error": "Could not load analytics.",
       "vsPrevious": "vs previous period",
       "traffic": "Traffic",
       "views": "Page views",
-      "visitors": "Unique visitors",
       "inquiries": "Inquiries",
       "conversion": "Conversion",
       "topPages": "Top pages",
-      "sources": "Traffic sources",
       "devices": "Devices",
       "emptyPages": "No page views recorded yet.",
-      "emptySources": "No sources recorded yet.",
       "emptyDevices": "No devices recorded yet.",
-      "emptyHint": "Visits to the public site appear here within a minute.",
-      "source": {
-        "direct": "Direct",
-        "google": "Google",
-        "search": "Other search",
-        "facebook": "Facebook",
-        "instagram": "Instagram",
-        "linkedin": "LinkedIn",
-        "portals": "Property portals",
-        "other": "Other sites"
-      },
+      "emptyHint": "Visits appear here once someone spends a few seconds on the live site.",
       "device": {
         "desktop": "Desktop",
         "mobile": "Mobile",
         "tablet": "Tablet",
         "unknown": "Unknown"
+      },
+      "visits": "Visits",
+      "singlePage": "Single-page visits",
+      "avgTime": "Avg. engaged time",
+      "pagesPerVisit": "Pages per visit",
+      "channels": "Channels",
+      "referrers": "Referring sites",
+      "countries": "Countries",
+      "emptyReferrers": "No referring sites yet.",
+      "emptyCountries": "No countries recorded yet.",
+      "conversionHelp": "Inquiries per 100 visits.",
+      "methodTitle": "How visits are counted",
+      "method": "Only the live site is measured. A visit counts after 5 seconds or a first scroll, tap or key press, and ends after 30 minutes of inactivity. Signed-in staff, preview sites and automated browsers are excluded. No cookies, no stored IP address, no cross-site identity; data older than 14 months is deleted. The method follows IAB/MRC, DAA and EDPB guidance but is not an accredited measurement.",
+      "channel": {
+        "direct": "Direct",
+        "organic_search": "Organic search",
+        "paid_search": "Paid search",
+        "organic_social": "Organic social",
+        "paid_social": "Paid social",
+        "referral": "Referral",
+        "email": "Email",
+        "ai_assistant": "AI assistant",
+        "other_campaign": "Other campaign"
       }
     },
     "auth": {

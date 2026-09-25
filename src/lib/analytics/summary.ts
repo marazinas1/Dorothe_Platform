@@ -4,22 +4,35 @@
 export const ANALYTICS_RANGES = [7, 30, 90] as const;
 export type AnalyticsRange = (typeof ANALYTICS_RANGES)[number];
 
+export interface PeriodTotals {
+  views: number;
+  visits: number;
+  single_page: number;
+  avg_seconds: number;
+}
+
+const ZERO: PeriodTotals = { views: 0, visits: 0, single_page: 0, avg_seconds: 0 };
+
 export interface AnalyticsSummary {
-  totals: { views: number; visitors: number };
-  previous: { views: number; visitors: number };
-  daily: { day: string; views: number; visitors: number }[];
+  totals: PeriodTotals;
+  previous: PeriodTotals;
+  daily: { day: string; views: number; visits: number }[];
   top_pages: { path: string; views: number }[];
-  sources: { source: string; views: number }[];
+  channels: { channel: string; views: number }[];
+  referrers: { referrer_host: string; views: number }[];
+  countries: { country: string; views: number }[];
   devices: { device: string; views: number }[];
   inquiries: number;
 }
 
 export const EMPTY_SUMMARY: AnalyticsSummary = {
-  totals: { views: 0, visitors: 0 },
-  previous: { views: 0, visitors: 0 },
+  totals: ZERO,
+  previous: ZERO,
   daily: [],
   top_pages: [],
-  sources: [],
+  channels: [],
+  referrers: [],
+  countries: [],
   devices: [],
   inquiries: 0,
 };
@@ -46,17 +59,24 @@ export function buildSeries(
   daily: AnalyticsSummary["daily"],
   range: AnalyticsRange,
   now: Date = new Date(),
-): { day: string; views: number; visitors: number }[] {
+): { day: string; views: number; visits: number }[] {
   const byDay = new Map(daily.map((d) => [d.day, d]));
-  const out: { day: string; views: number; visitors: number }[] = [];
+  const out: { day: string; views: number; visits: number }[] = [];
   for (let i = range - 1; i >= 0; i--) {
     const key = isoDay(i, now);
     const row = byDay.get(key);
     out.push({
       day: key,
       views: Number(row?.views ?? 0),
-      visitors: Number(row?.visitors ?? 0),
+      visits: Number(row?.visits ?? 0),
     });
   }
   return out;
+}
+
+/** Engaged seconds as "1m 05s". */
+export function formatDuration(seconds: number): string {
+  const s = Math.max(0, Math.round(seconds));
+  const m = Math.floor(s / 60);
+  return m ? `${m}m ${String(s % 60).padStart(2, "0")}s` : `${s}s`;
 }
