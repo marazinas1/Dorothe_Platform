@@ -4,7 +4,7 @@ import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
 import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
-import { HomeMediaEditor } from "@/components/admin/home/HomeMediaEditor";
+import { SiteMediaSlot } from "@/components/admin/ui/SiteMediaSlot";
 import type { PageDefinition } from "@/lib/pages/fields";
 import type { usePageAdmin } from "@/lib/pages/use-page-admin";
 
@@ -76,15 +76,7 @@ export function PageEditorWorkspace({
           />
 
 
-          {definition.mediaSlots.length > 0 ? (
-            <HomeMediaEditor
-              slots={definition.mediaSlots as never}
-              entry={admin.mediaEntry}
-              onChange={admin.setMediaEntry}
-              resolved={(slot) => admin.resolved.media(slot)}
-              scope={definition.key}
-            />
-          ) : null}
+          {definition.key === "about" ? <SiteMediaSlot slotKey="about:portrait" /> : null}
 
           <SaveButton onSubmit={admin.save} />
       </div>
