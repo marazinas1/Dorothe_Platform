@@ -14,7 +14,6 @@ import { IdentitySchema, ContactSchema } from "@/lib/validation/site-settings";
 import type { SiteSettings } from "@/types/site-settings";
 
 import { SaveButton } from "./SaveButton";
-import { OpeningHoursField } from "./OpeningHoursField";
 import { SocialLinksField } from "./SocialLinksField";
 import { SettingsField as Field } from "./SettingsField";
 import { AdminSection } from "@/components/admin/ui/AdminSection";
@@ -167,10 +166,6 @@ export function BusinessForm() {
         </div>
       </AdminSection>
 
-      <OpeningHoursField
-        value={form.opening_hours}
-        onChange={(next) => set("opening_hours", next)}
-      />
       <AdminSection title={t("admin.settings.social.title")} description={t("admin.settings.social.help")}>
         <SocialLinksField value={form.social} onChange={(next) => set("social", next)} />
       </AdminSection>
