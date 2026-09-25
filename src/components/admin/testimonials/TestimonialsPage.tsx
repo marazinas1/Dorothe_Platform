@@ -23,7 +23,7 @@ import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 export function TestimonialsPage() {
   const { t } = useTranslation();
   // Deleting is a manager action; editors see no delete control.
-  const canDelete = usePermission(\"settings.edit\");
+  const canDelete = usePermission("settings.edit");
   const qc = useQueryClient();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { data: rows } = useSuspenseQuery(adminTestimonialsQueryOptions);
