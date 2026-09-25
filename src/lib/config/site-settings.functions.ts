@@ -14,6 +14,7 @@ import {
   HomeSchema,
   HomeDefaultsSchema,
   MaintenanceSchema,
+  AgentPortraitSchema,
 
   type SettingsTabKey,
 } from "@/lib/validation/site-settings";
