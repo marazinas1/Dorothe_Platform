@@ -1135,6 +1135,7 @@ export type Database = {
           logo_size: number
           logo_url: string | null
           maintenance_mode: boolean
+          media_defaults: Json
           muted_text_color: string | null
           og_default_image: string | null
           opening_hours: Json
@@ -1200,6 +1201,7 @@ export type Database = {
           logo_size?: number
           logo_url?: string | null
           maintenance_mode?: boolean
+          media_defaults?: Json
           muted_text_color?: string | null
           og_default_image?: string | null
           opening_hours?: Json
@@ -1265,6 +1267,7 @@ export type Database = {
           logo_size?: number
           logo_url?: string | null
           maintenance_mode?: boolean
+          media_defaults?: Json
           muted_text_color?: string | null
           og_default_image?: string | null
           opening_hours?: Json

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import brokerPlaceholder from "@/assets/broker-placeholder.jpg";
+import { agentPortrait } from "@/lib/media/slots";
 import type { Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
@@ -38,7 +38,7 @@ export function AgentIntro({
   showSignature = true,
 }: Props) {
   const { t } = useTranslation();
-  const portrait = settings.primary_agent_photo_url ?? brokerPlaceholder;
+  const portrait = agentPortrait(settings);
   const role = eyebrow ?? t("pages.about.kicker");
 
   return (

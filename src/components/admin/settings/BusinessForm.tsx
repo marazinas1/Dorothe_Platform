@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
-import { BrandAssetField } from "./BrandAssetField";
-import { agentPortraitPath } from "@/lib/branding/media-paths";
 import { geocodeAddress } from "@/lib/geo/geocode.functions";
 import {
   siteSettingsQueryOptions,
@@ -125,16 +123,6 @@ export function BusinessForm() {
           <Field label={t("admin.settings.business.agent_role")}>
             <Input value={form.primary_agent_role} onChange={(e) => set("primary_agent_role", e.target.value)} />
           </Field>
-          <div className="sm:col-span-2">
-            <BrandAssetField
-              kind="logo"
-              label={t("admin.settings.business.agent_photo")}
-              help={t("admin.settings.business.agent_photo_help")}
-              value={form.primary_agent_photo_url}
-              onChange={(url) => set("primary_agent_photo_url", url)}
-              pathForVariant={(variant) => agentPortraitPath(data.id, variant)}
-            />
-          </div>
         </div>
       </AdminSection>
 

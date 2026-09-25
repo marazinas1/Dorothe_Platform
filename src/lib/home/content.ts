@@ -1,3 +1,4 @@
+import { agentPortraitIfSet, resolveMedia } from "@/lib/media/slots";
 /**
  * Home page content resolver (core).
  *
@@ -131,19 +132,8 @@ export function homeDefaultList(settings: SiteSettings, key: string, locale: str
 
 /** Per-slot photograph: an own upload wins, otherwise the house default. */
 export function homeMedia(settings: SiteSettings, slot: HomeMediaSlot): string | null {
-  const media = (settings.home_media ?? {}) as Record<
-    string,
-    { mode?: string; url?: string } | undefined
-  >;
-  const entry = media[slot];
-  if (entry?.mode === "custom" && entry.url?.trim()) return entry.url.trim();
-
-  const heroSection = (settings.homepage_sections ?? []).find((s) => s.key === "hero");
-  const heroImage = heroSection?.image?.trim() || null;
-  const portrait = settings.primary_agent_photo_url?.trim() || null;
-
-  if (slot === "portrait") return portrait;
-  return heroImage ?? portrait;
+  if (slot === "portrait") return agentPortraitIfSet(settings);
+  return resolveMedia(settings, "home:hero_photo").url;
 }
 
 export interface HomeMediaBag {

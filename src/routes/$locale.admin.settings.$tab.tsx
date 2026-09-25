@@ -1,23 +1,10 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 
 import { BusinessTab } from "@/components/admin/settings/BusinessTab";
-import { LegalTab } from "@/components/admin/settings/LegalTab";
 import { HomeAdminPage } from "@/components/admin/home/HomeAdminPage";
 import { PageAdminPage } from "@/components/admin/pages/PageAdminPage";
 
-const TABS = [
-  "business",
-  "home",
-  "properties",
-  "selling",
-  "inheritance",
-  "blog",
-  "about",
-  "imprint",
-  "privacy",
-  "terms",
-  "contact",
-] as const;
+const TABS = ["business", "home", "selling", "inheritance", "about", "contact"] as const;
 type Tab = (typeof TABS)[number];
 
 /** Retired tab ids keep their old bookmarks: land on the merged Business tab. */
@@ -29,7 +16,13 @@ const LEGACY = new Set([
   "analytics",
   "appearance",
   "maintenance",
-    "legal",
+  "legal",
+  // Collections live under Manage; legal texts are fixed templates.
+  "properties",
+  "blog",
+  "imprint",
+  "privacy",
+  "terms",
 ]);
 
 export const Route = createFileRoute("/$locale/admin/settings/$tab")({
@@ -55,12 +48,6 @@ function TabPage() {
       return <BusinessTab />;
     case "home":
       return <HomeAdminPage embedded />;
-    case "imprint":
-      return <LegalTab field="legal_impressum" />;
-    case "privacy":
-      return <LegalTab field="legal_privacy" />;
-    case "terms":
-      return <LegalTab field="legal_terms" />;
     default:
       return <PageAdminPage page={tab} embedded />;
   }

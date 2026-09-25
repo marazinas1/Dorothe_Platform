@@ -131,6 +131,7 @@ export const HomeSchema = z.object({
   home_media: jsonRecord,
 });
 export const MaintenanceSchema = z.object({ maintenance_mode: z.boolean() });
+export const AgentPortraitSchema = z.object({ primary_agent_photo_url: nullableUrl });
 export type HomeInput = z.infer<typeof HomeSchema>;
 
 /** Developer-only: the home wording locked in as this clone's default. */
@@ -153,6 +154,7 @@ export const SITE_SETTINGS_SCHEMAS = {
   analytics: AnalyticsSchema,
   home: HomeSchema,
   maintenance: MaintenanceSchema,
+  agent_portrait: AgentPortraitSchema,
 } as const;
 
 export type SettingsTabKey = keyof typeof SITE_SETTINGS_SCHEMAS;

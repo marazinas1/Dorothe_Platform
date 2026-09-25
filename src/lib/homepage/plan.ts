@@ -1,3 +1,4 @@
+import { agentPortraitIfSet } from "@/lib/media/slots";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import { pickImageUrl } from "@/lib/listings/image";
 import { pickLocalized } from "@/lib/listings/format";
@@ -49,7 +50,7 @@ export function buildHomepagePlan(
   const image = hero?.image?.trim() ? hero.image.trim() : null;
   const layout = normalizeLayout(hero?.variant, Boolean(image));
   const heroImage = layout === "split" ? image : null;
-  const portrait = settings.primary_agent_photo_url?.trim() || null;
+  const portrait = agentPortraitIfSet(settings);
   return {
     heroLayout: layout,
     heroImage,
@@ -138,7 +139,7 @@ export function resolveSocialImage(
     const url = pickImageUrl(primary?.variants, "og") ?? pickImageUrl(primary?.variants, "detail");
     if (url) return url;
   }
-  return settings.primary_agent_photo_url?.trim() || null;
+  return agentPortraitIfSet(settings);
 }
 
 /** Evidence, not a catalogue: at most three properties on the homepage. */

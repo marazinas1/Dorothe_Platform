@@ -5,11 +5,9 @@ import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
 import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
-import { homeMedia } from "@/lib/home/content";
-import { HOME_MEDIA_SLOTS } from "@/lib/home/layout";
 import type { useHomeAdmin } from "@/lib/home/use-home-admin";
 
-import { HomeMediaEditor } from "./HomeMediaEditor";
+import { SiteMediaSlot } from "@/components/admin/ui/SiteMediaSlot";
 import { HomeTextEditor } from "./HomeTextEditor";
 
 type Props = {
@@ -70,11 +68,10 @@ export function HomeEditorWorkspace({ home, locales, locale, onLocale }: Props) 
           />
 
 
-          <HomeMediaEditor
-            slots={HOME_MEDIA_SLOTS}
-            entry={home.mediaEntry}
-            onChange={home.setMediaEntry}
-            resolved={(slot) => homeMedia(home.settings, slot as never)}
+          <SiteMediaSlot
+            slotKey="home:hero_photo"
+            chosen={home.mediaEntry("hero_photo").mode === "custom" ? home.mediaEntry("hero_photo").url : null}
+            onChoose={(url) => home.setMediaEntry("hero_photo", url ? { mode: "custom", url } : { mode: "default", url: "" })}
           />
 
           <SaveButton

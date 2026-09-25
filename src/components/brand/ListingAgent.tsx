@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import { ListingInquiryForm } from "@/components/brand/ListingInquiryForm";
+import { agentPortraitIfSet } from "@/lib/media/slots";
 import type { SiteSettings } from "@/types/site-settings";
 
 type Props = {
@@ -17,7 +18,7 @@ export function ListingAgent({ listingId, settings }: Props) {
   const { t } = useTranslation();
   const name = settings.primary_agent_name ?? settings.legal_name ?? settings.site_name;
   const role = settings.primary_agent_role ?? "";
-  const photo = settings.primary_agent_photo_url;
+  const photo = agentPortraitIfSet(settings);
   const phone = settings.contact_phone;
   const email = settings.contact_email;
 

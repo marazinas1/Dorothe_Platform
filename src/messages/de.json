@@ -1636,6 +1636,36 @@
       "title": "Nicht gespeicherte Änderungen",
       "body": "Es gibt noch nicht gespeicherte Änderungen. Wenn Sie jetzt gehen, gehen sie verloren.",
       "leave": "Ohne Speichern verlassen"
+    },
+    "media": {
+      "yourChoice": "Ihre Auswahl",
+      "studioDefault": "Studio-Standard",
+      "builtIn": "Integriert",
+      "showing": "Aktiv",
+      "noChoice": "Nichts ausgewählt",
+      "noStudio": "Kein Studio-Standard",
+      "noBuiltIn": "Kein integriertes Foto",
+      "showing_chosen": "Aktuell sichtbar: Ihre Auswahl",
+      "showing_default": "Aktuell sichtbar: der Studio-Standard",
+      "showing_builtIn": "Aktuell sichtbar: das integrierte Foto",
+      "resetToDefault": "Auf Standard zurücksetzen",
+      "saved": "Foto aktualisiert.",
+      "reset": "Foto auf Standard zurückgesetzt.",
+      "studioSaved": "Studio-Standard gesetzt.",
+      "studioCleared": "Studio-Standard entfernt.",
+      "clearStudio": "Studio-Standard entfernen",
+      "studioLocked": "Der Studio-Standard wird von Ihrem Entwickler festgelegt.",
+      "error": "Speichern fehlgeschlagen. Bitte erneut versuchen.",
+      "slots": {
+        "home_hero_photo": {
+          "label": "Auftaktfoto",
+          "help": "Das große Foto neben den einleitenden Worten der Startseite. Bitte anschließend speichern."
+        },
+        "about_portrait": {
+          "label": "Porträt",
+          "help": "Ihr Porträt auf der Seite Über mich. Es erscheint auch neben dem Anfrageformular auf jeder Immobilienseite. Wird sofort gespeichert."
+        }
+      }
     }
   },
   "pages": {

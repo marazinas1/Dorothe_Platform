@@ -80,6 +80,8 @@ export interface SiteSettings {
   home_defaults: Record<string, any>;
   /** Per photo slot: house default or the owner's own upload. */
   home_media: Record<string, { mode?: string; url?: string }>;
+  /** Developer-pinned studio defaults, keyed "page:slot". */
+  media_defaults?: Record<string, string | null>;
 
 }
 

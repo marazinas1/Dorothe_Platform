@@ -92,16 +92,6 @@ export function BrandAssetsSection() {
         onCommit={(next) => void set("logo_size", next)}
         disabled={saving}
       />
-
-      <section className="grid gap-6 sm:grid-cols-2">
-        <BrandAssetField
-          kind="og_default"
-          label={label("ogImage")}
-          help={label("ogImageHelp")}
-          value={current.og_default_image}
-          onChange={(url) => void set("og_default_image", url)}
-        />
-      </section>
     </div>
   );
 }
