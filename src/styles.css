@@ -231,6 +231,8 @@
 
   --font-body: "Urbanist Variable", "Urbanist", ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-body);
+  /* Re-declared here: the root value was resolved with the public font. */
+  --font-sans: var(--font-body);
   --admin-label-transform: uppercase;
   --admin-label-tracking: 0.14em;
   --admin-label-size: 0.625rem;
@@ -266,21 +268,24 @@
   --sidebar-ring: #ffffff;
 
   font-family: var(--font-sans);
-  font-size: 0.9375rem;
+  font-size: 1rem;
+  font-weight: 400;
   line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :where([data-admin-theme="noir"]) :is(h1, h2, h3, h4, h5, h6, .font-heading) {
   font-family: var(--font-sans);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
 }
 
 :where([data-admin-theme="noir"]) h1 {
   font-size: 1.5rem;
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
 }
 
 :where([data-admin-theme="noir"]) h2 {
@@ -313,7 +318,7 @@
 :where([data-admin-theme="noir"]) [data-slot="button"] {
   min-height: 2.5rem;
   border-radius: var(--radius);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 :where([data-admin-theme="noir"]) [data-slot="badge"] {
@@ -323,7 +328,8 @@
 :where([data-admin-theme="noir"]) [data-sidebar="menu-button"] {
   min-height: 2.5rem;
   border-radius: var(--radius);
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 
 :where([data-admin-theme="noir"]) [data-sidebar="menu-button"]:hover {
@@ -334,7 +340,6 @@
 :where([data-admin-theme="noir"]) [data-sidebar="menu-button"][data-active="true"] {
   background: var(--sidebar-active);
   color: var(--sidebar-accent-foreground);
-  font-weight: 600;
 }
 
 :where([data-admin-theme="noir"]) [data-sidebar="group-label"] {
