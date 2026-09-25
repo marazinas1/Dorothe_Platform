@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 import { BrandMark } from "@/components/brand/BrandMark";
 import { logoSrc } from "@/lib/theme/logo";
 import { cn } from "@/lib/utils";
@@ -5,7 +7,7 @@ import type { SiteSettings } from "@/types/site-settings";
 
 type Props = {
   settings: SiteSettings;
-  /** `light` is for use over hero photography. */
+  /** `light` is for use over hero photography and dark chrome. */
   tone?: "dark" | "light";
   className?: string;
   /**
@@ -19,9 +21,16 @@ type Props = {
 const INTERACTIVE_CLASS =
   "transition-[filter] duration-300 ease-out hover:brightness-[0.7]";
 
+/** The one shared height, scaled by the single size chosen in Site settings. */
+const BASE_HEIGHT_REM = 4;
+
+const clampSize = (value: number | null | undefined) =>
+  Math.min(140, Math.max(60, Math.round(value ?? 100)));
+
 /**
- * Renders one canonical uploaded logo at one shared size throughout public,
- * auth and admin chrome. Backgrounds may differ; the logo file never does.
+ * Renders the uploaded logo at one shared size throughout public, auth and
+ * admin chrome. Over dark backgrounds the dark-background file is used when the
+ * client uploaded one.
  */
 export function SiteLogo({
   settings,
@@ -29,7 +38,9 @@ export function SiteLogo({
   className,
   interactive = false,
 }: Props) {
-  const src = logoSrc("original", settings.logo_url);
+  const configured =
+    tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
+  const src = logoSrc(tone === "light" ? "mono" : "original", configured);
   if (!src)
     return (
       <BrandMark
@@ -39,15 +50,14 @@ export function SiteLogo({
       />
     );
 
+  const height = `${(BASE_HEIGHT_REM * clampSize(settings.logo_size)) / 100}rem`;
+
   return (
     <img
       src={src}
       alt={settings.site_name}
-      className={cn(
-        "h-16 w-auto max-w-full object-contain",
-        interactive && INTERACTIVE_CLASS,
-        className,
-      )}
+      className={cn("w-auto max-w-full object-contain", interactive && INTERACTIVE_CLASS, className)}
+      style={{ height } as CSSProperties}
       loading="eager"
       decoding="async"
     />
