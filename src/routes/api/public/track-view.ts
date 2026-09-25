@@ -79,9 +79,7 @@ export const Route = createFileRoute("/api/public/track-view")({
 
           let referrerHost = hostOf(parsed.referrer);
           // Self-referral and development hosts count as direct.
-          if (referrerHost === selfHost || isNonProductionHost(referrerHost)) {
-            referrerHost = referrerHost === selfHost || !referrerHost ? null : null;
-          }
+          if (referrerHost === selfHost || isNonProductionHost(referrerHost)) referrerHost = null;
           let utmSource = cleanTag(parsed.utm?.source);
           if (utmSource && isNonProductionHost(utmSource)) utmSource = null;
           const utmMedium = utmSource || parsed.utm?.medium ? cleanTag(parsed.utm?.medium) : null;
