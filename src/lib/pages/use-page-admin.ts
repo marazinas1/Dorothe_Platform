@@ -1,3 +1,4 @@
+import { agentPortraitIfSet } from "@/lib/media/slots";
 import { useEffect, useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
@@ -40,7 +41,7 @@ export function usePageAdmin(page: string, locale: string) {
   }, [row]);
 
   const resolveOptions = {
-    mediaDefaults: { portrait: settings.primary_agent_photo_url ?? null },
+    mediaDefaults: { portrait: agentPortraitIfSet(settings) },
     vars: copyVars(settings, locale),
   };
 

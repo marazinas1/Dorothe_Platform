@@ -1,3 +1,4 @@
+import { agentPortraitIfSet } from "@/lib/media/slots";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import type { Locale } from "@/i18n/config";
@@ -17,7 +18,7 @@ export function usePageCopy(page: string, locale: Locale): ResolvedPage {
   const { data: row } = useSuspenseQuery(pageContentQueryOptions(page));
 
   return resolvePage(page, row, locale, settings.default_locale, {
-    mediaDefaults: { portrait: settings.primary_agent_photo_url ?? null },
+    mediaDefaults: { portrait: agentPortraitIfSet(settings) },
     vars: copyVars(settings, locale),
   });
 }

@@ -1,3 +1,4 @@
+import { agentPortraitIfSet } from "@/lib/media/slots";
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -64,7 +65,7 @@ export const Route = createFileRoute("/$locale/ueber-mich")({
       title,
       description: translate(locale, descKey, copyVars(settings, locale)),
       siteName: settings.site_name,
-      ogDefaultImage: settings.primary_agent_photo_url ?? settings.og_default_image,
+      ogDefaultImage: agentPortraitIfSet(settings) ?? settings.og_default_image,
     });
   },
   component: AboutPage,
