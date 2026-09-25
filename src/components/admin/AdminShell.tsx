@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { markInternalBrowser } from "@/lib/analytics/use-page-tracking";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -21,6 +23,9 @@ export function AdminShell({
 }) {
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
+
+  // Staff browsers are excluded from public statistics, even after sign-out.
+  useEffect(() => markInternalBrowser(), []);
 
   const displayName = profile.full_name || profile.email || t("admin.topbar.unknownUser");
   const roleLabel = t(`admin.role.${profile.role}`);
