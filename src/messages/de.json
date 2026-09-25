@@ -517,7 +517,7 @@
       "content": "Inhalte",
       "testimonials": "Kundenstimmen",
       "analytics": "Auswertung",
-      "settings": "Einstellungen",
+      "settings": "Website-Einstellungen",
       "viewSite": "Website ansehen",
       "users": "Benutzer",
       "group": "Verwalten",
@@ -636,7 +636,7 @@
       }
     },
     "settings": {
-      "title": "Einstellungen",
+      "title": "Website-Einstellungen",
       "saving": "Wird gespeichert…",
       "saved": "Gespeichert",
       "saveError": "Speichern fehlgeschlagen",
@@ -686,7 +686,6 @@
         "address_country": "Land",
         "geo_lat": "Breitengrad",
         "geo_lng": "Längengrad",
-        "opening_hours": "Öffnungszeiten (JSON)",
         "social": "Soziale Netzwerke (JSON)",
         "json_help": "Wird als JSON gespeichert.",
         "json_invalid": "Ungültiges JSON.",
@@ -776,8 +775,6 @@
         "identity": "Name & Erscheinung",
         "contact": "Kontakt & Büro",
         "region_name": "Regionsname",
-        "technical": "Technisch (für diese Website festgelegt)",
-        "technical_help": "Diese Werte steuern Prüfung und Preisformatierung. Sie ändern sich nur mit der Plattform — bitte den Entwickler fragen.",
         "agent_name": "Name der Maklerin",
         "agent_role": "Rolle der Maklerin",
         "agent_photo": "Porträt der Maklerin",
@@ -814,7 +811,7 @@
         "instagram": "Instagram",
         "help": "Erscheinen als Symbole im Fußbereich der Website. Leer lassen, um ein Symbol auszublenden."
       },
-      "subtitle": "Unternehmensdaten, Seitentexte und rechtliche Angaben verwalten."
+      "subtitle": "Kontaktdaten, Markendateien, Texte und Fotos der öffentlichen Website."
     },
     "listings": {
       "new": "Neues Objekt",

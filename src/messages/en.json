@@ -517,7 +517,7 @@
       "content": "Content",
       "testimonials": "Testimonials",
       "analytics": "Analytics",
-      "settings": "Settings",
+      "settings": "Site settings",
       "viewSite": "View public site",
       "users": "Users",
       "group": "Manage",
@@ -636,7 +636,7 @@
       }
     },
     "settings": {
-      "title": "Settings",
+      "title": "Site settings",
       "saving": "Saving…",
       "saved": "Saved",
       "saveError": "Save failed",
@@ -686,7 +686,6 @@
         "address_country": "Country",
         "geo_lat": "Latitude",
         "geo_lng": "Longitude",
-        "opening_hours": "Opening hours (JSON)",
         "social": "Social links (JSON)",
         "json_help": "Stored as JSON.",
         "json_invalid": "Invalid JSON.",
@@ -776,8 +775,6 @@
         "identity": "Name & identity",
         "contact": "Contact & office",
         "region_name": "Region name",
-        "technical": "Technical (fixed for this website)",
-        "technical_help": "These values drive validation and price formatting. They only change with the platform itself — ask your developer.",
         "agent_name": "Agent name",
         "agent_role": "Agent role",
         "agent_photo": "Agent portrait",
@@ -814,7 +811,7 @@
         "instagram": "Instagram",
         "help": "Shown as icons in the website footer. Leave empty to hide an icon."
       },
-      "subtitle": "Manage business details, public page wording and legal information."
+      "subtitle": "Contact details, brand files, wording, and photographs of the public site."
     },
     "listings": {
       "new": "New listing",
