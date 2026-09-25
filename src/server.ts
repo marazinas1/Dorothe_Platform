@@ -44,13 +44,26 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+function isClientAbort(error: unknown): boolean {
+  const e = error as { code?: string; message?: string; cause?: { code?: string } } | null;
+  return e?.code === "ECONNRESET" || e?.cause?.code === "ECONNRESET" || e?.message === "aborted";
+}
+
+function clientGone(): Response {
+  return new Response(null, { status: 499 });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
+      // The visitor closed the connection (reload, navigation away): nobody
+      // is waiting for this answer, so it is not a server failure.
+      if (request.signal?.aborted) return clientGone();
       return await normalizeCatastrophicSsrResponse(response);
     } catch (error) {
+      if (request.signal?.aborted || isClientAbort(error)) return clientGone();
       console.error(error);
       return new Response(renderErrorPage(), {
         status: 500,
