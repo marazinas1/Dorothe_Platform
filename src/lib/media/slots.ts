@@ -50,8 +50,7 @@ function builtIn(settings: SiteSettings, key: MediaSlotKey): string | null {
   if (key === "about:portrait") return BUILT_IN_PORTRAIT;
   if (key === "selling:hero_photo") return sellingHouse;
   if (key === "inheritance:hero_photo") return inheritanceHouse;
-  const hero = (settings.homepage_sections ?? []).find((s) => s.key === "hero");
-  return clean(hero?.image) ?? homeHouse;
+  return homeHouse;
 }
 
 export function resolveMedia(
