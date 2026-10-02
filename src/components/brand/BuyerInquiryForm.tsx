@@ -5,7 +5,6 @@ import { ConsentCheckbox } from "@/components/public/ConsentCheckbox";
 import { useConsent } from "@/lib/inquiry/use-consent";
 
 import { submitBuyerInquiry } from "@/lib/inquiry/submit.functions";
-import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 import { Button } from "@/components/brand/ui/Button";
 
 const inputCls =
@@ -129,7 +128,7 @@ export function BuyerInquiryForm() {
 
       <Button
         type="submit"
-        disabled={status === "submitting"}
+        loading={status === "submitting"}
         
       >
         {status === "submitting" ? t("inquiry.submitting") : t("inquiry.buyer.submit")}

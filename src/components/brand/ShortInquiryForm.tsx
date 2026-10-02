@@ -7,7 +7,6 @@ import { useConsent } from "@/lib/inquiry/use-consent";
 
 import type { Locale } from "@/i18n/config";
 import { submitBuyerInquiry, submitSellerInquiry } from "@/lib/inquiry/submit.functions";
-import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 import { Button } from "@/components/brand/ui/Button";
 
 const inputCls =
@@ -122,7 +121,7 @@ export function ShortInquiryForm({ mode, locale, appearance = "default" }: Props
       <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
         <Button
           type="submit"
-          disabled={status === "submitting"}
+          loading={status === "submitting"}
           
         >
           {status === "submitting" ? t("inquiry.submitting") : t("inquiry.submit")}

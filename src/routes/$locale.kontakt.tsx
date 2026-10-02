@@ -13,7 +13,6 @@ import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { submitBuyerInquiry } from "@/lib/inquiry/submit.functions";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
-import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 import { OfficeMap } from "@/components/brand/OfficeMap";
 import { openingHoursRows } from "@/lib/config/opening-hours-display";
 import { Button } from "@/components/brand/ui/Button";
@@ -267,7 +266,7 @@ function ContactForm() {
 
       <Button
         type="submit"
-        disabled={status === "submitting"}
+        loading={status === "submitting"}
         
       >
         {status === "submitting"
