@@ -23,7 +23,7 @@ export function TestimonialsCarousel({
               key={i}
               className="flex min-w-[280px] max-w-[360px] flex-1 shrink-0 snap-start flex-col rounded-[var(--radius)] bg-background px-[26px] py-[30px]"
             >
-              <Stars className="text-accent" />
+              <Stars className="text-foreground" />
               <p className="mt-4 text-[14.5px] leading-[1.62]">{item.quote}</p>
               <div className="mt-auto pt-[22px]">
                 <div className="border-t border-border pt-4 text-[13.5px] font-semibold">
