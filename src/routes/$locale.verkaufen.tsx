@@ -59,6 +59,7 @@ function SellingPage() {
         kicker={copy.text("kicker")}
         headline={copy.text("headline")}
         lead={copy.text("intro")}
+        image={copy.media("hero_photo")}
       />
 
       <NumberedSteps title={copy.text("steps_title")} steps={steps} />

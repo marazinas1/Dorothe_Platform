@@ -54,6 +54,7 @@ function InheritancePage() {
         kicker={copy.text("kicker")}
         headline={copy.text("headline")}
         lead={copy.text("intro")}
+        image={copy.media("hero_photo")}
       />
 
       <TextSection

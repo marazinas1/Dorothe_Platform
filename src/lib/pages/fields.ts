@@ -59,7 +59,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   {
     key: "properties",
     path: "immobilien",
-    mediaSlots: [],
+    mediaSlots: ["hero_photo"],
     fields: [
       para("headline", "listings.title", "opening", true),
       para("intro", "listings.description", "opening", true),
@@ -69,7 +69,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   {
     key: "selling",
     path: "verkaufen",
-    mediaSlots: [],
+    mediaSlots: ["hero_photo"],
     fields: [
       line("kicker", "pages.selling.kicker", "opening"),
       para("headline", "pages.selling.headline", "opening", true),

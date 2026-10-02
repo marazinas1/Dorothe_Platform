@@ -77,6 +77,18 @@ export function PageEditorWorkspace({
 
 
           {definition.key === "about" ? <SiteMediaSlot slotKey="about:portrait" /> : null}
+          {definition.mediaSlots.map((slot) => {
+            const slotKey = `${definition.key}:${slot}` as "selling:hero_photo" | "inheritance:hero_photo";
+            const entry = admin.mediaEntry(slot);
+            return (
+              <SiteMediaSlot
+                key={slotKey}
+                slotKey={slotKey}
+                chosen={entry.mode === "custom" ? entry.url : null}
+                onChoose={(url) => admin.setMediaEntry(slot, url ? { mode: "custom", url } : { mode: "default", url: "" })}
+              />
+            );
+          })}
 
           <SaveButton onSubmit={admin.save} />
       </div>
