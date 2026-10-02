@@ -61,7 +61,7 @@ export function ListingCard({
   const meta = (
     <div className="flex items-center gap-1.5">
       <ListingIcon name="pin" className="size-3.5 text-muted-foreground" />
-      <span className="eyebrow truncate text-[11.5px] font-medium text-muted-foreground">{where}</span>
+      <span className="eyebrow truncate text-[11.5px] font-semibold text-muted-foreground">{where}</span>
     </div>
   );
 
@@ -104,7 +104,7 @@ export function ListingCard({
         <h3
           className={cn(
             "mt-2 line-clamp-2 min-h-[2.56em] font-heading font-bold leading-[1.28] tracking-[-0.02em] text-foreground transition-opacity duration-300 group-hover:opacity-70",
-            small ? "text-base" : "text-xl",
+            small ? "text-base" : "text-[21px]",
           )}
           title={headline || undefined}
         >

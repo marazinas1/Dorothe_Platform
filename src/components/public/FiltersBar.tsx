@@ -15,7 +15,7 @@ const ROOMS = [1, 2, 3, 4, 5, 6];
 const AREA = [50, 75, 100, 150, 200, 250];
 
 const CTL =
-  "flex min-h-11 w-full items-center gap-2 rounded-[var(--radius-button)] border border-border bg-background px-3 text-[14.5px] text-foreground focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring";
+  "flex min-h-[52px] w-full items-center gap-2 rounded-[var(--radius-button)] border border-border bg-background px-3 text-[14.5px] text-foreground focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring";
 
 function Field({ label, id, children }: { label: string; id: string; children: ReactNode }) {
   return (

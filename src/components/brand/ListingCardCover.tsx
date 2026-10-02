@@ -58,7 +58,7 @@ export function ListingCardCover({
       {badge ? (
         <span
           className={cn(
-            "absolute top-3 left-3 z-20 rounded-[var(--radius-button)] px-2.5 py-1 text-xs font-semibold",
+            "absolute top-3 left-3 z-20 rounded-[var(--radius-button)] px-2.5 py-1 text-[11px] font-bold",
             BADGE[badge.tone],
           )}
         >

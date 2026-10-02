@@ -1,4 +1,3 @@
-import { CardRail } from "@/components/brand/CardRail";
 import { cn } from "@/lib/utils";
 import type { TestiItem } from "@/lib/testimonials/types";
 
@@ -45,8 +44,8 @@ export function HomeTestimonials({
     <section className="bg-secondary py-20 lg:py-[88px]">
       <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
         {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
-        <CardRail perView={3} label={title ?? ""} className="mt-12">
-          {items.map((item, i) => (
+        <div className="mt-12 grid gap-7 md:grid-cols-3">
+          {items.slice(0, 3).map((item, i) => (
             <div
               key={i}
               className="flex h-full flex-col rounded-[var(--radius)] bg-background px-[26px] py-[30px]"
@@ -63,7 +62,7 @@ export function HomeTestimonials({
               </div>
             </div>
           ))}
-        </CardRail>
+        </div>
       </div>
     </section>
   );

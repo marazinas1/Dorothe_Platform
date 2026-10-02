@@ -33,3 +33,10 @@ Blocked outside this work:
 ## Deerva Noir public base (stage A)
 - [x] Noir tokens, Urbanist, one public Button, no raw values, neutral logo fallback, binding rules
 - [ ] B Admin spine & menu · C remove unused identity fields · D sellers-first public UX · E remix template
+
+## Approved full public-site HTML parity
+- [ ] Wave 1: shared public chrome and Home
+- [ ] Wave 2: Properties and listing detail
+- [ ] Wave 3: Sold, Selling, Valuation and Inheritance
+- [ ] Wave 4: About, Contact, Guides, Article and legal chrome
+- [ ] Wave 5: desktop/mobile visual parity and final verification

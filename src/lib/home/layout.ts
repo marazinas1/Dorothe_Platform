@@ -13,6 +13,6 @@ export const HOME_MEDIA_SLOTS: HomeMediaSlot[] = ["hero_photo"];
 export const HOME_CHROME = {
   /** The footer band is the darker, warmer surface. */
   footerTone: "dark" as const,
-  /** The header does not sit on top of a full-bleed hero photograph. */
-  heroOverlay: false,
+  /** The header sits over the full-bleed hero until the visitor scrolls. */
+  heroOverlay: true,
 };

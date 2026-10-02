@@ -11,8 +11,6 @@ type Props = {
   images: GalleryImage[];
   locale: Locale;
   title: string;
-  /** Optional content laid over the lower part of the hero image. */
-  overlay?: ReactNode;
 };
 
 /** Beyond this many images above the fold, the browser decides when to load. */
@@ -24,7 +22,7 @@ const EAGER = 3;
  * complete without JavaScript; the browser lazy-loads everything below the
  * first few. Clicking opens a keyboard-driven full-screen viewer.
  */
-export function ListingGallery({ images, locale, title, overlay }: Props) {
+export function ListingGallery({ images, locale, title }: Props) {
   const { t } = useTranslation();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const { photos } = splitListingImages(images);
@@ -46,47 +44,38 @@ export function ListingGallery({ images, locale, title, overlay }: Props) {
     return <div className="aspect-[16/9] w-full rounded-media bg-muted" />;
   }
 
-  const hero = list[0]!;
-  const rest = list.slice(1);
+  const visible = list.slice(0, 5);
 
   return (
     <>
-      <div className="relative overflow-hidden rounded-media bg-muted">
-        <button
-          type="button"
-          onClick={() => setOpenIdx(0)}
-          aria-label={t("listings.detail.gallery_open")}
-          className="group block aspect-[4/3] w-full md:aspect-[3/2]"
-        >
-          <img
-            src={pickImageUrl(hero.variants, "detail") ?? ""}
-            alt={pickLocalized(hero.alt_text, locale) || title}
-            className="h-full w-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-[1.02]"
-          />
-        </button>
-        {overlay}
+      <div className="grid gap-2 md:grid-cols-4 md:grid-rows-2">
+        {visible.map((img, i) => (
+          <button
+            key={img.id ?? i}
+            type="button"
+            onClick={() => setOpenIdx(i)}
+            aria-label={i === 0 ? t("listings.detail.gallery_open") : undefined}
+            className={`group relative overflow-hidden rounded-media bg-muted ${
+              i === 0
+                ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[520px]"
+                : "hidden min-h-[254px] md:block"
+            }`}
+          >
+            <img
+              src={pickImageUrl(img.variants, "detail") ?? ""}
+              alt={pickLocalized(img.alt_text, locale) || title}
+              loading={i < EAGER ? undefined : "lazy"}
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            />
+            {i === visible.length - 1 && list.length > visible.length ? (
+              <span className="absolute right-4 bottom-4 rounded-[var(--radius-button)] bg-scrim px-3 py-2 text-xs font-semibold text-on-media">
+                {list.length} {t("listings.detail.gallery_open")}
+              </span>
+            ) : null}
+          </button>
+        ))}
       </div>
-
-      {rest.length > 0 ? (
-        <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3">
-          {rest.map((img, i) => (
-            <button
-              key={img.id ?? i}
-              type="button"
-              onClick={() => setOpenIdx(i + 1)}
-              className="group aspect-[4/3] w-full overflow-hidden rounded-media bg-muted"
-            >
-              <img
-                src={pickImageUrl(img.variants, "detail") ?? ""}
-                alt={pickLocalized(img.alt_text, locale) || title}
-                loading={i + 1 < EAGER ? undefined : "lazy"}
-                decoding="async"
-                className="h-full w-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-[1.03]"
-              />
-            </button>
-          ))}
-        </div>
-      ) : null}
 
       {openIdx != null ? (
         <div

@@ -68,25 +68,23 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
   return (
     <>
       {/* 1. Gallery */}
-      <section className="mx-auto max-w-[1600px] px-3 pt-6 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-[1220px] px-6 pt-8 lg:px-8">
         <ListingGallery
           images={l.images}
           locale={locale}
           title={title}
-          overlay={
-            <ListingHeroOverlay
-              title={title}
-              locationLine={locationLine}
-              contactHref={`#${CONTACT_ID}`}
-            />
-          }
         />
       </section>
 
-      <div className="mx-auto grid max-w-[1200px] gap-x-16 px-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-10">
+      <div className="mx-auto mt-12 grid max-w-[1220px] gap-x-16 px-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-8">
         <div className="min-w-0">
+          <ListingHeroOverlay
+            title={title}
+            locationLine={locationLine}
+            contactHref={`#${CONTACT_ID}`}
+          />
           {/* 2. Key facts */}
-          <section className="mt-16 lg:mt-20">
+          <section className="mt-12 lg:mt-16">
             <ListingFactsBar listing={l} locale={locale} settings={settings} />
           </section>
 

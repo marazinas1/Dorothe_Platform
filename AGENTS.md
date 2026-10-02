@@ -34,6 +34,7 @@ Binding rules. If a request conflicts, say so and propose the compliant version.
 
 ## Design tiers
 - The public site starts from a Deerva theme family (Noir by default) in `src/styles.css`; a client brand overrides only `--primary` and the logo, because one look per family keeps every clone consistent. Binding UI rules: `src/components/brand/AGENTS.md`.
+- The approved `broker-site.html` composition is the public-site visual reference; keep its shared chrome and page anatomy while rendering only live settings, content, media and records.
 - Standard (default): differentiate via `site_settings` primary colour, `homepage_sections`, hero variants and flags. Premium: `/components/brand` may be rewritten. Prefer config, then a variant/token, before bespoke components.
 
 ## General

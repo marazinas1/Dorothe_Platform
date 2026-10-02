@@ -53,9 +53,7 @@ export function useNavItems() {
 
 
 /**
- * Full-width fixed navigation bar: compact, transparent over a hero photo, and
- * fading into a blurred surface once the page scrolls. Uppercase wide-tracked
- * links, one solid CTA on the right.
+ * Shared public header matching the broker-site reference.
  */
 export function SiteNav({ locale, settings, overlay = false }: Props) {
   const { t } = useTranslation();
@@ -78,15 +76,15 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-[background-color,box-shadow,backdrop-filter] duration-500 ease-out",
         onPhoto
-          ? "bg-gradient-to-b from-background/85 via-background/45 to-transparent"
-          : "border-b border-border/60 bg-background/90 backdrop-blur-md",
+          ? "bg-gradient-to-b from-scrim-soft to-transparent text-on-media"
+          : "border-b border-border bg-background/95 backdrop-blur-md",
       )}
     >
       <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
         <nav
           className={cn(
             "flex items-center justify-between transition-[height] duration-500 ease-out",
-            scrolled ? "h-[74px]" : "h-[86px]",
+            "h-20",
           )}
         >
           <HomeLink
@@ -97,17 +95,17 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             <SiteLogo settings={settings} interactive />
           </HomeLink>
 
-          <div className="hidden items-center gap-[34px] md:flex">
+          <div className="hidden items-center gap-7 lg:flex">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 params={{ locale }}
                 className={cn(
-                  "whitespace-nowrap text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground",
-                  "text-muted-foreground hover:text-foreground",
+                  "whitespace-nowrap text-[15px] font-medium transition-colors duration-200",
+                  onPhoto ? "text-on-media-muted hover:text-on-media" : "text-muted-foreground hover:text-foreground",
                 )}
-                activeProps={{ className: "text-foreground" }}
+                activeProps={{ className: onPhoto ? "text-on-media underline underline-offset-8" : "text-foreground underline underline-offset-8" }}
               >
                 {n.label}
               </Link>
@@ -116,6 +114,7 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             <LocaleSwitcher
               currentLocale={locale}
               enabledLocales={settings.enabled_locales}
+              invert={onPhoto}
             />
 
             <Link
@@ -127,16 +126,17 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             </Link>
           </div>
 
-          <div className="flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-3 lg:hidden">
             <LocaleSwitcher
               currentLocale={locale}
               enabledLocales={settings.enabled_locales}
+              invert={onPhoto}
             />
             <Button
               type="button"
               onClick={() => setOpen(true)}
               aria-label={t("nav.menu")}
-              variant="ghost" size="icon"
+              variant="ghost" size="icon" inverse={onPhoto}
             >
               <span className="sr-only">{t("nav.menu")}</span>
               <span aria-hidden="true" className="flex flex-col gap-[6px]">

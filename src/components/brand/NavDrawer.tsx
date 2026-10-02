@@ -25,11 +25,16 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
 
   useEffect(() => {
     if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
   }, [open, onClose]);
 
   if (!open) return null;
@@ -40,7 +45,7 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
       aria-modal="true"
       className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
     >
-      <div className="flex items-center justify-between px-6 py-6">
+      <div className="flex h-20 items-center justify-between border-b border-border px-5">
         <BrandMark settings={settings} />
         <Button
           type="button"
@@ -52,21 +57,21 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
         </Button>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-6 px-6 pt-6">
+      <nav className="flex flex-1 flex-col justify-center gap-5 px-5 py-8">
         {items.map((n) => (
           <Link
             key={n.to}
             to={n.to}
             params={{ locale }}
             onClick={onClose}
-            className="font-heading text-3xl text-foreground"
+            className="font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-bold leading-tight text-foreground"
           >
             {n.label}
           </Link>
         ))}
       </nav>
 
-      <div className="flex items-center justify-between gap-4 border-t border-border/70 px-6 py-6">
+      <div className="flex items-center justify-between gap-4 border-t border-border px-5 py-5">
         <LocaleSwitcher currentLocale={locale} enabledLocales={settings.enabled_locales} />
         <Link
           to="/$locale/kontakt"
