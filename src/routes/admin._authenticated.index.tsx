@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/admin/_authenticated/")({
 
 function Dashboard() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams();
+  const locale = usePublicLocale();
   const [period, setPeriod] = useState<PeriodPreset>(DEFAULT_PERIOD);
   const { from, to } = resolvePeriod(period);
 

@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -13,7 +14,8 @@ export const Route = createFileRoute("/admin/_authenticated/inquiries/$id")({
 
 function InquiryDetailPage() {
   const { t } = useTranslation();
-  const { locale, id } = Route.useParams();
+  const { id } = Route.useParams();
+  const locale = usePublicLocale();
   const { data } = useSuspenseQuery(adminInquiryQueryOptions(id));
 
   return (

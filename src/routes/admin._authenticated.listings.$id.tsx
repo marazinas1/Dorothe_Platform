@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -22,7 +23,8 @@ export const Route = createFileRoute("/admin/_authenticated/listings/$id")({
 
 function EditListing() {
   const { t } = useTranslation();
-  const { locale, id } = Route.useParams();
+  const { id } = Route.useParams();
+  const locale = usePublicLocale();
   const { field } = Route.useSearch();
   const { data } = useSuspenseQuery(adminListingQueryOptions(id));
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);

@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/admin/set-password")({
 
 function ResetPasswordPage() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams() as { locale: Locale };
+  const locale = usePublicLocale();
   const navigate = useNavigate();
   const [ready, setReady] = useState(false);
   const [invalid, setInvalid] = useState(false);

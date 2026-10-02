@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { Link, useParams, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -119,7 +120,6 @@ function NavRow({ item, locale }: { item: NavItem; locale: Locale }) {
   if (item.flag && !flagOn) return null;
 
   const resolved = item.to
-    .replace("$locale", locale)
     .replace("$page", item.page ?? "");
   const isActive =
     item.to === "/admin"
@@ -132,7 +132,7 @@ function NavRow({ item, locale }: { item: NavItem; locale: Locale }) {
       <SidebarMenuButton asChild isActive={isActive} tooltip={t(`admin.nav.${item.key}`)}>
         <Link
           to={item.to}
-          params={{ locale, ...(item.page ? { page: item.page } : {}) } as never}
+          params={(item.page ? { page: item.page } : {}) as never}
           className="flex items-center gap-2"
         >
           <item.icon className="h-4 w-4" />
@@ -150,7 +150,7 @@ function NavRow({ item, locale }: { item: NavItem; locale: Locale }) {
 
 export function AdminSidebar({ email, roleLabel }: { email: string; roleLabel: string }) {
   const { t } = useTranslation();
-  const { locale } = useParams({ strict: false }) as { locale: Locale };
+  const locale = usePublicLocale();
   return (
     <Sidebar collapsible="offcanvas" className="[--sidebar-width:16rem]">
       <AdminSidebarHeader />

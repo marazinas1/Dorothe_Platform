@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { Link, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, LogOut } from "lucide-react";
@@ -20,7 +21,7 @@ interface Props {
 /** Signed-in identity, public-site link and sign-out at the sidebar bottom. */
 export function AdminSidebarFooter({ email, roleLabel }: Props) {
   const { t } = useTranslation();
-  const { locale } = useParams({ strict: false }) as { locale: Locale };
+  const locale = usePublicLocale();
   const signOut = useSignOut();
 
   return (

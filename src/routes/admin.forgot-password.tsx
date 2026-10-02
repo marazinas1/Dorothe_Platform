@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/admin/forgot-password")({
 
 function ForgotPasswordPage() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams() as { locale: Locale };
+  const locale = usePublicLocale();
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
@@ -25,7 +26,7 @@ function ForgotPasswordPage() {
     e.preventDefault();
     setBusy(true);
     await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/${locale}/auth/reset-password`,
+      redirectTo: `${window.location.origin}/admin/set-password`,
     });
     setBusy(false);
     setDone(true);

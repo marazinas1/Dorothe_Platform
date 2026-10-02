@@ -118,7 +118,7 @@ export async function inviteOrCreateUser(
 
   const email = input.email.trim().toLowerCase();
   const db = await admin();
-  const redirectTo = `${siteOrigin()}/auth/reset-password`;
+  const redirectTo = `${siteOrigin()}/admin/set-password`;
 
   // Store the intended role first: the signup trigger reads it.
   await db.from("user_invitations").insert({

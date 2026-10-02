@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { Link, useParams } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -10,7 +11,7 @@ import type { Locale } from "@/i18n/config";
  * The shared brand mark above the admin menu, linking back to the dashboard.
  */
 export function AdminSidebarHeader() {
-  const { locale } = useParams({ strict: false }) as { locale: Locale };
+  const locale = usePublicLocale();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   return (
     <SidebarHeader className="border-b border-sidebar-border px-6 py-4">

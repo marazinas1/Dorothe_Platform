@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useState } from "react";
 import { useParams } from "@tanstack/react-router";
 
@@ -10,7 +11,7 @@ import type { Locale } from "@/i18n/config";
 export function useConsent() {
   const [given, setGiven] = useState(false);
   const [error, setError] = useState(false);
-  const { locale } = useParams({ strict: false }) as { locale: Locale };
+  const locale = usePublicLocale();
 
   return {
     given,

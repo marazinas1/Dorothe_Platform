@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/admin/login")({
 
 function LoginPage() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams() as { locale: Locale };
+  const locale = usePublicLocale();
   const search = useSearch({ from: "/admin/login" });
   const navigate = useNavigate();
   const qc = useQueryClient();
@@ -72,7 +73,7 @@ function LoginPage() {
       // Best-effort last-login update; never blocks navigation.
       void updateLastLogin().catch(() => undefined);
       await qc.invalidateQueries({ queryKey: currentUserQueryOptions.queryKey });
-      const target = search.redirect ?? `/${locale}/admin`;
+      const target = search.redirect ?? "/admin";
       await navigate({ to: target, replace: true });
     } catch {
       setError(t("admin.auth.login.generic"));

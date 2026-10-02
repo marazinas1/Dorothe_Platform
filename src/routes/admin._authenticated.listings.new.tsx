@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/admin/_authenticated/listings/new")({
  */
 function NewListing() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams();
+  const locale = usePublicLocale();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
 
   return (
