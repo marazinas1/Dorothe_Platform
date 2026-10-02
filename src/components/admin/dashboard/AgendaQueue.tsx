@@ -32,7 +32,7 @@ export function AgendaQueue({ locale }: { locale: string }) {
       footer={
         <Link
           to="/admin/calendar"
-          params={{ locale }}
+
           className="underline-offset-4 hover:underline"
         >
           {t("admin.dashboard.queue.agenda.all")}

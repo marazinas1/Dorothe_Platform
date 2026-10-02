@@ -16,6 +16,6 @@ export function useSignOut() {
     queryClient.clear();
     await supabase.auth.signOut();
     router.invalidate();
-    navigate({ to: "/admin/login", params: { locale }, replace: true });
+    navigate({ to: "/admin/login", replace: true });
   };
 }

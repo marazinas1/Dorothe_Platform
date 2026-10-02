@@ -5,7 +5,7 @@ export const Route = createFileRoute("/admin/_authenticated/settings/")({
   beforeLoad: ({ params }) => {
     throw redirect({
       to: "/admin/settings/$tab",
-      params: { locale: params.locale, tab: "business" },
+      params: { tab: "business" },
     });
   },
 });

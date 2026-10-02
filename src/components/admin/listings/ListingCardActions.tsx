@@ -79,7 +79,7 @@ export function ListingCardActions({
         type="button"
         size="sm"
         variant="secondary"
-        onClick={() => navigate({ to: "/admin/listings/$id", params: { locale, id } })}
+        onClick={() => navigate({ to: "/admin/listings/$id", params: { id } })}
       >
         <Pencil className="h-3.5 w-3.5" />
         {t("admin.listings.actions.edit")}
@@ -109,7 +109,7 @@ export function ListingCardActions({
                 toast.success(t("admin.listings.actions.duplicated"));
                 navigate({
                   to: "/admin/listings/$id",
-                  params: { locale, id: created.id },
+                  params: { id: created.id },
                 });
               })
             }

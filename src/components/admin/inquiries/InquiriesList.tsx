@@ -33,7 +33,7 @@ export function InquiriesList({
         >
           <Link
             to="/admin/inquiries/$id"
-            params={{ locale, id: row.id }}
+            params={{ id: row.id }}
             className="block px-4 py-4"
           >
             <div className="flex flex-wrap items-center gap-2">

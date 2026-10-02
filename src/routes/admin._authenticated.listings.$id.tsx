@@ -41,7 +41,7 @@ function EditListing() {
     <div className="space-y-6">
       <Link
         to="/admin/listings"
-        params={{ locale }}
+
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />

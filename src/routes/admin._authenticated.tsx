@@ -20,7 +20,7 @@ export const Route = createFileRoute("/admin/_authenticated")({
     const toLogin = (reason?: string) =>
       redirect({
         to: "/admin/login",
-        params: { locale: params.locale },
+
         search: { redirect: location.href, ...(reason ? { error: reason } : {}) },
       });
 

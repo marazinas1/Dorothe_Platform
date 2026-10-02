@@ -28,7 +28,7 @@ function ListingsIndex() {
   return (
     <div className="space-y-6">
       <AdminPageHeader icon={Building2} title={t("admin.pages.listings")} description={t("admin.listings.pageHint")} actions={<Button asChild>
-          <Link to="/admin/listings/new" params={{ locale }}>
+          <Link to="/admin/listings/new">
             <Plus className="h-4 w-4" />
             {t("admin.listings.new")}
           </Link>

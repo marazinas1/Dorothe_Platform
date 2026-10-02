@@ -27,7 +27,7 @@ export function SettingsTabs() {
           ? t(teamEnabled ? "admin.settings.tabs.about_us" : "admin.settings.tabs.about")
           : t(`admin.settings.tabs.${tab}`),
         to: "/admin/settings/$tab",
-        params: { locale, tab },
+        params: { tab },
         active: pathname === `/${locale}/admin/settings/${tab}`,
       }))}
     />

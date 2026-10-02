@@ -60,7 +60,7 @@ function ForgotPasswordPage() {
         <div className="text-sm">
           <Link
             to="/admin/login"
-            params={{ locale }}
+
             className="text-primary underline-offset-4 hover:underline"
           >
             {t("admin.auth.forgot.back")}

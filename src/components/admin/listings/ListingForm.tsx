@@ -81,7 +81,7 @@ export function ListingForm({
       queryClient.invalidateQueries(adminListingsQueryOptions);
       await navigate({
         to: "/admin/listings/$id",
-        params: { locale: navLocale, id: result.id },
+        params: { id: result.id },
         replace: true,
       });
       return result.id;

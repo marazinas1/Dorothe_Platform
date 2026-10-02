@@ -113,7 +113,7 @@ function Footer({
           />
           <DeervaBadge label={t("footer.badge")} />
           <div className="mt-2 flex gap-4 md:justify-end">
-            <Link to="/admin" params={{ locale }} className="hover:text-foreground">
+            <Link to="/admin" className="hover:text-foreground">
               {t("nav.admin")}
             </Link>
           </div>

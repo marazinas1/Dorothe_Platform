@@ -87,7 +87,7 @@ function ResetPasswordPage() {
     }
     setDone(true);
     window.setTimeout(
-      () => navigate({ to: "/admin", params: { locale }, replace: true }),
+      () => navigate({ to: "/admin", replace: true }),
       1200,
     );
   }

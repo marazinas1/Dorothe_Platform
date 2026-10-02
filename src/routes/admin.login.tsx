@@ -144,7 +144,7 @@ function LoginPage() {
         <div className="pt-1">
           <Link
             to="/admin/forgot-password"
-            params={{ locale }}
+
             className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-300 hover:text-foreground hover:underline"
           >
             {t("admin.auth.login.forgot")}

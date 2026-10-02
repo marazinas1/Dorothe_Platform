@@ -63,7 +63,7 @@ export function ListingsTable({
                 <TableCell>
                   <Link
                     to="/admin/listings/$id"
-                    params={{ locale, id: row.id }}
+                    params={{ id: row.id }}
                     className="block h-14 w-20 overflow-hidden rounded border border-border bg-muted"
                   >
                     {thumb ? (
@@ -78,7 +78,7 @@ export function ListingsTable({
                 <TableCell>
                   <Link
                     to="/admin/listings/$id"
-                    params={{ locale, id: row.id }}
+                    params={{ id: row.id }}
                     className="font-medium underline-offset-4 hover:underline"
                   >
                     {pickLocalized(row.title, locale) || t("admin.listings.untitled")}

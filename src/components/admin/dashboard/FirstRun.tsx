@@ -18,7 +18,7 @@ export function FirstRun({ locale }: { locale: string }) {
         {t("admin.dashboard.firstRun.body")}
       </p>
       <Button asChild className="mt-4">
-        <Link to="/admin/listings/new" params={{ locale }}>
+        <Link to="/admin/listings/new">
           <Plus className="h-4 w-4" />
           {t("admin.dashboard.firstRun.cta")}
         </Link>
