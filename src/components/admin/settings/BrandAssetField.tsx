@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ImageOff, Loader2, Trash2, Upload } from "lucide-react";
+import { Download, ImageOff, Loader2, Trash2, Upload } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import { downloadFile } from "@/lib/download";
 import { processImageFile } from "@/lib/images/optimize";
 import {
   SITE_ASSETS_BUCKET,
@@ -20,6 +22,7 @@ interface Props {
   label: string;
   help?: string;
   value: string | null;
+  downloadName: string;
   onChange: (url: string | null) => void;
   /** Dark logos sit on a dark plate so they stay visible while choosing. */
   dark?: boolean;
@@ -39,6 +42,7 @@ export function BrandAssetField({
   label,
   help,
   value,
+  downloadName,
   onChange,
   dark,
   square,
@@ -70,6 +74,15 @@ export function BrandAssetField({
     }
   }
 
+  async function download() {
+    if (!value) return;
+    try {
+      await downloadFile(value, downloadName);
+    } catch {
+      toast.error(t("admin.settings.brand.downloadError"));
+    }
+  }
+
   return (
     <div className="space-y-3 rounded-[var(--radius)] border border-border bg-card p-5">
       <div>
@@ -89,18 +102,20 @@ export function BrandAssetField({
         }}
       />
 
-      <div className="flex flex-wrap items-center gap-3">
-        <div
-          className={`admin-media-frame shrink-0 p-2 ${square ? "size-16" : "h-16 w-28"}`}
-          style={dark ? { background: "var(--foreground)" } : undefined}
-        >
-
+      <div
+        className={`admin-media-frame h-28 w-full p-4 ${dark ? "bg-primary" : "bg-muted"}`}
+      >
           {value ? (
-            <img src={value} alt="" className="max-h-full max-w-full object-contain" />
+            <img
+              src={value}
+              alt=""
+              className={square ? "h-16 w-16 object-contain" : "max-h-20 max-w-full object-contain"}
+            />
           ) : (
             <ImageOff className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
           )}
-        </div>
+      </div>
+      <div className="flex min-h-9 flex-wrap items-center gap-2">
         <Button type="button" size="sm" disabled={busy} onClick={() => inputRef.current?.click()}>
           {busy ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -109,6 +124,12 @@ export function BrandAssetField({
           )}
           {value ? t("admin.settings.brand.replace") : t("admin.settings.brand.upload")}
         </Button>
+        {value ? (
+          <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => void download()}>
+            <Download className="h-3.5 w-3.5" />
+            {t("admin.settings.brand.download")}
+          </Button>
+        ) : null}
         {value ? (
           <Button
             type="button"

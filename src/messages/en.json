@@ -777,13 +777,15 @@
         "ogImageHelp": "Used when a page is shared on social media.",
         "upload": "Upload an image",
         "replace": "Replace",
+        "download": "Download",
+        "downloadError": "The file could not be downloaded.",
         "remove": "Remove",
-        "sectionTitle": "Website images",
-        "sectionHelp": "Logo, browser icon and sharing image used throughout the website.",
+        "sectionTitle": "Brand files",
+        "sectionHelp": "The logo, dark-background logo and browser icon used throughout the website.",
         "size": "Logo size",
         "sizeHelp": "One shared size for the public website, sign-in and admin panel.",
         "title": "Appearance",
-        "help": "Logo, favicon and the image used when a page is shared."
+        "help": "Upload, replace or download the website's brand files."
       },
       "properties": {
         "title": "Properties page",

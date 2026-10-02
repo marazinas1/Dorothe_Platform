@@ -66,6 +66,7 @@ export function BrandAssetsSection() {
           label={label("logo")}
           help={label("logoHelp")}
           value={current.logo_url}
+          downloadName="4-waende-saar-logo.webp"
           onChange={(url) => void set("logo_url", url)}
         />
         <BrandAssetField
@@ -73,6 +74,7 @@ export function BrandAssetsSection() {
           label={label("logoDark")}
           help={label("logoDarkHelp")}
           value={current.logo_dark_url}
+          downloadName="4-waende-saar-logo-dark.webp"
           onChange={(url) => void set("logo_dark_url", url)}
           dark
         />
@@ -81,6 +83,7 @@ export function BrandAssetsSection() {
           label={label("favicon")}
           help={label("faviconHelp")}
           value={current.favicon_url}
+          downloadName="4-waende-saar-favicon.webp"
           onChange={(url) => void set("favicon_url", url)}
           square
         />

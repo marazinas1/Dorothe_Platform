@@ -777,13 +777,15 @@
         "ogImageHelp": "Wird beim Teilen einer Seite in sozialen Netzwerken verwendet.",
         "upload": "Bild hochladen",
         "replace": "Ersetzen",
+        "download": "Herunterladen",
+        "downloadError": "Die Datei konnte nicht heruntergeladen werden.",
         "remove": "Entfernen",
-        "sectionTitle": "Bilder der Website",
-        "sectionHelp": "Logo, Browser-Symbol und Vorschaubild für die gesamte Website.",
+        "sectionTitle": "Markendateien",
+        "sectionHelp": "Logo, Logo für dunkle Flächen und Browser-Symbol für die gesamte Website.",
         "size": "Logogröße",
         "sizeHelp": "Eine gemeinsame Größe für Website, Anmeldung und Admin-Bereich.",
         "title": "Auftritt",
-        "help": "Logo, Favicon und das Bild, das beim Teilen einer Seite erscheint."
+        "help": "Markendateien der Website hochladen, ersetzen oder herunterladen."
       },
       "properties": {
         "title": "Immobilienseite",
