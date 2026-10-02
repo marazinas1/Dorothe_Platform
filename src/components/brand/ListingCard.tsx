@@ -103,8 +103,8 @@ export function ListingCard({
         {meta}
         <h3
           className={cn(
-            "mt-2 line-clamp-2 min-h-[2.56em] font-heading font-bold leading-[1.28] tracking-[-0.02em] text-foreground transition-opacity duration-300 group-hover:opacity-70",
-            small ? "text-base" : "text-[21px]",
+            "mt-2 line-clamp-2 min-h-[2.56em] font-heading font-bold leading-[1.28] text-foreground transition-opacity duration-300 group-hover:opacity-70",
+            small ? "text-base" : "text-[18px]",
           )}
           title={headline || undefined}
         >

@@ -121,6 +121,14 @@
   "listings": {
     "title": "Properties",
     "description": "Current offerings {{region_in}}.",
+    "catalogue_title": "Properties in {{region}}",
+    "catalogue_intro": "Each one visited, valued and photographed by me.",
+    "results_context": "for sale, {{sort}} first",
+    "need_cta": {
+      "title": "Not the right one yet?",
+      "body": "Tell me what you are looking for. Many properties are sold before they are ever published, to buyers already on my list.",
+      "action": "Describe what you need"
+    },
     "sold_title": "Sold & completed",
     "sold_description": "A record of recently completed transactions.",
     "sold_empty": "No completed sales published yet.",

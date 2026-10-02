@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import { zodValidator } from "@tanstack/zod-adapter";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
-import { CtaBand } from "@/components/brand/CtaBand";
 import { ListingCard } from "@/components/brand/ListingCard";
 import { ListingsMap } from "@/components/brand/ListingsMap";
+import { ListingsNeedCta } from "@/components/brand/ListingsNeedCta";
 
 import { FiltersBar } from "@/components/public/FiltersBar";
 import type { Locale } from "@/i18n/config";
@@ -21,7 +21,7 @@ import {
   PAGE_SIZE,
   type ListingsSearch,
 } from "@/lib/listings/search-schema";
-import { copyVars } from "@/lib/config/site-copy";
+import { copyVars, serviceRegion } from "@/lib/config/site-copy";
 import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
 import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
@@ -125,21 +125,25 @@ function ListingsIndex() {
 
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
-      <section className="mx-auto max-w-[1220px] px-6 pt-9 pb-10 lg:px-8">
-        <h1 className="font-heading text-[clamp(30px,3.6vw,44px)] leading-[1.1] font-bold tracking-[-0.02em]">
-          {copy.text("headline")}
+      <section className="border-b border-border pb-8 pt-14 md:pb-10 md:pt-20">
+        <div className="mx-auto max-w-[1280px] px-5 md:px-10">
+        <h1 className="font-heading text-[clamp(2.25rem,4vw,3.5rem)] font-bold leading-[1.08]">
+          {t("listings.catalogue_title", { region: serviceRegion(settings, locale) })}
         </h1>
-        <p className="mt-2 max-w-xl text-muted-foreground">{copy.text("intro")}</p>
+        <p className="mt-4 max-w-xl text-[17px] text-muted-foreground">{t("listings.catalogue_intro")}</p>
 
         <FiltersBar key={JSON.stringify(search)} locale={locale as Locale} search={search} total={data.total} />
+        </div>
+      </section>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-[26px] pb-[18px]">
+      <section className="mx-auto max-w-[1280px] px-5 pb-4 pt-9 md:px-10">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6">
           <div className="flex items-baseline gap-3">
             <span className="font-semibold">
               {t("listings.results_count").replace("{{count}}", String(data.total))}
             </span>
-            <span className="eyebrow text-[11.5px] font-medium text-muted-foreground">
-              {t("listings.sorted_by", { sort: t(`listings.sort_short.${sortKey}`) })}
+            <span className="text-sm text-muted-foreground">
+              {t("listings.results_context", { sort: t(`listings.sort_short.${sortKey}`).toLowerCase() })}
             </span>
           </div>
           <div className="flex items-center gap-2.5">
@@ -189,7 +193,7 @@ function ListingsIndex() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-x-7 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {data.items.map((l, i) => (
               <ListingCard key={l.id} listing={l} locale={locale as Locale} settings={settings} eager={i < 3} />
             ))}
@@ -210,7 +214,7 @@ function ListingsIndex() {
           </nav>
         ) : null}
       </section>
-      <CtaBand locale={locale as Locale} settings={settings} />
+      <ListingsNeedCta locale={locale as Locale} />
     </PublicChrome>
   );
 }
