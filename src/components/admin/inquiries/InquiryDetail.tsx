@@ -105,7 +105,7 @@ export function InquiryDetail({
         <section className="space-y-1">
           <h2 className="admin-section-title">{t("admin.inquiries.detail.listing")}</h2>
           <Link
-            to="/$locale/admin/listings/$id"
+            to="/admin/listings/$id"
             params={{ locale, id: inquiry.listing.id }}
             className="text-sm underline underline-offset-4"
           >

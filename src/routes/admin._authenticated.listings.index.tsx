@@ -9,7 +9,7 @@ import { adminListingsQueryOptions } from "@/lib/listings/admin.functions";
 import { cleanupAbandonedDrafts } from "@/lib/listings/autodraft.functions";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 
-export const Route = createFileRoute("/$locale/admin/listings/")({
+export const Route = createFileRoute("/admin/_authenticated/listings/")({
   staticData: { sitemap: false },
   // Auto-created drafts that were never filled in are removed here, so the
   // "photos first" flow cannot silently pile up junk rows.
@@ -28,7 +28,7 @@ function ListingsIndex() {
   return (
     <div className="space-y-6">
       <AdminPageHeader icon={Building2} title={t("admin.pages.listings")} description={t("admin.listings.pageHint")} actions={<Button asChild>
-          <Link to="/$locale/admin/listings/new" params={{ locale }}>
+          <Link to="/admin/listings/new" params={{ locale }}>
             <Plus className="h-4 w-4" />
             {t("admin.listings.new")}
           </Link>

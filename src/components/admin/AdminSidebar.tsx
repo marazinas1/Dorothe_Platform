@@ -71,26 +71,26 @@ const GROUPS: NavGroup[] = [
   {
     label: "workspace",
     items: [
-      { key: "dashboard", to: "/$locale/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
-      { key: "inquiries", to: "/$locale/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
+      { key: "dashboard", to: "/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
+      { key: "inquiries", to: "/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
       {
         key: "calendar",
-        to: "/$locale/admin/calendar",
+        to: "/admin/calendar",
         icon: CalendarDays,
         permission: "inquiry.view.own",
         flag: "calendar",
       },
-      { key: "analytics", to: "/$locale/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
+      { key: "analytics", to: "/admin/analytics", icon: BarChart3, permission: "analytics.view.own" },
     ],
   },
   {
     label: "manage",
     items: [
-      { key: "listings", to: "/$locale/admin/listings", icon: Building2, permission: "listing.create" },
-      { key: "posts", to: "/$locale/admin/posts", icon: Newspaper, permission: "settings.edit" },
+      { key: "listings", to: "/admin/listings", icon: Building2, permission: "listing.create" },
+      { key: "posts", to: "/admin/posts", icon: Newspaper, permission: "settings.edit" },
       {
         key: "testimonials",
-        to: "/$locale/admin/testimonials",
+        to: "/admin/testimonials",
         icon: Quote,
         permission: "settings.edit",
         flag: "testimonials",
@@ -100,8 +100,8 @@ const GROUPS: NavGroup[] = [
   {
     label: "settings",
     items: [
-      { key: "users", to: "/$locale/admin/users", icon: UserCog, permission: "user.manage" },
-      { key: "settings", to: "/$locale/admin/settings", icon: Settings, permission: "settings.edit" },
+      { key: "users", to: "/admin/users", icon: UserCog, permission: "user.manage" },
+      { key: "settings", to: "/admin/settings", icon: Settings, permission: "settings.edit" },
     ],
   },
 ];
@@ -122,7 +122,7 @@ function NavRow({ item, locale }: { item: NavItem; locale: Locale }) {
     .replace("$locale", locale)
     .replace("$page", item.page ?? "");
   const isActive =
-    item.to === "/$locale/admin"
+    item.to === "/admin"
       ? pathname === resolved
       : pathname === resolved || pathname.startsWith(`${resolved}/`);
   const badge = item.key === "inquiries" ? (newInquiries ?? 0) : 0;

@@ -13,7 +13,7 @@ import { DEFAULT_PERIOD, resolvePeriod, type PeriodPreset } from "@/lib/dashboar
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { LayoutDashboard } from "lucide-react";
 
-export const Route = createFileRoute("/$locale/admin/")({
+export const Route = createFileRoute("/admin/_authenticated/")({
   staticData: { sitemap: false },
   component: Dashboard,
 });

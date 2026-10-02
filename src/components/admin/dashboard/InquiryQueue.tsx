@@ -29,7 +29,7 @@ export function InquiryQueue({ locale }: { locale: string }) {
       failed={query.isError}
       footer={
         <Link
-          to="/$locale/admin/inquiries"
+          to="/admin/inquiries"
           params={{ locale }}
           className="text-primary underline-offset-4 hover:underline"
         >
@@ -43,7 +43,7 @@ export function InquiryQueue({ locale }: { locale: string }) {
           return (
             <li key={item.id}>
               <Link
-                to="/$locale/admin/inquiries/$id"
+                to="/admin/inquiries/$id"
                 params={{ locale, id: item.id }}
                 className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 rounded-md px-1.5 py-1.5 text-sm hover:bg-muted"
               >

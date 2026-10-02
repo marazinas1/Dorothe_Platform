@@ -41,7 +41,7 @@ export function ListingCardTile({
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-[var(--radius)] border border-border bg-card">
       <Link
-        to="/$locale/admin/listings/$id"
+        to="/admin/listings/$id"
         params={{ locale, id: row.id }}
         className="group relative block aspect-[3/2] overflow-hidden bg-muted"
       >
@@ -78,7 +78,7 @@ export function ListingCardTile({
 
         <h3 className="mt-3 line-clamp-2 min-h-[2.5em] font-heading text-lg leading-tight">
           <Link
-            to="/$locale/admin/listings/$id"
+            to="/admin/listings/$id"
             params={{ locale, id: row.id }}
             className="underline-offset-4 hover:underline"
           >

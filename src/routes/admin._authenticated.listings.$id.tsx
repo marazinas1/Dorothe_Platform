@@ -11,7 +11,7 @@ import { adminListingQueryOptions } from "@/lib/listings/admin.functions";
 import { scrollToField } from "@/lib/listings/scroll-to-field";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 
-export const Route = createFileRoute("/$locale/admin/listings/$id")({
+export const Route = createFileRoute("/admin/_authenticated/listings/$id")({
   staticData: { sitemap: false },
   // ?field=<anchor> lets the dashboard hand over to the exact field to fix.
   validateSearch: (search: Record<string, unknown>): { field?: string } =>
@@ -40,7 +40,7 @@ function EditListing() {
   return (
     <div className="space-y-6">
       <Link
-        to="/$locale/admin/listings"
+        to="/admin/listings"
         params={{ locale }}
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >

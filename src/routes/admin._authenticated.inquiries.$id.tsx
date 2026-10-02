@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { InquiryDetail } from "@/components/admin/inquiries/InquiryDetail";
 import { adminInquiryQueryOptions } from "@/lib/inquiries/admin.functions";
 
-export const Route = createFileRoute("/$locale/admin/inquiries/$id")({
+export const Route = createFileRoute("/admin/_authenticated/inquiries/$id")({
   staticData: { sitemap: false },
   component: InquiryDetailPage,
 });
@@ -19,7 +19,7 @@ function InquiryDetailPage() {
   return (
     <div className="space-y-6">
       <Link
-        to="/$locale/admin/inquiries"
+        to="/admin/inquiries"
         params={{ locale }}
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >

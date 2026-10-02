@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/$locale/admin/inquiries")({
+export const Route = createFileRoute("/admin/_authenticated/listings")({
   staticData: { sitemap: false },
   component: () => <Outlet />,
 });

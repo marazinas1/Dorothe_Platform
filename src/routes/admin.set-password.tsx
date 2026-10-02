@@ -11,7 +11,7 @@ import { validatePassword } from "@/lib/auth/password-schema";
 import type { Locale } from "@/i18n/config";
 
 
-export const Route = createFileRoute("/$locale/auth/reset-password")({
+export const Route = createFileRoute("/admin/set-password")({
   staticData: { sitemap: false },
   component: ResetPasswordPage,
 });
@@ -87,7 +87,7 @@ function ResetPasswordPage() {
     }
     setDone(true);
     window.setTimeout(
-      () => navigate({ to: "/$locale/admin", params: { locale }, replace: true }),
+      () => navigate({ to: "/admin", params: { locale }, replace: true }),
       1200,
     );
   }

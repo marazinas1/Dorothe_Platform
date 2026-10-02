@@ -62,7 +62,7 @@ export function ListingsTable({
               <TableRow key={row.id} className="cursor-pointer">
                 <TableCell>
                   <Link
-                    to="/$locale/admin/listings/$id"
+                    to="/admin/listings/$id"
                     params={{ locale, id: row.id }}
                     className="block h-14 w-20 overflow-hidden rounded border border-border bg-muted"
                   >
@@ -77,7 +77,7 @@ export function ListingsTable({
                 </TableCell>
                 <TableCell>
                   <Link
-                    to="/$locale/admin/listings/$id"
+                    to="/admin/listings/$id"
                     params={{ locale, id: row.id }}
                     className="font-medium underline-offset-4 hover:underline"
                   >

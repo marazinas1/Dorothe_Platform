@@ -7,7 +7,7 @@ import { adminInquiriesQueryOptions } from "@/lib/inquiries/admin.functions";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { Inbox } from "lucide-react";
 
-export const Route = createFileRoute("/$locale/admin/inquiries/")({
+export const Route = createFileRoute("/admin/_authenticated/inquiries/")({
   staticData: { sitemap: false },
   component: InquiriesIndex,
 });

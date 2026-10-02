@@ -24,7 +24,7 @@ const pct = (part: number, whole: number) => (whole ? ((part / whole) * 100).toF
 
 export function AnalyticsPage() {
   const { t } = useTranslation();
-  const { locale } = useParams({ from: "/$locale/admin/analytics" });
+  const { locale } = useParams({ from: "/admin/analytics" });
   const [range, setRange] = useState<AnalyticsRange>(30);
   const query = useQuery(analyticsSummaryQueryOptions(range));
   const { data, isPending, error } = query;

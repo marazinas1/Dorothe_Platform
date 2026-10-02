@@ -25,13 +25,13 @@ const LEGACY = new Set([
   "terms",
 ]);
 
-export const Route = createFileRoute("/$locale/admin/settings/$tab")({
+export const Route = createFileRoute("/admin/_authenticated/settings/$tab")({
   staticData: { sitemap: false },
   beforeLoad: ({ params }) => {
     if ((TABS as readonly string[]).includes(params.tab)) return;
     if (LEGACY.has(params.tab)) {
       throw redirect({
-        to: "/$locale/admin/settings/$tab",
+        to: "/admin/settings/$tab",
         params: { locale: params.locale, tab: "business" },
         replace: true,
       });

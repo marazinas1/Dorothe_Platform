@@ -15,7 +15,7 @@ export function AdminSidebarHeader() {
   return (
     <SidebarHeader className="border-b border-sidebar-border px-6 py-4">
       <Link
-        to="/$locale/admin"
+        to="/admin"
         params={{ locale }}
         className="flex h-16 items-center"
         aria-label={settings.site_name}

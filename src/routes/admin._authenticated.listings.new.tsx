@@ -8,7 +8,7 @@ import { ListingForm } from "@/components/admin/listings/ListingForm";
 import { EMPTY_VALUES } from "@/components/admin/listings/listing-form-state";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 
-export const Route = createFileRoute("/$locale/admin/listings/new")({
+export const Route = createFileRoute("/admin/_authenticated/listings/new")({
   staticData: { sitemap: false },
   component: NewListing,
 });
@@ -26,7 +26,7 @@ function NewListing() {
   return (
     <div className="space-y-6">
       <Link
-        to="/$locale/admin/listings"
+        to="/admin/listings"
         params={{ locale }}
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >

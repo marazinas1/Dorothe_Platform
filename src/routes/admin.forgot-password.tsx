@@ -9,7 +9,7 @@ import { AuthCard } from "@/components/brand/AuthCard";
 import { supabase } from "@/integrations/supabase/client";
 import type { Locale } from "@/i18n/config";
 
-export const Route = createFileRoute("/$locale/auth/forgot-password")({
+export const Route = createFileRoute("/admin/forgot-password")({
   staticData: { sitemap: false },
   component: ForgotPasswordPage,
 });
@@ -59,7 +59,7 @@ function ForgotPasswordPage() {
         )}
         <div className="text-sm">
           <Link
-            to="/$locale/auth/login"
+            to="/admin/login"
             params={{ locale }}
             className="text-primary underline-offset-4 hover:underline"
           >

@@ -1,10 +1,10 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/$locale/admin/settings/")({
+export const Route = createFileRoute("/admin/_authenticated/settings/")({
   staticData: { sitemap: false },
   beforeLoad: ({ params }) => {
     throw redirect({
-      to: "/$locale/admin/settings/$tab",
+      to: "/admin/settings/$tab",
       params: { locale: params.locale, tab: "business" },
     });
   },

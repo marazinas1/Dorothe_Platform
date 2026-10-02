@@ -20,7 +20,7 @@ const searchSchema = z.object({
   error: z.string().optional(),
 });
 
-export const Route = createFileRoute("/$locale/auth/login")({
+export const Route = createFileRoute("/admin/login")({
   staticData: { sitemap: false },
   validateSearch: (s) => searchSchema.parse(s),
   loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions),
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/$locale/auth/login")({
 function LoginPage() {
   const { t } = useTranslation();
   const { locale } = Route.useParams() as { locale: Locale };
-  const search = useSearch({ from: "/$locale/auth/login" });
+  const search = useSearch({ from: "/admin/login" });
   const navigate = useNavigate();
   const qc = useQueryClient();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
@@ -143,7 +143,7 @@ function LoginPage() {
         </Button>
         <div className="pt-1">
           <Link
-            to="/$locale/auth/forgot-password"
+            to="/admin/forgot-password"
             params={{ locale }}
             className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-300 hover:text-foreground hover:underline"
           >

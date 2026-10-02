@@ -32,7 +32,7 @@ export function InquiriesList({
           className={cn("transition-colors hover:bg-muted/40", row.status === "new" && "bg-muted/20")}
         >
           <Link
-            to="/$locale/admin/inquiries/$id"
+            to="/admin/inquiries/$id"
             params={{ locale, id: row.id }}
             className="block px-4 py-4"
           >
