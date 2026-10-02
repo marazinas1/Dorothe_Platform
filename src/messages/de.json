@@ -618,6 +618,7 @@
       },
       "reset": {
         "title": "Neues Passwort setzen",
+        "checking": "Link wird überprüft…",
         "subtitle": "Wählen Sie ein neues Passwort.",
         "password": "Neues Passwort",
         "confirm": "Passwort bestätigen",

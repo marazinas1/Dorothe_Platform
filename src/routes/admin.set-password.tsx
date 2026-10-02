@@ -30,17 +30,31 @@ function ResetPasswordPage() {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    // Supabase places the recovery session in the URL hash. Wait for the
-    // auth client to consume it and emit a session, then allow submission.
-    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") setReady(true);
+    // The auth client consumes the recovery tokens from the URL hash while it
+    // initialises — often before this component subscribes — so we may only
+    // ever see INITIAL_SESSION. Accept any event that carries a session, and
+    // also check the current session directly.
+    let active = true;
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
+      if (
+        session &&
+        (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN" || event === "INITIAL_SESSION")
+      ) {
+        setReady(true);
+        setInvalid(false);
+      }
     });
-    // If no hash exists after a short delay, the link is invalid.
+    void supabase.auth.getSession().then(({ data }) => {
+      if (active && data.session) setReady(true);
+    });
     const timer = window.setTimeout(async () => {
       const { data } = await supabase.auth.getSession();
-      if (!data.session) setInvalid(true);
-    }, 800);
+      if (!active) return;
+      if (data.session) setReady(true);
+      else setInvalid(true);
+    }, 1500);
     return () => {
+      active = false;
       sub.subscription.unsubscribe();
       window.clearTimeout(timer);
     };
@@ -134,7 +148,11 @@ function ResetPasswordPage() {
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" disabled={busy || !ready} className="w-full">
-              {busy ? t("admin.auth.reset.submitting") : t("admin.auth.reset.submit")}
+              {!ready
+                ? t("admin.auth.reset.checking")
+                : busy
+                  ? t("admin.auth.reset.submitting")
+                  : t("admin.auth.reset.submit")}
             </Button>
           </form>
 
