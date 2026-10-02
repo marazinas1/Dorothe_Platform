@@ -38,7 +38,7 @@ type Props = {
 };
 
 const CONTACT_ID = "kontakt";
-const GAP = "mt-24 lg:mt-32";
+const GAP = "mt-16 lg:mt-20";
 
 /**
  * The detail page in reading order: what it looks like, what it costs, what it
@@ -69,7 +69,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
   return (
     <>
       {/* 1. Gallery */}
-      <section className="mx-auto max-w-[1220px] px-6 pt-8 lg:px-8">
+      <section className="mx-auto max-w-[1080px] px-6 pt-8 lg:px-8">
         <nav aria-label={t("listings.detail.breadcrumb")} className="mb-7 flex items-center gap-2 text-xs text-muted-foreground">
           <Link to="/$locale/immobilien" params={{ locale }}>{t("nav.properties")}</Link>
           <span aria-hidden>/</span><span>{l.address_city}</span><span aria-hidden>/</span>
@@ -82,7 +82,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         />
       </section>
 
-      <div className="mx-auto mt-12 grid max-w-[1220px] gap-x-16 px-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-8">
+      <div className="mx-auto mt-12 grid max-w-[1080px] gap-x-14 px-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:px-8">
         <div className="min-w-0">
           <ListingHeroOverlay
             title={title}
@@ -90,26 +90,22 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
             kicker={`${t(`listings.propertyType.${l.property_type}`)} ${t(l.deal_type === "rent" ? "listings.for_rent" : "listings.for_sale")} · ${t("listings.detail.reference_short")} ${l.reference_code ?? "—"}`}
           />
           {/* 2. Key facts */}
-          <section className="mt-12 lg:mt-16">
+          <section className="mt-10 lg:mt-12">
             <ListingFactsBar listing={l} locale={locale} settings={settings} />
           </section>
 
           {/* 3. Description, with the highlights that belong to it */}
           <section className={GAP}>
             <ListingHeadline listing={l} locale={locale} />
-            <div className="mt-16">
+            <div className="mt-8">
               <ListingContentSections sections={l.content_sections} locale={locale} />
             </div>
+            <div className="mt-8"><ListingFeatures features={l.features} /></div>
           </section>
 
-          {/* 4. Specification and costs */}
+          {/* 4. Price and costs */}
           <section className={GAP}>
             <ListingSpecs listing={l} locale={locale} settings={settings} />
-          </section>
-
-          {/* 5. Features */}
-          <section className={GAP}>
-            <ListingFeatures features={l.features} />
           </section>
 
           {/* 6. Energy certificate */}
@@ -148,7 +144,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         />
       </div>
 
-      <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
+      <div className="mx-auto max-w-[1080px] px-6 lg:px-8">
         <section className={GAP}>
           <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
             {t("listings.detail.share")}
