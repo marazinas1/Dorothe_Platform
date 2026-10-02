@@ -130,7 +130,17 @@ export function ListingFactsBar({ listing, locale, settings }: Props) {
     onRequestLabel: t("listings.on_request"),
   });
 
-  const primaryFacts = facts.slice(0, 4);
+  const preferredLabels = [
+    t("listings.detail.living_area"),
+    t("listings.detail.rooms"),
+    t("listings.detail.floor"),
+    t("listings.detail.year_built"),
+    t("listings.detail.plot_area"),
+  ];
+  const primaryFacts = preferredLabels
+    .map((label) => facts.find((fact) => fact.label === label))
+    .filter((fact): fact is Fact => Boolean(fact))
+    .slice(0, 4);
   return (
     <div className="grid grid-cols-2 border-y border-border sm:grid-cols-5">
       <div className="border-b border-r border-border px-4 py-5 sm:border-b-0 sm:pl-0">

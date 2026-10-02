@@ -2,11 +2,11 @@ import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
 import type { PublicListing } from "@/lib/listings/queries.functions";
-import { formatArea, formatPrice } from "@/lib/listings/format";
-import { moneyLabelKey } from "@/lib/listings/field-labels";
+import { formatPrice } from "@/lib/listings/format";
 import { commissionRow } from "@/lib/listings/commission";
 import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { buttonClass } from "@/components/brand/ui/Button";
 import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 
 type Props = {
@@ -24,39 +24,12 @@ type Props = {
  */
 export function ListingStickyRail({ listing, locale, settings, contactHref }: Props) {
   const { t } = useTranslation();
-  const shape = { property_type: listing.property_type, deal_type: listing.deal_type };
-
   const price = formatPrice(listing.price, settings.currency, locale, {
     onRequest: listing.price_on_request,
     period: listing.price_period,
     onRequestLabel: t("listings.on_request"),
   });
   const commission = commissionRow(listing, settings.currency, locale, t);
-
-  const figures: Array<{ label: string; value: string }> = [];
-  const area = listing.property_type === "land" ? listing.plot_area : listing.living_area;
-  if (area != null) {
-    figures.push({
-      label: t(
-        listing.property_type === "land"
-          ? "listings.detail.plot_area"
-          : "listings.detail.living_area",
-      ),
-      value: formatArea(area, settings.area_unit, locale),
-    });
-  }
-  if (listing.rooms != null) {
-    figures.push({ label: t("listings.detail.rooms"), value: String(listing.rooms) });
-  }
-  if (listing.total_rent != null) {
-    figures.push({
-      label: t(moneyLabelKey(shape, "total_rent", "public")),
-      value: formatPrice(listing.total_rent, settings.currency, locale, {
-        period: "month",
-        onRequestLabel: "",
-      }),
-    });
-  }
 
   return (
     <aside className="hidden lg:block">
@@ -81,6 +54,9 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
           className={actionButtonClass("primary", "mt-8 w-full")}
         >
           <ListingIcon name="cal" /> {t("listings.detail.book_viewing")}
+        </a>
+        <a href={contactHref} className={buttonClass({ variant: "secondary", className: "mt-2 w-full" })}>
+          <ListingIcon name="doc" /> {t("listings.detail.request_expose")}
         </a>
         {settings.contact_phone ? <a href={`tel:${settings.contact_phone.replace(/\s/g, "")}`} className="mt-5 flex items-center justify-center gap-2 text-sm font-semibold"><ListingIcon name="phone" />{settings.contact_phone}</a> : null}
         {listing.reference_code ? (

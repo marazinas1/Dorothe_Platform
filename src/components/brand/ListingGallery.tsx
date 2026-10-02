@@ -12,6 +12,7 @@ type Props = {
   images: GalleryImage[];
   locale: Locale;
   title: string;
+  hasTour?: boolean;
 };
 
 /** Beyond this many images above the fold, the browser decides when to load. */
@@ -23,7 +24,7 @@ const EAGER = 3;
  * complete without JavaScript; the browser lazy-loads everything below the
  * first few. Clicking opens a keyboard-driven full-screen viewer.
  */
-export function ListingGallery({ images, locale, title }: Props) {
+export function ListingGallery({ images, locale, title, hasTour = false }: Props) {
   const { t } = useTranslation();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const { photos } = splitListingImages(images);
@@ -58,8 +59,8 @@ export function ListingGallery({ images, locale, title }: Props) {
             aria-label={i === 0 ? t("listings.detail.gallery_open") : undefined}
             className={`group relative overflow-hidden rounded-media bg-muted ${
               i === 0
-                ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[430px]"
-                : "hidden min-h-[211px] md:block"
+                ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[500px]"
+                : "hidden min-h-[246px] md:block"
             }`}
           >
             <img
@@ -82,6 +83,16 @@ export function ListingGallery({ images, locale, title }: Props) {
         <Button type="button" variant="outline" size="sm" onClick={() => setOpenIdx(0)}>
           <ListingIcon name="cam" /> {t("listings.detail.all_photos")}
         </Button>
+        {splitListingImages(images).floorplans.length > 0 ? (
+          <Button type="button" variant="secondary" size="sm" onClick={() => document.getElementById("floor-plans")?.scrollIntoView({ behavior: "smooth" })}>
+            <ListingIcon name="plan" /> {t("listings.detail.floorplan")}
+          </Button>
+        ) : null}
+        {hasTour ? (
+          <Button type="button" variant="secondary" size="sm">
+            <ListingIcon name="map" /> {t("listings.detail.tour")}
+          </Button>
+        ) : null}
         <Button type="button" variant="outline" size="sm" onClick={() => navigator.share?.({ title, url: window.location.href })}>
           <ListingIcon name="share" /> {t("listings.detail.share")}
         </Button>
