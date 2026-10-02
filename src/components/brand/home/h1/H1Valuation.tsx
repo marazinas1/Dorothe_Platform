@@ -1,14 +1,16 @@
 import { useTranslation } from "react-i18next";
+import { Phone } from "lucide-react";
 
 import { HomeButton } from "../HomeActions";
 import type { HomeTemplateProps } from "../types";
+import { buttonClass } from "@/components/brand/ui/Button";
 
 /**
  * The mandate band: the only inverted full-width area on the page, so the
  * valuation offer cannot be scrolled past. On ink the primary action turns
  * paper-coloured — amber on ink reads like a mistake, not a choice.
  */
-export function H1Valuation({ locale, copy }: HomeTemplateProps) {
+export function H1Valuation({ locale, copy, settings }: HomeTemplateProps) {
   const { t } = useTranslation();
   const title = copy.text("valuation_title");
   const steps = copy.list("valuation_steps");
@@ -22,7 +24,7 @@ export function H1Valuation({ locale, copy }: HomeTemplateProps) {
           <p className="mt-4.5 max-w-[40ch] leading-relaxed opacity-75">
             {copy.text("valuation_body")}
           </p>
-          <div className="mt-7">
+          <div className="mt-7 flex flex-wrap gap-3">
             <HomeButton
               locale={locale}
               to="/$locale/immobilienbewertung"
@@ -30,6 +32,11 @@ export function H1Valuation({ locale, copy }: HomeTemplateProps) {
             >
               {t("home.valuation_cta")}
             </HomeButton>
+            {settings.contact_phone ? (
+              <a href={`tel:${settings.contact_phone.replace(/\s+/g, "")}`} className={buttonClass({ variant: "outline", inverse: true })}>
+                <Phone className="size-4" />{settings.contact_phone}
+              </a>
+            ) : null}
           </div>
         </div>
 
