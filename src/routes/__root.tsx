@@ -20,7 +20,7 @@ import { ThemeStyleTag } from "@/components/shared/ThemeStyleTag";
 import { Toaster } from "@/components/ui/sonner";
 
 import { extractLocale } from "@/lib/seo/hreflang";
-import { translate, FALLBACK_LOCALE, isLocale, type Locale } from "@/i18n/config";
+import { translate, FALLBACK_LOCALE, isLocale, SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
 import { Button, buttonClass } from "@/components/brand/ui/Button";
 
@@ -148,13 +148,11 @@ function RootShell({ children }: { children: ReactNode }) {
   const settings = queryClient.getQueryData(
     siteSettingsQueryOptions.queryKey,
   ) as SiteSettings | undefined;
-  const urlLocale = settings
-    ? extractLocale(pathname, settings.enabled_locales)
-    : null;
+  const urlLocale = extractLocale(pathname, [...SUPPORTED_LOCALES]);
   const lang = urlLocale ?? settings?.default_locale ?? FALLBACK_LOCALE;
 
   return (
-    <html lang={lang}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <HeadContent />
         {settings ? <ThemeStyleTag settings={settings} /> : null}

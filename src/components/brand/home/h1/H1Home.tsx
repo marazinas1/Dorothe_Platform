@@ -19,12 +19,6 @@ export function H1Home(props: HomeTemplateProps) {
     <>
       <H1Hero {...props} />
       <H1Paths {...props} />
-      <H1Credentials {...props} />
-      <HomeTestimonials
-        items={testimonials}
-        title={copy.text("testi_title")}
-        tone="paper"
-      />
       <HomeListings
         locale={locale}
         settings={settings}
@@ -32,8 +26,10 @@ export function H1Home(props: HomeTemplateProps) {
         title={copy.text("listings_title")}
         note={copy.text("listings_note")}
       />
-      <SoldStrip locale={locale} items={sold} settings={settings} hidePrice={hideSoldPrice} />
+      <H1Credentials {...props} />
+      <HomeTestimonials items={testimonials} title={copy.text("testi_title")} tone="paper" />
       <H1Valuation {...props} />
+      <SoldStrip locale={locale} items={sold} settings={settings} hidePrice={hideSoldPrice} />
       <ContactSection locale={locale} settings={settings} heading={copy.text("contact_title")} appearance="direct" />
     </>
   );

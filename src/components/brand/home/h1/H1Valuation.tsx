@@ -15,8 +15,8 @@ export function H1Valuation({ locale, copy }: HomeTemplateProps) {
   if (!title && steps.length === 0) return null;
 
   return (
-    <section className="bg-primary py-20 text-primary-foreground lg:py-[88px]">
-      <div className="mx-auto grid max-w-[1220px] items-center gap-12 px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:px-8">
+    <section className="bg-primary py-[72px] text-primary-foreground lg:py-[96px]">
+      <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-5 md:px-10 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
         <div>
           <h2 className="text-section max-w-[13ch] text-balance">{title}</h2>
           <p className="mt-4.5 max-w-[40ch] leading-relaxed opacity-75">

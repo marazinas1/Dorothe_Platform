@@ -31,7 +31,7 @@ export function ContactSection({ locale, settings, heading, appearance = "defaul
 
   if (appearance === "direct") {
     return (
-      <section className="mx-auto max-w-[1220px] px-6 py-20 lg:px-8 lg:py-[88px]">
+      <section className="mx-auto max-w-[1280px] px-5 py-[72px] md:px-10 lg:py-[120px]">
         <div className="grid gap-14 md:grid-cols-[0.85fr_1.15fr] md:gap-[60px]">
           <div>
             <h2 className="max-w-[11ch] font-heading text-[clamp(1.7rem,2.6vw,2.2rem)] leading-[1.18]">
