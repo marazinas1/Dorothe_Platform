@@ -7,6 +7,7 @@ import { listingsToPoints } from "@/lib/maps/carto";
 import { formatArea, formatPrice } from "@/lib/listings/format";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
+import { Button } from "@/components/brand/ui/Button";
 
 const MapCanvas = lazy(() => import("@/components/brand/MapCanvas"));
 
@@ -66,13 +67,13 @@ export function ListingsMap({ items, locale, settings, alwaysOpen = false }: Pro
 
   return (
     <div className="border-t border-border pt-6">
-      <button
+      <Button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="eyebrow text-muted-foreground transition-colors duration-300 hover:text-foreground"
+        variant="link"
       >
         {open ? t("listings.map.hide") : t("listings.map.show")} ({points.length})
-      </button>
+      </Button>
 
       {open ? <div className="mt-6">{map}</div> : null}
     </div>

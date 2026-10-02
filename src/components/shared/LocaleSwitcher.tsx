@@ -31,8 +31,8 @@ export function LocaleSwitcher({
               "transition-colors duration-300",
               invert
                 ? isActive
-                  ? "font-semibold text-primary-foreground underline underline-offset-4 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
-                  : "text-primary-foreground/75 hover:text-primary-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+                  ? "font-semibold text-on-media underline underline-offset-4 drop-shadow-sm"
+                  : "text-on-media/75 hover:text-on-media drop-shadow-sm"
                 : isActive
                   ? "font-semibold underline underline-offset-4"
                   : "text-muted-foreground hover:text-foreground",

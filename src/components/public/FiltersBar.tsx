@@ -7,6 +7,7 @@ import { exampleCity } from "@/lib/config/site-copy";
 
 import type { ListingsSearch } from "@/lib/listings/search-schema";
 import type { Locale } from "@/i18n/config";
+import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
   locale: Locale;
@@ -148,13 +149,13 @@ export function FiltersBar({ locale, search, total }: Props) {
             <option value="price_asc">{t("listings.sort.price_asc")}</option>
             <option value="price_desc">{t("listings.sort.price_desc")}</option>
           </select>
-          <button
+          <Button
             type="button"
             onClick={reset}
-            className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+            variant="link"
           >
             {t("listings.filters.reset")}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

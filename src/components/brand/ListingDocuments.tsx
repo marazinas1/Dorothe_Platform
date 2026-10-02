@@ -5,6 +5,7 @@ import {
   signListingDocument,
   type PublicDocument,
 } from "@/lib/listings/queries.functions";
+import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
   documents: PublicDocument[];
@@ -45,14 +46,14 @@ export function ListingDocuments({ documents }: Props) {
               {doc.type ? t(`listings.documentType.${doc.type}`) : doc.filename}
             </span>
             {doc.storage_path ? (
-              <button
+              <Button
                 type="button"
                 onClick={() => open(doc.id)}
                 disabled={busy === doc.id}
-                className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors duration-300 hover:text-foreground"
+                variant="link"
               >
                 {t(busy === doc.id ? "listings.detail.document_loading" : "listings.detail.document_open")}
-              </button>
+              </Button>
             ) : (
               <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                 {t("listings.detail.document_on_request")}

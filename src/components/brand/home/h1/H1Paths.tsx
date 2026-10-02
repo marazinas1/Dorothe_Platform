@@ -18,7 +18,7 @@ export function H1Paths({ locale, copy }: HomeTemplateProps) {
           params={{ locale }}
           className="flex min-h-[300px] flex-col justify-center bg-primary px-6 py-14 text-primary-foreground transition-opacity duration-300 hover:opacity-95 lg:px-13 lg:py-16"
         >
-          <div className="eyebrow text-accent">{t("home.path_sell_kicker")}</div>
+          <div className="eyebrow text-primary-foreground/70">{t("home.path_sell_kicker")}</div>
           <h2 className="text-section-sm mt-3.5 max-w-[16ch] text-balance">
             {copy.text("sell_title")}
           </h2>
@@ -35,7 +35,7 @@ export function H1Paths({ locale, copy }: HomeTemplateProps) {
           params={{ locale }}
           className="flex min-h-[300px] flex-col justify-center px-6 py-14 transition-colors duration-300 hover:bg-secondary lg:px-13 lg:py-16"
         >
-          <div className="eyebrow text-accent">{t("home.path_buy_kicker")}</div>
+          <div className="eyebrow text-muted-foreground">{t("home.path_buy_kicker")}</div>
           <h2 className="text-section-sm mt-3.5 max-w-[16ch] text-balance">
             {copy.text("buy_title")}
           </h2>

@@ -28,7 +28,7 @@ export function HomeTestimonials({
                 key={i}
                 className="border-b border-primary-foreground/20 py-7 md:border-b-0 md:border-r md:pr-7 md:last:border-r-0"
               >
-                <Stars className="text-accent" />
+                <Stars className="text-foreground" />
                 <p className="mt-4 text-[15px] leading-relaxed opacity-85">{item.quote}</p>
                 <div className="mt-5 text-[13px] opacity-60">
                   {[item.name, item.town].filter(Boolean).join(" · ")}
@@ -51,7 +51,7 @@ export function HomeTestimonials({
               key={i}
               className="flex h-full flex-col rounded-[var(--radius)] bg-background px-[26px] py-[30px]"
             >
-              <Stars className="text-accent" />
+              <Stars className="text-foreground" />
               <p className="mt-4 min-h-[88px] text-[14.5px] leading-[1.62]">{item.quote}</p>
               <div className="mt-auto pt-[22px]">
                 <div className="border-t border-border pt-4 text-[13.5px] font-semibold">

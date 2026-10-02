@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import { OSM_STYLE, MARKER_COLOR, type MapPoint } from "@/lib/maps/carto";
+import { OSM_STYLE, type MapPoint } from "@/lib/maps/carto";
+import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
   points: MapPoint[];
@@ -18,8 +19,8 @@ type Props = {
 function exactMarkerEl() {
   const el = document.createElement("div");
   el.innerHTML = `<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-    <circle cx="11" cy="11" r="9" fill="${MARKER_COLOR}" fill-opacity="0.22" />
-    <circle cx="11" cy="11" r="5" fill="${MARKER_COLOR}" />
+    <circle cx="11" cy="11" r="9" style="fill:var(--primary)" fill-opacity="0.22" />
+    <circle cx="11" cy="11" r="5" style="fill:var(--primary)" />
   </svg>`;
   el.style.cursor = "pointer";
   return el;
@@ -30,8 +31,8 @@ function areaMarkerEl() {
   el.style.width = "88px";
   el.style.height = "88px";
   el.style.borderRadius = "9999px";
-  el.style.background = `${MARKER_COLOR}26`;
-  el.style.border = `1px solid ${MARKER_COLOR}59`;
+  el.style.background = "color-mix(in oklab, var(--primary) 15%, transparent)";
+  el.style.border = "1px solid color-mix(in oklab, var(--primary) 35%, transparent)";
   el.style.cursor = "pointer";
   return el;
 }
@@ -125,7 +126,7 @@ export default function MapCanvas({
     <div className={`relative ${className ?? ""}`}>
       <div ref={holder} className="h-full w-full" />
       {resetLabel ? (
-        <button
+        <Button
           type="button"
           onClick={() => {
             const start = home.current;
@@ -133,10 +134,10 @@ export default function MapCanvas({
               map.current.easeTo({ center: start.center, zoom: start.zoom, duration: 500 });
             }
           }}
-          className="absolute left-3 top-3 z-10 rounded-[var(--radius-button)] border border-border bg-background/95 px-3 py-2 text-xs text-foreground shadow-sm transition-colors hover:bg-secondary"
+          variant="secondary" size="sm" className="absolute left-3 top-3 z-10"
         >
           {resetLabel}
-        </button>
+        </Button>
       ) : null}
     </div>
   );

@@ -55,14 +55,11 @@ function Footer({
   tone: "dark" | "light";
 }) {
   const { t } = useTranslation();
-  const dark = tone === "dark";
   return (
     <footer
-      className={
-        dark
-          ? "bg-primary text-primary-foreground [&_.text-muted-foreground]:text-primary-foreground/70"
-          : "border-t border-border/60 bg-background"
-      }
+      // Noir: the footer is always the black band, whatever the home design.
+      data-tone={tone}
+      className="bg-footer text-footer-foreground [&_.text-muted-foreground]:text-footer-muted [&_a:hover]:text-footer-foreground"
     >
       {/* Local links belong on every page, not only the homepage. */}
       <div className="mx-auto max-w-[1220px] px-0 pt-12">
@@ -76,7 +73,7 @@ function Footer({
       <div className="mx-auto grid max-w-[1220px] gap-11 px-6 pt-11 pb-[30px] md:grid-cols-[1.3fr_1fr_1fr] lg:px-8">
         <div>
           <HomeLink locale={locale} label={settings.site_name}>
-            <SiteLogo settings={settings} interactive />
+            <SiteLogo settings={settings} tone="light" interactive />
           </HomeLink>
           {settings.address_street ? (
             <p className="mt-3 text-sm text-muted-foreground">
@@ -103,7 +100,7 @@ function Footer({
             settings={settings}
             className="mb-4 flex gap-4 md:justify-end"
           />
-          <div className="border-t border-primary-foreground/20 pt-6 text-[12.5px]">
+          <div className="border-t border-footer-muted/30 pt-6 text-[12.5px]">
             © {new Date().getFullYear()} {settings.legal_name ?? settings.site_name}.{" "}
             {t("footer.rights")}.
           </div>

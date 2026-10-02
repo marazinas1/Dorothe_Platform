@@ -16,7 +16,7 @@ export function DeervaBadge({ label }: { label: string }) {
   }, []);
   return (
     <div className="mt-2 md:text-right">
-      <a href={href} target="_blank" rel="noopener" className="transition-colors hover:text-accent">
+      <a href={href} target="_blank" rel="noopener" className="transition-colors hover:opacity-70">
         {label}
       </a>
     </div>

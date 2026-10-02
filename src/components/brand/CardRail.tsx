@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/brand/ui/Button";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -129,19 +130,14 @@ function RailButton({
   children: React.ReactNode;
 }) {
   return (
-    <button
-      type="button"
+    <Button
+      variant="secondary"
+      size="icon"
       onClick={onClick}
       aria-label={label}
       disabled={disabled}
-      className={cn(
-        "grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground transition-colors duration-200",
-        disabled
-          ? "cursor-default opacity-30"
-          : "hover:bg-secondary",
-      )}
     >
       {children}
-    </button>
+    </Button>
   );
 }

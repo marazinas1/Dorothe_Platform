@@ -38,7 +38,7 @@ export function ListingFactPills({ listing, locale, settings }: Props) {
     <ul className="flex flex-wrap items-center gap-2">
       {facts.map((f) => (
         <li key={f.key}>
-          <span className="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs tabular-figures text-muted-foreground">
+          <span className="inline-flex items-center rounded-sm border border-border px-3 py-1 text-xs tabular-figures text-muted-foreground">
             {f.label}
           </span>
         </li>
@@ -47,7 +47,7 @@ export function ListingFactPills({ listing, locale, settings }: Props) {
         <li>
           <span
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs",
+              "inline-flex items-center gap-1.5 rounded-sm border px-3 py-1 text-xs",
               energyClassTone(energy),
             )}
             title={t("listings.facts.energy_class")}

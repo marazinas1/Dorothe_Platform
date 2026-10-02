@@ -28,7 +28,7 @@ export function H1Credentials({ copy }: HomeTemplateProps) {
                 {item.body}
               </p>
               {item.tag ? (
-                <div className="mt-3.5 text-[12.5px] font-semibold text-accent">{item.tag}</div>
+                <div className="mt-3.5 text-[12.5px] font-semibold text-muted-foreground">{item.tag}</div>
               ) : null}
             </div>
           ))}

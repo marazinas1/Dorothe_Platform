@@ -37,7 +37,7 @@ export function HeroFrame({
           />
         ) : null}
         {/* Text-protection gradient only — confined to the lower band. */}
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-scrim via-scrim-soft to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1400px] px-6 pb-14 lg:px-10 lg:pb-20">
           {children}
         </div>
@@ -50,8 +50,8 @@ export function HeroFrame({
 export function HeroFact({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="eyebrow text-white/70">{label}</div>
-      <div className="mt-1.5 font-heading text-3xl tabular-figures text-white md:text-4xl">
+      <div className="eyebrow text-on-media-muted">{label}</div>
+      <div className="mt-1.5 font-heading text-3xl tabular-figures text-on-media md:text-4xl">
         {value}
       </div>
     </div>

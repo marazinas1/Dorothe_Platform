@@ -23,7 +23,7 @@ export function BrandMark({ settings, descriptor, tone = "dark", className }: Pr
       <span
         className={cn(
           "font-heading text-xl md:text-2xl",
-          tone === "light" ? "text-white" : "text-foreground",
+          tone === "light" ? "text-on-media" : "text-foreground",
         )}
       >
         {name}
@@ -32,7 +32,7 @@ export function BrandMark({ settings, descriptor, tone = "dark", className }: Pr
         <span
           className={cn(
             "eyebrow mt-1.5",
-            tone === "light" ? "text-white/70" : "text-muted-foreground",
+            tone === "light" ? "text-on-media-muted" : "text-muted-foreground",
           )}
         >
           {descriptor}

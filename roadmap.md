@@ -29,3 +29,7 @@ Blocked outside this work:
 - [x] Remove iframe previews from page editors
 - [x] Finish shared admin controls and Noir surfaces
 - [x] Verify admin and public routes across responsive viewports
+
+## Deerva Noir public base (stage A)
+- [x] Noir tokens, Urbanist, one public Button, no raw values, neutral logo fallback, binding rules
+- [ ] B Admin spine & menu · C remove unused identity fields · D sellers-first public UX · E remix template

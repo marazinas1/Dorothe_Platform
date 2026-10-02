@@ -6,6 +6,7 @@ import type { Locale } from "@/i18n/config";
 import { pickLocalized } from "@/lib/listings/format";
 import { pickImageUrl } from "@/lib/listings/image";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/brand/ui/Button";
 
 type ImageInput = {
   id: string | null;
@@ -237,15 +238,15 @@ function Arrow({
 }) {
   const Icon = dir === "prev" ? ChevronLeft : ChevronRight;
   return (
-    <button
+    <Button
       type="button"
       tabIndex={-1}
       aria-hidden="true"
       title={label}
       onClick={onClick}
-      className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-card/85 text-foreground opacity-80 transition-opacity duration-300 hover:opacity-100"
+      variant="ghost" size="icon" className="pointer-events-auto bg-card/85 hover:bg-card"
     >
       <Icon className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
-    </button>
+    </Button>
   );
 }

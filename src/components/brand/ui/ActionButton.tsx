@@ -2,15 +2,12 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 import type { Locale } from "@/i18n/config";
-import { cn } from "@/lib/utils";
+
+import { buttonClass } from "./Button";
 
 /**
- * The one filled action style for the whole public site.
- *
- * Rule (see the button plan): amber surface, 4px corners, 48px tall,
- * uppercase wide-tracked label, never an arrow inside a filled button.
- * `on-dark` is the single exception: on inverted bands amber reads as an
- * error, so the button flips to paper with ink text — same size, same shape.
+ * Route-link form of the one public Button. `primary` = filled primary;
+ * `on-dark` = the inverse primary for inverted bands and photography.
  */
 export type ActionTone = "primary" | "on-dark";
 
@@ -27,14 +24,7 @@ export const ACTION_ROUTES = [
 export type ActionRoute = (typeof ACTION_ROUTES)[number];
 
 export function actionButtonClass(tone: ActionTone = "primary", className?: string) {
-  return cn(
-    "eyebrow inline-flex h-12 cursor-pointer items-center justify-center rounded-[var(--radius-button)] px-8 text-center transition-colors duration-300",
-    "disabled:cursor-default disabled:opacity-60",
-    tone === "on-dark"
-      ? "bg-background text-foreground hover:bg-secondary"
-      : "bg-accent text-accent-foreground hover:bg-[var(--accent-hover)] hover:text-accent-foreground",
-    className,
-  );
+  return buttonClass({ variant: "primary", inverse: tone === "on-dark", className });
 }
 
 

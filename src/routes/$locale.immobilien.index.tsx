@@ -27,6 +27,7 @@ import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
 import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
+import { Button } from "@/components/brand/ui/Button";
 
 function keyFor(s: ListingsSearch) {
   return ["listings", "index", s] as const;
@@ -135,7 +136,7 @@ function ListingsIndex() {
                     search: (prev: ListingsSearch) => ({ ...prev, status: st, page: 1 }),
                   })
                 }
-                className={`rounded-full border px-4 py-1.5 text-sm transition-colors duration-300 ${
+                className={`inline-flex min-h-11 cursor-pointer items-center rounded-[var(--radius-button)] border px-4 text-sm transition-colors duration-300 ${
                   search.status === st
                     ? "border-foreground bg-foreground text-background"
                     : "border-border text-muted-foreground hover:text-foreground"
@@ -156,7 +157,7 @@ function ListingsIndex() {
                     search: (prev: ListingsSearch) => ({ ...prev, view: v }),
                   })
                 }
-                className={`rounded-full border px-4 py-1.5 text-sm transition-colors duration-300 ${
+                className={`inline-flex min-h-11 cursor-pointer items-center rounded-[var(--radius-button)] border px-4 text-sm transition-colors duration-300 ${
                   search.view === v
                     ? "border-foreground bg-foreground text-background"
                     : "border-border text-muted-foreground hover:text-foreground"
@@ -204,27 +205,27 @@ function ListingsIndex() {
 
         {totalPages > 1 ? (
           <nav className="mt-16 flex items-center justify-between border-t border-border pt-6 text-sm">
-            <button
+            <Button
               type="button"
               disabled={search.page <= 1}
               onClick={() => gotoPage(search.page - 1)}
-              className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+              variant="ghost" size="sm"
             >
               ← {t("listings.pager.prev")}
-            </button>
+            </Button>
             <div className="tabular-figures text-muted-foreground">
               {t("listings.pager.page")
                 .replace("{{n}}", String(search.page))
                 .replace("{{total}}", String(totalPages))}
             </div>
-            <button
+            <Button
               type="button"
               disabled={search.page >= totalPages}
               onClick={() => gotoPage(search.page + 1)}
-              className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+              variant="ghost" size="sm"
             >
               {t("listings.pager.next")} →
-            </button>
+            </Button>
           </nav>
         ) : null}
 

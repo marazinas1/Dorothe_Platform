@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
+import { Button } from "@/components/brand/ui/Button";
 
 export function MaintenanceBanner({ locale, onPreview }: { locale: Locale; onPreview: () => void }) {
   const { t } = useTranslation();
@@ -10,13 +11,13 @@ export function MaintenanceBanner({ locale, onPreview }: { locale: Locale; onPre
       <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-center gap-x-4 gap-y-1 text-center text-xs">
         <p>{t("maintenance.banner")}</p>
         <div className="flex items-center gap-3">
-          <button
+          <Button
             type="button"
             onClick={onPreview}
-            className="font-semibold underline underline-offset-2"
+            variant="link" className="min-h-0 normal-case tracking-normal"
           >
             {t("maintenance.previewAsVisitor")}
-          </button>
+          </Button>
           <Link
             to="/admin/settings/$tab"
             params={{ tab: "maintenance" }}

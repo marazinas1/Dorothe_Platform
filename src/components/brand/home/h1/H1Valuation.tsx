@@ -40,7 +40,7 @@ export function H1Valuation({ locale, copy }: HomeTemplateProps) {
                 key={i}
                 className="flex gap-3.5 border-b border-primary-foreground/20 py-4 text-[14.5px] opacity-85"
               >
-                <span className="shrink-0 font-heading text-accent italic tabular-figures">
+                <span className="shrink-0 font-heading text-primary-foreground/70 tabular-figures">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 {step}
