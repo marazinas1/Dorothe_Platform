@@ -43,7 +43,11 @@ Blocked outside this work:
 
 ## Current full-site content requirement
 - [ ] Copy all approved HTML demo copy and iconography into EN/DE content fallbacks
-- [x] Make every non-listing public photograph editable in its owning page Settings tab
+- [ ] Make every non-listing public photograph editable in its owning page Settings tab
 - [x] Seed HTML testimonials and ensure Testimonials admin remains source of truth
 - [ ] Preserve live listing images and all collection-driven records
 - [ ] Verify every public route against broker-site-2.html on desktop and mobile
+
+## Brand files
+- [x] Create and install the light logo, dark-background logo and favicon
+- [x] Match the StageHomy/Lumidenta brand-file cards with previews, replacement and downloads
