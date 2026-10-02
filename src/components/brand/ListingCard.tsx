@@ -1,49 +1,32 @@
 import { Link } from "@tanstack/react-router";
-import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ListingCardCarousel } from "@/components/brand/ListingCardCarousel";
+import { ListingCardCover } from "@/components/brand/ListingCardCover";
+import { ListingCardPrice } from "@/components/brand/ListingCardPrice";
 import { ListingCardSpecs } from "@/components/brand/ListingCardSpecs";
+import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 import type { Locale } from "@/i18n/config";
 import type { PublicListing } from "@/lib/listings/queries.functions";
-import { formatDate, formatPrice, pickLocalized } from "@/lib/listings/format";
 import { listingDisplayName, listingHeadline } from "@/lib/listings/display-title";
 import { cardTone } from "@/lib/listings/card-tone";
-import { moneyLabelKey } from "@/lib/listings/field-labels";
+import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/types/site-settings";
 
 type Props = {
   listing: PublicListing;
   locale: Locale;
   settings: SiteSettings;
-  /**
-   * Density:
-   * - `large` — full homepage/catalog row
-   * - `compact` — archive grids, agent listings, catalogue density
-   * - `small` — homepage recently sold proof points, two per row
-   */
+  /** `small` is the dense proof-point card (recently sold); others are equal. */
   size?: "large" | "compact" | "small";
-  /** Suppress the price row (achieved prices on closed properties). */
   hidePrice?: boolean;
-  /** Above-the-fold rows may load their cover eagerly. */
   eager?: boolean;
+  /** `row` is the list-view variant: photo left, facts middle, price right. */
+  layout?: "card" | "row";
 };
 
-
 /**
- * The one listing card — homepage, catalogue, sold archive, related block and
- * the agent block all render this. Nothing about a status is decided here; that
- * lives in src/lib/listings/card-tone.ts, and which figures appear lives in
- * src/lib/listings/card-specs.ts.
- *
- * Structure is an <article> with the real <a> on the headline; that link spreads
- * an inset-0 pseudo-element over the whole card, which is why the entire surface
- * is clickable while the card stays valid HTML with a single tab stop. Carousel
- * controls sit above that overlay, so they need no click guards.
- *
- * Every zone has reserved height (media aspect, spec row, clamped title, two
- * line description) and the price is pinned with mt-auto, so neighbours in a row
- * always end at the same height whatever data they carry.
+ * The one listing card (broker listings reference). An <article> whose headline
+ * link stretches over the whole surface, so the card is one tab stop.
  */
 export function ListingCard({
   listing,
@@ -52,167 +35,92 @@ export function ListingCard({
   size = "large",
   hidePrice = false,
   eager = false,
+  layout = "card",
 }: Props) {
   const { t } = useTranslation();
-  const drag = useRef<{ x: number; y: number } | null>(null);
-
   const headline = listingHeadline(listing, locale);
-  // Never the slug: a title-less listing shows no headline, and the link still
-  // needs a name, so it gets a descriptive one ("Wohnung in Kevelaer").
   const linkName = listingDisplayName(listing, locale, t);
-  const description = listingHeadline({ title: listing.description }, locale);
-  const price = formatPrice(listing.price, settings.currency, locale, {
-    onRequest: listing.price_on_request,
-    period: listing.price_period,
-    onRequestLabel: t("listings.on_request"),
-  });
   const tone = cardTone(listing, t);
-  const priceLabel = t(
-    moneyLabelKey(
-      { property_type: listing.property_type, deal_type: listing.deal_type },
-      "price",
-      "public",
-    ),
-  );
-  const place = [listing.address_city, pickLocalized(settings.service_region, locale)]
+  const small = size === "small";
+  const rent = listing.deal_type === "rent";
+  const where = [listing.address_city, rent && layout === "row" ? t("listings.for_rent") : null]
     .filter(Boolean)
     .join(", ");
 
-  return (
-    <article
-      // A swipe that ends on the media must not follow the card link.
-      onPointerDown={(e) => {
-        drag.current = { x: e.clientX, y: e.clientY };
-      }}
-      onClickCapture={(e) => {
-        const start = drag.current;
-        drag.current = null;
-        if (!start) return;
-        if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 8) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-media border border-border/70 bg-card"
+  const link = (
+    <Link
+      to="/$locale/immobilien/$slug"
+      params={{ locale, slug: listing.slug }}
+      aria-label={headline ? undefined : linkName}
+      className="before:absolute before:inset-0 before:z-10 before:content-[''] focus-visible:outline-none"
     >
-      <ListingCardCarousel
-        images={listing.images}
-        locale={locale}
-        name={linkName}
-        eager={eager}
-        badge={tone.badge}
-        muted={tone.closed}
-      />
+      {headline}
+    </Link>
+  );
 
-      <div
-        className={
-          size === "large"
-            ? "flex flex-1 flex-col px-5 pt-5 pb-5"
-            : size === "compact"
-              ? "flex flex-1 flex-col px-4 pt-4 pb-4"
-              : "flex flex-1 flex-col px-3.5 pt-3.5 pb-3.5"
-        }
-      >
-        <div className="flex items-baseline justify-between gap-4">
-          <span
-            className={
-              size === "small"
-                ? "eyebrow truncate text-xs text-muted-foreground"
-                : "eyebrow truncate text-muted-foreground"
-            }
-          >
-            {listing.address_city}
-          </span>
-          <span
-            className={
-              tone.badge?.accent
-                ? size === "small"
-                  ? "eyebrow shrink-0 text-xs text-primary"
-                  : "eyebrow shrink-0 text-primary"
-                : size === "small"
-                  ? "eyebrow shrink-0 text-xs text-muted-foreground"
-                  : "eyebrow shrink-0 text-muted-foreground"
-            }
-          >
-            {tone.status}
-          </span>
+  const meta = (
+    <div className="flex items-center gap-1.5">
+      <ListingIcon name="pin" className="size-3.5 text-muted-foreground" />
+      <span className="eyebrow truncate text-[11.5px] font-medium text-muted-foreground">{where}</span>
+    </div>
+  );
+
+  const cover = (
+    <ListingCardCover
+      images={listing.images}
+      locale={locale}
+      name={linkName}
+      badge={tone.badge}
+      muted={tone.closed}
+      eager={eager}
+    />
+  );
+
+  const specs = (
+    <ListingCardSpecs listing={listing} areaUnit={settings.area_unit} locale={locale} compact={small} />
+  );
+
+  if (layout === "row") {
+    return (
+      <article className="group relative grid items-center gap-6 border-t border-border py-[18px] md:grid-cols-[280px_1fr_auto] focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring">
+        {cover}
+        <div className="min-w-0">
+          {meta}
+          <h3 className="mt-1.5 font-heading text-[21px] font-bold leading-snug text-foreground transition-opacity duration-300 group-hover:opacity-70">
+            {link}
+          </h3>
+          <div className="mt-3">{specs}</div>
         </div>
+        <ListingCardPrice listing={listing} locale={locale} currency={settings.currency} hidePrice={hidePrice} layout="row" />
+      </article>
+    );
+  }
 
-        <div className={size === "small" ? "mt-3" : "mt-4"}>
-          <ListingCardSpecs
-            listing={listing}
-            areaUnit={settings.area_unit}
-            locale={locale}
-            compact={size === "small"}
-          />
-        </div>
-
+  return (
+    <article className="group relative flex h-full flex-col focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-ring">
+      {cover}
+      <div className={cn("flex flex-1 flex-col", small ? "pt-3" : "pt-4")}>
+        {meta}
         <h3
-          className={
-            size === "large"
-              ? "mt-4 line-clamp-2 min-h-[2.5em] font-heading text-2xl leading-tight text-foreground"
-              : size === "compact"
-                ? "mt-4 line-clamp-2 min-h-[2.5em] font-heading text-xl leading-tight text-foreground"
-                : "mt-3 line-clamp-2 min-h-[2.5em] font-heading text-lg leading-tight text-foreground"
-          }
+          className={cn(
+            "mt-2 line-clamp-2 min-h-[2.56em] font-heading font-bold leading-[1.28] tracking-[-0.02em] text-foreground transition-opacity duration-300 group-hover:opacity-70",
+            small ? "text-base" : "text-xl",
+          )}
           title={headline || undefined}
         >
-          <Link
-            to="/$locale/immobilien/$slug"
-            params={{ locale, slug: listing.slug }}
-            aria-label={headline ? undefined : linkName}
-            className="transition-opacity duration-300 before:absolute before:inset-0 before:z-10 before:content-[''] group-hover:opacity-80"
-          >
-            {/* No headline for a title-less listing, but the link (and its
-                inset overlay) is still here, so the card stays clickable. */}
-            {headline}
-          </Link>
+          {link}
         </h3>
-
-        {place ? (
-          <p
-            className={
-              size === "small"
-                ? "mt-1.5 text-xs text-muted-foreground"
-                : "mt-2 text-sm text-muted-foreground"
-            }
-          >
-            {place}
-          </p>
-        ) : null}
-
-        {/* The compact/small card is a proof point, not a pitch: no description. */}
-        {size === "large" ? (
-          <p className="mt-2 line-clamp-2 min-h-[3.25em] text-sm leading-relaxed text-muted-foreground">
-            {description}
-          </p>
-        ) : null}
-
-        <div
-          className={
-            size === "small"
-              ? "mt-auto flex items-baseline justify-between gap-6 border-t border-border/70 pt-3 text-xs"
-              : "mt-auto flex items-baseline justify-between gap-6 border-t border-border/70 pt-4 text-sm"
-          }
-        >
-          {/* On closed properties the price row disappears rather than reading
-              "on request" — the sale is over, there is nothing to ask. */}
-          {hidePrice ? (
-            <span />
-          ) : (
-            <span className="font-body text-foreground">
-              <span className="text-muted-foreground">{priceLabel}</span>{" "}
-              <span className="tabular-figures font-semibold">{price}</span>
-            </span>
-          )}
-          {listing.status === "sold" && listing.sold_at ? (
-            <span className="shrink-0 text-xs text-muted-foreground">
-              {t("listings.sold_on", { date: formatDate(listing.sold_at, locale) })}
-            </span>
-          ) : null}
+        <div className={small ? "mt-2" : "mt-3"}>{specs}</div>
+        <div className={cn("flex flex-1 flex-col", small ? "mt-3" : "mt-3.5")}>
+          <ListingCardPrice
+            listing={listing}
+            locale={locale}
+            currency={settings.currency}
+            hidePrice={hidePrice}
+            size={small ? "small" : "default"}
+          />
         </div>
       </div>
-
     </article>
   );
 }
