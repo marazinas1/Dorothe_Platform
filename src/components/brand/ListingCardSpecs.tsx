@@ -40,9 +40,9 @@ export function ListingCardSpecs({ listing, areaUnit, locale, compact = false }:
         <li key={spec.key} className="inline-flex items-center gap-1.5">
           <ListingIcon name={ICONS[spec.key]} className={compact ? "size-3.5" : "size-4"} />
           <span className="tabular-figures">
-            {spec.value}
+            {spec.key === "floor" ? t("listings.facts.floor_n", { n: spec.value }) : spec.value}
             {spec.key === "rooms" ? ` ${t("listings.facts.rooms")}` : ""}
-            {spec.key === "floor" ? `. ${t("listings.facts.floor")}` : ""}
+            
           </span>
           <span className="sr-only">{t(spec.labelKey)}</span>
         </li>

@@ -113,11 +113,13 @@
       "label": "Sort",
       "newest": "Newest first",
       "price_asc": "Price low to high",
-      "price_desc": "Price high to low"
+      "price_desc": "Price high to low",
+      "prefix": "Sort"
     },
     "view": {
       "grid": "Grid",
-      "map": "Map"
+      "map": "Map",
+      "list": "List"
     },
     "filters": {
       "deal": "Deal type",
@@ -136,7 +138,13 @@
       "price_max": "Price up to (EUR)",
       "area_min": "Area from (m²)",
       "reset": "Reset",
-      "apply": "Apply"
+      "apply": "Apply",
+      "location": "Location",
+      "location_placeholder": "Town or postcode",
+      "type_any": "All types",
+      "price_up_to": "Price up to",
+      "area_from": "Area from",
+      "show": "Show {{count}} properties"
     },
     "detail": {
       "reference": "Reference",
@@ -262,7 +270,8 @@
       "rooms": "rooms",
       "bedrooms": "bed",
       "bathrooms": "bath",
-      "energy_class": "Energy class"
+      "energy_class": "Energy class",
+      "floor_n": "Floor {{n}}"
     },
     "map": {
       "show": "Show map",
@@ -354,7 +363,14 @@
       "type_in_city": "{{type}} in {{city}}",
       "more_photos": "+{{count}} photos",
       "prev_photo": "Previous photo",
-      "next_photo": "Next photo"
+      "next_photo": "Next photo",
+      "photos": "{{count}} photos",
+      "hausgeld": "Hausgeld {{amount}} / month",
+      "cold_rent": "cold rent / month",
+      "warm": "{{amount}} warm",
+      "sold_in": "Sold in {{date}}",
+      "rented_in": "Rented in {{date}}",
+      "cert_pending": "Certificate in preparation"
     },
     "energyExemption": {
       "not_required": "No energy certificate is required for this property.",
@@ -372,7 +388,14 @@
       "available": "Available",
       "archive": "Sold & rented",
       "all": "All"
-    }
+    },
+    "sorted_by": "Sorted by {{sort}}",
+    "sort_short": {
+      "newest": "Newest",
+      "price_asc": "Lowest price",
+      "price_desc": "Highest price"
+    },
+    "new": "New"
   },
   "inquiry": {
     "title": "Send enquiry",
