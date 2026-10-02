@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { stripSearchParams } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,6 @@ import { ListingCard } from "@/components/brand/ListingCard";
 import { ListingsMap } from "@/components/brand/ListingsMap";
 
 import { FiltersBar } from "@/components/public/FiltersBar";
-import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -27,7 +26,8 @@ import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
 import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
-import { Button } from "@/components/brand/ui/Button";
+import { Button, buttonClass } from "@/components/brand/ui/Button";
+import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 
 function keyFor(s: ListingsSearch) {
   return ["listings", "index", s] as const;
@@ -45,7 +45,7 @@ function listingsQueryOptions(s: ListingsSearch) {
     queryFn: () =>
       listPublicListings({
         data: {
-          deal: s.deal,
+          deal: s.deal || "sale",
           type: s.type,
           city: s.city,
           rooms_min: s.rooms_min,
@@ -115,124 +115,100 @@ function ListingsIndex() {
       search: (prev: ListingsSearch) => ({ ...prev, page: n }),
     });
 
+  const views = [
+    { key: "grid", icon: "grid" },
+    { key: "list", icon: "list" },
+    { key: "map", icon: "map" },
+  ] as const;
+  const view = search.view === "list" || search.view === "map" ? search.view : "grid";
+  const sortKey = ["newest", "price_asc", "price_desc"].includes(search.sort) ? search.sort : "newest";
+
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
-      <section className="mx-auto max-w-[1400px] px-6 pt-24 lg:px-10">
-        <h1 className="font-heading text-5xl md:text-6xl">{copy.text("headline")}</h1>
-        <p className="mt-4 max-w-xl text-base text-muted-foreground">
-          {copy.text("intro")}
-        </p>
+      <section className="mx-auto max-w-[1220px] px-6 pt-9 pb-10 lg:px-8">
+        <h1 className="font-heading text-[clamp(30px,3.6vw,44px)] leading-[1.1] font-bold tracking-[-0.02em]">
+          {copy.text("headline")}
+        </h1>
+        <p className="mt-2 max-w-xl text-muted-foreground">{copy.text("intro")}</p>
 
+        <FiltersBar key={JSON.stringify(search)} locale={locale as Locale} search={search} total={data.total} />
 
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            {(["available", "archive", "all"] as const).map((st) => (
-              <button
-                key={st}
-                type="button"
-                onClick={() =>
-                  navigate({
-                    params: { locale },
-                    search: (prev: ListingsSearch) => ({ ...prev, status: st, page: 1 }),
-                  })
-                }
-                className={`inline-flex min-h-11 cursor-pointer items-center rounded-[var(--radius-button)] border px-4 text-sm transition-colors duration-300 ${
-                  search.status === st
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t(`listings.tabs.${st}`)}
-              </button>
-            ))}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-[26px] pb-[18px]">
+          <div className="flex items-baseline gap-3">
+            <span className="font-semibold">
+              {t("listings.results_count").replace("{{count}}", String(data.total))}
+            </span>
+            <span className="eyebrow text-[11.5px] font-medium text-muted-foreground">
+              {t("listings.sorted_by", { sort: t(`listings.sort_short.${sortKey}`) })}
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            {(["grid", "map"] as const).map((v) => (
-              <button
-                key={v}
-                type="button"
-                onClick={() =>
-                  navigate({
-                    params: { locale },
-                    search: (prev: ListingsSearch) => ({ ...prev, view: v }),
-                  })
+          <div className="flex items-center gap-2.5">
+            <label className={buttonClass({ variant: "ghost", size: "sm", className: "relative px-3" })}>
+              <span className="btn-noir">{t("listings.sort.prefix")}: {t(`listings.sort_short.${sortKey}`)}</span>
+              <ListingIcon name="chev" className="size-4" />
+              <select
+                aria-label={t("listings.sort.label")}
+                value={sortKey}
+                onChange={(e) =>
+                  navigate({ params: { locale }, search: (prev: ListingsSearch) => ({ ...prev, sort: e.target.value, page: 1 }) })
                 }
-                className={`inline-flex min-h-11 cursor-pointer items-center rounded-[var(--radius-button)] border px-4 text-sm transition-colors duration-300 ${
-                  search.view === v
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border text-muted-foreground hover:text-foreground"
-                }`}
+                className="absolute inset-0 cursor-pointer opacity-0"
               >
-                {t(`listings.view.${v}`)}
-              </button>
-            ))}
+                {["newest", "price_asc", "price_desc"].map((k) => (
+                  <option key={k} value={k}>{t(`listings.sort.${k}`)}</option>
+                ))}
+              </select>
+            </label>
+            <div role="group" aria-label={t("listings.view.grid")} className="inline-flex rounded-[var(--radius-button)] border border-border">
+              {views.map((v) => (
+                <button
+                  key={v.key}
+                  type="button"
+                  aria-pressed={view === v.key}
+                  aria-label={t(`listings.view.${v.key}`)}
+                  onClick={() => navigate({ params: { locale }, search: (prev: ListingsSearch) => ({ ...prev, view: v.key }) })}
+                  className={`grid h-[42px] w-11 cursor-pointer place-items-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
+                    view === v.key ? "bg-card text-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <ListingIcon name={v.icon} />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="mt-6">
-          <FiltersBar locale={locale as Locale} search={search} total={data.total} />
-        </div>
-
-
-        {search.view === "map" ? (
-          <div className="mt-10">
-            <ListingsMap
-              items={data.items}
-              locale={locale as Locale}
-              settings={settings}
-              alwaysOpen
-            />
-          </div>
-        ) : null}
-
-        {data.items.length === 0 ? (
-          <div className="py-24 text-center text-sm text-muted-foreground">
-            {copy.text("empty")}
+        {view === "map" ? (
+          <ListingsMap items={data.items} locale={locale as Locale} settings={settings} alwaysOpen />
+        ) : data.items.length === 0 ? (
+          <div className="py-24 text-center text-sm text-muted-foreground">{copy.text("empty")}</div>
+        ) : view === "list" ? (
+          <div className="border-b border-border">
+            {data.items.map((l, i) => (
+              <ListingCard key={l.id} listing={l} locale={locale as Locale} settings={settings} layout="row" eager={i < 2} />
+            ))}
           </div>
         ) : (
-          <div className={`mt-12 ${LISTING_CARD_GRID}`}>
-            {data.items.map((l) => (
-              <ListingCard
-                key={l.id}
-                listing={l}
-                locale={locale as Locale}
-                settings={settings}
-                size="compact"
-              />
+          <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {data.items.map((l, i) => (
+              <ListingCard key={l.id} listing={l} locale={locale as Locale} settings={settings} eager={i < 3} />
             ))}
           </div>
         )}
 
         {totalPages > 1 ? (
           <nav className="mt-16 flex items-center justify-between border-t border-border pt-6 text-sm">
-            <Button
-              type="button"
-              disabled={search.page <= 1}
-              onClick={() => gotoPage(search.page - 1)}
-              variant="ghost" size="sm"
-            >
-              ← {t("listings.pager.prev")}
+            <Button disabled={search.page <= 1} onClick={() => gotoPage(search.page - 1)} variant="ghost" size="sm">
+              {t("listings.pager.prev")}
             </Button>
             <div className="tabular-figures text-muted-foreground">
-              {t("listings.pager.page")
-                .replace("{{n}}", String(search.page))
-                .replace("{{total}}", String(totalPages))}
+              {t("listings.pager.page").replace("{{n}}", String(search.page)).replace("{{total}}", String(totalPages))}
             </div>
-            <Button
-              type="button"
-              disabled={search.page >= totalPages}
-              onClick={() => gotoPage(search.page + 1)}
-              variant="ghost" size="sm"
-            >
-              {t("listings.pager.next")} →
+            <Button disabled={search.page >= totalPages} onClick={() => gotoPage(search.page + 1)} variant="ghost" size="sm">
+              {t("listings.pager.next")}
             </Button>
           </nav>
         ) : null}
-
-        {/* Keep Link import used to reduce dead-code warnings */}
-        <span className="hidden">
-          <Link to="/$locale" params={{ locale }} />
-        </span>
       </section>
       <CtaBand locale={locale as Locale} settings={settings} />
     </PublicChrome>
