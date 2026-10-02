@@ -22,7 +22,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { extractLocale } from "@/lib/seo/hreflang";
 import { translate, FALLBACK_LOCALE, isLocale, type Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
-import { Button } from "@/components/brand/ui/Button";
+import { Button, buttonClass } from "@/components/brand/ui/Button";
 
 /** Resolve the active locale from URL, falling back to site default. */
 function useActiveLocale(): Locale {
@@ -46,7 +46,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className={buttonClass()}
           >
             {translate(locale, "errors.home")}
           </Link>
