@@ -64,6 +64,15 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-energy-ap: var(--energy-ap);
+  --color-energy-a: var(--energy-a);
+  --color-energy-b: var(--energy-b);
+  --color-energy-c: var(--energy-c);
+  --color-energy-d: var(--energy-d);
+  --color-energy-e: var(--energy-e);
+  --color-energy-f: var(--energy-f);
+  --color-energy-g: var(--energy-g);
+  --color-energy-h: var(--energy-h);
   --color-footer: var(--footer);
   --color-footer-foreground: var(--footer-foreground);
   --color-footer-muted: var(--footer-muted);
@@ -133,6 +142,17 @@
   --on-media-muted: rgb(255 255 255 / 0.75);
   --scrim: rgb(0 0 0 / 0.55);
   --scrim-soft: rgb(0 0 0 / 0.25);
+
+  /* German energy label scale (GEG), the colours buyers know from the label. */
+  --energy-ap: #00843d;
+  --energy-a: #2ea343;
+  --energy-b: #7db83a;
+  --energy-c: #b5c21e;
+  --energy-d: #f2d700;
+  --energy-e: #f6b11e;
+  --energy-f: #ee7a1d;
+  --energy-g: #e2231a;
+  --energy-h: #a8151b;
 
   --chart-1: #111111;
   --chart-2: #5e5e5e;

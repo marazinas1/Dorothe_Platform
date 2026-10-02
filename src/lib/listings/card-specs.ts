@@ -4,20 +4,16 @@ import { formatArea } from "./format";
 import { energyClassOf } from "./energy-class";
 
 /**
- * The card's spec row, decided in one place. Icons are named, not imported, so
- * this stays a pure data function and the component owns the glyph mapping.
- *
- * Order follows the portals a buyer already reads: area, rooms, bedrooms,
- * bathrooms. The energy class is returned separately because it is a legal
- * disclosure and a letter grade — it stays textual, never an icon.
+ * The card's fact row, decided in one place (broker listings reference):
+ * three facts per card, chosen by type because that is what sells it —
+ * plot for houses, floor for apartments, year otherwise. Pure data; the
+ * component maps keys to glyphs.
  */
-export type CardSpecIcon = "area" | "rooms" | "bedrooms" | "bathrooms";
+export type CardSpecIcon = "area" | "rooms" | "plot" | "floor" | "year";
 
 export type CardSpec = {
   key: CardSpecIcon;
-  /** Rendered next to the icon. */
   value: string;
-  /** Accessible label key — an icon plus a number says nothing to a reader. */
   labelKey: string;
 };
 
@@ -28,8 +24,13 @@ type SpecInput = {
   rooms?: number | null;
   bedrooms?: number | null;
   bathrooms?: number | null;
+  floor?: number | null;
+  year_built?: number | null;
   energy?: unknown;
 };
+
+const HOUSES = ["house", "villa", "townhouse"];
+const FLATS = ["apartment", "penthouse"];
 
 export function cardSpecs(
   listing: SpecInput,
@@ -40,41 +41,29 @@ export function cardSpecs(
     maximumFractionDigits: 1,
   });
   const specs: CardSpec[] = [];
+  const type = listing.property_type ?? "";
+  const isLand = type === "land";
 
-  const isLand = listing.property_type === "land";
-  const area = formatArea(
-    isLand ? listing.plot_area : listing.living_area,
-    areaUnit,
-    locale,
-  );
+  const area = formatArea(isLand ? listing.plot_area : listing.living_area, areaUnit, locale);
   if (area !== "—") {
     specs.push({
-      key: "area",
+      key: isLand ? "plot" : "area",
       value: area,
       labelKey: isLand ? "listings.detail.plot_area" : "listings.detail.living_area",
     });
   }
-  if (listing.rooms != null) {
-    specs.push({
-      key: "rooms",
-      value: nf.format(listing.rooms),
-      labelKey: "listings.detail.rooms",
-    });
-  }
-  if (listing.bedrooms != null) {
-    specs.push({
-      key: "bedrooms",
-      value: String(listing.bedrooms),
-      labelKey: "listings.detail.bedrooms",
-    });
-  }
-  if (listing.bathrooms != null) {
-    specs.push({
-      key: "bathrooms",
-      value: String(listing.bathrooms),
-      labelKey: "listings.detail.bathrooms",
-    });
+  if (listing.rooms != null && !isLand) {
+    specs.push({ key: "rooms", value: nf.format(listing.rooms), labelKey: "listings.detail.rooms" });
   }
 
-  return { specs, energyClass: energyClassOf(listing.energy) };
+  const plot = formatArea(listing.plot_area, areaUnit, locale);
+  if (HOUSES.includes(type) && plot !== "—") {
+    specs.push({ key: "plot", value: plot, labelKey: "listings.detail.plot_area" });
+  } else if (FLATS.includes(type) && listing.floor != null) {
+    specs.push({ key: "floor", value: String(listing.floor), labelKey: "listings.detail.floor" });
+  } else if (!isLand && listing.year_built != null) {
+    specs.push({ key: "year", value: String(listing.year_built), labelKey: "listings.detail.year_built" });
+  }
+
+  return { specs: specs.slice(0, 3), energyClass: energyClassOf(listing.energy) };
 }

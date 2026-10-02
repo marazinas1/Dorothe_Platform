@@ -13,12 +13,20 @@ export function energyClassOf(energy: unknown): string | null {
   return (CLASSES as readonly string[]).includes(normalized) ? normalized : null;
 }
 
-/**
- * Subtle tinting only: efficient classes lean on the sage accent, weak classes
- * on clay. Never loud — the border carries the colour, not a filled badge.
- */
+/** Filled label chip in the official energy-scale colour (tokens in styles.css). */
+const TONES: Record<string, string> = {
+  "A++": "bg-energy-ap text-on-media",
+  "A+": "bg-energy-ap text-on-media",
+  A: "bg-energy-a text-on-media",
+  B: "bg-energy-b text-on-media",
+  C: "bg-energy-c text-foreground",
+  D: "bg-energy-d text-foreground",
+  E: "bg-energy-e text-foreground",
+  F: "bg-energy-f text-on-media",
+  G: "bg-energy-g text-on-media",
+  H: "bg-energy-h text-on-media",
+};
+
 export function energyClassTone(cls: string): string {
-  if (["A++", "A+", "A", "B"].includes(cls)) return "border-primary/40 text-primary";
-  if (["C", "D"].includes(cls)) return "border-border text-foreground";
-  return "border-accent/40 text-accent";
+  return TONES[cls] ?? "bg-card text-foreground";
 }

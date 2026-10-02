@@ -113,11 +113,13 @@
       "label": "Sortierung",
       "newest": "Neueste",
       "price_asc": "Preis aufsteigend",
-      "price_desc": "Preis absteigend"
+      "price_desc": "Preis absteigend",
+      "prefix": "Sortierung"
     },
     "view": {
       "grid": "Raster",
-      "map": "Karte"
+      "map": "Karte",
+      "list": "Liste"
     },
     "filters": {
       "deal": "Angebotsart",
@@ -136,7 +138,13 @@
       "price_max": "Preis bis (EUR)",
       "area_min": "Fläche ab (m²)",
       "reset": "Zurücksetzen",
-      "apply": "Anwenden"
+      "apply": "Anwenden",
+      "location": "Ort",
+      "location_placeholder": "Ort oder PLZ",
+      "type_any": "Alle Objektarten",
+      "price_up_to": "Preis bis",
+      "area_from": "Fläche ab",
+      "show": "{{count}} Objekte anzeigen"
     },
     "detail": {
       "reference": "Referenz",
@@ -262,7 +270,8 @@
       "rooms": "Zimmer",
       "bedrooms": "Schlafzimmer",
       "bathrooms": "Bäder",
-      "energy_class": "Energieklasse"
+      "energy_class": "Energieklasse",
+      "floor_n": "{{n}}. Etage"
     },
     "map": {
       "show": "Karte anzeigen",
@@ -354,7 +363,14 @@
       "type_in_city": "{{type}} in {{city}}",
       "more_photos": "+{{count}} Fotos",
       "prev_photo": "Vorheriges Foto",
-      "next_photo": "Nächstes Foto"
+      "next_photo": "Nächstes Foto",
+      "photos": "{{count}} Fotos",
+      "hausgeld": "Hausgeld {{amount}} / Monat",
+      "cold_rent": "Kaltmiete / Monat",
+      "warm": "{{amount}} warm",
+      "sold_in": "Verkauft im {{date}}",
+      "rented_in": "Vermietet im {{date}}",
+      "cert_pending": "Energieausweis in Vorbereitung"
     },
     "energyExemption": {
       "not_required": "Für dieses Objekt ist kein Energieausweis erforderlich.",
@@ -372,7 +388,14 @@
       "available": "Verfügbar",
       "archive": "Verkauft & vermietet",
       "all": "Alle"
-    }
+    },
+    "sorted_by": "Sortiert nach {{sort}}",
+    "sort_short": {
+      "newest": "Neueste",
+      "price_asc": "Niedrigster Preis",
+      "price_desc": "Höchster Preis"
+    },
+    "new": "Neu"
   },
   "inquiry": {
     "title": "Anfrage senden",
