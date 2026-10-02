@@ -19,6 +19,12 @@
     "view_all": "View all properties",
     "view_all_sold": "Browse sold archive",
     "hero_cta": "Request a valuation",
+    "hero_form_address": "Address",
+    "hero_form_address_hint": "Street, town",
+    "hero_form_type": "Type",
+    "hero_form_house": "House",
+    "hero_form_apartment": "Apartment",
+    "hero_form_land": "Plot",
     "team_kicker": "Team",
     "team_title": "The people behind the properties",
     "hero_cta_secondary": "View properties",
@@ -1688,6 +1694,14 @@
         "about_portrait": {
           "label": "Portrait",
           "help": "Your portrait on the About me page. It also appears beside the enquiry form on every property page. Saved immediately."
+        },
+        "selling_hero_photo": {
+          "label": "Selling page photograph",
+          "help": "The house photograph in the opening section of the Selling page. Remember to press Save."
+        },
+        "inheritance_hero_photo": {
+          "label": "Inheritance page photograph",
+          "help": "The house photograph in the opening section of the Inheritance page. Remember to press Save."
         }
       }
     }

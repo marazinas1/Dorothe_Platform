@@ -1,4 +1,7 @@
-import brokerPlaceholder from "@/assets/broker-placeholder.jpg";
+import brokerPlaceholder from "@/assets/noir-broker-portrait.jpg";
+import homeHouse from "@/assets/noir-home-house.jpg";
+import inheritanceHouse from "@/assets/noir-inheritance-house.jpg";
+import sellingHouse from "@/assets/noir-selling-house.jpg";
 import type { SiteSettings } from "@/types/site-settings";
 
 /**
@@ -7,7 +10,9 @@ import type { SiteSettings } from "@/types/site-settings";
  * pinned, then the built-in code fallback.
  */
 export const MEDIA_SLOTS = {
-  "home:hero_photo": { page: "home", slot: "hero_photo", aspect: "aspect-[4/5]" },
+  "home:hero_photo": { page: "home", slot: "hero_photo", aspect: "aspect-[16/9]" },
+  "selling:hero_photo": { page: "selling", slot: "hero_photo", aspect: "aspect-[4/3]" },
+  "inheritance:hero_photo": { page: "inheritance", slot: "hero_photo", aspect: "aspect-[4/3]" },
   "about:portrait": { page: "about", slot: "portrait", aspect: "aspect-[4/5]" },
 } as const;
 
@@ -35,6 +40,7 @@ function studioDefault(settings: SiteSettings, key: MediaSlotKey): string | null
 
 function ownerChoice(settings: SiteSettings, key: MediaSlotKey): string | null {
   if (key === "about:portrait") return clean(settings.primary_agent_photo_url);
+  if (key !== "home:hero_photo") return null;
   const media = (settings.home_media ?? {}) as Record<string, { mode?: string; url?: string } | undefined>;
   const entry = media.hero_photo;
   return entry?.mode === "custom" ? clean(entry.url) : null;
@@ -42,8 +48,9 @@ function ownerChoice(settings: SiteSettings, key: MediaSlotKey): string | null {
 
 function builtIn(settings: SiteSettings, key: MediaSlotKey): string | null {
   if (key === "about:portrait") return BUILT_IN_PORTRAIT;
-  const hero = (settings.homepage_sections ?? []).find((s) => s.key === "hero");
-  return clean(hero?.image) ?? resolveMedia(settings, "about:portrait").url;
+  if (key === "selling:hero_photo") return sellingHouse;
+  if (key === "inheritance:hero_photo") return inheritanceHouse;
+  return homeHouse;
 }
 
 export function resolveMedia(

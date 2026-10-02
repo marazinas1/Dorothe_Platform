@@ -19,6 +19,12 @@
     "view_all": "Alle Objekte ansehen",
     "view_all_sold": "Zum Verkauft-Archiv",
     "hero_cta": "Immobilie bewerten lassen",
+    "hero_form_address": "Adresse",
+    "hero_form_address_hint": "Straße, Ort",
+    "hero_form_type": "Art",
+    "hero_form_house": "Haus",
+    "hero_form_apartment": "Wohnung",
+    "hero_form_land": "Grundstück",
     "team_kicker": "Team",
     "team_title": "Die Menschen hinter den Objekten",
     "hero_cta_secondary": "Immobilien ansehen",
@@ -1688,6 +1694,14 @@
         "about_portrait": {
           "label": "Porträt",
           "help": "Ihr Porträt auf der Seite Über mich. Es erscheint auch neben dem Anfrageformular auf jeder Immobilienseite. Wird sofort gespeichert."
+        },
+        "selling_hero_photo": {
+          "label": "Foto der Verkaufen-Seite",
+          "help": "Das Hausfoto im Auftaktbereich der Seite Verkaufen. Bitte anschließend speichern."
+        },
+        "inheritance_hero_photo": {
+          "label": "Foto der Erben-Seite",
+          "help": "Das Hausfoto im Auftaktbereich der Seite Erben. Bitte anschließend speichern."
         }
       }
     }

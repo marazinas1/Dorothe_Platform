@@ -1,4 +1,4 @@
-import { agentPortraitIfSet } from "@/lib/media/slots";
+import { agentPortraitIfSet, resolveMedia } from "@/lib/media/slots";
 import { useEffect, useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
@@ -41,7 +41,15 @@ export function usePageAdmin(page: string, locale: string) {
   }, [row]);
 
   const resolveOptions = {
-    mediaDefaults: { portrait: agentPortraitIfSet(settings) },
+    mediaDefaults: {
+      portrait: agentPortraitIfSet(settings),
+      hero_photo:
+        page === "selling"
+          ? resolveMedia(settings, "selling:hero_photo").url
+          : page === "inheritance"
+            ? resolveMedia(settings, "inheritance:hero_photo").url
+            : null,
+    },
     vars: copyVars(settings, locale),
   };
 

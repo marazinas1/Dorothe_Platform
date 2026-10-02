@@ -1,4 +1,4 @@
-import { agentPortraitIfSet } from "@/lib/media/slots";
+import { agentPortraitIfSet, resolveMedia } from "@/lib/media/slots";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import type { Locale } from "@/i18n/config";
@@ -18,7 +18,15 @@ export function usePageCopy(page: string, locale: Locale): ResolvedPage {
   const { data: row } = useSuspenseQuery(pageContentQueryOptions(page));
 
   return resolvePage(page, row, locale, settings.default_locale, {
-    mediaDefaults: { portrait: agentPortraitIfSet(settings) },
+    mediaDefaults: {
+      portrait: agentPortraitIfSet(settings),
+      hero_photo:
+        page === "selling"
+          ? resolveMedia(settings, "selling:hero_photo").url
+          : page === "inheritance"
+            ? resolveMedia(settings, "inheritance:hero_photo").url
+            : null,
+    },
     vars: copyVars(settings, locale),
   });
 }
