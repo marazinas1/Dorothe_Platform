@@ -11,10 +11,6 @@ const Input = z.object({
   url: z.string().url().max(2000).nullable(),
 });
 
-export function publicMediaDefaults(settings: { media_defaults?: unknown }) {
-  return (settings.media_defaults ?? {}) as Record<string, string | null>;
-}
-
 /** Developer-only: pin or clear the studio default for one photograph. */
 export const setMediaDefault = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])

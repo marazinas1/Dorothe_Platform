@@ -1688,6 +1688,14 @@
         "about_portrait": {
           "label": "Portrait",
           "help": "Your portrait on the About me page. It also appears beside the enquiry form on every property page. Saved immediately."
+        },
+        "selling_hero_photo": {
+          "label": "Selling page photograph",
+          "help": "The house photograph in the opening section of the Selling page. Remember to press Save."
+        },
+        "inheritance_hero_photo": {
+          "label": "Inheritance page photograph",
+          "help": "The house photograph in the opening section of the Inheritance page. Remember to press Save."
         }
       }
     }

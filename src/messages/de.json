@@ -1688,6 +1688,14 @@
         "about_portrait": {
           "label": "Porträt",
           "help": "Ihr Porträt auf der Seite Über mich. Es erscheint auch neben dem Anfrageformular auf jeder Immobilienseite. Wird sofort gespeichert."
+        },
+        "selling_hero_photo": {
+          "label": "Foto der Verkaufen-Seite",
+          "help": "Das Hausfoto im Auftaktbereich der Seite Verkaufen. Bitte anschließend speichern."
+        },
+        "inheritance_hero_photo": {
+          "label": "Foto der Erben-Seite",
+          "help": "Das Hausfoto im Auftaktbereich der Seite Erben. Bitte anschließend speichern."
         }
       }
     }
