@@ -545,15 +545,14 @@
   }
   h1, h2, h3, h4, h5, h6, .font-heading {
     font-family: var(--font-heading);
-    font-optical-sizing: none;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1.05;
   }
 
-  /* Button shape follows site_settings.button_style, one token everywhere. */
-  button, [data-slot="button"] {
-    border-radius: var(--radius-button);
+  body {
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   /* Tabular figures on numeric utility so prices/areas align. */
@@ -634,7 +633,16 @@
 @utility eyebrow {
   font-family: var(--font-body);
   font-size: 0.78125rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Noir button voice: uppercase, 0.12em, 700. One rule, used by Button only. */
+@utility btn-noir {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
