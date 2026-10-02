@@ -5,8 +5,13 @@ How the interface of this project is built. Read together with `AGENTS.md`
 
 ## Two visual languages
 
-- **Public site** — per client. Colours, fonts and shape come from
-  `site_settings` through `ThemeStyleTag` into `:root`.
+- **Public site** — Deerva Noir family in `:root` (white / #111 ink, #F5F5F5
+  surface, black footer, 2px radius, Urbanist, uppercase 0.12em buttons). A
+  client overrides only `--primary` (via `ThemeStyleTag`) and the logo. All
+  public buttons use `src/components/brand/ui/Button.tsx` (`Button`,
+  `buttonClass`); route links use `ActionLink`/`QuietLink`, which wrap it.
+  Over photography use `text-on-media` / `from-scrim`. Rules:
+  `src/components/brand/AGENTS.md`.
 - **Admin** — fixed and identical in every clone, scoped to `.admin-theme` in
   `src/styles.css`. It defines only the core semantic roles and reuses the
   project's `--font-sans` and `--radius`. No admin-only token aliases, no
