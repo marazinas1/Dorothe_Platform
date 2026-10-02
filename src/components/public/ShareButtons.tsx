@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { buttonClass } from "@/components/brand/ui/Button";
+
 type Props = { url: string; title: string };
 
-const pill =
-  "inline-flex items-center rounded-full border border-border px-4 py-2 text-xs tracking-[0.06em] text-muted-foreground transition-colors duration-500 ease-out hover:border-primary/50 hover:text-primary";
+const pill = buttonClass({ variant: "secondary", size: "sm" });
 
 export function ShareButtons({ url, title }: Props) {
   const { t } = useTranslation();
