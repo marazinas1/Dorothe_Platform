@@ -121,7 +121,7 @@
   "listings": {
     "title": "Properties",
     "description": "Current offerings {{region_in}}.",
-    "catalogue_title": "Properties in the {{region}}",
+    "catalogue_title": "Properties in {{region}}",
     "catalogue_intro": "Each one visited, valued and photographed by me.",
     "results_context": "for sale, {{sort}} first",
     "need_cta": {
