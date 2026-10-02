@@ -19,7 +19,7 @@ import { H1SaleProcess } from "./H1SaleProcess";
 export function H1Home(props: HomeTemplateProps) {
   const { t } = useTranslation();
   const { locale, settings, copy, featured, sold, hideSoldPrice, testimonials, posts } = props;
-  const steps = (t("pages.selling.steps", { returnObjects: true }) as Step[]).slice(0, 4);
+  const steps = t("home.sale_process_steps", { returnObjects: true }) as Step[];
   return (
     <>
       <H1Hero {...props} />

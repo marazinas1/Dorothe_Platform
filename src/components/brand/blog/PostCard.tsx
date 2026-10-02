@@ -14,7 +14,7 @@ export function PostCard({
   dateLabel: string | null;
 }) {
   return (
-    <li className="group flex flex-col overflow-hidden rounded-[var(--radius)] border border-border/70 bg-card">
+    <li className="group flex flex-col overflow-hidden rounded-[var(--radius)] bg-card">
       <Link
         to="/$locale/ratgeber/$slug"
         params={{ locale, slug: post.slug }}
@@ -30,7 +30,7 @@ export function PostCard({
             />
           </div>
         ) : null}
-        <div className="flex flex-1 flex-col px-[26px] py-[26px]">
+        <div className="flex flex-1 flex-col pt-5">
           {dateLabel ? (
             <div className="text-[12px] uppercase tracking-[0.14em] text-muted-foreground">
               {dateLabel}

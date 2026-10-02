@@ -18,6 +18,18 @@
     "rail_next": "Next",
     "view_all": "View all properties",
     "view_all_sold": "Browse sold archive",
+    "sale_process_title": "How a sale works with me",
+    "sale_process_intro": "Four stages. You decide at the end of each one whether to continue.",
+    "sale_process_link": "The full process",
+    "sale_process_steps": [
+      { "title": "Valuation on site", "body": "I visit, record every value-relevant detail and give you a realistic price range in writing." },
+      { "title": "Preparation", "body": "Documents, energy certificate, photographs and floor plans. I handle what you would rather not." },
+      { "title": "Marketing and viewings", "body": "Portals, my buyer database and viewings with buyers who have proven they can finance." },
+      { "title": "Notary and handover", "body": "I prepare the contract with the notary and stay with you until the keys are handed over." }
+    ],
+    "more_reviews": "More reviews",
+    "guides_title": "Guides for owners and buyers",
+    "all_articles": "All articles",
     "hero_cta": "Request a valuation",
     "hero_form_address": "Address",
     "hero_form_address_hint": "Street, town",
