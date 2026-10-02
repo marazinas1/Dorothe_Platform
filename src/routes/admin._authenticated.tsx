@@ -16,7 +16,7 @@ export const Route = createFileRoute("/admin/_authenticated")({
   // hard refresh. The gate confirms a real session, then verifies the profile
   // server-side (bearer token validated by requireSupabaseAuth).
   ssr: false,
-  beforeLoad: async ({ params, location }) => {
+  beforeLoad: async ({ location }) => {
     const toLogin = (reason?: string) =>
       redirect({
         to: "/admin/login",
