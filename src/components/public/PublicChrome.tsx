@@ -75,6 +75,8 @@ function Footer({
         <div>
           <Link to="/$locale" params={{ locale }} aria-label={settings.site_name}><SiteLogo settings={settings} tone="light" interactive className="max-h-12" /></Link>
           {settings.primary_agent_name ? <div className="mt-5 text-sm text-footer-muted">{settings.primary_agent_name}</div> : null}
+          {settings.address_street ? <div className="mt-1 text-sm text-footer-muted">{settings.address_street}<br />{settings.address_zip} {settings.address_city}</div> : null}
+          <Link to="/$locale/immobilienbewertung" params={{ locale }} className="mt-7 inline-flex min-h-11 items-center border border-footer-foreground bg-footer-foreground px-5 text-xs font-bold uppercase tracking-[0.12em] text-footer hover:opacity-85">{t("home.valuation_cta")}</Link>
           <SocialLinks settings={settings} className="mt-5 flex gap-4" />
         </div>
         <FooterLinks title={t("nav.listings")} links={pages} locale={locale} />
@@ -84,7 +86,8 @@ function Footer({
           <div className="mt-5 text-sm leading-7 text-footer-muted">
             {settings.contact_email ? <a className="block hover:text-footer-foreground" href={`mailto:${settings.contact_email}`}>{settings.contact_email}</a> : null}
             {settings.contact_phone ? <a className="block tabular-figures hover:text-footer-foreground" href={`tel:${settings.contact_phone.replace(/\s/g, "")}`}>{settings.contact_phone}</a> : null}
-            {settings.address_street ? <div className="mt-3">{settings.address_street}<br />{settings.address_zip} {settings.address_city}</div> : null}
+            <Link to="/$locale/ueber-mich" params={{ locale }} className="mt-3 block hover:text-footer-foreground">{t("nav.about_solo")}</Link>
+            <Link to="/$locale/kontakt" params={{ locale }} className="block hover:text-footer-foreground">{t("nav.contact")}</Link>
           </div>
         </div>
       </div>

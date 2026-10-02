@@ -1,5 +1,8 @@
 import { cn } from "@/lib/utils";
 import type { TestiItem } from "@/lib/testimonials/types";
+import type { Locale } from "@/i18n/config";
+import { HomeTextLink } from "./HomeActions";
+import { useTranslation } from "react-i18next";
 
 /**
  * Client voices — the one trust element a solo practice cannot borrow from a
@@ -8,10 +11,12 @@ import type { TestiItem } from "@/lib/testimonials/types";
 export function HomeTestimonials({
   items,
   title,
+  locale,
   tone = "paper",
 }: {
   items: TestiItem[];
   title?: string;
+  locale?: Locale;
   tone?: "paper" | "ink";
 }) {
   if (items.length === 0) return null;
@@ -41,17 +46,19 @@ export function HomeTestimonials({
   }
 
   return (
-    <section className="bg-secondary py-20 lg:py-[88px]">
-      <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
-        {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
-        <div className="mt-12 grid gap-7 md:grid-cols-3">
+    <section className="bg-background py-[72px] lg:py-[96px]">
+      <div className="mx-auto max-w-[1280px] px-5 md:px-10">
+        <div className="flex items-end justify-between gap-6">
+          {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
+          {locale ? <ReviewLink locale={locale} /> : null}
+        </div>
+        <div className="mt-10 grid gap-7 md:grid-cols-3">
           {items.slice(0, 3).map((item, i) => (
             <div
               key={i}
-              className="flex h-full flex-col rounded-[var(--radius)] bg-background px-[26px] py-[30px]"
+              className="flex h-full min-h-[230px] flex-col rounded-[var(--radius)] bg-card px-[26px] py-[30px]"
             >
-              <Stars className="text-foreground" />
-              <p className="mt-4 min-h-[88px] text-[14.5px] leading-[1.62]">{item.quote}</p>
+              <p className="min-h-[88px] text-[17px] leading-[1.5]">“{item.quote.replace(/^['\"]|['\"]$/g, "")}”</p>
               <div className="mt-auto pt-[22px]">
                 <div className="border-t border-border pt-4 text-[13.5px] font-semibold">
                   {item.name}
@@ -66,6 +73,11 @@ export function HomeTestimonials({
       </div>
     </section>
   );
+}
+
+function ReviewLink({ locale }: { locale: Locale }) {
+  const { t } = useTranslation();
+  return <HomeTextLink locale={locale} to="/$locale/ueber-mich">{t("home.more_reviews")}</HomeTextLink>;
 }
 
 export function Stars({ className }: { className?: string }) {

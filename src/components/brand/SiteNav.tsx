@@ -35,19 +35,14 @@ export function useNavItems() {
   return [
     { to: "/$locale" as const, label: t("nav.home") },
     { to: "/$locale/immobilien" as const, label: t("nav.listings") },
-    // Selling replaces the valuation link: an owner weighs "should I sell",
-    // not "I need a valuation". Sold work is evidence, so it is linked from
-    // the homepage and Über mich rather than the main menu.
     { to: "/$locale/verkaufen" as const, label: t("nav.selling") },
+    { to: "/$locale/immobilienbewertung" as const, label: t("nav.valuation") },
     { to: "/$locale/erben" as const, label: t("nav.inheritance") },
     ...(showBlog ? [{ to: "/$locale/ratgeber" as const, label: t("nav.blog") }] : []),
     {
       to: "/$locale/ueber-mich" as const,
       label: t(teamEnabled ? "nav.about_team" : "nav.about_solo"),
     },
-    // Contact stays in the list as well as the filled button: people look for
-    // it in the menu out of habit.
-    { to: "/$locale/kontakt" as const, label: t("nav.contact") },
   ];
 }
 
@@ -80,7 +75,7 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
           : "border-b border-border bg-background/95 backdrop-blur-md",
       )}
     >
-      <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
+      <div className="mx-auto max-w-[1280px] px-5 md:px-10">
         <nav
           className={cn(
             "flex items-center justify-between transition-[height] duration-500 ease-out",
@@ -95,14 +90,14 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             <SiteLogo settings={settings} interactive />
           </HomeLink>
 
-          <div className="hidden items-center gap-7 lg:flex">
+          <div className="hidden items-center gap-6 lg:flex xl:gap-7">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 params={{ locale }}
                 className={cn(
-                  "whitespace-nowrap text-[15px] font-medium transition-colors duration-200",
+                  "whitespace-nowrap text-sm font-medium transition-colors duration-200",
                   onPhoto ? "text-on-media-muted hover:text-on-media" : "text-muted-foreground hover:text-foreground",
                 )}
                 activeProps={{ className: onPhoto ? "text-on-media underline underline-offset-8" : "text-foreground underline underline-offset-8" }}

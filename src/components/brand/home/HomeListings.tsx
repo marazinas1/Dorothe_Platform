@@ -25,7 +25,7 @@ export function HomeListings({ locale, settings, items, title, note, hidePrice =
   if (items.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-[1280px] px-5 py-[72px] md:px-10 lg:py-[88px]">
+    <section className="mx-auto max-w-[1280px] px-5 pb-[88px] md:px-10 lg:pb-[96px]">
       <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-section max-w-[24ch] text-balance">{title}</h2>
