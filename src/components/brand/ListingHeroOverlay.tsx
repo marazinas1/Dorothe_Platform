@@ -27,7 +27,7 @@ export function ListingHeroOverlay({ title, locationLine, contactHref }: Props) 
       </div>
       <a
         href={contactHref}
-        className={actionButtonClass("primary", "pointer-events-auto flex-none")}
+        className={actionButtonClass("on-dark", "pointer-events-auto flex-none")}
       >
         {t("listings.detail.contact_agent")}
       </a>

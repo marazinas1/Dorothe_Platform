@@ -136,7 +136,7 @@ function ListingsIndex() {
                     search: (prev: ListingsSearch) => ({ ...prev, status: st, page: 1 }),
                   })
                 }
-                className={`rounded-full border px-4 py-1.5 text-sm transition-colors duration-300 ${
+                className={`inline-flex min-h-11 cursor-pointer items-center rounded-[var(--radius-button)] border px-4 text-sm transition-colors duration-300 ${
                   search.status === st
                     ? "border-foreground bg-foreground text-background"
                     : "border-border text-muted-foreground hover:text-foreground"
@@ -157,7 +157,7 @@ function ListingsIndex() {
                     search: (prev: ListingsSearch) => ({ ...prev, view: v }),
                   })
                 }
-                className={`rounded-full border px-4 py-1.5 text-sm transition-colors duration-300 ${
+                className={`inline-flex min-h-11 cursor-pointer items-center rounded-[var(--radius-button)] border px-4 text-sm transition-colors duration-300 ${
                   search.view === v
                     ? "border-foreground bg-foreground text-background"
                     : "border-border text-muted-foreground hover:text-foreground"

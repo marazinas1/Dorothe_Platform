@@ -62,7 +62,7 @@ export function ListingCardSpecs({ listing, areaUnit, locale, compact = false }:
           <span className="sr-only">{t("listings.facts.energy_class")}</span>
           <span
             className={cn(
-              "inline-flex items-center rounded-full border px-2 py-0.5 text-xs",
+              "inline-flex items-center rounded-sm border px-2 py-0.5 text-xs",
               compact && "px-1.5 py-0 text-[10px]",
               energyClassTone(energyClass),
             )}
