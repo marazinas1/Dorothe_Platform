@@ -31,7 +31,7 @@ import {
 export const Route = createFileRoute("/$locale/")({
   staticData: { sitemap: true },
   loader: async ({ context, params }) => {
-    const [settings, origin, featured, testimonials] = await Promise.all([
+    const [settings, origin, featured, testimonials, , , , , posts] = await Promise.all([
       context.queryClient.ensureQueryData(siteSettingsQueryOptions),
       getRequestOrigin(),
       context.queryClient.ensureQueryData(featuredListingsQueryOptions),
@@ -40,6 +40,7 @@ export const Route = createFileRoute("/$locale/")({
       context.queryClient.ensureQueryData(publicCitiesQueryOptions),
       context.queryClient.ensureQueryData(publicTeamQueryOptions),
       context.queryClient.ensureQueryData(featureFlagsQueryOptions),
+      context.queryClient.ensureQueryData(publicPostsQueryOptions),
     ]);
 
     return {
@@ -48,7 +49,7 @@ export const Route = createFileRoute("/$locale/")({
       locale: params.locale as Locale,
       socialImage: resolveSocialImage(settings, featured.items),
       testimonials,
-      context.queryClient.ensureQueryData(publicPostsQueryOptions),
+      posts,
     };
   },
   head: ({ loaderData }) => {
