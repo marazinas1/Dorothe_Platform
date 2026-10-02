@@ -6,6 +6,7 @@ import { pickImageUrl } from "@/lib/listings/image";
 import { pickLocalized } from "@/lib/listings/format";
 import { splitListingImages, type GalleryImage } from "@/lib/listings/gallery-images";
 import { Button } from "@/components/brand/ui/Button";
+import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 
 type Props = {
   images: GalleryImage[];
@@ -57,8 +58,8 @@ export function ListingGallery({ images, locale, title }: Props) {
             aria-label={i === 0 ? t("listings.detail.gallery_open") : undefined}
             className={`group relative overflow-hidden rounded-media bg-muted ${
               i === 0
-                ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[520px]"
-                : "hidden min-h-[254px] md:block"
+                ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[430px]"
+                : "hidden min-h-[211px] md:block"
             }`}
           >
             <img
@@ -75,6 +76,15 @@ export function ListingGallery({ images, locale, title }: Props) {
             ) : null}
           </button>
         ))}
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        <Button type="button" variant="outline" size="sm" onClick={() => setOpenIdx(0)}>
+          <ListingIcon name="cam" /> {t("listings.detail.all_photos")}
+        </Button>
+        <Button type="button" variant="outline" size="sm" onClick={() => navigator.share?.({ title, url: window.location.href })}>
+          <ListingIcon name="share" /> {t("listings.detail.share")}
+        </Button>
       </div>
 
       {openIdx != null ? (

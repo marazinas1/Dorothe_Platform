@@ -130,13 +130,14 @@ export function ListingFactsBar({ listing, locale, settings }: Props) {
     onRequestLabel: t("listings.on_request"),
   });
 
+  const primaryFacts = facts.slice(0, 4);
   return (
-    <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-20">
-      <div className="border-t border-border pt-6">
+    <div className="grid grid-cols-2 border-y border-border sm:grid-cols-5">
+      <div className="border-b border-r border-border px-4 py-5 sm:border-b-0 sm:pl-0">
         <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
           {t(moneyLabelKey(shape, "price", "public"))}
         </div>
-        <div className="mt-4 font-heading text-4xl leading-none tabular-figures md:text-5xl">
+        <div className="mt-2 font-heading text-xl font-bold leading-none tabular-figures md:text-2xl">
           {price}
         </div>
         {investment ? (
@@ -146,16 +147,16 @@ export function ListingFactsBar({ listing, locale, settings }: Props) {
         ) : null}
       </div>
 
-      <dl className="border-t border-border">
-        {facts.map((f) => (
+      <dl className="contents">
+        {primaryFacts.map((f) => (
           <div
             key={f.label}
-            className="flex items-baseline justify-between gap-6 border-b border-border py-4"
+            className="border-b border-r border-border px-4 py-5 last:border-r-0 sm:border-b-0"
           >
             <dt className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
               {f.label}
             </dt>
-            <dd className="tabular-figures text-base text-foreground">{f.value}</dd>
+            <dd className="mt-2 tabular-figures text-lg font-semibold text-foreground">{f.value}</dd>
           </div>
         ))}
       </dl>
