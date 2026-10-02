@@ -35,7 +35,7 @@ Blocked outside this work:
 - [ ] B Admin spine & menu · C remove unused identity fields · D sellers-first public UX · E remix template
 
 ## Approved full public-site HTML parity
-- [ ] Wave 1: shared public chrome and Home (exact HTML copy, icons, temporary editable media)
+- [x] Wave 1: shared public chrome and Home (exact HTML copy, icons, temporary editable media)
 - [ ] Wave 2: Properties and listing detail (retain live listing images)
 - [ ] Wave 3: Sold, Selling, Valuation and Inheritance
 - [ ] Wave 4: About, Contact, Guides, Article and legal chrome
@@ -43,7 +43,7 @@ Blocked outside this work:
 
 ## Current full-site content requirement
 - [ ] Copy all approved HTML demo copy and iconography into EN/DE content fallbacks
-- [ ] Make every non-listing public photograph editable in its owning page Settings tab
-- [ ] Seed HTML testimonials and ensure Testimonials admin remains source of truth
+- [x] Make every non-listing public photograph editable in its owning page Settings tab
+- [x] Seed HTML testimonials and ensure Testimonials admin remains source of truth
 - [ ] Preserve live listing images and all collection-driven records
 - [ ] Verify every public route against broker-site-2.html on desktop and mobile

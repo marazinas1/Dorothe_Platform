@@ -131,3 +131,15 @@ UPDATE public.site_settings SET
   ]'::jsonb,
   credibility_heading = '{"de":"Warum Dorothe Waltner","en":"Why Dorothe Waltner"}'::jsonb,
   about_body = '{"de":"Ich begleite Eigentümer und Käufer im Saarland persönlich — von der ersten Wertermittlung bis zum Notartermin. Als Einzelmaklerin arbeite ich bewusst mit wenigen Objekten gleichzeitig, damit jedes die Aufmerksamkeit bekommt, die es verdient. Kein Callcenter, keine Übergabe an Kollegen: Sie sprechen mit mir.","en":"I personally guide owners and buyers across the Saarland — from the first valuation to signing at the notary. As a solo broker I deliberately handle only a handful of properties at a time, so each one gets the attention it deserves. No call centre, no handovers: you speak with me."}'::jsonb;
+
+-- ---------------------------------------------------------------------------
+-- 2. Demonstration testimonials from the approved broker-site reference.
+-- They remain normal admin-managed records and can be replaced before launch.
+-- ---------------------------------------------------------------------------
+INSERT INTO public.testimonials
+  (quote, author_name, author_detail, sort_order, published, show_on_home)
+VALUES
+  ('{"en":"She valued our house in person and explained every figure. No pressure at any point, we decided on our own timeline.","de":"Sie hat unser Haus persönlich bewertet und jede Zahl erklärt. Zu keinem Zeitpunkt gab es Druck – wir entschieden in unserem eigenen Tempo."}'::jsonb, 'Sabine K.', 'Sold a house in Völklingen', 10, true, true),
+  ('{"en":"We inherited a house as three siblings. Her valuation gave us one figure everyone could accept.","de":"Wir haben als drei Geschwister ein Haus geerbt. Ihre Bewertung gab uns einen Wert, den alle akzeptieren konnten."}'::jsonb, 'Thomas R.', 'Inherited property, Saarbrücken', 20, true, true),
+  ('{"en":"From the first viewing to the notary, always the same person and always reachable. Exactly what we needed as first-time buyers.","de":"Von der ersten Besichtigung bis zum Notar immer dieselbe Ansprechpartnerin und immer erreichbar. Genau das brauchten wir als Erstkäufer."}'::jsonb, 'Julia and Mark H.', 'Bought in Riegelsberg', 30, true, true)
+ON CONFLICT DO NOTHING;
