@@ -30,7 +30,7 @@ export function Signature({ name, tone = "on-paper", size = "md", className }: P
       className={cn(
         "font-script inline-block select-none",
         SIZES[size],
-        tone === "on-photo" ? "text-white/90" : "text-primary",
+        tone === "on-photo" ? "text-on-media" : "text-primary",
         className,
       )}
     >
