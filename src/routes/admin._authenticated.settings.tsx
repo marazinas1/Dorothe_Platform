@@ -6,7 +6,7 @@ import { SettingsTabs } from "@/components/admin/settings/SettingsTabs";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { Settings } from "lucide-react";
 
-export const Route = createFileRoute("/$locale/admin/settings")({
+export const Route = createFileRoute("/admin/_authenticated/settings")({
   staticData: { sitemap: false },
   component: SettingsLayout,
 });

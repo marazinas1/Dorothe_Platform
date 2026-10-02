@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useNavigate, useParams, useRouter } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -6,7 +7,7 @@ import type { Locale } from "@/i18n/config";
 
 /** Clears cached admin data, ends the session and returns to the login page. */
 export function useSignOut() {
-  const { locale } = useParams({ strict: false }) as { locale: Locale };
+  const locale = usePublicLocale();
   const navigate = useNavigate();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -16,6 +17,6 @@ export function useSignOut() {
     queryClient.clear();
     await supabase.auth.signOut();
     router.invalidate();
-    navigate({ to: "/$locale/auth/login", params: { locale }, replace: true });
+    navigate({ to: "/admin/login", replace: true });
   };
 }

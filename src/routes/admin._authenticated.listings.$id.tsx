@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ import { adminListingQueryOptions } from "@/lib/listings/admin.functions";
 import { scrollToField } from "@/lib/listings/scroll-to-field";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 
-export const Route = createFileRoute("/$locale/admin/listings/$id")({
+export const Route = createFileRoute("/admin/_authenticated/listings/$id")({
   staticData: { sitemap: false },
   // ?field=<anchor> lets the dashboard hand over to the exact field to fix.
   validateSearch: (search: Record<string, unknown>): { field?: string } =>
@@ -22,7 +23,8 @@ export const Route = createFileRoute("/$locale/admin/listings/$id")({
 
 function EditListing() {
   const { t } = useTranslation();
-  const { locale, id } = Route.useParams();
+  const { id } = Route.useParams();
+  const locale = usePublicLocale();
   const { field } = Route.useSearch();
   const { data } = useSuspenseQuery(adminListingQueryOptions(id));
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
@@ -40,8 +42,8 @@ function EditListing() {
   return (
     <div className="space-y-6">
       <Link
-        to="/$locale/admin/listings"
-        params={{ locale }}
+        to="/admin/listings"
+
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />

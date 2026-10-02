@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { Link, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
@@ -19,7 +20,7 @@ type Props = {
  */
 export function ConsentCheckbox({ id, checked, onChange, showError }: Props) {
   const { t } = useTranslation();
-  const { locale } = useParams({ strict: false }) as { locale: Locale };
+  const locale = usePublicLocale();
 
   return (
     <div>

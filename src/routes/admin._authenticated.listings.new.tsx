@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,7 @@ import { ListingForm } from "@/components/admin/listings/ListingForm";
 import { EMPTY_VALUES } from "@/components/admin/listings/listing-form-state";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 
-export const Route = createFileRoute("/$locale/admin/listings/new")({
+export const Route = createFileRoute("/admin/_authenticated/listings/new")({
   staticData: { sitemap: false },
   component: NewListing,
 });
@@ -20,14 +21,14 @@ export const Route = createFileRoute("/$locale/admin/listings/new")({
  */
 function NewListing() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams();
+  const locale = usePublicLocale();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
 
   return (
     <div className="space-y-6">
       <Link
-        to="/$locale/admin/listings"
-        params={{ locale }}
+        to="/admin/listings"
+
         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />

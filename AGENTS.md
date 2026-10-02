@@ -11,163 +11,32 @@
 
 # Project rules — broker platform template
 
-These are binding rules for every task in this repository. Follow them without
-being asked. When a request conflicts with a rule, say so and propose the
-compliant version.
+Binding rules. If a request conflicts, say so and propose the compliant version. Context and work plan: PLAN.md (read before planning).
 
-## 1. Architecture
+## Architecture
+- Clone-per-client: one codebase, one deployment, database and domain per broker. Not multi-tenant: no tenant ids, tenant routing or cross-client tables; no frontend/backend split.
+- Reuse comes from the core/brand boundary plus an upstream template. Fixes for every client go into core, never patched twice in brand.
+- Read settings only via `@/lib/config/site-settings.functions`; never query `site_settings` from components or assume one row.
+- RLS uses the SQL helpers (`current_user_role()`, `has_role(text[])`, `current_user_has_permission()`, `current_user_is_active()`); no inline role literals.
+- Storage paths start with the owning entity id (`listings/<id>/...`).
+- Business logic lives in server functions under `/lib`, never in components.
 
-- This is a **clone-per-client platform**: one codebase, one independent
-  deployment per broker. Each client has their own database, domain and
-  deployment.
-- It is NOT a shared backend with thin frontends, and NOT multi-tenant. Do not
-  add tenant ids, tenant routing, or cross-client tables.
-- Reuse comes from the core/brand boundary plus an upstream git template — never
-  from a network boundary. Do not split the app into separate frontend/backend
-  services.
-- Fixes that belong to every client go into core so they can be synced upstream.
-  Never patch the same bug twice in brand code.
+## Core / brand boundary
+- CORE: `supabase/migrations`, `/lib`, `/components/admin` (see its AGENTS.md), `/components/ui` (never modified), engines (SEO, i18n, energy validation, images, tokens).
+- BRAND: `/components/brand`, route files (composition + head only), `site_settings` rows and `supabase/seed/<client>.sql`.
+- Core never imports brand (pass markup as props/children). Brand components only render props: no fetching, permissions or rules (type imports ok).
 
-## 2. Multi-tenant readiness (a later move must be a refactor, not a rewrite)
+## Client data — never in code
+- Visible strings in `/src/messages` (en/de); client words interpolated from `site_settings` via `@/lib/config/site-copy`.
+- Client values in `site_settings`; fonts as keys of `@/lib/theme/fonts`; optional capabilities behind `feature_flags` via `useFeatureFlag`.
+- Client data only in seed files; migrations hold schema and are immutable (neutralise leaks with a follow-up migration).
+- No client name, address, phone, email or town anywhere else — including comments, placeholders, defaults and migration WHERE clauses.
 
-- Read settings only through the single settings accessor
-  (`@/lib/config/site-settings.functions`). Never query `site_settings`
-  directly from a component, and never assume "the one settings row" in
-  application code.
-- Express RLS through the existing SQL helper functions
-  (`current_user_role()`, `has_role(text[])`, `current_user_has_permission()`,
-  `current_user_is_active()`). Never inline role string literals in policies.
-- Prefix every storage path with the owning entity id
-  (`listings/<listing_id>/...`, `agent/<profile_id>/...`).
-- All business logic lives in server functions under `/lib`, never in
-  components.
+## Design tiers
+- Standard (default): differentiate via `site_settings` tokens, `homepage_sections`, hero variants and flags. Premium: `/components/brand` may be rewritten. Prefer config, then a variant/token, before bespoke components.
 
-## 3. The core / brand boundary — the most important rule
-
-**CORE** (identical in every clone, updated from upstream):
-
-- `supabase/migrations` — schema, RLS, triggers, SQL helper functions
-- `/lib` — server functions, queries, validation, business rules
-- `/components/admin` — the whole admin panel
-- `/components/ui` — shadcn primitives, never modified
-- the engines: SEO/head builder, i18n, energy validation, image pipeline,
-  design tokens
-
-**BRAND** (configured or rewritten per client):
-
-- `/components/brand` — presentational components
-- route files under `src/routes` — composition only
-- `site_settings` rows and `supabase/seed/<client>.sql`
-
-Rules:
-
-- Brand imports from core. **Core NEVER imports from brand.** If a core shell
-  needs brand markup, it accepts it as props/children.
-- No data fetching, no permission checks, no business rules inside
-  `/components/brand`. Brand components receive props and render. Type-only
-  imports from core are allowed.
-- Route files compose components and build head metadata. No markup or logic
-  beyond that — extract both into components.
-
-## 4. Client data — never in code
-
-- Every client-visible string goes in `/src/messages` (`en.json`, `de.json`).
-  Client-specific words are interpolated: `{{region}}`, `{{agent}}`, `{{city}}`,
-  resolved from `site_settings` through `@/lib/config/site-copy`.
-- Every client value goes in `site_settings`.
-- Fonts come from the curated registry in `@/lib/theme/fonts`; `site_settings`
-  stores a registry key, never a raw CSS stack, and `src/styles.css` never
-  decides typography.
-- Every optional capability sits behind a `feature_flags` row and is read
-  through `useFeatureFlag`.
-- Client-specific data belongs in `supabase/seed/<client>.sql` only. Migrations
-  contain schema, never client content. Applied migrations are immutable — if
-  client content ever lands in one, add a follow-up migration that neutralises
-  it and move the real values into the seed file.
-- A client's name, address, phone, email, region, town names or any other detail
-  must never appear anywhere else in the codebase — including translations,
-  comments, placeholders, default values and migration `WHERE` clauses.
-
-## 5. Design tiers
-
-- **Standard tier (default)**: clients differ only through `site_settings`
-  tokens (colours, fonts, logo, photos, copy), `homepage_sections` ordering,
-  hero variants and feature flags. No component rewriting.
-- **Premium tier (exception, priced higher)**: `/components/brand` may be
-  rewritten for maximum visual differentiation.
-- Always try to achieve differentiation through configuration first, and add a
-  variant or token before adding a bespoke component.
-
-## 5.1 Two design systems: fixed admin, per-client public site
-
-- The product has **two** visual languages, deliberately separate:
-  - **Admin (inside)** — one fixed design system, identical in every clone. It
-    does not read client branding at all. Colours, fonts, radii, button shape
-    and control sizing are defined once in the admin theme scope
-    (`.admin-theme` in `src/styles.css`) and are never client-configurable.
-  - **Public site (outside)** — fully per-client, driven by `site_settings`
-    tokens through `ThemeStyleTag`.
-- Changing a client's primary colour, fonts or corner style must change the
-  public site only. The admin must look identical across clients.
-- Never let client tokens leak into the admin scope, and never put a
-  client-specific colour or font inside the admin theme.
-- Both sides still use semantic tokens. Components never hardcode colours or
-  fonts; the admin scope supplies the admin values, `:root`/`ThemeStyleTag` the
-  public ones.
-- The admin scope defines only the core semantic roles (`background`,
-  `foreground`, `card`, `primary`, `secondary`, `muted`, `accent`,
-  `destructive`, `border`, `input`, `ring`, status pairs). No admin-only
-  aliases, no separate admin typeface, no separate shape language: the admin
-  uses the project's `--font-sans` and `--radius`, and never pill-shaped
-  controls or tabs.
-- Tabs everywhere in the admin use the shared `AdminTabs` component: a
-  transparent row on one `border-border` line with a 3px `primary` underline on
-  the active tab.
-- Destructive actions use the shared `ConfirmDialog` (never `window.confirm`)
-  and name the record plus what disappears from the public site. Forms with
-  unsaved edits render `UnsavedChangesGuard`.
-- The one exception carried over from the client theme is the logo, which is
-  brand identity rather than styling.
-
-
-## 6. General
-
-- Files stay under 200 lines. Split into components instead of growing one.
-  (Generated files — `src/integrations/supabase/types.ts`, `routeTree.gen.ts` —
-  and `/components/ui` primitives are exempt.)
-- The site is server-rendered. Keep SSR intact; do not move public pages to
-  client-only rendering.
-- Animation is CSS-only. No motion libraries.
-- German market: fonts must include `latin-ext` for umlauts; energy certificate
-  fields follow `site_settings.country`; no cookies without consent — prefer
-  cookieless, server-side approaches (no Google Analytics by default).
-- All colours come from semantic tokens in `src/styles.css`. Never use
-  `text-white`, `bg-black`, or hex values in components.
-
-## 7. Per-client onboarding checklist
-
-1. Clone the repository, create a fresh Lovable Cloud backend, apply all
-   migrations.
-2. Create `supabase/seed/<country>-<client>.sql` and fill the single
-   `site_settings` row:
-   - identity: `site_name`, `legal_name`, `country`, `currency`, `area_unit`
-   - locales: `default_locale`, `enabled_locales`
-   - branding: `primary_color`, `secondary_color`, `accent_color`,
-     `font_heading`, `font_body`, `logo_url`, `logo_dark_url`, `favicon_url`,
-     `og_default_image`
-   - contact: `contact_email`, `contact_phone`, `whatsapp`, `address_*`,
-     `geo_lat`, `geo_lng`, `opening_hours`, `social`
-   - content: `homepage_sections`, `credibility_heading`, `credibility_stats`,
-     `about_body`, `qualifications`, `primary_agent_*`
-   - legal: `legal_impressum`, `legal_privacy`, `legal_terms`
-3. Upload assets to the `site-assets` bucket (logo light/dark, favicon, agent
-   portrait, hero image, OG default) and run them through the image
-   optimisation function.
-4. Set locales and country, then verify energy validation matches that country.
-5. Toggle `feature_flags` for the modules sold (rentals, team, valuation,
-   sold archive, maps, ...).
-6. Create the owner user and grant permissions; confirm the admin panel loads.
-7. Confirm no client detail was added outside the seed file and
-   `site_settings`.
-Project context and the current work plan are in PLAN.md. Read it before
-planning any task.
+## General
+- Files under 200 lines (generated files and `/components/ui` exempt).
+- Public site stays SSR. CSS-only animation.
+- German market: `latin-ext` fonts; energy fields follow `site_settings.country`; no cookies without consent, cookieless analytics.
+- Colours only from semantic tokens in `src/styles.css`.

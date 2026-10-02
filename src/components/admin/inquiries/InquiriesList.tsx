@@ -32,8 +32,8 @@ export function InquiriesList({
           className={cn("transition-colors hover:bg-muted/40", row.status === "new" && "bg-muted/20")}
         >
           <Link
-            to="/$locale/admin/inquiries/$id"
-            params={{ locale, id: row.id }}
+            to="/admin/inquiries/$id"
+            params={{ id: row.id }}
             className="block px-4 py-4"
           >
             <div className="flex flex-wrap items-center gap-2">

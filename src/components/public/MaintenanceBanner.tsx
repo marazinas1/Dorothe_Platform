@@ -18,8 +18,8 @@ export function MaintenanceBanner({ locale, onPreview }: { locale: Locale; onPre
             {t("maintenance.previewAsVisitor")}
           </button>
           <Link
-            to="/$locale/admin/settings/$tab"
-            params={{ locale, tab: "maintenance" }}
+            to="/admin/settings/$tab"
+            params={{ tab: "maintenance" }}
             className="font-semibold underline underline-offset-2"
           >
             {t("maintenance.turnOff")}

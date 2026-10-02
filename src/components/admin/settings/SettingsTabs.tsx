@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useParams, useRouterState } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +14,7 @@ const TABS = ["business", "home", "selling", "inheritance", "about", "contact"] 
 export type SettingsTabId = (typeof TABS)[number];
 
 export function SettingsTabs() {
-  const { locale } = useParams({ strict: false }) as { locale: Locale };
+  const locale = usePublicLocale();
   const { t } = useTranslation();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const teamEnabled = useFeatureFlag("team");
@@ -26,9 +27,9 @@ export function SettingsTabs() {
         label: tab === "about"
           ? t(teamEnabled ? "admin.settings.tabs.about_us" : "admin.settings.tabs.about")
           : t(`admin.settings.tabs.${tab}`),
-        to: "/$locale/admin/settings/$tab",
-        params: { locale, tab },
-        active: pathname === `/${locale}/admin/settings/${tab}`,
+        to: "/admin/settings/$tab",
+        params: { tab },
+        active: pathname === `/admin/settings/${tab}`,
       }))}
     />
   );

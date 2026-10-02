@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -9,14 +10,14 @@ import { AuthCard } from "@/components/brand/AuthCard";
 import { supabase } from "@/integrations/supabase/client";
 import type { Locale } from "@/i18n/config";
 
-export const Route = createFileRoute("/$locale/auth/forgot-password")({
+export const Route = createFileRoute("/admin/forgot-password")({
   staticData: { sitemap: false },
   component: ForgotPasswordPage,
 });
 
 function ForgotPasswordPage() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams() as { locale: Locale };
+  const locale = usePublicLocale();
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
@@ -25,7 +26,7 @@ function ForgotPasswordPage() {
     e.preventDefault();
     setBusy(true);
     await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/${locale}/auth/reset-password`,
+      redirectTo: `${window.location.origin}/admin/set-password`,
     });
     setBusy(false);
     setDone(true);
@@ -59,8 +60,8 @@ function ForgotPasswordPage() {
         )}
         <div className="text-sm">
           <Link
-            to="/$locale/auth/login"
-            params={{ locale }}
+            to="/admin/login"
+
             className="text-primary underline-offset-4 hover:underline"
           >
             {t("admin.auth.forgot.back")}

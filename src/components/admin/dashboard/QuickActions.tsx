@@ -5,10 +5,10 @@ import { Building2, CalendarPlus, FilePlus2, MailOpen } from "lucide-react";
 import { AdminSection } from "@/components/admin/ui/AdminSection";
 
 const ACTIONS = [
-  { key: "property", to: "/$locale/admin/listings/new", icon: Building2 },
-  { key: "inquiries", to: "/$locale/admin/inquiries", icon: MailOpen },
-  { key: "appointment", to: "/$locale/admin/calendar", icon: CalendarPlus },
-  { key: "article", to: "/$locale/admin/posts", icon: FilePlus2 },
+  { key: "property", to: "/admin/listings/new", icon: Building2 },
+  { key: "inquiries", to: "/admin/inquiries", icon: MailOpen },
+  { key: "appointment", to: "/admin/calendar", icon: CalendarPlus },
+  { key: "article", to: "/admin/posts", icon: FilePlus2 },
 ] as const;
 
 export function QuickActions({ locale }: { locale: string }) {

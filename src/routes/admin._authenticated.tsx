@@ -9,18 +9,18 @@ import { resolveMessageLocale } from "@/i18n/config";
 import { AdminI18nProvider } from "@/i18n/admin-provider";
 import { AdminShell } from "@/components/admin/AdminShell";
 
-export const Route = createFileRoute("/$locale/admin")({
+export const Route = createFileRoute("/admin/_authenticated")({
   staticData: { sitemap: "exclude-subtree" },
   // Client-only gate: the Supabase session lives in localStorage, which the
   // server cannot read, so gating during SSR would loop back to login on every
   // hard refresh. The gate confirms a real session, then verifies the profile
   // server-side (bearer token validated by requireSupabaseAuth).
   ssr: false,
-  beforeLoad: async ({ params, location }) => {
+  beforeLoad: async ({ location }) => {
     const toLogin = (reason?: string) =>
       redirect({
-        to: "/$locale/auth/login",
-        params: { locale: params.locale },
+        to: "/admin/login",
+
         search: { redirect: location.href, ...(reason ? { error: reason } : {}) },
       });
 

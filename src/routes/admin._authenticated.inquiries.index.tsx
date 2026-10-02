@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -7,14 +8,14 @@ import { adminInquiriesQueryOptions } from "@/lib/inquiries/admin.functions";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { Inbox } from "lucide-react";
 
-export const Route = createFileRoute("/$locale/admin/inquiries/")({
+export const Route = createFileRoute("/admin/_authenticated/inquiries/")({
   staticData: { sitemap: false },
   component: InquiriesIndex,
 });
 
 function InquiriesIndex() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams();
+  const locale = usePublicLocale();
   const { data } = useSuspenseQuery(adminInquiriesQueryOptions);
   const unread = data.filter((row) => row.status === "new").length;
 

@@ -31,8 +31,8 @@ export function AgendaQueue({ locale }: { locale: string }) {
       failed={query.isError}
       footer={
         <Link
-          to="/$locale/admin/calendar"
-          params={{ locale }}
+          to="/admin/calendar"
+
           className="underline-offset-4 hover:underline"
         >
           {t("admin.dashboard.queue.agenda.all")}

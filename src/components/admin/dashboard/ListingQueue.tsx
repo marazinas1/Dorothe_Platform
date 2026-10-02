@@ -63,8 +63,8 @@ function Row({
     <div className="rounded-md px-1.5 py-1.5 hover:bg-muted">
       <div className="flex flex-wrap items-baseline gap-x-2">
         <Link
-          to="/$locale/admin/listings/$id"
-          params={{ locale, id: item.id }}
+          to="/admin/listings/$id"
+          params={{ id: item.id }}
           className="text-sm font-medium underline-offset-4 hover:underline"
         >
           {title}
@@ -114,8 +114,8 @@ function ReasonChip({
 
   return (
     <Link
-      to="/$locale/admin/listings/$id"
-      params={{ locale, id }}
+      to="/admin/listings/$id"
+      params={{ id }}
       search={{ field: reason.anchor }}
       className="rounded-[var(--radius)] border border-border bg-muted/60 px-2 py-0.5 text-xs text-muted-foreground hover:border-primary/40 hover:text-foreground"
     >

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "@tanstack/react-router";
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useTranslation } from "react-i18next";
 import { BarChart3, Clock, Eye, FileText, Inbox, Layers, MousePointerClick, TrendingUp } from "lucide-react";
 
@@ -24,7 +24,7 @@ const pct = (part: number, whole: number) => (whole ? ((part / whole) * 100).toF
 
 export function AnalyticsPage() {
   const { t } = useTranslation();
-  const { locale } = useParams({ from: "/$locale/admin/analytics" });
+  const locale = usePublicLocale();
   const [range, setRange] = useState<AnalyticsRange>(30);
   const query = useQuery(analyticsSummaryQueryOptions(range));
   const { data, isPending, error } = query;

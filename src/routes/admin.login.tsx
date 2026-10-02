@@ -1,3 +1,4 @@
+import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
@@ -20,7 +21,7 @@ const searchSchema = z.object({
   error: z.string().optional(),
 });
 
-export const Route = createFileRoute("/$locale/auth/login")({
+export const Route = createFileRoute("/admin/login")({
   staticData: { sitemap: false },
   validateSearch: (s) => searchSchema.parse(s),
   loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions),
@@ -29,8 +30,8 @@ export const Route = createFileRoute("/$locale/auth/login")({
 
 function LoginPage() {
   const { t } = useTranslation();
-  const { locale } = Route.useParams() as { locale: Locale };
-  const search = useSearch({ from: "/$locale/auth/login" });
+  const locale = usePublicLocale();
+  const search = useSearch({ from: "/admin/login" });
   const navigate = useNavigate();
   const qc = useQueryClient();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
@@ -72,7 +73,7 @@ function LoginPage() {
       // Best-effort last-login update; never blocks navigation.
       void updateLastLogin().catch(() => undefined);
       await qc.invalidateQueries({ queryKey: currentUserQueryOptions.queryKey });
-      const target = search.redirect ?? `/${locale}/admin`;
+      const target = search.redirect ?? "/admin";
       await navigate({ to: target, replace: true });
     } catch {
       setError(t("admin.auth.login.generic"));
@@ -143,8 +144,8 @@ function LoginPage() {
         </Button>
         <div className="pt-1">
           <Link
-            to="/$locale/auth/forgot-password"
-            params={{ locale }}
+            to="/admin/forgot-password"
+
             className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-300 hover:text-foreground hover:underline"
           >
             {t("admin.auth.login.forgot")}
