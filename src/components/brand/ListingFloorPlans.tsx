@@ -25,7 +25,7 @@ export function ListingFloorPlans({ images, locale }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <div>
+    <div id="floor-plans" className="scroll-mt-28">
       <h2 className="font-heading text-2xl tracking-tight sm:text-3xl">
         {t("listings.detail.sections.plans")}
       </h2>

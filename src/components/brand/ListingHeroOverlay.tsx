@@ -4,14 +4,13 @@ import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 type Props = {
   title: string;
   locationLine: string;
-  contactHref: string;
+  kicker: string;
 };
 
-export function ListingHeroOverlay({ title, locationLine }: Props) {
-  const { t } = useTranslation();
-
+export function ListingHeroOverlay({ title, locationLine, kicker }: Props) {
   return (
     <div className="min-w-0">
+        <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{kicker}</p>
         <h1 className="max-w-3xl font-heading text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.08]">
           {title}
         </h1>

@@ -1,5 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { Link } from "@tanstack/react-router";
 
 import { ShareButtons } from "@/components/public/ShareButtons";
 import { useFeatureFlag } from "@/hooks/use-feature-flag";
@@ -69,6 +70,11 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
     <>
       {/* 1. Gallery */}
       <section className="mx-auto max-w-[1220px] px-6 pt-8 lg:px-8">
+        <nav aria-label={t("listings.detail.breadcrumb")} className="mb-7 flex items-center gap-2 text-xs text-muted-foreground">
+          <Link to="/$locale/immobilien" params={{ locale }}>{t("nav.properties")}</Link>
+          <span aria-hidden>/</span><span>{l.address_city}</span><span aria-hidden>/</span>
+          <span className="truncate text-foreground">{title}</span>
+        </nav>
         <ListingGallery
           images={l.images}
           locale={locale}
@@ -81,7 +87,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
           <ListingHeroOverlay
             title={title}
             locationLine={locationLine}
-            contactHref={`#${CONTACT_ID}`}
+            kicker={`${t(`listings.propertyType.${l.property_type}`)} ${t(l.deal_type === "rent" ? "listings.for_rent" : "listings.for_sale")} · ${t("listings.detail.reference_short")} ${l.reference_code ?? "—"}`}
           />
           {/* 2. Key facts */}
           <section className="mt-12 lg:mt-16">
@@ -96,7 +102,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
             </div>
           </section>
 
-          {/* 4. Specification */}
+          {/* 4. Specification and costs */}
           <section className={GAP}>
             <ListingSpecs listing={l} locale={locale} settings={settings} />
           </section>
@@ -106,17 +112,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
             <ListingFeatures features={l.features} />
           </section>
 
-          {/* 6. Location, with the surroundings text */}
-          <section className={GAP}>
-            <ListingLocationMap listing={l} locale={locale} />
-          </section>
-
-          {/* 7. Floor plans and renderings */}
-          <section className={GAP}>
-            <ListingFloorPlans images={l.images} locale={locale} />
-          </section>
-
-          {/* 8. Energy certificate — fields decided by site_settings.country */}
+          {/* 6. Energy certificate */}
           <section className={GAP}>
             <EnergyPanel
               energy={l.energy}
@@ -124,6 +120,16 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
               exemption={l.energy_exemption}
               country={settings.country}
             />
+          </section>
+
+          {/* 7. Floor plans and renderings */}
+          <section className={GAP}>
+            <ListingFloorPlans images={l.images} locale={locale} />
+          </section>
+
+          {/* 8. Location */}
+          <section className={GAP}>
+            <ListingLocationMap listing={l} locale={locale} />
           </section>
 
           {/* 9. Documents */}
@@ -142,13 +148,8 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         />
       </div>
 
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-        {/* 10. Enquiry */}
-        <section id={CONTACT_ID} className={`${GAP} scroll-mt-28`}>
-          <ListingAgent listingId={l.id} settings={settings} />
-        </section>
-
-        <section className="mt-20">
+      <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
+        <section className={GAP}>
           <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
             {t("listings.detail.share")}
           </div>
@@ -157,12 +158,16 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
           </div>
         </section>
 
-        {/* 11. Other properties that can actually be enquired about */}
+        {/* 10. Other properties that can actually be enquired about */}
         {relatedItems.length > 0 ? (
           <section className={GAP}>
             <RelatedListings items={relatedItems} locale={locale} settings={settings} />
           </section>
         ) : null}
+
+        <section id={CONTACT_ID} className={`${GAP} scroll-mt-28`}>
+          <ListingAgent listingId={l.id} settings={settings} />
+        </section>
       </div>
 
       <ListingActionBar
