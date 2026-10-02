@@ -20,7 +20,6 @@ import { homeCopy, homeMediaBag } from "@/lib/home/content";
 import { homeJsonLd } from "@/lib/seo/home-jsonld";
 import { publicTestimonialsQueryOptions } from "@/lib/testimonials/queries.functions";
 import { homeTestiItems } from "@/lib/testimonials/resolve";
-import { fallbackTestiItems } from "@/lib/testimonials/fallback";
 import { HOME_CHROME } from "@/lib/home/layout";
 import {
   applySoldPricePolicy,
@@ -69,7 +68,6 @@ export const Route = createFileRoute("/$locale/")({
     });
     const copy = homeCopy(settings, locale);
     const homeVoices = homeTestiItems(testimonials, locale);
-    const voices = homeVoices.length ? homeVoices : fallbackTestiItems(copy);
     return {
       ...head,
       scripts: [
@@ -99,7 +97,7 @@ function HomePage() {
   const copy = homeCopy(settings, l);
   const media = homeMediaBag(settings);
   const curated = homeTestiItems(testimonials, l);
-  const voices = curated.length ? curated : fallbackTestiItems(copy);
+  const voices = curated;
 
   return (
     <PublicChrome

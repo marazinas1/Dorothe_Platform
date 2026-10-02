@@ -5,35 +5,38 @@ import { credItems, type HomeTemplateProps } from "../types";
  * then three hairline columns. The certificate line under each column carries
  * the amber, so the evidence is what the eye lands on.
  */
-export function H1Credentials({ copy }: HomeTemplateProps) {
+export function H1Credentials({ copy, media, settings }: HomeTemplateProps) {
   const intro = copy.text("cred_intro");
   const items = credItems(copy);
   if (!intro && items.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-[1220px] border-b border-border px-6 py-20 lg:px-8 lg:py-[88px]">
-      {intro ? (
-        <p className="max-w-[60ch] text-lg leading-[1.65] text-muted-foreground">{intro}</p>
-      ) : null}
-
-      {items.length > 0 ? (
-        <div className="mt-14 grid border-t border-border md:grid-cols-3">
+    <section className="mx-auto grid max-w-[1280px] items-center gap-10 px-5 py-[72px] md:px-10 lg:grid-cols-[5fr_6fr] lg:gap-20 lg:py-[120px]">
+      {media.portrait ? (
+        <div className="aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] bg-card">
+          <img src={media.portrait} alt={settings.primary_agent_name ?? settings.site_name} className="h-full w-full object-cover" />
+        </div>
+      ) : <div className="aspect-[4/5] bg-card" aria-hidden="true" />}
+      <div>
+        {intro ? <p className="max-w-[60ch] text-[clamp(1.125rem,1.6vw,1.3125rem)] leading-[1.55]">{intro}</p> : null}
+        {items.length > 0 ? (
+        <div className="mt-9 border-t border-border">
           {items.map((item, i) => (
             <div
               key={i}
-              className="border-b border-border py-7 md:border-b-0 md:border-r md:pr-7 md:nth-[2]:pl-7 md:last:border-r-0 md:last:pl-7"
+              className="grid gap-1 border-b border-border py-4 sm:grid-cols-[1fr_auto] sm:gap-4"
             >
-              <h3 className="font-heading text-[19px]">{item.title}</h3>
-              <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted-foreground">
-                {item.body}
-              </p>
+              <div><h3 className="font-heading text-base">{item.title}</h3>{item.body ? <p className="mt-1 text-sm text-muted-foreground">{item.body}</p> : null}</div>
               {item.tag ? (
-                <div className="mt-3.5 text-[12.5px] font-semibold text-muted-foreground">{item.tag}</div>
+                <div className="text-sm text-muted-foreground sm:text-right">{item.tag}</div>
               ) : null}
             </div>
           ))}
         </div>
       ) : null}
+      {settings.primary_agent_name ? <div className="mt-7 text-xl font-bold">{settings.primary_agent_name}</div> : null}
+      {settings.primary_agent_role ? <div className="text-sm text-muted-foreground">{settings.primary_agent_role}</div> : null}
+      </div>
     </section>
   );
 }

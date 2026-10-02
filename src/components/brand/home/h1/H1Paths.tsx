@@ -11,12 +11,12 @@ export function H1Paths({ locale, copy }: HomeTemplateProps) {
   const { t } = useTranslation();
 
   return (
-    <section className="border-t border-border">
-      <div className="grid lg:grid-cols-[1.25fr_1fr]">
+    <section>
+      <div className="grid md:grid-cols-2">
         <Link
           to="/$locale/verkaufen"
           params={{ locale }}
-          className="flex min-h-[300px] flex-col justify-center bg-primary px-6 py-14 text-primary-foreground transition-opacity duration-300 hover:opacity-95 lg:px-13 lg:py-16"
+          className="flex min-h-[420px] flex-col justify-end bg-foreground px-6 py-16 text-background transition-opacity duration-300 hover:opacity-95 md:px-16 md:py-[88px]"
         >
           <div className="eyebrow text-primary-foreground/70">{t("home.path_sell_kicker")}</div>
           <h2 className="text-section-sm mt-3.5 max-w-[16ch] text-balance">
@@ -33,7 +33,7 @@ export function H1Paths({ locale, copy }: HomeTemplateProps) {
         <Link
           to="/$locale/immobilien"
           params={{ locale }}
-          className="flex min-h-[300px] flex-col justify-center px-6 py-14 transition-colors duration-300 hover:bg-secondary lg:px-13 lg:py-16"
+          className="flex min-h-[420px] flex-col justify-end bg-card px-6 py-16 transition-colors duration-300 hover:bg-secondary md:px-16 md:py-[88px]"
         >
           <div className="eyebrow text-muted-foreground">{t("home.path_buy_kicker")}</div>
           <h2 className="text-section-sm mt-3.5 max-w-[16ch] text-balance">

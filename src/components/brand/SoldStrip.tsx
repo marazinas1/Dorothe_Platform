@@ -1,13 +1,9 @@
 import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
-import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
 
-import { Reveal } from "@/components/shared/Reveal";
-
-import { CardRail } from "./CardRail";
 import { HomeTextLink } from "./home/HomeActions";
 import { ListingCard } from "./ListingCard";
 
@@ -32,7 +28,7 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
   const title = t("home.recent_sales");
 
   return (
-    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1400px] px-6 lg:px-10`}>
+    <section className="mx-auto max-w-[1280px] px-5 py-[72px] md:px-10 lg:py-[120px]">
       <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-section max-w-[24ch] text-balance">{title}</h2>
@@ -45,18 +41,18 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
         </HomeTextLink>
       </div>
 
-      <CardRail perView={3} label={title} alwaysShowArrows>
-        {items.map((l, i) => (
-          <Reveal key={l.id} delay={Math.min(i, 2) * 90} className="h-full">
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+        {items.slice(0, 4).map((l) => (
+          <div key={l.id} className="h-full">
             <ListingCard
               listing={l}
               locale={locale}
               settings={settings}
               hidePrice={hidePrice}
             />
-          </Reveal>
+          </div>
         ))}
-      </CardRail>
+      </div>
     </section>
   );
 }
