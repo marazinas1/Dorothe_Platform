@@ -1,6 +1,9 @@
 import { useTranslation } from "react-i18next";
 
 import { PostCard } from "@/components/brand/blog/PostCard";
+import guideEnergy from "@/assets/placeholders/guide-energy.jpg";
+import guideHomeValue from "@/assets/placeholders/guide-home-value.jpg";
+import guideInheritance from "@/assets/placeholders/guide-inheritance.jpg";
 import type { Locale } from "@/i18n/config";
 import { formatPostDate } from "@/lib/posts/date";
 import { postViews } from "@/lib/posts/resolve";
@@ -8,9 +11,9 @@ import type { PostRow } from "@/lib/posts/types";
 import { HomeTextLink } from "./HomeActions";
 
 const PLACEHOLDER_IMAGES = [
-  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=75",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=75",
-  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=75",
+  guideHomeValue,
+  guideEnergy,
+  guideInheritance,
 ];
 
 export function HomeArticles({ locale, posts }: { locale: Locale; posts: PostRow[] }) {
@@ -37,7 +40,7 @@ export function HomeArticles({ locale, posts }: { locale: Locale; posts: PostRow
           : placeholders.map((post, index) => (
               <li key={post.title}>
                 <div className="aspect-[3/2] overflow-hidden bg-muted">
-                  <img src={PLACEHOLDER_IMAGES[index]} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  <img src={PLACEHOLDER_IMAGES[index]} alt="" loading="lazy" width={992} height={672} className="h-full w-full object-cover" />
                 </div>
                 <div className="mt-[18px] text-xs uppercase tracking-[0.14em] text-muted-foreground">{post.category}</div>
                 <h3 className="mt-3 text-[19px] leading-[1.3] font-semibold text-balance">{post.title}</h3>
