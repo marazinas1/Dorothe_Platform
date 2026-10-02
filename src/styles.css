@@ -3,27 +3,9 @@
 @import "tw-animate-css";
 
 /*
- * Fonts are self-hosted through @fontsource — never the Google Fonts CDN.
- * These are the families in the curated registry (src/lib/theme/fonts.ts);
- * a client picks heading/body families in site_settings, so CSS never decides
- * typography. Every import ships the `latin-ext` subset, which is what makes
- * ä ö ü ß render. Importing a family does not download it: browsers fetch a
- * font file only when rendered text actually uses it.
+ * Public fonts (Noir family): Urbanist for everything, Tangerine only for the
+ * signature motif. Both are loaded via <link> in src/routes/__root.tsx.
  */
-@import "@fontsource-variable/fraunces/index.css";
-@import "@fontsource-variable/playfair-display/index.css";
-@import "@fontsource-variable/lora/index.css";
-@import "@fontsource-variable/inter/index.css";
-@import "@fontsource-variable/work-sans/index.css";
-@import "@fontsource-variable/dm-sans/index.css";
-@import "@fontsource-variable/ibm-plex-sans/index.css";
-@import "@fontsource-variable/newsreader/index.css";
-@import "@fontsource-variable/archivo/index.css";
-@import "@fontsource-variable/urbanist/index.css";
-/* Script face, only ever used for the signature motif. */
-@import "@fontsource/tangerine/latin-400.css";
-@import "@fontsource/tangerine/latin-700.css";
-
 
 @custom-variant dark (&:is(.dark *));
 
@@ -76,6 +58,13 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-footer: var(--footer);
+  --color-footer-foreground: var(--footer-foreground);
+  --color-footer-muted: var(--footer-muted);
+  --color-on-media: var(--on-media);
+  --color-on-media-muted: var(--on-media-muted);
+  --color-scrim: var(--scrim);
+  --color-scrim-soft: var(--scrim-soft);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -88,70 +77,71 @@
 
 :root {
   /*
-   * Neutral template defaults. Every one of these is overridden per client
-   * from site_settings (see @/lib/theme/tokens) — nothing here is client data.
-   * Base is a near-white with the faintest warmth, not a visible cream.
+   * PUBLIC SITE — Deerva Noir family. A client may override only --primary
+   * (via site_settings / ThemeStyleTag) and the logo. Nothing else.
    */
-  --paper: #fbfaf8;
-  --surface: #ffffff;
-  --ink: #23211f;
-  --stone: #78736c;
-  --linen: #f0eee9;
-  --hairline: #e6e3dd;
-  --sage: #6b7259;
-  --clay: #a67c6d;
-
-  --font-heading: "Fraunces Variable", "Fraunces", Georgia, serif;
-  --font-body: "IBM Plex Sans Variable", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Urbanist", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Urbanist", ui-sans-serif, system-ui, sans-serif;
   --font-script: "Tangerine", cursive;
 
-  --radius: 0.5rem;
-  --radius-media: 0.875rem;
-  /* Button shape; site_settings.button_style overrides it via ThemeStyleTag. */
-  --radius-button: var(--radius);
+  --radius: 2px;
+  --radius-media: 2px;
+  --radius-button: 2px;
 
-  --background: var(--paper);
-  --foreground: var(--ink);
+  --background: #ffffff;
+  --foreground: #111111;
+  --card: #f5f5f5;
+  --card-foreground: #111111;
+  --popover: #ffffff;
+  --popover-foreground: #111111;
 
-  --card: var(--surface);
-  --card-foreground: var(--ink);
-  --popover: var(--surface);
-  --popover-foreground: var(--ink);
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #111111;
+  --muted: #f5f5f5;
+  --muted-foreground: #5e5e5e;
+  --accent: #f5f5f5;
+  --accent-foreground: #111111;
 
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+  --success: #1f6f43;
+  --success-foreground: #ffffff;
+  --warning: #8a5a00;
+  --warning-foreground: #ffffff;
+  --info: #1f4e79;
+  --info-foreground: #ffffff;
 
-  /* Sage is the signature accent; overridden per project by ThemeStyleTag. */
-  --primary: var(--sage);
-  --primary-foreground: var(--paper);
+  --border: #e0e0e0;
+  --input: #e0e0e0;
+  --ring: var(--primary);
 
-  --secondary: var(--linen);
-  --secondary-foreground: var(--ink);
-  --muted: var(--linen);
-  --muted-foreground: var(--stone);
-  /* Clay — used very sparingly. */
-  --accent: var(--clay);
-  --accent-foreground: var(--paper);
+  /* Footer and inverted bands. */
+  --footer: #000000;
+  --footer-foreground: #ffffff;
+  --footer-muted: rgb(255 255 255 / 0.6);
 
-  --destructive: oklch(0.55 0.18 27);
-  --destructive-foreground: var(--paper);
+  /* Text and veils over photography. */
+  --on-media: #ffffff;
+  --on-media-muted: rgb(255 255 255 / 0.75);
+  --scrim: rgb(0 0 0 / 0.55);
+  --scrim-soft: rgb(0 0 0 / 0.25);
 
-  --border: var(--hairline);
-  --input: var(--hairline);
-  --ring: var(--sage);
+  --chart-1: #111111;
+  --chart-2: #5e5e5e;
+  --chart-3: #9e9e9e;
+  --chart-4: #c4c4c4;
+  --chart-5: #e0e0e0;
 
-  --chart-1: var(--sage);
-  --chart-2: var(--clay);
-  --chart-3: var(--stone);
-  --chart-4: oklch(0.7 0.06 84);
-  --chart-5: oklch(0.65 0.07 70);
-
-  --sidebar: var(--surface);
-  --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--sage);
-  --sidebar-primary-foreground: var(--paper);
-  --sidebar-accent: var(--linen);
-  --sidebar-accent-foreground: var(--ink);
-  --sidebar-border: var(--hairline);
-  --sidebar-ring: var(--sage);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111111;
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #111111;
+  --sidebar-border: #e0e0e0;
+  --sidebar-ring: var(--primary);
 }
 
 
