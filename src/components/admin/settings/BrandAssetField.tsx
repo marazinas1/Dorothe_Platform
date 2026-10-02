@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Download, ImageOff, Loader2, Trash2, Upload } from "lucide-react";
+import { Download, ImageOff, Loader2, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -59,8 +59,8 @@ export function BrandAssetField({
     try {
       const processed = await processImageFile(file);
       // The largest variant available keeps logos crisp on retina screens.
-      const variant =
-        processed.variants.find((v) => v.key === "detail") ?? processed.variants[0]!;
+      const variant = processed.variants.find((v) => v.key === "detail") ?? processed.variants[0];
+      if (!variant) throw new Error("No image variant was created");
       const path = pathForVariant?.(variant.key) ?? brandAssetPath(kind, variant.key);
       const { error: uploadError } = await supabase.storage
         .from(SITE_ASSETS_BUCKET)
@@ -128,18 +128,6 @@ export function BrandAssetField({
           <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => void download()}>
             <Download className="h-3.5 w-3.5" />
             {t("admin.settings.brand.download")}
-          </Button>
-        ) : null}
-        {value ? (
-          <Button
-            type="button"
-            size="sm"
-            variant="ghost"
-            disabled={busy}
-            onClick={() => onChange(null)}
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            {t("admin.settings.brand.remove")}
           </Button>
         ) : null}
       </div>
