@@ -1,17 +1,13 @@
 /**
  * Everything the listing card needs to know about a status, decided once.
- *
- * The card components never test `status` themselves: the eyebrow label, the
- * badge over the photograph, whether the media is muted and whether a price
- * row is shown all come from here, so the homepage, the catalogue, the sold
- * archive and the admin grid can never drift apart.
+ * Badge rule (broker listings reference): never more than one per card —
+ * New, Coming soon, Reserved, Sold, Rented.
  */
-export type CardBadge = { label: string; accent: boolean };
+export type CardBadgeTone = "accent" | "light" | "dark";
+export type CardBadge = { label: string; tone: CardBadgeTone };
 
 export type CardTone = {
-  /** Short status word for the eyebrow row. */
   status: string;
-  /** Shown over the photograph only for states a buyer must notice. */
   badge: CardBadge | null;
   /** Closed properties (sold, rented) read as archive, not as offer. */
   closed: boolean;
@@ -20,28 +16,36 @@ export type CardTone = {
 type ToneInput = {
   status: string;
   deal_type: string;
+  published_at?: string | null;
 };
 
+/** A listing counts as new for this many days after publishing. */
+const NEW_DAYS = 21;
+
+function isNew(published: string | null | undefined): boolean {
+  if (!published) return false;
+  const age = Date.now() - new Date(published).getTime();
+  return age >= 0 && age < NEW_DAYS * 86_400_000;
+}
+
 export function cardTone(listing: ToneInput, t: (key: string) => string): CardTone {
-  if (listing.status === "coming_soon") {
+  const s = listing.status;
+  if (s === "coming_soon") {
     const label = t("listings.coming_soon");
-    return { status: label, badge: { label, accent: true }, closed: false };
+    return { status: label, badge: { label, tone: "light" }, closed: false };
   }
-  if (listing.status === "reserved") {
+  if (s === "reserved") {
     const label = t("listings.reserved");
-    return { status: label, badge: { label, accent: false }, closed: false };
+    return { status: label, badge: { label, tone: "light" }, closed: false };
   }
-  if (listing.status === "sold") {
-    const label = t("listings.sold");
-    return { status: label, badge: { label, accent: false }, closed: true };
+  if (s === "sold" || s === "rented") {
+    const label = t(s === "sold" ? "listings.sold" : "listings.rented");
+    return { status: label, badge: { label, tone: "dark" }, closed: true };
   }
-  if (listing.status === "rented") {
-    const label = t("listings.rented");
-    return { status: label, badge: { label, accent: false }, closed: true };
-  }
+  const status = t(listing.deal_type === "rent" ? "listings.for_rent" : "listings.for_sale");
   return {
-    status: t(listing.deal_type === "rent" ? "listings.for_rent" : "listings.for_sale"),
-    badge: null,
+    status,
+    badge: isNew(listing.published_at) ? { label: t("listings.new"), tone: "accent" } : null,
     closed: false,
   };
 }
