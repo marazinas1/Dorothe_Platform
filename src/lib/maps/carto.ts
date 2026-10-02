@@ -22,7 +22,7 @@ export const OSM_STYLE = {
 };
 
 /** Sage marker colour — kept in sync with the brand accent token. */
-export const MARKER_COLOR = "#6B7259";
+export const MARKER_COLOR = "#111111";
 
 export type MapPoint = {
   id: string;

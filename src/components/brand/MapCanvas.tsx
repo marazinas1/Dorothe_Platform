@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import { OSM_STYLE, MARKER_COLOR, type MapPoint } from "@/lib/maps/carto";
+import { OSM_STYLE, type MapPoint } from "@/lib/maps/carto";
 import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
@@ -19,8 +19,8 @@ type Props = {
 function exactMarkerEl() {
   const el = document.createElement("div");
   el.innerHTML = `<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-    <circle cx="11" cy="11" r="9" fill="${MARKER_COLOR}" fill-opacity="0.22" />
-    <circle cx="11" cy="11" r="5" fill="${MARKER_COLOR}" />
+    <circle cx="11" cy="11" r="9" style="fill:var(--primary)" fill-opacity="0.22" />
+    <circle cx="11" cy="11" r="5" style="fill:var(--primary)" />
   </svg>`;
   el.style.cursor = "pointer";
   return el;
@@ -31,8 +31,8 @@ function areaMarkerEl() {
   el.style.width = "88px";
   el.style.height = "88px";
   el.style.borderRadius = "9999px";
-  el.style.background = `${MARKER_COLOR}26`;
-  el.style.border = `1px solid ${MARKER_COLOR}59`;
+  el.style.background = "color-mix(in oklab, var(--primary) 15%, transparent)";
+  el.style.border = "1px solid color-mix(in oklab, var(--primary) 35%, transparent)";
   el.style.cursor = "pointer";
   return el;
 }
