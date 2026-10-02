@@ -28,12 +28,13 @@ Binding rules. If a request conflicts, say so and propose the compliant version.
 
 ## Client data — never in code
 - Visible strings in `/src/messages` (en/de); client words interpolated from `site_settings` via `@/lib/config/site-copy`.
-- Client values in `site_settings`; fonts as keys of `@/lib/theme/fonts`; optional capabilities behind `feature_flags` via `useFeatureFlag`.
+- Client values in `site_settings`; optional capabilities behind `feature_flags` via `useFeatureFlag`.
 - Client data only in seed files; migrations hold schema and are immutable (neutralise leaks with a follow-up migration).
 - No client name, address, phone, email or town anywhere else — including comments, placeholders, defaults and migration WHERE clauses.
 
 ## Design tiers
-- Standard (default): differentiate via `site_settings` tokens, `homepage_sections`, hero variants and flags. Premium: `/components/brand` may be rewritten. Prefer config, then a variant/token, before bespoke components.
+- The public site starts from a Deerva theme family (Noir by default) in `src/styles.css`; a client brand overrides only `--primary` and the logo, because one look per family keeps every clone consistent. Binding UI rules: `src/components/brand/AGENTS.md`.
+- Standard (default): differentiate via `site_settings` primary colour, `homepage_sections`, hero variants and flags. Premium: `/components/brand` may be rewritten. Prefer config, then a variant/token, before bespoke components.
 
 ## General
 - Files under 200 lines (generated files and `/components/ui` exempt).
