@@ -7,18 +7,20 @@ import { credItems, type HomeTemplateProps } from "../types";
  */
 export function H1Credentials({ copy, media, settings }: HomeTemplateProps) {
   const intro = copy.text("cred_intro");
+  const title = copy.text("cred_title");
   const items = credItems(copy);
   if (!intro && items.length === 0) return null;
 
   return (
-    <section className="mx-auto grid max-w-[1280px] items-center gap-10 px-5 py-[72px] md:px-10 lg:grid-cols-[5fr_6fr] lg:gap-20 lg:py-[120px]">
+    <section className="mx-auto grid max-w-[1120px] items-center gap-10 px-5 py-[72px] md:px-10 lg:grid-cols-[5fr_6fr] lg:gap-16 lg:py-[104px]">
       {media.portrait ? (
         <div className="aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] bg-card">
           <img src={media.portrait} alt={settings.primary_agent_name ?? settings.site_name} className="h-full w-full object-cover" />
         </div>
       ) : null}
       <div>
-        {intro ? <p className="max-w-[60ch] text-[clamp(1.125rem,1.6vw,1.3125rem)] leading-[1.55]">{intro}</p> : null}
+        {title ? <h2 className="text-section-sm max-w-[19ch] text-balance">{title}</h2> : null}
+        {intro ? <p className="mt-6 max-w-[60ch] text-[clamp(1rem,1.4vw,1.1875rem)] leading-[1.55]">{intro}</p> : null}
         {items.length > 0 ? (
         <div className="mt-9 border-t border-border">
           {items.map((item, i) => (

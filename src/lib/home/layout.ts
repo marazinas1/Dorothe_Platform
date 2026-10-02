@@ -13,6 +13,6 @@ export const HOME_MEDIA_SLOTS: HomeMediaSlot[] = ["hero_photo"];
 export const HOME_CHROME = {
   /** The footer band is the darker, warmer surface. */
   footerTone: "dark" as const,
-  /** The header sits over the full-bleed hero until the visitor scrolls. */
-  heroOverlay: true,
+  /** The approved broker reference always keeps a white bar above the hero. */
+  heroOverlay: false,
 };

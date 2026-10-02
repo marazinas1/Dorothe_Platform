@@ -49,6 +49,7 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
               locale={locale}
               settings={settings}
               hidePrice={hidePrice}
+              size="small"
             />
           </div>
         ))}
