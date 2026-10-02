@@ -13,9 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
-import { Route as LocaleAdminRouteImport } from './routes/$locale.admin'
 import { Route as LocaleAgbRouteImport } from './routes/$locale.agb'
-import { Route as LocaleAuthRouteImport } from './routes/$locale.auth'
 import { Route as LocaleDatenschutzRouteImport } from './routes/$locale.datenschutz'
 import { Route as LocaleErbenRouteImport } from './routes/$locale.erben'
 import { Route as LocaleImmobilienbewertungRouteImport } from './routes/$locale.immobilienbewertung'
@@ -24,30 +22,31 @@ import { Route as LocaleKontaktRouteImport } from './routes/$locale.kontakt'
 import { Route as LocaleUeberMichRouteImport } from './routes/$locale.ueber-mich'
 import { Route as LocaleVerkaufenRouteImport } from './routes/$locale.verkaufen'
 import { Route as LocaleVerkauftRouteImport } from './routes/$locale.verkauft'
-import { Route as LocaleAdminIndexRouteImport } from './routes/$locale.admin.index'
-import { Route as LocaleAdminAnalyticsRouteImport } from './routes/$locale.admin.analytics'
-import { Route as LocaleAdminCalendarRouteImport } from './routes/$locale.admin.calendar'
-import { Route as LocaleAdminInquiriesRouteImport } from './routes/$locale.admin.inquiries'
-import { Route as LocaleAdminListingsRouteImport } from './routes/$locale.admin.listings'
-import { Route as LocaleAdminPostsRouteImport } from './routes/$locale.admin.posts'
-import { Route as LocaleAdminSettingsRouteImport } from './routes/$locale.admin.settings'
-import { Route as LocaleAdminTestimonialsRouteImport } from './routes/$locale.admin.testimonials'
-import { Route as LocaleAdminUsersRouteImport } from './routes/$locale.admin.users'
-import { Route as LocaleAuthForgotPasswordRouteImport } from './routes/$locale.auth.forgot-password'
-import { Route as LocaleAuthLoginRouteImport } from './routes/$locale.auth.login'
-import { Route as LocaleAuthResetPasswordRouteImport } from './routes/$locale.auth.reset-password'
+import { Route as AdminAuthenticatedRouteImport } from './routes/admin._authenticated'
+import { Route as AdminForgotPasswordRouteImport } from './routes/admin.forgot-password'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminSetPasswordRouteImport } from './routes/admin.set-password'
 import { Route as LocaleImmobilienIndexRouteImport } from './routes/$locale.immobilien.index'
 import { Route as LocaleImmobilienSlugRouteImport } from './routes/$locale.immobilien.$slug'
 import { Route as LocaleRatgeberIndexRouteImport } from './routes/$locale.ratgeber.index'
 import { Route as LocaleRatgeberSlugRouteImport } from './routes/$locale.ratgeber.$slug'
+import { Route as AdminAuthenticatedIndexRouteImport } from './routes/admin._authenticated.index'
+import { Route as AdminAuthenticatedAnalyticsRouteImport } from './routes/admin._authenticated.analytics'
+import { Route as AdminAuthenticatedCalendarRouteImport } from './routes/admin._authenticated.calendar'
+import { Route as AdminAuthenticatedInquiriesRouteImport } from './routes/admin._authenticated.inquiries'
+import { Route as AdminAuthenticatedListingsRouteImport } from './routes/admin._authenticated.listings'
+import { Route as AdminAuthenticatedPostsRouteImport } from './routes/admin._authenticated.posts'
+import { Route as AdminAuthenticatedSettingsRouteImport } from './routes/admin._authenticated.settings'
+import { Route as AdminAuthenticatedTestimonialsRouteImport } from './routes/admin._authenticated.testimonials'
+import { Route as AdminAuthenticatedUsersRouteImport } from './routes/admin._authenticated.users'
 import { Route as ApiPublicTrackViewRouteImport } from './routes/api/public/track-view'
-import { Route as LocaleAdminInquiriesIndexRouteImport } from './routes/$locale.admin.inquiries.index'
-import { Route as LocaleAdminInquiriesIdRouteImport } from './routes/$locale.admin.inquiries.$id'
-import { Route as LocaleAdminListingsIndexRouteImport } from './routes/$locale.admin.listings.index'
-import { Route as LocaleAdminListingsIdRouteImport } from './routes/$locale.admin.listings.$id'
-import { Route as LocaleAdminListingsNewRouteImport } from './routes/$locale.admin.listings.new'
-import { Route as LocaleAdminSettingsIndexRouteImport } from './routes/$locale.admin.settings.index'
-import { Route as LocaleAdminSettingsTabRouteImport } from './routes/$locale.admin.settings.$tab'
+import { Route as AdminAuthenticatedInquiriesIndexRouteImport } from './routes/admin._authenticated.inquiries.index'
+import { Route as AdminAuthenticatedInquiriesIdRouteImport } from './routes/admin._authenticated.inquiries.$id'
+import { Route as AdminAuthenticatedListingsIndexRouteImport } from './routes/admin._authenticated.listings.index'
+import { Route as AdminAuthenticatedListingsIdRouteImport } from './routes/admin._authenticated.listings.$id'
+import { Route as AdminAuthenticatedListingsNewRouteImport } from './routes/admin._authenticated.listings.new'
+import { Route as AdminAuthenticatedSettingsIndexRouteImport } from './routes/admin._authenticated.settings.index'
+import { Route as AdminAuthenticatedSettingsTabRouteImport } from './routes/admin._authenticated.settings.$tab'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 
@@ -71,19 +70,9 @@ const LocaleIndexRoute = LocaleIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleAdminRoute = LocaleAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => LocaleRoute,
-} as any)
 const LocaleAgbRoute = LocaleAgbRouteImport.update({
   id: '/agb',
   path: '/agb',
-  getParentRoute: () => LocaleRoute,
-} as any)
-const LocaleAuthRoute = LocaleAuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocaleDatenschutzRoute = LocaleDatenschutzRouteImport.update({
@@ -127,66 +116,25 @@ const LocaleVerkauftRoute = LocaleVerkauftRouteImport.update({
   path: '/verkauft',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleAdminIndexRoute = LocaleAdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => LocaleAdminRoute,
+const AdminAuthenticatedRoute = AdminAuthenticatedRouteImport.update({
+  id: '/admin/_authenticated',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const LocaleAdminAnalyticsRoute = LocaleAdminAnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => LocaleAdminRoute,
+const AdminForgotPasswordRoute = AdminForgotPasswordRouteImport.update({
+  id: '/admin/forgot-password',
+  path: '/admin/forgot-password',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const LocaleAdminCalendarRoute = LocaleAdminCalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
-  getParentRoute: () => LocaleAdminRoute,
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const LocaleAdminInquiriesRoute = LocaleAdminInquiriesRouteImport.update({
-  id: '/inquiries',
-  path: '/inquiries',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminListingsRoute = LocaleAdminListingsRouteImport.update({
-  id: '/listings',
-  path: '/listings',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminPostsRoute = LocaleAdminPostsRouteImport.update({
-  id: '/posts',
-  path: '/posts',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminSettingsRoute = LocaleAdminSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminTestimonialsRoute = LocaleAdminTestimonialsRouteImport.update({
-  id: '/testimonials',
-  path: '/testimonials',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAdminUsersRoute = LocaleAdminUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => LocaleAdminRoute,
-} as any)
-const LocaleAuthForgotPasswordRoute =
-  LocaleAuthForgotPasswordRouteImport.update({
-    id: '/forgot-password',
-    path: '/forgot-password',
-    getParentRoute: () => LocaleAuthRoute,
-  } as any)
-const LocaleAuthLoginRoute = LocaleAuthLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => LocaleAuthRoute,
-} as any)
-const LocaleAuthResetPasswordRoute = LocaleAuthResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => LocaleAuthRoute,
+const AdminSetPasswordRoute = AdminSetPasswordRouteImport.update({
+  id: '/admin/set-password',
+  path: '/admin/set-password',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleImmobilienIndexRoute = LocaleImmobilienIndexRouteImport.update({
   id: '/immobilien/',
@@ -208,49 +156,104 @@ const LocaleRatgeberSlugRoute = LocaleRatgeberSlugRouteImport.update({
   path: '/ratgeber/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
+const AdminAuthenticatedIndexRoute = AdminAuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminAuthenticatedRoute,
+} as any)
+const AdminAuthenticatedAnalyticsRoute =
+  AdminAuthenticatedAnalyticsRouteImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => AdminAuthenticatedRoute,
+  } as any)
+const AdminAuthenticatedCalendarRoute =
+  AdminAuthenticatedCalendarRouteImport.update({
+    id: '/calendar',
+    path: '/calendar',
+    getParentRoute: () => AdminAuthenticatedRoute,
+  } as any)
+const AdminAuthenticatedInquiriesRoute =
+  AdminAuthenticatedInquiriesRouteImport.update({
+    id: '/inquiries',
+    path: '/inquiries',
+    getParentRoute: () => AdminAuthenticatedRoute,
+  } as any)
+const AdminAuthenticatedListingsRoute =
+  AdminAuthenticatedListingsRouteImport.update({
+    id: '/listings',
+    path: '/listings',
+    getParentRoute: () => AdminAuthenticatedRoute,
+  } as any)
+const AdminAuthenticatedPostsRoute = AdminAuthenticatedPostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => AdminAuthenticatedRoute,
+} as any)
+const AdminAuthenticatedSettingsRoute =
+  AdminAuthenticatedSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AdminAuthenticatedRoute,
+  } as any)
+const AdminAuthenticatedTestimonialsRoute =
+  AdminAuthenticatedTestimonialsRouteImport.update({
+    id: '/testimonials',
+    path: '/testimonials',
+    getParentRoute: () => AdminAuthenticatedRoute,
+  } as any)
+const AdminAuthenticatedUsersRoute = AdminAuthenticatedUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminAuthenticatedRoute,
+} as any)
 const ApiPublicTrackViewRoute = ApiPublicTrackViewRouteImport.update({
   id: '/api/public/track-view',
   path: '/api/public/track-view',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LocaleAdminInquiriesIndexRoute =
-  LocaleAdminInquiriesIndexRouteImport.update({
+const AdminAuthenticatedInquiriesIndexRoute =
+  AdminAuthenticatedInquiriesIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => LocaleAdminInquiriesRoute,
+    getParentRoute: () => AdminAuthenticatedInquiriesRoute,
   } as any)
-const LocaleAdminInquiriesIdRoute = LocaleAdminInquiriesIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => LocaleAdminInquiriesRoute,
-} as any)
-const LocaleAdminListingsIndexRoute =
-  LocaleAdminListingsIndexRouteImport.update({
+const AdminAuthenticatedInquiriesIdRoute =
+  AdminAuthenticatedInquiriesIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AdminAuthenticatedInquiriesRoute,
+  } as any)
+const AdminAuthenticatedListingsIndexRoute =
+  AdminAuthenticatedListingsIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => LocaleAdminListingsRoute,
+    getParentRoute: () => AdminAuthenticatedListingsRoute,
   } as any)
-const LocaleAdminListingsIdRoute = LocaleAdminListingsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => LocaleAdminListingsRoute,
-} as any)
-const LocaleAdminListingsNewRoute = LocaleAdminListingsNewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => LocaleAdminListingsRoute,
-} as any)
-const LocaleAdminSettingsIndexRoute =
-  LocaleAdminSettingsIndexRouteImport.update({
+const AdminAuthenticatedListingsIdRoute =
+  AdminAuthenticatedListingsIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AdminAuthenticatedListingsRoute,
+  } as any)
+const AdminAuthenticatedListingsNewRoute =
+  AdminAuthenticatedListingsNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => AdminAuthenticatedListingsRoute,
+  } as any)
+const AdminAuthenticatedSettingsIndexRoute =
+  AdminAuthenticatedSettingsIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => LocaleAdminSettingsRoute,
+    getParentRoute: () => AdminAuthenticatedSettingsRoute,
   } as any)
-const LocaleAdminSettingsTabRoute = LocaleAdminSettingsTabRouteImport.update({
-  id: '/$tab',
-  path: '/$tab',
-  getParentRoute: () => LocaleAdminSettingsRoute,
-} as any)
+const AdminAuthenticatedSettingsTabRoute =
+  AdminAuthenticatedSettingsTabRouteImport.update({
+    id: '/$tab',
+    path: '/$tab',
+    getParentRoute: () => AdminAuthenticatedSettingsRoute,
+  } as any)
 const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   id: '/lovable/email/auth/preview',
   path: '/lovable/email/auth/preview',
@@ -266,9 +269,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
-  '/$locale/auth': typeof LocaleAuthRouteWithChildren
   '/$locale/datenschutz': typeof LocaleDatenschutzRoute
   '/$locale/erben': typeof LocaleErbenRoute
   '/$locale/immobilienbewertung': typeof LocaleImmobilienbewertungRoute
@@ -277,39 +278,39 @@ export interface FileRoutesByFullPath {
   '/$locale/ueber-mich': typeof LocaleUeberMichRoute
   '/$locale/verkaufen': typeof LocaleVerkaufenRoute
   '/$locale/verkauft': typeof LocaleVerkauftRoute
+  '/admin': typeof AdminAuthenticatedRouteWithChildren
+  '/admin/forgot-password': typeof AdminForgotPasswordRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/set-password': typeof AdminSetPasswordRoute
   '/$locale/': typeof LocaleIndexRoute
-  '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
-  '/$locale/admin/calendar': typeof LocaleAdminCalendarRoute
-  '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
-  '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
-  '/$locale/admin/posts': typeof LocaleAdminPostsRoute
-  '/$locale/admin/settings': typeof LocaleAdminSettingsRouteWithChildren
-  '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
-  '/$locale/admin/users': typeof LocaleAdminUsersRoute
-  '/$locale/auth/forgot-password': typeof LocaleAuthForgotPasswordRoute
-  '/$locale/auth/login': typeof LocaleAuthLoginRoute
-  '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
+  '/admin/analytics': typeof AdminAuthenticatedAnalyticsRoute
+  '/admin/calendar': typeof AdminAuthenticatedCalendarRoute
+  '/admin/inquiries': typeof AdminAuthenticatedInquiriesRouteWithChildren
+  '/admin/listings': typeof AdminAuthenticatedListingsRouteWithChildren
+  '/admin/posts': typeof AdminAuthenticatedPostsRoute
+  '/admin/settings': typeof AdminAuthenticatedSettingsRouteWithChildren
+  '/admin/testimonials': typeof AdminAuthenticatedTestimonialsRoute
+  '/admin/users': typeof AdminAuthenticatedUsersRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
-  '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
   '/$locale/ratgeber/': typeof LocaleRatgeberIndexRoute
-  '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
-  '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
-  '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
-  '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
+  '/admin/': typeof AdminAuthenticatedIndexRoute
+  '/admin/inquiries/$id': typeof AdminAuthenticatedInquiriesIdRoute
+  '/admin/listings/$id': typeof AdminAuthenticatedListingsIdRoute
+  '/admin/listings/new': typeof AdminAuthenticatedListingsNewRoute
+  '/admin/settings/$tab': typeof AdminAuthenticatedSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
-  '/$locale/admin/inquiries/': typeof LocaleAdminInquiriesIndexRoute
-  '/$locale/admin/listings/': typeof LocaleAdminListingsIndexRoute
-  '/$locale/admin/settings/': typeof LocaleAdminSettingsIndexRoute
+  '/admin/inquiries/': typeof AdminAuthenticatedInquiriesIndexRoute
+  '/admin/listings/': typeof AdminAuthenticatedListingsIndexRoute
+  '/admin/settings/': typeof AdminAuthenticatedSettingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/agb': typeof LocaleAgbRoute
-  '/$locale/auth': typeof LocaleAuthRouteWithChildren
   '/$locale/datenschutz': typeof LocaleDatenschutzRoute
   '/$locale/erben': typeof LocaleErbenRoute
   '/$locale/immobilienbewertung': typeof LocaleImmobilienbewertungRoute
@@ -318,39 +319,37 @@ export interface FileRoutesByTo {
   '/$locale/ueber-mich': typeof LocaleUeberMichRoute
   '/$locale/verkaufen': typeof LocaleVerkaufenRoute
   '/$locale/verkauft': typeof LocaleVerkauftRoute
+  '/admin/forgot-password': typeof AdminForgotPasswordRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/set-password': typeof AdminSetPasswordRoute
   '/$locale': typeof LocaleIndexRoute
-  '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
-  '/$locale/admin/calendar': typeof LocaleAdminCalendarRoute
-  '/$locale/admin/posts': typeof LocaleAdminPostsRoute
-  '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
-  '/$locale/admin/users': typeof LocaleAdminUsersRoute
-  '/$locale/auth/forgot-password': typeof LocaleAuthForgotPasswordRoute
-  '/$locale/auth/login': typeof LocaleAuthLoginRoute
-  '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
+  '/admin/analytics': typeof AdminAuthenticatedAnalyticsRoute
+  '/admin/calendar': typeof AdminAuthenticatedCalendarRoute
+  '/admin/posts': typeof AdminAuthenticatedPostsRoute
+  '/admin/testimonials': typeof AdminAuthenticatedTestimonialsRoute
+  '/admin/users': typeof AdminAuthenticatedUsersRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
-  '/$locale/admin': typeof LocaleAdminIndexRoute
   '/$locale/immobilien': typeof LocaleImmobilienIndexRoute
   '/$locale/ratgeber': typeof LocaleRatgeberIndexRoute
-  '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
-  '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
-  '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
-  '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
+  '/admin': typeof AdminAuthenticatedIndexRoute
+  '/admin/inquiries/$id': typeof AdminAuthenticatedInquiriesIdRoute
+  '/admin/listings/$id': typeof AdminAuthenticatedListingsIdRoute
+  '/admin/listings/new': typeof AdminAuthenticatedListingsNewRoute
+  '/admin/settings/$tab': typeof AdminAuthenticatedSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
-  '/$locale/admin/inquiries': typeof LocaleAdminInquiriesIndexRoute
-  '/$locale/admin/listings': typeof LocaleAdminListingsIndexRoute
-  '/$locale/admin/settings': typeof LocaleAdminSettingsIndexRoute
+  '/admin/inquiries': typeof AdminAuthenticatedInquiriesIndexRoute
+  '/admin/listings': typeof AdminAuthenticatedListingsIndexRoute
+  '/admin/settings': typeof AdminAuthenticatedSettingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/$locale/admin': typeof LocaleAdminRouteWithChildren
   '/$locale/agb': typeof LocaleAgbRoute
-  '/$locale/auth': typeof LocaleAuthRouteWithChildren
   '/$locale/datenschutz': typeof LocaleDatenschutzRoute
   '/$locale/erben': typeof LocaleErbenRoute
   '/$locale/immobilienbewertung': typeof LocaleImmobilienbewertungRoute
@@ -359,33 +358,34 @@ export interface FileRoutesById {
   '/$locale/ueber-mich': typeof LocaleUeberMichRoute
   '/$locale/verkaufen': typeof LocaleVerkaufenRoute
   '/$locale/verkauft': typeof LocaleVerkauftRoute
+  '/admin/_authenticated': typeof AdminAuthenticatedRouteWithChildren
+  '/admin/forgot-password': typeof AdminForgotPasswordRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/set-password': typeof AdminSetPasswordRoute
   '/$locale/': typeof LocaleIndexRoute
-  '/$locale/admin/analytics': typeof LocaleAdminAnalyticsRoute
-  '/$locale/admin/calendar': typeof LocaleAdminCalendarRoute
-  '/$locale/admin/inquiries': typeof LocaleAdminInquiriesRouteWithChildren
-  '/$locale/admin/listings': typeof LocaleAdminListingsRouteWithChildren
-  '/$locale/admin/posts': typeof LocaleAdminPostsRoute
-  '/$locale/admin/settings': typeof LocaleAdminSettingsRouteWithChildren
-  '/$locale/admin/testimonials': typeof LocaleAdminTestimonialsRoute
-  '/$locale/admin/users': typeof LocaleAdminUsersRoute
-  '/$locale/auth/forgot-password': typeof LocaleAuthForgotPasswordRoute
-  '/$locale/auth/login': typeof LocaleAuthLoginRoute
-  '/$locale/auth/reset-password': typeof LocaleAuthResetPasswordRoute
   '/$locale/immobilien/$slug': typeof LocaleImmobilienSlugRoute
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
+  '/admin/_authenticated/analytics': typeof AdminAuthenticatedAnalyticsRoute
+  '/admin/_authenticated/calendar': typeof AdminAuthenticatedCalendarRoute
+  '/admin/_authenticated/inquiries': typeof AdminAuthenticatedInquiriesRouteWithChildren
+  '/admin/_authenticated/listings': typeof AdminAuthenticatedListingsRouteWithChildren
+  '/admin/_authenticated/posts': typeof AdminAuthenticatedPostsRoute
+  '/admin/_authenticated/settings': typeof AdminAuthenticatedSettingsRouteWithChildren
+  '/admin/_authenticated/testimonials': typeof AdminAuthenticatedTestimonialsRoute
+  '/admin/_authenticated/users': typeof AdminAuthenticatedUsersRoute
   '/api/public/track-view': typeof ApiPublicTrackViewRoute
-  '/$locale/admin/': typeof LocaleAdminIndexRoute
   '/$locale/immobilien/': typeof LocaleImmobilienIndexRoute
   '/$locale/ratgeber/': typeof LocaleRatgeberIndexRoute
-  '/$locale/admin/inquiries/$id': typeof LocaleAdminInquiriesIdRoute
-  '/$locale/admin/listings/$id': typeof LocaleAdminListingsIdRoute
-  '/$locale/admin/listings/new': typeof LocaleAdminListingsNewRoute
-  '/$locale/admin/settings/$tab': typeof LocaleAdminSettingsTabRoute
+  '/admin/_authenticated/': typeof AdminAuthenticatedIndexRoute
+  '/admin/_authenticated/inquiries/$id': typeof AdminAuthenticatedInquiriesIdRoute
+  '/admin/_authenticated/listings/$id': typeof AdminAuthenticatedListingsIdRoute
+  '/admin/_authenticated/listings/new': typeof AdminAuthenticatedListingsNewRoute
+  '/admin/_authenticated/settings/$tab': typeof AdminAuthenticatedSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
-  '/$locale/admin/inquiries/': typeof LocaleAdminInquiriesIndexRoute
-  '/$locale/admin/listings/': typeof LocaleAdminListingsIndexRoute
-  '/$locale/admin/settings/': typeof LocaleAdminSettingsIndexRoute
+  '/admin/_authenticated/inquiries/': typeof AdminAuthenticatedInquiriesIndexRoute
+  '/admin/_authenticated/listings/': typeof AdminAuthenticatedListingsIndexRoute
+  '/admin/_authenticated/settings/': typeof AdminAuthenticatedSettingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -393,9 +393,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$locale'
     | '/sitemap.xml'
-    | '/$locale/admin'
     | '/$locale/agb'
-    | '/$locale/auth'
     | '/$locale/datenschutz'
     | '/$locale/erben'
     | '/$locale/immobilienbewertung'
@@ -404,39 +402,39 @@ export interface FileRouteTypes {
     | '/$locale/ueber-mich'
     | '/$locale/verkaufen'
     | '/$locale/verkauft'
+    | '/admin'
+    | '/admin/forgot-password'
+    | '/admin/login'
+    | '/admin/set-password'
     | '/$locale/'
-    | '/$locale/admin/analytics'
-    | '/$locale/admin/calendar'
-    | '/$locale/admin/inquiries'
-    | '/$locale/admin/listings'
-    | '/$locale/admin/posts'
-    | '/$locale/admin/settings'
-    | '/$locale/admin/testimonials'
-    | '/$locale/admin/users'
-    | '/$locale/auth/forgot-password'
-    | '/$locale/auth/login'
-    | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
     | '/$locale/ratgeber/$slug'
+    | '/admin/analytics'
+    | '/admin/calendar'
+    | '/admin/inquiries'
+    | '/admin/listings'
+    | '/admin/posts'
+    | '/admin/settings'
+    | '/admin/testimonials'
+    | '/admin/users'
     | '/api/public/track-view'
-    | '/$locale/admin/'
     | '/$locale/immobilien/'
     | '/$locale/ratgeber/'
-    | '/$locale/admin/inquiries/$id'
-    | '/$locale/admin/listings/$id'
-    | '/$locale/admin/listings/new'
-    | '/$locale/admin/settings/$tab'
+    | '/admin/'
+    | '/admin/inquiries/$id'
+    | '/admin/listings/$id'
+    | '/admin/listings/new'
+    | '/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
-    | '/$locale/admin/inquiries/'
-    | '/$locale/admin/listings/'
-    | '/$locale/admin/settings/'
+    | '/admin/inquiries/'
+    | '/admin/listings/'
+    | '/admin/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/sitemap.xml'
     | '/$locale/agb'
-    | '/$locale/auth'
     | '/$locale/datenschutz'
     | '/$locale/erben'
     | '/$locale/immobilienbewertung'
@@ -445,38 +443,36 @@ export interface FileRouteTypes {
     | '/$locale/ueber-mich'
     | '/$locale/verkaufen'
     | '/$locale/verkauft'
+    | '/admin/forgot-password'
+    | '/admin/login'
+    | '/admin/set-password'
     | '/$locale'
-    | '/$locale/admin/analytics'
-    | '/$locale/admin/calendar'
-    | '/$locale/admin/posts'
-    | '/$locale/admin/testimonials'
-    | '/$locale/admin/users'
-    | '/$locale/auth/forgot-password'
-    | '/$locale/auth/login'
-    | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
     | '/$locale/ratgeber/$slug'
+    | '/admin/analytics'
+    | '/admin/calendar'
+    | '/admin/posts'
+    | '/admin/testimonials'
+    | '/admin/users'
     | '/api/public/track-view'
-    | '/$locale/admin'
     | '/$locale/immobilien'
     | '/$locale/ratgeber'
-    | '/$locale/admin/inquiries/$id'
-    | '/$locale/admin/listings/$id'
-    | '/$locale/admin/listings/new'
-    | '/$locale/admin/settings/$tab'
+    | '/admin'
+    | '/admin/inquiries/$id'
+    | '/admin/listings/$id'
+    | '/admin/listings/new'
+    | '/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
-    | '/$locale/admin/inquiries'
-    | '/$locale/admin/listings'
-    | '/$locale/admin/settings'
+    | '/admin/inquiries'
+    | '/admin/listings'
+    | '/admin/settings'
   id:
     | '__root__'
     | '/'
     | '/$locale'
     | '/sitemap.xml'
-    | '/$locale/admin'
     | '/$locale/agb'
-    | '/$locale/auth'
     | '/$locale/datenschutz'
     | '/$locale/erben'
     | '/$locale/immobilienbewertung'
@@ -485,39 +481,44 @@ export interface FileRouteTypes {
     | '/$locale/ueber-mich'
     | '/$locale/verkaufen'
     | '/$locale/verkauft'
+    | '/admin/_authenticated'
+    | '/admin/forgot-password'
+    | '/admin/login'
+    | '/admin/set-password'
     | '/$locale/'
-    | '/$locale/admin/analytics'
-    | '/$locale/admin/calendar'
-    | '/$locale/admin/inquiries'
-    | '/$locale/admin/listings'
-    | '/$locale/admin/posts'
-    | '/$locale/admin/settings'
-    | '/$locale/admin/testimonials'
-    | '/$locale/admin/users'
-    | '/$locale/auth/forgot-password'
-    | '/$locale/auth/login'
-    | '/$locale/auth/reset-password'
     | '/$locale/immobilien/$slug'
     | '/$locale/ratgeber/$slug'
+    | '/admin/_authenticated/analytics'
+    | '/admin/_authenticated/calendar'
+    | '/admin/_authenticated/inquiries'
+    | '/admin/_authenticated/listings'
+    | '/admin/_authenticated/posts'
+    | '/admin/_authenticated/settings'
+    | '/admin/_authenticated/testimonials'
+    | '/admin/_authenticated/users'
     | '/api/public/track-view'
-    | '/$locale/admin/'
     | '/$locale/immobilien/'
     | '/$locale/ratgeber/'
-    | '/$locale/admin/inquiries/$id'
-    | '/$locale/admin/listings/$id'
-    | '/$locale/admin/listings/new'
-    | '/$locale/admin/settings/$tab'
+    | '/admin/_authenticated/'
+    | '/admin/_authenticated/inquiries/$id'
+    | '/admin/_authenticated/listings/$id'
+    | '/admin/_authenticated/listings/new'
+    | '/admin/_authenticated/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
-    | '/$locale/admin/inquiries/'
-    | '/$locale/admin/listings/'
-    | '/$locale/admin/settings/'
+    | '/admin/_authenticated/inquiries/'
+    | '/admin/_authenticated/listings/'
+    | '/admin/_authenticated/settings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminAuthenticatedRoute: typeof AdminAuthenticatedRouteWithChildren
+  AdminForgotPasswordRoute: typeof AdminForgotPasswordRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminSetPasswordRoute: typeof AdminSetPasswordRoute
   ApiPublicTrackViewRoute: typeof ApiPublicTrackViewRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -553,25 +554,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleIndexRouteImport
       parentRoute: typeof LocaleRoute
     }
-    '/$locale/admin': {
-      id: '/$locale/admin'
-      path: '/admin'
-      fullPath: '/$locale/admin'
-      preLoaderRoute: typeof LocaleAdminRouteImport
-      parentRoute: typeof LocaleRoute
-    }
     '/$locale/agb': {
       id: '/$locale/agb'
       path: '/agb'
       fullPath: '/$locale/agb'
       preLoaderRoute: typeof LocaleAgbRouteImport
-      parentRoute: typeof LocaleRoute
-    }
-    '/$locale/auth': {
-      id: '/$locale/auth'
-      path: '/auth'
-      fullPath: '/$locale/auth'
-      preLoaderRoute: typeof LocaleAuthRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/$locale/datenschutz': {
@@ -630,89 +617,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleVerkauftRouteImport
       parentRoute: typeof LocaleRoute
     }
-    '/$locale/admin/': {
-      id: '/$locale/admin/'
-      path: '/'
-      fullPath: '/$locale/admin/'
-      preLoaderRoute: typeof LocaleAdminIndexRouteImport
-      parentRoute: typeof LocaleAdminRoute
+    '/admin/_authenticated': {
+      id: '/admin/_authenticated'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminAuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/$locale/admin/analytics': {
-      id: '/$locale/admin/analytics'
-      path: '/analytics'
-      fullPath: '/$locale/admin/analytics'
-      preLoaderRoute: typeof LocaleAdminAnalyticsRouteImport
-      parentRoute: typeof LocaleAdminRoute
+    '/admin/forgot-password': {
+      id: '/admin/forgot-password'
+      path: '/admin/forgot-password'
+      fullPath: '/admin/forgot-password'
+      preLoaderRoute: typeof AdminForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/$locale/admin/calendar': {
-      id: '/$locale/admin/calendar'
-      path: '/calendar'
-      fullPath: '/$locale/admin/calendar'
-      preLoaderRoute: typeof LocaleAdminCalendarRouteImport
-      parentRoute: typeof LocaleAdminRoute
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/$locale/admin/inquiries': {
-      id: '/$locale/admin/inquiries'
-      path: '/inquiries'
-      fullPath: '/$locale/admin/inquiries'
-      preLoaderRoute: typeof LocaleAdminInquiriesRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/listings': {
-      id: '/$locale/admin/listings'
-      path: '/listings'
-      fullPath: '/$locale/admin/listings'
-      preLoaderRoute: typeof LocaleAdminListingsRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/posts': {
-      id: '/$locale/admin/posts'
-      path: '/posts'
-      fullPath: '/$locale/admin/posts'
-      preLoaderRoute: typeof LocaleAdminPostsRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/settings': {
-      id: '/$locale/admin/settings'
-      path: '/settings'
-      fullPath: '/$locale/admin/settings'
-      preLoaderRoute: typeof LocaleAdminSettingsRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/testimonials': {
-      id: '/$locale/admin/testimonials'
-      path: '/testimonials'
-      fullPath: '/$locale/admin/testimonials'
-      preLoaderRoute: typeof LocaleAdminTestimonialsRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/admin/users': {
-      id: '/$locale/admin/users'
-      path: '/users'
-      fullPath: '/$locale/admin/users'
-      preLoaderRoute: typeof LocaleAdminUsersRouteImport
-      parentRoute: typeof LocaleAdminRoute
-    }
-    '/$locale/auth/forgot-password': {
-      id: '/$locale/auth/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/$locale/auth/forgot-password'
-      preLoaderRoute: typeof LocaleAuthForgotPasswordRouteImport
-      parentRoute: typeof LocaleAuthRoute
-    }
-    '/$locale/auth/login': {
-      id: '/$locale/auth/login'
-      path: '/login'
-      fullPath: '/$locale/auth/login'
-      preLoaderRoute: typeof LocaleAuthLoginRouteImport
-      parentRoute: typeof LocaleAuthRoute
-    }
-    '/$locale/auth/reset-password': {
-      id: '/$locale/auth/reset-password'
-      path: '/reset-password'
-      fullPath: '/$locale/auth/reset-password'
-      preLoaderRoute: typeof LocaleAuthResetPasswordRouteImport
-      parentRoute: typeof LocaleAuthRoute
+    '/admin/set-password': {
+      id: '/admin/set-password'
+      path: '/admin/set-password'
+      fullPath: '/admin/set-password'
+      preLoaderRoute: typeof AdminSetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/$locale/immobilien/': {
       id: '/$locale/immobilien/'
@@ -742,6 +673,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleRatgeberSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/admin/_authenticated/': {
+      id: '/admin/_authenticated/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminAuthenticatedIndexRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/analytics': {
+      id: '/admin/_authenticated/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAuthenticatedAnalyticsRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/calendar': {
+      id: '/admin/_authenticated/calendar'
+      path: '/calendar'
+      fullPath: '/admin/calendar'
+      preLoaderRoute: typeof AdminAuthenticatedCalendarRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/inquiries': {
+      id: '/admin/_authenticated/inquiries'
+      path: '/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AdminAuthenticatedInquiriesRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/listings': {
+      id: '/admin/_authenticated/listings'
+      path: '/listings'
+      fullPath: '/admin/listings'
+      preLoaderRoute: typeof AdminAuthenticatedListingsRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/posts': {
+      id: '/admin/_authenticated/posts'
+      path: '/posts'
+      fullPath: '/admin/posts'
+      preLoaderRoute: typeof AdminAuthenticatedPostsRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/settings': {
+      id: '/admin/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminAuthenticatedSettingsRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/testimonials': {
+      id: '/admin/_authenticated/testimonials'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials'
+      preLoaderRoute: typeof AdminAuthenticatedTestimonialsRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
+    '/admin/_authenticated/users': {
+      id: '/admin/_authenticated/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminAuthenticatedUsersRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
     '/api/public/track-view': {
       id: '/api/public/track-view'
       path: '/api/public/track-view'
@@ -749,54 +743,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicTrackViewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/$locale/admin/inquiries/': {
-      id: '/$locale/admin/inquiries/'
+    '/admin/_authenticated/inquiries/': {
+      id: '/admin/_authenticated/inquiries/'
       path: '/'
-      fullPath: '/$locale/admin/inquiries/'
-      preLoaderRoute: typeof LocaleAdminInquiriesIndexRouteImport
-      parentRoute: typeof LocaleAdminInquiriesRoute
+      fullPath: '/admin/inquiries/'
+      preLoaderRoute: typeof AdminAuthenticatedInquiriesIndexRouteImport
+      parentRoute: typeof AdminAuthenticatedInquiriesRoute
     }
-    '/$locale/admin/inquiries/$id': {
-      id: '/$locale/admin/inquiries/$id'
+    '/admin/_authenticated/inquiries/$id': {
+      id: '/admin/_authenticated/inquiries/$id'
       path: '/$id'
-      fullPath: '/$locale/admin/inquiries/$id'
-      preLoaderRoute: typeof LocaleAdminInquiriesIdRouteImport
-      parentRoute: typeof LocaleAdminInquiriesRoute
+      fullPath: '/admin/inquiries/$id'
+      preLoaderRoute: typeof AdminAuthenticatedInquiriesIdRouteImport
+      parentRoute: typeof AdminAuthenticatedInquiriesRoute
     }
-    '/$locale/admin/listings/': {
-      id: '/$locale/admin/listings/'
+    '/admin/_authenticated/listings/': {
+      id: '/admin/_authenticated/listings/'
       path: '/'
-      fullPath: '/$locale/admin/listings/'
-      preLoaderRoute: typeof LocaleAdminListingsIndexRouteImport
-      parentRoute: typeof LocaleAdminListingsRoute
+      fullPath: '/admin/listings/'
+      preLoaderRoute: typeof AdminAuthenticatedListingsIndexRouteImport
+      parentRoute: typeof AdminAuthenticatedListingsRoute
     }
-    '/$locale/admin/listings/$id': {
-      id: '/$locale/admin/listings/$id'
+    '/admin/_authenticated/listings/$id': {
+      id: '/admin/_authenticated/listings/$id'
       path: '/$id'
-      fullPath: '/$locale/admin/listings/$id'
-      preLoaderRoute: typeof LocaleAdminListingsIdRouteImport
-      parentRoute: typeof LocaleAdminListingsRoute
+      fullPath: '/admin/listings/$id'
+      preLoaderRoute: typeof AdminAuthenticatedListingsIdRouteImport
+      parentRoute: typeof AdminAuthenticatedListingsRoute
     }
-    '/$locale/admin/listings/new': {
-      id: '/$locale/admin/listings/new'
+    '/admin/_authenticated/listings/new': {
+      id: '/admin/_authenticated/listings/new'
       path: '/new'
-      fullPath: '/$locale/admin/listings/new'
-      preLoaderRoute: typeof LocaleAdminListingsNewRouteImport
-      parentRoute: typeof LocaleAdminListingsRoute
+      fullPath: '/admin/listings/new'
+      preLoaderRoute: typeof AdminAuthenticatedListingsNewRouteImport
+      parentRoute: typeof AdminAuthenticatedListingsRoute
     }
-    '/$locale/admin/settings/': {
-      id: '/$locale/admin/settings/'
+    '/admin/_authenticated/settings/': {
+      id: '/admin/_authenticated/settings/'
       path: '/'
-      fullPath: '/$locale/admin/settings/'
-      preLoaderRoute: typeof LocaleAdminSettingsIndexRouteImport
-      parentRoute: typeof LocaleAdminSettingsRoute
+      fullPath: '/admin/settings/'
+      preLoaderRoute: typeof AdminAuthenticatedSettingsIndexRouteImport
+      parentRoute: typeof AdminAuthenticatedSettingsRoute
     }
-    '/$locale/admin/settings/$tab': {
-      id: '/$locale/admin/settings/$tab'
+    '/admin/_authenticated/settings/$tab': {
+      id: '/admin/_authenticated/settings/$tab'
       path: '/$tab'
-      fullPath: '/$locale/admin/settings/$tab'
-      preLoaderRoute: typeof LocaleAdminSettingsTabRouteImport
-      parentRoute: typeof LocaleAdminSettingsRoute
+      fullPath: '/admin/settings/$tab'
+      preLoaderRoute: typeof AdminAuthenticatedSettingsTabRouteImport
+      parentRoute: typeof AdminAuthenticatedSettingsRoute
     }
     '/lovable/email/auth/preview': {
       id: '/lovable/email/auth/preview'
@@ -815,95 +809,8 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface LocaleAdminInquiriesRouteChildren {
-  LocaleAdminInquiriesIdRoute: typeof LocaleAdminInquiriesIdRoute
-  LocaleAdminInquiriesIndexRoute: typeof LocaleAdminInquiriesIndexRoute
-}
-
-const LocaleAdminInquiriesRouteChildren: LocaleAdminInquiriesRouteChildren = {
-  LocaleAdminInquiriesIdRoute: LocaleAdminInquiriesIdRoute,
-  LocaleAdminInquiriesIndexRoute: LocaleAdminInquiriesIndexRoute,
-}
-
-const LocaleAdminInquiriesRouteWithChildren =
-  LocaleAdminInquiriesRoute._addFileChildren(LocaleAdminInquiriesRouteChildren)
-
-interface LocaleAdminListingsRouteChildren {
-  LocaleAdminListingsIdRoute: typeof LocaleAdminListingsIdRoute
-  LocaleAdminListingsNewRoute: typeof LocaleAdminListingsNewRoute
-  LocaleAdminListingsIndexRoute: typeof LocaleAdminListingsIndexRoute
-}
-
-const LocaleAdminListingsRouteChildren: LocaleAdminListingsRouteChildren = {
-  LocaleAdminListingsIdRoute: LocaleAdminListingsIdRoute,
-  LocaleAdminListingsNewRoute: LocaleAdminListingsNewRoute,
-  LocaleAdminListingsIndexRoute: LocaleAdminListingsIndexRoute,
-}
-
-const LocaleAdminListingsRouteWithChildren =
-  LocaleAdminListingsRoute._addFileChildren(LocaleAdminListingsRouteChildren)
-
-interface LocaleAdminSettingsRouteChildren {
-  LocaleAdminSettingsTabRoute: typeof LocaleAdminSettingsTabRoute
-  LocaleAdminSettingsIndexRoute: typeof LocaleAdminSettingsIndexRoute
-}
-
-const LocaleAdminSettingsRouteChildren: LocaleAdminSettingsRouteChildren = {
-  LocaleAdminSettingsTabRoute: LocaleAdminSettingsTabRoute,
-  LocaleAdminSettingsIndexRoute: LocaleAdminSettingsIndexRoute,
-}
-
-const LocaleAdminSettingsRouteWithChildren =
-  LocaleAdminSettingsRoute._addFileChildren(LocaleAdminSettingsRouteChildren)
-
-interface LocaleAdminRouteChildren {
-  LocaleAdminAnalyticsRoute: typeof LocaleAdminAnalyticsRoute
-  LocaleAdminCalendarRoute: typeof LocaleAdminCalendarRoute
-  LocaleAdminInquiriesRoute: typeof LocaleAdminInquiriesRouteWithChildren
-  LocaleAdminListingsRoute: typeof LocaleAdminListingsRouteWithChildren
-  LocaleAdminPostsRoute: typeof LocaleAdminPostsRoute
-  LocaleAdminSettingsRoute: typeof LocaleAdminSettingsRouteWithChildren
-  LocaleAdminTestimonialsRoute: typeof LocaleAdminTestimonialsRoute
-  LocaleAdminUsersRoute: typeof LocaleAdminUsersRoute
-  LocaleAdminIndexRoute: typeof LocaleAdminIndexRoute
-}
-
-const LocaleAdminRouteChildren: LocaleAdminRouteChildren = {
-  LocaleAdminAnalyticsRoute: LocaleAdminAnalyticsRoute,
-  LocaleAdminCalendarRoute: LocaleAdminCalendarRoute,
-  LocaleAdminInquiriesRoute: LocaleAdminInquiriesRouteWithChildren,
-  LocaleAdminListingsRoute: LocaleAdminListingsRouteWithChildren,
-  LocaleAdminPostsRoute: LocaleAdminPostsRoute,
-  LocaleAdminSettingsRoute: LocaleAdminSettingsRouteWithChildren,
-  LocaleAdminTestimonialsRoute: LocaleAdminTestimonialsRoute,
-  LocaleAdminUsersRoute: LocaleAdminUsersRoute,
-  LocaleAdminIndexRoute: LocaleAdminIndexRoute,
-}
-
-const LocaleAdminRouteWithChildren = LocaleAdminRoute._addFileChildren(
-  LocaleAdminRouteChildren,
-)
-
-interface LocaleAuthRouteChildren {
-  LocaleAuthForgotPasswordRoute: typeof LocaleAuthForgotPasswordRoute
-  LocaleAuthLoginRoute: typeof LocaleAuthLoginRoute
-  LocaleAuthResetPasswordRoute: typeof LocaleAuthResetPasswordRoute
-}
-
-const LocaleAuthRouteChildren: LocaleAuthRouteChildren = {
-  LocaleAuthForgotPasswordRoute: LocaleAuthForgotPasswordRoute,
-  LocaleAuthLoginRoute: LocaleAuthLoginRoute,
-  LocaleAuthResetPasswordRoute: LocaleAuthResetPasswordRoute,
-}
-
-const LocaleAuthRouteWithChildren = LocaleAuthRoute._addFileChildren(
-  LocaleAuthRouteChildren,
-)
-
 interface LocaleRouteChildren {
-  LocaleAdminRoute: typeof LocaleAdminRouteWithChildren
   LocaleAgbRoute: typeof LocaleAgbRoute
-  LocaleAuthRoute: typeof LocaleAuthRouteWithChildren
   LocaleDatenschutzRoute: typeof LocaleDatenschutzRoute
   LocaleErbenRoute: typeof LocaleErbenRoute
   LocaleImmobilienbewertungRoute: typeof LocaleImmobilienbewertungRoute
@@ -920,9 +827,7 @@ interface LocaleRouteChildren {
 }
 
 const LocaleRouteChildren: LocaleRouteChildren = {
-  LocaleAdminRoute: LocaleAdminRouteWithChildren,
   LocaleAgbRoute: LocaleAgbRoute,
-  LocaleAuthRoute: LocaleAuthRouteWithChildren,
   LocaleDatenschutzRoute: LocaleDatenschutzRoute,
   LocaleErbenRoute: LocaleErbenRoute,
   LocaleImmobilienbewertungRoute: LocaleImmobilienbewertungRoute,
@@ -941,10 +846,93 @@ const LocaleRouteChildren: LocaleRouteChildren = {
 const LocaleRouteWithChildren =
   LocaleRoute._addFileChildren(LocaleRouteChildren)
 
+interface AdminAuthenticatedInquiriesRouteChildren {
+  AdminAuthenticatedInquiriesIdRoute: typeof AdminAuthenticatedInquiriesIdRoute
+  AdminAuthenticatedInquiriesIndexRoute: typeof AdminAuthenticatedInquiriesIndexRoute
+}
+
+const AdminAuthenticatedInquiriesRouteChildren: AdminAuthenticatedInquiriesRouteChildren =
+  {
+    AdminAuthenticatedInquiriesIdRoute: AdminAuthenticatedInquiriesIdRoute,
+    AdminAuthenticatedInquiriesIndexRoute:
+      AdminAuthenticatedInquiriesIndexRoute,
+  }
+
+const AdminAuthenticatedInquiriesRouteWithChildren =
+  AdminAuthenticatedInquiriesRoute._addFileChildren(
+    AdminAuthenticatedInquiriesRouteChildren,
+  )
+
+interface AdminAuthenticatedListingsRouteChildren {
+  AdminAuthenticatedListingsIdRoute: typeof AdminAuthenticatedListingsIdRoute
+  AdminAuthenticatedListingsNewRoute: typeof AdminAuthenticatedListingsNewRoute
+  AdminAuthenticatedListingsIndexRoute: typeof AdminAuthenticatedListingsIndexRoute
+}
+
+const AdminAuthenticatedListingsRouteChildren: AdminAuthenticatedListingsRouteChildren =
+  {
+    AdminAuthenticatedListingsIdRoute: AdminAuthenticatedListingsIdRoute,
+    AdminAuthenticatedListingsNewRoute: AdminAuthenticatedListingsNewRoute,
+    AdminAuthenticatedListingsIndexRoute: AdminAuthenticatedListingsIndexRoute,
+  }
+
+const AdminAuthenticatedListingsRouteWithChildren =
+  AdminAuthenticatedListingsRoute._addFileChildren(
+    AdminAuthenticatedListingsRouteChildren,
+  )
+
+interface AdminAuthenticatedSettingsRouteChildren {
+  AdminAuthenticatedSettingsTabRoute: typeof AdminAuthenticatedSettingsTabRoute
+  AdminAuthenticatedSettingsIndexRoute: typeof AdminAuthenticatedSettingsIndexRoute
+}
+
+const AdminAuthenticatedSettingsRouteChildren: AdminAuthenticatedSettingsRouteChildren =
+  {
+    AdminAuthenticatedSettingsTabRoute: AdminAuthenticatedSettingsTabRoute,
+    AdminAuthenticatedSettingsIndexRoute: AdminAuthenticatedSettingsIndexRoute,
+  }
+
+const AdminAuthenticatedSettingsRouteWithChildren =
+  AdminAuthenticatedSettingsRoute._addFileChildren(
+    AdminAuthenticatedSettingsRouteChildren,
+  )
+
+interface AdminAuthenticatedRouteChildren {
+  AdminAuthenticatedAnalyticsRoute: typeof AdminAuthenticatedAnalyticsRoute
+  AdminAuthenticatedCalendarRoute: typeof AdminAuthenticatedCalendarRoute
+  AdminAuthenticatedInquiriesRoute: typeof AdminAuthenticatedInquiriesRouteWithChildren
+  AdminAuthenticatedListingsRoute: typeof AdminAuthenticatedListingsRouteWithChildren
+  AdminAuthenticatedPostsRoute: typeof AdminAuthenticatedPostsRoute
+  AdminAuthenticatedSettingsRoute: typeof AdminAuthenticatedSettingsRouteWithChildren
+  AdminAuthenticatedTestimonialsRoute: typeof AdminAuthenticatedTestimonialsRoute
+  AdminAuthenticatedUsersRoute: typeof AdminAuthenticatedUsersRoute
+  AdminAuthenticatedIndexRoute: typeof AdminAuthenticatedIndexRoute
+}
+
+const AdminAuthenticatedRouteChildren: AdminAuthenticatedRouteChildren = {
+  AdminAuthenticatedAnalyticsRoute: AdminAuthenticatedAnalyticsRoute,
+  AdminAuthenticatedCalendarRoute: AdminAuthenticatedCalendarRoute,
+  AdminAuthenticatedInquiriesRoute:
+    AdminAuthenticatedInquiriesRouteWithChildren,
+  AdminAuthenticatedListingsRoute: AdminAuthenticatedListingsRouteWithChildren,
+  AdminAuthenticatedPostsRoute: AdminAuthenticatedPostsRoute,
+  AdminAuthenticatedSettingsRoute: AdminAuthenticatedSettingsRouteWithChildren,
+  AdminAuthenticatedTestimonialsRoute: AdminAuthenticatedTestimonialsRoute,
+  AdminAuthenticatedUsersRoute: AdminAuthenticatedUsersRoute,
+  AdminAuthenticatedIndexRoute: AdminAuthenticatedIndexRoute,
+}
+
+const AdminAuthenticatedRouteWithChildren =
+  AdminAuthenticatedRoute._addFileChildren(AdminAuthenticatedRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminAuthenticatedRoute: AdminAuthenticatedRouteWithChildren,
+  AdminForgotPasswordRoute: AdminForgotPasswordRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminSetPasswordRoute: AdminSetPasswordRoute,
   ApiPublicTrackViewRoute: ApiPublicTrackViewRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
