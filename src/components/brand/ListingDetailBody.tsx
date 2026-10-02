@@ -71,7 +71,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
       {/* 1. Gallery */}
       <section className="mx-auto max-w-[1080px] px-6 pt-8 lg:px-8">
         <nav aria-label={t("listings.detail.breadcrumb")} className="mb-7 flex items-center gap-2 text-xs text-muted-foreground">
-          <Link to="/$locale/immobilien" params={{ locale }}>{t("nav.properties")}</Link>
+          <Link to="/$locale/immobilien" params={{ locale }}>{t("admin.nav.properties")}</Link>
           <span aria-hidden>/</span><span>{l.address_city}</span><span aria-hidden>/</span>
           <span className="truncate text-foreground">{title}</span>
         </nav>
