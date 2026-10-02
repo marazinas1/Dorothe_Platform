@@ -30,6 +30,11 @@
     "more_reviews": "More reviews",
     "guides_title": "Guides for owners and buyers",
     "all_articles": "All articles",
+    "guide_placeholders": [
+      { "category": "Selling", "title": "What a house in the Saarland is worth in 2026", "excerpt": "How comparable sales, condition and energy class shape a realistic asking price." },
+      { "category": "Energy", "title": "The energy certificate: what sellers must show", "excerpt": "Which data belongs in every property ad, and which certificate type you need." },
+      { "category": "Inheritance", "title": "Selling a house you inherited with siblings", "excerpt": "Why one neutral valuation is often the step that makes an agreement possible." }
+    ],
     "hero_cta": "Request a valuation",
     "hero_form_address": "Address",
     "hero_form_address_hint": "Street, town",

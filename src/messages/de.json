@@ -30,6 +30,11 @@
     "more_reviews": "Weitere Bewertungen",
     "guides_title": "Ratgeber für Eigentümer und Käufer",
     "all_articles": "Alle Artikel",
+    "guide_placeholders": [
+      { "category": "Verkaufen", "title": "Was ein Haus im Saarland 2026 wert ist", "excerpt": "Wie Vergleichsverkäufe, Zustand und Energieklasse einen realistischen Angebotspreis bestimmen." },
+      { "category": "Energie", "title": "Der Energieausweis: Was Verkäufer zeigen müssen", "excerpt": "Welche Angaben in jedes Immobilienangebot gehören und welchen Ausweistyp Sie benötigen." },
+      { "category": "Erbschaft", "title": "Ein gemeinsam geerbtes Haus verkaufen", "excerpt": "Warum eine neutrale Bewertung oft der Schritt ist, der eine Einigung möglich macht." }
+    ],
     "hero_cta": "Immobilie bewerten lassen",
     "hero_form_address": "Adresse",
     "hero_form_address_hint": "Straße, Ort",
