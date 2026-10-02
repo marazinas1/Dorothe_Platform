@@ -6,7 +6,7 @@ import type { HomeTemplateProps } from "../types";
 /**
  * Full-bleed seller-first opening from the approved broker-site reference.
  */
-export function H1Hero({ locale, settings, copy, media }: HomeTemplateProps) {
+export function H1Hero({ locale, copy, media }: HomeTemplateProps) {
   const { t } = useTranslation();
   const kicker = copy.text("hero_kicker");
 

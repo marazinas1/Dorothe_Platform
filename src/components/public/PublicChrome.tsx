@@ -7,7 +7,6 @@ import { SiteNav } from "@/components/brand/SiteNav";
 import { SocialLinks } from "@/components/brand/SocialLinks";
 import { LegalLinks } from "@/components/public/LegalLinks";
 import { SiteLogo } from "@/components/brand/SiteLogo";
-import { HomeLink } from "@/components/shared/HomeLink";
 import { DeervaBadge } from "@/components/public/DeervaBadge";
 import type { Locale } from "@/i18n/config";
 import { HOME_CHROME } from "@/lib/home/layout";
@@ -55,67 +54,58 @@ function Footer({
   tone: "dark" | "light";
 }) {
   const { t } = useTranslation();
+  const pages = [
+    [t("nav.listings"), "/$locale/immobilien"],
+    [t("nav.selling"), "/$locale/verkaufen"],
+    [t("nav.valuation"), "/$locale/immobilienbewertung"],
+    [t("nav.inheritance"), "/$locale/erben"],
+  ] as const;
+  const company = [
+    [t("nav.about_solo"), "/$locale/ueber-mich"],
+    [t("nav.contact"), "/$locale/kontakt"],
+    [t("nav.blog"), "/$locale/ratgeber"],
+  ] as const;
   return (
     <footer
       // Noir: the footer is always the black band, whatever the home design.
       data-tone={tone}
       className="bg-footer text-footer-foreground [&_.text-muted-foreground]:text-footer-muted [&_a:hover]:text-footer-foreground"
     >
-      {/* Local links belong on every page, not only the homepage. */}
-      <div className="mx-auto max-w-[1220px] px-0 pt-12">
-        <AreaLinks
-          locale={locale}
-          cities={serviceAreas(settings, [])}
-          linkable={!areasAreConfigured(settings)}
-          tone="footer"
-        />
-      </div>
-      <div className="mx-auto grid max-w-[1220px] gap-11 px-6 pt-11 pb-[30px] md:grid-cols-[1.3fr_1fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-[1280px] gap-12 px-5 pt-[72px] md:grid-cols-2 md:px-10 lg:grid-cols-4">
         <div>
-          <HomeLink locale={locale} label={settings.site_name}>
-            <SiteLogo settings={settings} tone="light" interactive />
-          </HomeLink>
-          {settings.address_street ? (
-            <p className="mt-3 text-sm text-muted-foreground">
-              {settings.address_street}
-              <br />
-              {settings.address_zip} {settings.address_city}
-              <br />
-              {settings.address_country ?? ""}
-            </p>
-          ) : null}
+          <Link to="/$locale" params={{ locale }} aria-label={settings.site_name}><SiteLogo settings={settings} tone="light" interactive className="max-h-12" /></Link>
+          {settings.primary_agent_name ? <div className="mt-5 text-sm text-footer-muted">{settings.primary_agent_name}</div> : null}
+          <SocialLinks settings={settings} className="mt-5 flex gap-4" />
         </div>
-        <div className="text-sm text-muted-foreground">
-          {settings.contact_email ? (
-            <div>
-              <a className="hover:text-foreground" href={`mailto:${settings.contact_email}`}>
-                {settings.contact_email}
-              </a>
-            </div>
-          ) : null}
-          {settings.contact_phone ? <div className="tabular-figures">{settings.contact_phone}</div> : null}
-        </div>
-        <div className="text-sm text-muted-foreground md:text-right">
-          <SocialLinks
-            settings={settings}
-            className="mb-4 flex gap-4 md:justify-end"
-          />
-          <div className="border-t border-footer-muted/30 pt-6 text-[12.5px]">
-            © {new Date().getFullYear()} {settings.legal_name ?? settings.site_name}.{" "}
-            {t("footer.rights")}.
+        <FooterLinks title={t("nav.listings")} links={pages} locale={locale} />
+        <FooterLinks title={t("nav.about_solo")} links={company} locale={locale} />
+        <div>
+          <div className="text-sm font-semibold">{t("footer.contact")}</div>
+          <div className="mt-5 text-sm leading-7 text-footer-muted">
+            {settings.contact_email ? <a className="block hover:text-footer-foreground" href={`mailto:${settings.contact_email}`}>{settings.contact_email}</a> : null}
+            {settings.contact_phone ? <a className="block tabular-figures hover:text-footer-foreground" href={`tel:${settings.contact_phone.replace(/\s/g, "")}`}>{settings.contact_phone}</a> : null}
+            {settings.address_street ? <div className="mt-3">{settings.address_street}<br />{settings.address_zip} {settings.address_city}</div> : null}
           </div>
+        </div>
+      </div>
+      <div className="mx-auto max-w-[1280px] px-5 md:px-10">
+        <div className="mt-12 border-t border-footer-muted/30 pt-8">
+          <AreaLinks locale={locale} cities={serviceAreas(settings, [])} linkable={!areasAreConfigured(settings)} tone="footer" />
+        </div>
+        <div className="mt-10 flex flex-col gap-3 border-t border-footer-muted/30 py-7 text-[12.5px] text-footer-muted md:flex-row md:items-end md:justify-between">
+          <div><div>© {new Date().getFullYear()} {settings.legal_name ?? settings.site_name}. {t("footer.rights")}.</div>
           <LegalLinks
             locale={locale}
-            className="mt-2 flex flex-wrap gap-4 md:justify-end"
+            className="mt-2 flex flex-wrap gap-4"
           />
-          <DeervaBadge label={t("footer.badge")} />
-          <div className="mt-2 flex gap-4 md:justify-end">
-            <Link to="/admin" className="hover:text-foreground">
-              {t("nav.admin")}
-            </Link>
           </div>
+          <div className="md:text-right"><DeervaBadge label={t("footer.badge")} /><Link to="/admin" className="mt-2 block hover:text-footer-foreground">{t("nav.admin")}</Link></div>
         </div>
       </div>
     </footer>
   );
+}
+
+function FooterLinks({ title, links, locale }: { title: string; links: readonly (readonly [string, string])[]; locale: Locale }) {
+  return <div><div className="text-sm font-semibold">{title}</div><nav className="mt-5 flex flex-col gap-3 text-sm text-footer-muted">{links.map(([label, to]) => <Link key={to} to={to} params={{ locale }} className="hover:text-footer-foreground">{label}</Link>)}</nav></div>;
 }

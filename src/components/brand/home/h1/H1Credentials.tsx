@@ -16,7 +16,7 @@ export function H1Credentials({ copy, media, settings }: HomeTemplateProps) {
         <div className="aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] bg-card">
           <img src={media.portrait} alt={settings.primary_agent_name ?? settings.site_name} className="h-full w-full object-cover" />
         </div>
-      ) : <div className="aspect-[4/5] bg-card" aria-hidden="true" />}
+      ) : null}
       <div>
         {intro ? <p className="max-w-[60ch] text-[clamp(1.125rem,1.6vw,1.3125rem)] leading-[1.55]">{intro}</p> : null}
         {items.length > 0 ? (
