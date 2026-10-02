@@ -21,7 +21,7 @@ import {
   PAGE_SIZE,
   type ListingsSearch,
 } from "@/lib/listings/search-schema";
-import { copyVars } from "@/lib/config/site-copy";
+import { copyVars, serviceRegion } from "@/lib/config/site-copy";
 import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
 import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
@@ -128,7 +128,7 @@ function ListingsIndex() {
       <section className="border-b border-border pb-8 pt-14 md:pb-10 md:pt-20">
         <div className="mx-auto max-w-[1280px] px-5 md:px-10">
         <h1 className="font-heading text-[clamp(2.25rem,4vw,3.5rem)] font-bold leading-[1.08]">
-          {t("listings.catalogue_title", { region: settings.region_name })}
+          {t("listings.catalogue_title", { region: serviceRegion(settings, locale) })}
         </h1>
         <p className="mt-4 max-w-xl text-[17px] text-muted-foreground">{t("listings.catalogue_intro")}</p>
 
