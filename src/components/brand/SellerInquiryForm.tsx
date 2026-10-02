@@ -6,6 +6,7 @@ import { useConsent } from "@/lib/inquiry/use-consent";
 
 import { submitSellerInquiry } from "@/lib/inquiry/submit.functions";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { Button } from "@/components/brand/ui/Button";
 
 const inputCls =
   "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-sm text-foreground outline-none transition-colors duration-300 focus:border-foreground";
@@ -193,13 +194,13 @@ export function SellerInquiryForm() {
         <div className="text-sm text-destructive">{t("inquiry.error")}</div>
       ) : null}
 
-      <button
+      <Button
         type="submit"
         disabled={status === "submitting"}
-        className={actionButtonClass()}
+        
       >
         {status === "submitting" ? t("inquiry.submitting") : t("inquiry.seller.submit")}
-      </button>
+      </Button>
     </form>
   );
 }

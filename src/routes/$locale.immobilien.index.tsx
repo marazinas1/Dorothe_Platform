@@ -27,6 +27,7 @@ import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
 import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
+import { Button } from "@/components/brand/ui/Button";
 
 function keyFor(s: ListingsSearch) {
   return ["listings", "index", s] as const;
@@ -204,27 +205,27 @@ function ListingsIndex() {
 
         {totalPages > 1 ? (
           <nav className="mt-16 flex items-center justify-between border-t border-border pt-6 text-sm">
-            <button
+            <Button
               type="button"
               disabled={search.page <= 1}
               onClick={() => gotoPage(search.page - 1)}
-              className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+              variant="ghost" size="sm"
             >
               ← {t("listings.pager.prev")}
-            </button>
+            </Button>
             <div className="tabular-figures text-muted-foreground">
               {t("listings.pager.page")
                 .replace("{{n}}", String(search.page))
                 .replace("{{total}}", String(totalPages))}
             </div>
-            <button
+            <Button
               type="button"
               disabled={search.page >= totalPages}
               onClick={() => gotoPage(search.page + 1)}
-              className="text-muted-foreground hover:text-foreground disabled:opacity-30"
+              variant="ghost" size="sm"
             >
               {t("listings.pager.next")} →
-            </button>
+            </Button>
           </nav>
         ) : null}
 

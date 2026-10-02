@@ -6,6 +6,7 @@ import { useConsent } from "@/lib/inquiry/use-consent";
 
 import { submitInquiry } from "@/lib/inquiry/submit.functions";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
   listingId: string;
@@ -101,13 +102,13 @@ export function ListingInquiryForm({ listingId, defaultMessage }: Props) {
         <div className="mt-4 text-sm text-destructive">{t("inquiry.error")}</div>
       ) : null}
 
-      <button
+      <Button
         type="submit"
         disabled={status === "submitting"}
-        className={actionButtonClass("primary", "mt-10")}
+        className="mt-10"
       >
         {status === "submitting" ? t("inquiry.submitting") : t("inquiry.submit")}
-      </button>
+      </Button>
     </form>
   );
 }

@@ -3,6 +3,7 @@ import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 import { OSM_STYLE, MARKER_COLOR, type MapPoint } from "@/lib/maps/carto";
+import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
   points: MapPoint[];
@@ -125,7 +126,7 @@ export default function MapCanvas({
     <div className={`relative ${className ?? ""}`}>
       <div ref={holder} className="h-full w-full" />
       {resetLabel ? (
-        <button
+        <Button
           type="button"
           onClick={() => {
             const start = home.current;
@@ -133,10 +134,10 @@ export default function MapCanvas({
               map.current.easeTo({ center: start.center, zoom: start.zoom, duration: 500 });
             }
           }}
-          className="absolute left-3 top-3 z-10 rounded-[var(--radius-button)] border border-border bg-background/95 px-3 py-2 text-xs text-foreground shadow-sm transition-colors hover:bg-secondary"
+          variant="secondary" size="sm" className="absolute left-3 top-3 z-10"
         >
           {resetLabel}
-        </button>
+        </Button>
       ) : null}
     </div>
   );

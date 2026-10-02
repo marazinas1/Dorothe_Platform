@@ -22,6 +22,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { extractLocale } from "@/lib/seo/hreflang";
 import { translate, FALLBACK_LOCALE, isLocale, type Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
+import { Button } from "@/components/brand/ui/Button";
 
 /** Resolve the active locale from URL, falling back to site default. */
 function useActiveLocale(): Locale {
@@ -71,15 +72,15 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
           {translate(locale, "errors.somethingWentWrong")}
         </h1>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
+          <Button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            
           >
             {translate(locale, "errors.tryAgain")}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ import { buildHead } from "@/lib/seo/build-head";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 import { OfficeMap } from "@/components/brand/OfficeMap";
 import { openingHoursRows } from "@/lib/config/opening-hours-display";
+import { Button } from "@/components/brand/ui/Button";
 
 export const Route = createFileRoute("/$locale/kontakt")({
   staticData: { sitemap: true },
@@ -264,15 +265,15 @@ function ContactForm() {
         <div className="text-sm text-destructive">{t("pages.contact.form_error")}</div>
       ) : null}
 
-      <button
+      <Button
         type="submit"
         disabled={status === "submitting"}
-        className={actionButtonClass()}
+        
       >
         {status === "submitting"
           ? t("pages.contact.form_submitting")
           : t("pages.contact.form_submit")}
-      </button>
+      </Button>
     </form>
   );
 }

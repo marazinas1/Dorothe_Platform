@@ -7,6 +7,7 @@ import { LocaleSwitcher } from "@/components/shared/LocaleSwitcher";
 import type { Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { Button } from "@/components/brand/ui/Button";
 
 type Item = { to: "/$locale/immobilien" | string; label: string };
 
@@ -41,14 +42,14 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
     >
       <div className="flex items-center justify-between px-6 py-6">
         <BrandMark settings={settings} />
-        <button
+        <Button
           type="button"
           onClick={onClose}
           aria-label={t("nav.close")}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/70 text-lg"
+          variant="ghost" size="icon" className="text-lg"
         >
           <span aria-hidden="true">×</span>
-        </button>
+        </Button>
       </div>
 
       <nav className="flex flex-1 flex-col gap-6 px-6 pt-6">

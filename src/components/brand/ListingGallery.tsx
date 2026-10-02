@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/config";
 import { pickImageUrl } from "@/lib/listings/image";
 import { pickLocalized } from "@/lib/listings/format";
 import { splitListingImages, type GalleryImage } from "@/lib/listings/gallery-images";
+import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
   images: GalleryImage[];
@@ -147,13 +148,13 @@ function ViewerButton({
   className?: string;
 }) {
   return (
-    <button
+    <Button
       type="button"
       aria-label={label}
       onClick={onClick}
-      className={`flex h-10 w-10 items-center justify-center rounded-full bg-background/15 text-xl leading-none text-background transition-colors duration-300 hover:bg-background/30 ${className}`}
+      variant="ghost" size="icon" inverse className={`text-xl ${className}`}
     >
       {children}
-    </button>
+    </Button>
   );
 }

@@ -15,6 +15,7 @@ import type { Locale } from "@/i18n/config";
 import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { Button } from "@/components/brand/ui/Button";
 
 type Props = {
   locale: Locale;
@@ -131,11 +132,11 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
               currentLocale={locale}
               enabledLocales={settings.enabled_locales}
             />
-            <button
+            <Button
               type="button"
               onClick={() => setOpen(true)}
               aria-label={t("nav.menu")}
-              className="inline-flex h-10 w-10 items-center justify-center text-foreground"
+              variant="ghost" size="icon"
             >
               <span className="sr-only">{t("nav.menu")}</span>
               <span aria-hidden="true" className="flex flex-col gap-[6px]">
@@ -143,7 +144,7 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
                 <span className="block h-px w-6 bg-current" />
                 <span className="block h-px w-6 bg-current" />
               </span>
-            </button>
+            </Button>
           </div>
         </nav>
       </div>
