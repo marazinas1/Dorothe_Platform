@@ -15,12 +15,12 @@ const ROOMS = [1, 2, 3, 4, 5, 6];
 const AREA = [50, 75, 100, 150, 200, 250];
 
 const CTL =
-  "flex min-h-[52px] w-full items-center gap-2 rounded-[var(--radius-button)] border border-border bg-background px-3 text-[14.5px] text-foreground focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring";
+  "flex min-h-[52px] w-full items-center gap-2 rounded-[var(--radius-button)] border border-border bg-background px-4 text-[14px] text-foreground focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring";
 
 function Field({ label, id, children }: { label: string; id: string; children: ReactNode }) {
   return (
     <div className="flex flex-col gap-[5px]">
-      <label htmlFor={id} className="text-[12.5px] font-semibold text-muted-foreground">
+      <label htmlFor={id} className="eyebrow text-[11px] text-muted-foreground">
         {label}
       </label>
       {children}
@@ -59,7 +59,7 @@ export function FiltersBar({ locale, search, total }: Props) {
 
   return (
     <div>
-      <div role="tablist" className="mt-[22px] inline-flex rounded-[var(--radius-button)] border border-border p-[3px]">
+      <div role="tablist" className="mt-8 inline-flex rounded-[var(--radius-button)] border border-border">
         {(["sale", "rent"] as const).map((d) => (
           <button
             key={d}
@@ -68,7 +68,7 @@ export function FiltersBar({ locale, search, total }: Props) {
             aria-selected={deal === d}
             onClick={() => go({ deal: d === "sale" ? "" : "rent", price_max: 0 })}
             className={cn(
-              "min-h-[38px] cursor-pointer rounded-[var(--radius-button)] px-[18px] text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+              "min-h-[42px] cursor-pointer rounded-[var(--radius-button)] px-5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
               deal === d ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground",
             )}
           >
@@ -78,7 +78,7 @@ export function FiltersBar({ locale, search, total }: Props) {
       </div>
 
       <form
-        className="mt-4 grid grid-cols-2 gap-2.5 lg:grid-cols-[2fr_1.2fr_1.2fr_1fr_1fr_auto]"
+        className="mt-6 grid grid-cols-2 gap-x-3 gap-y-4 lg:grid-cols-[2fr_1.2fr_1.2fr_1fr_1fr_auto]"
         onSubmit={(e) => {
           e.preventDefault();
           go({ city: draft.city, type: draft.type, price_max: draft.price_max, rooms_min: draft.rooms_min, area_min: draft.area_min });
