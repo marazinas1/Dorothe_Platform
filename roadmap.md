@@ -36,7 +36,7 @@ Blocked outside this work:
 
 ## Approved full public-site HTML parity
 - [x] Wave 1: shared public chrome and Home (exact HTML copy, icons, temporary editable media)
-- [ ] Wave 2: Properties and listing detail (retain live listing images)
+- [x] Wave 2: Properties and listing detail (retain live listing images)
 - [ ] Wave 3: Sold, Selling, Valuation and Inheritance
 - [ ] Wave 4: About, Contact, Guides, Article and legal chrome
 - [ ] Wave 5: desktop/mobile visual parity and final verification
@@ -45,7 +45,7 @@ Blocked outside this work:
 - [ ] Copy all approved HTML demo copy and iconography into EN/DE content fallbacks
 - [ ] Make every non-listing public photograph editable in its owning page Settings tab
 - [x] Seed HTML testimonials and ensure Testimonials admin remains source of truth
-- [ ] Preserve live listing images and all collection-driven records
+- [x] Preserve live listing images and all collection-driven records
 - [ ] Verify every public route against broker-site-2.html on desktop and mobile
 
 ## Brand files

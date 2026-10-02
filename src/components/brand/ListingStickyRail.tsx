@@ -7,6 +7,7 @@ import { moneyLabelKey } from "@/lib/listings/field-labels";
 import { commissionRow } from "@/lib/listings/commission";
 import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 
 type Props = {
   listing: PublicListing;
@@ -59,11 +60,8 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
 
   return (
     <aside className="hidden lg:block">
-      <div className="sticky top-28 border-t border-border pt-6">
-        <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-          {t(moneyLabelKey(shape, "price", "public"))}
-        </div>
-        <div className="mt-3 font-heading text-4xl leading-none tabular-figures">
+      <div className="sticky top-24 border border-border p-7">
+        <div className="font-heading text-3xl font-bold leading-none tabular-figures">
           {price}
         </div>
 
@@ -73,26 +71,18 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
           </p>
         ) : null}
 
-        <dl className="mt-8">
-          {figures.map((f) => (
-            <div
-              key={f.label}
-              className="flex items-baseline justify-between gap-4 border-b border-border py-3"
-            >
-              <dt className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-                {f.label}
-              </dt>
-              <dd className="tabular-figures text-sm">{f.value}</dd>
-            </div>
-          ))}
-        </dl>
+        <div className="mt-6 border-t border-border pt-6">
+          <div className="font-semibold">{settings.primary_agent_name ?? settings.legal_name ?? settings.site_name}</div>
+          <p className="mt-1 text-xs leading-5 text-muted-foreground">{settings.primary_agent_role}</p>
+        </div>
 
         <a
           href={contactHref}
           className={actionButtonClass("primary", "mt-8 w-full")}
         >
-          {t("listings.detail.contact_agent")}
+          <ListingIcon name="cal" /> {t("listings.detail.book_viewing")}
         </a>
+        {settings.contact_phone ? <a href={`tel:${settings.contact_phone.replace(/\s/g, "")}`} className="mt-5 flex items-center justify-center gap-2 text-sm font-semibold"><ListingIcon name="phone" />{settings.contact_phone}</a> : null}
         {listing.reference_code ? (
           <div className="mt-4 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
             {t("listings.detail.reference_short")} {listing.reference_code}

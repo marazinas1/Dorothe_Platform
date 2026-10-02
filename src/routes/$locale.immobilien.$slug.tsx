@@ -200,8 +200,8 @@ function ListingDetail() {
   const title = listingDisplayName(l, locale as Locale, t);
 
   return (
-    <PublicChrome locale={locale as Locale} settings={settings} heroOverlay>
-      <article className="pb-40">
+    <PublicChrome locale={locale as Locale} settings={settings}>
+      <article className="pb-24">
         {preview ? (
           <div className="bg-secondary px-6 py-2 text-center text-[11px] uppercase tracking-[0.16em] text-secondary-foreground">
             {t("listings.detail.preview_notice", {
