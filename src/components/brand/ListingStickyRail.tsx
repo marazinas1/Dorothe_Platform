@@ -6,6 +6,7 @@ import { formatPrice } from "@/lib/listings/format";
 import { commissionRow } from "@/lib/listings/commission";
 import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
+import { buttonClass } from "@/components/brand/ui/Button";
 import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 
 type Props = {
@@ -54,7 +55,7 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
         >
           <ListingIcon name="cal" /> {t("listings.detail.book_viewing")}
         </a>
-        <a href={contactHref} className={actionButtonClass("secondary", "mt-2 w-full")}>
+        <a href={contactHref} className={buttonClass({ variant: "secondary", className: "mt-2 w-full" })}>
           <ListingIcon name="doc" /> {t("listings.detail.request_expose")}
         </a>
         {settings.contact_phone ? <a href={`tel:${settings.contact_phone.replace(/\s/g, "")}`} className="mt-5 flex items-center justify-center gap-2 text-sm font-semibold"><ListingIcon name="phone" />{settings.contact_phone}</a> : null}
