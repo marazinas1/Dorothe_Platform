@@ -3,6 +3,7 @@ import type { HomeCopy, HomeMediaBag } from "@/lib/home/content";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { TestiItem } from "@/lib/testimonials/types";
 import type { SiteSettings } from "@/types/site-settings";
+import type { PostRow } from "@/lib/posts/types";
 
 /**
  * Every home page design receives exactly this: resolved copy, resolved
@@ -19,6 +20,7 @@ export interface HomeTemplateProps {
   hideSoldPrice: boolean;
   /** The curated client voices, already localised and capped. */
   testimonials: TestiItem[];
+  posts: PostRow[];
 }
 
 

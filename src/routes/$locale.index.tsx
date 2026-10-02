@@ -19,6 +19,7 @@ import { buildHead } from "@/lib/seo/build-head";
 import { homeCopy, homeMediaBag } from "@/lib/home/content";
 import { homeJsonLd } from "@/lib/seo/home-jsonld";
 import { publicTestimonialsQueryOptions } from "@/lib/testimonials/queries.functions";
+import { publicPostsQueryOptions } from "@/lib/posts/queries.functions";
 import { homeTestiItems } from "@/lib/testimonials/resolve";
 import { HOME_CHROME } from "@/lib/home/layout";
 import {
@@ -47,6 +48,7 @@ export const Route = createFileRoute("/$locale/")({
       locale: params.locale as Locale,
       socialImage: resolveSocialImage(settings, featured.items),
       testimonials,
+      context.queryClient.ensureQueryData(publicPostsQueryOptions),
     };
   },
   head: ({ loaderData }) => {
@@ -92,6 +94,7 @@ function HomePage() {
   const { data: featured } = useSuspenseQuery(featuredListingsQueryOptions);
   const { data: sold } = useSuspenseQuery(recentSoldQueryOptions);
   const { data: testimonials } = useSuspenseQuery(publicTestimonialsQueryOptions);
+  const { data: posts } = useSuspenseQuery(publicPostsQueryOptions);
 
   const l = locale as Locale;
   const copy = homeCopy(settings, l);
@@ -115,6 +118,7 @@ function HomePage() {
         sold={applySoldPricePolicy(sold.items, settings)}
         hideSoldPrice={soldPricesHidden(settings)}
         testimonials={voices}
+        posts={posts}
       />
     </PublicChrome>
   );
