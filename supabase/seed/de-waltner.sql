@@ -137,9 +137,15 @@ UPDATE public.site_settings SET
 -- They remain normal admin-managed records and can be replaced before launch.
 -- ---------------------------------------------------------------------------
 INSERT INTO public.testimonials
-  (quote, author_name, author_detail, sort_order, published, show_on_home)
+  (id, quote, author_name, author_detail, sort_order, published, show_on_home)
 VALUES
-  ('{"en":"She valued our house in person and explained every figure. No pressure at any point, we decided on our own timeline.","de":"Sie hat unser Haus persönlich bewertet und jede Zahl erklärt. Zu keinem Zeitpunkt gab es Druck – wir entschieden in unserem eigenen Tempo."}'::jsonb, 'Sabine K.', 'Sold a house in Völklingen', 10, true, true),
-  ('{"en":"We inherited a house as three siblings. Her valuation gave us one figure everyone could accept.","de":"Wir haben als drei Geschwister ein Haus geerbt. Ihre Bewertung gab uns einen Wert, den alle akzeptieren konnten."}'::jsonb, 'Thomas R.', 'Inherited property, Saarbrücken', 20, true, true),
-  ('{"en":"From the first viewing to the notary, always the same person and always reachable. Exactly what we needed as first-time buyers.","de":"Von der ersten Besichtigung bis zum Notar immer dieselbe Ansprechpartnerin und immer erreichbar. Genau das brauchten wir als Erstkäufer."}'::jsonb, 'Julia and Mark H.', 'Bought in Riegelsberg', 30, true, true)
-ON CONFLICT DO NOTHING;
+  ('699bdd30-48dc-4e1a-9d14-51fb3d84da01', '{"en":"She valued our house in person and explained every figure. No pressure at any point, we decided on our own timeline.","de":"Sie hat unser Haus persönlich bewertet und jede Zahl erklärt. Zu keinem Zeitpunkt gab es Druck – wir entschieden in unserem eigenen Tempo."}'::jsonb, 'Sabine K.', 'Sold a house in Völklingen', 10, true, true),
+  ('699bdd30-48dc-4e1a-9d14-51fb3d84da02', '{"en":"We inherited a house as three siblings. Her valuation gave us one figure everyone could accept.","de":"Wir haben als drei Geschwister ein Haus geerbt. Ihre Bewertung gab uns einen Wert, den alle akzeptieren konnten."}'::jsonb, 'Thomas R.', 'Inherited property, Saarbrücken', 20, true, true),
+  ('699bdd30-48dc-4e1a-9d14-51fb3d84da03', '{"en":"From the first viewing to the notary, always the same person and always reachable. Exactly what we needed as first-time buyers.","de":"Von der ersten Besichtigung bis zum Notar immer dieselbe Ansprechpartnerin und immer erreichbar. Genau das brauchten wir als Erstkäufer."}'::jsonb, 'Julia and Mark H.', 'Bought in Riegelsberg', 30, true, true)
+ON CONFLICT (id) DO UPDATE SET
+  quote = EXCLUDED.quote,
+  author_name = EXCLUDED.author_name,
+  author_detail = EXCLUDED.author_detail,
+  sort_order = EXCLUDED.sort_order,
+  published = EXCLUDED.published,
+  show_on_home = EXCLUDED.show_on_home;
