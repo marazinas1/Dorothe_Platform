@@ -63,6 +63,7 @@ function BlogIndex() {
         intro={copy.text("intro")}
         emptyLabel={copy.text("empty")}
         formatDate={(iso) => formatPostDate(iso, l)}
+        formatTopic={(topic) => (topic ? t(`blog.topics.${topic}`) : null)}
       />
       <CtaBand locale={l} settings={settings} />
     </PublicChrome>

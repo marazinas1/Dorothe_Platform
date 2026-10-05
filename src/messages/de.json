@@ -1575,7 +1575,9 @@
       "coverRemove": "Bild entfernen",
       "coverHint": "JPG oder PNG — die Größe wird automatisch angepasst.",
       "confirmDeleteTitle": "Diesen Beitrag löschen?",
-      "confirmDeleteBody": "„{{name}}“ wird gelöscht und verschwindet von der Website. Das kann nicht rückgängig gemacht werden."
+      "confirmDeleteBody": "„{{name}}“ wird gelöscht und verschwindet von der Website. Das kann nicht rückgängig gemacht werden.",
+      "topic": "Thema",
+      "topicNone": "Kein Thema"
     },
     "copyEditor": {
       "currentlyShown": "Aktuell sichtbar",
@@ -2077,6 +2079,12 @@
       "back": "Zurück zu allen Beiträgen",
       "unavailable_title": "Beitrag nicht verfügbar",
       "unavailable_body": "Dieser Beitrag ist nicht mehr veröffentlicht."
+    },
+    "topics": {
+      "selling": "Verkaufen",
+      "buying": "Kaufen",
+      "inheritance": "Erben",
+      "energy": "Energie"
     }
   },
   "cta": {
