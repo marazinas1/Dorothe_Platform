@@ -4,7 +4,7 @@ import { CalendarDays, FileText, Scale, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
-import { SellerInquiryForm } from "@/components/brand/SellerInquiryForm";
+import { ValuationWizard } from "@/components/brand/valuation/ValuationWizard";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -50,7 +50,7 @@ function ValuationPage() {
           </div>
           <div className="mt-10 bg-card p-7"><h3 className="font-heading text-xl font-bold">{t("pages.valuation.inheritance_title")}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{t("pages.valuation.inheritance_body")}</p><Link to="/$locale/erben" params={{ locale }} className="btn-noir mt-4 inline-flex min-h-11 items-center underline underline-offset-[6px]">{t("pages.valuation.inheritance_link")}</Link></div>
         </div>
-        <div className="border border-border p-6 md:p-9"><div className="mb-7 flex gap-2" aria-label={t("pages.valuation.step_label")}><span className="h-1 flex-1 bg-foreground" /><span className="h-1 flex-1 bg-border" /><span className="h-1 flex-1 bg-border" /></div><div className="eyebrow text-muted-foreground">{t("pages.valuation.step_label")}</div><h2 className="mt-3 font-heading text-2xl font-bold">{t("pages.valuation.form_title")}</h2><div className="mt-8"><SellerInquiryForm defaultAddress={search.address} defaultType={search.type} /></div></div>
+        <div className="border border-border p-6 md:p-9"><ValuationWizard address={search.address} type={search.type} /></div>
       </section>
     </PublicChrome>
   );

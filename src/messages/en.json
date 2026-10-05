@@ -1842,7 +1842,17 @@
       "inheritance_title": "Need a valuation for the tax office?",
       "inheritance_body": "For inheritance and gift tax a formal market value appraisal is needed, not a sales valuation.",
       "inheritance_link": "Appraisals for inherited property",
-      "step_label": "Step 1 of 3"
+      "step_label": "Step 1 of 3",
+      "wizard": {
+        "choose": "Select…",
+        "step1": "Your property",
+        "step2": "Details and photos",
+        "step3": "How can I reach you?",
+        "progress": "Step {{n}} of {{total}}",
+        "next": "Continue",
+        "back": "Back",
+        "done_title": "Thank you — your request has arrived."
+      }
     },
     "selling": {
       "title": "Selling",

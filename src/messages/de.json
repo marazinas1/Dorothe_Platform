@@ -1842,7 +1842,17 @@
       "inheritance_title": "Benötigen Sie eine Bewertung für das Finanzamt?",
       "inheritance_body": "Für Erbschaft- und Schenkungsteuer wird ein formelles Verkehrswertgutachten benötigt, keine Verkaufsbewertung.",
       "inheritance_link": "Gutachten für geerbte Immobilien",
-      "step_label": "Schritt 1 von 3"
+      "step_label": "Schritt 1 von 3",
+      "wizard": {
+        "choose": "Bitte wählen…",
+        "step1": "Ihre Immobilie",
+        "step2": "Details und Fotos",
+        "step3": "Wie erreiche ich Sie?",
+        "progress": "Schritt {{n}} von {{total}}",
+        "next": "Weiter",
+        "back": "Zurück",
+        "done_title": "Vielen Dank — Ihre Anfrage ist angekommen."
+      }
     },
     "selling": {
       "title": "Verkaufen",
