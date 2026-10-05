@@ -42,3 +42,5 @@ Binding rules. If a request conflicts, say so and propose the compliant version.
 - Public site stays SSR. CSS-only animation.
 - German market: `latin-ext` fonts; energy fields follow `site_settings.country`; no cookies without consent, cookieless analytics.
 - Colours only from semantic tokens in `src/styles.css`.
+
+- New public listing columns need both the `listings_public` view and a column-level `GRANT SELECT (...) ON listings TO anon`; the view is security_invoker, so without the grant every public page fails.

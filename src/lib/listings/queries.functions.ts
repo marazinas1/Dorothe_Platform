@@ -59,6 +59,8 @@ export type PublicListing = {
   title: any;
   description: any;
   service_charge: number | null;
+  reserve_fund: number | null;
+  price_reduced: boolean | null;
   utilities_cost: number | null;
   total_rent: number | null;
   deposit: number | null;

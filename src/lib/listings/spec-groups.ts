@@ -35,6 +35,7 @@ export type SpecInput = CommissionInput & {
   price_on_request: boolean | null;
   price_period: string | null;
   service_charge: number | null;
+  reserve_fund?: number | null;
   utilities_cost: number | null;
   heating_costs_included: boolean | null;
   total_rent: number | null;
@@ -128,6 +129,11 @@ export function specGroups(
       "service_charge",
       t(moneyLabelKey(shape, "service_charge", "public")),
       money(listing.service_charge, "month"),
+    ],
+    [
+      "reserve_fund",
+      t(moneyLabelKey(shape, "reserve_fund", "public")),
+      money(listing.reserve_fund ?? null),
     ],
     [
       "utilities_cost",

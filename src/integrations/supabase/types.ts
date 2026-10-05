@@ -540,9 +540,11 @@ export type Database = {
           meta_description: Json
           meta_title: Json
           plot_area: number | null
+          previous_price: number | null
           price: number | null
           price_on_request: boolean
           price_period: string | null
+          price_reduced: boolean
           property_type: string
           public_address_number: string | null
           public_address_street: string | null
@@ -555,6 +557,7 @@ export type Database = {
           published_at: string | null
           reference_code: string | null
           rental_status: string | null
+          reserve_fund: number | null
           rooms: number | null
           service_charge: number | null
           slug: string
@@ -619,9 +622,11 @@ export type Database = {
           meta_description?: Json
           meta_title?: Json
           plot_area?: number | null
+          previous_price?: number | null
           price?: number | null
           price_on_request?: boolean
           price_period?: string | null
+          price_reduced?: boolean
           property_type: string
           public_address_number?: string | null
           public_address_street?: string | null
@@ -634,6 +639,7 @@ export type Database = {
           published_at?: string | null
           reference_code?: string | null
           rental_status?: string | null
+          reserve_fund?: number | null
           rooms?: number | null
           service_charge?: number | null
           slug: string
@@ -698,9 +704,11 @@ export type Database = {
           meta_description?: Json
           meta_title?: Json
           plot_area?: number | null
+          previous_price?: number | null
           price?: number | null
           price_on_request?: boolean
           price_period?: string | null
+          price_reduced?: boolean
           property_type?: string
           public_address_number?: string | null
           public_address_street?: string | null
@@ -713,6 +721,7 @@ export type Database = {
           published_at?: string | null
           reference_code?: string | null
           rental_status?: string | null
+          reserve_fund?: number | null
           rooms?: number | null
           service_charge?: number | null
           slug?: string
@@ -1131,6 +1140,7 @@ export type Database = {
           legal_name: string | null
           legal_privacy: Json
           legal_terms: Json
+          listing_ref_prefix: string | null
           logo_dark_url: string | null
           logo_size: number
           logo_url: string | null
@@ -1197,6 +1207,7 @@ export type Database = {
           legal_name?: string | null
           legal_privacy?: Json
           legal_terms?: Json
+          listing_ref_prefix?: string | null
           logo_dark_url?: string | null
           logo_size?: number
           logo_url?: string | null
@@ -1263,6 +1274,7 @@ export type Database = {
           legal_name?: string | null
           legal_privacy?: Json
           legal_terms?: Json
+          listing_ref_prefix?: string | null
           logo_dark_url?: string | null
           logo_size?: number
           logo_url?: string | null
@@ -1513,10 +1525,12 @@ export type Database = {
           price: number | null
           price_on_request: boolean | null
           price_period: string | null
+          price_reduced: boolean | null
           property_type: string | null
           published_at: string | null
           reference_code: string | null
           rental_status: string | null
+          reserve_fund: number | null
           rooms: number | null
           service_charge: number | null
           slug: string | null
@@ -1575,10 +1589,12 @@ export type Database = {
           price?: number | null
           price_on_request?: boolean | null
           price_period?: string | null
+          price_reduced?: boolean | null
           property_type?: string | null
           published_at?: string | null
           reference_code?: string | null
           rental_status?: string | null
+          reserve_fund?: number | null
           rooms?: number | null
           service_charge?: number | null
           slug?: string | null
@@ -1637,10 +1653,12 @@ export type Database = {
           price?: number | null
           price_on_request?: boolean | null
           price_period?: string | null
+          price_reduced?: boolean | null
           property_type?: string | null
           published_at?: string | null
           reference_code?: string | null
           rental_status?: string | null
+          reserve_fund?: number | null
           rooms?: number | null
           service_charge?: number | null
           slug?: string | null

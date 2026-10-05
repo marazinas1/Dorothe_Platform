@@ -169,6 +169,9 @@ export const ListingFormSchema = z.object({
   // by field-visibility from deal_type + property_type; the database clears the
   // ones that stop applying when deal_type changes.
   service_charge: nullableNumber,
+  reserve_fund: nullableNumber,
+  price_reduced: z.boolean().default(false),
+  previous_price: nullableNumber,
   utilities_cost: nullableNumber,
   heating_costs_included: z.boolean().default(false),
   deposit: nullableNumber,

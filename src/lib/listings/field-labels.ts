@@ -16,6 +16,7 @@ export type MoneyField =
   | "price"
   | "total_rent"
   | "service_charge"
+  | "reserve_fund"
   | "utilities_cost"
   | "deposit";
 

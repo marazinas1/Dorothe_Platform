@@ -31,6 +31,7 @@ export type VisibleField =
   | "energy"
   | "price_period"
   | "service_charge"
+  | "reserve_fund"
   | "utilities_cost"
   | "heating_costs_included"
   | "total_rent"
@@ -67,6 +68,7 @@ const BASE: Record<VisibleField, FieldLevel> = {
   energy: "open",
   price_period: "hidden",
   service_charge: "details",
+  reserve_fund: "details",
   utilities_cost: "hidden",
   heating_costs_included: "hidden",
   total_rent: "hidden",
@@ -88,11 +90,12 @@ const BY_PROPERTY_TYPE: Matrix = {
     total_floors: "open",
     // In the German market Hausgeld is asked immediately after the price.
     service_charge: "open",
+    reserve_fund: "details",
   },
   // Etagenanzahl is stated for German houses as a matter of course; `floor`
   // (which storey the unit is on) stays apartment-only.
-  house: { plot_area: "open", floor: "hidden", total_floors: "open" },
-  country_house: { plot_area: "open", floor: "hidden", total_floors: "open" },
+  house: { plot_area: "open", floor: "hidden", total_floors: "open", reserve_fund: "hidden" },
+  country_house: { plot_area: "open", floor: "hidden", total_floors: "open", reserve_fund: "hidden" },
   land: {
     living_area: "hidden",
     usable_area: "hidden",
@@ -108,6 +111,7 @@ const BY_PROPERTY_TYPE: Matrix = {
     heating_type: "hidden",
     energy: "hidden",
     service_charge: "hidden",
+    reserve_fund: "hidden",
   },
   commercial: {
     living_area: "hidden",
@@ -127,14 +131,15 @@ const BY_PROPERTY_TYPE: Matrix = {
     heating_type: "hidden",
     energy: "hidden",
     service_charge: "hidden",
+    reserve_fund: "hidden",
   },
   // Legacy types kept for existing rows behave like their closest modern type.
   // Etagenanzahl is stated for German houses as a matter of course; `floor`
   // (which storey the unit is on) stays apartment-only.
-  villa: { plot_area: "open", floor: "hidden", total_floors: "open" },
+  villa: { plot_area: "open", floor: "hidden", total_floors: "open", reserve_fund: "hidden" },
   // Etagenanzahl is stated for German houses as a matter of course; `floor`
   // (which storey the unit is on) stays apartment-only.
-  townhouse: { plot_area: "open", floor: "hidden", total_floors: "open" },
+  townhouse: { plot_area: "open", floor: "hidden", total_floors: "open", reserve_fund: "hidden" },
   penthouse: { plot_area: "hidden", floor: "open", total_floors: "open", service_charge: "open" },
   other: {},
 };
@@ -154,6 +159,7 @@ const BY_DEAL_TYPE: Matrix = {
   },
   rent: {
     service_charge: "hidden",
+    reserve_fund: "hidden",
     utilities_cost: "open",
     heating_costs_included: "open",
     total_rent: "open",
