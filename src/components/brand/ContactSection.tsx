@@ -7,6 +7,7 @@ import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { SiteSettings } from "@/types/site-settings";
 
 import { ShortInquiryForm } from "./ShortInquiryForm";
+import { Button } from "./ui/Button";
 
 type Props = {
   locale: Locale;
@@ -109,7 +110,7 @@ export function ContactSection({ locale, settings, heading, appearance = "defaul
 }
 
 function DirectTab({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return <button type="button" role="tab" aria-selected={active} onClick={onClick} className={`-mb-px border-b-2 pb-2.5 text-[14.5px] ${active ? "border-foreground font-medium text-foreground" : "border-transparent text-muted-foreground"}`}>{children}</button>;
+  return <Button type="button" role="tab" aria-selected={active} onClick={onClick} variant="ghost" size="sm" className={`-mb-px rounded-none border-b-2 px-0 text-sm ${active ? "border-foreground font-medium text-foreground" : "border-transparent text-muted-foreground"}`}>{children}</Button>;
 }
 
 function TabButton({
@@ -122,18 +123,19 @@ function TabButton({
   children: React.ReactNode;
 }) {
   return (
-    <button
+    <Button
       type="button"
       role="tab"
       aria-selected={active}
       onClick={onClick}
-      className={`relative -mb-px pb-4 font-heading text-xl transition-opacity duration-300 md:text-2xl ${
+      variant="ghost"
+      className={`relative -mb-px h-auto rounded-none px-0 pb-4 font-heading text-xl transition-opacity duration-300 md:text-2xl ${
         active
           ? "text-foreground after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-foreground"
           : "text-muted-foreground hover:text-foreground"
       }`}
     >
       {children}
-    </button>
+    </Button>
   );
 }

@@ -165,18 +165,20 @@ function ListingsIndex() {
             </label>
             <div role="group" aria-label={t("listings.view.grid")} className="inline-flex rounded-[var(--radius-button)] border border-border">
               {views.map((v) => (
-                <button
+                <Button
                   key={v.key}
                   type="button"
                   aria-pressed={view === v.key}
                   aria-label={t(`listings.view.${v.key}`)}
                   onClick={() => navigate({ params: { locale }, search: (prev: ListingsSearch) => ({ ...prev, view: v.key }) })}
-                  className={`grid h-[42px] w-11 cursor-pointer place-items-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
+                  variant="ghost"
+                  size="icon"
+                  className={`grid place-items-center ${
                     view === v.key ? "bg-card text-foreground" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <ListingIcon name={v.icon} />
-                </button>
+                </Button>
               ))}
             </div>
           </div>

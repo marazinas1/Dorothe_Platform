@@ -61,19 +61,21 @@ export function FiltersBar({ locale, search, total }: Props) {
     <div>
       <div role="tablist" className="mt-8 inline-flex rounded-[var(--radius-button)] border border-border">
         {(["sale", "rent"] as const).map((d) => (
-          <button
+          <Button
             key={d}
             type="button"
             role="tab"
             aria-selected={deal === d}
             onClick={() => go({ deal: d === "sale" ? "" : "rent", price_max: 0 })}
+            variant="ghost"
+            size="sm"
             className={cn(
-              "min-h-[42px] cursor-pointer rounded-[var(--radius-button)] px-5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+              "px-5 text-sm font-semibold",
               deal === d ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground",
             )}
           >
             {t(`listings.filters.${d}`)}
-          </button>
+          </Button>
         ))}
       </div>
 

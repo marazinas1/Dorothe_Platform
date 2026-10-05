@@ -57,7 +57,7 @@ export function BuyerInquiryForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8">
         <div>
           <label className={labelCls} htmlFor="buyer-type">
             {t("inquiry.buyer.property_type")}
@@ -74,7 +74,7 @@ export function BuyerInquiryForm() {
           <label className={labelCls} htmlFor="buyer-city">
             {t("inquiry.buyer.city")}
           </label>
-          <input id="buyer-city" name="city" className={inputCls} />
+          <input id="buyer-city" name="city" autoComplete="address-level2" maxLength={120} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="buyer-rooms">
@@ -88,7 +88,7 @@ export function BuyerInquiryForm() {
           </label>
           <input id="buyer-area" name="area_min" type="number" min="0" className={inputCls} />
         </div>
-        <div className="md:col-span-2">
+        <div>
           <label className={labelCls} htmlFor="buyer-budget">
             {t("inquiry.buyer.price_max")}
           </label>
@@ -96,22 +96,22 @@ export function BuyerInquiryForm() {
         </div>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8">
         <div>
           <label className={labelCls} htmlFor="buyer-name">{t("inquiry.name")}</label>
-          <input id="buyer-name" name="name" required className={inputCls} />
+          <input id="buyer-name" name="name" required autoComplete="name" maxLength={100} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="buyer-email">{t("inquiry.email")}</label>
-          <input id="buyer-email" name="email" type="email" required className={inputCls} />
+          <input id="buyer-email" name="email" type="email" required autoComplete="email" maxLength={255} className={inputCls} />
         </div>
-        <div className="md:col-span-2">
+        <div>
           <label className={labelCls} htmlFor="buyer-phone">{t("inquiry.phone")}</label>
-          <input id="buyer-phone" name="phone" className={inputCls} />
+          <input id="buyer-phone" name="phone" type="tel" autoComplete="tel" maxLength={40} className={inputCls} />
         </div>
-        <div className="md:col-span-2">
+        <div>
           <label className={labelCls} htmlFor="buyer-message">{t("inquiry.message")}</label>
-          <textarea id="buyer-message" name="message" rows={3} className={`${inputCls} resize-none pt-3`} />
+          <textarea id="buyer-message" name="message" rows={3} maxLength={2000} className={`${inputCls} resize-none pt-3`} />
         </div>
       </div>
 
@@ -123,7 +123,7 @@ export function BuyerInquiryForm() {
       />
 
       {status === "error" ? (
-        <div className="text-sm text-destructive">{t("inquiry.error")}</div>
+        <div role="alert" aria-live="polite" className="text-sm text-destructive">{t("inquiry.error")}</div>
       ) : null}
 
       <Button
