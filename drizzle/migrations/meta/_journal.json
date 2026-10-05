@@ -15,6 +15,13 @@
       "when": 1791197253373,
       "tag": "0001_grant_public_listing_new_columns",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791202109438,
+      "tag": "0002_posts_topic",
+      "breakpoints": true
     }
   ]
 }

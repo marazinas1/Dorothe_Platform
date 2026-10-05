@@ -970,6 +970,7 @@ export type Database = {
           slug: string
           status: string
           title: Json
+          topic: string | null
           updated_at: string
         }
         Insert: {
@@ -986,6 +987,7 @@ export type Database = {
           slug: string
           status?: string
           title?: Json
+          topic?: string | null
           updated_at?: string
         }
         Update: {
@@ -1002,6 +1004,7 @@ export type Database = {
           slug?: string
           status?: string
           title?: Json
+          topic?: string | null
           updated_at?: string
         }
         Relationships: [
