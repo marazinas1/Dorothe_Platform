@@ -72,3 +72,8 @@ Blocked outside this work:
 - [x] F3 Sold and let: Let label, price-aware intro text, archived property links go to Properties
 - [x] F4 Valuation: 3-step form (property, details/photos, contact), prefilled from hero, saved as source=valuation
 - [x] F5 About: mockup order (intro, qualifications, seals, all published testimonials grid, closing band); listings/sold/stats/contact blocks removed from About
+
+## Book plan F-stages
+- [x] F1–F5
+- [x] F6 Guides: flag+post gating, article topic field and labels
+- [ ] F7 Admin shell and sign-in · F8–F13
