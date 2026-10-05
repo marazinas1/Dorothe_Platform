@@ -1,10 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
 import { PageIntro } from "@/components/brand/PageIntro";
 import { TextSection } from "@/components/brand/TextSection";
+import { DarkActionBand } from "@/components/brand/DarkActionBand";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -57,15 +58,13 @@ function InheritancePage() {
         image={copy.media("hero_photo")}
       />
 
-      <TextSection
-        title={copy.text("appraisal_title")}
-        body={copy.text("appraisal_body")}
-      />
-
-      <TextSection
-        title={copy.text("community_title")}
-        body={copy.text("community_body")}
-      />
+      <section className="mx-auto max-w-[1280px] px-5 py-20 md:px-10 lg:py-28">
+        <p className="max-w-3xl text-xl leading-9 text-foreground">{t("pages.inheritance.bridge")}</p>
+        <div className="mt-16 grid gap-14 md:grid-cols-2 md:gap-20">
+          <div><h2 className="text-section">{copy.text("appraisal_title")}</h2><p className="mt-6 text-base leading-8 text-muted-foreground">{copy.text("appraisal_body")}</p></div>
+          <div><h2 className="text-section">{copy.text("community_title")}</h2><p className="mt-6 text-base leading-8 text-muted-foreground">{copy.text("community_body")}</p></div>
+        </div>
+      </section>
 
       <TextSection
         title={copy.text("credential_title")}
@@ -73,21 +72,7 @@ function InheritancePage() {
         quiet
       />
 
-      <div className="pb-32">
-        <TextSection
-          title={copy.text("contact_title")}
-          body={copy.text("contact_body")}
-          quiet
-        >
-          <Link
-            to="/$locale/kontakt"
-            params={{ locale }}
-            className="eyebrow text-muted-foreground transition-colors duration-300 hover:text-foreground"
-          >
-            {t("pages.inheritance.contact_link")} →
-          </Link>
-        </TextSection>
-      </div>
+      <DarkActionBand title={copy.text("contact_title")} body={copy.text("contact_body")} action={t("pages.inheritance.contact_link")} locale={locale as Locale} intent="other" />
     </PublicChrome>
   );
 }

@@ -140,7 +140,6 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
           listing={l}
           locale={locale}
           settings={settings}
-          contactHref={`#${CONTACT_ID}`}
         />
       </div>
 

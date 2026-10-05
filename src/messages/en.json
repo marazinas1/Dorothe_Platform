@@ -153,8 +153,8 @@
       "body": "Tell me what you are looking for. Many properties are sold before they are ever published, to buyers already on my list.",
       "action": "Describe what you need"
     },
-    "sold_title": "Sold & completed",
-    "sold_description": "A record of recently completed transactions.",
+    "sold_title": "Sold and let",
+    "sold_description": "A selection of properties I have sold or let in recent years. Sale prices stay private, as agreed with the owners.",
     "sold_empty": "No completed sales published yet.",
     "empty": "No properties match these criteria.",
     "on_request": "Price on request",
@@ -459,7 +459,9 @@
       "price_asc": "Lowest price",
       "price_desc": "Highest price"
     },
-    "new": "New"
+    "new": "New",
+    "sold_cta_title": "Your property could be next.",
+    "sold_cta_body": "Every sale here started with a valuation on site. Free and without obligation for owners considering a sale."
   },
   "inquiry": {
     "title": "Send enquiry",
@@ -1805,7 +1807,31 @@
       "form_title": "Request a valuation",
       "form_intro": "The more precise your input, the sharper the first estimate. Everything you share stays confidential.",
       "credentials_title": "Valued by a certified expert",
-      "credentials_note": "Your valuation is prepared by a DEKRA-certified property valuation expert with IHK valuer qualification — not by an automated estimate alone."
+      "credentials_note": "Your valuation is prepared by a DEKRA-certified property valuation expert with IHK valuer qualification — not by an automated estimate alone.",
+      "reference_headline": "What is your property worth today?",
+      "reference_intro": "A valuation in person, on site, by a DEKRA-certified valuer. Not an online calculator. Free and without obligation for owners considering a sale.",
+      "reference_deliverables": [
+        {
+          "title": "Appointment on site",
+          "body": "About an hour. I record every value-relevant feature, inside and out."
+        },
+        {
+          "title": "Market value from real sales",
+          "body": "Based on current comparable sales in your part of the Saarland."
+        },
+        {
+          "title": "A written summary",
+          "body": "A realistic price range you can keep, whether you sell or not."
+        },
+        {
+          "title": "A conversation about next steps",
+          "body": "Timing, documents and how I would market your property."
+        }
+      ],
+      "inheritance_title": "Need a valuation for the tax office?",
+      "inheritance_body": "For inheritance and gift tax a formal market value appraisal is needed, not a sales valuation.",
+      "inheritance_link": "Appraisals for inherited property",
+      "step_label": "Step 1 of 3"
     },
     "selling": {
       "title": "Selling",
@@ -1865,7 +1891,45 @@
       "form_intro": "Tell me the essentials about your property — I reply personally, usually within one working day.",
       "proof_title": "Recently sold",
       "proof_body": "A selection of properties I have valued, marketed and sold in the Saarland.",
-      "proof_link": "Browse the sold archive"
+      "proof_link": "Browse the sold archive",
+      "question_link": "Ask a question first",
+      "service_details": [
+        {
+          "title": "Valuation",
+          "body": "DEKRA-certified, on site and documented — the basis for every decision after it."
+        },
+        {
+          "title": "Presentation",
+          "body": "Photographs, floor plans and an exposé prepared so buyers ask fewer questions."
+        },
+        {
+          "title": "Paperwork",
+          "body": "Land register, energy certificate and declarations of division for apartments."
+        },
+        {
+          "title": "Qualified buyers",
+          "body": "Financing checked before a viewing, so your time is spent on real buyers."
+        }
+      ],
+      "faq_title": "Questions owners ask",
+      "faqs": [
+        {
+          "question": "How long does a sale take?",
+          "answer": "Most properties sell within three to six months of publication. The valuation and preparation usually take two to four weeks before that."
+        },
+        {
+          "question": "Do I need an energy certificate?",
+          "answer": "Yes. Its key data must appear in every property advert. If you do not have a valid one, I arrange it as part of the preparation."
+        },
+        {
+          "question": "Can I stay in the house during the sale?",
+          "answer": "Yes. Viewings are scheduled with you so you are not disturbed more than necessary."
+        },
+        {
+          "question": "What if I decide not to sell after the valuation?",
+          "answer": "Then you keep the written valuation and owe nothing. Many owners use it to plan the following years."
+        }
+      ]
     },
     "about": {
       "meta_description_solo": "About {{agent}} — a solo real estate advisor {{region_in}} with personal support from valuation to handover.",
@@ -1902,9 +1966,12 @@
       "title": "Contact",
       "meta_description": "Contact details, opening hours and directions. Write to us — we reply within one working day.",
       "kicker": "Contact",
-      "headline_solo": "Call, write, or drop by the office.",
-      "headline_team": "Call, write, or drop by the office.",
+      "headline_solo": "Buying or selling, tell me where to start.",
+      "headline_team": "Buying or selling, tell us where to start.",
       "address_title": "Office",
+      "address_note": "Meetings by appointment.",
+      "phone_note": "Call or WhatsApp",
+      "email_note": "For documents and longer questions",
       "hours_title": "Office hours",
       "hours_default": [
         {
@@ -1929,6 +1996,15 @@
       "form_phone": "Phone (optional)",
       "form_message": "Message",
       "form_submit": "Send message",
+      "intent_selling": "I’m selling",
+      "intent_looking": "I’m looking",
+      "intent_other": "Something else",
+      "form_city": "Town of the property",
+      "form_phone_note": "Optional. I call back if you prefer.",
+      "message_selling": "What would you like to sell, and when roughly?",
+      "message_looking": "Tell me which property you would like to view or what you are looking for.",
+      "message_other": "How can I help?",
+      "valuation_instead": "Request a full valuation instead",
       "form_submitting": "Sending…",
       "form_success": "Thanks — your message has arrived.",
       "form_error": "Could not send the message. Please try again.",
@@ -1951,7 +2027,8 @@
       "credential_body": "Certified specialist in inheritance-related property matters (Sprengnetter) and DEKRA-certified expert for property valuation. Legal and tax questions are settled with your notary, lawyer or tax adviser — my part is bringing the property and its value into that process cleanly.",
       "contact_title": "If you would like to talk",
       "contact_body": "An inheritance runs at its own pace. If for now you simply want to know where you stand, write to me. A first conversation commits you to nothing.",
-      "contact_link": "Get in touch"
+      "contact_link": "Get in touch",
+      "bridge": "I take on the part that concerns the property: valuing it, putting it in context and, if you decide to, selling it."
     }
   },
   "brand": {

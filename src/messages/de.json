@@ -153,8 +153,8 @@
       "body": "Sagen Sie mir, was Sie suchen. Viele Immobilien werden verkauft, bevor sie veröffentlicht werden — an Interessenten aus meiner Kartei.",
       "action": "Suchwunsch beschreiben"
     },
-    "sold_title": "Verkauft & vermittelt",
-    "sold_description": "Referenzen aus den letzten Monaten.",
+    "sold_title": "Verkauft und vermietet",
+    "sold_description": "Eine Auswahl von Immobilien, die ich in den vergangenen Jahren verkauft oder vermietet habe. Verkaufspreise bleiben privat — wie mit den Eigentümern vereinbart.",
     "sold_empty": "Noch keine vermittelten Objekte veröffentlicht.",
     "empty": "Keine Objekte mit diesen Kriterien gefunden.",
     "on_request": "Preis auf Anfrage",
@@ -459,7 +459,9 @@
       "price_asc": "Niedrigster Preis",
       "price_desc": "Höchster Preis"
     },
-    "new": "Neu"
+    "new": "Neu",
+    "sold_cta_title": "Ihre Immobilie könnte die nächste sein.",
+    "sold_cta_body": "Jeder Verkauf hier begann mit einer Bewertung vor Ort. Kostenfrei und unverbindlich für Eigentümer, die über einen Verkauf nachdenken."
   },
   "inquiry": {
     "title": "Anfrage senden",
@@ -1805,7 +1807,31 @@
       "form_title": "Bewertung anfordern",
       "form_intro": "Je genauer die Angaben, desto präziser die erste Einschätzung. Alle Angaben sind vertraulich.",
       "credentials_title": "Bewertung durch zertifizierte Sachverständige",
-      "credentials_note": "Ihre Bewertung erstellt eine DEKRA-zertifizierte Sachverständige für Immobilienbewertung mit IHK-Qualifikation als Immobilienbewerterin — nicht nur eine automatische Schätzung."
+      "credentials_note": "Ihre Bewertung erstellt eine DEKRA-zertifizierte Sachverständige für Immobilienbewertung mit IHK-Qualifikation als Immobilienbewerterin — nicht nur eine automatische Schätzung.",
+      "reference_headline": "Was ist Ihre Immobilie heute wert?",
+      "reference_intro": "Eine persönliche Bewertung vor Ort durch eine DEKRA-zertifizierte Sachverständige. Kein Online-Rechner. Kostenfrei und unverbindlich für Eigentümer, die über einen Verkauf nachdenken.",
+      "reference_deliverables": [
+        {
+          "title": "Termin vor Ort",
+          "body": "Etwa eine Stunde. Ich erfasse alle wertrelevanten Merkmale innen und außen."
+        },
+        {
+          "title": "Marktwert aus realen Verkäufen",
+          "body": "Auf Basis aktueller Vergleichsverkäufe in Ihrem Teil des Saarlandes."
+        },
+        {
+          "title": "Schriftliche Zusammenfassung",
+          "body": "Eine realistische Preisspanne, die Ihnen bleibt — unabhängig davon, ob Sie verkaufen."
+        },
+        {
+          "title": "Gespräch über die nächsten Schritte",
+          "body": "Zeitplan, Unterlagen und wie ich Ihre Immobilie vermarkten würde."
+        }
+      ],
+      "inheritance_title": "Benötigen Sie eine Bewertung für das Finanzamt?",
+      "inheritance_body": "Für Erbschaft- und Schenkungsteuer wird ein formelles Verkehrswertgutachten benötigt, keine Verkaufsbewertung.",
+      "inheritance_link": "Gutachten für geerbte Immobilien",
+      "step_label": "Schritt 1 von 3"
     },
     "selling": {
       "title": "Verkaufen",
@@ -1865,7 +1891,45 @@
       "form_intro": "Nennen Sie mir das Wichtigste zu Ihrer Immobilie — ich antworte persönlich, in der Regel innerhalb eines Werktages.",
       "proof_title": "Zuletzt verkauft",
       "proof_body": "Eine Auswahl von Objekten, die ich im Saarland bewertet, vermarktet und verkauft habe.",
-      "proof_link": "Zum Verkauft-Archiv"
+      "proof_link": "Zum Verkauft-Archiv",
+      "question_link": "Zuerst eine Frage stellen",
+      "service_details": [
+        {
+          "title": "Bewertung",
+          "body": "DEKRA-zertifiziert, vor Ort und dokumentiert — die Basis für jede weitere Entscheidung."
+        },
+        {
+          "title": "Präsentation",
+          "body": "Fotos, Grundrisse und Exposé, so vorbereitet, dass Käufer weniger Rückfragen haben."
+        },
+        {
+          "title": "Unterlagen",
+          "body": "Grundbuch, Energieausweis und Teilungserklärung bei Wohnungen."
+        },
+        {
+          "title": "Geprüfte Käufer",
+          "body": "Finanzierung vor der Besichtigung geprüft, damit Ihre Zeit echten Interessenten gehört."
+        }
+      ],
+      "faq_title": "Fragen von Eigentümern",
+      "faqs": [
+        {
+          "question": "Wie lange dauert ein Verkauf?",
+          "answer": "Die meisten Immobilien werden innerhalb von drei bis sechs Monaten nach Veröffentlichung verkauft. Bewertung und Vorbereitung dauern davor meist zwei bis vier Wochen."
+        },
+        {
+          "question": "Brauche ich einen Energieausweis?",
+          "answer": "Ja. Die Kerndaten müssen in jeder Immobilienanzeige stehen. Falls kein gültiger Ausweis vorliegt, organisiere ich ihn im Rahmen der Vorbereitung."
+        },
+        {
+          "question": "Kann ich während des Verkaufs im Haus wohnen bleiben?",
+          "answer": "Ja. Besichtigungen werden mit Ihnen abgestimmt, damit Sie nicht mehr als nötig gestört werden."
+        },
+        {
+          "question": "Was passiert, wenn ich nach der Bewertung nicht verkaufen möchte?",
+          "answer": "Dann behalten Sie die schriftliche Bewertung und schulden nichts. Viele Eigentümer nutzen sie für ihre weitere Planung."
+        }
+      ]
     },
     "about": {
       "meta_description_solo": "Über {{agent}} — Immobilienberatung {{region_in}} mit persönlicher Betreuung von der Bewertung bis zur Übergabe.",
@@ -1902,9 +1966,12 @@
       "title": "Kontakt",
       "meta_description": "Kontaktdaten, Öffnungszeiten und Anfahrt. Schreiben Sie mir — ich melde mich innerhalb eines Werktags zurück.",
       "kicker": "Kontakt",
-      "headline_solo": "Rufen Sie an, schreiben Sie, oder kommen Sie vorbei.",
-      "headline_team": "Rufen Sie an, schreiben Sie, oder kommen Sie vorbei.",
+      "headline_solo": "Kaufen oder verkaufen — sagen Sie mir, worum es geht.",
+      "headline_team": "Kaufen oder verkaufen — sagen Sie uns, worum es geht.",
       "address_title": "Büro",
+      "address_note": "Termine nach Vereinbarung.",
+      "phone_note": "Anrufen oder WhatsApp",
+      "email_note": "Für Unterlagen und längere Fragen",
       "hours_title": "Sprechzeiten",
       "hours_default": [
         {
@@ -1929,6 +1996,15 @@
       "form_phone": "Telefon (optional)",
       "form_message": "Nachricht",
       "form_submit": "Nachricht senden",
+      "intent_selling": "Ich verkaufe",
+      "intent_looking": "Ich suche",
+      "intent_other": "Etwas anderes",
+      "form_city": "Ort der Immobilie",
+      "form_phone_note": "Optional. Ich rufe Sie auf Wunsch zurück.",
+      "message_selling": "Was möchten Sie verkaufen und ungefähr wann?",
+      "message_looking": "Welche Immobilie möchten Sie besichtigen oder wonach suchen Sie?",
+      "message_other": "Wie kann ich Ihnen helfen?",
+      "valuation_instead": "Stattdessen eine vollständige Bewertung anfragen",
       "form_submitting": "Wird gesendet…",
       "form_success": "Danke — Ihre Nachricht ist angekommen.",
       "form_error": "Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.",
@@ -1951,7 +2027,8 @@
       "credential_body": "Immo-Erbrechts-Expertin (Sprengnetter) und DEKRA-zertifizierte Sachverständige für Immobilienbewertung. Rechtliche und steuerliche Fragen klären Sie mit Notar, Anwalt oder Steuerberater — ich bringe die Immobilie und ihren Wert sauber in diesen Prozess ein.",
       "contact_title": "Wenn Sie sprechen möchten",
       "contact_body": "Ein Erbfall hat kein festes Tempo. Wenn Sie zunächst nur wissen möchten, woran Sie sind, schreiben Sie mir. Ein erstes Gespräch verpflichtet zu nichts.",
-      "contact_link": "Kontakt aufnehmen"
+      "contact_link": "Kontakt aufnehmen",
+      "bridge": "Ich übernehme den Teil, der die Immobilie betrifft: bewerten, einordnen und, wenn Sie sich dafür entscheiden, verkaufen."
     }
   },
   "brand": {

@@ -33,14 +33,15 @@ export function useNavItems() {
   const { data: posts } = useQuery({ ...publicPostsQueryOptions, enabled: blogEnabled });
   const showBlog = blogEnabled && (posts?.length ?? 0) > 0;
   return [
-    { to: "/$locale" as const, label: t("nav.home") },
-    { to: "/$locale/immobilien" as const, label: t("nav.listings") },
-    { to: "/$locale/verkaufen" as const, label: t("nav.selling") },
-    { to: "/$locale/erben" as const, label: t("nav.inheritance") },
-    ...(showBlog ? [{ to: "/$locale/ratgeber" as const, label: t("nav.blog") }] : []),
+    { to: "/$locale" as const, label: t("nav.home"), exact: true },
+    { to: "/$locale/immobilien" as const, label: t("nav.listings"), exact: false },
+    { to: "/$locale/verkaufen" as const, label: t("nav.selling"), exact: false },
+    { to: "/$locale/erben" as const, label: t("nav.inheritance"), exact: false },
+    ...(showBlog ? [{ to: "/$locale/ratgeber" as const, label: t("nav.blog"), exact: false }] : []),
     {
       to: "/$locale/ueber-mich" as const,
       label: t(teamEnabled ? "nav.about_team" : "nav.about_solo"),
+      exact: false,
     },
   ];
 }
@@ -100,6 +101,7 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
                   onPhoto ? "text-on-media-muted hover:text-on-media" : "text-muted-foreground hover:text-foreground",
                 )}
                 activeProps={{ className: onPhoto ? "text-on-media underline underline-offset-8" : "text-foreground underline underline-offset-8" }}
+                activeOptions={{ exact: n.exact }}
               >
                 {n.label}
               </Link>

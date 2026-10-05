@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { applySoldPricePolicy, soldPricesHidden } from "@/lib/homepage/plan";
 import { PublicChrome } from "@/components/public/PublicChrome";
-import { CtaBand } from "@/components/brand/CtaBand";
+import { DarkActionBand } from "@/components/brand/DarkActionBand";
 import { ListingCard } from "@/components/brand/ListingCard";
 import { LISTING_CARD_GRID } from "@/lib/homepage/card-grid";
 import type { Locale } from "@/i18n/config";
@@ -74,18 +74,22 @@ function SoldArchive() {
 
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
-      <section className="mx-auto max-w-[1400px] px-6 pt-24 lg:px-10">
-        <h1 className="font-heading text-5xl md:text-6xl">{t("listings.sold_title")}</h1>
-        <p className="mt-4 max-w-xl text-base text-muted-foreground">
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-[1280px] px-5 py-20 md:px-10 lg:py-28">
+        <h1 className="max-w-[18ch] font-heading text-5xl font-bold leading-[1.04] md:text-7xl">{t("listings.sold_title")}</h1>
+        <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
           {t("listings.sold_description")}
         </p>
+        </div>
+      </section>
 
+      <section className="mx-auto max-w-[1280px] px-5 py-16 md:px-10 lg:py-20">
         {items.length === 0 ? (
           <div className="py-24 text-center text-sm text-muted-foreground">
             {t("listings.sold_empty")}
           </div>
         ) : (
-          <div className={`mt-16 ${LISTING_CARD_GRID}`}>
+          <div className={LISTING_CARD_GRID}>
             {items.map((l) => (
               <ListingCard
                 key={l.id}
@@ -94,12 +98,13 @@ function SoldArchive() {
                 settings={settings}
                 size="compact"
                 hidePrice={soldPricesHidden(settings)}
+                archived
               />
             ))}
           </div>
         )}
       </section>
-      <CtaBand locale={locale as Locale} settings={settings} />
+      <DarkActionBand title={t("listings.sold_cta_title")} body={t("listings.sold_cta_body")} action={t("pages.selling.cta_button")} locale={locale as Locale} phone={settings.contact_phone} />
     </PublicChrome>
   );
 }

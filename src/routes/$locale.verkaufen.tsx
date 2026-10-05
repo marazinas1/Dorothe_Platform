@@ -7,6 +7,11 @@ import { PageIntro } from "@/components/brand/PageIntro";
 import { NumberedSteps, type Step } from "@/components/brand/NumberedSteps";
 import { TextSection } from "@/components/brand/TextSection";
 import { SellerInquiryForm } from "@/components/brand/SellerInquiryForm";
+import { ActionLink } from "@/components/brand/ui/ActionButton";
+import { buttonClass } from "@/components/brand/ui/Button";
+import { FeatureGrid } from "@/components/brand/FeatureGrid";
+import { FaqList } from "@/components/brand/FaqList";
+import { DarkActionBand } from "@/components/brand/DarkActionBand";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -51,6 +56,8 @@ function SellingPage() {
   const copy = usePageCopy("selling", locale as Locale);
   const steps = t("pages.selling.steps", { returnObjects: true }) as Step[];
   const services = copy.lines("services");
+  const serviceDetails = t("pages.selling.service_details", { returnObjects: true }) as Step[];
+  const faqs = t("pages.selling.faqs", { returnObjects: true }) as { question: string; answer: string }[];
 
   return (
     <PublicChrome locale={locale as Locale} settings={settings}>
@@ -59,20 +66,19 @@ function SellingPage() {
         headline={copy.text("headline")}
         lead={copy.text("intro")}
         image={copy.media("hero_photo")}
+        actions={<><ActionLink locale={locale as Locale} to="/$locale/immobilienbewertung">{t("pages.selling.cta_button")}</ActionLink><Link to="/$locale/kontakt" params={{ locale }} className={buttonClass({ variant: "outline" })}>{t("pages.selling.question_link")}</Link></>}
       />
 
       <NumberedSteps title={copy.text("steps_title")} steps={steps} />
 
-      <TextSection
-        title={copy.text("services_title")}
-        body={copy.text("services_body")}
-        items={services}
-      />
+      <FeatureGrid title={copy.text("services_title")} intro={copy.text("services_body")} items={serviceDetails.length ? serviceDetails : services.map((title) => ({ title, body: "" }))} />
 
       <TextSection
         title={copy.text("costs_title")}
         body={copy.text("costs_body")}
       />
+
+      <FaqList title={t("pages.selling.faq_title")} items={faqs} />
 
       <section
         id="form"
@@ -109,6 +115,7 @@ function SellingPage() {
           </Link>
         </TextSection>
       </div>
+      <DarkActionBand title={copy.text("cta_title")} body={copy.text("cta_body")} action={t("pages.selling.cta_button")} locale={locale as Locale} phone={settings.contact_phone} />
     </PublicChrome>
   );
 }
