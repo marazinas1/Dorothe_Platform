@@ -22,18 +22,42 @@
     "sale_process_intro": "Four stages. You decide at the end of each one whether to continue.",
     "sale_process_link": "The full process",
     "sale_process_steps": [
-      { "title": "Valuation on site", "body": "I visit, record every value-relevant detail and give you a realistic price range in writing." },
-      { "title": "Preparation", "body": "Documents, energy certificate, photographs and floor plans. I handle what you would rather not." },
-      { "title": "Marketing and viewings", "body": "Portals, my buyer database and viewings with buyers who have proven they can finance." },
-      { "title": "Notary and handover", "body": "I prepare the contract with the notary and stay with you until the keys are handed over." }
+      {
+        "title": "Valuation on site",
+        "body": "I visit, record every value-relevant detail and give you a realistic price range in writing."
+      },
+      {
+        "title": "Preparation",
+        "body": "Documents, energy certificate, photographs and floor plans. I handle what you would rather not."
+      },
+      {
+        "title": "Marketing and viewings",
+        "body": "Portals, my buyer database and viewings with buyers who have proven they can finance."
+      },
+      {
+        "title": "Notary and handover",
+        "body": "I prepare the contract with the notary and stay with you until the keys are handed over."
+      }
     ],
     "more_reviews": "More reviews",
     "guides_title": "Guides for owners and buyers",
     "all_articles": "All articles",
     "guide_placeholders": [
-      { "category": "Selling", "title": "What a house in the Saarland is worth in 2026", "excerpt": "How comparable sales, condition and energy class shape a realistic asking price." },
-      { "category": "Energy", "title": "The energy certificate: what sellers must show", "excerpt": "Which data belongs in every property ad, and which certificate type you need." },
-      { "category": "Inheritance", "title": "Selling a house you inherited with siblings", "excerpt": "Why one neutral valuation is often the step that makes an agreement possible." }
+      {
+        "category": "Selling",
+        "title": "What a house in the Saarland is worth in 2026",
+        "excerpt": "How comparable sales, condition and energy class shape a realistic asking price."
+      },
+      {
+        "category": "Energy",
+        "title": "The energy certificate: what sellers must show",
+        "excerpt": "Which data belongs in every property ad, and which certificate type you need."
+      },
+      {
+        "category": "Inheritance",
+        "title": "Selling a house you inherited with siblings",
+        "excerpt": "Why one neutral valuation is often the step that makes an agreement possible."
+      }
     ],
     "hero_cta": "Request a valuation",
     "hero_form_address": "Address",
@@ -294,8 +318,10 @@
         "certificate_valid_until": "Valid until",
         "hwb": "Heating demand (HWB)",
         "eeb": "Final energy demand (EEB)",
-        "fgee": "Overall energy efficiency factor (fGEE)"
-      }
+        "fgee": "Overall energy efficiency factor (fGEE)",
+        "efficiency_class": "Efficiency class"
+      },
+      "energy_scale": "Energy label scale"
     },
     "pager": {
       "prev": "Previous",
@@ -961,7 +987,9 @@
         "certificate_type": "Certificate type",
         "final_energy": "Final energy (kWh/m²a)",
         "energy_source": "Energy source",
-        "year_built": "Year built (energy certificate)"
+        "year_built": "Year built (energy certificate)",
+        "certificate_valid_until": "Valid until (certificate)",
+        "certificate_date": "Certificate issued"
       },
       "help": {
         "price_on_request": "Hide the price and show “Price on request” instead.",
