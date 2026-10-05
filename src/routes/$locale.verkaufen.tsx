@@ -8,6 +8,7 @@ import { NumberedSteps, type Step } from "@/components/brand/NumberedSteps";
 import { TextSection } from "@/components/brand/TextSection";
 import { SellerInquiryForm } from "@/components/brand/SellerInquiryForm";
 import { ActionLink } from "@/components/brand/ui/ActionButton";
+import { buttonClass } from "@/components/brand/ui/Button";
 import { FeatureGrid } from "@/components/brand/FeatureGrid";
 import { FaqList } from "@/components/brand/FaqList";
 import { DarkActionBand } from "@/components/brand/DarkActionBand";
@@ -65,12 +66,8 @@ function SellingPage() {
         headline={copy.text("headline")}
         lead={copy.text("intro")}
         image={copy.media("hero_photo")}
+        actions={<><ActionLink locale={locale as Locale} to="/$locale/immobilienbewertung">{t("pages.selling.cta_button")}</ActionLink><Link to="/$locale/kontakt" params={{ locale }} className={buttonClass({ variant: "outline" })}>{t("pages.selling.question_link")}</Link></>}
       />
-
-      <div className="mx-auto flex max-w-[1280px] flex-wrap gap-4 px-5 pt-10 md:px-10">
-        <ActionLink locale={locale as Locale} to="/$locale/immobilienbewertung">{t("pages.selling.cta_button")}</ActionLink>
-        <ActionLink locale={locale as Locale} to="/$locale/kontakt" className="bg-transparent text-foreground" >{t("pages.selling.question_link")}</ActionLink>
-      </div>
 
       <NumberedSteps title={copy.text("steps_title")} steps={steps} />
 

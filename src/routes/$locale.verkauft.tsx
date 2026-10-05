@@ -98,6 +98,7 @@ function SoldArchive() {
                 settings={settings}
                 size="compact"
                 hidePrice={soldPricesHidden(settings)}
+                archived
               />
             ))}
           </div>

@@ -22,6 +22,8 @@ type Props = {
   eager?: boolean;
   /** `row` is the list-view variant: photo left, facts middle, price right. */
   layout?: "card" | "row";
+  /** Archived proof cards are informative and do not open inactive detail pages. */
+  archived?: boolean;
 };
 
 /**
@@ -36,6 +38,7 @@ export function ListingCard({
   hidePrice = false,
   eager = false,
   layout = "card",
+  archived = false,
 }: Props) {
   const { t } = useTranslation();
   const headline = listingHeadline(listing, locale);
@@ -47,7 +50,7 @@ export function ListingCard({
     .filter(Boolean)
     .join(", ");
 
-  const link = (
+  const titleContent = archived ? headline : (
     <Link
       to="/$locale/immobilien/$slug"
       params={{ locale, slug: listing.slug }}
@@ -87,7 +90,7 @@ export function ListingCard({
         <div className="min-w-0">
           {meta}
           <h3 className="mt-1.5 font-heading text-[21px] font-bold leading-snug text-foreground transition-opacity duration-300 group-hover:opacity-70">
-            {link}
+            {titleContent}
           </h3>
           <div className="mt-3">{specs}</div>
         </div>
@@ -108,7 +111,7 @@ export function ListingCard({
           )}
           title={headline || undefined}
         >
-          {link}
+          {titleContent}
         </h3>
         <div className={small ? "mt-2" : "mt-3"}>{specs}</div>
         <div className={cn("flex flex-1 flex-col", small ? "mt-3" : "mt-3.5")}>
