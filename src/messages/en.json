@@ -125,7 +125,9 @@
       "testi3_quote": "Lorem ipsum dolor sit amet — calm, well-prepared advice from the first viewing to the notary appointment.",
       "testi3_name": "Client name",
       "testi3_town": "Town"
-    }
+    },
+    "hero_form_multi_family": "Multi-family house",
+    "hero_form_submit": "Start valuation"
   },
   "nav": {
     "home": "Home",

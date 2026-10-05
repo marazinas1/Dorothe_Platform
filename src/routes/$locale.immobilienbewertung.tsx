@@ -13,6 +13,10 @@ import { getRequestOrigin } from "@/lib/seo/origin.functions";
 
 export const Route = createFileRoute("/$locale/immobilienbewertung")({
   staticData: { sitemap: true },
+  validateSearch: (search: Record<string, unknown>): { address?: string; type?: string } => ({
+    address: typeof search.address === "string" ? search.address.slice(0, 160) : undefined,
+    type: typeof search.type === "string" ? search.type.slice(0, 50) : undefined,
+  }),
   loader: async ({ context, params }) => {
     const [settings, origin] = await Promise.all([context.queryClient.ensureQueryData(siteSettingsQueryOptions), getRequestOrigin()]);
     return { settings, origin, locale: params.locale as Locale };
@@ -27,6 +31,7 @@ export const Route = createFileRoute("/$locale/immobilienbewertung")({
 
 function ValuationPage() {
   const { locale } = Route.useParams();
+  const search = Route.useSearch();
   const { t } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const items = t("pages.valuation.reference_deliverables", { returnObjects: true }) as { title: string; body: string }[];
@@ -45,7 +50,7 @@ function ValuationPage() {
           </div>
           <div className="mt-10 bg-card p-7"><h3 className="font-heading text-xl font-bold">{t("pages.valuation.inheritance_title")}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{t("pages.valuation.inheritance_body")}</p><Link to="/$locale/erben" params={{ locale }} className="btn-noir mt-4 inline-flex min-h-11 items-center underline underline-offset-[6px]">{t("pages.valuation.inheritance_link")}</Link></div>
         </div>
-        <div className="border border-border p-6 md:p-9"><div className="mb-7 flex gap-2" aria-label={t("pages.valuation.step_label")}><span className="h-1 flex-1 bg-foreground" /><span className="h-1 flex-1 bg-border" /><span className="h-1 flex-1 bg-border" /></div><div className="eyebrow text-muted-foreground">{t("pages.valuation.step_label")}</div><h2 className="mt-3 font-heading text-2xl font-bold">{t("pages.valuation.form_title")}</h2><div className="mt-8"><SellerInquiryForm /></div></div>
+        <div className="border border-border p-6 md:p-9"><div className="mb-7 flex gap-2" aria-label={t("pages.valuation.step_label")}><span className="h-1 flex-1 bg-foreground" /><span className="h-1 flex-1 bg-border" /><span className="h-1 flex-1 bg-border" /></div><div className="eyebrow text-muted-foreground">{t("pages.valuation.step_label")}</div><h2 className="mt-3 font-heading text-2xl font-bold">{t("pages.valuation.form_title")}</h2><div className="mt-8"><SellerInquiryForm defaultAddress={search.address} defaultType={search.type} /></div></div>
       </section>
     </PublicChrome>
   );

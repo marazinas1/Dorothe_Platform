@@ -4,10 +4,6 @@ import { useTranslation } from "react-i18next";
 import type { HomeTemplateProps } from "../types";
 import { buttonClass } from "@/components/brand/ui/Button";
 
-/**
- * Two panels sharing one edge: selling carries the ink weight, buying stays on
- * paper. The amber kicker is the only saturated mark in each panel.
- */
 export function H1Paths({ locale, copy }: HomeTemplateProps) {
   const { t } = useTranslation();
 

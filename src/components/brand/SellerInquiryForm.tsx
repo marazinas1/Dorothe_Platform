@@ -15,7 +15,7 @@ const labelCls =
 const MAX_PHOTOS = 4;
 const MAX_BYTES = 3 * 1024 * 1024;
 
-export function SellerInquiryForm() {
+export function SellerInquiryForm({ defaultAddress, defaultType }: { defaultAddress?: string; defaultType?: string } = {}) {
   const { t } = useTranslation();
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error" | "too_large"
@@ -88,10 +88,11 @@ export function SellerInquiryForm() {
           <label className={labelCls} htmlFor="seller-type">
             {t("inquiry.seller.property_type")}
           </label>
-          <select id="seller-type" name="property_type" className={inputCls} defaultValue="">
+          <select id="seller-type" name="property_type" className={inputCls} defaultValue={defaultType ?? ""}>
             <option value="">{t("listings.filters.any")}</option>
             <option value="house">{t("listings.filters.house")}</option>
             <option value="apartment">{t("listings.filters.apartment")}</option>
+            <option value="multi_family">{t("home.hero_form_multi_family")}</option>
             <option value="land">{t("listings.filters.land")}</option>
             <option value="commercial">{t("listings.filters.commercial")}</option>
           </select>
@@ -106,7 +107,7 @@ export function SellerInquiryForm() {
           <label className={labelCls} htmlFor="seller-street">
             {t("inquiry.seller.address_street")}
           </label>
-          <input id="seller-street" name="address_street" autoComplete="street-address" maxLength={160} className={inputCls} />
+          <input id="seller-street" name="address_street" defaultValue={defaultAddress} autoComplete="street-address" maxLength={160} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="seller-zip">

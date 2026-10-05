@@ -1,14 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
 
-import { buttonClass } from "@/components/brand/ui/Button";
+import { HeroValuationForm } from "../HeroValuationForm";
 import type { HomeTemplateProps } from "../types";
 
 /**
- * Full-bleed seller-first opening from the approved broker-site reference.
+ * Full-bleed seller-first opening: claim, then the valuation entry form.
  */
-export function H1Hero({ locale, copy, media, settings }: HomeTemplateProps) {
+export function H1Hero({ locale, copy, media }: HomeTemplateProps) {
   const { t } = useTranslation();
   const kicker = copy.text("hero_kicker");
 
@@ -33,13 +32,7 @@ export function H1Hero({ locale, copy, media, settings }: HomeTemplateProps) {
             {copy.text("hero_subline")}
           </p>
         </div>
-        <div className="mt-8 flex flex-col items-start gap-4 rounded-[var(--radius)] bg-background p-5 text-foreground shadow-sm sm:flex-row sm:items-center sm:justify-between md:p-6">
-          <div>
-            <div className="font-heading text-base font-bold">{t("home.valuation_title")}</div>
-            <div className="mt-1 text-sm text-muted-foreground">{copy.text("valuation_body")}</div>
-          </div>
-          <Link to="/$locale/verkaufen" hash="form" params={{ locale }} className={buttonClass({ variant: "primary", className: "shrink-0" })}>{t("home.hero_cta")}</Link>
-        </div>
+        <HeroValuationForm locale={locale} title={t("home.valuation_title")} />
         <div className="mt-6 grid gap-4 border-t border-on-media/25 pt-5 text-xs text-on-media md:grid-cols-3">
           {[copy.text("cred1_tag"), copy.text("cred3_tag"), copy.text("cred2_tag")].filter(Boolean).map((item) => (
             <span key={item} className="inline-flex items-start gap-2"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0" />{item}</span>

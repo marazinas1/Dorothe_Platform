@@ -125,7 +125,9 @@
       "testi3_quote": "Lorem ipsum dolor sit amet — ruhige, gut vorbereitete Beratung von der Besichtigung bis zum Notartermin.",
       "testi3_name": "Name",
       "testi3_town": "Ort"
-    }
+    },
+    "hero_form_multi_family": "Mehrfamilienhaus",
+    "hero_form_submit": "Bewertung starten"
   },
   "nav": {
     "home": "Startseite",

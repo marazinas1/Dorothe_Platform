@@ -5,11 +5,6 @@ import { HomeButton } from "../HomeActions";
 import type { HomeTemplateProps } from "../types";
 import { buttonClass } from "@/components/brand/ui/Button";
 
-/**
- * The mandate band: the only inverted full-width area on the page, so the
- * valuation offer cannot be scrolled past. On ink the primary action turns
- * paper-coloured — amber on ink reads like a mistake, not a choice.
- */
 export function H1Valuation({ locale, copy, settings }: HomeTemplateProps) {
   const { t } = useTranslation();
   const title = copy.text("valuation_title");
