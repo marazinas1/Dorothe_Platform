@@ -23,22 +23,19 @@ export function ListingAgent({ listingId, settings }: Props) {
   const email = settings.contact_email;
 
   return (
-    <section>
-      <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-        {t("listings.detail.agent")}
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-16 border-t border-border pt-10 lg:grid-cols-2">
+    <section className="border-t border-border pt-10">
+      <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
         <div>
           <div className="flex items-start gap-6">
             {photo ? (
               <img
                 src={photo}
                 alt={name}
-                className="h-28 w-28 flex-none object-cover grayscale"
+                className="h-36 w-36 flex-none object-cover grayscale"
               />
             ) : null}
             <div className="min-w-0">
-              <div className="font-heading text-3xl leading-tight md:text-4xl">{name}</div>
+              <div className="font-heading text-3xl font-bold leading-tight md:text-4xl">{name}</div>
               {role ? (
                 <div className="mt-2 text-sm text-muted-foreground">{role}</div>
               ) : null}

@@ -123,17 +123,17 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
             <ListingFloorPlans images={l.images} locale={locale} />
           </section>
 
-          {/* 8. Location */}
-          <section className={GAP}>
-            <ListingLocationMap listing={l} locale={locale} />
-          </section>
-
-          {/* 9. Documents */}
+          {/* 8. Documents */}
           {documentsEnabled ? (
             <section className={GAP}>
               <ListingDocuments documents={documents.data ?? []} />
             </section>
           ) : null}
+
+          {/* 9. Location */}
+          <section className={GAP}>
+            <ListingLocationMap listing={l} locale={locale} />
+          </section>
         </div>
 
         <ListingStickyRail
@@ -155,11 +155,9 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         </section>
 
         {/* 10. Other properties that can actually be enquired about */}
-        {relatedItems.length > 0 ? (
-          <section className={GAP}>
-            <RelatedListings items={relatedItems} locale={locale} settings={settings} />
-          </section>
-        ) : null}
+        <section className={GAP}>
+          <RelatedListings items={relatedItems} locale={locale} settings={settings} />
+        </section>
 
         <section id={CONTACT_ID} className={`${GAP} scroll-mt-28`}>
           <ListingAgent listingId={l.id} settings={settings} />
