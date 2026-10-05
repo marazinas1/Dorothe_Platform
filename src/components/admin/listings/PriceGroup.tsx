@@ -12,12 +12,13 @@ import {
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { PRICE_PERIODS } from "@/lib/listings/admin-schema";
 import { currencySymbol } from "@/lib/listings/format";
-import { isOpen, type ListingShape } from "@/lib/listings/field-visibility";
+import { applies, isOpen, type ListingShape } from "@/lib/listings/field-visibility";
 import { moneyLabelKey } from "@/lib/listings/field-labels";
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow } from "./FieldRow";
 import { MoneyField } from "./MoneyField";
 import { CommissionFields } from "./CommissionFields";
+import { PriceReductionFields } from "./PriceReductionFields";
 
 /**
  * The money block. Which figures appear, and what the price is called, both come
@@ -107,6 +108,16 @@ export function PriceGroup({ form }: { form: ListingFormApi }) {
             />
           ) : null}
 
+          {applies(shape, "reserve_fund") ? (
+            <MoneyField
+              label={t(moneyLabelKey(shape, "reserve_fund"))}
+              help={t("admin.listings.help.reserve_fund")}
+              symbol={symbol}
+              value={values.reserve_fund}
+              onChange={(v) => form.setField("reserve_fund", v)}
+            />
+          ) : null}
+
           {isOpen(shape, "utilities_cost") ? (
             <MoneyField
               label={t(moneyLabelKey(shape, "utilities_cost"))}
@@ -149,6 +160,8 @@ export function PriceGroup({ form }: { form: ListingFormApi }) {
           />
         </label>
       ) : null}
+
+      {values.price_on_request ? null : <PriceReductionFields form={form} symbol={symbol} />}
 
       {isOpen(shape, "commission") ? <CommissionFields form={form} symbol={symbol} /> : null}
     </div>

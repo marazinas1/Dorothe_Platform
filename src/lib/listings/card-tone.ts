@@ -1,7 +1,7 @@
 /**
  * Everything the listing card needs to know about a status, decided once.
  * Badge rule (broker listings reference): never more than one per card —
- * New, Coming soon, Reserved, Sold, Rented.
+ * Coming soon, Reserved, Sold, Let, Price reduced, New.
  */
 export type CardBadgeTone = "accent" | "light" | "dark";
 export type CardBadge = { label: string; tone: CardBadgeTone };
@@ -17,10 +17,11 @@ type ToneInput = {
   status: string;
   deal_type: string;
   published_at?: string | null;
+  price_reduced?: boolean | null;
 };
 
 /** A listing counts as new for this many days after publishing. */
-const NEW_DAYS = 21;
+const NEW_DAYS = 14;
 
 function isNew(published: string | null | undefined): boolean {
   if (!published) return false;
@@ -45,7 +46,11 @@ export function cardTone(listing: ToneInput, t: (key: string) => string): CardTo
   const status = t(listing.deal_type === "rent" ? "listings.for_rent" : "listings.for_sale");
   return {
     status,
-    badge: isNew(listing.published_at) ? { label: t("listings.new"), tone: "accent" } : null,
+    badge: listing.price_reduced
+      ? { label: t("listings.price_reduced"), tone: "dark" }
+      : isNew(listing.published_at)
+        ? { label: t("listings.new"), tone: "accent" }
+        : null,
     closed: false,
   };
 }
