@@ -1,11 +1,7 @@
-import { credItems, type HomeTemplateProps } from "../types";
+import { credItems, type HomeTemplateProps } from "./types";
 
-/**
- * Qualification as an argument set out on paper: one paragraph in her own voice,
- * then three hairline columns. The certificate line under each column carries
- * the amber, so the evidence is what the eye lands on.
- */
-export function H1Credentials({ copy, media, settings }: HomeTemplateProps) {
+/** Broker block: portrait, her own words, credentials and signature. */
+export function HomeBroker({ copy, media, settings }: HomeTemplateProps) {
   const intro = copy.text("cred_intro");
   const title = copy.text("cred_title");
   const items = credItems(copy);
@@ -14,7 +10,7 @@ export function H1Credentials({ copy, media, settings }: HomeTemplateProps) {
   return (
     <section className="mx-auto grid max-w-[1120px] items-center gap-10 px-5 py-[72px] md:px-10 lg:grid-cols-[5fr_6fr] lg:gap-16 lg:py-[104px]">
       {media.portrait ? (
-        <div className="aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] bg-card lg:aspect-[1/1]">
+        <div className="aspect-[4/5] overflow-hidden bg-card lg:aspect-[1/1]">
           <img src={media.portrait} alt={settings.primary_agent_name ?? settings.site_name} className="h-full w-full object-cover" />
         </div>
       ) : null}
