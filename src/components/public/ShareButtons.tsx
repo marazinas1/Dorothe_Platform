@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { buttonClass } from "@/components/brand/ui/Button";
+import { Button, buttonClass } from "@/components/brand/ui/Button";
 
 type Props = { url: string; title: string };
 
@@ -50,16 +50,16 @@ export function ShareButtons({ url, title }: Props) {
           {l.label}
         </a>
       ))}
-      <button
+      <Button
         type="button"
         onClick={copy}
         aria-live="polite"
-        className={
-          copied ? `${pill} border-primary/50 text-primary` : pill
-        }
+        variant="ghost"
+        size="sm"
+        className={copied ? "border-primary/50 text-primary" : undefined}
       >
         {copied ? t("share.copied") : t("share.copy")}
-      </button>
+      </Button>
     </div>
   );
 }

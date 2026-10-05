@@ -24,14 +24,16 @@ export function ConsentCheckbox({ id, checked, onChange, showError }: Props) {
 
   return (
     <div>
-      <label htmlFor={id} className="flex cursor-pointer items-start gap-3">
+      <label htmlFor={id} className="flex min-h-11 cursor-pointer items-start gap-3 py-1">
         <input
           id={id}
           name="consent"
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
+          required
+          aria-invalid={showError || undefined}
+          className="mt-0.5 size-5 shrink-0 cursor-pointer accent-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           aria-describedby={showError ? `${id}-error` : undefined}
         />
         <span className="text-sm leading-relaxed text-muted-foreground">
@@ -48,7 +50,7 @@ export function ConsentCheckbox({ id, checked, onChange, showError }: Props) {
         </span>
       </label>
       {showError ? (
-        <p id={`${id}-error`} className="mt-2 text-sm text-destructive">
+        <p id={`${id}-error`} role="alert" className="mt-2 text-sm text-destructive">
           {t("consent.required")}
         </p>
       ) : null}

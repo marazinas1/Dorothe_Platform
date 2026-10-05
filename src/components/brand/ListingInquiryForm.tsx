@@ -65,15 +65,15 @@ export function ListingInquiryForm({ listingId, defaultMessage }: Props) {
       <div className="mt-8 grid gap-8">
         <div>
           <label className={labelCls} htmlFor="inq-name">{t("inquiry.name")}</label>
-          <input id="inq-name" name="name" required className={inputCls} />
+          <input id="inq-name" name="name" required autoComplete="name" maxLength={100} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="inq-email">{t("inquiry.email")}</label>
-          <input id="inq-email" name="email" type="email" required className={inputCls} />
+          <input id="inq-email" name="email" type="email" required autoComplete="email" maxLength={255} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="inq-phone">{t("inquiry.phone")}</label>
-          <input id="inq-phone" name="phone" className={inputCls} />
+          <input id="inq-phone" name="phone" type="tel" autoComplete="tel" maxLength={40} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="inq-message">{t("inquiry.message")}</label>
@@ -82,6 +82,7 @@ export function ListingInquiryForm({ listingId, defaultMessage }: Props) {
             name="message"
             required
             rows={4}
+            maxLength={2000}
             defaultValue={defaultMessage ?? t("inquiry.message_default")}
             className={`${inputCls} resize-none pt-3`}
           />
@@ -98,7 +99,7 @@ export function ListingInquiryForm({ listingId, defaultMessage }: Props) {
       </div>
 
       {status === "error" ? (
-        <div className="mt-4 text-sm text-destructive">{t("inquiry.error")}</div>
+        <div role="alert" aria-live="polite" className="mt-4 text-sm text-destructive">{t("inquiry.error")}</div>
       ) : null}
 
       <Button

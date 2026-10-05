@@ -27,7 +27,7 @@ export function H1Valuation({ locale, copy, settings }: HomeTemplateProps) {
           <div className="mt-7 flex flex-wrap gap-3">
             <HomeButton
               locale={locale}
-              to="/$locale/immobilienbewertung"
+              to="/$locale/verkaufen"
               tone="on-dark"
             >
               {t("home.valuation_cta")}

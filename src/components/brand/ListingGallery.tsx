@@ -6,6 +6,7 @@ import { pickImageUrl } from "@/lib/listings/image";
 import { pickLocalized } from "@/lib/listings/format";
 import { splitListingImages, type GalleryImage } from "@/lib/listings/gallery-images";
 import { Button } from "@/components/brand/ui/Button";
+import { buttonClass } from "@/components/brand/ui/Button";
 import { ListingIcon } from "@/components/brand/ui/ListingIcon";
 
 type Props = {
@@ -57,7 +58,7 @@ export function ListingGallery({ images, locale, title, hasTour = false }: Props
             type="button"
             onClick={() => setOpenIdx(i)}
             aria-label={i === 0 ? t("listings.detail.gallery_open") : undefined}
-            className={`group relative overflow-hidden rounded-media bg-muted ${
+            className={`${buttonClass({ variant: "ghost", className: "group relative h-auto min-h-11 overflow-hidden rounded-media bg-muted p-0" })} ${
               i === 0
                 ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[500px]"
                 : "hidden min-h-[246px] md:block"
@@ -68,7 +69,7 @@ export function ListingGallery({ images, locale, title, hasTour = false }: Props
               alt={pickLocalized(img.alt_text, locale) || title}
               loading={i < EAGER ? undefined : "lazy"}
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             />
             {i === visible.length - 1 && list.length > visible.length ? (
               <span className="absolute right-4 bottom-4 rounded-[var(--radius-button)] bg-scrim px-3 py-2 text-xs font-semibold text-on-media">

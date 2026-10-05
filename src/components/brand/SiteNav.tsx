@@ -36,7 +36,6 @@ export function useNavItems() {
     { to: "/$locale" as const, label: t("nav.home") },
     { to: "/$locale/immobilien" as const, label: t("nav.listings") },
     { to: "/$locale/verkaufen" as const, label: t("nav.selling") },
-    { to: "/$locale/immobilienbewertung" as const, label: t("nav.valuation") },
     { to: "/$locale/erben" as const, label: t("nav.inheritance") },
     ...(showBlog ? [{ to: "/$locale/ratgeber" as const, label: t("nav.blog") }] : []),
     {
