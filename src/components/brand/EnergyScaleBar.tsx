@@ -15,13 +15,23 @@ export function EnergyScaleBar({ scale, label }: { scale: EnergyScale; label: st
           </span>
         ))}
         {scale.markerPercent != null && scale.markerLabel ? (
-          <div
-            className="absolute -top-[34px] flex -translate-x-1/2 flex-col items-center whitespace-nowrap text-[13px] font-bold tabular-figures text-foreground"
-            style={{ left: `${scale.markerPercent}%` }}
-          >
-            {scale.markerLabel}
-            <span aria-hidden className="mt-[3px] h-2.5 w-0.5 bg-foreground" />
-          </div>
+          <>
+            {/* Near either end the label shifts inward so it never leaves the card. */}
+            <span
+              className="absolute -top-[34px] whitespace-nowrap text-[13px] font-bold tabular-figures text-foreground"
+              style={{
+                left: `${scale.markerPercent}%`,
+                transform: `translateX(-${scale.markerPercent > 85 ? 90 : scale.markerPercent < 15 ? 10 : 50}%)`,
+              }}
+            >
+              {scale.markerLabel}
+            </span>
+            <span
+              aria-hidden
+              className="absolute -top-3 h-2.5 w-0.5 -translate-x-1/2 bg-foreground"
+              style={{ left: `${scale.markerPercent}%` }}
+            />
+          </>
         ) : null}
       </div>
       <div className="mt-2 grid grid-cols-9 text-center text-[11.5px] tabular-figures text-muted-foreground">
