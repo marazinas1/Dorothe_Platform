@@ -69,3 +69,4 @@ Blocked outside this work:
 - [ ] F2 Listing fields migration (additive) + Properties + Listing — awaiting approval
 - [ ] F3–F13 per approved plan
 - [x] F2 Listings: reserve fund, price-reduced badge (internal previous price), listing ref prefix column, New badge 14 days, "Let" label
+- [x] F3 Sold and let: Let label, price-aware intro text, archived property links go to Properties
