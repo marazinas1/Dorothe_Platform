@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 import { ContactDetails } from "@/components/brand/ContactDetails";
 import { ContactIntentForm, type ContactIntent } from "@/components/brand/ContactIntentForm";
@@ -12,14 +13,13 @@ import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
 import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { buildHead } from "@/lib/seo/build-head";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
-import i18n from "@/i18n/config";
 
-type ContactSearch = { intent: ContactIntent; listing?: string; title?: string };
+type ContactSearch = { intent?: ContactIntent; listing?: string; title?: string };
 
 export const Route = createFileRoute("/$locale/kontakt")({
   staticData: { sitemap: true },
   validateSearch: (search: Record<string, unknown>): ContactSearch => ({
-    intent: search.intent === "looking" || search.intent === "other" ? search.intent : "selling",
+    intent: search.intent === "looking" || search.intent === "other" || search.intent === "selling" ? search.intent : undefined,
     listing: typeof search.listing === "string" ? search.listing : undefined,
     title: typeof search.title === "string" ? search.title.slice(0, 240) : undefined,
   }),
@@ -47,10 +47,11 @@ export const Route = createFileRoute("/$locale/kontakt")({
 function ContactPage() {
   const { locale } = Route.useParams();
   const search = Route.useSearch();
+  const { t } = useTranslation();
   const currentLocale = locale as Locale;
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const copy = usePageCopy("contact", currentLocale);
-  const configured = openingHoursRows(settings.opening_hours ?? {}, currentLocale, i18n.t.bind(i18n));
+  const configured = openingHoursRows(settings.opening_hours ?? {}, currentLocale, t);
   const hasHours = Object.keys(settings.opening_hours ?? {}).some((key) => key !== "exceptions");
 
   return (
@@ -63,7 +64,7 @@ function ContactPage() {
       </section>
       <section className="mx-auto grid max-w-[1120px] gap-14 px-5 py-16 md:px-10 lg:grid-cols-[0.85fr_1.2fr] lg:gap-20 lg:py-20">
         <ContactDetails settings={settings} hours={hasHours ? configured.weekly : []} />
-        <ContactIntentForm initialIntent={search.intent} listingId={search.listing} listingTitle={search.title} locale={currentLocale} />
+        <ContactIntentForm initialIntent={search.intent ?? "selling"} listingId={search.listing} listingTitle={search.title} locale={currentLocale} />
       </section>
     </PublicChrome>
   );
