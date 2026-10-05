@@ -1,4 +1,5 @@
 import { Clock3, Mail, MapPin, Phone } from "lucide-react";
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import { OfficeMap } from "@/components/brand/OfficeMap";
@@ -10,7 +11,7 @@ type Props = {
   hours: DisplayHours[];
 };
 
-function DetailRow({ icon, children, note }: { icon: React.ReactNode; children: React.ReactNode; note?: string }) {
+function DetailRow({ icon, children, note }: { icon: ReactNode; children: ReactNode; note?: string }) {
   return (
     <div className="grid grid-cols-[20px_1fr] gap-4 border-b border-border py-6 first:pt-0">
       <span aria-hidden className="mt-0.5 text-foreground">{icon}</span>

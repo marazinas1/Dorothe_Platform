@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type InputHTMLAttributes, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/brand/ui/Button";
@@ -73,6 +73,6 @@ export function ContactIntentForm({ initialIntent, listingId, listingTitle, loca
   );
 }
 
-function Field({ id, labelText, ...props }: React.InputHTMLAttributes<HTMLInputElement> & { id: string; labelText: string }) {
+function Field({ id, labelText, ...props }: InputHTMLAttributes<HTMLInputElement> & { id: string; labelText: string }) {
   return <div><label className={label} htmlFor={id}>{labelText}</label><input id={id} maxLength={255} className={input} {...props} /></div>;
 }

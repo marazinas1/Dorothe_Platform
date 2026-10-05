@@ -9,7 +9,7 @@ import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 import { Button } from "@/components/brand/ui/Button";
 
-type Item = { to: "/$locale/immobilien" | string; label: string };
+type Item = { to: "/$locale/immobilien" | string; label: string; exact: boolean };
 
 type Props = {
   open: boolean;
@@ -88,6 +88,8 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
             to={n.to}
             params={{ locale }}
             onClick={onClose}
+            activeOptions={{ exact: n.exact }}
+            activeProps={{ className: "underline underline-offset-8" }}
             className="font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-bold leading-tight text-foreground"
           >
             {n.label}
