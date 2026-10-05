@@ -3,13 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { ENERGY_SOURCES, readEnergySources } from "@/lib/listings/vocabularies";
 import {
@@ -57,7 +51,6 @@ function fieldsFor(country: Country): Field[] {
   return [];
 }
 
-
 /**
  * Country-specific energy certificate fields. The database re-validates on
  * publish (listings_validate_energy_on_publish); this mirror only warns early.
@@ -79,7 +72,6 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
     const next = checked ? [...sources, key] : sources.filter((s) => s !== key);
     form.setEnergyField("energy_source", next.length > 0 ? next : null);
   }
-
 
   if (fields.length === 0) {
     return (
@@ -202,7 +194,6 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
           );
         })}
       </div>
-
     </FormSection>
   );
 }
