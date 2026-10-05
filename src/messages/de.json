@@ -469,6 +469,7 @@
     "phone": "Telefon (optional)",
     "message": "Nachricht",
     "message_default": "Bitte kontaktieren Sie mich zu diesem Objekt.",
+    "message_for_listing": "Bitte kontaktieren Sie mich zur Immobilie {{title}}.",
     "submit": "Anfrage senden",
     "submitting": "Wird gesendet…",
     "success": "Vielen Dank. Ihre Anfrage ist bei uns eingegangen.",

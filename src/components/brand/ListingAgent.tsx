@@ -6,6 +6,7 @@ import type { SiteSettings } from "@/types/site-settings";
 
 type Props = {
   listingId: string;
+  listingTitle: string;
   settings: SiteSettings;
 };
 
@@ -14,7 +15,7 @@ type Props = {
  * contact, with the enquiry form immediately alongside so buyers do not have
  * to navigate to a separate contact page.
  */
-export function ListingAgent({ listingId, settings }: Props) {
+export function ListingAgent({ listingId, listingTitle, settings }: Props) {
   const { t } = useTranslation();
   const name = settings.primary_agent_name ?? settings.legal_name ?? settings.site_name;
   const role = settings.primary_agent_role ?? "";
@@ -41,7 +42,7 @@ export function ListingAgent({ listingId, settings }: Props) {
               ) : null}
               <dl className="mt-6 space-y-2 text-sm">
                 {phone ? (
-                  <div className="flex items-baseline gap-4">
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                     <dt className="w-16 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                       {t("contact.phone")}
                     </dt>
@@ -56,12 +57,12 @@ export function ListingAgent({ listingId, settings }: Props) {
                   </div>
                 ) : null}
                 {email ? (
-                  <div className="flex items-baseline gap-4">
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                     <dt className="w-16 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                       {t("contact.email")}
                     </dt>
                     <dd>
-                      <a href={`mailto:${email}`} className="text-foreground hover:underline">
+                      <a href={`mailto:${email}`} className="break-all text-foreground hover:underline">
                         {email}
                       </a>
                     </dd>
@@ -72,7 +73,10 @@ export function ListingAgent({ listingId, settings }: Props) {
           </div>
         </div>
         <div>
-          <ListingInquiryForm listingId={listingId} />
+          <ListingInquiryForm
+            listingId={listingId}
+            defaultMessage={t("inquiry.message_for_listing", { title: listingTitle })}
+          />
         </div>
       </div>
     </section>

@@ -160,7 +160,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         </section>
 
         <section id={CONTACT_ID} className={`${GAP} scroll-mt-28`}>
-          <ListingAgent listingId={l.id} settings={settings} />
+          <ListingAgent listingId={l.id} listingTitle={title} settings={settings} />
         </section>
       </div>
 
