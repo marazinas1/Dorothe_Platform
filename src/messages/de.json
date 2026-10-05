@@ -465,7 +465,8 @@
     "new": "Neu",
     "sold_cta_title": "Ihre Immobilie könnte die nächste sein.",
     "sold_cta_body": "Jeder Verkauf hier begann mit einer Bewertung vor Ort. Kostenfrei und unverbindlich für Eigentümer, die über einen Verkauf nachdenken.",
-    "price_reduced": "Preis reduziert"
+    "price_reduced": "Preis reduziert",
+    "sold_description_prices_shown": "Eine Auswahl von Immobilien, die ich in den vergangenen Jahren verkauft oder vermietet habe."
   },
   "inquiry": {
     "title": "Anfrage senden",
