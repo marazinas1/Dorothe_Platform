@@ -5,7 +5,7 @@ Sources, in priority order: `broker-book.html` (wins on any conflict), `broker-s
 ## F0. Audit (current state vs mockup)
 
 ### Database (checked)
-- `listings.status` currently holds `active` (5), `draft` (2), `sold` (2) and `rented` (1). The book's list is draft, coming_soon, live, reserved, sold, let, archived. Mapping: `active → live`, `rented → let`; `draft` and `sold` stay as they are. `reserved` and `coming_soon` are new values, and no existing listing uses them yet.
+- `listings.status` currently holds `active` (5), `draft` (2), `sold` (2) and `rented` (1). The schema already allows the full lifecycle (draft, coming_soon, active, reserved, sold, rented, archived); `coming_soon` and `reserved` are simply unused so far. **Status keys are not renamed**, because `active`/`rented` are used by triggers, RLS (listings, images, documents, tours), the public view and about 46 places in code. Only the labels follow the book's section 8 via i18n: `active` = Live / Aktiv, `rented` = Let / Vermietet.
 - These fields already exist: `listings.reference_code`, `features`, `published_at`; `testimonials.show_on_home`, `sort_order`, `published`; `inquiries.status`, `read_at`; `posts.status`.
 - These fields are missing: `listings.hausgeld`, `reserve_fund`, `price_reduced`, `previous_price`, `cold_rent`, `utilities`, `warm_rent`, `deposit`, `available_from`, `floors_total`; `posts.topic`, `seo_title`, `seo_description`, `cover_alt`; `inquiries.internal_note`; `site_settings.listing_ref_prefix` (licence fields to be checked in F2).
 
@@ -29,7 +29,7 @@ The shell, login, listings, posts, testimonials, settings, inquiries and analyti
 
 | Section | Data source | Change |
 |---|---|---|
-| Hero | Settings Home: headline, subline, hero photo (Your choice → Studio default → Built-in); credentials from settings | Replace the white CTA card with a **form**: Address field, Type select (House / Apartment / Multi-family house / Plot), "Start valuation" button. It goes to `/immobilienbewertung?address=…&type=…`. No submission happens here. |
+| Hero | Settings Home: headline, subline, hero photo (Your choice → Studio default → Built-in); credentials from settings | Replace the white CTA card with a **form**: Address field, Type select (House / Apartment / Multi-family house / Plot), "Start valuation" button. It navigates via the typed route `/$locale/immobilienbewertung` with the current page's `locale` param and `search: { address, type }` (DE → `/immobilienbewertung`, EN → `/en/immobilienbewertung`), never a hand-built URL. No submission happens here. |
 | Two paths | Fixed copy in i18n | Selling → `/verkaufen`, Buying → `/immobilien`; check against the mockup and keep the component |
 | Broker | Settings Home: heading, intro, portrait; qualifications from settings; name and town from `site_settings` | New `HomeBroker.tsx`, which replaces `H1Credentials` |
 | Selected properties | `featuredListingsQueryOptions` (3) | Order and header with an "All properties" link; reuse the cards |
@@ -56,15 +56,14 @@ The shell, login, listings, posts, testimonials, settings, inquiries and analyti
 
 ## F2–F13 (overview, each approved separately)
 
-- **F2 Listings: migration + Properties + Listing.** Schema only:
+- **F2 Listings: migration + Properties + Listing.** Schema only, additive; statuses untouched:
   ```text
-  ALTER listings: drop status check; UPDATE active->live, rented->let;
-    new check (draft,coming_soon,live,reserved,sold,let,archived);
-    add hausgeld, reserve_fund, previous_price numeric; price_reduced bool default false;
-    cold_rent, utilities, warm_rent, deposit numeric; available_from text; floors_total int
+  ALTER listings: add hausgeld, reserve_fund, previous_price numeric;
+    price_reduced bool default false; cold_rent, utilities, warm_rent numeric;
+    available_from text; floors_total int   (deposit already exists)
   ALTER site_settings: add listing_ref_prefix text (+ licence fields if missing)
   ```
-  Every place that filters on `active`/`rented` is updated (queries, sitemap, admin, RLS helpers are only read, not changed). `previous_price` is never returned publicly. Badges: New (14 days after `published_at`), Reserved, Coming soon. Risk: the status rename touches many queries, so all of them are found with search before the migration.
+  Status keys stay `active`/`rented`; labels Live/Aktiv and Let/Vermietet come from i18n (`status-label.ts`). `previous_price` is never returned publicly. Badges: New (14 days after `published_at`), Reserved, Coming soon.
 - **F3 Sold and let.** Show `sold` + `let`; price policy; archived listings redirect to Properties.
 - **F4 Selling, Valuation, Inherited.** 3-step valuation into `submitSellerInquiry` with source=valuation, prefilled from the hero; FAQ answers stay drafts until Dorothe confirms them.
 - **F5 About, Contact.** About: portrait, qualifications from settings, all published testimonials. Contact: check it against the mockup.
