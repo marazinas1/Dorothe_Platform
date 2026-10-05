@@ -63,3 +63,8 @@ Blocked outside this work:
 - [x] Verify headings, landmarks, metadata, content states and route consistency
 - [x] Test all public routes on desktop and mobile, including keyboard and reduced motion
 - [ ] Complete the remaining HTML-parity waves within the corrected standards foundation
+
+## Book alignment (F1–F13)
+- [x] F1 Home: hero valuation form, section order, broker block, guides behind blog flag
+- [ ] F2 Listing fields migration (additive) + Properties + Listing — awaiting approval
+- [ ] F3–F13 per approved plan
