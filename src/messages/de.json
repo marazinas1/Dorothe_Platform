@@ -1981,7 +1981,9 @@
       "email_label": "E-Mail",
       "phone_label": "Telefon",
       "seals_title": "Zertifizierte Expertise",
-      "testimonials_title": "Das sagen Kundinnen und Kunden"
+      "testimonials_title": "Das sagen Kundinnen und Kunden",
+      "cta_title": "Lassen Sie uns über Ihre Immobilie sprechen.",
+      "cta_action": "Kontakt aufnehmen"
     },
     "contact": {
       "title": "Kontakt",
