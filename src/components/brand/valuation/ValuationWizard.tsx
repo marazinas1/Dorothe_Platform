@@ -85,7 +85,7 @@ export function ValuationWizard({ address, type }: { address?: string; type?: st
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate={false} aria-label={t("pages.valuation.form_title")}>
+    <form ref={formRef} onSubmit={onSubmit} noValidate aria-label={t("pages.valuation.form_title")}>
       <ol className="mb-7 flex gap-2" aria-label={t("pages.valuation.wizard.progress", { n: step, total: STEPS })}>
         {titles.map((title, i) => (
           <li key={title} className={cn("h-1 flex-1", i < step ? "bg-foreground" : "bg-border")}>
