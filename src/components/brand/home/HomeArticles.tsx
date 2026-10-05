@@ -35,7 +35,7 @@ export function HomeArticles({ locale, posts }: { locale: Locale; posts: PostRow
       <ul className="mt-10 grid gap-7 md:grid-cols-3">
         {items.length > 0
           ? items.map((post) => (
-              <PostCard key={post.id} post={post} locale={locale} dateLabel={formatPostDate(post.publishedAt, locale)} />
+              <PostCard key={post.id} post={post} locale={locale} dateLabel={formatPostDate(post.publishedAt, locale)} topicLabel={post.topic ? t(`blog.topics.${post.topic}`) : null} />
             ))
           : placeholders.map((post, index) => (
               <li key={post.title}>
