@@ -93,7 +93,7 @@ export function ListingGallery({ images, locale, title, hasTour = false }: Props
             <ListingIcon name="map" /> {t("listings.detail.tour")}
           </Button>
         ) : null}
-        <Button type="button" variant="outline" size="sm" onClick={() => navigator.share?.({ title, url: window.location.href })}>
+        <Button type="button" variant="ghost" size="sm" onClick={() => navigator.share?.({ title, url: window.location.href })}>
           <ListingIcon name="share" /> {t("listings.detail.share")}
         </Button>
       </div>

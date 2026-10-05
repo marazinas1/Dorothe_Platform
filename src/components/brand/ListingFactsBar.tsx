@@ -150,10 +150,10 @@ export function ListingFactsBar({ listing, locale, settings }: Props) {
   return (
     <div className="grid grid-cols-2 border-y border-border sm:grid-cols-5">
       <div className="border-b border-r border-border px-4 py-5 sm:border-b-0 sm:pl-0">
-        <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-          {t(moneyLabelKey(shape, "price", "public"))}
-        </div>
-        <div className="mt-2 font-heading text-xl font-bold leading-none tabular-figures md:text-2xl">
+             <div className="text-[13px] text-muted-foreground">
+               {t(moneyLabelKey(shape, "price", "public"))}
+             </div>
+             <div className="mt-1.5 font-heading text-2xl font-bold leading-none tabular-figures tracking-tight">
           {price}
         </div>
         {investment ? (

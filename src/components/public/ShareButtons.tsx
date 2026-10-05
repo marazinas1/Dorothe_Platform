@@ -5,7 +5,7 @@ import { buttonClass } from "@/components/brand/ui/Button";
 
 type Props = { url: string; title: string };
 
-const pill = buttonClass({ variant: "secondary", size: "sm" });
+const pill = buttonClass({ variant: "ghost", size: "sm" });
 
 export function ShareButtons({ url, title }: Props) {
   const { t } = useTranslation();
