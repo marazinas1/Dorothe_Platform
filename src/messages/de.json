@@ -323,7 +323,8 @@
         "fgee": "Gesamtenergieeffizienz-Faktor (fGEE)",
         "efficiency_class": "Effizienzklasse"
       },
-      "energy_scale": "Energieeffizienzskala"
+      "energy_scale": "Energieeffizienzskala",
+      "reserve_fund": "Erhaltungsrücklage (Anteil)"
     },
     "pager": {
       "prev": "Zurück",
@@ -463,7 +464,8 @@
     },
     "new": "Neu",
     "sold_cta_title": "Ihre Immobilie könnte die nächste sein.",
-    "sold_cta_body": "Jeder Verkauf hier begann mit einer Bewertung vor Ort. Kostenfrei und unverbindlich für Eigentümer, die über einen Verkauf nachdenken."
+    "sold_cta_body": "Jeder Verkauf hier begann mit einer Bewertung vor Ort. Kostenfrei und unverbindlich für Eigentümer, die über einen Verkauf nachdenken.",
+    "price_reduced": "Preis reduziert"
   },
   "inquiry": {
     "title": "Anfrage senden",
@@ -982,7 +984,10 @@
         "commission_free": "Provisionsfrei für Käufer",
         "commission_value_percent": "Provision (%)",
         "commission_free_rent": "Provisionsfrei für Mieter",
-        "slug": "Webadresse (Slug)"
+        "slug": "Webadresse (Slug)",
+        "reserve_fund": "Erhaltungsrücklage (Anteil)",
+        "price_reduced": "Preis reduziert",
+        "previous_price": "Vorheriger Preis (intern)"
       },
       "energyFields": {
         "hwb": "HWB (kWh/m²a)",
@@ -1019,7 +1024,10 @@
         "titleOptional": "Optional. Ist das Feld leer, wird der Titel auf {{locale}} gezeigt.",
         "slugFollowsTitle": "Folgt dem Titel, bis das Objekt erstmals veröffentlicht wird.",
         "slugFrozen": "Dieses Objekt war schon öffentlich. Eine Änderung der Webadresse macht alle bereits geteilten Links ungültig; die alte Adresse leitet weiter, mehr nicht.",
-        "slugWarning": "Änderung macht bestehende Links ungültig. Die alte Adresse leitet auf die neue weiter."
+        "slugWarning": "Änderung macht bestehende Links ungültig. Die alte Adresse leitet auf die neue weiter.",
+        "reserve_fund": "Anteil der Wohnung an der Erhaltungsrücklage der Eigentümergemeinschaft. Wird auf der Objektseite angezeigt.",
+        "price_reduced": "Zeigt das Etikett „Preis reduziert\" auf der Objektkarte.",
+        "previous_price": "Nur für Ihre eigene Übersicht. Wird nie auf der Website angezeigt."
       },
       "energy": {
         "intro": "Pflichtfelder für {{country}}. Ohne sie ist eine Veröffentlichung nicht möglich.",
