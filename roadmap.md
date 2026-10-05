@@ -52,3 +52,14 @@ Blocked outside this work:
 ## Brand files
 - [x] Create and install the light logo, dark-background logo and favicon
 - [x] Match the StageHomy/Lumidenta brand-file cards with previews, replacement and downloads
+
+## Full public-site standards audit
+- [ ] Remove the redundant footer CTA and duplicate footer navigation
+- [ ] Resolve CTA hierarchy and redirecting valuation links on every public route
+- [ ] Standardise public controls, typography voices, focus states and 44 px targets
+- [ ] Bring every public form to Baymard and WCAG 2.2 AA requirements
+- [ ] Remove invented opening-hour fallbacks and deceptive/non-functional controls
+- [ ] Apply click-to-load privacy to every third-party map
+- [ ] Verify headings, landmarks, metadata, content states and route consistency
+- [ ] Test all public routes on desktop and mobile, including keyboard and reduced motion
+- [ ] Complete the remaining HTML-parity waves within the corrected standards foundation
