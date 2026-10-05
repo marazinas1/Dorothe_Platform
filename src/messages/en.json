@@ -1981,7 +1981,9 @@
       "email_label": "Email",
       "phone_label": "Phone",
       "seals_title": "Certified expertise",
-      "testimonials_title": "What clients say"
+      "testimonials_title": "What clients say",
+      "cta_title": "Let us talk about your property.",
+      "cta_action": "Get in touch"
     },
     "contact": {
       "title": "Contact",

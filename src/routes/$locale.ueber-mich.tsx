@@ -5,14 +5,11 @@ import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
 import { AgentIntro } from "@/components/brand/AgentIntro";
-import { AgentListings } from "@/components/brand/AgentListings";
-import { CredibilityBar } from "@/components/brand/CredibilityBar";
 import { QualificationsList } from "@/components/brand/QualificationsList";
 import { TrustSeals } from "@/components/brand/TrustSeals";
-import { ContactSection } from "@/components/brand/ContactSection";
-import { SoldStrip } from "@/components/brand/SoldStrip";
 import { TeamSection } from "@/components/brand/TeamSection";
 import { TestimonialsCarousel } from "@/components/brand/TestimonialsCarousel";
+import { DarkActionBand } from "@/components/brand/DarkActionBand";
 import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
@@ -23,10 +20,6 @@ import { featureFlagsQueryOptions } from "@/lib/config/feature-flags.functions";
 import { publicTeamQueryOptions } from "@/lib/team/queries.functions";
 import { publicTestimonialsQueryOptions } from "@/lib/testimonials/queries.functions";
 import { testiItems } from "@/lib/testimonials/resolve";
-import {
-  activeListingsQueryOptions,
-  recentSoldQueryOptions,
-} from "@/lib/listings/queries.functions";
 import { pickLocalized } from "@/lib/listings/format";
 import { copyVars } from "@/lib/config/site-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
@@ -41,8 +34,6 @@ export const Route = createFileRoute("/$locale/ueber-mich")({
       context.queryClient.ensureQueryData(featureFlagsQueryOptions),
       context.queryClient.ensureQueryData(publicTeamQueryOptions),
       context.queryClient.ensureQueryData(publicTestimonialsQueryOptions),
-      context.queryClient.ensureQueryData(activeListingsQueryOptions),
-      context.queryClient.ensureQueryData(recentSoldQueryOptions),
       context.queryClient.ensureQueryData(pageContentQueryOptions("about")),
     ]);
     return { settings, origin, flags, locale: params.locale as Locale };
@@ -77,8 +68,6 @@ function AboutPage() {
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const copy = usePageCopy("about", locale as Locale);
   const { data: team } = useSuspenseQuery(publicTeamQueryOptions);
-  const { data: active } = useSuspenseQuery(activeListingsQueryOptions);
-  const { data: sold } = useSuspenseQuery(recentSoldQueryOptions);
   const { data: testimonials } = useSuspenseQuery(publicTestimonialsQueryOptions);
   const teamEnabled = useFeatureFlag("team");
   const l = locale as Locale;
@@ -125,18 +114,13 @@ function AboutPage() {
         title={copy.text("testimonials_title")}
       />
 
-      <AgentListings
+      <DarkActionBand
+        title={t("pages.about.cta_title")}
+        action={t("pages.about.cta_action")}
         locale={l}
-        items={active.items}
-        settings={settings}
-        heading={t(teamEnabled ? "pages.about.our_properties" : "pages.about.my_properties")}
+        phone={settings.contact_phone}
+        intent="other"
       />
-
-      <SoldStrip locale={l} items={sold.items} settings={settings} />
-
-      <CredibilityBar locale={l} stats={settings.credibility_stats ?? []} settings={settings} />
-
-      <ContactSection locale={locale as Locale} settings={settings} />
     </PublicChrome>
   );
 }
