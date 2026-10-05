@@ -15,19 +15,13 @@ export function NumberedSteps({ title, steps }: Props) {
   if (!steps || steps.length === 0) return null;
 
   return (
-    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1400px] px-6 lg:px-10`}>
-      <div className="grid grid-cols-1 gap-14 md:grid-cols-12">
-        <div className="md:col-span-4">
-          <h2 className="text-section max-w-[18ch] text-balance">{title}</h2>
-        </div>
-        <div className="md:col-span-8">
-          <ol className="divide-y divide-border border-y border-border">
+    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1280px] px-5 md:px-10`}>
+      <h2 className="text-section max-w-[18ch] text-balance">{title}</h2>
+      <ol className="mt-12 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
-              <li key={i} className="grid grid-cols-12 gap-6 py-9">
-                <div className="col-span-2 font-sans text-2xl tabular-figures text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <div className="col-span-10">
+              <li key={i} className="min-h-64 border-b border-r border-border p-7">
+                <div className="font-sans text-2xl tabular-figures text-muted-foreground">{i + 1}</div>
+                <div className="mt-10">
                   <div className="text-section-sm">{s.title}</div>
                   <p className="mt-3 text-base leading-relaxed text-muted-foreground">
                     {s.body}
@@ -35,9 +29,7 @@ export function NumberedSteps({ title, steps }: Props) {
                 </div>
               </li>
             ))}
-          </ol>
-        </div>
-      </div>
+      </ol>
     </section>
   );
 }
