@@ -5,6 +5,7 @@ import type { PublicListing } from "@/lib/listings/queries.functions";
 import { formatArea, formatPrice } from "@/lib/listings/format";
 import { moneyLabelKey } from "@/lib/listings/field-labels";
 import type { SiteSettings } from "@/types/site-settings";
+import { ListingIcon, type ListingIconName } from "@/components/brand/ui/ListingIcon";
 
 type Props = {
   listing: PublicListing;
@@ -12,7 +13,7 @@ type Props = {
   settings: SiteSettings;
 };
 
-type Fact = { label: string; value: string };
+type Fact = { label: string; value: string; icon?: ListingIconName };
 
 /**
  * Key figures as a calm label/value table: hairline dividers, tabular
@@ -31,24 +32,27 @@ export function ListingFactsBar({ listing, locale, settings }: Props) {
     facts.push({
       label: t("listings.detail.living_area"),
       value: formatArea(listing.living_area, settings.area_unit, locale),
+      icon: "area",
     });
   }
   if (listing.plot_area != null) {
     facts.push({
       label: t("listings.detail.plot_area"),
       value: formatArea(listing.plot_area, settings.area_unit, locale),
+      icon: "plot",
     });
   }
   if (listing.rooms != null) {
-    facts.push({ label: t("listings.detail.rooms"), value: String(listing.rooms) });
+    facts.push({ label: t("listings.detail.rooms"), value: String(listing.rooms), icon: "rooms" });
   }
   if (listing.bedrooms != null) {
-    facts.push({ label: t("listings.detail.bedrooms"), value: String(listing.bedrooms) });
+    facts.push({ label: t("listings.detail.bedrooms"), value: String(listing.bedrooms), icon: "bed" });
   }
   if (listing.bathrooms != null) {
     facts.push({
       label: t("listings.detail.bathrooms"),
       value: String(listing.bathrooms),
+      icon: "bath",
     });
   }
   if (listing.floor != null) {
@@ -57,12 +61,14 @@ export function ListingFactsBar({ listing, locale, settings }: Props) {
       value: listing.total_floors
         ? `${listing.floor}/${listing.total_floors}`
         : String(listing.floor),
+      icon: "floor",
     });
   }
   if (listing.year_built != null) {
     facts.push({
       label: t("listings.detail.year_built"),
       value: String(listing.year_built),
+      icon: "year",
     });
   }
 
@@ -157,19 +163,20 @@ export function ListingFactsBar({ listing, locale, settings }: Props) {
         ) : null}
       </div>
 
-      <dl className="contents">
-        {primaryFacts.map((f) => (
-          <div
-            key={f.label}
-            className="border-b border-r border-border px-4 py-5 last:border-r-0 sm:border-b-0"
-          >
-            <dt className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-              {f.label}
-            </dt>
-            <dd className="mt-2 tabular-figures text-lg font-semibold text-foreground">{f.value}</dd>
-          </div>
-        ))}
-      </dl>
+           <dl className="contents">
+             {primaryFacts.map((f) => (
+               <div
+                 key={f.label}
+                 className="border-b border-r border-border px-4 py-5 last:border-r-0 sm:border-b-0"
+               >
+                 <dt className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
+                   {f.icon ? <ListingIcon name={f.icon} className="size-[15px]" /> : null}
+                   {f.label}
+                 </dt>
+                 <dd className="mt-1.5 tabular-figures text-2xl font-bold tracking-tight text-foreground">{f.value}</dd>
+               </div>
+             ))}
+           </dl>
     </div>
   );
 }
