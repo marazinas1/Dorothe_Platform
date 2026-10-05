@@ -89,6 +89,8 @@ const SellerInquiryInput = z.object({
   photos: z.array(SellerPhotoInput).max(4).optional(),
   consent: z.literal(true),
   locale: z.string().trim().max(10).optional(),
+  /** Which public entry the owner used; drives the admin inbox label. */
+  source: z.enum(["public_web", "valuation"]).optional(),
 });
 
 export const submitSellerInquiry = createServerFn({ method: "POST" })
@@ -96,7 +98,7 @@ export const submitSellerInquiry = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { consentColumns } = await import("./consent.server");
-    const { name, email, phone, message, photos, consent: _c, locale, ...criteria } = data;
+    const { name, email, phone, message, photos, consent: _c, locale, source, ...criteria } = data;
     const consent = await consentColumns(locale);
 
     const photo_paths: string[] = [];
@@ -128,7 +130,7 @@ export const submitSellerInquiry = createServerFn({ method: "POST" })
       message: message || null,
       payload: criteria,
       photo_paths,
-      source: "public_web",
+      source: source ?? "public_web",
     });
     if (error) throw new Error(error.message);
     return { ok: true };
