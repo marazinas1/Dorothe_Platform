@@ -25,7 +25,7 @@ export function ListingSpecs({ listing, locale, settings }: Props) {
   return (
     <div>
       <h2 className="font-heading text-2xl tracking-tight sm:text-3xl">
-        {t(costs.titleKey)}
+        {t("listings.detail.sections.costs")}
       </h2>
       <dl className="mt-7 max-w-2xl">
         {costs.rows.map((row) => (
