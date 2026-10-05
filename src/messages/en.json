@@ -465,7 +465,8 @@
     "new": "New",
     "sold_cta_title": "Your property could be next.",
     "sold_cta_body": "Every sale here started with a valuation on site. Free and without obligation for owners considering a sale.",
-    "price_reduced": "Price reduced"
+    "price_reduced": "Price reduced",
+    "sold_description_prices_shown": "A selection of properties I have sold or let in recent years."
   },
   "inquiry": {
     "title": "Send enquiry",

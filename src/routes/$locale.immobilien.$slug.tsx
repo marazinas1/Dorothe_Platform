@@ -1,4 +1,6 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+
+import { isArchivedListingSlug } from "@/lib/listings/archived.functions";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
@@ -56,6 +58,13 @@ export const Route = createFileRoute("/$locale/immobilien/$slug")({
           to: "/$locale/immobilien/$slug",
           params: { locale: params.locale, slug: current },
           statusCode: 301,
+        });
+      }
+      if (!deps.preview && (await isArchivedListingSlug({ data: { slug: params.slug } }))) {
+        throw redirect({
+          to: "/$locale/immobilien",
+          params: { locale: params.locale },
+          statusCode: 302,
         });
       }
       throw notFound();

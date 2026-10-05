@@ -56,7 +56,7 @@ export const Route = createFileRoute("/$locale/verkauft")({
       enabledLocales: settings.enabled_locales,
       defaultLocale: settings.default_locale,
       title,
-      description: translate(locale, "listings.sold_description"),
+      description: translate(locale, soldPricesHidden(settings) ? "listings.sold_description" : "listings.sold_description_prices_shown"),
       siteName: settings.site_name,
       ogDefaultImage: settings.og_default_image,
     });
@@ -78,7 +78,7 @@ function SoldArchive() {
         <div className="mx-auto max-w-[1280px] px-5 py-20 md:px-10 lg:py-28">
         <h1 className="max-w-[18ch] font-heading text-5xl font-bold leading-[1.04] md:text-7xl">{t("listings.sold_title")}</h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-          {t("listings.sold_description")}
+          {t(soldPricesHidden(settings) ? "listings.sold_description" : "listings.sold_description_prices_shown")}
         </p>
         </div>
       </section>
