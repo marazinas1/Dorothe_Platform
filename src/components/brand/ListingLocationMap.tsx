@@ -6,6 +6,7 @@ import type { Locale } from "@/i18n/config";
 import { listingsToPoints } from "@/lib/maps/carto";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import { pickLocalized } from "@/lib/listings/format";
+import { Button } from "@/components/brand/ui/Button";
 
 const MapCanvas = lazy(() => import("@/components/brand/MapCanvas"));
 
@@ -75,18 +76,14 @@ export function ListingLocationMap({ listing, locale }: Props) {
               </Suspense>
             </ClientOnly>
           ) : (
-            <button
-              type="button"
-              onClick={() => setLoaded(true)}
-              className={`${CANVAS} flex flex-col items-center justify-center gap-3 bg-muted px-6 text-center transition-colors duration-300 hover:bg-secondary`}
-            >
-              <span className="text-sm text-foreground">
+            <div className={`${CANVAS} flex flex-col items-center justify-center gap-4 bg-muted px-6 text-center`}>
+              <Button type="button" variant="secondary" onClick={() => setLoaded(true)}>
                 {t("listings.detail.map_load")}
-              </span>
-              <span className="max-w-sm text-xs leading-relaxed text-muted-foreground">
+              </Button>
+              <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
                 {t("listings.detail.map_consent_note")}
-              </span>
-            </button>
+              </p>
+            </div>
           )}
         </div>
       ) : townLine ? (

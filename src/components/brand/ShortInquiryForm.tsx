@@ -69,30 +69,30 @@ export function ShortInquiryForm({ mode, locale, appearance = "default" }: Props
 
   return (
     <form onSubmit={onSubmit} className={appearance === "direct" ? "space-y-6" : "space-y-10"}>
-      <div className={appearance === "direct" ? "grid gap-5 md:grid-cols-2" : "grid gap-8 md:grid-cols-2"}>
+      <div className={appearance === "direct" ? "grid gap-5" : "grid gap-8"}>
         <div>
           <label className={labelCls} htmlFor={id("name")}>
             {t("inquiry.name")}
           </label>
-          <input id={id("name")} name="name" required className={inputCls} />
+          <input id={id("name")} name="name" required autoComplete="name" maxLength={100} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor={id("email")}>
             {t("inquiry.email")}
           </label>
-          <input id={id("email")} name="email" type="email" required className={inputCls} />
+          <input id={id("email")} name="email" type="email" required autoComplete="email" maxLength={255} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor={id("phone")}>
             {t("inquiry.phone")}
           </label>
-          <input id={id("phone")} name="phone" className={inputCls} />
+          <input id={id("phone")} name="phone" type="tel" autoComplete="tel" maxLength={40} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor={id("town")}>
             {t(mode === "seller" ? "inquiry.seller.address_city" : "inquiry.buyer.city")}
           </label>
-          <input id={id("town")} name="town" className={inputCls} />
+          <input id={id("town")} name="town" autoComplete="address-level2" maxLength={120} className={inputCls} />
         </div>
         <div className="md:col-span-2">
           <label className={labelCls} htmlFor={id("message")}>
@@ -102,6 +102,7 @@ export function ShortInquiryForm({ mode, locale, appearance = "default" }: Props
             id={id("message")}
             name="message"
             rows={4}
+            maxLength={2000}
             className={`${inputCls} resize-none pt-3 ${appearance === "direct" ? "min-h-[92px]" : ""}`}
           />
         </div>
@@ -115,7 +116,7 @@ export function ShortInquiryForm({ mode, locale, appearance = "default" }: Props
       />
 
       {status === "error" ? (
-        <div className="text-sm text-destructive">{t("inquiry.error")}</div>
+        <div role="alert" aria-live="polite" className="text-sm text-destructive">{t("inquiry.error")}</div>
       ) : null}
 
       <div className="flex flex-wrap items-center gap-x-8 gap-y-4">

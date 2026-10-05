@@ -16,6 +16,8 @@ import { buildHead } from "@/lib/seo/build-head";
 import { OfficeMap } from "@/components/brand/OfficeMap";
 import { openingHoursRows } from "@/lib/config/opening-hours-display";
 import { Button } from "@/components/brand/ui/Button";
+import { ConsentCheckbox } from "@/components/public/ConsentCheckbox";
+import { useConsent } from "@/lib/inquiry/use-consent";
 
 export const Route = createFileRoute("/$locale/kontakt")({
   staticData: { sitemap: true },
@@ -46,8 +48,6 @@ export const Route = createFileRoute("/$locale/kontakt")({
   component: ContactPage,
 });
 
-type Hours = { day: string; time: string };
-
 function ContactPage() {
   const { locale } = Route.useParams();
   const { t } = useTranslation();
@@ -56,9 +56,8 @@ function ContactPage() {
   const teamEnabled = useFeatureFlag("team");
 
   const configuredHours = openingHoursRows(settings.opening_hours ?? {}, locale, t);
-  const fallbackHours = t("pages.contact.hours_default", { returnObjects: true }) as Hours[];
   const hasConfiguredHours = Object.keys(settings.opening_hours ?? {}).some((key) => key !== "exceptions");
-  const hours = hasConfiguredHours ? configuredHours.weekly : fallbackHours;
+  const hours = hasConfiguredHours ? configuredHours.weekly : [];
 
 
   return (
@@ -76,7 +75,7 @@ function ContactPage() {
 
       <section className="mx-auto mt-20 max-w-[1400px] px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-14 border-y border-border py-14 md:grid-cols-3">
-          <div>
+          {hours.length > 0 ? <div>
             <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               {copy.text("address_title")}
             </div>
@@ -89,7 +88,7 @@ function ContactPage() {
                 {settings.address_country ?? ""}
               </p>
             ) : null}
-          </div>
+          </div> : null}
           <div>
             <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               {copy.text("channels_title")}
@@ -191,10 +190,12 @@ const labelCls =
 function ContactForm() {
   const { t } = useTranslation();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const consent = useConsent();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    if (!consent.check()) return;
     setStatus("submitting");
     try {
       await submitBuyerInquiry({
@@ -208,6 +209,8 @@ function ContactForm() {
           rooms_min: null,
           area_min: null,
           price_max: null,
+          consent: true,
+          locale: consent.locale,
         },
       });
       setStatus("success");
@@ -227,26 +230,26 @@ function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8">
         <div>
           <label className={labelCls} htmlFor="c-name">
             {t("pages.contact.form_name")}
           </label>
-          <input id="c-name" name="name" required className={inputCls} />
+          <input id="c-name" name="name" required autoComplete="name" maxLength={100} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="c-email">
             {t("pages.contact.form_email")}
           </label>
-          <input id="c-email" name="email" type="email" required className={inputCls} />
+          <input id="c-email" name="email" type="email" required autoComplete="email" maxLength={255} className={inputCls} />
         </div>
-        <div className="md:col-span-2">
+        <div>
           <label className={labelCls} htmlFor="c-phone">
             {t("pages.contact.form_phone")}
           </label>
-          <input id="c-phone" name="phone" className={inputCls} />
+          <input id="c-phone" name="phone" type="tel" autoComplete="tel" maxLength={40} className={inputCls} />
         </div>
-        <div className="md:col-span-2">
+        <div>
           <label className={labelCls} htmlFor="c-message">
             {t("pages.contact.form_message")}
           </label>
@@ -254,14 +257,22 @@ function ContactForm() {
             id="c-message"
             name="message"
             required
+            maxLength={2000}
             rows={4}
             className={`${inputCls} resize-none pt-3`}
           />
         </div>
       </div>
 
+      <ConsentCheckbox
+        id="contact-consent"
+        checked={consent.given}
+        onChange={consent.set}
+        showError={consent.error}
+      />
+
       {status === "error" ? (
-        <div className="text-sm text-destructive">{t("pages.contact.form_error")}</div>
+        <div role="alert" aria-live="polite" className="text-sm text-destructive">{t("pages.contact.form_error")}</div>
       ) : null}
 
       <Button
