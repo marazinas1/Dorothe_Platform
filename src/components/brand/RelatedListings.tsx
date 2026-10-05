@@ -21,16 +21,27 @@ type Props = {
  */
 export function RelatedListings({ items, locale, settings }: Props) {
   const { t } = useTranslation();
-  if (items.length === 0) return null;
 
   return (
     <div>
-      <div className="flex items-end justify-between gap-6"><h2 className="font-heading text-3xl font-bold sm:text-4xl">{t("listings.detail.sections.related")}</h2><a href={`/${locale}/immobilien`} className="eyebrow text-foreground underline underline-offset-8">{t("listings.detail.all_properties")}</a></div>
-      <div className={`mt-10 ${LISTING_CARD_GRID}`}>
-        {items.map((l) => (
-          <ListingCard key={l.id} listing={l} locale={locale} settings={settings} />
-        ))}
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <h2 className="font-heading text-3xl font-bold sm:text-4xl">
+          {t("listings.detail.sections.related")}
+        </h2>
+        <a
+          href={`/${locale}/immobilien`}
+          className="eyebrow text-foreground underline underline-offset-8"
+        >
+          {t("listings.detail.all_properties")}
+        </a>
       </div>
+      {items.length > 0 ? (
+        <div className={`mt-10 ${LISTING_CARD_GRID}`}>
+          {items.map((l) => (
+            <ListingCard key={l.id} listing={l} locale={locale} settings={settings} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

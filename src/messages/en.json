@@ -469,6 +469,7 @@
     "phone": "Phone (optional)",
     "message": "Message",
     "message_default": "Please contact me regarding this property.",
+    "message_for_listing": "Please contact me regarding {{title}}.",
     "submit": "Send enquiry",
     "submitting": "Sending…",
     "success": "Thank you. Your enquiry has been received.",

@@ -6,6 +6,7 @@ import type { SiteSettings } from "@/types/site-settings";
 
 type Props = {
   listingId: string;
+  listingTitle: string;
   settings: SiteSettings;
 };
 
@@ -14,7 +15,7 @@ type Props = {
  * contact, with the enquiry form immediately alongside so buyers do not have
  * to navigate to a separate contact page.
  */
-export function ListingAgent({ listingId, settings }: Props) {
+export function ListingAgent({ listingId, listingTitle, settings }: Props) {
   const { t } = useTranslation();
   const name = settings.primary_agent_name ?? settings.legal_name ?? settings.site_name;
   const role = settings.primary_agent_role ?? "";
@@ -23,28 +24,25 @@ export function ListingAgent({ listingId, settings }: Props) {
   const email = settings.contact_email;
 
   return (
-    <section>
-      <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-        {t("listings.detail.agent")}
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-16 border-t border-border pt-10 lg:grid-cols-2">
+    <section className="border-t border-border pt-10">
+      <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
         <div>
           <div className="flex items-start gap-6">
             {photo ? (
               <img
                 src={photo}
                 alt={name}
-                className="h-28 w-28 flex-none object-cover grayscale"
+                className="h-36 w-36 flex-none object-cover grayscale"
               />
             ) : null}
             <div className="min-w-0">
-              <div className="font-heading text-3xl leading-tight md:text-4xl">{name}</div>
+              <div className="font-heading text-3xl font-bold leading-tight md:text-4xl">{name}</div>
               {role ? (
                 <div className="mt-2 text-sm text-muted-foreground">{role}</div>
               ) : null}
               <dl className="mt-6 space-y-2 text-sm">
                 {phone ? (
-                  <div className="flex items-baseline gap-4">
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                     <dt className="w-16 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                       {t("contact.phone")}
                     </dt>
@@ -59,12 +57,12 @@ export function ListingAgent({ listingId, settings }: Props) {
                   </div>
                 ) : null}
                 {email ? (
-                  <div className="flex items-baseline gap-4">
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                     <dt className="w-16 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                       {t("contact.email")}
                     </dt>
                     <dd>
-                      <a href={`mailto:${email}`} className="text-foreground hover:underline">
+                      <a href={`mailto:${email}`} className="break-all text-foreground hover:underline">
                         {email}
                       </a>
                     </dd>
@@ -75,7 +73,10 @@ export function ListingAgent({ listingId, settings }: Props) {
           </div>
         </div>
         <div>
-          <ListingInquiryForm listingId={listingId} />
+          <ListingInquiryForm
+            listingId={listingId}
+            defaultMessage={t("inquiry.message_for_listing", { title: listingTitle })}
+          />
         </div>
       </div>
     </section>

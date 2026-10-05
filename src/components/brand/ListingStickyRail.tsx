@@ -8,6 +8,7 @@ import type { SiteSettings } from "@/types/site-settings";
 import { actionButtonClass } from "@/components/brand/ui/ActionButton";
 import { buttonClass } from "@/components/brand/ui/Button";
 import { ListingIcon } from "@/components/brand/ui/ListingIcon";
+import { agentPortraitIfSet } from "@/lib/media/slots";
 
 type Props = {
   listing: PublicListing;
@@ -30,6 +31,8 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
     onRequestLabel: t("listings.on_request"),
   });
   const commission = commissionRow(listing, settings.currency, locale, t);
+  const agentName = settings.primary_agent_name ?? settings.legal_name ?? settings.site_name;
+  const agentPhoto = agentPortraitIfSet(settings);
 
   return (
     <aside className="hidden lg:block">
@@ -44,9 +47,18 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
           </p>
         ) : null}
 
-        <div className="mt-6 border-t border-border pt-6">
-          <div className="font-semibold">{settings.primary_agent_name ?? settings.legal_name ?? settings.site_name}</div>
-          <p className="mt-1 text-xs leading-5 text-muted-foreground">{settings.primary_agent_role}</p>
+        <div className="mt-6 flex items-center gap-4 border-t border-border pt-6">
+          {agentPhoto ? (
+            <img
+              src={agentPhoto}
+              alt={agentName}
+              className="size-14 flex-none object-cover grayscale"
+            />
+          ) : null}
+          <div className="min-w-0">
+            <div className="font-semibold">{agentName}</div>
+            <p className="mt-1 text-xs leading-5 text-muted-foreground">{settings.primary_agent_role}</p>
+          </div>
         </div>
 
         <a
@@ -60,7 +72,7 @@ export function ListingStickyRail({ listing, locale, settings, contactHref }: Pr
         </a>
         {settings.contact_phone ? <a href={`tel:${settings.contact_phone.replace(/\s/g, "")}`} className="mt-5 flex items-center justify-center gap-2 text-sm font-semibold"><ListingIcon name="phone" />{settings.contact_phone}</a> : null}
         {listing.reference_code ? (
-          <div className="mt-4 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+          <div className="mt-4 text-center text-xs text-muted-foreground">
             {t("listings.detail.reference_short")} {listing.reference_code}
           </div>
         ) : null}
