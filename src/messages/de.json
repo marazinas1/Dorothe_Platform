@@ -22,18 +22,42 @@
     "sale_process_intro": "Vier Etappen. Nach jeder entscheiden Sie selbst, ob Sie weitermachen möchten.",
     "sale_process_link": "Der gesamte Ablauf",
     "sale_process_steps": [
-      { "title": "Bewertung vor Ort", "body": "Ich besichtige die Immobilie, erfasse alle wertrelevanten Details und nenne Ihnen eine realistische Preisspanne in Schriftform." },
-      { "title": "Vorbereitung", "body": "Unterlagen, Energieausweis, Fotografien und Grundrisse. Ich kümmere mich um das, was Sie lieber abgeben möchten." },
-      { "title": "Vermarktung und Besichtigungen", "body": "Portale, meine Käuferdatei und Termine mit Interessenten, deren Finanzierung geprüft ist." },
-      { "title": "Notar und Übergabe", "body": "Ich bereite den Vertrag mit dem Notar vor und bleibe bis zur Schlüsselübergabe an Ihrer Seite." }
+      {
+        "title": "Bewertung vor Ort",
+        "body": "Ich besichtige die Immobilie, erfasse alle wertrelevanten Details und nenne Ihnen eine realistische Preisspanne in Schriftform."
+      },
+      {
+        "title": "Vorbereitung",
+        "body": "Unterlagen, Energieausweis, Fotografien und Grundrisse. Ich kümmere mich um das, was Sie lieber abgeben möchten."
+      },
+      {
+        "title": "Vermarktung und Besichtigungen",
+        "body": "Portale, meine Käuferdatei und Termine mit Interessenten, deren Finanzierung geprüft ist."
+      },
+      {
+        "title": "Notar und Übergabe",
+        "body": "Ich bereite den Vertrag mit dem Notar vor und bleibe bis zur Schlüsselübergabe an Ihrer Seite."
+      }
     ],
     "more_reviews": "Weitere Bewertungen",
     "guides_title": "Ratgeber für Eigentümer und Käufer",
     "all_articles": "Alle Artikel",
     "guide_placeholders": [
-      { "category": "Verkaufen", "title": "Was ein Haus im Saarland 2026 wert ist", "excerpt": "Wie Vergleichsverkäufe, Zustand und Energieklasse einen realistischen Angebotspreis bestimmen." },
-      { "category": "Energie", "title": "Der Energieausweis: Was Verkäufer zeigen müssen", "excerpt": "Welche Angaben in jedes Immobilienangebot gehören und welchen Ausweistyp Sie benötigen." },
-      { "category": "Erbschaft", "title": "Ein gemeinsam geerbtes Haus verkaufen", "excerpt": "Warum eine neutrale Bewertung oft der Schritt ist, der eine Einigung möglich macht." }
+      {
+        "category": "Verkaufen",
+        "title": "Was ein Haus im Saarland 2026 wert ist",
+        "excerpt": "Wie Vergleichsverkäufe, Zustand und Energieklasse einen realistischen Angebotspreis bestimmen."
+      },
+      {
+        "category": "Energie",
+        "title": "Der Energieausweis: Was Verkäufer zeigen müssen",
+        "excerpt": "Welche Angaben in jedes Immobilienangebot gehören und welchen Ausweistyp Sie benötigen."
+      },
+      {
+        "category": "Erbschaft",
+        "title": "Ein gemeinsam geerbtes Haus verkaufen",
+        "excerpt": "Warum eine neutrale Bewertung oft der Schritt ist, der eine Einigung möglich macht."
+      }
     ],
     "hero_cta": "Immobilie bewerten lassen",
     "hero_form_address": "Adresse",
@@ -294,8 +318,10 @@
         "certificate_valid_until": "Gültig bis",
         "hwb": "Heizwärmebedarf (HWB)",
         "eeb": "Endenergiebedarf (EEB)",
-        "fgee": "Gesamtenergieeffizienz-Faktor (fGEE)"
-      }
+        "fgee": "Gesamtenergieeffizienz-Faktor (fGEE)",
+        "efficiency_class": "Effizienzklasse"
+      },
+      "energy_scale": "Energieeffizienzskala"
     },
     "pager": {
       "prev": "Zurück",
@@ -961,7 +987,9 @@
         "certificate_type": "Ausweisart",
         "final_energy": "Endenergie (kWh/m²a)",
         "energy_source": "Energieträger",
-        "year_built": "Baujahr (Energieausweis)"
+        "year_built": "Baujahr (Energieausweis)",
+        "certificate_valid_until": "Gültig bis (Energieausweis)",
+        "certificate_date": "Ausgestellt am"
       },
       "help": {
         "price_on_request": "Preis ausblenden und „Preis auf Anfrage“ zeigen.",

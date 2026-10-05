@@ -53,7 +53,7 @@ function str(value: unknown): string | null {
   return typeof value === "string" && value.trim().length > 0 ? value.trim() : null;
 }
 
-function kwh(value: number, locale: string): string {
+export function kwh(value: number, locale: string): string {
   const nf = new Intl.NumberFormat(locale === "en" ? "en-US" : "de-DE", {
     maximumFractionDigits: 1,
   });

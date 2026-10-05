@@ -3,13 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { ENERGY_SOURCES, readEnergySources } from "@/lib/listings/vocabularies";
 import {
@@ -25,6 +19,7 @@ import { FieldRow, FormSection } from "./FieldRow";
 type Field =
   | { key: string; kind: "number" }
   | { key: string; kind: "sources" }
+  | { key: string; kind: "date" }
   | { key: string; kind: "select"; options: readonly string[] };
 
 const AT_FIELDS: Field[] = [
@@ -32,6 +27,8 @@ const AT_FIELDS: Field[] = [
   { key: "eeb", kind: "number" },
   { key: "fgee", kind: "number" },
   { key: "efficiency_class", kind: "select", options: EFFICIENCY_CLASS_AT },
+  { key: "certificate_date", kind: "date" },
+  { key: "certificate_valid_until", kind: "date" },
 ];
 
 const DE_FIELDS: Field[] = [
@@ -44,6 +41,8 @@ const DE_FIELDS: Field[] = [
   { key: "energy_source", kind: "sources" },
   { key: "efficiency_class", kind: "select", options: EFFICIENCY_CLASS_DE },
   { key: "year_built", kind: "number" },
+  { key: "certificate_date", kind: "date" },
+  { key: "certificate_valid_until", kind: "date" },
 ];
 
 function fieldsFor(country: Country): Field[] {
@@ -51,7 +50,6 @@ function fieldsFor(country: Country): Field[] {
   if (country === "DE") return DE_FIELDS;
   return [];
 }
-
 
 /**
  * Country-specific energy certificate fields. The database re-validates on
@@ -74,7 +72,6 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
     const next = checked ? [...sources, key] : sources.filter((s) => s !== key);
     form.setEnergyField("energy_source", next.length > 0 ? next : null);
   }
-
 
   if (fields.length === 0) {
     return (
@@ -172,6 +169,14 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
                     ))}
                   </SelectContent>
                 </Select>
+              ) : field.kind === "date" ? (
+                <Input
+                  type="date"
+                  value={typeof value === "string" ? value.slice(0, 10) : ""}
+                  onChange={(e) =>
+                    form.setEnergyField(field.key, e.target.value === "" ? null : e.target.value)
+                  }
+                />
               ) : (
                 <Input
                   type="number"
@@ -189,7 +194,6 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
           );
         })}
       </div>
-
     </FormSection>
   );
 }

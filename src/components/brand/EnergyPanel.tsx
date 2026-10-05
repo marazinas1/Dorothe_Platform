@@ -1,6 +1,9 @@
 import { useTranslation } from "react-i18next";
 
-import { energyView, type EnergyCell } from "@/lib/listings/energy-display";
+import { energyView, kwh, type EnergyCell } from "@/lib/listings/energy-display";
+import { energyScale } from "@/lib/listings/energy-scale";
+
+import { EnergyScaleBar } from "./EnergyScaleBar";
 
 type Props = {
   energy: unknown;
@@ -46,37 +49,30 @@ export function EnergyPanel({ energy, propertyType, exemption, country }: Props)
     );
   }
 
+  const rawValue = (energy as Record<string, unknown> | null)?.["final_energy"];
+  const scale = energyScale({
+    country,
+    energy,
+    formattedValue: typeof rawValue === "number" ? kwh(rawValue, i18n.language) : null,
+  });
+  const cells: EnergyCell[] = view.efficiencyClass
+    ? [...view.cells.slice(0, 2), { labelKey: "listings.detail.energy_fields.efficiency_class", value: view.efficiencyClass }, ...view.cells.slice(2)]
+    : view.cells;
+
   return (
     <Frame t={t}>
-      <div className="mt-8 grid gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-16">
-        {view.efficiencyClass ? (
-          <div className="flex flex-col items-start">
-            <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-              {t("listings.detail.energy_class")}
-            </div>
-            <div className="mt-3 flex h-20 w-20 items-center justify-center rounded-media border border-border bg-secondary font-heading text-4xl text-secondary-foreground">
-              {view.efficiencyClass}
-            </div>
-          </div>
-        ) : null}
-
-        <dl className="grid gap-x-12 sm:grid-cols-2">
-          {view.cells.map((cell) => (
-            <div
-              key={cell.labelKey}
-              className="flex items-baseline justify-between gap-6 border-b border-border py-4"
-            >
-              <dt className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-                {t(cell.labelKey)}
-              </dt>
-              <dd className="tabular-figures text-right text-base text-foreground">
-                {cellValue(cell, t)}
-              </dd>
+      <div className="mt-[18px] rounded-media border border-border p-7">
+        {scale ? <EnergyScaleBar scale={scale} label={t("listings.detail.energy_scale")} /> : null}
+        <dl className={`grid grid-cols-2 gap-[18px] text-[15.5px] sm:grid-cols-3 ${scale ? "mt-6" : ""}`}>
+          {cells.map((cell) => (
+            <div key={cell.labelKey}>
+              <dt className="text-[13px] text-muted-foreground">{t(cell.labelKey)}</dt>
+              <dd className="tabular-figures text-foreground">{cellValue(cell, t)}</dd>
             </div>
           ))}
         </dl>
       </div>
-      <p className="mt-8 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+      <p className="mt-6 max-w-2xl text-xs leading-relaxed text-muted-foreground">
         {t(view.footnoteKey)}
       </p>
     </Frame>

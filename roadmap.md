@@ -37,6 +37,7 @@ Blocked outside this work:
 ## Approved full public-site HTML parity
 - [x] Wave 1: shared public chrome and Home (exact HTML copy, icons, temporary editable media)
 - [x] Wave 2: Properties and listing detail (retain live listing images)
+- [x] Listing energy certificate: GEG scale with live marker, valid-until dates in admin
 - [ ] Wave 3: Sold, Selling, Valuation and Inheritance
 - [ ] Wave 4: About, Contact, Guides, Article and legal chrome
 - [ ] Wave 5: desktop/mobile visual parity and final verification
