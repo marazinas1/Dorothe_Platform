@@ -25,6 +25,7 @@ import { FieldRow, FormSection } from "./FieldRow";
 type Field =
   | { key: string; kind: "number" }
   | { key: string; kind: "sources" }
+  | { key: string; kind: "date" }
   | { key: string; kind: "select"; options: readonly string[] };
 
 const AT_FIELDS: Field[] = [
@@ -32,6 +33,8 @@ const AT_FIELDS: Field[] = [
   { key: "eeb", kind: "number" },
   { key: "fgee", kind: "number" },
   { key: "efficiency_class", kind: "select", options: EFFICIENCY_CLASS_AT },
+  { key: "certificate_date", kind: "date" },
+  { key: "certificate_valid_until", kind: "date" },
 ];
 
 const DE_FIELDS: Field[] = [
@@ -44,6 +47,8 @@ const DE_FIELDS: Field[] = [
   { key: "energy_source", kind: "sources" },
   { key: "efficiency_class", kind: "select", options: EFFICIENCY_CLASS_DE },
   { key: "year_built", kind: "number" },
+  { key: "certificate_date", kind: "date" },
+  { key: "certificate_valid_until", kind: "date" },
 ];
 
 function fieldsFor(country: Country): Field[] {
@@ -172,6 +177,14 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
                     ))}
                   </SelectContent>
                 </Select>
+              ) : field.kind === "date" ? (
+                <Input
+                  type="date"
+                  value={typeof value === "string" ? value.slice(0, 10) : ""}
+                  onChange={(e) =>
+                    form.setEnergyField(field.key, e.target.value === "" ? null : e.target.value)
+                  }
+                />
               ) : (
                 <Input
                   type="number"
