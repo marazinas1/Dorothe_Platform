@@ -66,7 +66,7 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
       role="dialog"
       aria-modal="true"
       aria-label={t("nav.menu")}
-      className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
+      className="pointer-events-auto fixed left-0 top-0 z-50 flex h-dvh w-screen flex-col overflow-y-auto bg-background lg:hidden"
     >
       <div className="flex h-20 items-center justify-between border-b border-border px-5">
         <BrandMark settings={settings} />
@@ -81,7 +81,7 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
         </Button>
       </div>
 
-      <nav className="flex flex-1 flex-col justify-center gap-5 px-5 py-8">
+      <nav className="flex flex-1 flex-col justify-center gap-5 px-5 py-8" aria-label={t("nav.menu")}>
         {items.map((n) => (
           <Link
             key={n.to}
