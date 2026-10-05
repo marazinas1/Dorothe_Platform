@@ -14,7 +14,7 @@ Sources, in priority order: `broker-book.html` (wins on any conflict), `broker-s
 |---|---|---|
 | Home | H1 sections exist (Hero, Paths, Credentials, Listings, SaleProcess, Testimonials, Valuation, Sold, Articles) | F1: reorder sections, add the hero valuation form, rebuild the broker block, remove "amber" leftovers |
 | Properties / Listing | Mostly aligned in earlier waves | F2: new fields, statuses, badges (New, Reserved, price reduced) |
-| Sold and let | Aligned | F3: `let` status, price policy check |
+| Sold and let | Aligned | F3: "Let" label for `rented`, price policy check |
 | Selling / Valuation / Inherited | Aligned; valuation has no address prefill | F4: 3-step valuation with prefill from the hero, source=valuation |
 | About / Contact | Contact done; About not aligned | F5 |
 | Guides | Routes exist | F6: behind the blog flag, topics |
@@ -64,7 +64,7 @@ The shell, login, listings, posts, testimonials, settings, inquiries and analyti
   ALTER site_settings: add listing_ref_prefix text (+ licence fields if missing)
   ```
   Status keys stay `active`/`rented`; labels Live/Aktiv and Let/Vermietet come from i18n (`status-label.ts`). `previous_price` is never returned publicly. Badges: New (14 days after `published_at`), Reserved, Coming soon.
-- **F3 Sold and let.** Show `sold` + `let`; price policy; archived listings redirect to Properties.
+- **F3 Sold and let.** Show `sold` + `rented` (labelled Let / Vermietet); price policy; archived listings redirect to Properties.
 - **F4 Selling, Valuation, Inherited.** 3-step valuation into `submitSellerInquiry` with source=valuation, prefilled from the hero; FAQ answers stay drafts until Dorothe confirms them.
 - **F5 About, Contact.** About: portrait, qualifications from settings, all published testimonials. Contact: check it against the mockup.
 - **F6 Guides.** Menu item and home section only when the flag is on and a post exists; migration `posts.topic` (selling, buying, inheritance, energy), `seo_title`, `seo_description`, `cover_alt`.
