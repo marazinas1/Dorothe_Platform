@@ -19,9 +19,11 @@ export function ContactIntentForm({ initialIntent, listingId, listingTitle, loca
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const consent = useConsent();
   const tabs: ContactIntent[] = ["selling", "looking", "other"];
+  const tabLabel = (v: ContactIntent) =>
+    v === "selling" ? t("pages.contact.intent_selling") : v === "looking" ? t("pages.contact.intent_looking") : t("pages.contact.intent_other");
   const initialMessage = listingTitle
     ? t("inquiry.message_for_listing", { title: listingTitle })
-    : t(`pages.contact.message_${intent}`);
+    : intent === "selling" ? t("pages.contact.message_selling") : intent === "looking" ? t("pages.contact.message_looking") : t("pages.contact.message_other");
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,7 +52,7 @@ export function ContactIntentForm({ initialIntent, listingId, listingTitle, loca
         {tabs.map((value) => (
           <Button key={value} type="button" role="tab" aria-selected={intent === value} variant="ghost"
             onClick={() => setIntent(value)} className={`btn-noir h-12 border-0 px-0 ${intent === value ? "border-b-2 border-foreground" : "text-muted-foreground"}`}>
-            {t(`pages.contact.intent_${value}`)}
+            {tabLabel(value)}
           </Button>
         ))}
       </div>
