@@ -8,10 +8,12 @@ export function PostCard({
   post,
   locale,
   dateLabel,
+  topicLabel,
 }: {
   post: PostView;
   locale: Locale;
   dateLabel: string | null;
+  topicLabel?: string | null;
 }) {
   return (
     <li className="group flex flex-col overflow-hidden rounded-[var(--radius)] bg-card">
@@ -31,9 +33,9 @@ export function PostCard({
           </div>
         ) : null}
         <div className="flex flex-1 flex-col pt-5">
-          {dateLabel ? (
+          {dateLabel || topicLabel ? (
             <div className="text-[12px] uppercase tracking-[0.14em] text-muted-foreground">
-              {dateLabel}
+              {[topicLabel, dateLabel].filter(Boolean).join(" · ")}
             </div>
           ) : null}
           <h3 className="mt-3 text-[19px] leading-[1.3] font-semibold text-balance">
