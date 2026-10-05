@@ -60,6 +60,6 @@ Blocked outside this work:
 - [x] Bring every public form to Baymard and WCAG 2.2 AA requirements
 - [x] Remove invented opening-hour fallbacks and deceptive/non-functional controls
 - [x] Apply click-to-load privacy to every third-party map
-- [ ] Verify headings, landmarks, metadata, content states and route consistency
-- [ ] Test all public routes on desktop and mobile, including keyboard and reduced motion
+- [x] Verify headings, landmarks, metadata, content states and route consistency
+- [x] Test all public routes on desktop and mobile, including keyboard and reduced motion
 - [ ] Complete the remaining HTML-parity waves within the corrected standards foundation
