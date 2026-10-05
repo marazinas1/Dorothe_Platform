@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { BrandMark } from "@/components/brand/BrandMark";
@@ -22,18 +22,39 @@ type Props = {
 /** Full-screen mobile menu. Calm fade + no layout jump; closes on Escape. */
 export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
   const { t } = useTranslation();
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
+    const returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
+    closeRef.current?.focus();
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = previous;
+      returnFocus?.focus();
     };
   }, [open, onClose]);
 
@@ -41,13 +62,16 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
+      aria-label={t("nav.menu")}
       className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
     >
       <div className="flex h-20 items-center justify-between border-b border-border px-5">
         <BrandMark settings={settings} />
         <Button
+          ref={closeRef}
           type="button"
           onClick={onClose}
           aria-label={t("nav.close")}

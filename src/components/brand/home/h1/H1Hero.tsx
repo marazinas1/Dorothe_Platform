@@ -33,12 +33,13 @@ export function H1Hero({ locale, copy, media, settings }: HomeTemplateProps) {
             {copy.text("hero_subline")}
           </p>
         </div>
-        <form className="mt-8 grid gap-4 rounded-[var(--radius)] bg-background p-5 text-foreground shadow-sm md:grid-cols-[1.3fr_1fr_auto] md:items-end md:p-6" onSubmit={(event) => event.preventDefault()}>
-          <div className="font-heading text-base font-bold md:col-span-3">{t("home.valuation_title")}</div>
-          <label className="grid gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">{t("home.hero_form_address")}<input className="min-h-[52px] rounded-[var(--radius-button)] border border-input bg-background px-4 text-base font-normal normal-case tracking-normal text-foreground" placeholder={t("home.hero_form_address_hint")} /></label>
-          <label className="grid gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">{t("home.hero_form_type")}<select className="min-h-[52px] rounded-[var(--radius-button)] border border-input bg-background px-4 text-base font-normal normal-case tracking-normal text-foreground"><option>{t("home.hero_form_house")}</option><option>{t("home.hero_form_apartment")}</option><option>{t("home.hero_form_land")}</option></select></label>
-          <Link to="/$locale/immobilienbewertung" params={{ locale }} className={buttonClass({ variant: "primary", className: "min-h-12" })}>{t("home.hero_cta")}</Link>
-        </form>
+        <div className="mt-8 flex flex-col items-start gap-4 rounded-[var(--radius)] bg-background p-5 text-foreground shadow-sm sm:flex-row sm:items-center sm:justify-between md:p-6">
+          <div>
+            <div className="font-heading text-base font-bold">{t("home.valuation_title")}</div>
+            <div className="mt-1 text-sm text-muted-foreground">{copy.text("valuation_body")}</div>
+          </div>
+          <Link to="/$locale/verkaufen" hash="form" params={{ locale }} className={buttonClass({ variant: "primary", className: "shrink-0" })}>{t("home.hero_cta")}</Link>
+        </div>
         <div className="mt-6 grid gap-4 border-t border-on-media/25 pt-5 text-xs text-on-media md:grid-cols-3">
           {[copy.text("cred1_tag"), copy.text("cred3_tag"), copy.text("cred2_tag")].filter(Boolean).map((item) => (
             <span key={item} className="inline-flex items-start gap-2"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0" />{item}</span>
