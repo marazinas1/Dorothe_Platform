@@ -1,0 +1,1 @@
+GRANT SELECT (reserve_fund, price_reduced) ON public.listings TO anon;

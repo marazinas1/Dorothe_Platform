@@ -8,6 +8,13 @@
       "when": 1791197114271,
       "tag": "0000_listings_price_reduction_reserve_fund",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791197253373,
+      "tag": "0001_grant_public_listing_new_columns",
+      "breakpoints": true
     }
   ]
 }
