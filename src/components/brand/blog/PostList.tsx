@@ -10,6 +10,7 @@ type Props = {
   intro?: string;
   emptyLabel: string;
   formatDate: (iso: string | null) => string | null;
+  formatTopic?: (topic: PostView["topic"]) => string | null;
 };
 
 /** The article index. Presentational only. */
@@ -20,6 +21,7 @@ export function PostList({
   intro,
   emptyLabel,
   formatDate,
+  formatTopic,
 }: Props) {
   return (
     <section className="py-16 lg:py-20">
@@ -41,6 +43,7 @@ export function PostList({
                 post={post}
                 locale={locale}
                 dateLabel={formatDate(post.publishedAt)}
+                topicLabel={formatTopic?.(post.topic) ?? null}
               />
             ))}
           </ul>
