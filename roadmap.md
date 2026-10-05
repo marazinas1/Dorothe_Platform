@@ -54,12 +54,12 @@ Blocked outside this work:
 - [x] Match the StageHomy/Lumidenta brand-file cards with previews, replacement and downloads
 
 ## Full public-site standards audit
-- [ ] Remove the redundant footer CTA and duplicate footer navigation
-- [ ] Resolve CTA hierarchy and redirecting valuation links on every public route
-- [ ] Standardise public controls, typography voices, focus states and 44 px targets
-- [ ] Bring every public form to Baymard and WCAG 2.2 AA requirements
-- [ ] Remove invented opening-hour fallbacks and deceptive/non-functional controls
-- [ ] Apply click-to-load privacy to every third-party map
+- [x] Remove the redundant footer CTA and duplicate footer navigation
+- [x] Resolve CTA hierarchy and redirecting valuation links on every public route
+- [x] Standardise public controls, typography voices, focus states and 44 px targets
+- [x] Bring every public form to Baymard and WCAG 2.2 AA requirements
+- [x] Remove invented opening-hour fallbacks and deceptive/non-functional controls
+- [x] Apply click-to-load privacy to every third-party map
 - [ ] Verify headings, landmarks, metadata, content states and route consistency
 - [ ] Test all public routes on desktop and mobile, including keyboard and reduced motion
 - [ ] Complete the remaining HTML-parity waves within the corrected standards foundation

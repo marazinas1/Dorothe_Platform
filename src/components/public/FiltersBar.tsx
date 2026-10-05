@@ -92,9 +92,12 @@ export function FiltersBar({ locale, search, total }: Props) {
               <ListingIcon name="search" className="size-4 text-muted-foreground" />
               <input
                 id="f-city"
+                name="city"
                 value={draft.city}
                 onChange={(e) => set({ city: e.target.value })}
                 placeholder={t("listings.filters.location_placeholder")}
+                autoComplete="address-level2"
+                maxLength={120}
                 className="w-full bg-transparent outline-none placeholder:text-muted-foreground"
               />
             </div>

@@ -100,7 +100,7 @@ export function SellerInquiryForm() {
           <label className={labelCls} htmlFor="seller-condition">
             {t("inquiry.seller.condition")}
           </label>
-          <input id="seller-condition" name="condition" className={inputCls} />
+          <input id="seller-condition" name="condition" maxLength={120} className={inputCls} />
         </div>
         <div>
           <label className={labelCls} htmlFor="seller-street">
@@ -159,7 +159,7 @@ export function SellerInquiryForm() {
           </div>
         ) : null}
         {status === "too_large" ? (
-          <div className="mt-2 text-xs text-destructive">{t("inquiry.seller.photo_too_large")}</div>
+          <div role="alert" aria-live="polite" className="mt-2 text-xs text-destructive">{t("inquiry.seller.photo_too_large")}</div>
         ) : null}
       </div>
 
