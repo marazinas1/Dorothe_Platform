@@ -9,8 +9,6 @@ const ListingInquiryInput = z.object({
   message: z.string().trim().min(1).max(4000),
   consent: z.literal(true),
   locale: z.string().trim().max(10).optional(),
-  /** Which public entry the owner used; drives the admin inbox label. */
-  source: z.enum(["public_web", "valuation"]).optional(),
 });
 
 export const submitInquiry = createServerFn({ method: "POST" })
@@ -91,6 +89,8 @@ const SellerInquiryInput = z.object({
   photos: z.array(SellerPhotoInput).max(4).optional(),
   consent: z.literal(true),
   locale: z.string().trim().max(10).optional(),
+  /** Which public entry the owner used; drives the admin inbox label. */
+  source: z.enum(["public_web", "valuation"]).optional(),
 });
 
 export const submitSellerInquiry = createServerFn({ method: "POST" })
