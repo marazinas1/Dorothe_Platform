@@ -15,6 +15,7 @@ export const PostInputSchema = z.object({
   body: localizedLong,
   meta_title: localizedShort,
   meta_description: localizedLong,
+  topic: z.enum(["selling", "buying", "inheritance", "energy"]).nullable().default(null),
 });
 
 export type PostInput = z.infer<typeof PostInputSchema>;

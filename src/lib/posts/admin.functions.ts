@@ -53,6 +53,7 @@ export const savePost = createServerFn({ method: "POST" })
       body: data.body,
       meta_title: data.meta_title,
       meta_description: data.meta_description,
+      topic: data.topic,
     };
 
     if (data.id) {

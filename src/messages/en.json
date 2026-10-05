@@ -1575,7 +1575,9 @@
       "coverRemove": "Remove picture",
       "coverHint": "JPG or PNG — it is resized automatically.",
       "confirmDeleteTitle": "Delete this article?",
-      "confirmDeleteBody": "“{{name}}” will be deleted and disappear from the public website. This cannot be undone."
+      "confirmDeleteBody": "“{{name}}” will be deleted and disappear from the public website. This cannot be undone.",
+      "topic": "Topic",
+      "topicNone": "No topic"
     },
     "copyEditor": {
       "currentlyShown": "Currently shown",
@@ -2077,6 +2079,12 @@
       "back": "Back to all articles",
       "unavailable_title": "Article unavailable",
       "unavailable_body": "This article is no longer published."
+    },
+    "topics": {
+      "selling": "Selling",
+      "buying": "Buying",
+      "inheritance": "Inheritance",
+      "energy": "Energy"
     }
   },
   "cta": {

@@ -13,9 +13,13 @@ export interface PostRow {
   body: Record<string, string> | null;
   meta_title: Record<string, string> | null;
   meta_description: Record<string, string> | null;
+  topic: PostTopic | null;
   created_at?: string;
   updated_at?: string;
 }
+
+export const POST_TOPICS = ["selling", "buying", "inheritance", "energy"] as const;
+export type PostTopic = (typeof POST_TOPICS)[number];
 
 /** What a presentational component receives — already localised. */
 export interface PostView {
@@ -29,7 +33,8 @@ export interface PostView {
   publishedAt: string | null;
   metaTitle: string;
   metaDescription: string;
+  topic: PostTopic | null;
 }
 
 export const POST_COLUMNS =
-  "id, slug, status, published_at, cover_path, cover_alt, title, excerpt, body, meta_title, meta_description, created_at, updated_at";
+  "id, slug, status, published_at, cover_path, cover_alt, title, excerpt, body, meta_title, meta_description, topic, created_at, updated_at";

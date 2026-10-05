@@ -9,9 +9,10 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { SaveButton } from "@/components/admin/settings/SaveButton";
 import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
-import type { PostRow } from "@/lib/posts/types";
+import type { PostRow, PostTopic } from "@/lib/posts/types";
 
 import { CoverUploader } from "./CoverUploader";
+import { TopicField } from "./TopicField";
 
 export interface PostDraft {
   id?: string;
@@ -25,6 +26,7 @@ export interface PostDraft {
   body: Record<string, string>;
   meta_title: Record<string, string>;
   meta_description: Record<string, string>;
+  topic: PostTopic | null;
 }
 
 export function toDraft(row?: PostRow): PostDraft {
@@ -40,6 +42,7 @@ export function toDraft(row?: PostRow): PostDraft {
     body: { ...(row?.body ?? {}) },
     meta_title: { ...(row?.meta_title ?? {}) },
     meta_description: { ...(row?.meta_description ?? {}) },
+    topic: row?.topic ?? null,
   };
 }
 
@@ -157,6 +160,7 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
             }
           />
         </div>
+        <TopicField value={draft.topic} onChange={(topic) => setDraft((p) => ({ ...p, topic }))} />
         <div className="space-y-1.5">
           <Label htmlFor="post-slug">{t("admin.posts.slug")}</Label>
           <Input

@@ -17,6 +17,7 @@ export function postView(row: PostRow, locale: string): PostView {
     publishedAt: row.published_at,
     metaTitle: pickLocalized(row.meta_title, locale, "de") || title,
     metaDescription: pickLocalized(row.meta_description, locale, "de") || excerpt,
+    topic: row.topic ?? null,
   };
 }
 
