@@ -111,6 +111,10 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
             />
             <p className="text-xs text-muted-foreground">{t("admin.posts.bodyHint")}</p>
           </div>
+          <div className="space-y-1">
+            <p className="text-sm font-medium">{t("admin.posts.seoTitle")}</p>
+            <p className="text-xs text-muted-foreground">{t("admin.posts.seoHint")}</p>
+          </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <Label htmlFor={`post-metatitle-${loc}`}>{t("admin.posts.metaTitle")}</Label>
@@ -119,6 +123,9 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
                 value={draft.meta_title[loc] ?? ""}
                 onChange={(e) => set("meta_title", loc, e.target.value)}
               />
+              <p className="text-xs text-muted-foreground">
+                {t("admin.posts.chars", { count: (draft.meta_title[loc] ?? "").length, max: 60 })}
+              </p>
             </div>
             <div className="space-y-1.5">
               <Label htmlFor={`post-metadesc-${loc}`}>{t("admin.posts.metaDescription")}</Label>
@@ -127,6 +134,9 @@ export function PostForm({ initial, locales, onSave, onCancel, ensurePostId }: P
                 value={draft.meta_description[loc] ?? ""}
                 onChange={(e) => set("meta_description", loc, e.target.value)}
               />
+              <p className="text-xs text-muted-foreground">
+                {t("admin.posts.chars", { count: (draft.meta_description[loc] ?? "").length, max: 160 })}
+              </p>
             </div>
             <div className="space-y-1.5">
               <Label htmlFor={`post-coveralt-${loc}`}>{t("admin.posts.coverAlt")}</Label>
