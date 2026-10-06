@@ -60,7 +60,8 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   {
     key: "properties",
     path: "immobilien",
-    mediaSlots: ["hero_photo"],
+    // The catalogue shows listing photos only; it has no page photograph.
+    mediaSlots: [],
     fields: [
       para("headline", "listings.title", "opening", true),
       para("intro", "listings.description", "opening", true),
