@@ -36,8 +36,8 @@ export function LogoSizeField({ value, onChange, onCommit, disabled }: Props) {
 
       <div className="mt-5 grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.7fr)]">
         <Slider
-          min={60}
-          max={140}
+          min={50}
+          max={150}
           step={5}
           value={[value]}
           disabled={disabled}
