@@ -924,7 +924,7 @@
       "saved": "Objekt gespeichert.",
       "unsaved": "Nicht gespeicherte Änderungen",
       "untitled": "Objekt ohne Titel",
-      "empty": "Noch keine Objekte.",
+      "empty": "Noch keine Objekte. Erstellen Sie das erste Objekt, damit es auf der Website erscheint.",
       "viewPublic": "Öffentliche Seite ansehen",
       "statusChanged": "Status aktualisiert.",
       "saveBeforeStatus": "Bitte zuerst speichern.",
@@ -1300,7 +1300,7 @@
         "removed": "Von der Startseite entfernt.",
         "limitReached": "Die Startseite zeigt höchstens {{count}} Objekte. Bitte zuerst eines entfernen."
       },
-      "pageHint": "Ihre Immobilien zum Kauf und zur Miete.",
+      "pageHint": "Ihre Immobilien zum Kauf und zur Miete. Ziehen Sie die Objekte, um die Reihenfolge auf der Website zu ändern.",
       "referencePending": "Wird beim ersten Speichern vergeben",
       "tabs": {
         "label": "Objektstatus",
@@ -1316,10 +1316,15 @@
         "energy": "Energie",
         "updated": "Aktualisiert",
         "ref": "Ref.",
-        "priceReduced": "Preis reduziert"
+        "priceReduced": "Preis reduziert",
+        "order": "Reihenfolge",
+        "dragHandle": "{{title}} ziehen, um die Reihenfolge zu ändern. Mit Pfeiltasten verschieben."
       },
       "energyMissing": "Fehlt",
-      "energyExempt": "Ausgenommen"
+      "energyExempt": "Ausgenommen",
+      "orderSaved": "Reihenfolge gespeichert.",
+      "orderSaving": "Reihenfolge wird gespeichert…",
+      "orderUnavailable": "Filter zurücksetzen, um die Website-Reihenfolge zu ändern."
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",
@@ -1593,8 +1598,8 @@
     },
     "posts": {
       "title": "Artikel",
-      "hint": "Beiträge für den öffentlichen Ratgeber. Nur veröffentlichte Beiträge sind sichtbar; der Menüpunkt erscheint, sobald einer vorhanden ist.",
-      "add": "Beitrag hinzufügen",
+      "hint": "Ratgeber für Eigentümer und Käufer. Veröffentlichte Beiträge erscheinen unter Ratgeber und helfen, über Google gefunden zu werden.",
+      "add": "Neuer Artikel",
       "titleField": "Überschrift",
       "excerpt": "Kurze Einleitung",
       "body": "Text",
@@ -1623,7 +1628,20 @@
       "topicNone": "Kein Thema",
       "seoTitle": "Suchmaschinen",
       "seoHint": "So erscheint der Artikel bei Google. Leer gelassen, werden Titel und Kurztext verwendet.",
-      "chars": "{{count}} / {{max}} Zeichen"
+      "chars": "{{count}} / {{max}} Zeichen",
+      "search": "Artikel suchen",
+      "count": "{{count}} Artikel",
+      "count_one": "{{count}} Artikel",
+      "noMatches": "Keine Artikel passen zu dieser Suche.",
+      "notYet": "Noch nicht",
+      "viewsUnavailable": "—",
+      "table": {
+        "article": "Artikel",
+        "status": "Status",
+        "published": "Veröffentlicht",
+        "views30": "Aufrufe, 30 Tage",
+        "actions": "Aktionen"
+      }
     },
     "copyEditor": {
       "currentlyShown": "Aktuell sichtbar",

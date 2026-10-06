@@ -1,32 +1,50 @@
 import { useTranslation } from "react-i18next";
-import { ChevronDown, Trash2 } from "lucide-react";
+import { ImageOff, Pencil } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/admin/ui/StatusChip";
 import { pickLocalized } from "@/lib/listings/format";
-import { formatPostDate } from "@/lib/posts/date";
 import type { PostRow as Row } from "@/lib/posts/types";
 
 interface Props {
   row: Row;
   locale: string;
   onEdit: () => void;
-  /** Omitted when the signed-in role may not delete. */
-  onDelete?: () => void;
   expanded: boolean;
 }
 
-export function PostRow({ row, locale, onEdit, onDelete, expanded }: Props) {
+export function PostRow({ row, locale, onEdit, expanded }: Props) {
   const { t } = useTranslation();
   const title = pickLocalized(row.title, locale, "de");
-  const date = formatPostDate(row.published_at, locale);
+  const date = row.published_at
+    ? new Intl.DateTimeFormat(locale === "de" ? "de-DE" : "en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }).format(new Date(row.published_at))
+    : null;
 
   return (
-    <div className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:bg-muted/30">
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-medium">{title || "—"}</p>
-        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-          {row.status === "published" ? (
+    <tr className="group hover:bg-muted">
+      <td className="border-b border-border px-3.5 py-3 align-middle group-last:border-b-0">
+        <div className="flex items-center gap-3">
+          <span className="block h-12 w-16 shrink-0 overflow-hidden rounded-[var(--radius)] bg-secondary">
+            {row.cover_path ? (
+              <img src={row.cover_path} alt="" className="h-full w-full object-cover" loading="lazy" />
+            ) : (
+              <span className="flex h-full w-full items-center justify-center">
+                <ImageOff className="h-4 w-4 text-muted-foreground" />
+              </span>
+            )}
+          </span>
+          <span className="min-w-0">
+            <b className="block truncate font-semibold">{title || "—"}</b>
+            <span className="block truncate text-[12.5px] text-muted-foreground">/guides/{row.slug}</span>
+          </span>
+        </div>
+      </td>
+      <td className="border-b border-border px-3.5 py-3 align-middle group-last:border-b-0">
+        {row.status === "published" ? (
             <StatusChip icon="published" tone="active">
               {t("admin.posts.published")}
             </StatusChip>
@@ -35,34 +53,27 @@ export function PostRow({ row, locale, onEdit, onDelete, expanded }: Props) {
               {t("admin.posts.draft")}
             </StatusChip>
           )}
-          {date ? <span>{date}</span> : null}
-          <span className="truncate">/{row.slug}</span>
-        </div>
-      </div>
-      <div className="flex shrink-0 items-center gap-1">
+      </td>
+      <td className="whitespace-nowrap border-b border-border px-3.5 py-3 align-middle text-muted-foreground group-last:border-b-0">
+        {date ?? t("admin.posts.notYet")}
+      </td>
+      <td className="border-b border-border px-3.5 py-3 text-right align-middle text-muted-foreground group-last:border-b-0">
+        {t("admin.posts.viewsUnavailable")}
+      </td>
+      <td className="border-b border-border px-3.5 py-3 text-right align-middle group-last:border-b-0">
+        <div className="flex justify-end gap-1">
         <Button
           type="button"
           size="sm"
           variant="outline"
-          aria-label={t("admin.posts.edit")}
           aria-expanded={expanded}
           onClick={onEdit}
         >
+          <Pencil className="h-4 w-4" strokeWidth={1.75} />
           {expanded ? t("admin.common.close") : t("admin.posts.edit")}
-          <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
         </Button>
-        {onDelete ? (
-        <Button
-          type="button"
-          size="icon"
-          variant="ghost"
-          aria-label={t("admin.posts.delete")}
-          onClick={onDelete}
-        >
-          <Trash2 className="h-4 w-4" />
-        </Button>
-        ) : null}
       </div>
-    </div>
+      </td>
+    </tr>
   );
 }
