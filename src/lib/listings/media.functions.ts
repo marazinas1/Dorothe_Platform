@@ -188,7 +188,7 @@ export const signListingDocument = createServerFn({ method: "POST" })
 
 // ---------------------------------------------------------------------------
 
-async function assertEditListing(
+export async function assertEditListing(
   supabase: import("@supabase/supabase-js").SupabaseClient,
   userId: string,
   listingId: string,

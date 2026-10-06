@@ -1103,7 +1103,13 @@
         "technicalTitle": "What happens to your photos",
         "dragHandle": "Drag to reorder",
         "deleteTitle": "Remove photograph?",
-        "deleteBody": "This photograph will be removed from the listing and the public website."
+        "deleteBody": "This photograph will be removed from the listing and the public website.",
+        "alt": {
+          "label": "Photo description",
+          "placeholder": "What the photo shows",
+          "saved": "Description saved.",
+          "failed": "Could not save the description."
+        }
       },
       "preview": "Preview",
       "publish": "Publish",
@@ -1214,7 +1220,8 @@
           "price": "Price or “price on request”",
           "city": "Town",
           "energy": "Energy certificate fields",
-          "commission": "Commission or “commission-free”"
+          "commission": "Commission or “commission-free”",
+          "photoAlt": "A description for every photo"
         },
         "energyExempt": "No Energieausweis required for this listing."
       },
@@ -1286,7 +1293,8 @@
         "removed": "Removed from the home page.",
         "limitReached": "The home page shows at most {{count}} properties. Remove one first."
       },
-      "pageHint": "Create properties, update their status and control what appears on the website."
+      "pageHint": "Create properties, update their status and control what appears on the website.",
+      "referencePending": "Assigned when the listing is first saved"
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",

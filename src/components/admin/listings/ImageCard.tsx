@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, GripVertical, Star, Trash2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button";
 import { variantUrl } from "./listing-image-url";
+import { PhotoAltInput } from "./PhotoAltInput";
 
 export type ImageRecord = {
   id: string;
@@ -12,6 +13,8 @@ export type ImageRecord = {
   is_primary: boolean;
   original_storage_path: string | null;
   content_type: string | null;
+  /** Localised photo description; required before going Live. */
+  alt_text?: unknown;
 };
 
 /**
@@ -163,6 +166,7 @@ export function ImageCard({
           </Button>
         </div>
       </div>
+      <PhotoAltInput imageId={image.id} value={image.alt_text} />
     </div>
   );
 }

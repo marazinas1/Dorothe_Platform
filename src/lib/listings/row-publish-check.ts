@@ -2,7 +2,7 @@
 // and the form never disagree about what is missing.
 import type { AdminListingRow } from "./admin.functions";
 import type { ListingFormValues } from "./admin-schema";
-import { buildPublishChecklist, type ChecklistItem } from "./publish-checklist";
+import { buildPublishChecklist, countPhotosMissingAlt, type ChecklistItem } from "./publish-checklist";
 import type { Country } from "@/lib/validation/energy";
 
 /** The subset of form values a list row can supply. */
@@ -30,6 +30,7 @@ export function rowPublishBlockers(
   const { items } = buildPublishChecklist({
     values: asFormValues(row),
     imageCount: (row.images ?? []).length,
+    photosMissingAlt: countPhotosMissingAlt(row.images ?? []),
     country,
   });
   return items.filter((item) => !item.done);
