@@ -24,7 +24,7 @@ const TD = "border-b border-border px-3.5 py-3 align-middle group-last:border-b-
 export function ListingsTable({ rows, locale }: { rows: AdminListingRow[]; locale: string }) {
   const { t, i18n } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
-  const date = new Intl.DateTimeFormat(i18n.language, { day: "numeric", month: "short" });
+  const date = new Intl.DateTimeFormat(i18n.language.startsWith("de") ? "de-DE" : "en-GB", { day: "numeric", month: "short" });
 
   return (
     <div className="overflow-x-auto rounded-[var(--radius)] border border-border bg-card">
