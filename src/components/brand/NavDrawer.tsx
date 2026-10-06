@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BrandMark } from "@/components/brand/BrandMark";
+import { SiteLogo } from "@/components/brand/SiteLogo";
 import { LocaleSwitcher } from "@/components/shared/LocaleSwitcher";
 import type { Locale } from "@/i18n/config";
 import type { SiteSettings } from "@/types/site-settings";
@@ -69,7 +69,7 @@ export function NavDrawer({ open, onClose, locale, settings, items }: Props) {
       className="pointer-events-auto fixed left-0 top-0 z-50 flex h-dvh w-screen flex-col overflow-y-auto bg-background lg:hidden"
     >
       <div className="flex h-20 items-center justify-between border-b border-border px-5">
-        <BrandMark settings={settings} />
+        <SiteLogo settings={settings} />
         <Button
           ref={closeRef}
           type="button"

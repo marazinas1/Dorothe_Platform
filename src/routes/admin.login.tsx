@@ -95,7 +95,7 @@ function LoginPage() {
           <SiteLogo settings={settings} className="max-w-[12rem]" interactive />
         </Link>
       }
-      title={settings?.site_name}
+      title={<SiteLogo settings={settings} tone="light" className="max-w-[12rem]" />}
       tagline={settings?.legal_name || settings?.primary_agent_name}
       note={t("admin.auth.login.note")}
     >

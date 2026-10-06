@@ -87,7 +87,7 @@ export function SiteNav({ locale, settings, overlay = false }: Props) {
             label={settings.site_name}
             className="min-w-0 shrink-0"
           >
-            <SiteLogo settings={settings} interactive />
+            <SiteLogo settings={settings} tone={onPhoto ? "light" : "dark"} interactive />
           </HomeLink>
 
           <div className="hidden items-center gap-6 lg:flex xl:gap-7">
