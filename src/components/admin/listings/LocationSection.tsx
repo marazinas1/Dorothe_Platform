@@ -1,3 +1,4 @@
+import { MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -44,7 +45,7 @@ export function LocationSection({ form }: { form: ListingFormApi }) {
   const region = values.address_region ?? "";
 
   return (
-    <FormSection title={t("admin.listings.sections.location")}>
+    <FormSection icon={MapPin} title={t("admin.listings.sections.location")}>
       <div className="grid gap-4">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TEXT_FIELDS.map((key) => (

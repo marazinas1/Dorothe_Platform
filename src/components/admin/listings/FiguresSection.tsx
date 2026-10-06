@@ -1,3 +1,4 @@
+import { Euro } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { fieldsAtLevel } from "@/lib/listings/field-visibility";
@@ -22,7 +23,7 @@ export function FiguresSection({ form }: { form: ListingFormApi }) {
   const openNumbers = fieldsAtLevel(shape, NUMERIC_KEYS, "open");
 
   return (
-    <FormSection anchor="price" title={t("admin.listings.sections.figures")}>
+    <FormSection icon={Euro} anchor="price" title={t("admin.listings.sections.figures")}>
       <div className="grid gap-8">
         <div className="grid gap-4">
           <h3 className="admin-label font-medium text-muted-foreground">

@@ -1,3 +1,4 @@
+import { Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -75,7 +76,7 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
 
   if (fields.length === 0) {
     return (
-      <FormSection title={t("admin.listings.sections.energy")}>
+      <FormSection icon={Zap} title={t("admin.listings.sections.energy")}>
         <p className="text-sm text-muted-foreground">
           {t("admin.listings.energy.notRequired", { country })}
         </p>
@@ -84,7 +85,7 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
   }
 
   return (
-    <FormSection
+    <FormSection icon={Zap}
       anchor="energy"
       title={t("admin.listings.sections.energy")}
       description={t("admin.listings.energy.intro", { country })}

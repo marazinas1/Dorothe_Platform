@@ -1,3 +1,4 @@
+import { House } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import {
   Select,
@@ -31,7 +32,7 @@ export function BasicsSection({ form }: { form: ListingFormApi }) {
   const shape = { property_type: values.property_type, deal_type: values.deal_type };
 
   return (
-    <FormSection anchor="basics" title={t("admin.listings.sections.basics")}>
+    <FormSection icon={House} anchor="basics" title={t("admin.listings.sections.basics")}>
       <div className="grid gap-4 sm:grid-cols-2">
         <FieldRow
           label={t("admin.listings.fields.property_type")}

@@ -1,3 +1,4 @@
+import { Ruler } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@/components/ui/checkbox";
@@ -41,7 +42,7 @@ export function EquipmentSection({ form }: { form: ListingFormApi }) {
   }
 
   return (
-    <FormSection title={t("admin.listings.sections.equipment")}>
+    <FormSection icon={Ruler} title={t("admin.listings.sections.equipment")}>
       <div className="grid gap-6">
         <div className="grid gap-4 sm:grid-cols-2">
           {showCondition ? (
