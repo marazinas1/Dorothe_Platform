@@ -85,7 +85,6 @@ function LoginPage() {
 
   return (
     <AuthSplit
-      eyebrow={t("admin.auth.login.eyebrow")}
       brand={
         <Link
           to="/$locale"
@@ -93,23 +92,19 @@ function LoginPage() {
           className="inline-block"
           aria-label={t("nav.home")}
         >
-          <SiteLogo
-            settings={settings}
-            tone="light"
-            className="max-w-[18rem]"
-            interactive
-          />
+          <SiteLogo settings={settings} className="max-w-[12rem]" interactive />
         </Link>
       }
-      tagline={settings?.site_name}
+      title={settings?.site_name}
+      tagline={settings?.legal_name || settings?.primary_agent_name}
       note={t("admin.auth.login.note")}
     >
-      <h1 className="font-heading text-4xl md:text-5xl">{t("admin.auth.login.title")}</h1>
-      <p className="mt-3 text-sm text-muted-foreground">
+      <h1 className="text-[26px] font-bold tracking-tight">{t("admin.auth.login.title")}</h1>
+      <p className="-mt-2 text-sm text-muted-foreground">
         {t("admin.auth.login.subtitle")}
       </p>
 
-      <form className="mt-10 space-y-5" onSubmit={onSubmit}>
+      <form className="space-y-4" onSubmit={onSubmit}>
         <div className="space-y-2">
           <Label htmlFor="email" className="admin-label">
             {t("admin.auth.login.email")}
