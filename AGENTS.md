@@ -50,3 +50,4 @@ Binding rules. If a request conflicts, say so and propose the compliant version.
 
 - New public listing columns need both the `listings_public` view and a column-level `GRANT SELECT (...) ON listings TO anon`; the view is security_invoker, so without the grant every public page fails.
 - Enquiry status is read through `normalizeInquiryStatus` (legacy `read`/`handled` map to `in_progress`/`closed`), because older deployed builds may still write the old values.
+- Every email (auth and app) renders through `src/lib/email-templates/layout.tsx` with words from `src/messages` `emails.*`; enquiry mails are sent best-effort from `src/lib/inquiry/notify.server.ts` so a mail failure never loses an enquiry.

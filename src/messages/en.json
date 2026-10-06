@@ -2131,5 +2131,28 @@
     "banner": "Maintenance mode is on — you see the website because you are signed in. Visitors see an update notice.",
     "previewAsVisitor": "Preview as a visitor",
     "turnOff": "Turn off"
+  },
+  "emails": {
+    "received": {
+      "subject": "We have received your enquiry",
+      "preview": "Thank you — your enquiry has arrived.",
+      "greeting": "Thank you, {{name}}",
+      "greeting_plain": "Thank you for your enquiry",
+      "body": "Your message to {{site}} has arrived.",
+      "about": "About: {{subject}}",
+      "next": "You will receive a personal reply, usually within one working day.",
+      "footnote": "You received this email because you sent an enquiry through our website."
+    },
+    "new": {
+      "subject": "New enquiry from {{name}}",
+      "heading": "New enquiry",
+      "open": "Open enquiry",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "about": "About",
+      "message": "Message",
+      "footnote": "Reply directly to this email to answer the sender."
+    }
   }
 }
