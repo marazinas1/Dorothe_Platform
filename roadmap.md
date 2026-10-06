@@ -77,4 +77,5 @@ Blocked outside this work:
 - [x] F1–F5
 - [x] F6 Guides: flag+post gating, article topic field and labels
 - [x] F7 Admin shell and sign-in
-- [ ] F8–F13
+- [x] F8 Listing editor: photo descriptions required for Live, reference assigned by the database
+- [ ] F9–F13
