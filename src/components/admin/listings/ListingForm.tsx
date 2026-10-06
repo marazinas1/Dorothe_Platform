@@ -10,7 +10,7 @@ import {
   adminListingsQueryOptions,
   saveListing,
 } from "@/lib/listings/admin.functions";
-import { buildPublishChecklist } from "@/lib/listings/publish-checklist";
+import { buildPublishChecklist, countPhotosMissingAlt } from "@/lib/listings/publish-checklist";
 import { formatPublishError } from "@/lib/listings/publish-error";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import { FALLBACK_LOCALE } from "@/i18n/config";
@@ -61,6 +61,7 @@ export function ListingForm({
   const checklist = buildPublishChecklist({
     values: form.values,
     imageCount: images.length,
+    photosMissingAlt: countPhotosMissingAlt(images),
     country: settings.country as Country,
   });
 

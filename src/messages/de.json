@@ -1103,7 +1103,13 @@
         "technicalTitle": "Was mit den Fotos passiert",
         "dragHandle": "Zum Sortieren ziehen",
         "deleteTitle": "Foto entfernen?",
-        "deleteBody": "Dieses Foto wird aus dem Objekt und von der öffentlichen Website entfernt."
+        "deleteBody": "Dieses Foto wird aus dem Objekt und von der öffentlichen Website entfernt.",
+        "alt": {
+          "label": "Fotobeschreibung",
+          "placeholder": "Was das Foto zeigt",
+          "saved": "Beschreibung gespeichert.",
+          "failed": "Die Beschreibung konnte nicht gespeichert werden."
+        }
       },
       "preview": "Vorschau",
       "publish": "Veröffentlichen",
@@ -1214,7 +1220,8 @@
           "price": "Preis oder ‚Preis auf Anfrage‘",
           "city": "Ort",
           "energy": "Angaben zum Energieausweis",
-          "commission": "Provision oder „provisionsfrei“"
+          "commission": "Provision oder „provisionsfrei“",
+          "photoAlt": "Eine Beschreibung für jedes Foto"
         },
         "energyExempt": "Für dieses Objekt ist kein Energieausweis erforderlich."
       },
@@ -1286,7 +1293,8 @@
         "removed": "Von der Startseite entfernt.",
         "limitReached": "Die Startseite zeigt höchstens {{count}} Objekte. Bitte zuerst eines entfernen."
       },
-      "pageHint": "Objekte anlegen, Status ändern und steuern, was auf der Website erscheint."
+      "pageHint": "Objekte anlegen, Status ändern und steuern, was auf der Website erscheint.",
+      "referencePending": "Wird beim ersten Speichern vergeben"
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",

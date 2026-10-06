@@ -36,7 +36,7 @@ export type AdminListingRow = {
   energy: Json;
   energy_exemption: string | null;
   updated_at: string;
-  images: { variants: Json; is_primary: boolean | null; sort_order: number | null }[];
+  images: { variants: Json; is_primary: boolean | null; sort_order: number | null; alt_text: Json }[];
 };
 
 export const listAdminListings = createServerFn({ method: "GET" })
@@ -45,7 +45,7 @@ export const listAdminListings = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("listings")
       .select(
-        "id, slug, status, deal_type, property_type, price, price_on_request, is_featured, address_city, reference_code, rooms, bedrooms, bathrooms, living_area, title, commission_free, commission_value, energy, energy_exemption, updated_at, listing_images(variants, is_primary, sort_order)",
+        "id, slug, status, deal_type, property_type, price, price_on_request, is_featured, address_city, reference_code, rooms, bedrooms, bathrooms, living_area, title, commission_free, commission_value, energy, energy_exemption, updated_at, listing_images(variants, is_primary, sort_order, alt_text)",
       )
       .order("updated_at", { ascending: false });
     if (error) throw new Error(error.message);
@@ -76,7 +76,7 @@ export const getAdminListing = createServerFn({ method: "GET" })
     const { data: images, error: imgError } = await context.supabase
       .from("listing_images")
       .select(
-        "id, storage_path, original_storage_path, content_type, variants, sort_order, is_primary, processing_status, processing_error, width, height",
+        "id, storage_path, original_storage_path, content_type, variants, sort_order, is_primary, processing_status, processing_error, width, height, alt_text",
       )
       .eq("listing_id", data.id)
       .order("sort_order", { ascending: true });
