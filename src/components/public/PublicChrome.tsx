@@ -73,7 +73,7 @@ function Footer({
     >
       <div className="mx-auto grid max-w-[1280px] gap-12 px-5 pt-[72px] md:grid-cols-2 md:px-10 lg:grid-cols-4">
         <div>
-          <Link to="/$locale" params={{ locale }} aria-label={settings.site_name}><SiteLogo settings={settings} tone="light" interactive className="max-h-12" /></Link>
+          <Link to="/$locale" params={{ locale }} aria-label={settings.site_name}><SiteLogo settings={settings} tone="light" interactive /></Link>
           {settings.primary_agent_name ? <div className="mt-5 text-sm text-footer-muted">{settings.primary_agent_name}</div> : null}
           {settings.address_street ? <div className="mt-1 text-sm text-footer-muted">{settings.address_street}<br />{settings.address_zip} {settings.address_city}</div> : null}
           <SocialLinks settings={settings} className="mt-5 flex gap-4" />

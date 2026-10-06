@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/types/site-settings";
 
@@ -8,6 +10,7 @@ type Props = {
   /** `light` inverts the mark for use over hero photography. */
   tone?: "dark" | "light";
   className?: string;
+  style?: CSSProperties;
 };
 
 /**
@@ -15,14 +18,14 @@ type Props = {
  * descriptor beneath. Both strings come from site_settings / translations, so a
  * fork only changes data, never this component.
  */
-export function BrandMark({ settings, descriptor, tone = "dark", className }: Props) {
+export function BrandMark({ settings, descriptor, tone = "dark", className, style }: Props) {
   const name = settings.site_name;
 
   return (
-    <span className={cn("inline-flex flex-col leading-none", className)}>
+    <span className={cn("inline-flex flex-col leading-none", className)} style={style}>
       <span
         className={cn(
-          "font-heading text-xl md:text-2xl",
+          "font-heading text-[1.5em]",
           tone === "light" ? "text-on-media" : "text-foreground",
         )}
       >

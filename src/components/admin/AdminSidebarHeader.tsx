@@ -15,13 +15,12 @@ export function AdminSidebarHeader() {
       <Link
         to="/admin"
 
-        className="flex h-16 items-center"
+        className="flex min-h-16 w-full items-center"
         aria-label={settings.site_name}
       >
         <SiteLogo
           settings={settings}
           tone="light"
-          className="max-w-[12rem]"
         />
       </Link>
     </SidebarHeader>

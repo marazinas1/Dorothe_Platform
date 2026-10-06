@@ -92,10 +92,10 @@ function LoginPage() {
           className="inline-block"
           aria-label={t("nav.home")}
         >
-          <SiteLogo settings={settings} className="max-w-[12rem]" interactive />
+          <SiteLogo settings={settings} interactive />
         </Link>
       }
-      title={<SiteLogo settings={settings} tone="light" className="max-w-[12rem]" />}
+      title={<SiteLogo settings={settings} tone="light" />}
       tagline={settings?.legal_name || settings?.primary_agent_name}
       note={t("admin.auth.login.note")}
     >

@@ -43,6 +43,13 @@
       "when": 1791282629058,
       "tag": "0005_inquiry_workflow_statuses_and_note",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791290268081,
+      "tag": "0006_expand_logo_size_range",
+      "breakpoints": true
     }
   ]
 }

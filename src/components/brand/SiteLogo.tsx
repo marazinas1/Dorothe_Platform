@@ -23,9 +23,11 @@ const INTERACTIVE_CLASS =
 
 /** The one shared height, scaled by the single size chosen in Site settings. */
 const BASE_HEIGHT_REM = 4;
+const MIN_LOGO_SIZE = 50;
+const MAX_LOGO_SIZE = 150;
 
 const clampSize = (value: number | null | undefined) =>
-  Math.min(140, Math.max(60, Math.round(value ?? 100)));
+  Math.min(MAX_LOGO_SIZE, Math.max(MIN_LOGO_SIZE, Math.round(value ?? 100)));
 
 /**
  * Renders the uploaded logo at one shared size throughout public, auth and
@@ -41,16 +43,17 @@ export function SiteLogo({
   const configured =
     tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
   const src = logoSrc(tone === "light" ? "mono" : "original", configured);
+  const logoSize = clampSize(settings.logo_size);
+  const height = `${(BASE_HEIGHT_REM * logoSize) / 100}rem`;
   if (!src)
     return (
       <BrandMark
         settings={settings}
         tone={tone}
         className={cn(interactive && INTERACTIVE_CLASS, className)}
+        style={{ fontSize: `${logoSize / 100}rem` } as CSSProperties}
       />
     );
-
-  const height = `${(BASE_HEIGHT_REM * clampSize(settings.logo_size)) / 100}rem`;
 
   return (
     <img
