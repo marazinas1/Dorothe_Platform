@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { ImageOff, Pencil } from "lucide-react";
 
@@ -74,7 +75,7 @@ export function PostRow({ row, locale, onEdit, expanded }: Props) {
   );
 }
 
-function PostStatus({ tone, children }: { tone: "published" | "draft"; children: React.ReactNode }) {
+function PostStatus({ tone, children }: { tone: "published" | "draft"; children: ReactNode }) {
   return (
     <span
       className={cn(
