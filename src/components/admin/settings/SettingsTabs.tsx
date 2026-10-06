@@ -20,13 +20,7 @@ const TABS = [
   "about",
   "contact",
 ] as const;
-/** Page tabs repeat the public menu label word for word. */
-const PUBLIC_LABEL: Partial<Record<string, string>> = {
-  properties: "nav.listings",
-  valuation: "nav.valuation",
-  inheritance: "nav.inheritance",
-};
-
+// Page tabs repeat the public menu label word for word.
 export type SettingsTabId = (typeof TABS)[number];
 
 export function SettingsTabs() {
@@ -42,9 +36,13 @@ export function SettingsTabs() {
         id: tab,
         label: tab === "about"
           ? t(teamEnabled ? "admin.settings.tabs.about_us" : "admin.settings.tabs.about")
-          : tab in PUBLIC_LABEL
-            ? t(PUBLIC_LABEL[tab]!)
-            : t(`admin.settings.tabs.${tab}`),
+          : tab === "properties"
+            ? t("nav.listings")
+            : tab === "valuation"
+              ? t("nav.valuation")
+              : tab === "inheritance"
+                ? t("nav.inheritance")
+                : t(`admin.settings.tabs.${tab}`),
         to: "/admin/settings/$tab",
         params: { tab },
         active: pathname === `/admin/settings/${tab}`,
