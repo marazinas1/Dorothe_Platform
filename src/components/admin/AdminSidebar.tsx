@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { newInquiryCountQueryOptions } from "@/lib/inquiries/admin.functions";
 import {
   LayoutDashboard,
-  Building2,
+  House,
   Inbox,
   UserCog,
   BarChart3,
