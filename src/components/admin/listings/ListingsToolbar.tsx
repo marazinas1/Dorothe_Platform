@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { LayoutGrid, Table2 } from "lucide-react";
+import { Search } from "lucide-react";
 
-import { Input } from "@/components/ui/input";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   Select,
   SelectContent,
@@ -10,128 +8,67 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  DEAL_TYPES,
-  LISTING_STATUSES,
-  PROPERTY_TYPES,
-} from "@/lib/listings/admin-schema";
-import {
-  LISTING_SORTS,
-  type ListingFilters,
-  type ListingSort,
-} from "@/lib/listings/admin-list-filters";
+import { DEAL_TYPES, PROPERTY_TYPES } from "@/lib/listings/admin-schema";
+import type { ListingFilters } from "@/lib/listings/admin-list-filters";
 
-export type ListingsView = "grid" | "table";
-
+/** Search, type and deal filters with the result count on the right. */
 export function ListingsToolbar({
   filters,
   onChange,
-  view,
-  onViewChange,
   count,
 }: {
   filters: ListingFilters;
   onChange: (next: ListingFilters) => void;
-  view: ListingsView;
-  onViewChange: (next: ListingsView) => void;
   count: number;
 }) {
   const { t } = useTranslation();
   const set = (patch: Partial<ListingFilters>) => onChange({ ...filters, ...patch });
+  const trigger = "h-10 w-auto min-w-[110px] gap-3 bg-card text-[13px] font-semibold";
 
   return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <Input
+    <div className="flex flex-wrap items-center gap-3">
+      <label className="flex min-h-10 min-w-[220px] max-w-[420px] flex-1 items-center gap-2 rounded-[var(--radius)] border border-border bg-card px-3 text-muted-foreground focus-within:ring-2 focus-within:ring-ring">
+        <Search className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
+        <input
           value={filters.search}
           onChange={(e) => set({ search: e.target.value })}
           placeholder={t("admin.listings.toolbar.searchReference")}
           aria-label={t("admin.listings.toolbar.search")}
-          className="h-9 w-full sm:w-56"
+          className="flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
         />
+      </label>
 
-        <Select value={filters.dealType} onValueChange={(v) => set({ dealType: v })}>
-          <SelectTrigger className="h-9 w-[150px]" aria-label={t("admin.listings.fields.deal_type")}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("admin.listings.toolbar.allDealTypes")}</SelectItem>
-            {DEAL_TYPES.map((d) => (
-              <SelectItem key={d} value={d}>
-                {t(`listings.dealType.${d}`)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <Select value={filters.propertyType} onValueChange={(v) => set({ propertyType: v })}>
+        <SelectTrigger className={trigger} aria-label={t("admin.listings.fields.property_type")}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">{t("admin.listings.toolbar.allTypes")}</SelectItem>
+          {PROPERTY_TYPES.map((p) => (
+            <SelectItem key={p} value={p}>
+              {t(`listings.propertyType.${p}`)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-        <Select
-          value={filters.propertyType}
-          onValueChange={(v) => set({ propertyType: v })}
-        >
-          <SelectTrigger
-            className="h-9 w-[160px]"
-            aria-label={t("admin.listings.fields.property_type")}
-          >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("admin.listings.toolbar.allPropertyTypes")}</SelectItem>
-            {PROPERTY_TYPES.map((p) => (
-              <SelectItem key={p} value={p}>
-                {t(`listings.propertyType.${p}`)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <Select value={filters.dealType} onValueChange={(v) => set({ dealType: v })}>
+        <SelectTrigger className={trigger} aria-label={t("admin.listings.fields.deal_type")}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">{t("admin.listings.toolbar.saleAndRent")}</SelectItem>
+          {DEAL_TYPES.map((d) => (
+            <SelectItem key={d} value={d}>
+              {t(`listings.dealType.${d}`)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-        <Select value={filters.status} onValueChange={(v) => set({ status: v })}>
-          <SelectTrigger className="h-9 w-[150px]" aria-label={t("admin.listings.fields.status")}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("admin.listings.toolbar.allStatuses")}</SelectItem>
-            {LISTING_STATUSES.map((s) => (
-              <SelectItem key={s} value={s}>
-                {t(`listings.status.${s}`)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select
-          value={filters.sort}
-          onValueChange={(v) => set({ sort: v as ListingSort })}
-        >
-          <SelectTrigger className="h-9 w-[170px]" aria-label={t("admin.listings.toolbar.sort")}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {LISTING_SORTS.map((s) => (
-              <SelectItem key={s} value={s}>
-                {t(`admin.listings.toolbar.sortOptions.${s}`)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <ToggleGroup
-          type="single"
-          value={view}
-          onValueChange={(v) => v && onViewChange(v as ListingsView)}
-          className="ml-auto"
-        >
-          <ToggleGroupItem value="grid" aria-label={t("admin.listings.toolbar.gridView")}>
-            <LayoutGrid className="h-4 w-4" />
-          </ToggleGroupItem>
-          <ToggleGroupItem value="table" aria-label={t("admin.listings.toolbar.tableView")}>
-            <Table2 className="h-4 w-4" />
-          </ToggleGroupItem>
-        </ToggleGroup>
-      </div>
-
-      <p className="text-sm text-muted-foreground">
+      <span className="ml-auto text-[13px] text-muted-foreground" aria-live="polite">
         {t("admin.listings.toolbar.count", { count })}
-      </p>
+      </span>
     </div>
   );
 }
