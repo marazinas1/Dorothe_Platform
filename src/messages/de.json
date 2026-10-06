@@ -589,7 +589,10 @@
       "confirmDelete": "Diese Kundenstimme löschen?",
       "empty": "Noch keine Kundenstimmen.",
       "confirmDeleteTitle": "Diese Bewertung löschen?",
-      "confirmDeleteBody": "Die Bewertung von {{name}} wird gelöscht und nicht mehr auf der Website gezeigt."
+      "confirmDeleteBody": "Die Bewertung von {{name}} wird gelöscht und nicht mehr auf der Website gezeigt.",
+      "homeFull": "Auf der Startseite stehen bereits drei Stimmen. Nehmen Sie zuerst eine heraus.",
+      "homeCount": "Auf der Startseite: {{count}} von 3",
+      "homeLimitError": "Die Startseite zeigt höchstens drei Stimmen."
     },
     "topbar": {
       "signOut": "Abmelden",
@@ -1586,7 +1589,10 @@
       "confirmDeleteTitle": "Diesen Beitrag löschen?",
       "confirmDeleteBody": "„{{name}}“ wird gelöscht und verschwindet von der Website. Das kann nicht rückgängig gemacht werden.",
       "topic": "Thema",
-      "topicNone": "Kein Thema"
+      "topicNone": "Kein Thema",
+      "seoTitle": "Suchmaschinen",
+      "seoHint": "So erscheint der Artikel bei Google. Leer gelassen, werden Titel und Kurztext verwendet.",
+      "chars": "{{count}} / {{max}} Zeichen"
     },
     "copyEditor": {
       "currentlyShown": "Aktuell sichtbar",

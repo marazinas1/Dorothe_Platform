@@ -36,10 +36,12 @@ interface Props {
   locales: string[];
   onSave: (draft: TestimonialDraft) => Promise<void>;
   onCancel: () => void;
+  /** Three other quotes already sit on the home page. */
+  homeFull?: boolean;
 }
 
 /** One quote, one card: the words per language and where it is shown. */
-export function TestimonialForm({ initial, locales, onSave, onCancel }: Props) {
+export function TestimonialForm({ initial, locales, onSave, onCancel, homeFull = false }: Props) {
   const { t } = useTranslation();
   const [draft, setDraft] = useState<TestimonialDraft>(initial);
   const dirty = JSON.stringify(draft) !== JSON.stringify(initial);
@@ -93,11 +95,15 @@ export function TestimonialForm({ initial, locales, onSave, onCancel }: Props) {
         <label className="flex items-center gap-2 text-sm">
           <Switch
             checked={draft.show_on_home}
+            disabled={homeFull && !draft.show_on_home}
             onCheckedChange={(v) => setDraft((p) => ({ ...p, show_on_home: v }))}
           />
           {t("admin.testimonials.showOnHome")}
         </label>
       </div>
+      {homeFull && !draft.show_on_home ? (
+        <p className="text-xs text-muted-foreground">{t("admin.testimonials.homeFull")}</p>
+      ) : null}
 
       <div className="flex items-center gap-3">
         <SaveButton onSubmit={() => onSave(draft)} />

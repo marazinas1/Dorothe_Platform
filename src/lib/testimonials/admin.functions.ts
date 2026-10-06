@@ -8,7 +8,7 @@ import {
   TestimonialMoveSchema,
 } from "@/lib/validation/testimonials";
 
-import type { TestimonialRow } from "./types";
+import { HOME_TESTIMONIAL_LIMIT, type TestimonialRow } from "./types";
 
 const COLUMNS = "id, quote, author_name, author_detail, sort_order, published, show_on_home";
 
@@ -50,6 +50,15 @@ export const saveTestimonial = createServerFn({ method: "POST" })
       published: data.published,
       show_on_home: data.show_on_home,
     };
+
+    if (data.show_on_home) {
+      let q = supabase.from("testimonials").select("id").eq("show_on_home", true);
+      if (data.id) q = q.neq("id", data.id);
+      const { data: others } = await q;
+      if ((others ?? []).length >= HOME_TESTIMONIAL_LIMIT) {
+        throw new Error("The home page shows at most three quotes.");
+      }
+    }
 
     if (data.id) {
       const { error } = await supabase

@@ -589,7 +589,10 @@
       "confirmDelete": "Delete this testimonial?",
       "empty": "No testimonials yet.",
       "confirmDeleteTitle": "Delete this testimonial?",
-      "confirmDeleteBody": "The testimonial from {{name}} will be deleted and no longer shown on the website."
+      "confirmDeleteBody": "The testimonial from {{name}} will be deleted and no longer shown on the website.",
+      "homeFull": "Three quotes are already on the home page. Take one off first.",
+      "homeCount": "On the home page: {{count}} of 3",
+      "homeLimitError": "The home page shows at most three quotes."
     },
     "topbar": {
       "signOut": "Sign out",
@@ -1586,7 +1589,10 @@
       "confirmDeleteTitle": "Delete this article?",
       "confirmDeleteBody": "“{{name}}” will be deleted and disappear from the public website. This cannot be undone.",
       "topic": "Topic",
-      "topicNone": "No topic"
+      "topicNone": "No topic",
+      "seoTitle": "Search engines",
+      "seoHint": "How the article appears in Google. Left empty, the title and summary are used.",
+      "chars": "{{count}} / {{max}} characters"
     },
     "copyEditor": {
       "currentlyShown": "Currently shown",

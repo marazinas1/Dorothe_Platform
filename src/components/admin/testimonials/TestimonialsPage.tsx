@@ -15,6 +15,7 @@ import {
 
 import { TestimonialForm, toDraft, type TestimonialDraft } from "./TestimonialForm";
 import { TestimonialRow } from "./TestimonialRow";
+import { HOME_TESTIMONIAL_LIMIT } from "@/lib/testimonials/types";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
 import { AdminEmptyState } from "@/components/admin/ui/AdminEmptyState";
 import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
@@ -33,6 +34,10 @@ export function TestimonialsPage() {
   const enabled = (settings.enabled_locales ?? []).filter(Boolean);
   const locales = enabled.length > 0 ? enabled : [settings.default_locale];
 
+  const onHome = rows.filter((r) => r.show_on_home);
+  const homeFullFor = (id?: string) =>
+    onHome.filter((r) => r.id !== id).length >= HOME_TESTIMONIAL_LIMIT;
+
   async function refresh() {
     await qc.invalidateQueries({ queryKey: adminTestimonialsQueryOptions.queryKey });
   }
@@ -50,12 +55,17 @@ export function TestimonialsPage() {
           {t("admin.testimonials.add")}
         </Button>} />
 
+      <p className="text-sm text-muted-foreground">
+        {t("admin.testimonials.homeCount", { count: onHome.length })}
+      </p>
+
       {editing && !editing.id ? (
         <TestimonialForm
           initial={editing}
           locales={locales}
           onSave={save}
           onCancel={() => setEditing(null)}
+          homeFull={homeFullFor()}
         />
       ) : null}
 
@@ -89,6 +99,7 @@ export function TestimonialsPage() {
                     locales={locales}
                     onSave={save}
                     onCancel={() => setEditing(null)}
+                    homeFull={homeFullFor(row.id)}
                   />
                 ) : null}
               </li>
