@@ -10,7 +10,23 @@ import { useFeatureFlag } from "@/hooks/use-feature-flag";
  * Business & appearance first, then one tab per public page in the exact order
  * and with the exact names the site menu uses, then the legal pages last.
  */
-const TABS = ["business", "home", "selling", "inheritance", "about", "contact"] as const;
+const TABS = [
+  "business",
+  "home",
+  "properties",
+  "selling",
+  "valuation",
+  "inheritance",
+  "about",
+  "contact",
+] as const;
+/** Page tabs repeat the public menu label word for word. */
+const PUBLIC_LABEL: Partial<Record<string, string>> = {
+  properties: "nav.listings",
+  valuation: "nav.valuation",
+  inheritance: "nav.inheritance",
+};
+
 export type SettingsTabId = (typeof TABS)[number];
 
 export function SettingsTabs() {
@@ -26,7 +42,9 @@ export function SettingsTabs() {
         id: tab,
         label: tab === "about"
           ? t(teamEnabled ? "admin.settings.tabs.about_us" : "admin.settings.tabs.about")
-          : t(`admin.settings.tabs.${tab}`),
+          : tab in PUBLIC_LABEL
+            ? t(PUBLIC_LABEL[tab]!)
+            : t(`admin.settings.tabs.${tab}`),
         to: "/admin/settings/$tab",
         params: { tab },
         active: pathname === `/admin/settings/${tab}`,

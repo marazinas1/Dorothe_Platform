@@ -633,7 +633,8 @@
       "calendar": "Calendar",
       "backToSite": "Back to site",
       "properties": "Properties",
-      "blog": "Advice"
+      "blog": "Advice",
+      "valuation": "Valuation"
     },
     "pages": {
       "dashboard": "Dashboard",
@@ -760,7 +761,8 @@
         "blog": "Advice",
         "imprint": "Imprint",
         "privacy": "Privacy policy",
-        "terms": "Terms"
+        "terms": "Terms",
+        "valuation": "Valuation"
       },
       "general": {
         "site_name": "Company name",
@@ -1697,6 +1699,13 @@
           "headline": "Page title",
           "intro": "Intro text",
           "empty": "Text when no article is published"
+        },
+        "valuation": {
+          "headline": "Headline",
+          "intro": "Introduction",
+          "deliverables_title": "What you receive — title",
+          "inheritance_title": "Inherited property — title",
+          "inheritance_body": "Inherited property — text"
         }
       },
       "resetToDefault": "Reset to default",
