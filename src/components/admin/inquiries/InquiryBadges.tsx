@@ -12,7 +12,7 @@ export function InquiryTypeBadge({ type }: { type: string }) {
 
 export function InquiryStatusBadge({ status }: { status: InquiryStatus }) {
   const { t } = useTranslation();
-  const icon = status === "new" ? "unread" : status === "handled" ? "published" : "read";
+  const icon = status === "new" ? "unread" : status === "closed" ? "published" : "read";
   return (
     <StatusChip icon={icon} tone={status === "new" ? "active" : "muted"}>
       {t(`admin.inquiries.status.${status}`)}

@@ -10,6 +10,7 @@ import { rowPublishBlockers } from "@/lib/listings/row-publish-check";
 import type { AdminListingRow } from "@/lib/listings/admin.functions";
 import { publishedGaps, GAP_ANCHOR } from "@/lib/listings/published-gaps";
 import { assertCanUseDashboard, siteCountry } from "./admin.server";
+import { OPEN_INQUIRY_STATUSES, normalizeInquiryStatus } from "@/lib/inquiries/types";
 import { QUEUE_LIMIT, STALE_ACTIVE_DAYS } from "./types";
 import type {
   DashboardMetrics,
@@ -38,7 +39,7 @@ export const dashboardInquiryQueue = createServerFn({ method: "GET" })
       .select("id, type, status, name, email, created_at, listings(slug, title)", {
         count: "exact",
       })
-      .in("status", ["new", "read"])
+      .in("status", [...OPEN_INQUIRY_STATUSES])
       .order("created_at", { ascending: true })
       .limit(QUEUE_LIMIT);
     if (error) throw new Error(error.message);
@@ -46,7 +47,7 @@ export const dashboardInquiryQueue = createServerFn({ method: "GET" })
     const items = (data ?? []).map((row: Json) => ({
       id: row.id,
       type: row.type,
-      status: row.status,
+      status: normalizeInquiryStatus(row.status),
       name: row.name,
       email: row.email,
       created_at: row.created_at,

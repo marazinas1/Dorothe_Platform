@@ -49,3 +49,4 @@ Binding rules. If a request conflicts, say so and propose the compliant version.
 - Colours only from semantic tokens in `src/styles.css`.
 
 - New public listing columns need both the `listings_public` view and a column-level `GRANT SELECT (...) ON listings TO anon`; the view is security_invoker, so without the grant every public page fails.
+- Enquiry status is read through `normalizeInquiryStatus` (legacy `read`/`handled` map to `in_progress`/`closed`), because older deployed builds may still write the old values.

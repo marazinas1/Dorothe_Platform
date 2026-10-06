@@ -6,16 +6,18 @@ import { z } from "zod";
 
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { assertCanViewInquiries, signSellerPhotos } from "./admin.server";
-import { INQUIRY_STATUSES, type AdminInquiryRow } from "./types";
+import { INQUIRY_STATUSES, normalizeInquiryStatus, type AdminInquiryRow } from "./types";
 
 const COLUMNS =
-  "id, type, status, name, email, phone, message, locale, source, payload, photo_paths, listing_id, created_at, read_at, handled_at, listings(id, slug, title)";
+  "id, type, status, name, email, phone, message, locale, source, payload, photo_paths, listing_id, created_at, read_at, handled_at, internal_note, listings(id, slug, title)";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function shape(row: any): AdminInquiryRow {
   const { listings, ...rest } = row;
   return {
     ...rest,
+    status: normalizeInquiryStatus(rest.status),
+    internal_note: rest.internal_note ?? "",
     photo_paths: rest.photo_paths ?? [],
     listing: listings ?? null,
   } as AdminInquiryRow;
@@ -61,7 +63,7 @@ export interface AdminInquiryDetail {
   photoUrls: string[];
 }
 
-/** Loads one inquiry and marks it read on first open. */
+/** Loads one inquiry and records when it was first opened. */
 export const getInquiry = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
@@ -79,17 +81,15 @@ export const getInquiry = createServerFn({ method: "GET" })
 
     const inquiry = shape(row);
 
-    if (inquiry.status === "new") {
+    // Opening only stamps the time; the status stays the owner's decision.
+    if (!inquiry.read_at) {
       const { data: updated } = await supabase
         .from("inquiries")
-        .update({ status: "read", read_at: new Date().toISOString() } as never)
+        .update({ read_at: new Date().toISOString() } as never)
         .eq("id", inquiry.id)
-        .select("status, read_at")
+        .select("read_at")
         .maybeSingle();
-      if (updated) {
-        inquiry.status = "read";
-        inquiry.read_at = (updated as { read_at: string | null }).read_at;
-      }
+      if (updated) inquiry.read_at = (updated as { read_at: string | null }).read_at;
     }
 
     const photoUrls = await signSellerPhotos(inquiry.photo_paths ?? []);
@@ -115,7 +115,7 @@ export const setInquiryStatus = createServerFn({ method: "POST" })
     await assertCanViewInquiries(supabase, userId);
     const patch = {
       status: data.status,
-      handled_at: data.status === "handled" ? new Date().toISOString() : null,
+      handled_at: data.status === "closed" ? new Date().toISOString() : null,
     };
     const { data: updated, error } = await supabase
       .from("inquiries")
@@ -127,4 +127,21 @@ export const setInquiryStatus = createServerFn({ method: "POST" })
       throw new Error(error?.message ?? "Status change failed");
     }
     return updated as { id: string; status: string; handled_at: string | null };
+  });
+
+/** Staff-only note on an enquiry; never sent to the person who wrote it. */
+export const saveInquiryNote = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z.object({ id: z.string().uuid(), note: z.string().max(4000) }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    await assertCanViewInquiries(supabase, userId);
+    const { error } = await supabase
+      .from("inquiries")
+      .update({ internal_note: data.note.trim() } as never)
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true as const };
   });

@@ -10,7 +10,7 @@ export interface QueueResult<T> {
 export interface QueueInquiryItem {
   id: string;
   type: string;
-  status: "new" | "read";
+  status: "new" | "in_progress" | "answered" | "closed";
   name: string | null;
   email: string;
   created_at: string;

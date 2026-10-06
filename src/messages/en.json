@@ -1314,8 +1314,9 @@
       },
       "status": {
         "new": "New",
-        "read": "Read",
-        "handled": "Handled"
+        "in_progress": "In progress",
+        "answered": "Answered",
+        "closed": "Closed"
       },
       "detail": {
         "back": "Back to enquiries",
@@ -1326,12 +1327,20 @@
         "photo_alt": "Submitted photo {{n}}",
         "photos_private": "Private submission — links expire after 10 minutes.",
         "whatsapp": "WhatsApp",
-        "mark_handled": "Mark as handled",
-        "mark_open": "Reopen",
         "status_saved": "Status updated.",
         "status_error": "Could not update the status.",
         "locale": "Language",
-        "source": "Source"
+        "source": "Source",
+        "workflow": "Status",
+        "note": "Internal note",
+        "note_hint": "Only visible to your team. The sender never sees it.",
+        "note_save": "Save note",
+        "note_saved": "Note saved.",
+        "note_error": "Could not save the note.",
+        "history": "History",
+        "history_received": "Received",
+        "history_opened": "First opened",
+        "history_closed": "Closed"
       },
       "fields": {
         "property_type": "Property type",
@@ -1359,7 +1368,7 @@
         "article": "Write article"
       },
       "queue": {
-        "heading": "To do",
+        "heading": "Needs attention",
         "failed": "Could not load this group.",
         "more": "{{count}} more not shown",
         "agenda": {

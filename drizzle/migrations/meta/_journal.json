@@ -36,6 +36,13 @@
       "when": 1791280688279,
       "tag": "0004_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791282629058,
+      "tag": "0005_inquiry_workflow_statuses_and_note",
+      "breakpoints": true
     }
   ]
 }

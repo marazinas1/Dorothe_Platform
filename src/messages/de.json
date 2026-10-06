@@ -1314,8 +1314,9 @@
       },
       "status": {
         "new": "Neu",
-        "read": "Gelesen",
-        "handled": "Erledigt"
+        "in_progress": "In Bearbeitung",
+        "answered": "Beantwortet",
+        "closed": "Abgeschlossen"
       },
       "detail": {
         "back": "Zurück zu den Anfragen",
@@ -1326,12 +1327,20 @@
         "photo_alt": "Übermitteltes Foto {{n}}",
         "photos_private": "Private Übermittlung – Links laufen nach 10 Minuten ab.",
         "whatsapp": "WhatsApp",
-        "mark_handled": "Als erledigt markieren",
-        "mark_open": "Wieder öffnen",
         "status_saved": "Status aktualisiert.",
         "status_error": "Status konnte nicht aktualisiert werden.",
         "locale": "Sprache",
-        "source": "Quelle"
+        "source": "Quelle",
+        "workflow": "Status",
+        "note": "Interne Notiz",
+        "note_hint": "Nur für Ihr Team sichtbar. Der Absender sieht sie nie.",
+        "note_save": "Notiz speichern",
+        "note_saved": "Notiz gespeichert.",
+        "note_error": "Notiz konnte nicht gespeichert werden.",
+        "history": "Verlauf",
+        "history_received": "Eingegangen",
+        "history_opened": "Zuerst geöffnet",
+        "history_closed": "Abgeschlossen"
       },
       "fields": {
         "property_type": "Objektart",
@@ -1359,7 +1368,7 @@
         "article": "Artikel schreiben"
       },
       "queue": {
-        "heading": "Zu tun",
+        "heading": "Braucht Aufmerksamkeit",
         "failed": "Diese Gruppe konnte nicht geladen werden.",
         "more": "{{count}} weitere nicht angezeigt",
         "agenda": {

@@ -1,14 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
-import { Check, Mail, MailOpen, MessageCircle, Phone } from "lucide-react";
-import { toast } from "sonner";
+import { Mail, MessageCircle, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { pickLocalized } from "@/lib/listings/format";
 import { payloadEntries, type AdminInquiryDetailView } from "./detail-types";
-import { setInquiryStatus } from "@/lib/inquiries/admin.functions";
+import { InquiryWorkflow } from "./InquiryWorkflow";
 import { InquiryStatusBadge, InquiryTypeBadge, formatInquiryDate } from "./InquiryBadges";
 import { SellerPhotos } from "./SellerPhotos";
 
@@ -25,20 +22,6 @@ export function InquiryDetail({
 }) {
   const { t } = useTranslation();
   const { inquiry, photoUrls } = detail;
-  const queryClient = useQueryClient();
-  const updateStatus = useServerFn(setInquiryStatus);
-
-  const mutation = useMutation({
-    mutationFn: (status: "read" | "handled") =>
-      updateStatus({ data: { id: inquiry.id, status } }),
-    onSuccess: () => {
-      toast.success(t("admin.inquiries.detail.status_saved"));
-      void queryClient.invalidateQueries({ queryKey: ["admin", "inquiry", inquiry.id] });
-      void queryClient.invalidateQueries({ queryKey: ["admin", "inquiries"] });
-    },
-    onError: () => toast.error(t("admin.inquiries.detail.status_error")),
-  });
-
   const details = payloadEntries(inquiry.payload);
 
   return (
@@ -49,29 +32,9 @@ export function InquiryDetail({
         <span className="text-xs text-muted-foreground">
           {formatInquiryDate(inquiry.created_at, locale)}
         </span>
-        <div className="ml-auto flex gap-2">
-          {inquiry.status === "handled" ? (
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={mutation.isPending}
-              onClick={() => mutation.mutate("read")}
-            >
-              <MailOpen className="h-4 w-4" />
-              {t("admin.inquiries.detail.mark_open")}
-            </Button>
-          ) : (
-            <Button
-              size="sm"
-              disabled={mutation.isPending}
-              onClick={() => mutation.mutate("handled")}
-            >
-              <Check className="h-4 w-4" />
-              {t("admin.inquiries.detail.mark_handled")}
-            </Button>
-          )}
-        </div>
       </div>
+
+      <InquiryWorkflow inquiry={inquiry} locale={locale} />
 
       <section className="space-y-3 rounded-[var(--radius)] border border-border bg-card p-4">
         <h1 className="text-2xl font-extrabold">{inquiry.name || inquiry.email}</h1>

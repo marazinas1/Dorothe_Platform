@@ -213,6 +213,7 @@ export type Database = {
           email: string
           handled_at: string | null
           id: string
+          internal_note: string
           listing_id: string | null
           locale: string | null
           message: string | null
@@ -232,6 +233,7 @@ export type Database = {
           email: string
           handled_at?: string | null
           id?: string
+          internal_note?: string
           listing_id?: string | null
           locale?: string | null
           message?: string | null
@@ -251,6 +253,7 @@ export type Database = {
           email?: string
           handled_at?: string | null
           id?: string
+          internal_note?: string
           listing_id?: string | null
           locale?: string | null
           message?: string | null
