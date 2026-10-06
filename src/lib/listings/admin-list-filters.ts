@@ -32,6 +32,14 @@ export function inTab(row: AdminListingRow, tab: ListingTab): boolean {
   return tab === "all" || TAB_STATUSES[tab].includes(row.status);
 }
 
+export function sortListings(rows: AdminListingRow[]): AdminListingRow[] {
+  return [...rows].sort((a, b) => {
+    const order = (a.sort_order ?? 0) - (b.sort_order ?? 0);
+    if (order !== 0) return order;
+    return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+  });
+}
+
 function matchesSearch(row: AdminListingRow, needle: string, locale: string): boolean {
   const q = needle.trim().toLowerCase();
   if (!q) return true;
@@ -47,12 +55,12 @@ export function filterListings(
   filters: Omit<ListingFilters, "tab">,
   locale: string,
 ): AdminListingRow[] {
-  return rows
-    .filter(
+  return sortListings(
+    rows.filter(
       (row) =>
         matchesSearch(row, filters.search, locale) &&
         (filters.dealType === "all" || row.deal_type === filters.dealType) &&
         (filters.propertyType === "all" || row.property_type === filters.propertyType),
-    )
-    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+    ),
+  );
 }

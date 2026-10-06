@@ -924,7 +924,7 @@
       "saved": "Listing saved.",
       "unsaved": "Unsaved changes",
       "untitled": "Untitled listing",
-      "empty": "No listings yet.",
+      "empty": "No listings yet. Create your first one to show it on the site.",
       "viewPublic": "View public page",
       "statusChanged": "Status updated.",
       "saveBeforeStatus": "Save your changes first.",
@@ -1300,7 +1300,7 @@
         "removed": "Removed from the home page.",
         "limitReached": "The home page shows at most {{count}} properties. Remove one first."
       },
-      "pageHint": "Your properties for sale and rent.",
+      "pageHint": "Your properties for sale and rent. Drag to change the order on the site.",
       "referencePending": "Assigned when the listing is first saved",
       "tabs": {
         "label": "Listing status",
@@ -1316,10 +1316,15 @@
         "energy": "Energy",
         "updated": "Updated",
         "ref": "ref.",
-        "priceReduced": "Price reduced"
+        "priceReduced": "Price reduced",
+        "order": "Order",
+        "dragHandle": "Drag to reorder {{title}}. Use arrow keys to move it."
       },
       "energyMissing": "Missing",
-      "energyExempt": "Exempt"
+      "energyExempt": "Exempt",
+      "orderSaved": "Listing order saved.",
+      "orderSaving": "Saving listing order…",
+      "orderUnavailable": "Clear filters to change the site order."
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",
@@ -1593,8 +1598,8 @@
     },
     "posts": {
       "title": "Articles",
-      "hint": "Articles for the public advice section. Only published articles are visible, and the menu link appears once one exists.",
-      "add": "Add article",
+      "hint": "Guides for owners and buyers. Published articles appear under Guides and help people find you on Google.",
+      "add": "New article",
       "titleField": "Headline",
       "excerpt": "Short intro",
       "body": "Text",
@@ -1623,7 +1628,20 @@
       "topicNone": "No topic",
       "seoTitle": "Search engines",
       "seoHint": "How the article appears in Google. Left empty, the title and summary are used.",
-      "chars": "{{count}} / {{max}} characters"
+      "chars": "{{count}} / {{max}} characters",
+      "search": "Search articles",
+      "count": "{{count}} articles",
+      "count_one": "{{count}} article",
+      "noMatches": "No articles match this search.",
+      "notYet": "Not yet",
+      "viewsUnavailable": "—",
+      "table": {
+        "article": "Article",
+        "status": "Status",
+        "published": "Published",
+        "views30": "Views, 30 days",
+        "actions": "Actions"
+      }
     },
     "copyEditor": {
       "currentlyShown": "Currently shown",

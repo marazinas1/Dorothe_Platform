@@ -36,6 +36,7 @@ export type AdminListingRow = {
   energy: Json;
   energy_exemption: string | null;
   price_reduced: boolean | null;
+  sort_order: number;
   updated_at: string;
   images: { variants: Json; is_primary: boolean | null; sort_order: number | null; alt_text: Json }[];
 };
@@ -46,8 +47,9 @@ export const listAdminListings = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("listings")
       .select(
-        "id, slug, status, deal_type, property_type, price, price_on_request, is_featured, address_city, reference_code, rooms, bedrooms, bathrooms, living_area, title, commission_free, commission_value, energy, energy_exemption, price_reduced, updated_at, listing_images(variants, is_primary, sort_order, alt_text)",
+        "id, slug, status, deal_type, property_type, price, price_on_request, is_featured, address_city, reference_code, rooms, bedrooms, bathrooms, living_area, title, commission_free, commission_value, energy, energy_exemption, price_reduced, sort_order, updated_at, listing_images(variants, is_primary, sort_order, alt_text)",
       )
+      .order("sort_order", { ascending: true })
       .order("updated_at", { ascending: false });
     if (error) throw new Error(error.message);
     return (data ?? []).map((row: Json) => ({
