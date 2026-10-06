@@ -43,14 +43,15 @@ export function SiteLogo({
   const configured =
     tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
   const src = logoSrc(tone === "light" ? "mono" : "original", configured);
-  const height = `${(BASE_HEIGHT_REM * clampSize(settings.logo_size)) / 100}rem`;
+  const logoSize = clampSize(settings.logo_size);
+  const height = `${(BASE_HEIGHT_REM * logoSize) / 100}rem`;
   if (!src)
     return (
       <BrandMark
         settings={settings}
         tone={tone}
         className={cn(interactive && INTERACTIVE_CLASS, className)}
-        style={{ fontSize: height } as CSSProperties}
+        style={{ fontSize: `${logoSize / 100}rem` } as CSSProperties}
       />
     );
 
