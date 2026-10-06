@@ -3,46 +3,35 @@ import type { ReactNode } from "react";
 type Props = {
   /** Form column content. */
   children: ReactNode;
-  /** Small label above the sign-in heading. */
-  eyebrow?: ReactNode;
-  /** Brand mark rendered in the right-hand panel. */
+  /** Brand mark shown above the form. */
   brand: ReactNode;
-  /** Site name shown in smaller type under the brand mark. */
+  /** Business name at the top of the dark panel. */
+  title?: ReactNode;
+  /** Larger line at the bottom of the dark panel. */
   tagline?: ReactNode;
-  /** Quiet line under the brand mark ("authorised personnel only"). */
+  /** Quiet line under the tagline. */
   note?: ReactNode;
 };
 
 /**
- * Two-column authentication shell: credentials on the left, the site's own
- * logo on a calm ink panel at the right. The panel is hidden on mobile so
- * only the centred form remains.
+ * Admin sign-in split screen (broker-admin.html): form on the left, a dark
+ * brand panel on the right. Below 900px the panel stacks under the form.
  */
-export function AuthSplit({ children, eyebrow, brand, tagline, note }: Props) {
+export function AuthSplit({ children, brand, title, tagline, note }: Props) {
   return (
-    <div className="grid min-h-screen grid-cols-1 bg-background lg:grid-cols-2">
-      <div className="flex items-center justify-center px-5 py-14 sm:px-10">
-        <div className="w-full max-w-[26rem]">
-          {eyebrow ? (
-            <p className="admin-label text-muted-foreground">
-              {eyebrow}
-            </p>
-          ) : null}
+    <div className="grid min-h-screen grid-cols-1 bg-card min-[900px]:grid-cols-2">
+      <div className="flex items-center justify-center p-10">
+        <div className="flex w-full max-w-[360px] flex-col gap-4">
+          <div className="mb-3">{brand}</div>
           {children}
         </div>
       </div>
-
-      <div className="hidden flex-col items-center justify-center gap-8 bg-foreground px-10 lg:flex">
-        <div className="flex flex-col items-center gap-4 text-center">
-          {brand}
-          {tagline ? (
-            <p className="text-xs text-primary-foreground/70">{tagline}</p>
-          ) : null}
+      <div className="flex min-h-[200px] flex-col justify-between bg-sidebar p-12 text-sidebar-accent-foreground">
+        {title ? <div className="text-[22px] font-bold">{title}</div> : <span />}
+        <div>
+          {tagline ? <p className="max-w-[30ch] text-xl leading-snug">{tagline}</p> : null}
+          {note ? <p className="mt-2 text-sidebar-foreground">{note}</p> : null}
         </div>
-        <span className="h-px w-16 bg-primary-foreground/40" />
-        {note ? (
-          <p className="admin-label text-primary-foreground/60">{note}</p>
-        ) : null}
       </div>
     </div>
   );
