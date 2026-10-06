@@ -1,28 +1,38 @@
-// Client-side filtering and sorting of the already-loaded admin listing list.
+// Client-side filtering of the already-loaded admin listing list.
 import type { AdminListingRow } from "./admin.functions";
 import { pickLocalized } from "./format";
 
-export const LISTING_SORTS = ["newest", "oldest", "price_desc", "price_asc"] as const;
-export type ListingSort = (typeof LISTING_SORTS)[number];
+/** Status tabs above the listings table, in the order the broker works. */
+export const LISTING_TABS = ["all", "live", "drafts", "coming_soon", "closed", "archived"] as const;
+export type ListingTab = (typeof LISTING_TABS)[number];
+
+const TAB_STATUSES: Record<Exclude<ListingTab, "all">, string[]> = {
+  live: ["active", "reserved"],
+  drafts: ["draft"],
+  coming_soon: ["coming_soon"],
+  closed: ["sold", "rented"],
+  archived: ["archived"],
+};
 
 export type ListingFilters = {
+  tab: ListingTab;
   search: string;
   dealType: string;
   propertyType: string;
-  status: string;
-  sort: ListingSort;
 };
 
 export const EMPTY_FILTERS: ListingFilters = {
+  tab: "all",
   search: "",
   dealType: "all",
   propertyType: "all",
-  status: "all",
-  sort: "newest",
 };
 
+export function inTab(row: AdminListingRow, tab: ListingTab): boolean {
+  return tab === "all" || TAB_STATUSES[tab].includes(row.status);
+}
+
 function matchesSearch(row: AdminListingRow, needle: string, locale: string): boolean {
-  if (!needle) return true;
   const q = needle.trim().toLowerCase();
   if (!q) return true;
   const title = pickLocalized(row.title, locale).toLowerCase();
@@ -31,32 +41,18 @@ function matchesSearch(row: AdminListingRow, needle: string, locale: string): bo
   return title.includes(q) || city.includes(q) || reference.includes(q);
 }
 
-export function filterAndSortListings(
+/** Rows matching search, type and deal filters (ignores the status tab). */
+export function filterListings(
   rows: AdminListingRow[],
-  filters: ListingFilters,
+  filters: Omit<ListingFilters, "tab">,
   locale: string,
 ): AdminListingRow[] {
-  const out = rows.filter(
-    (row) =>
-      matchesSearch(row, filters.search, locale) &&
-      (filters.dealType === "all" || row.deal_type === filters.dealType) &&
-      (filters.propertyType === "all" || row.property_type === filters.propertyType) &&
-      (filters.status === "all" || row.status === filters.status),
-  );
-
-  const price = (row: AdminListingRow) => (row.price == null ? -1 : Number(row.price));
-  const time = (row: AdminListingRow) => new Date(row.updated_at).getTime();
-
-  return out.sort((a, b) => {
-    switch (filters.sort) {
-      case "oldest":
-        return time(a) - time(b);
-      case "price_desc":
-        return price(b) - price(a);
-      case "price_asc":
-        return price(a) - price(b);
-      default:
-        return time(b) - time(a);
-    }
-  });
+  return rows
+    .filter(
+      (row) =>
+        matchesSearch(row, filters.search, locale) &&
+        (filters.dealType === "all" || row.deal_type === filters.dealType) &&
+        (filters.propertyType === "all" || row.property_type === filters.propertyType),
+    )
+    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
 }

@@ -33,7 +33,7 @@ const ENUMS = {
   numericFields: unionFrom("src/components/admin/listings/NumberFields.tsx", "NumericKey"),
   textFields: listFrom("src/lib/listings/text-placement.ts", "TEXT_FIELDS"),
   outlineRegions: listFrom("src/lib/listings/text-placement.ts", "OUTLINE_REGION_KEYS"),
-  statusGroups: listFrom("src/lib/listings/admin-list-groups.ts", "STATUS_GROUP_KEYS"),
+  listingTabs: listFrom("src/lib/listings/admin-list-filters.ts", "LISTING_TABS"),
   slugIssues: listFrom("src/lib/listings/slug.ts", "SLUG_ISSUE_KEYS"),
 };
 
@@ -47,7 +47,7 @@ const DYNAMIC_PREFIXES = {
   "admin.listings.checklist.items": ENUMS.checklist,
   "admin.listings.placement": ENUMS.textFields,
   "admin.listings.outline.regions": ENUMS.outlineRegions,
-  "admin.listings.statusGroups": ENUMS.statusGroups,
+  "admin.listings.tabs": ENUMS.listingTabs,
   "admin.listings.errors": ENUMS.slugIssues,
 };
 
