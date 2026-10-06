@@ -1,7 +1,18 @@
 // Shared inquiry types + small pure helpers (client-safe).
 
-export const INQUIRY_STATUSES = ["new", "read", "handled"] as const;
+/** The workflow an enquiry moves through, in the order the owner works it. */
+export const INQUIRY_STATUSES = ["new", "in_progress", "answered", "closed"] as const;
 export type InquiryStatus = (typeof INQUIRY_STATUSES)[number];
+
+/** Rows written before the workflow existed carry the old names. */
+export function normalizeInquiryStatus(raw: string): InquiryStatus {
+  if (raw === "read") return "in_progress";
+  if (raw === "handled") return "closed";
+  return (INQUIRY_STATUSES as readonly string[]).includes(raw) ? (raw as InquiryStatus) : "new";
+}
+
+/** Statuses that still need the owner's attention. */
+export const OPEN_INQUIRY_STATUSES = ["new", "in_progress", "read"] as const;
 
 export const INQUIRY_TYPES = ["listing", "buyer", "seller"] as const;
 export type InquiryType = (typeof INQUIRY_TYPES)[number];
@@ -25,6 +36,7 @@ export interface AdminInquiryRow {
   created_at: string;
   read_at: string | null;
   handled_at: string | null;
+  internal_note: string;
   listing: { id: string; slug: string; title: Json } | null;
 }
 
