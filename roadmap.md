@@ -76,4 +76,5 @@ Blocked outside this work:
 ## Book plan F-stages
 - [x] F1–F5
 - [x] F6 Guides: flag+post gating, article topic field and labels
-- [x] F7 Admin shell and sign-in · F8–F13
+- [x] F7 Admin shell and sign-in
+- [ ] F8–F13
