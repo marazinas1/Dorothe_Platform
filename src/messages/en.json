@@ -1154,7 +1154,9 @@
         "tableView": "Table view",
         "count": "{{count}} listings",
         "count_one": "{{count}} listing",
-        "searchReference": "Search title, town or reference"
+        "searchReference": "Search by title, town or reference",
+        "allTypes": "All types",
+        "saleAndRent": "Sale and rent"
       },
       "figures": {
         "rooms": "rooms",
@@ -1298,8 +1300,26 @@
         "removed": "Removed from the home page.",
         "limitReached": "The home page shows at most {{count}} properties. Remove one first."
       },
-      "pageHint": "Create properties, update their status and control what appears on the website.",
-      "referencePending": "Assigned when the listing is first saved"
+      "pageHint": "Your properties for sale and rent.",
+      "referencePending": "Assigned when the listing is first saved",
+      "tabs": {
+        "label": "Listing status",
+        "all": "All",
+        "live": "Live",
+        "drafts": "Drafts",
+        "coming_soon": "Coming soon",
+        "closed": "Sold and let",
+        "archived": "Archived"
+      },
+      "table": {
+        "property": "Property",
+        "energy": "Energy",
+        "updated": "Updated",
+        "ref": "ref.",
+        "priceReduced": "Price reduced"
+      },
+      "energyMissing": "Missing",
+      "energyExempt": "Exempt"
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",

@@ -2,7 +2,7 @@ import { usePublicLocale } from "@/lib/config/use-public-locale";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { House, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ListingsBrowser } from "@/components/admin/listings/ListingsBrowser";
@@ -28,7 +28,7 @@ function ListingsIndex() {
 
   return (
     <div className="space-y-6">
-      <AdminPageHeader icon={House} title={t("admin.pages.listings")} description={t("admin.listings.pageHint")} actions={<Button asChild>
+      <AdminPageHeader title={t("admin.pages.listings")} description={t("admin.listings.pageHint")} actions={<Button asChild>
           <Link to="/admin/listings/new">
             <Plus className="h-4 w-4" />
             {t("admin.listings.new")}

@@ -1154,7 +1154,9 @@
         "tableView": "Tabellenansicht",
         "count": "{{count}} Objekte",
         "count_one": "{{count}} Objekt",
-        "searchReference": "Titel, Ort oder Objektnummer suchen"
+        "searchReference": "Nach Titel, Ort oder Referenz suchen",
+        "allTypes": "Alle Objektarten",
+        "saleAndRent": "Kauf und Miete"
       },
       "figures": {
         "rooms": "Zimmer",
@@ -1298,8 +1300,26 @@
         "removed": "Von der Startseite entfernt.",
         "limitReached": "Die Startseite zeigt höchstens {{count}} Objekte. Bitte zuerst eines entfernen."
       },
-      "pageHint": "Objekte anlegen, Status ändern und steuern, was auf der Website erscheint.",
-      "referencePending": "Wird beim ersten Speichern vergeben"
+      "pageHint": "Ihre Immobilien zum Kauf und zur Miete.",
+      "referencePending": "Wird beim ersten Speichern vergeben",
+      "tabs": {
+        "label": "Objektstatus",
+        "all": "Alle",
+        "live": "Live",
+        "drafts": "Entwürfe",
+        "coming_soon": "Demnächst",
+        "closed": "Verkauft und vermietet",
+        "archived": "Archiviert"
+      },
+      "table": {
+        "property": "Objekt",
+        "energy": "Energie",
+        "updated": "Aktualisiert",
+        "ref": "Ref.",
+        "priceReduced": "Preis reduziert"
+      },
+      "energyMissing": "Fehlt",
+      "energyExempt": "Ausgenommen"
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",
