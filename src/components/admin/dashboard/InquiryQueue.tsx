@@ -10,7 +10,7 @@ import type { Locale } from "@/i18n/config";
 import { QueueGroup } from "./QueueGroup";
 
 /**
- * Enquiries that nobody has closed out yet — "new" and "read" both count,
+ * Enquiries that nobody has closed out yet — "new" and "in progress" both count,
  * because opening a message is not the same as answering it. Oldest first: the
  * one that has been waiting longest is the one that matters.
  */

@@ -47,10 +47,14 @@ export function InquiryWorkflow({ inquiry, locale }: { inquiry: AdminInquiryRow;
   });
 
   const history = [
-    { key: "received", at: inquiry.created_at },
-    { key: "opened", at: inquiry.read_at },
-    { key: "closed", at: inquiry.status === "closed" ? inquiry.handled_at : null },
-  ].filter((h): h is { key: string; at: string } => Boolean(h.at));
+    { key: "received", label: t("admin.inquiries.detail.history_received"), at: inquiry.created_at },
+    { key: "opened", label: t("admin.inquiries.detail.history_opened"), at: inquiry.read_at },
+    {
+      key: "closed",
+      label: t("admin.inquiries.detail.history_closed"),
+      at: inquiry.status === "closed" ? inquiry.handled_at : null,
+    },
+  ].filter((h): h is { key: string; label: string; at: string } => Boolean(h.at));
 
   return (
     <section className="grid gap-6 rounded-[var(--radius)] border border-border bg-card p-4 lg:grid-cols-[1fr_1fr]">
@@ -80,9 +84,7 @@ export function InquiryWorkflow({ inquiry, locale }: { inquiry: AdminInquiryRow;
           <ol className="space-y-1 text-sm">
             {history.map((h) => (
               <li key={h.key} className="flex gap-3">
-                <span className="w-32 text-muted-foreground">
-                  {t(`admin.inquiries.detail.history_${h.key}`)}
-                </span>
+                <span className="w-32 text-muted-foreground">{h.label}</span>
                 <span>{formatInquiryDate(h.at, locale)}</span>
               </li>
             ))}
