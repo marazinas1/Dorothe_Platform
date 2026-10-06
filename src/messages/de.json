@@ -2131,5 +2131,28 @@
     "banner": "Wartungsmodus ist aktiv — Sie sehen die Website, weil Sie angemeldet sind. Besucher sehen einen Hinweis.",
     "previewAsVisitor": "Als Besucher ansehen",
     "turnOff": "Ausschalten"
+  },
+  "emails": {
+    "received": {
+      "subject": "Wir haben Ihre Anfrage erhalten",
+      "preview": "Vielen Dank — Ihre Anfrage ist angekommen.",
+      "greeting": "Vielen Dank, {{name}}",
+      "greeting_plain": "Vielen Dank für Ihre Anfrage",
+      "body": "Ihre Nachricht an {{site}} ist angekommen.",
+      "about": "Betreff: {{subject}}",
+      "next": "Sie erhalten eine persönliche Antwort, in der Regel innerhalb eines Werktags.",
+      "footnote": "Sie erhalten diese E-Mail, weil Sie über unsere Website eine Anfrage gesendet haben."
+    },
+    "new": {
+      "subject": "Neue Anfrage von {{name}}",
+      "heading": "Neue Anfrage",
+      "open": "Anfrage öffnen",
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "about": "Betreff",
+      "message": "Nachricht",
+      "footnote": "Antworten Sie direkt auf diese E-Mail, um dem Absender zu antworten."
+    }
   }
 }

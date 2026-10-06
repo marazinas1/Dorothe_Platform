@@ -17,7 +17,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { consentColumns } = await import("./consent.server");
     const consent = await consentColumns(data.locale);
-    const { error } = await supabaseAdmin.from("inquiries").insert({
+    const { data: row, error } = await supabaseAdmin.from("inquiries").insert({
       ...consent,
       listing_id: data.listing_id,
       name: data.name,
@@ -26,8 +26,13 @@ export const submitInquiry = createServerFn({ method: "POST" })
       message: data.message,
       source: "public_web",
       type: "listing",
-    });
+    }).select("id").single();
     if (error) throw new Error(error.message);
+    const { sendInquiryEmails } = await import("./notify.server");
+    await sendInquiryEmails(supabaseAdmin, {
+      id: row.id, type: "listing", name: data.name, email: data.email,
+      phone: data.phone, message: data.message, locale: data.locale, listingId: data.listing_id,
+    });
     return { ok: true };
   });
 
@@ -52,7 +57,7 @@ export const submitBuyerInquiry = createServerFn({ method: "POST" })
     const { consentColumns } = await import("./consent.server");
     const { name, email, phone, message, consent: _c, locale, ...criteria } = data;
     const consent = await consentColumns(locale);
-    const { error } = await supabaseAdmin.from("inquiries").insert({
+    const { data: row, error } = await supabaseAdmin.from("inquiries").insert({
       ...consent,
       listing_id: null,
       type: "buyer",
@@ -62,8 +67,10 @@ export const submitBuyerInquiry = createServerFn({ method: "POST" })
       message: message || null,
       payload: criteria,
       source: "public_web",
-    });
+    }).select("id").single();
     if (error) throw new Error(error.message);
+    const { sendInquiryEmails } = await import("./notify.server");
+    await sendInquiryEmails(supabaseAdmin, { id: row.id, type: "buyer", name, email, phone, message, locale });
     return { ok: true };
   });
 
@@ -120,7 +127,7 @@ export const submitSellerInquiry = createServerFn({ method: "POST" })
       }
     }
 
-    const { error } = await supabaseAdmin.from("inquiries").insert({
+    const { data: row, error } = await supabaseAdmin.from("inquiries").insert({
       ...consent,
       listing_id: null,
       type: "seller",
@@ -131,7 +138,9 @@ export const submitSellerInquiry = createServerFn({ method: "POST" })
       payload: criteria,
       photo_paths,
       source: source ?? "public_web",
-    });
+    }).select("id").single();
     if (error) throw new Error(error.message);
+    const { sendInquiryEmails } = await import("./notify.server");
+    await sendInquiryEmails(supabaseAdmin, { id: row.id, type: "seller", name, email, phone, message, locale });
     return { ok: true };
   });
