@@ -13,6 +13,11 @@
 
 Binding rules. If a request conflicts, say so and propose the compliant version. Context and work plan: PLAN.md (read before planning).
 
+## Design and content source of truth
+- `docs/broker-book.md` is the single source of truth for colours, fonts, icons, components, EN/DE vocabulary, formats, content model and data fields. Read it before any UI, copy, icon, data or admin work.
+- Visual reference: `docs/reference/broker-site.html` and `docs/reference/broker-admin.html`. When a mockup and the book disagree, the book wins.
+- Mockup text, photos, listings and testimonials are samples and never become code, seed or database rows.
+
 ## Architecture
 - Clone-per-client: one codebase, one deployment, database and domain per broker. Not multi-tenant: no tenant ids, tenant routing or cross-client tables; no frontend/backend split.
 - Reuse comes from the core/brand boundary plus an upstream template. Fixes for every client go into core, never patched twice in brand.

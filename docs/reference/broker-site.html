@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4 Wände – Saar · Full site mockup (Noir)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ NOIR TOKENS (public :root) ============ */
+:root{
+  --bg:#FFFFFF; --fg:#111111; --card:#F5F5F5; --muted:#5E5E5E; --border:#E0E0E0;
+  --primary:#111111; --primary-fg:#FFFFFF; --primary-hover:#2E2E2E;
+  --footer:#000000; --footer-fg:#FFFFFF;
+  --on-media:#FFFFFF; --on-media-muted:rgba(255,255,255,.78);
+  --scrim:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,.22) 40%,rgba(0,0,0,.66) 100%);
+  --radius:2px;
+  --font:"Urbanist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --w:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{display:block;max-width:100%}
+.c{max-width:var(--w);margin:0 auto;padding:0 40px}
+@media(max-width:760px){.c{padding:0 20px}}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.meta{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+h1,h2,h3,h4{font-weight:700;letter-spacing:-0.02em;line-height:1.12}
+.h-display{font-size:clamp(40px,6vw,76px);letter-spacing:-0.035em;line-height:1.02}
+.h1{font-size:clamp(34px,4.4vw,56px);letter-spacing:-0.03em;line-height:1.06}
+.h2{font-size:clamp(28px,3.2vw,40px)}
+.h3{font-size:22px;letter-spacing:-0.01em;line-height:1.25}
+.lead{font-size:clamp(18px,1.6vw,21px);line-height:1.55;color:var(--muted);max-width:56ch}
+.prose p{max-width:66ch}
+.prose p+p{margin-top:16px}
+.sec{padding:120px 0}
+.sec.tight{padding:88px 0}
+.sec.surface{background:var(--card)}
+.sec.dark{background:var(--fg);color:var(--bg)}
+.sec.dark .muted,.sec.dark .lead{color:rgba(255,255,255,.7)}
+@media(max-width:760px){.sec{padding:72px 0}.sec.tight{padding:56px 0}}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px;flex-wrap:wrap}
+.sec-head p{margin-top:12px}
+svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============ IMAGES with graceful fallback ============ */
+.img{position:relative;overflow:hidden;background:#D8D8D5;border-radius:var(--radius)}
+.img img{width:100%;height:100%;object-fit:cover}
+.img.ph{background:linear-gradient(160deg,#CFCFCB,#9C9C97)}
+.img.ph::after{content:attr(data-cap);position:absolute;left:14px;bottom:12px;font-size:12px;color:#fff;background:rgba(0,0,0,.35);padding:4px 10px;border-radius:var(--radius)}
+
+/* ============ BUTTONS (one family, five variants) ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px;font-family:var(--font);font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .2s,background .2s,color .2s,border-color .2s}
+.btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--primary);color:var(--primary-fg)}
+.btn.primary:hover{background:var(--primary-hover);transform:translateY(-2px)}
+.btn.secondary{background:var(--card);color:var(--fg);border-color:var(--border)}
+.btn.secondary:hover{border-color:var(--fg)}
+.btn.outline{background:transparent;color:var(--fg);border-color:var(--fg)}
+.btn.outline:hover{background:var(--fg);color:var(--bg)}
+.btn.ghost{background:transparent;color:var(--fg);padding:0 14px}
+.btn.ghost:hover{background:var(--card)}
+.btn.link{min-height:auto;padding:0 0 3px;border:0;border-bottom:1px solid currentColor;border-radius:0;letter-spacing:.12em}
+.btn.link:hover{opacity:.7}
+.btn.light{background:var(--bg);color:var(--fg)}
+.btn.light:hover{background:#EDEDED;transform:translateY(-2px)}
+.btn.outline-light{background:transparent;color:var(--on-media);border-color:var(--on-media)}
+.btn.outline-light:hover{background:var(--on-media);color:var(--fg)}
+.btn.block{width:100%}
+.btn svg.i{width:16px;height:16px}
+.actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ============ HEADER ============ */
+.hdr{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.hdr .c{display:flex;align-items:center;justify-content:space-between;height:80px;gap:24px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:700;font-size:19px;letter-spacing:-0.01em}
+.logo .mark{width:34px;height:34px;border:1.5px solid var(--fg);border-radius:var(--radius);display:grid;place-items:center;font-size:16px}
+.logo small{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:30px;font-size:15px;font-weight:500}
+.nav a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav a:hover,.nav a.on{color:var(--fg)}
+.nav a.on{text-decoration:underline;text-underline-offset:8px;text-decoration-thickness:1.5px}
+.lang{display:flex;gap:8px;font-size:13px;font-weight:600}
+.lang span{color:var(--muted)}
+.lang b{color:var(--fg)}
+.menu-btn{display:none;width:44px;height:44px;border:1px solid var(--border);background:none;border-radius:var(--radius);cursor:pointer;place-items:center}
+@media(max-width:1080px){.nav,.hdr .lang,.hdr .btn{display:none}.menu-btn{display:grid}}
+
+/* ============ FORMS ============ */
+.f{display:flex;flex-direction:column;gap:8px}
+.f label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.f input,.f select,.f textarea{min-height:52px;padding:0 16px;font:inherit;font-size:16px;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius)}
+.f textarea{padding:14px 16px;min-height:132px;resize:vertical}
+.f input:focus-visible,.f select:focus-visible,.f textarea:focus-visible{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
+.f .help{font-size:14px;color:var(--muted)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fgrid .full{grid-column:1/-1}
+@media(max-width:640px){.fgrid{grid-template-columns:1fr}}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--muted)}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--primary);flex:none}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:var(--radius);padding:4px;gap:4px}
+.seg button{border:0;background:none;font:inherit;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:0 20px;min-height:40px;border-radius:var(--radius);cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--fg);color:var(--bg)}
+.tabs{display:flex;gap:32px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.tabs button{background:none;border:0;font:inherit;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:0 0 14px;margin-bottom:-1px;border-bottom:2px solid transparent;cursor:pointer;min-height:44px;display:flex;align-items:flex-end}
+.tabs button.on{color:var(--fg);border-bottom-color:var(--fg)}
+
+/* ============ LISTING CARD ============ */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 28px}
+@media(max-width:1000px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.cards{grid-template-columns:1fr}}
+.lc{display:block;text-decoration:none;color:inherit}
+.lc .img{aspect-ratio:4/3}
+.lc .img img{transition:transform .7s ease-out}
+.lc:hover .img img{transform:scale(1.05)}
+.badge{position:absolute;top:14px;left:14px;z-index:2;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:6px 10px;border-radius:var(--radius);background:var(--bg);color:var(--fg)}
+.badge.dark{background:var(--fg);color:var(--bg)}
+.pcount{position:absolute;right:14px;bottom:14px;z-index:2;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#fff;background:rgba(0,0,0,.5);padding:5px 10px;border-radius:var(--radius)}
+.pcount svg.i{width:14px;height:14px}
+.lc .loc{margin-top:18px;display:block}
+.lc h3{font-size:21px;line-height:1.28;margin-top:8px;transition:opacity .3s;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.56em}
+.lc:hover h3{opacity:.7}
+.facts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:15px;color:var(--muted)}
+.facts span{display:inline-flex;align-items:center;gap:7px}
+.facts svg.i{width:16px;height:16px}
+.lc .bot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.price{font-size:23px;font-weight:700;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;line-height:1.1}
+.price small{display:block;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:4px}
+.price.soft{font-size:17px;color:var(--muted);font-weight:600}
+.ec{display:inline-grid;place-items:center;min-width:32px;height:26px;padding:0 6px;border-radius:var(--radius);font-size:12.5px;font-weight:700;color:#fff}
+.ec-ap{background:#00843D}.ec-a{background:#2EA343;color:#111}.ec-b{background:#7DB83A;color:#111}.ec-c{background:#B5C21E;color:#111}.ec-d{background:#F2D700;color:#111}.ec-e{background:#F6B11E;color:#111}.ec-f{background:#EE7A1D;color:#111}.ec-g{background:#E2231A}.ec-h{background:#A8151B}
+
+/* ============ FOOTER ============ */
+.ftr{background:var(--footer);color:var(--footer-fg);padding:96px 0 32px}
+.ftr-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:48px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.14)}
+.ftr h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.5);margin-bottom:18px}
+.ftr a{display:block;text-decoration:none;color:rgba(255,255,255,.72);padding:4px 0;transition:color .3s,transform .3s}
+.ftr a:hover{color:#fff;transform:translateX(4px)}
+.ftr .big{font-size:28px;font-weight:700;letter-spacing:-0.02em;line-height:1.2}
+.ftr p{color:rgba(255,255,255,.72);margin-top:14px;font-size:15px}
+.ftr .areas{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:15px;color:rgba(255,255,255,.72)}
+.ftr-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:28px;font-size:13.5px;color:rgba(255,255,255,.5)}
+.ftr-bot nav{display:flex;gap:22px}
+.ftr-bot a{display:inline;padding:0}
+@media(max-width:900px){.ftr-top{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ftr-top{grid-template-columns:1fr}}
+
+/* ============ PAGE-SPECIFIC ============ */
+/* home hero */
+.hero{position:relative;min-height:max(680px,calc(100svh - 80px));display:flex;align-items:flex-end;color:var(--on-media)}
+.hero .bgimg{position:absolute;inset:0}
+.hero .bgimg img{width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:var(--scrim)}
+.hero .c{position:relative;z-index:2;width:100%;padding-top:96px;padding-bottom:56px}
+.hero h1{max-width:15ch}
+.hero .lead{color:var(--on-media-muted);margin-top:20px}
+.valbox{margin-top:36px;background:var(--bg);color:var(--fg);border-radius:var(--radius);padding:22px;display:grid;grid-template-columns:1.6fr 1fr auto;gap:12px;align-items:end;max-width:880px}
+.valbox .t{grid-column:1/-1;font-weight:700;font-size:17px}
+.valbox .f input,.valbox .f select{min-height:52px}
+@media(max-width:820px){.valbox{grid-template-columns:1fr}}
+.hero-creds{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.25);font-size:14.5px;color:var(--on-media-muted)}
+.hero-creds span{display:inline-flex;align-items:center;gap:8px}
+/* two paths */
+.paths{display:grid;grid-template-columns:1fr 1fr}
+.path{padding:88px 64px;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end}
+.path.dark{background:var(--fg);color:var(--bg)}
+.path.dark .muted{color:rgba(255,255,255,.7)}
+.path.light{background:var(--card)}
+.path h2{max-width:14ch}
+.path p{margin-top:16px;max-width:40ch}
+.path .actions{margin-top:32px}
+@media(max-width:860px){.paths{grid-template-columns:1fr}.path{padding:64px 24px;min-height:auto}}
+/* broker intro */
+.intro{display:grid;grid-template-columns:5fr 6fr;gap:80px;align-items:center}
+.intro .img{aspect-ratio:4/5}
+.creds{margin-top:36px;border-top:1px solid var(--border)}
+.creds div{display:grid;grid-template-columns:1fr auto;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);font-size:16px}
+.creds div span:last-child{color:var(--muted);font-size:14.5px;text-align:right}
+.sig{margin-top:28px;font-size:15px}
+.sig b{display:block;font-size:20px;letter-spacing:-0.01em}
+@media(max-width:900px){.intro{grid-template-columns:1fr;gap:40px}}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border)}
+.step{padding:32px 28px 0 0}
+.step+.step{padding-left:28px;border-left:1px solid var(--border)}
+.step .no{font-size:48px;font-weight:700;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums}
+.step h3{margin-top:20px}
+.step p{margin-top:10px;font-size:16px;color:var(--muted)}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}.step:nth-child(3){padding-left:0;border-left:0}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}.step+.step{padding-left:0;border-left:0;border-top:1px solid var(--border);margin-top:32px}}
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.q{background:var(--bg);padding:36px;border-radius:var(--radius);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.q blockquote{font-size:20px;line-height:1.45;font-weight:500;letter-spacing:-0.01em}
+.q .who{font-size:15px}
+.q .who b{display:block}
+@media(max-width:900px){.quotes{grid-template-columns:1fr}}
+/* valuation band */
+.vband{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center}
+.vlist{border-top:1px solid rgba(255,255,255,.2)}
+.vlist div{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.2);font-size:16.5px;color:rgba(255,255,255,.85)}
+.vlist div b{font-variant-numeric:tabular-nums;color:#fff;min-width:22px}
+@media(max-width:900px){.vband{grid-template-columns:1fr;gap:40px}}
+/* sold strip + articles */
+.sold-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.sold-row .img{aspect-ratio:1/1}
+.sold-row h4{font-size:16px;margin-top:12px;letter-spacing:-0.01em}
+@media(max-width:900px){.sold-row{grid-template-columns:1fr 1fr}}
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.art{text-decoration:none;color:inherit;display:block}
+.art .img{aspect-ratio:3/2}
+.art h3{margin-top:18px;transition:opacity .3s}
+.art:hover h3{opacity:.7}
+.art p{margin-top:10px;font-size:15.5px;color:var(--muted)}
+@media(max-width:900px){.arts{grid-template-columns:1fr}}
+/* page hero (inner pages) */
+.phero{padding:96px 0 64px;border-bottom:1px solid var(--border)}
+.phero .lead{margin-top:20px}
+.crumb{display:flex;gap:10px;font-size:14px;color:var(--muted);margin-bottom:28px;flex-wrap:wrap}
+.crumb a{text-decoration:none}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:40px}}
+/* properties page */
+.filters{display:grid;grid-template-columns:2fr 1.2fr 1.2fr 1fr 1fr auto;gap:12px;align-items:end;margin-top:32px}
+@media(max-width:1000px){.filters{grid-template-columns:1fr 1fr}}
+.resbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:40px 0 28px}
+.views{display:inline-flex;border:1px solid var(--border);border-radius:var(--radius)}
+.views button{width:46px;height:46px;border:0;background:none;color:var(--muted);cursor:pointer;display:grid;place-items:center}
+.views button.on{color:var(--fg);background:var(--card)}
+.notfound{margin-top:72px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;background:var(--card);padding:48px;border-radius:var(--radius)}
+@media(max-width:760px){.notfound{grid-template-columns:1fr;padding:32px 24px}}
+/* listing detail */
+.gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:10px}
+.gal .img:first-child{grid-row:1/3}
+@media(max-width:860px){.gal{grid-template-columns:1fr;grid-template-rows:300px}.gal .img:not(:first-child){display:none}}
+.gal-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.dl{display:grid;grid-template-columns:1fr 380px;gap:72px;align-items:start;padding:48px 0 0}
+@media(max-width:1000px){.dl{grid-template-columns:1fr}}
+.keyfacts{display:grid;grid-template-columns:repeat(5,1fr);margin-top:36px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.kf{padding:20px 16px 20px 0;display:flex;flex-direction:column;gap:6px}
+.kf+.kf{padding-left:16px;border-left:1px solid var(--border)}
+.kf .l{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.kf .l svg.i{width:15px;height:15px}
+.kf .v{font-size:24px;font-weight:700;letter-spacing:-0.02em;font-variant-numeric:tabular-nums}
+@media(max-width:700px){.keyfacts{grid-template-columns:1fr 1fr}.kf+.kf{border-left:0;padding-left:0}}
+.blk{margin-top:64px}
+.blk>p{margin-top:14px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-top:20px;list-style:none}
+.feat li{display:flex;gap:12px;align-items:center}
+.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:16px}
+.tbl td{padding:14px 0;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.tbl tr.total td{border-bottom:0;font-weight:700;font-size:17px;padding-top:18px}
+.tbl small{display:block;color:var(--muted);font-weight:400;font-size:14px}
+.ecard{margin-top:18px;border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+.escale{position:relative;display:grid;grid-template-columns:repeat(9,1fr);gap:2px;margin-top:40px}
+.escale span{height:34px;display:grid;place-items:center;font-size:12.5px;font-weight:700;color:#fff}
+.marker{position:absolute;top:-34px;transform:translateX(-50%);font-size:13px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;align-items:center}
+.marker::after{content:"";width:2px;height:10px;background:var(--fg);margin-top:3px}
+.ticks{display:grid;grid-template-columns:repeat(9,1fr);text-align:center;font-size:11.5px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;font-size:15.5px}
+.egrid small{display:block;color:var(--muted);font-size:13px}
+@media(max-width:700px){.egrid{grid-template-columns:1fr 1fr}}
+.docrow{display:flex;align-items:center;gap:16px;padding:16px 18px;border:1px solid var(--border);border-radius:var(--radius);margin-top:10px}
+.docrow div{flex:1}
+.docrow small{display:block;color:var(--muted);font-size:14px}
+.map{position:relative;margin-top:18px;height:300px;border-radius:var(--radius);overflow:hidden;background:repeating-linear-gradient(0deg,transparent 0 46px,rgba(0,0,0,.05) 46px 48px),repeating-linear-gradient(90deg,transparent 0 66px,rgba(0,0,0,.05) 66px 68px),#EDEDEA}
+.map .road{position:absolute;background:#fff;border:1px solid #DDD}
+.map .area{position:absolute;left:50%;top:50%;width:170px;height:170px;transform:translate(-50%,-50%);border-radius:50%;background:rgba(17,17,17,.10);border:2px solid var(--fg)}
+.map .cap{position:absolute;left:14px;bottom:14px;background:var(--bg);font-size:13px;padding:7px 12px;border-radius:var(--radius)}
+.aside{position:sticky;top:104px;border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+.aside .pr{font-size:34px;font-weight:700;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;line-height:1.05}
+.agent{display:flex;gap:16px;align-items:center;margin:24px 0;padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.agent .img{width:60px;height:60px;border-radius:50%;flex:none}
+.agent span{font-size:14px;color:var(--muted);display:block}
+.stack{display:grid;gap:10px}
+/* selling */
+.inc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.inc div{background:var(--bg);padding:32px 28px}
+.inc svg.i{width:24px;height:24px}
+.inc h3{font-size:18px;margin-top:22px}
+.inc p{font-size:15px;color:var(--muted);margin-top:8px}
+@media(max-width:900px){.inc{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.inc{grid-template-columns:1fr}}
+.faq details{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;padding:26px 0;font-size:20px;font-weight:600;letter-spacing:-0.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;font-size:26px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 26px;max-width:70ch;color:var(--muted)}
+/* valuation page */
+.vpage{display:grid;grid-template-columns:1fr 520px;gap:80px;align-items:start}
+@media(max-width:1000px){.vpage{grid-template-columns:1fr}}
+.fcard{border:1px solid var(--border);border-radius:var(--radius);padding:36px}
+.fcard .stepper{display:flex;gap:8px;margin-bottom:28px}
+.fcard .stepper span{flex:1;height:3px;background:var(--border)}
+.fcard .stepper span.on{background:var(--fg)}
+.deliver div{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--border)}
+.deliver svg.i{width:22px;height:22px;margin-top:3px}
+.deliver h3{font-size:18px}
+.deliver p{font-size:15.5px;color:var(--muted);margin-top:4px}
+/* about */
+.about-hero{display:grid;grid-template-columns:6fr 5fr;gap:80px;align-items:end}
+.about-hero .img{aspect-ratio:4/5}
+@media(max-width:900px){.about-hero{grid-template-columns:1fr;gap:40px}}
+.facts-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.facts-row div{padding:28px 24px 28px 0}
+.facts-row div+div{padding-left:24px;border-left:1px solid var(--border)}
+.facts-row b{display:block;font-size:22px;letter-spacing:-0.01em}
+.facts-row span{color:var(--muted);font-size:15px}
+@media(max-width:700px){.facts-row{grid-template-columns:1fr}.facts-row div+div{border-left:0;padding-left:0;border-top:1px solid var(--border)}}
+/* contact */
+.cgrid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:start}
+@media(max-width:900px){.cgrid{grid-template-columns:1fr;gap:48px}}
+.cline{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--border)}
+.cline svg.i{width:20px;height:20px;margin-top:4px}
+.cline b{display:block;font-size:19px;letter-spacing:-0.01em}
+.cline span{color:var(--muted);font-size:15px}
+.hours{display:grid;grid-template-columns:1fr auto;gap:6px 24px;font-size:15.5px;margin-top:8px}
+/* article */
+.article{max-width:760px;margin:0 auto}
+.article h2{font-size:28px;margin:48px 0 14px}
+.article p{font-size:18px;line-height:1.75}
+.article p+p{margin-top:18px}
+.article .cover{aspect-ratio:16/9;margin:40px 0}
+.author{display:flex;gap:18px;align-items:center;margin-top:56px;padding:28px;background:var(--card);border-radius:var(--radius)}
+.author .img{width:64px;height:64px;border-radius:50%;flex:none}
+
+
+/* overflow guards */
+.f input,.f select,.f textarea{width:100%;min-width:0}
+.filters>*,.vpage>*,.split>*,.cgrid>*,.dl>*,.intro>*,.about-hero>*{min-width:0}
+@media(max-width:640px){.filters{grid-template-columns:1fr}}
+.seg{flex-wrap:wrap}
+.author{flex-wrap:wrap}
+
+/* ============ DOC CHROME (not design) ============ */
+.picker{position:fixed;right:16px;bottom:16px;z-index:100;display:flex;gap:8px;align-items:center;background:#1E1E1E;color:#fff;padding:8px 10px;border-radius:8px;font:13px system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.picker select{font:inherit;padding:6px 8px;border-radius:5px;border:0}
+.picker label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.notes{display:none;margin:56px auto 0;max-width:var(--w);padding:0 40px}
+body.show-notes .notes{display:block}
+.notes div{background:#FFF8D6;border:1px dashed #C9B54A;border-radius:6px;padding:18px 22px;font:14px/1.55 system-ui,sans-serif;color:#3A3420}
+.notes b{display:block;margin-bottom:6px}
+.notes li{margin-left:18px}
+.page[hidden]{display:none}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-area" viewBox="0 0 24 24"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></symbol>
+  <symbol id="i-rooms" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M3 12h9"/></symbol>
+  <symbol id="i-plot" viewBox="0 0 24 24"><path d="M3 20h18M7 20v-4M7 16 3.5 16 7 8l3.5 8zM16 20v-5"/><circle cx="16" cy="11" r="3.5"/></symbol>
+  <symbol id="i-year" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-floor" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5zM3 13l9 5 9-5"/></symbol>
+  <symbol id="i-garden" viewBox="0 0 24 24"><path d="M12 21V11M12 11c0-4 3-6 7-6 0 4-3 6-7 6zM12 14c0-3-2-5-6-5 0 3 2 5 6 5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-plan" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 12h8V3M11 12v4M15 12h6M15 12v9"/></symbol>
+  <symbol id="i-360" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2h8l5 5v15H6zM14 2v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3v3H8z"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></symbol>
+  <symbol id="i-camera2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7l2-3h4l2 3"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2h8l5 5v15H6zM14 2v5h5"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M22 20a6.5 6.5 0 0 0-4.5-6.2"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M7 11V5a1.5 1.5 0 0 1 3 0v5M10 10V3.5a1.5 1.5 0 0 1 3 0V10M13 10V5a1.5 1.5 0 0 1 3 0v6M16 11V8a1.5 1.5 0 0 1 3 0v6a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-3-5a1.5 1.5 0 0 1 2.5-1.6L7 14"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M14 9l2 2"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+</svg>
+
+<header class="hdr">
+  <div class="c">
+    <a class="logo" href="#home" aria-label="4 Wände – Saar, home"><span class="mark">4</span><span>4 Wände – Saar<small>Immobilienberatung</small></span></a>
+    <nav class="nav" aria-label="Main">
+      <a data-nav href="#home">Home</a>
+      <a data-nav href="#properties">Properties</a>
+      <a data-nav href="#selling">Selling</a>
+      <a data-nav href="#valuation">Valuation</a>
+      <a data-nav href="#inheritance">Inherited property</a>
+      <a data-nav href="#about">About me</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:20px">
+      <div class="lang"><b>EN</b><span>DE</span></div>
+      <a class="btn primary" href="#contact">Contact</a>
+      <button class="menu-btn" aria-label="Open menu"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- =========================================================
+     HOME
+     ========================================================= -->
+<section class="page" id="p-home">
+  <div class="hero">
+    <div class="bgimg img"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=2200&q=80" alt="" onerror="this.remove()"></div>
+    <div class="c">
+      <h1 class="h-display">Your property in the Saarland, valued and sold by a certified expert.</h1>
+      <p class="lead">One broker, a few properties at a time, full attention on yours. From the first valuation to the notary appointment you always speak with me.</p>
+      <form class="valbox" onsubmit="location.hash='valuation';return false">
+        <div class="t">What is your property worth today?</div>
+        <div class="f"><label for="hv1">Address</label><input id="hv1" placeholder="Street, town"></div>
+        <div class="f"><label for="hv2">Type</label><select id="hv2"><option>House</option><option>Apartment</option><option>Multi-family house</option><option>Plot</option></select></div>
+        <button class="btn primary" type="submit">Start valuation</button>
+      </form>
+      <div class="hero-creds">
+        <span><svg class="i"><use href="#i-shield"/></svg>DEKRA-certified property valuer</span>
+        <span><svg class="i"><use href="#i-shield"/></svg>Inherited property specialist (Sprengnetter)</span>
+        <span><svg class="i"><use href="#i-shield"/></svg>IHK-qualified broker</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="paths">
+    <div class="path dark">
+      <span class="meta" style="color:rgba(255,255,255,.55)">Selling</span>
+      <h2 class="h2" style="margin-top:14px">Thinking of selling your property?</h2>
+      <p class="muted">We start with an expert valuation on site. You then decide, without pressure, whether and when to sell.</p>
+      <div class="actions"><a class="btn light" href="#selling">How selling works</a></div>
+    </div>
+    <div class="path light">
+      <span class="meta">Buying</span>
+      <h2 class="h2" style="margin-top:14px">Looking for a home?</h2>
+      <p class="muted">Every available property with full details, floor plans and energy data.</p>
+      <div class="actions"><a class="btn outline" href="#properties">Browse properties</a></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="c intro">
+      <div class="img ph" data-cap="Portrait: Dorothe Waltner"></div>
+      <div>
+        <h2 class="h2">You speak with me, from the first visit to the notary.</h2>
+        <div class="prose" style="margin-top:24px">
+          <p class="lead" style="color:var(--fg)">I personally guide owners and buyers across the Saarland. As a solo broker I deliberately handle only a handful of properties at a time, so each one gets the attention it deserves.</p>
+          <p class="muted">No call centre, no handover to colleagues. The person who values your property is the person who sells it.</p>
+        </div>
+        <div class="creds">
+          <div><span>Valued, not estimated</span><span>DEKRA-certified valuer</span></div>
+          <div><span>Numbers are my craft</span><span>Business graduate (BA), IHK</span></div>
+          <div><span>Inherited property, handled calmly</span><span>Sprengnetter specialist</span></div>
+        </div>
+        <div class="sig"><b>Dorothe Waltner</b><span class="muted">Owner and property broker, Püttlingen</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec tight" style="padding-top:0">
+    <div class="c">
+      <div class="sec-head">
+        <div><h2 class="h2">Selected properties</h2><p class="muted">A small selection, each visited, valued and photographed by me.</p></div>
+        <a class="btn link" href="#properties">All properties</a>
+      </div>
+      <div class="cards">
+        <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge">New</span><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>24</span></div>
+          <span class="meta loc">Völklingen</span><h3>Three-apartment house with a park-like garden</h3>
+          <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>320 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>11 rooms</span><span><svg class="i"><use href="#i-plot"/></svg>1,240 m²</span></div>
+          <div class="bot"><span class="price">€649,000</span><span class="ec ec-d">D</span></div></a>
+        <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge">Reserved</span><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>18</span></div>
+          <span class="meta loc">Riegelsberg</span><h3>Detached house with a building plot in a quiet cul-de-sac</h3>
+          <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>162 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>5 rooms</span><span><svg class="i"><use href="#i-plot"/></svg>1,007 m²</span></div>
+          <div class="bot"><span class="price">€479,000</span><span class="ec ec-h">H</span></div></a>
+        <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>14</span></div>
+          <span class="meta loc">Saarbrücken</span><h3>Two-room apartment with a bay window, near the station</h3>
+          <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>58 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>2 rooms</span><span><svg class="i"><use href="#i-floor"/></svg>3rd floor</span></div>
+          <div class="bot"><span class="price">€179,000<small>Hausgeld €240 / month</small></span><span class="ec ec-c">C</span></div></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec surface">
+    <div class="c">
+      <div class="sec-head"><div><h2 class="h2">How a sale works with me</h2><p class="muted">Four stages. You decide at the end of each one whether to continue.</p></div><a class="btn link" href="#selling">The full process</a></div>
+      <div class="steps">
+        <div class="step"><div class="no">1</div><h3 class="h3">Valuation on site</h3><p>I visit, record every value-relevant detail and give you a realistic price range in writing.</p></div>
+        <div class="step"><div class="no">2</div><h3 class="h3">Preparation</h3><p>Documents, energy certificate, photographs and floor plans. I handle what you would rather not.</p></div>
+        <div class="step"><div class="no">3</div><h3 class="h3">Marketing and viewings</h3><p>Portals, my buyer database and viewings with buyers who have proven they can finance.</p></div>
+        <div class="step"><div class="no">4</div><h3 class="h3">Notary and handover</h3><p>I prepare the contract with the notary and stay with you until the keys are handed over.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="c">
+      <div class="sec-head"><div><h2 class="h2">What clients say</h2></div><a class="btn link" href="#about">More reviews</a></div>
+      <div class="quotes" style="--bg:var(--card)">
+        <div class="q"><blockquote>"She valued our house in person and explained every figure. No pressure at any point, we decided on our own timeline."</blockquote><div class="who"><b>Sabine K.</b><span class="muted">Sold a house in Völklingen</span></div></div>
+        <div class="q"><blockquote>"We inherited a house as three siblings. Her valuation gave us one figure everyone could accept."</blockquote><div class="who"><b>Thomas R.</b><span class="muted">Inherited property, Saarbrücken</span></div></div>
+        <div class="q"><blockquote>"From the first viewing to the notary, always the same person and always reachable. Exactly what we needed as first-time buyers."</blockquote><div class="who"><b>Julia and Mark H.</b><span class="muted">Bought in Riegelsberg</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec dark">
+    <div class="c vband">
+      <div>
+        <h2 class="h1">What is your property worth today?</h2>
+        <p class="lead" style="margin-top:20px">I value your property in person, on site, as a DEKRA-certified valuer. Free and without obligation for owners considering a sale.</p>
+        <div class="actions" style="margin-top:36px"><a class="btn light" href="#valuation">Request a valuation</a><a class="btn outline-light" href="tel:+491604444047"><svg class="i"><use href="#i-phone"/></svg>0160 4444047</a></div>
+      </div>
+      <div class="vlist">
+        <div><b>1</b>Appointment on site with a full survey of value-relevant features</div>
+        <div><b>2</b>Market value based on current comparable sales in the Saarland</div>
+        <div><b>3</b>A written summary with a realistic price range</div>
+        <div><b>4</b>A conversation about timing, documents and sales strategy</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="c">
+      <div class="sec-head"><div><h2 class="h2">Recently sold</h2><p class="muted">Sale prices stay private, as agreed with the owners.</p></div><a class="btn link" href="#sold">All references</a></div>
+      <div class="sold-row">
+        <div><div class="img" style="aspect-ratio:1/1"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><h4>House with three apartments</h4><span class="muted" style="font-size:14px">Nonnweiler, August 2026</span></div>
+        <div><div class="img" style="aspect-ratio:1/1"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><h4>Renovated three-room apartment</h4><span class="muted" style="font-size:14px">Saarbrücken, August 2026</span></div>
+        <div><div class="img" style="aspect-ratio:1/1"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><h4>Semi-detached house with garden</h4><span class="muted" style="font-size:14px">Püttlingen, June 2026</span></div>
+        <div><div class="img" style="aspect-ratio:1/1"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Let</span></div><h4>Apartment with fitted kitchen</h4><span class="muted" style="font-size:14px">Saarlouis, May 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec surface">
+    <div class="c">
+      <div class="sec-head"><div><h2 class="h2">Guides for owners and buyers</h2></div><a class="btn link" href="#articles">All articles</a></div>
+      <div class="arts">
+        <a class="art" href="#article"><div class="img"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta" style="display:block;margin-top:18px">Selling</span><h3 class="h3">What a house in the Saarland is worth in 2026</h3><p>How comparable sales, condition and energy class shape a realistic asking price.</p></a>
+        <a class="art" href="#article"><div class="img"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta" style="display:block;margin-top:18px">Energy</span><h3 class="h3">The energy certificate: what sellers must show</h3><p>Which data belongs in every property ad, and which certificate type you need.</p></a>
+        <a class="art" href="#article"><div class="img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta" style="display:block;margin-top:18px">Inheritance</span><h3 class="h3">Selling a house you inherited with siblings</h3><p>Why one neutral valuation is often the step that makes an agreement possible.</p></a>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes"><div><b>Home - implementation notes</b><ul>
+    <li>Sellers first: the valuation entry sits in the hero because the broker's income comes from owners. It links to the valuation page with the address prefilled.</li>
+    <li>Hero photo: full-bleed, from Settings (home hero image). Scrim token keeps text at 4.5:1 on any photo.</li>
+    <li>Section order: hero, two paths, broker, selected properties (3), process (4 steps), testimonials (show_on_home, max 3), valuation band, recently sold (4), articles (3, hidden when the blog flag is off).</li>
+    <li>Testimonials shown here are samples until real ones are entered in admin.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     PROPERTIES
+     ========================================================= -->
+<section class="page" id="p-properties" hidden>
+  <div class="phero" style="padding-bottom:40px">
+    <div class="c">
+      <h1 class="h1">Properties in the Saarland</h1>
+      <p class="lead">Each one visited, valued and photographed by me.</p>
+      <div style="margin-top:32px" class="seg" role="tablist"><button class="on" role="tab" aria-selected="true">Buy</button><button role="tab" aria-selected="false">Rent</button></div>
+      <div class="filters">
+        <div class="f"><label>Location</label><input placeholder="Town or postcode"></div>
+        <div class="f"><label>Type</label><select><option>All types</option><option>House</option><option>Apartment</option><option>Multi-family house</option><option>Plot</option></select></div>
+        <div class="f"><label>Price up to</label><select><option>Any</option><option>€250,000</option><option>€500,000</option><option>€750,000</option></select></div>
+        <div class="f"><label>Rooms from</label><select><option>Any</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+        <div class="f"><label>Area from</label><select><option>Any</option><option>60 m²</option><option>100 m²</option><option>150 m²</option></select></div>
+        <button class="btn primary" style="min-height:52px">Show 6</button>
+      </div>
+    </div>
+  </div>
+  <div class="c">
+    <div class="resbar"><span><b>6 properties</b> <span class="muted">for sale, newest first</span></span>
+      <div class="actions"><button class="btn ghost">Sort: newest<svg class="i"><use href="#i-chev"/></svg></button>
+      <div class="views" role="group" aria-label="View"><button class="on" aria-label="Grid"><svg class="i"><use href="#i-grid"/></svg></button><button aria-label="List"><svg class="i"><use href="#i-list"/></svg></button><button aria-label="Map"><svg class="i"><use href="#i-map"/></svg></button></div></div>
+    </div>
+    <div class="cards">
+      <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge">New</span><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>24</span></div>
+        <span class="meta loc">Völklingen</span><h3>Three-apartment house with a park-like garden</h3>
+        <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>320 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>11 rooms</span><span><svg class="i"><use href="#i-plot"/></svg>1,240 m²</span></div>
+        <div class="bot"><span class="price">€649,000</span><span class="ec ec-d">D</span></div></a>
+      <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge">Reserved</span><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>18</span></div>
+        <span class="meta loc">Riegelsberg</span><h3>Detached house with a building plot in a quiet cul-de-sac</h3>
+        <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>162 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>5 rooms</span><span><svg class="i"><use href="#i-plot"/></svg>1,007 m²</span></div>
+        <div class="bot"><span class="price">€479,000</span><span class="ec ec-h">H</span></div></a>
+      <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>21</span></div>
+        <span class="meta loc">Schmelz</span><h3>Well-kept semi-detached house in the centre of Hüttersdorf</h3>
+        <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>159 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>5 rooms</span><span><svg class="i"><use href="#i-year"/></svg>1978</span></div>
+        <div class="bot"><span class="price">€249,000</span><span class="ec ec-d">D</span></div></a>
+      <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge">Price reduced</span><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>14</span></div>
+        <span class="meta loc">Saarbrücken</span><h3>Two-room apartment with a bay window, near the station</h3>
+        <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>58 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>2 rooms</span><span><svg class="i"><use href="#i-floor"/></svg>3rd floor</span></div>
+        <div class="bot"><span class="price">€179,000<small>Hausgeld €240 / month</small></span><span class="ec ec-c">C</span></div></a>
+      <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge">Coming soon</span></div>
+        <span class="meta loc">Heusweiler</span><h3>Bungalow on one level with a south-facing garden</h3>
+        <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>124 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>4 rooms</span><span><svg class="i"><use href="#i-garden"/></svg>Garden</span></div>
+        <div class="bot"><span class="price soft">Price on request</span><span class="muted" style="font-size:13px">Certificate in preparation</span></div></a>
+      <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>19</span></div>
+        <span class="meta loc">Saarlouis</span><h3>Bright family house with a garden near the old town</h3>
+        <div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>146 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>6 rooms</span><span><svg class="i"><use href="#i-plot"/></svg>520 m²</span></div>
+        <div class="bot"><span class="price">€389,000</span><span class="ec ec-b">B</span></div></a>
+    </div>
+    <div class="notfound">
+      <div><h2 class="h3">Not the right one yet?</h2><p class="muted" style="margin-top:8px;max-width:56ch">Tell me what you are looking for. Many properties are sold before they are ever published, to buyers already on my list.</p></div>
+      <a class="btn primary" href="#contact">Describe what you need</a>
+    </div>
+  </div>
+  <div style="height:120px"></div>
+  <aside class="notes"><div><b>Properties - implementation notes</b><ul>
+    <li>Filters always visible, never behind a button. A solo broker has 5 to 30 listings, so every filter must return something; the button shows the live count.</li>
+    <li>Buy and rent share the page; rent cards show cold rent with warm rent below.</li>
+    <li>Badges: New, Coming soon, Price reduced, Reserved, Sold, Let. Never more than one per card.</li>
+    <li>Card facts depend on type: plot for houses, floor and Hausgeld for apartments.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     LISTING DETAIL
+     ========================================================= -->
+<section class="page" id="p-listing" hidden>
+  <div class="c" style="padding-top:32px">
+    <div class="crumb"><a href="#properties">Properties</a><span>/</span><span>Saarbrücken</span><span>/</span><span>Two-room apartment</span></div>
+    <div class="gal">
+      <div class="img"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80" alt="" onerror="this.remove()"><span class="badge">Price reduced</span></div>
+      <div class="img"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=75" alt="" onerror="this.remove()"></div>
+      <div class="img"><img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=75" alt="" onerror="this.remove()"></div>
+      <div class="img"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=75" alt="" onerror="this.remove()"></div>
+      <div class="img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=75" alt="" onerror="this.remove()"><span class="pcount"><svg class="i"><use href="#i-cam"/></svg>All 14 photos</span></div>
+    </div>
+    <div class="gal-actions">
+      <button class="btn secondary"><svg class="i"><use href="#i-cam"/></svg>All photos</button>
+      <button class="btn secondary"><svg class="i"><use href="#i-plan"/></svg>Floor plan</button>
+      <button class="btn secondary"><svg class="i"><use href="#i-360"/></svg>360° tour</button>
+      <button class="btn ghost"><svg class="i"><use href="#i-share"/></svg>Share</button>
+    </div>
+
+    <div class="dl">
+      <div>
+        <span class="meta">Apartment for sale, ref. 4WS-2026-014</span>
+        <h1 class="h1" style="margin-top:14px;font-size:clamp(30px,3.6vw,46px)">Two-room apartment with a bay window, near the station</h1>
+        <p class="muted" style="display:flex;gap:8px;align-items:center;margin-top:14px"><svg class="i"><use href="#i-pin"/></svg>Saarbrücken, St. Johann. The exact address is shared after your enquiry.</p>
+        <div class="keyfacts">
+          <div class="kf"><span class="l">Price</span><span class="v">€179,000</span></div>
+          <div class="kf"><span class="l"><svg class="i"><use href="#i-area"/></svg>Living area</span><span class="v">58 m²</span></div>
+          <div class="kf"><span class="l"><svg class="i"><use href="#i-rooms"/></svg>Rooms</span><span class="v">2</span></div>
+          <div class="kf"><span class="l"><svg class="i"><use href="#i-floor"/></svg>Floor</span><span class="v">3 of 4</span></div>
+          <div class="kf"><span class="l"><svg class="i"><use href="#i-year"/></svg>Built</span><span class="v">1965</span></div>
+        </div>
+
+        <div class="blk">
+          <h2 class="h2" style="font-size:30px">About this apartment</h2>
+          <p class="prose">A quiet two-room apartment on the third floor of a well-kept building from 1965. The living room opens into a bay window facing the tree-lined street. The kitchen was renewed in 2021, the windows in 2018. The main station is a seven-minute walk.</p>
+          <ul class="feat">
+            <li><svg class="i"><use href="#i-check"/></svg>Fitted kitchen, 2021</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Double-glazed windows, 2018</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Private cellar room</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Shared garden courtyard</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Bicycle storage</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Free on completion</li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <h2 class="h2" style="font-size:30px">Price and costs</h2>
+          <table class="tbl num">
+            <tr><td>Purchase price</td><td>€179,000</td></tr>
+            <tr><td>Hausgeld<small>Monthly owners' association fee, incl. reserve fund €45</small></td><td>€240 / month</td></tr>
+            <tr><td>Buyer's commission<small>3.57% incl. VAT, the seller pays the same share</small></td><td>€6,390</td></tr>
+            <tr><td>Land transfer tax<small>Saarland, 6.5%</small></td><td>€11,635</td></tr>
+            <tr><td>Notary and land register<small>Estimate, about 2%</small></td><td>€3,580</td></tr>
+            <tr class="total"><td>Total purchase costs</td><td>€200,605</td></tr>
+          </table>
+        </div>
+
+        <div class="blk">
+          <h2 class="h2" style="font-size:30px">Energy certificate</h2>
+          <div class="ecard">
+            <div class="escale">
+              <span style="background:#00843D">A+</span><span style="background:#2EA343;color:#111">A</span><span style="background:#7DB83A;color:#111">B</span><span style="background:#B5C21E;color:#111">C</span><span style="background:#F2D700;color:#111">D</span><span style="background:#F6B11E;color:#111">E</span><span style="background:#EE7A1D;color:#111">F</span><span style="background:#E2231A">G</span><span style="background:#A8151B">H</span>
+              <div class="marker" style="left:42.5%">96 kWh/(m²a)</div>
+            </div>
+            <div class="ticks"><span>&lt;30</span><span>&lt;50</span><span>&lt;75</span><span>&lt;100</span><span>&lt;130</span><span>&lt;160</span><span>&lt;200</span><span>&lt;250</span><span>&gt;250</span></div>
+            <div class="egrid">
+              <div><small>Certificate type</small>Consumption</div>
+              <div><small>Energy value</small>96 kWh/(m²a)</div>
+              <div><small>Efficiency class</small>C</div>
+              <div><small>Main energy source</small>Natural gas</div>
+              <div><small>Year built</small>1965</div>
+              <div><small>Valid until</small>March 2033</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <h2 class="h2" style="font-size:30px">Documents</h2>
+          <div class="docrow"><svg class="i"><use href="#i-plan"/></svg><div>Floor plan<small>PDF, 1 page</small></div><button class="btn ghost">Open</button></div>
+          <div class="docrow"><svg class="i"><use href="#i-lock"/></svg><div>Full exposé<small>Sent by email after a short enquiry</small></div><button class="btn secondary">Request</button></div>
+        </div>
+
+        <div class="blk">
+          <h2 class="h2" style="font-size:30px">Location</h2>
+          <p class="prose">St. Johann, close to the main station and the Saar riverside. Shops, schools and the university clinic within ten minutes.</p>
+          <div class="map"><div class="road" style="left:0;right:0;top:44%;height:16px"></div><div class="road" style="top:0;bottom:0;left:30%;width:14px"></div><div class="road" style="top:0;bottom:0;left:74%;width:12px"></div><div class="area"></div><span class="cap">Approximate area. Exact address after your enquiry.</span></div>
+        </div>
+      </div>
+
+      <aside class="aside">
+        <div class="pr">€179,000</div>
+        <div class="muted" style="font-size:14px;margin-top:6px">Hausgeld €240 / month</div>
+        <div class="agent"><div class="img ph" data-cap=""></div><div><b>Dorothe Waltner</b><span>DEKRA-certified valuer, your contact for this property</span></div></div>
+        <div class="stack">
+          <a class="btn primary block" href="#contact"><svg class="i"><use href="#i-cal"/></svg>Book a viewing</a>
+          <a class="btn secondary block" href="#contact"><svg class="i"><use href="#i-doc"/></svg>Request exposé</a>
+          <a class="btn ghost block" href="tel:+491604444047"><svg class="i"><use href="#i-phone"/></svg>0160 4444047</a>
+        </div>
+        <p class="muted num" style="font-size:13px;text-align:center;margin-top:16px">Ref. 4WS-2026-014. Quote it when you call.</p>
+      </aside>
+    </div>
+
+    <div class="sec tight" style="padding-bottom:120px">
+      <div class="sec-head"><h2 class="h2">Similar properties</h2><a class="btn link" href="#properties">All properties</a></div>
+      <div class="cards">
+        <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta loc">Saarbrücken</span><h3>Three-room apartment with balcony and lift</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>82 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>3 rooms</span></div><div class="bot"><span class="price">€239,000</span><span class="ec ec-c">C</span></div></a>
+        <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta loc">Völklingen</span><h3>Compact apartment with fitted kitchen</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>49 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>2 rooms</span></div><div class="bot"><span class="price">€129,000</span><span class="ec ec-d">D</span></div></a>
+        <a class="lc" href="#listing"><div class="img"><img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta loc">Püttlingen</span><h3>Maisonette under the roof with a view</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>74 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>3 rooms</span></div><div class="bot"><span class="price">€198,000</span><span class="ec ec-e">E</span></div></a>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><div><b>Listing detail - implementation notes</b><ul>
+    <li>Order: gallery, five key facts, description and features, price and costs, energy certificate, documents, location, similar.</li>
+    <li>Energy panel carries every field § 87 GEG requires in ads: type, value, class, source, year built.</li>
+    <li>Price box lists all purchase costs; transfer tax rate follows the federal state. Commission share shown openly.</li>
+    <li>Exposé behind a short enquiry. Location as approximate area until enquiry (geo_precision).</li>
+    <li>Mobile: the contact card becomes a fixed bottom bar with Call and Book a viewing.</li>
+    <li>New fields needed: Hausgeld, reference number, reserve fund, price reduced status.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     SOLD / REFERENCES
+     ========================================================= -->
+<section class="page" id="p-sold" hidden>
+  <div class="phero"><div class="c">
+    <h1 class="h1">Sold and let</h1>
+    <p class="lead">A selection of properties I have sold or let in recent years. Sale prices stay private, as agreed with the owners.</p>
+  </div></div>
+  <div class="sec tight"><div class="c">
+    <div class="cards">
+      <div class="lc"><div class="img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><span class="meta loc">Nonnweiler</span><h3>House with three apartments and a large garden</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>254 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>12 rooms</span></div><div class="bot"><span class="price soft">Sold in August 2026</span></div></div>
+      <div class="lc"><div class="img"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><span class="meta loc">Saarbrücken</span><h3>Renovated three-room apartment with a south balcony</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>67 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>3 rooms</span></div><div class="bot"><span class="price soft">Sold in August 2026</span></div></div>
+      <div class="lc"><div class="img"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><span class="meta loc">Püttlingen</span><h3>Semi-detached house with garden and garage</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>138 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>5 rooms</span></div><div class="bot"><span class="price soft">Sold in June 2026</span></div></div>
+      <div class="lc"><div class="img"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Let</span></div><span class="meta loc">Saarlouis</span><h3>Apartment with fitted kitchen near the market square</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>71 m²</span><span><svg class="i"><use href="#i-rooms"/></svg>3 rooms</span></div><div class="bot"><span class="price soft">Let in May 2026</span></div></div>
+      <div class="lc"><div class="img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><span class="meta loc">Heusweiler</span><h3>Inherited family house, sold for three co-heirs</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>156 m²</span><span><svg class="i"><use href="#i-plot"/></svg>890 m²</span></div><div class="bot"><span class="price soft">Sold in March 2026</span></div></div>
+      <div class="lc"><div class="img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=75" alt="" loading="lazy" onerror="this.remove()"><span class="badge dark">Sold</span></div><span class="meta loc">Riegelsberg</span><h3>Bungalow with a large plot on the edge of the woods</h3><div class="facts num"><span><svg class="i"><use href="#i-area"/></svg>118 m²</span><span><svg class="i"><use href="#i-plot"/></svg>1,140 m²</span></div><div class="bot"><span class="price soft">Sold in January 2026</span></div></div>
+    </div>
+    <div class="notfound">
+      <div><h2 class="h3">Your property could be next.</h2><p class="muted" style="margin-top:8px;max-width:56ch">Every sale here started with a valuation on site. Free and without obligation for owners considering a sale.</p></div>
+      <a class="btn primary" href="#valuation">Request a valuation</a>
+    </div>
+  </div></div>
+  <div style="height:60px"></div>
+  <aside class="notes"><div><b>Sold - implementation notes</b><ul>
+    <li>Cards are not links when the listing is archived; they show month and status only.</li>
+    <li>Price hidden when show_sold_prices is off (default). Ends with a valuation CTA, because this page is read by owners comparing brokers.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     SELLING
+     ========================================================= -->
+<section class="page" id="p-selling" hidden>
+  <div class="phero"><div class="c split">
+    <div>
+      <h1 class="h1">Selling your property, step by step.</h1>
+      <p class="lead">Eight stages from the first conversation to the handover of keys. You decide at every stage whether to continue, and you always speak with the same person.</p>
+      <div class="actions" style="margin-top:36px"><a class="btn primary" href="#valuation">Request a valuation</a><a class="btn link" href="#contact">Ask a question first</a></div>
+    </div>
+    <div class="img" style="aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80" alt="" onerror="this.remove()"></div>
+  </div></div>
+
+  <div class="sec"><div class="c">
+    <div class="sec-head"><h2 class="h2">The process</h2></div>
+    <div class="steps">
+      <div class="step"><div class="no">1</div><h3 class="h3">First conversation</h3><p>Your situation, your timeline, your questions. No obligation.</p></div>
+      <div class="step"><div class="no">2</div><h3 class="h3">Valuation on site</h3><p>A realistic price range in writing, based on comparable sales.</p></div>
+      <div class="step"><div class="no">3</div><h3 class="h3">Documents</h3><p>Land register, plans, energy certificate. I request what is missing.</p></div>
+      <div class="step"><div class="no">4</div><h3 class="h3">Presentation</h3><p>Photographs, floor plans and an exposé that answers buyers' questions.</p></div>
+    </div>
+    <div class="steps" style="margin-top:48px">
+      <div class="step"><div class="no">5</div><h3 class="h3">Marketing</h3><p>Portals and my buyer list. Many sales happen before publication.</p></div>
+      <div class="step"><div class="no">6</div><h3 class="h3">Viewings</h3><p>Only with buyers whose financing has been checked beforehand.</p></div>
+      <div class="step"><div class="no">7</div><h3 class="h3">Negotiation and notary</h3><p>I negotiate and prepare the purchase contract with the notary.</p></div>
+      <div class="step"><div class="no">8</div><h3 class="h3">Handover</h3><p>Meter readings, keys and a handover record. I am there.</p></div>
+    </div>
+  </div></div>
+
+  <div class="sec surface"><div class="c">
+    <div class="sec-head"><div><h2 class="h2">What I take off your hands</h2><p class="muted">The work behind a sale that owners usually underestimate.</p></div></div>
+    <div class="inc">
+      <div><svg class="i"><use href="#i-scale"/></svg><h3>Valuation</h3><p>DEKRA-certified, on site, documented. The basis for every decision after it.</p></div>
+      <div><svg class="i"><use href="#i-camera2"/></svg><h3>Presentation</h3><p>Photographs, floor plans and exposé, prepared so buyers ask fewer questions.</p></div>
+      <div><svg class="i"><use href="#i-file"/></svg><h3>Paperwork</h3><p>Land register, energy certificate, declarations of division for apartments.</p></div>
+      <div><svg class="i"><use href="#i-users"/></svg><h3>Qualified buyers</h3><p>Financing checked before a viewing, so your time is spent on real buyers.</p></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="c split" style="align-items:start">
+    <div><h2 class="h2">What it costs</h2></div>
+    <div class="prose">
+      <p class="lead" style="color:var(--fg)">The valuation is free and without obligation for owners considering a sale. Commission is only due when your property is sold.</p>
+      <p class="muted">The commission is agreed in writing before you sign anything. For houses and apartments sold to private buyers, the law limits the buyer's share to half, so the commission is shared between buyer and seller.</p>
+    </div>
+  </div></div>
+
+  <div class="sec tight" style="padding-top:0"><div class="c split" style="align-items:start">
+    <div><h2 class="h2">Questions owners ask</h2></div>
+    <div class="faq">
+      <details open><summary>How long does a sale take?</summary><p>Most properties in the Saarland sell within three to six months of publication. The valuation and preparation usually take two to four weeks before that.</p></details>
+      <details><summary>Do I need an energy certificate?</summary><p>Yes. Its key data must appear in every property advert. If you do not have a valid one, I arrange it as part of the preparation.</p></details>
+      <details><summary>Can I stay in the house during the sale?</summary><p>Yes. Viewings are scheduled with you, usually in groups, so you are not disturbed more than necessary.</p></details>
+      <details><summary>What if I decide not to sell after the valuation?</summary><p>Then you keep the written valuation and owe nothing. Many owners use it to plan the following years.</p></details>
+    </div>
+  </div></div>
+
+  <div class="sec dark"><div class="c" style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <div><h2 class="h1" style="max-width:16ch">Start with a valuation. Decide afterwards.</h2></div>
+    <div class="actions"><a class="btn light" href="#valuation">Request a valuation</a><a class="btn outline-light" href="tel:+491604444047"><svg class="i"><use href="#i-phone"/></svg>0160 4444047</a></div>
+  </div></div>
+  <aside class="notes"><div><b>Selling - implementation notes</b><ul>
+    <li>The eight steps are the existing Verkaufen copy (pages.selling.steps); this is their layout.</li>
+    <li>"What it costs" uses neutral wording until Dorothe confirms her commission terms. Do not publish a percentage without her approval.</li>
+    <li>FAQ answers are drafts for Dorothe to confirm.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     VALUATION
+     ========================================================= -->
+<section class="page" id="p-valuation" hidden>
+  <div class="phero" style="border-bottom:0;padding-bottom:24px"><div class="c">
+    <h1 class="h1" style="max-width:18ch">What is your property worth today?</h1>
+    <p class="lead">A valuation in person, on site, by a DEKRA-certified valuer. Not an online calculator. Free and without obligation for owners considering a sale.</p>
+  </div></div>
+  <div class="sec tight" style="padding-top:40px"><div class="c vpage">
+    <div>
+      <h2 class="h3">What you receive</h2>
+      <div class="deliver" style="margin-top:12px">
+        <div><svg class="i"><use href="#i-cal"/></svg><div><h3>Appointment on site</h3><p>About an hour. I record every value-relevant feature, inside and out.</p></div></div>
+        <div><svg class="i"><use href="#i-scale"/></svg><div><h3>Market value from real sales</h3><p>Based on current comparable sales in your part of the Saarland.</p></div></div>
+        <div><svg class="i"><use href="#i-doc"/></svg><div><h3>A written summary</h3><p>A realistic price range you can keep, whether you sell or not.</p></div></div>
+        <div><svg class="i"><use href="#i-users"/></svg><div><h3>A conversation about next steps</h3><p>Timing, documents and how I would market your property.</p></div></div>
+      </div>
+      <div style="margin-top:40px;background:var(--card);padding:28px;border-radius:var(--radius)">
+        <h3 class="h3" style="font-size:19px">Need a valuation for the tax office?</h3>
+        <p class="muted" style="margin-top:8px;font-size:15.5px">For inheritance and gift tax a formal market value appraisal is needed, not a sales valuation.</p>
+        <a class="btn link" style="margin-top:16px" href="#inheritance">Appraisals for inherited property</a>
+      </div>
+    </div>
+    <form class="fcard" onsubmit="return false">
+      <div class="stepper" aria-label="Step 1 of 3"><span class="on"></span><span></span><span></span></div>
+      <span class="meta">Step 1 of 3</span>
+      <h2 class="h3" style="margin-top:8px">About the property</h2>
+      <div style="margin-top:24px" class="seg" role="radiogroup"><button type="button" class="on">House</button><button type="button">Apartment</button><button type="button">Plot</button></div>
+      <div class="fgrid" style="margin-top:24px">
+        <div class="f full"><label for="v1">Address</label><input id="v1" placeholder="Street, postcode, town"></div>
+        <div class="f"><label for="v2">Living area</label><input id="v2" placeholder="m²" inputmode="numeric"></div>
+        <div class="f"><label for="v3">Plot area</label><input id="v3" placeholder="m²" inputmode="numeric"></div>
+        <div class="f"><label for="v4">Year built</label><input id="v4" placeholder="e.g. 1978" inputmode="numeric"></div>
+        <div class="f"><label for="v5">Reason</label><select id="v5"><option>Considering a sale</option><option>Inheritance</option><option>Divorce or separation</option><option>Just curious</option></select></div>
+      </div>
+      <div class="actions" style="margin-top:28px;justify-content:space-between"><span class="muted" style="font-size:14px">Next: your contact details</span><button class="btn primary">Continue</button></div>
+    </form>
+  </div></div>
+  <div style="height:60px"></div>
+  <aside class="notes"><div><b>Valuation - implementation notes</b><ul>
+    <li>Three steps: property, contact, confirmation. Address prefilled when coming from the home hero.</li>
+    <li>Submits to the existing seller inquiry flow with source = valuation.</li>
+    <li>"Reason" helps Dorothe prioritise; Inheritance routes to the inheritance follow-up.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     INHERITED PROPERTY
+     ========================================================= -->
+<section class="page" id="p-inheritance" hidden>
+  <div class="phero"><div class="c split">
+    <div>
+      <h1 class="h1">An inherited property, settled calmly.</h1>
+      <p class="lead">An inheritance raises questions nobody prepares for. What is the property worth? Which figure does the tax office want to see? And what applies when several heirs have to decide together?</p>
+    </div>
+    <div class="img" style="aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" alt="" onerror="this.remove()"></div>
+  </div></div>
+  <div class="sec"><div class="c">
+    <p class="lead" style="color:var(--fg);max-width:60ch">I take on the part that concerns the property: valuing it, putting it in context and, if you decide to, selling it.</p>
+    <div class="split" style="margin-top:72px;align-items:start">
+      <div><h2 class="h2">Market value appraisal</h2><div class="prose" style="margin-top:18px"><p>For the tax office what counts is the market value on the date of death, not today's asking price. Where the tax office's standardised valuation sits above the actual value, a qualified appraisal can be the basis for a correction.</p><p class="muted">I prepare the valuation using recognised methods and document it so it can be followed. The tax assessment itself is something you discuss with your tax adviser.</p></div></div>
+      <div><h2 class="h2">Co-heirs</h2><div class="prose" style="margin-top:18px"><p>When several heirs have to agree, a sale rarely fails because of the market. It fails because everyone has a different figure in mind. A neutral, evidenced valuation creates one number that can be discussed calmly.</p><p class="muted">From there I handle the sale so that everyone involved works from the same information, without taking sides.</p></div></div>
+    </div>
+  </div></div>
+  <div class="sec surface"><div class="c split" style="align-items:start">
+    <div><h2 class="h2">Qualifications</h2></div>
+    <div class="prose"><p class="lead" style="color:var(--fg)">Certified specialist in inheritance-related property matters (Sprengnetter) and DEKRA-certified expert for property valuation.</p><p class="muted">Legal and tax questions are settled with your notary, lawyer or tax adviser. My part is bringing the property and its value into that process cleanly.</p></div>
+  </div></div>
+  <div class="sec dark"><div class="c" style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <div><h2 class="h1" style="max-width:16ch">If you would like to talk</h2><p class="lead" style="margin-top:18px">An inheritance runs at its own pace. If for now you simply want to know where you stand, write to me. A first conversation commits you to nothing.</p></div>
+    <div class="actions"><a class="btn light" href="#contact">Get in touch</a></div>
+  </div></div>
+  <aside class="notes"><div><b>Inherited property - implementation notes</b><ul>
+    <li>Copy is the approved pages.inheritance text. The two sentences handing legal and tax questions to notary, lawyer and tax adviser are deliberate (RDG) and must stay.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     ABOUT
+     ========================================================= -->
+<section class="page" id="p-about" hidden>
+  <div class="phero"><div class="c about-hero">
+    <div>
+      <h1 class="h1">Dorothe Waltner</h1>
+      <p class="lead" style="color:var(--fg)">Property broker and DEKRA-certified valuer in Püttlingen, working across the Saarland.</p>
+      <div class="prose" style="margin-top:28px">
+        <p>I personally guide owners and buyers from the first valuation to signing at the notary. As a solo broker I deliberately handle only a handful of properties at a time, so each one gets the attention it deserves.</p>
+        <p class="muted">Before property, I worked in business and insurance. That background is why numbers, contracts and financing are where I feel most at home, and why I explain them without jargon.</p>
+      </div>
+    </div>
+    <div class="img ph" data-cap="Portrait: Dorothe Waltner"></div>
+  </div></div>
+
+  <div class="sec tight"><div class="c">
+    <div class="facts-row">
+      <div><b>Saarland</b><span>Püttlingen, Völklingen, Saarbrücken and surroundings</span></div>
+      <div><b>German, English, French</b><span>Consultations in three languages</span></div>
+      <div><b>One contact</b><span>From the first visit to the handover of keys</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec" style="padding-top:40px"><div class="c split" style="align-items:start">
+    <div><h2 class="h2">Qualifications</h2><p class="muted" style="margin-top:14px;max-width:40ch">Each one relates to a part of your sale: the value, the numbers or an inheritance.</p></div>
+    <div class="creds" style="margin-top:0">
+      <div><span>DEKRA-certified property valuer</span><span>Valuation</span></div>
+      <div><span>Inherited property specialist (Sprengnetter)</span><span>Inheritance</span></div>
+      <div><span>Business graduate, Dipl. Betriebswirtin (BA)</span><span>Numbers</span></div>
+      <div><span>Certified insurance specialist (IHK)</span><span>Financing</span></div>
+      <div><span>Certified property broker (IHK)</span><span>Brokerage</span></div>
+      <div><span>Member of the European Real Estate Academy</span><span>Network</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec surface"><div class="c">
+    <div class="sec-head"><h2 class="h2">What clients say</h2></div>
+    <div class="quotes">
+      <div class="q"><blockquote>"She valued our house in person and explained every figure. No pressure at any point."</blockquote><div class="who"><b>Sabine K.</b><span class="muted">Sold a house in Völklingen</span></div></div>
+      <div class="q"><blockquote>"We inherited a house as three siblings. Her valuation gave us one figure everyone could accept."</blockquote><div class="who"><b>Thomas R.</b><span class="muted">Inherited property, Saarbrücken</span></div></div>
+      <div class="q"><blockquote>"Always the same person, always reachable. Exactly what we needed as first-time buyers."</blockquote><div class="who"><b>Julia and Mark H.</b><span class="muted">Bought in Riegelsberg</span></div></div>
+      <div class="q"><blockquote>"Very flexible with appointments, even on a Saturday. The sale was done in under four months."</blockquote><div class="who"><b>Peter M.</b><span class="muted">Sold an apartment in Saarlouis</span></div></div>
+      <div class="q"><blockquote>"She told us honestly that our price was too high. We listened, and the house sold within weeks."</blockquote><div class="who"><b>Anna and Klaus W.</b><span class="muted">Sold a house in Heusweiler</span></div></div>
+      <div class="q"><blockquote>"Clear about the energy certificate and every document we needed. No surprises at the notary."</blockquote><div class="who"><b>Stefan L.</b><span class="muted">Sold a plot in Schmelz</span></div></div>
+    </div>
+  </div></div>
+
+  <div class="sec dark"><div class="c" style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <h2 class="h1" style="max-width:16ch">Let us talk about your property.</h2>
+    <div class="actions"><a class="btn light" href="#contact">Get in touch</a><a class="btn outline-light" href="#valuation">Request a valuation</a></div>
+  </div></div>
+  <aside class="notes"><div><b>About - implementation notes</b><ul>
+    <li>Home shows up to 3 testimonials (show_on_home); this page shows every published one.</li>
+    <li>Testimonials and the second biography paragraph are samples for Dorothe to replace or confirm.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     CONTACT
+     ========================================================= -->
+<section class="page" id="p-contact" hidden>
+  <div class="phero"><div class="c">
+    <h1 class="h1">Buying or selling, tell me where to start.</h1>
+    <p class="lead">I answer every message personally, usually within one working day.</p>
+  </div></div>
+  <div class="sec tight"><div class="c cgrid">
+    <div>
+      <div class="cline" style="padding-top:0"><svg class="i"><use href="#i-phone"/></svg><div><b>0160 4444047</b><span>Call or WhatsApp</span></div></div>
+      <div class="cline"><svg class="i"><use href="#i-mail"/></svg><div><b>dorothe.waltner@gmail.com</b><span>For documents and longer questions</span></div></div>
+      <div class="cline"><svg class="i"><use href="#i-pin"/></svg><div><b>Kyllbergstraße 140</b><span>66346 Püttlingen. Meetings by appointment.</span></div></div>
+      <div class="cline"><svg class="i"><use href="#i-clock"/></svg><div style="flex:1"><b>Hours</b>
+        <div class="hours num"><span class="muted">Monday to Friday</span><span>09:00 to 18:00</span><span class="muted">Saturday</span><span>By appointment</span></div></div></div>
+      <div class="map" style="height:240px"><div class="road" style="left:0;right:0;top:52%;height:14px"></div><div class="road" style="top:0;bottom:0;left:40%;width:12px"></div><div class="area" style="width:24px;height:24px;background:var(--fg)"></div><span class="cap">Püttlingen</span></div>
+    </div>
+    <div>
+      <div class="tabs" role="tablist"><button class="on" role="tab" aria-selected="true">I'm selling</button><button role="tab" aria-selected="false">I'm looking</button><button role="tab" aria-selected="false">Something else</button></div>
+      <form class="fgrid" onsubmit="return false">
+        <div class="f"><label for="c1">Name</label><input id="c1"></div>
+        <div class="f"><label for="c2">Email</label><input id="c2" type="email"></div>
+        <div class="f"><label for="c3">Phone</label><input id="c3" type="tel"><span class="help">Optional. I call back if you prefer.</span></div>
+        <div class="f"><label for="c4">Town of the property</label><input id="c4"></div>
+        <div class="f full"><label for="c5">Message</label><textarea id="c5" placeholder="What would you like to sell, and when roughly?"></textarea></div>
+        <label class="check full"><input type="checkbox"> I agree that my details are used to answer this enquiry. See the privacy notice.</label>
+        <div class="full actions" style="justify-content:space-between"><button class="btn primary">Send message</button><a class="btn link" href="#valuation">Request a full valuation instead</a></div>
+      </form>
+    </div>
+  </div></div>
+  <div style="height:80px"></div>
+  <aside class="notes"><div><b>Contact - implementation notes</b><ul>
+    <li>Tabs switch the existing seller and buyer forms; the placeholder text changes per tab.</li>
+    <li>Hours: the site says Mon-Fri 09:00-18:00, Immowelt says 09:00-20:00 daily. Confirm with Dorothe.</li>
+  </ul></div></aside>
+</section>
+
+<!-- =========================================================
+     ARTICLES
+     ========================================================= -->
+<section class="page" id="p-articles" hidden>
+  <div class="phero"><div class="c">
+    <h1 class="h1">Guides for owners and buyers</h1>
+    <p class="lead">Plain answers to the questions I hear most often about selling, buying and inheriting property in the Saarland.</p>
+  </div></div>
+  <div class="sec tight"><div class="c">
+    <a class="art split" href="#article" style="align-items:center">
+      <div class="img" style="aspect-ratio:16/10"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div><span class="meta">Selling, 6 min read</span><h2 class="h2" style="margin-top:14px">What a house in the Saarland is worth in 2026</h2><p class="lead" style="margin-top:16px">How comparable sales, condition and the energy class shape a realistic asking price, and why online calculators often miss by a wide margin.</p></div>
+    </a>
+    <div class="arts" style="margin-top:96px">
+      <a class="art" href="#article"><div class="img"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta" style="display:block;margin-top:18px">Energy, 4 min read</span><h3 class="h3">The energy certificate: what sellers must show</h3><p>Which data belongs in every property ad, and which certificate type you need.</p></a>
+      <a class="art" href="#article"><div class="img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta" style="display:block;margin-top:18px">Inheritance, 5 min read</span><h3 class="h3">Selling a house you inherited with siblings</h3><p>Why one neutral valuation is often the step that makes an agreement possible.</p></a>
+      <a class="art" href="#article"><div class="img"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=75" alt="" loading="lazy" onerror="this.remove()"></div><span class="meta" style="display:block;margin-top:18px">Buying, 5 min read</span><h3 class="h3">Hausgeld explained for apartment buyers</h3><p>What the monthly fee covers, what the reserve fund means, and what to ask before you buy.</p></a>
+    </div>
+  </div></div>
+  <div style="height:80px"></div>
+</section>
+
+<!-- =========================================================
+     ARTICLE
+     ========================================================= -->
+<section class="page" id="p-article" hidden>
+  <div class="c" style="padding-top:72px;padding-bottom:120px">
+    <div class="article">
+      <div class="crumb"><a href="#articles">Guides</a><span>/</span><span>Selling</span></div>
+      <h1 class="h1">What a house in the Saarland is worth in 2026</h1>
+      <p class="muted" style="margin-top:18px">By Dorothe Waltner, 14 September 2026, 6 min read</p>
+      <div class="img cover"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80" alt="" onerror="this.remove()"></div>
+      <p>Most owners start with an online calculator. It is a reasonable first look, but it cannot see the things that move a price most: the condition of the roof and heating, the light in the rooms, or the street itself.</p>
+      <h2>Comparable sales come first</h2>
+      <p>A valuation starts with what similar properties nearby have actually sold for, not what they were advertised at. Asking prices are wishes; sale prices are the market.</p>
+      <h2>Condition and energy class</h2>
+      <p>Since buyers must see the energy class in every advert, a poor class now shows up directly in offers. Recent work on windows, insulation or heating often matters more than the kitchen.</p>
+      <p>A valuation on site brings these together into a range you can plan with, whether you sell this year or later.</p>
+      <div class="author"><div class="img ph" data-cap=""></div><div><b>Dorothe Waltner</b><p class="muted" style="font-size:15px;margin-top:2px">DEKRA-certified valuer and property broker in Püttlingen.</p></div><a class="btn primary" href="#valuation" style="margin-left:auto">Request a valuation</a></div>
+    </div>
+  </div>
+  <aside class="notes"><div><b>Articles - implementation notes</b><ul>
+    <li>Blog nav item stays behind the feature flag until the first articles are published; the home section hides with it.</li>
+    <li>Each article: meta title and description, Open Graph image, Article JSON-LD, listed in sitemap.xml.</li>
+  </ul></div></aside>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="c">
+    <div class="ftr-top">
+      <div><div class="big">4 Wände – Saar</div><p>Immobilienberatung Dorothe Waltner<br>Kyllbergstraße 140, 66346 Püttlingen</p><div class="actions" style="margin-top:24px"><a class="btn light" href="#valuation" style="display:inline-flex">Request a valuation</a></div></div>
+      <div><h4>Explore</h4><a href="#properties">Properties</a><a href="#sold">Sold and let</a><a href="#selling">Selling</a><a href="#valuation">Valuation</a><a href="#inheritance">Inherited property</a><a href="#articles">Guides</a></div>
+      <div><h4>Contact</h4><a href="tel:+491604444047">0160 4444047</a><a href="mailto:dorothe.waltner@gmail.com">dorothe.waltner@gmail.com</a><a href="#about">About me</a><a href="#contact">Contact form</a></div>
+      <div><h4>Where I work</h4><div class="areas"><span>Püttlingen</span><span>Völklingen</span><span>Riegelsberg</span><span>Heusweiler</span><span>Schwalbach</span><span>Saarbrücken</span><span>Saarlouis</span><span>Schmelz</span></div></div>
+    </div>
+    <div class="ftr-bot"><span>© 2026 Dorothe Waltner</span><nav><a href="#">Imprint</a><a href="#">Privacy</a><a href="#">Terms</a></nav><span>Built and maintained by Deerva</span></div>
+  </div>
+</footer>
+
+<div class="picker" aria-label="Mockup controls">
+  <select id="pg" aria-label="Go to page">
+    <option value="home">Home</option><option value="properties">Properties</option><option value="listing">Listing detail</option><option value="sold">Sold and let</option><option value="selling">Selling</option><option value="valuation">Valuation</option><option value="inheritance">Inherited property</option><option value="about">About me</option><option value="contact">Contact</option><option value="articles">Guides</option><option value="article">Guide article</option>
+  </select>
+  <label><input type="checkbox" id="nt"> Notes</label>
+</div>
+
+<script>
+(function(){
+  var sel=document.getElementById('pg');
+  function show(){
+    var id=(location.hash||'#home').slice(1);
+    if(!document.getElementById('p-'+id)) id='home';
+    document.querySelectorAll('.page').forEach(function(p){p.hidden=(p.id!=='p-'+id)});
+    document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+id)});
+    sel.value=id; window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  sel.addEventListener('change',function(){location.hash=sel.value});
+  document.getElementById('nt').addEventListener('change',function(e){document.body.classList.toggle('show-notes',e.target.checked)});
+  show();
+})();
+</script>
+</body>
+</html>
