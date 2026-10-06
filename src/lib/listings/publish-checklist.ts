@@ -79,7 +79,6 @@ export function buildPublishChecklist({
     {
       key: "photoAlt",
       done: photosMissingAlt === 0,
-      missing: photosMissingAlt > 0 ? [String(photosMissingAlt)] : undefined,
       anchor: "photos",
     },
     {
