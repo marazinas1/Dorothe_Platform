@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { newInquiryCountQueryOptions } from "@/lib/inquiries/admin.functions";
 import {
   LayoutDashboard,
-  Building2,
+  House,
   Inbox,
   UserCog,
   BarChart3,
@@ -87,7 +87,7 @@ const GROUPS: NavGroup[] = [
   {
     label: "manage",
     items: [
-      { key: "listings", to: "/admin/listings", icon: Building2, permission: "listing.create" },
+      { key: "listings", to: "/admin/listings", icon: House, permission: "listing.create" },
       { key: "posts", to: "/admin/posts", icon: Newspaper, permission: "settings.edit" },
       {
         key: "testimonials",

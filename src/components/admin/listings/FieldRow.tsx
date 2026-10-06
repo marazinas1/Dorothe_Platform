@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import type { LucideIcon } from "lucide-react";
 
 import { Label } from "@/components/ui/label";
 
@@ -64,11 +65,14 @@ export function FormSection({
   description,
   children,
   anchor,
+  icon: Icon,
 }: {
   title: string;
   description?: string;
   children: React.ReactNode;
   anchor?: string;
+  /** Section icon from the book's listing editor table (20 px). */
+  icon?: LucideIcon;
 }) {
   const step = useContext(SectionStepContext);
 
@@ -78,7 +82,10 @@ export function FormSection({
       className="scroll-mt-28 overflow-hidden rounded-[var(--radius)] border border-border bg-card"
     >
       <header className="border-b border-border px-4 py-4 sm:px-5">
-      <h2 className="admin-section-title flex items-baseline gap-2">
+      <h2 className="admin-section-title flex items-center gap-2">
+        {Icon ? (
+          <Icon aria-hidden="true" strokeWidth={1.75} className="size-5 shrink-0 text-muted-foreground" />
+        ) : null}
         {step !== null ? (
           <span className="text-sm font-medium text-muted-foreground">{step}</span>
         ) : null}

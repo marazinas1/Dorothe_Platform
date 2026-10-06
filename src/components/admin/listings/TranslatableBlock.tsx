@@ -1,3 +1,4 @@
+import { FileText } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Textarea } from "@/components/ui/textarea";
@@ -70,7 +71,7 @@ export function TranslatableBlock({
   }
 
   return (
-    <FormSection
+    <FormSection icon={FileText}
       anchor="texts"
       title={t("admin.listings.sections.translated")}
       description={t("admin.listings.help.translated")}

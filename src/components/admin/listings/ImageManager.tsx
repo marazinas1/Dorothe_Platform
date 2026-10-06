@@ -1,3 +1,4 @@
+import { Image as ImageIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -58,7 +59,7 @@ export function ImageManager({
 
 
   return (
-    <FormSection
+    <FormSection icon={ImageIcon}
       anchor="photos"
       title={t("admin.listings.sections.images")}
       description={t("admin.listings.images.uploadHint")}
