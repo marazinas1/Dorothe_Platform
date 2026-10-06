@@ -47,7 +47,7 @@ const DYNAMIC_PREFIXES = {
   "admin.listings.checklist.items": ENUMS.checklist,
   "admin.listings.placement": ENUMS.textFields,
   "admin.listings.outline.regions": ENUMS.outlineRegions,
-  "admin.listings.statusGroups": ENUMS.statusGroups,
+  "admin.listings.tabs": ENUMS.listingTabs,
   "admin.listings.errors": ENUMS.slugIssues,
 };
 
