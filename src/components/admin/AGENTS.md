@@ -30,3 +30,5 @@
   unsaved edits render `UnsavedChangesGuard`.
 - The one exception carried over from the client theme is the logo, which is
   brand identity rather than styling.
+
+Source of truth for admin screens: `docs/broker-book.md` sections 6, 7 and 13 (visual reference `docs/reference/broker-admin.html`).

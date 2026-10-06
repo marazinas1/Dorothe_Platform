@@ -10,3 +10,5 @@ Every new public module follows these. No module invents its own look.
 6. **Fonts by layer.** Urbanist for the public site; admin and sign-in use the admin font only; the script font (Tangerine) only for the signature.
 7. **Contrast before colour.** Text on any filled surface reaches 4.5:1. If a brand colour fails, use its deeper shade for fills and keep the original for accents.
 8. **Fixed vocabulary.** Seven listing statuses with fixed words and colours. An action keeps its name through the flow: Publish produces Published.
+
+Source of truth for public components: `docs/broker-book.md` sections 1-8 and 12 (visual reference `docs/reference/broker-site.html`).

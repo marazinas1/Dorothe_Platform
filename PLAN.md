@@ -319,3 +319,5 @@ Recurring failure modes to guard against:
 - Reports claiming something that is not in the code
 - Plan items silently dropped during the build
 - Metrics displayed for columns nothing writes
+
+Design and content source of truth: `docs/broker-book.md` (mockups `docs/reference/`); read before any UI, copy, data or admin work.
