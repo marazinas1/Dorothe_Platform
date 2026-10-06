@@ -53,6 +53,7 @@ import { Route as AdminAuthenticatedSettingsIndexRouteImport } from './routes/ad
 import { Route as AdminAuthenticatedSettingsTabRouteImport } from './routes/admin._authenticated.settings.$tab'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -287,6 +288,12 @@ const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
   path: '/lovable/email/auth/webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -329,6 +336,7 @@ export interface FileRoutesByFullPath {
   '/admin/settings/$tab': typeof AdminAuthenticatedSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/admin/inquiries/': typeof AdminAuthenticatedInquiriesIndexRoute
   '/admin/listings/': typeof AdminAuthenticatedListingsIndexRoute
   '/admin/settings/': typeof AdminAuthenticatedSettingsIndexRoute
@@ -369,6 +377,7 @@ export interface FileRoutesByTo {
   '/admin/settings/$tab': typeof AdminAuthenticatedSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/admin/inquiries': typeof AdminAuthenticatedInquiriesIndexRoute
   '/admin/listings': typeof AdminAuthenticatedListingsIndexRoute
   '/admin/settings': typeof AdminAuthenticatedSettingsIndexRoute
@@ -416,6 +425,7 @@ export interface FileRoutesById {
   '/admin/_authenticated/settings/$tab': typeof AdminAuthenticatedSettingsTabRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/admin/_authenticated/inquiries/': typeof AdminAuthenticatedInquiriesIndexRoute
   '/admin/_authenticated/listings/': typeof AdminAuthenticatedListingsIndexRoute
   '/admin/_authenticated/settings/': typeof AdminAuthenticatedSettingsIndexRoute
@@ -463,6 +473,7 @@ export interface FileRouteTypes {
     | '/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
+    | '/lovable/email/transactional/preview'
     | '/admin/inquiries/'
     | '/admin/listings/'
     | '/admin/settings/'
@@ -503,6 +514,7 @@ export interface FileRouteTypes {
     | '/admin/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
+    | '/lovable/email/transactional/preview'
     | '/admin/inquiries'
     | '/admin/listings'
     | '/admin/settings'
@@ -549,6 +561,7 @@ export interface FileRouteTypes {
     | '/admin/_authenticated/settings/$tab'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
+    | '/lovable/email/transactional/preview'
     | '/admin/_authenticated/inquiries/'
     | '/admin/_authenticated/listings/'
     | '/admin/_authenticated/settings/'
@@ -562,6 +575,7 @@ export interface RootRouteChildren {
   ApiPublicTrackViewRoute: typeof ApiPublicTrackViewRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -874,6 +888,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1023,6 +1044,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicTrackViewRoute: ApiPublicTrackViewRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
