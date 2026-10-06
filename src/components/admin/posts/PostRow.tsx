@@ -47,9 +47,9 @@ export function PostRow({ row, locale, onEdit, expanded }: Props) {
       <td className="border-b border-border px-3.5 py-3 align-middle group-last:border-b-0">
         {row.status === "published" ? (
           <PostStatus tone="published">{t("admin.posts.published")}</PostStatus>
-          ) : (
+        ) : (
           <PostStatus tone="draft">{t("admin.posts.draft")}</PostStatus>
-          )}
+        )}
       </td>
       <td className="whitespace-nowrap border-b border-border px-3.5 py-3 align-middle text-muted-foreground group-last:border-b-0">
         {date ?? t("admin.posts.notYet")}
@@ -59,17 +59,11 @@ export function PostRow({ row, locale, onEdit, expanded }: Props) {
       </td>
       <td className="border-b border-border px-3.5 py-3 text-right align-middle group-last:border-b-0">
         <div className="flex justify-end gap-1">
-        <Button
-          type="button"
-          size="sm"
-          variant="outline"
-          aria-expanded={expanded}
-          onClick={onEdit}
-        >
-          <Pencil className="h-4 w-4" strokeWidth={1.75} />
-          {expanded ? t("admin.common.close") : t("admin.posts.edit")}
-        </Button>
-      </div>
+          <Button type="button" size="sm" variant="outline" aria-expanded={expanded} onClick={onEdit}>
+            <Pencil className="h-4 w-4" strokeWidth={1.75} />
+            {expanded ? t("admin.common.close") : t("admin.posts.edit")}
+          </Button>
+        </div>
       </td>
     </tr>
   );
