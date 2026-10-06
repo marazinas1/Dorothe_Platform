@@ -633,7 +633,8 @@
       "calendar": "Kalender",
       "backToSite": "Zurück zur Website",
       "properties": "Immobilien",
-      "blog": "Ratgeber"
+      "blog": "Ratgeber",
+      "valuation": "Bewertung"
     },
     "pages": {
       "dashboard": "Übersicht",
@@ -760,7 +761,8 @@
         "blog": "Ratgeber",
         "imprint": "Impressum",
         "privacy": "Datenschutz",
-        "terms": "AGB"
+        "terms": "AGB",
+        "valuation": "Bewertung"
       },
       "general": {
         "site_name": "Firmenname",
@@ -1697,6 +1699,13 @@
           "headline": "Seitentitel",
           "intro": "Einleitungstext",
           "empty": "Text, wenn kein Beitrag veröffentlicht ist"
+        },
+        "valuation": {
+          "headline": "Überschrift",
+          "intro": "Einleitung",
+          "deliverables_title": "Was Sie erhalten — Titel",
+          "inheritance_title": "Geerbte Immobilie — Titel",
+          "inheritance_body": "Geerbte Immobilie — Text"
         }
       },
       "resetToDefault": "Auf Standard zurücksetzen",

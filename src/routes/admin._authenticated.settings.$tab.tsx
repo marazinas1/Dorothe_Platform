@@ -4,7 +4,16 @@ import { BusinessTab } from "@/components/admin/settings/BusinessTab";
 import { HomeAdminPage } from "@/components/admin/home/HomeAdminPage";
 import { PageAdminPage } from "@/components/admin/pages/PageAdminPage";
 
-const TABS = ["business", "home", "selling", "inheritance", "about", "contact"] as const;
+const TABS = [
+  "business",
+  "home",
+  "properties",
+  "selling",
+  "valuation",
+  "inheritance",
+  "about",
+  "contact",
+] as const;
 type Tab = (typeof TABS)[number];
 
 /** Retired tab ids keep their old bookmarks: land on the merged Business tab. */
@@ -18,7 +27,6 @@ const LEGACY = new Set([
   "maintenance",
   "legal",
   // Collections live under Manage; legal texts are fixed templates.
-  "properties",
   "blog",
   "imprint",
   "privacy",

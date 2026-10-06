@@ -9,6 +9,7 @@
 export type PageKey =
   | "properties"
   | "selling"
+  | "valuation"
   | "inheritance"
   | "blog"
   | "about"
@@ -59,7 +60,8 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   {
     key: "properties",
     path: "immobilien",
-    mediaSlots: ["hero_photo"],
+    // The catalogue shows listing photos only; it has no page photograph.
+    mediaSlots: [],
     fields: [
       para("headline", "listings.title", "opening", true),
       para("intro", "listings.description", "opening", true),
@@ -86,6 +88,18 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
       para("form_intro", "pages.selling.form_intro", "form"),
       line("cta_title", "pages.selling.cta_title", "closing"),
       para("cta_body", "pages.selling.cta_body", "closing"),
+    ],
+  },
+  {
+    key: "valuation",
+    path: "immobilienbewertung",
+    mediaSlots: [],
+    fields: [
+      para("headline", "pages.valuation.reference_headline", "opening", true),
+      para("intro", "pages.valuation.reference_intro", "opening", true),
+      line("deliverables_title", "pages.valuation.deliverables_title"),
+      line("inheritance_title", "pages.valuation.inheritance_title", "closing"),
+      para("inheritance_body", "pages.valuation.inheritance_body", "closing"),
     ],
   },
   {
