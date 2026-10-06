@@ -152,7 +152,7 @@ export function AdminSidebar({ email, roleLabel }: { email: string; roleLabel: s
   const { t } = useTranslation();
   const locale = usePublicLocale();
   return (
-    <Sidebar collapsible="offcanvas" className="[--sidebar-width:16rem]">
+    <Sidebar collapsible="offcanvas" className="[--sidebar-width:15rem]">
       <AdminSidebarHeader />
       <SidebarContent>
         {GROUPS.map((group) => (

@@ -598,7 +598,8 @@
       "interfaceLanguage": "Panel language",
       "interfaceLanguageHint": "Only changes the language of this panel, not the website.",
       "interfaceLanguageFailed": "Could not save the panel language.",
-      "title": "{{site}} Admin"
+      "title": "{{site}} Admin",
+      "viewSite": "View site"
     },
     "role": {
       "developer": "Developer",
@@ -688,7 +689,7 @@
     "auth": {
       "login": {
         "title": "Sign in",
-        "subtitle": "Sign in with your email address.",
+        "subtitle": "Manage your listings, enquiries and website.",
         "email": "Email",
         "password": "Password",
         "submit": "Sign in",

@@ -598,7 +598,8 @@
       "interfaceLanguage": "Sprache der Oberfläche",
       "interfaceLanguageHint": "Ändert nur die Sprache dieses Panels, nicht die der Website.",
       "interfaceLanguageFailed": "Die Sprache der Oberfläche konnte nicht gespeichert werden.",
-      "title": "{{site}} Admin"
+      "title": "{{site}} Admin",
+      "viewSite": "Website ansehen"
     },
     "role": {
       "developer": "Developer",
@@ -688,7 +689,7 @@
     "auth": {
       "login": {
         "title": "Anmelden",
-        "subtitle": "Melden Sie sich mit Ihrer E-Mail-Adresse an.",
+        "subtitle": "Verwalten Sie Ihre Immobilien, Anfragen und Ihre Website.",
         "email": "E-Mail",
         "password": "Passwort",
         "submit": "Anmelden",

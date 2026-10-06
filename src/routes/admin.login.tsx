@@ -8,7 +8,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AuthSplit } from "@/components/brand/AuthSplit";
+import { AuthSplit } from "@/components/admin/AuthSplit";
 import { SiteLogo } from "@/components/brand/SiteLogo";
 import { supabase } from "@/integrations/supabase/client";
 import { updateLastLogin } from "@/lib/auth/last-login.functions";
