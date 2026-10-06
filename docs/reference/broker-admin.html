@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broker platform - admin mockup (Noir)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.454.0/dist/umd/lucide.min.js"></script>
+<style>
+/* ============ ADMIN NOIR TOKENS - exact values from 02-admin-ui.md ============ */
+[data-admin-theme="noir"]{
+  --font-sans:"Urbanist",ui-sans-serif,system-ui,sans-serif;
+  --background:#FAFAFA; --foreground:#111111; --card:#FFFFFF;
+  --primary:#1A1A1A; --primary-foreground:#FFFFFF; --secondary:#F2F2F2;
+  --muted-foreground:#666666; --accent:#F2F2F2; --border:#E0E0E0; --ring:#000000;
+  --destructive:#B00020; --success:#287A4B; --warning:#9A5B00; --info:#245C8A;
+  --radius:4px;
+  --sidebar:#000000; --sidebar-fg:rgba(255,255,255,.62); --sidebar-hover:rgba(255,255,255,.10); --sidebar-active:rgba(255,255,255,.15); --sidebar-border:rgba(255,255,255,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--background);color:var(--foreground);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.lucide{width:16px;height:16px;stroke-width:1.75;flex:none}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted-foreground)}
+.label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted-foreground)}
+
+/* ============ SHELL ============ */
+.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+.side{background:var(--sidebar);color:var(--sidebar-fg);display:flex;flex-direction:column;padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+.side .brand{display:flex;align-items:center;gap:10px;padding:6px 8px 18px;border-bottom:1px solid var(--sidebar-border);margin-bottom:18px;color:#fff;font-weight:700;font-size:15px}
+.side .brand .mk{width:30px;height:30px;border:1.5px solid #fff;border-radius:var(--radius);display:grid;place-items:center;font-size:14px}
+.side .grp{margin-bottom:18px}
+.side .gl{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.42);padding:0 8px 6px}
+.side a{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 8px;border-radius:var(--radius);color:var(--sidebar-fg);text-decoration:none;font-weight:500;transition:background .15s,color .15s}
+.side a:hover{background:var(--sidebar-hover);color:#fff}
+.side a.on{background:var(--sidebar-active);color:#fff}
+.side a .cnt{margin-left:auto;background:#fff;color:#111;border-radius:999px;font-size:11px;font-weight:700;padding:0 7px;line-height:18px}
+.side .foot{margin-top:auto;border-top:1px solid var(--sidebar-border);padding-top:14px}
+.side .who{padding:0 8px 10px;font-size:12.5px}
+.side .who b{display:block;color:#fff;font-weight:500;word-break:break-all}
+.side .who span{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em}
+.top{height:56px;border-bottom:1px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:5}
+.top .site{font-weight:600;display:flex;align-items:center;gap:10px}
+.top .r{display:flex;align-items:center;gap:14px}
+.lang{display:inline-flex;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.lang button{border:0;background:none;font:inherit;font-size:12px;font-weight:700;padding:6px 10px;cursor:pointer;color:var(--muted-foreground)}
+.lang button.on{background:var(--foreground);color:#fff}
+.main{min-width:0}
+.content{padding:32px 24px 64px}
+@media(min-width:768px){.content{padding:32px 32px 72px}}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{display:none}}
+
+/* ============ PAGE HEADER + TOOLBAR ============ */
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.ph h1{font-size:24px;font-weight:700;letter-spacing:-0.01em;line-height:1.2}
+.ph p{color:var(--muted-foreground);margin-top:4px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted-foreground);text-decoration:none;font-weight:500;margin-bottom:10px}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.search{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);flex:1;min-width:220px;max-width:420px;color:var(--muted-foreground)}
+.search input{border:0;outline:0;font:inherit;flex:1;background:transparent;color:var(--foreground)}
+.count{margin-left:auto;color:var(--muted-foreground);font-size:13px}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;font:inherit;font-size:13px;font-weight:600;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--primary);color:var(--primary-foreground)}
+.btn.primary:hover{background:#333}
+.btn.secondary{background:var(--card);border-color:var(--border);color:var(--foreground)}
+.btn.secondary:hover{border-color:var(--foreground)}
+.btn.ghost{background:transparent;color:var(--foreground)}
+.btn.ghost:hover{background:var(--accent)}
+.btn.link{min-height:auto;padding:0;background:none;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.btn.danger{background:var(--card);border-color:var(--destructive);color:var(--destructive)}
+.btn.danger:hover{background:var(--destructive);color:#fff}
+.btn.icon{width:40px;padding:0}
+.btn.sm{min-height:32px;padding:0 10px;font-size:12.5px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* ============ CARDS, TABLES, BADGES ============ */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.card.pad{padding:20px}
+.card h2{font-size:16px;font-weight:700}
+.card .sub{color:var(--muted-foreground);margin-top:2px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted-foreground);padding:12px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover td{background:#FCFCFC}
+.tbl .r{text-align:right}
+.thumb{width:64px;height:48px;border-radius:var(--radius);background:linear-gradient(160deg,#C9C9C5,#8E8E89);flex:none}
+.obj{display:flex;align-items:center;gap:12px}
+.obj b{display:block;font-weight:600}
+.obj span{font-size:12.5px;color:var(--muted-foreground)}
+.handle{color:#B5B5B5;cursor:grab}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap;line-height:20px}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.plain::before{display:none}
+.b-draft{background:#F2F2F2;color:#555}
+.b-soon{background:#E7EFF6;color:var(--info)}
+.b-live{background:#E5F2EA;color:var(--success)}
+.b-res{background:#F7EEDF;color:var(--warning)}
+.b-sold,.b-let{background:#111;color:#fff}
+.b-arch{background:transparent;color:#666;border:1px dashed #CFCFCF}
+.b-new{background:#111;color:#fff}
+.b-prog{background:#F7EEDF;color:var(--warning)}
+.b-done{background:#E5F2EA;color:var(--success)}
+.b-closed{background:#F2F2F2;color:#555}
+.b-neutral{background:#F2F2F2;color:#333}
+.ec{display:inline-grid;place-items:center;min-width:28px;height:22px;padding:0 5px;border-radius:var(--radius);font-size:11.5px;font-weight:700;color:#111}
+.ec-ap{background:#00843D;color:#fff}.ec-a{background:#2EA343}.ec-b{background:#7DB83A}.ec-c{background:#B5C21E}.ec-d{background:#F2D700}.ec-e{background:#F6B11E}.ec-f{background:#EE7A1D}.ec-g{background:#E2231A;color:#fff}.ec-h{background:#A8151B;color:#fff}
+
+/* ============ TABS ============ */
+.tabs{display:flex;gap:24px;border-bottom:1px solid var(--border);margin-bottom:20px;overflow-x:auto}
+.tabs a,.tabs button{background:none;border:0;font:inherit;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--muted-foreground);padding:12px 0 12px;margin-bottom:-1px;border-bottom:2px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
+.tabs .on{color:var(--foreground);border-bottom-color:var(--foreground)}
+.tabs .c{margin-left:6px;font-variant-numeric:tabular-nums;color:var(--muted-foreground)}
+
+/* ============ FORMS ============ */
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted-foreground)}
+.f input,.f select,.f textarea{min-height:40px;padding:0 12px;font:inherit;font-size:14px;color:var(--foreground);background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+.f textarea{padding:10px 12px;min-height:96px;resize:vertical}
+.f input:focus-visible,.f select:focus-visible,.f textarea:focus-visible{outline:2px solid var(--ring);outline-offset:1px}
+.f .help{font-size:12.5px;color:var(--muted-foreground)}
+.f .err{font-size:12.5px;color:var(--destructive)}
+.f input[aria-invalid="true"]{border-color:var(--destructive)}
+.f .cnt{font-size:12px;color:var(--muted-foreground);align-self:flex-end}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.full{grid-column:1/-1}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:500}
+.switch i.t{width:36px;height:20px;border-radius:999px;background:#D4D4D4;position:relative;display:inline-block;flex:none}
+.switch i.t::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .15s}
+.switch.on i.t{background:var(--foreground)}
+.switch.on i.t::after{left:18px}
+.radios{display:flex;gap:8px;flex-wrap:wrap}
+.radios label{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;cursor:pointer;font-size:13.5px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--foreground)}
+.radios label.on{border-color:var(--foreground);box-shadow:inset 0 0 0 1px var(--foreground)}
+.sec-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px}
+.sec-card>header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.sec-card>header h2{font-size:15px;font-weight:700;display:flex;align-items:center;gap:10px}
+.sec-card>header h2 .lucide{width:20px;height:20px}
+.sec-card .body{padding:20px}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:#111;color:#fff;padding:12px 16px;border-radius:var(--radius);font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:60}
+.toast .lucide{color:#7FD3A0}
+
+/* ============ PAGE-SPECIFIC ============ */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{padding:18px 20px}
+.kpi .v{font-size:28px;font-weight:700;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;margin-top:6px}
+.kpi .d{font-size:12.5px;color:var(--success);margin-top:2px}
+@media(max-width:1000px){.kpis{grid-template-columns:1fr 1fr}}
+.attn{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border);text-decoration:none;color:inherit}
+.attn:last-child{border-bottom:0}
+.attn:hover{background:#FCFCFC}
+.attn .ic{width:34px;height:34px;border-radius:var(--radius);background:var(--secondary);display:grid;place-items:center;flex:none}
+.attn div{flex:1;min-width:0}
+.attn b{display:block;font-weight:600}
+.attn span{color:var(--muted-foreground);font-size:13px}
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.qa a{display:flex;align-items:center;gap:10px;padding:16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);text-decoration:none;font-weight:600;transition:border-color .15s}
+.qa a:hover{border-color:var(--foreground)}
+@media(max-width:1000px){.qa{grid-template-columns:1fr 1fr}}
+.inq{display:grid;grid-template-columns:14px 1.3fr 1.6fr 110px 120px;gap:14px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);text-decoration:none;color:inherit}
+.inq:hover{background:#FCFCFC}
+.inq .dot{width:8px;height:8px;border-radius:50%;background:var(--foreground)}
+.inq .dot.read{background:transparent}
+.inq b{font-weight:600}
+.inq .src{font-size:12.5px;color:var(--muted-foreground)}
+.inq .snip{color:var(--muted-foreground);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inq .ctx{display:block;font-size:12.5px;color:var(--muted-foreground);margin-top:2px}
+.inq .ctx mark{background:#FFF1B8;color:inherit;padding:0 2px}
+@media(max-width:1000px){.inq{grid-template-columns:14px 1fr auto}.inq .snip,.inq .time{display:none}}
+.detail{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+@media(max-width:1100px){.detail{grid-template-columns:1fr}}
+.msg{font-size:15px;line-height:1.65}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:8px 12px;font-size:13.5px}
+.kv dt{color:var(--muted-foreground)}
+.timeline div{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
+.timeline div:last-child{border-bottom:0}
+.editor{display:grid;grid-template-columns:200px minmax(0,1fr) 280px;gap:20px;align-items:start}
+.editor>*{min-width:0}
+.f input,.f select,.f textarea{min-width:0;width:100%}
+.anchors{position:sticky;top:76px;display:flex;flex-direction:column;gap:2px}
+.anchors a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius);text-decoration:none;color:var(--muted-foreground);font-weight:500}
+.anchors a:hover{background:var(--accent);color:var(--foreground)}
+.anchors a.on{background:var(--accent);color:var(--foreground)}
+.anchors a .st{margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--success)}
+.anchors a .st.miss{background:var(--warning)}
+.checklist{position:sticky;top:76px}
+.checklist li{list-style:none;display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border);font-size:13.5px}
+.checklist li:last-child{border-bottom:0}
+.checklist .ok{color:var(--success)}
+.checklist .no{color:var(--warning)}
+@media(max-width:1200px){.editor{grid-template-columns:1fr}.anchors,.checklist{position:static}.anchors{flex-direction:row;flex-wrap:wrap}}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.photo{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff}
+.photo .im{aspect-ratio:4/3;background:linear-gradient(160deg,#CFCFCB,#9B9B96);position:relative}
+.photo .im .cover{position:absolute;top:8px;left:8px}
+.photo .im .grip{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:var(--radius);background:rgba(255,255,255,.9);display:grid;place-items:center}
+.photo .alt{padding:8px}
+.photo .alt input{width:100%;border:1px solid var(--border);border-radius:var(--radius);min-height:34px;padding:0 8px;font:inherit;font-size:12.5px}
+.photo .alt input[aria-invalid="true"]{border-color:var(--warning)}
+.drop{border:1.5px dashed #CFCFCF;border-radius:var(--radius);display:grid;place-items:center;text-align:center;padding:16px;color:var(--muted-foreground);aspect-ratio:auto;min-height:100%}
+@media(max-width:1000px){.photos{grid-template-columns:1fr 1fr}}
+.xrow{border-bottom:1px solid var(--border)}
+.xrow:last-child{border-bottom:0}
+.xhead{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer}
+.xhead .t{flex:1;min-width:0}
+.xhead .t b{display:block;font-weight:600}
+.xhead .t span{display:block;color:var(--muted-foreground);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xhead .chev{transition:transform .15s}
+.xrow.open .xhead .chev{transform:rotate(180deg)}
+.xbody{padding:4px 18px 20px 52px;display:none}
+.xrow.open .xbody{display:block}
+.user{display:grid;grid-template-columns:1.6fr 1fr 160px auto;gap:14px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+.user:last-child{border-bottom:0}
+.user b{font-weight:600}
+.user .bd{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
+@media(max-width:1000px){.user{grid-template-columns:1fr}}
+.brandfiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.bf{border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.bf .pv{height:110px;border-radius:var(--radius);background:#F4F4F2;display:grid;place-items:center;margin:12px 0;font-weight:700;font-size:20px}
+.bf .pv.dark{background:#111;color:#fff}
+@media(max-width:1000px){.brandfiles{grid-template-columns:1fr}}
+.media{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);margin-bottom:12px}
+.media .mh{display:flex;align-items:center;gap:14px;padding:12px 16px}
+.media .mh .thumb{width:72px;height:54px}
+.media .mh div{flex:1}
+.media .mh b{display:block;font-weight:600}
+.media .mh span{color:var(--muted-foreground);font-size:13px}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 16px 16px}
+.layer{border:1px solid var(--border);border-radius:var(--radius);padding:10px}
+.layer .im{aspect-ratio:4/3;border-radius:var(--radius);background:linear-gradient(160deg,#D2D2CE,#A3A39E);position:relative}
+.layer .im.empty{background:repeating-linear-gradient(45deg,#F4F4F2 0 8px,#ECECE9 8px 16px)}
+.layer.showing{border-color:var(--foreground);box-shadow:inset 0 0 0 1px var(--foreground)}
+.layer .lt{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-weight:600;font-size:13px}
+.layer p{font-size:12.5px;color:var(--muted-foreground);margin-top:2px}
+@media(max-width:900px){.layers{grid-template-columns:1fr}}
+.wording .lang-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.builtin{font-size:12px;color:var(--muted-foreground);border-left:2px solid var(--border);padding-left:8px;margin-top:4px}
+.bars{display:flex;align-items:flex-end;gap:8px;height:180px;padding-top:12px}
+.bars div{flex:1;background:#111;border-radius:2px 2px 0 0;position:relative}
+.bars div span{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted-foreground)}
+.empty{text-align:center;padding:48px 24px}
+.empty .ic{width:44px;height:44px;border-radius:50%;background:var(--secondary);display:grid;place-items:center;margin:0 auto 14px}
+.auth{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.auth .l{display:flex;align-items:center;justify-content:center;padding:40px;background:var(--card)}
+.auth form{width:100%;max-width:360px;display:flex;flex-direction:column;gap:16px}
+.auth .r{background:#111;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:48px}
+@media(max-width:900px){.auth{grid-template-columns:1fr}.auth .r{min-height:200px}}
+
+/* ============ DOC CHROME ============ */
+.view[hidden],.shell[hidden],.toast[hidden]{display:none!important}
+.picker{position:fixed;right:16px;bottom:16px;z-index:100;display:flex;gap:8px;align-items:center;background:#2B2B2B;color:#fff;padding:8px 10px;border-radius:8px;font:13px system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.picker select{font:inherit;padding:6px 8px;border-radius:5px;border:0}
+.picker label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.notes{display:none;margin-top:28px}
+body.show-notes .notes{display:block}
+.notes div{background:#FFF8D6;border:1px dashed #C9B54A;border-radius:6px;padding:16px 20px;font:13.5px/1.55 system-ui,sans-serif;color:#3A3420}
+.notes b{display:block;margin-bottom:6px}
+.notes li{margin-left:18px}
+</style>
+</head>
+<body data-admin-theme="noir">
+
+<!-- =========================================================
+     SIGN-IN (outside the shell)
+     ========================================================= -->
+<section class="view" id="v-login" hidden>
+  <div class="auth">
+    <div class="l">
+      <form onsubmit="location.hash='dashboard';return false">
+        <div style="display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;margin-bottom:12px"><span style="width:30px;height:30px;border:1.5px solid #111;border-radius:4px;display:grid;place-items:center">4</span>4 Wände – Saar</div>
+        <h1 style="font-size:26px;font-weight:700;letter-spacing:-0.01em">Sign in</h1>
+        <p class="muted" style="margin-top:-8px">Manage your listings, enquiries and website.</p>
+        <div class="f"><label for="l1">Email</label><input id="l1" type="email" value="dorothe.waltner@gmail.com" autocomplete="email"></div>
+        <div class="f"><label for="l2">Password</label><input id="l2" type="password" value="password123" autocomplete="current-password"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox"> Keep me signed in</label><a href="#set-password" class="btn link">Forgot password?</a></div>
+        <button class="btn primary" style="width:100%;min-height:44px">Sign in</button>
+      </form>
+    </div>
+    <div class="r">
+      <div style="font-weight:700;font-size:22px">4 Wände – Saar</div>
+      <div><p style="font-size:20px;line-height:1.4;max-width:30ch">Immobilienberatung Dorothe Waltner</p><p style="opacity:.6;margin-top:8px">Valuation, sale and inherited property in the Saarland.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="v-set-password" hidden>
+  <div class="auth">
+    <div class="l">
+      <form onsubmit="return false">
+        <h1 style="font-size:26px;font-weight:700">Set a new password</h1>
+        <p class="muted" style="margin-top:-8px">At least 8 characters, with an uppercase letter, a lowercase letter and a number.</p>
+        <div class="f"><label for="sp1">New password</label><input id="sp1" type="password" autocomplete="new-password"></div>
+        <div class="f"><label for="sp2">Confirm password</label><input id="sp2" type="password" autocomplete="new-password"></div>
+        <button class="btn primary" style="width:100%;min-height:44px" disabled>Checking link…</button>
+        <p class="muted" style="font-size:12.5px">The button becomes active as soon as your link is confirmed. If the link has expired, you will see a message here with a way to request a new one.</p>
+      </form>
+    </div>
+    <div class="r"><div style="font-weight:700;font-size:22px">4 Wände – Saar</div><p style="opacity:.6">Immobilienberatung Dorothe Waltner</p></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SHELL
+     ========================================================= -->
+<div class="shell" id="shell">
+  <aside class="side" aria-label="Admin navigation">
+    <div class="brand"><span class="mk">4</span>4 Wände – Saar</div>
+    <div class="grp"><div class="gl">Workspace</div>
+      <a href="#dashboard" data-v="dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+      <a href="#inquiries" data-v="inquiries inquiry"><i data-lucide="inbox"></i>Inquiries<span class="cnt">3</span></a>
+      <a href="#analytics" data-v="analytics"><i data-lucide="chart-column"></i>Analytics</a>
+    </div>
+    <div class="grp"><div class="gl">Manage</div>
+      <a href="#listings" data-v="listings listing-edit"><i data-lucide="house"></i>Listings</a>
+      <a href="#articles" data-v="articles article-edit"><i data-lucide="newspaper"></i>Articles</a>
+      <a href="#testimonials" data-v="testimonials"><i data-lucide="quote"></i>Testimonials</a>
+    </div>
+    <div class="grp"><div class="gl">Settings</div>
+      <a href="#users" data-v="users"><i data-lucide="user-cog"></i>Users</a>
+      <a href="#settings" data-v="settings settings-home"><i data-lucide="settings"></i>Site settings</a>
+    </div>
+    <div class="foot">
+      <div class="who"><b>rutkusmarius@gmail.com</b><span>Developer</span></div>
+      <a href="#"><i data-lucide="arrow-left"></i>Back to site</a>
+      <a href="#login"><i data-lucide="log-out"></i>Sign out</a>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <div class="site">Immobilienberatung Dorothe Waltner</div>
+      <div class="r">
+        <div class="lang" role="group" aria-label="Admin language"><button class="on">EN</button><button>DE</button></div>
+        <a class="btn ghost sm" href="#"><i data-lucide="external-link"></i>View site</a>
+      </div>
+    </header>
+    <div class="content">
+
+<!-- ================= DASHBOARD ================= -->
+<section class="view" id="v-dashboard" hidden>
+  <div class="ph"><div><h1>Dashboard</h1><p>What needs your attention, then how the site is doing.</p></div></div>
+  <div class="card" style="margin-bottom:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)"><h2 style="font-size:15px;font-weight:700">Needs attention</h2><a class="btn link" href="#inquiries">All inquiries</a></div>
+    <a class="attn" href="#inquiry"><span class="ic"><i data-lucide="inbox"></i></span><div><b>Valuation request from Sabine Krämer</b><span>House in Völklingen, received 2 hours ago</span></div><span class="badge b-new">New</span></a>
+    <a class="attn" href="#inquiry"><span class="ic"><i data-lucide="inbox"></i></span><div><b>Viewing request for ref. 4WS-2026-014</b><span>Two-room apartment, Saarbrücken, received yesterday</span></div><span class="badge b-new">New</span></a>
+    <a class="attn" href="#listing-edit"><span class="ic"><i data-lucide="house"></i></span><div><b>Bungalow in Heusweiler cannot be published yet</b><span>Energy certificate and 4 photo descriptions missing</span></div><span class="badge b-prog">2 missing</span></a>
+  </div>
+  <div class="kpis" style="margin-bottom:20px">
+    <div class="card kpi"><span class="label">Visits, 7 days</span><div class="v">1,284</div><div class="d">+12% on last week</div></div>
+    <div class="card kpi"><span class="label">Inquiries, 7 days</span><div class="v">9</div><div class="d">+3 on last week</div></div>
+    <div class="card kpi"><span class="label">Valuation requests, 30 days</span><div class="v">4</div><div class="d" style="color:var(--muted-foreground)">Same as last month</div></div>
+    <div class="card kpi"><span class="label">Live listings</span><div class="v">5</div><div class="d" style="color:var(--muted-foreground)">2 drafts, 1 coming soon</div></div>
+  </div>
+  <div class="qa">
+    <a href="#listing-edit"><i data-lucide="plus"></i>New listing</a>
+    <a href="#testimonials"><i data-lucide="quote"></i>Add a testimonial</a>
+    <a href="#article-edit"><i data-lucide="newspaper"></i>Write an article</a>
+    <a href="#"><i data-lucide="external-link"></i>View the site</a>
+  </div>
+  <aside class="notes"><div><b>Dashboard</b><ul><li>Order fixed by standard: Needs attention, Numbers, Quick actions. Analytics details stay on the Analytics page.</li><li>Needs attention: unread inquiries, listings blocked by the publish checklist, pending default requests (developer only).</li><li>Empty state: "Nothing needs your attention right now."</li></ul></div></aside>
+</section>
+
+<!-- ================= INQUIRIES ================= -->
+<section class="view" id="v-inquiries" hidden>
+  <div class="ph"><div><h1>Inquiries</h1><p>Every message from the site, newest first.</p></div></div>
+  <div class="tabs"><a class="on" href="#inquiries">All<span class="c">24</span></a><a href="#inquiries">Unread<span class="c">3</span></a><a href="#inquiries">Valuation<span class="c">6</span></a><a href="#inquiries">Listings<span class="c">12</span></a><a href="#inquiries">General<span class="c">6</span></a></div>
+  <div class="toolbar"><label class="search"><i data-lucide="search"></i><input value="lake" aria-label="Search inquiries"></label><span class="count">1 match</span></div>
+  <div class="card">
+    <a class="inq" href="#inquiry"><span class="dot"></span><div><b>Sabine Krämer</b><span class="src">Valuation request</span></div><span class="snip">House in Völklingen, about 160 m², we are thinking about selling next spring…</span><span class="time muted num">2 hours ago</span><span class="badge b-new">New</span></a>
+    <a class="inq" href="#inquiry"><span class="dot"></span><div><b>Thomas Reuter</b><span class="src">Listing 4WS-2026-014</span></div><span class="snip">We would like to view the apartment this week if possible…</span><span class="time muted num">Yesterday</span><span class="badge b-new">New</span></a>
+    <a class="inq" href="#inquiry"><span class="dot"></span><div><b>Familie Becker</b><span class="src">Contact form</span><span class="ctx">↳ Message: …our neighbour Robert <mark>Lake</mark> recommended you…</span></div><span class="snip">We inherited a house in Heusweiler with my brother…</span><span class="time muted num">Yesterday</span><span class="badge b-new">New</span></a>
+    <a class="inq" href="#inquiry"><span class="dot read"></span><div><b>Mark Hoffmann</b><span class="src">Listing 4WS-2026-009</span></div><span class="snip">Is the price still negotiable after the reduction?</span><span class="time muted num">29 Sep</span><span class="badge b-prog">In progress</span></a>
+    <a class="inq" href="#inquiry"><span class="dot read"></span><div><b>Julia Schmitt</b><span class="src">Buyer search</span></div><span class="snip">Looking for a house with garden around Püttlingen, up to €450,000…</span><span class="time muted num">27 Sep</span><span class="badge b-done">Answered</span></a>
+    <a class="inq" href="#inquiry"><span class="dot read"></span><div><b>Peter Müller</b><span class="src">Contact form</span></div><span class="snip">Thank you for the quick sale, all the best!</span><span class="time muted num">20 Sep</span><span class="badge b-closed">Closed</span></a>
+  </div>
+  <aside class="notes"><div><b>Inquiries</b><ul><li>Newest first. Each row: unread dot, name, source (valuation, listing ref, contact form, buyer search), snippet, time, workflow status (New, In progress, Answered, Closed).</li><li>Search matches inside messages show one muted context line under the name (NN/g #3). The row never auto-expands.</li><li>Opening an inquiry marks it read. Status changes are a separate control in the detail view.</li></ul></div></aside>
+</section>
+
+<section class="view" id="v-inquiry" hidden>
+  <a class="back" href="#inquiries"><i data-lucide="arrow-left"></i>Inquiries</a>
+  <div class="ph"><div><h1>Thomas Reuter</h1><p>Viewing request for ref. 4WS-2026-014, received yesterday at 18:42</p></div></div>
+  <div class="detail">
+    <div>
+      <div class="card pad"><p class="msg">Good evening Mrs Waltner, we would like to view the two-room apartment in St. Johann this week if possible. We are first-time buyers and our financing confirmation from the bank is already available. Thursday or Friday afternoon would suit us best.</p></div>
+      <div class="card" style="margin-top:16px"><div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700">Linked listing</div>
+        <div class="obj" style="padding:14px 18px"><span class="thumb"></span><div><b>Two-room apartment with a bay window</b><span>Saarbrücken, ref. 4WS-2026-014, €179,000</span></div><span class="badge b-live" style="margin-left:auto">Live</span></div></div>
+      <div class="card" style="margin-top:16px"><div style="padding:14px 18px;border-bottom:1px solid var(--border);font-weight:700">History</div>
+        <div class="timeline" style="padding:4px 18px"><div><span class="muted num">1 Oct 18:42</span>Inquiry received from the listing page</div><div><span class="muted num">2 Oct 09:10</span>Opened by Dorothe Waltner</div></div></div>
+    </div>
+    <div>
+      <div class="card pad">
+        <dl class="kv"><dt>Email</dt><dd>t.reuter@example.de</dd><dt>Phone</dt><dd class="num">0171 2345678</dd><dt>Source</dt><dd>Listing page, Book a viewing</dd><dt>Language</dt><dd>German</dd><dt>Consent</dt><dd>Given 1 Oct 18:42</dd></dl>
+        <div class="f" style="margin-top:16px"><label for="st">Status</label><select id="st"><option>New</option><option selected>In progress</option><option>Answered</option><option>Closed</option></select></div>
+        <div class="actions" style="margin-top:16px;flex-direction:column;align-items:stretch">
+          <a class="btn primary" href="#"><i data-lucide="mail"></i>Reply by email</a>
+          <a class="btn secondary" href="#"><i data-lucide="phone"></i>Call 0171 2345678</a>
+        </div>
+        <div class="f" style="margin-top:16px"><label for="nt">Internal note</label><textarea id="nt" placeholder="Only visible in admin"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANALYTICS ================= -->
+<section class="view" id="v-analytics" hidden>
+  <div class="ph"><div><h1>Analytics</h1><p>Visits and inquiries over the last 30 days.</p></div><div class="lang" role="group" aria-label="Period"><button>7 days</button><button class="on">30 days</button><button>90 days</button></div></div>
+  <div class="kpis" style="margin-bottom:20px">
+    <div class="card kpi"><span class="label">Visits</span><div class="v">5,412</div><div class="d">+8%</div></div>
+    <div class="card kpi"><span class="label">Listing views</span><div class="v">3,187</div><div class="d">+11%</div></div>
+    <div class="card kpi"><span class="label">Inquiries</span><div class="v">31</div><div class="d">+4</div></div>
+    <div class="card kpi"><span class="label">Inquiry rate</span><div class="v">0.57%</div><div class="d" style="color:var(--muted-foreground)">Inquiries per visit</div></div>
+  </div>
+  <div class="g2">
+    <div class="card pad"><h2>Visits per week</h2><div class="bars" style="margin-bottom:24px"><div style="height:52%"><span>W36</span></div><div style="height:61%"><span>W37</span></div><div style="height:58%"><span>W38</span></div><div style="height:74%"><span>W39</span></div><div style="height:88%"><span>W40</span></div></div></div>
+    <div class="card"><div style="padding:16px 20px;border-bottom:1px solid var(--border)"><h2 style="font-size:15px">Most viewed listings</h2></div>
+      <table class="tbl"><tbody>
+        <tr><td><div class="obj"><span class="thumb" style="width:48px;height:36px"></span><div><b>Two-room apartment</b><span>Saarbrücken</span></div></div></td><td class="r num">812 views</td><td class="r num">6 inquiries</td></tr>
+        <tr><td><div class="obj"><span class="thumb" style="width:48px;height:36px"></span><div><b>Three-apartment house</b><span>Völklingen</span></div></div></td><td class="r num">604 views</td><td class="r num">3 inquiries</td></tr>
+        <tr><td><div class="obj"><span class="thumb" style="width:48px;height:36px"></span><div><b>Detached house with plot</b><span>Riegelsberg</span></div></div></td><td class="r num">431 views</td><td class="r num">2 inquiries</td></tr>
+      </tbody></table></div>
+  </div>
+  <div class="card" style="margin-top:20px"><div style="padding:16px 20px;border-bottom:1px solid var(--border)"><h2 style="font-size:15px">Where visitors come from</h2></div>
+    <table class="tbl"><thead><tr><th>Source</th><th class="r">Visits</th><th class="r">Inquiries</th></tr></thead><tbody>
+      <tr><td>Google search</td><td class="r num">2,906</td><td class="r num">17</td></tr>
+      <tr><td>Direct</td><td class="r num">1,204</td><td class="r num">8</td></tr>
+      <tr><td>Immowelt and other portals</td><td class="r num">874</td><td class="r num">5</td></tr>
+      <tr><td>Social media</td><td class="r num">428</td><td class="r num">1</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ================= LISTINGS (collection) ================= -->
+<section class="view" id="v-listings" hidden>
+  <div class="ph"><div><h1>Listings</h1><p>Your properties for sale and rent. Drag to change the order on the site.</p></div><a class="btn primary" href="#listing-edit"><i data-lucide="plus"></i>New listing</a></div>
+  <div class="tabs"><a class="on" href="#listings">All<span class="c">9</span></a><a href="#listings">Live<span class="c">5</span></a><a href="#listings">Drafts<span class="c">2</span></a><a href="#listings">Coming soon<span class="c">1</span></a><a href="#listings">Sold and let<span class="c">6</span></a><a href="#listings">Archived<span class="c">3</span></a></div>
+  <div class="toolbar"><label class="search"><i data-lucide="search"></i><input placeholder="Search by title, town or reference" aria-label="Search listings"></label><select class="btn secondary" aria-label="Type"><option>All types</option><option>House</option><option>Apartment</option><option>Plot</option></select><select class="btn secondary" aria-label="Deal"><option>Sale and rent</option><option>Sale</option><option>Rent</option></select><span class="count">9 listings</span></div>
+  <div class="card" style="overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th style="width:28px"></th><th>Property</th><th>Status</th><th class="r">Price</th><th>Energy</th><th>Updated</th><th class="r">Actions</th></tr></thead>
+      <tbody>
+        <tr><td><i data-lucide="grip-vertical" class="handle"></i></td><td><div class="obj"><span class="thumb"></span><div><b>Two-room apartment with a bay window</b><span>Saarbrücken, ref. 4WS-2026-014</span></div></div></td><td><span class="badge b-live">Live</span> <span class="badge b-neutral plain">Price reduced</span></td><td class="r num">€179,000</td><td><span class="ec ec-c">C</span></td><td class="muted num">2 Oct</td><td class="r"><div class="actions" style="justify-content:flex-end"><a class="btn secondary sm" href="#listing-edit"><i data-lucide="pencil"></i>Edit</a><button class="btn ghost icon" aria-label="More actions for Two-room apartment with a bay window" title="More actions"><i data-lucide="ellipsis"></i></button></div></td></tr>
+        <tr><td><i data-lucide="grip-vertical" class="handle"></i></td><td><div class="obj"><span class="thumb"></span><div><b>Three-apartment house with a park-like garden</b><span>Völklingen, ref. 4WS-2026-011</span></div></div></td><td><span class="badge b-live">Live</span></td><td class="r num">€649,000</td><td><span class="ec ec-d">D</span></td><td class="muted num">28 Sep</td><td class="r"><div class="actions" style="justify-content:flex-end"><a class="btn secondary sm" href="#listing-edit"><i data-lucide="pencil"></i>Edit</a><button class="btn ghost icon" aria-label="More actions" title="More actions"><i data-lucide="ellipsis"></i></button></div></td></tr>
+        <tr><td><i data-lucide="grip-vertical" class="handle"></i></td><td><div class="obj"><span class="thumb"></span><div><b>Detached house with a building plot</b><span>Riegelsberg, ref. 4WS-2026-008</span></div></div></td><td><span class="badge b-res">Reserved</span></td><td class="r num">€479,000</td><td><span class="ec ec-h">H</span></td><td class="muted num">26 Sep</td><td class="r"><div class="actions" style="justify-content:flex-end"><a class="btn secondary sm" href="#listing-edit"><i data-lucide="pencil"></i>Edit</a><button class="btn ghost icon" aria-label="More actions" title="More actions"><i data-lucide="ellipsis"></i></button></div></td></tr>
+        <tr><td><i data-lucide="grip-vertical" class="handle"></i></td><td><div class="obj"><span class="thumb"></span><div><b>Bungalow on one level with a south garden</b><span>Heusweiler, ref. 4WS-2026-016</span></div></div></td><td><span class="badge b-soon">Coming soon</span></td><td class="r muted">On request</td><td><span class="muted">Missing</span></td><td class="muted num">24 Sep</td><td class="r"><div class="actions" style="justify-content:flex-end"><a class="btn secondary sm" href="#listing-edit"><i data-lucide="pencil"></i>Edit</a><button class="btn ghost icon" aria-label="More actions" title="More actions"><i data-lucide="ellipsis"></i></button></div></td></tr>
+        <tr><td><i data-lucide="grip-vertical" class="handle"></i></td><td><div class="obj"><span class="thumb"></span><div><b>Bright family house near the old town</b><span>Saarlouis, ref. 4WS-2026-017</span></div></div></td><td><span class="badge b-draft">Draft</span></td><td class="r num">€389,000</td><td><span class="ec ec-b">B</span></td><td class="muted num">21 Sep</td><td class="r"><div class="actions" style="justify-content:flex-end"><a class="btn secondary sm" href="#listing-edit"><i data-lucide="pencil"></i>Edit</a><button class="btn ghost icon" aria-label="More actions" title="More actions"><i data-lucide="ellipsis"></i></button></div></td></tr>
+        <tr><td><i data-lucide="grip-vertical" class="handle"></i></td><td><div class="obj"><span class="thumb"></span><div><b>House with three apartments</b><span>Nonnweiler, ref. 4WS-2026-003</span></div></div></td><td><span class="badge b-sold">Sold</span></td><td class="r muted">Not shown</td><td><span class="ec ec-e">E</span></td><td class="muted num">14 Aug</td><td class="r"><div class="actions" style="justify-content:flex-end"><a class="btn secondary sm" href="#listing-edit"><i data-lucide="pencil"></i>Edit</a><button class="btn ghost icon" aria-label="More actions" title="More actions"><i data-lucide="ellipsis"></i></button></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes"><div><b>Listings collection</b><ul>
+    <li>Same Collection module as Portfolio and Properties (02-admin-structure): drag order, thumbnail, title with town and reference, status badge, Edit, More (Unpublish, Duplicate, Delete).</li>
+    <li>Status lifecycle: Draft, Coming soon, Live, Reserved, Sold, Let, Archived. "Price reduced" is a flag, shown as a neutral badge next to the status.</li>
+    <li>Sold prices show "Not shown" when show_sold_prices is off. Empty state: "No listings yet. Create your first one to show it on the site."</li>
+    <li>Delete confirmation names the listing and says it disappears from the site and search results.</li>
+  </ul></div></aside>
+</section>
+
+<!-- ================= LISTING EDITOR (dedicated route) ================= -->
+<section class="view" id="v-listing-edit" hidden>
+  <a class="back" href="#listings"><i data-lucide="arrow-left"></i>Listings</a>
+  <div class="ph">
+    <div><h1>Two-room apartment with a bay window</h1><p>Ref. 4WS-2026-014. Last saved 2 minutes ago.</p></div>
+    <div class="actions"><span class="badge b-live">Live</span><a class="btn ghost" href="#"><i data-lucide="eye"></i>Preview</a><button class="btn secondary">Save draft</button><button class="btn primary">Save and update site</button></div>
+  </div>
+  <div class="editor">
+    <nav class="anchors" aria-label="Sections">
+      <a class="on" href="#e-basics">Basics<span class="st"></span></a>
+      <a href="#e-loc">Location<span class="st"></span></a>
+      <a href="#e-price">Price and costs<span class="st"></span></a>
+      <a href="#e-facts">Facts<span class="st"></span></a>
+      <a href="#e-desc">Description<span class="st"></span></a>
+      <a href="#e-energy">Energy certificate<span class="st"></span></a>
+      <a href="#e-photos">Photos<span class="st miss"></span></a>
+      <a href="#e-docs">Documents and tours<span class="st"></span></a>
+    </nav>
+    <div>
+      <div class="sec-card" id="e-basics"><header><h2><i data-lucide="house"></i>Basics</h2></header><div class="body g2">
+        <div class="f full"><label for="b1">Title</label><input id="b1" value="Two-room apartment with a bay window, near the station"><span class="cnt num">55 / 80</span></div>
+        <div class="f"><label>Deal</label><div class="radios"><label class="on"><input type="radio" name="deal" checked> Sale</label><label><input type="radio" name="deal"> Rent</label></div></div>
+        <div class="f"><label for="b3">Property type</label><select id="b3"><option>Apartment</option><option>House</option><option>Multi-family house</option><option>Plot</option><option>Commercial</option></select></div>
+        <div class="f"><label for="b4">Status</label><select id="b4"><option>Draft</option><option>Coming soon</option><option selected>Live</option><option>Reserved</option><option>Sold</option><option>Let</option><option>Archived</option></select><span class="help">Live and later statuses need every item in the checklist.</span></div>
+        <div class="f"><label for="b5">Reference</label><input id="b5" value="4WS-2026-014" readonly><span class="help">Created automatically. Buyers quote it when they call.</span></div>
+      </div></div>
+
+      <div class="sec-card" id="e-loc"><header><h2><i data-lucide="map-pin"></i>Location</h2></header><div class="body g2">
+        <div class="f full"><label for="l-a">Address</label><input id="l-a" value="Bahnhofstraße 12, 66111 Saarbrücken"></div>
+        <div class="f full"><label>Shown on the site</label><div class="radios"><label><input type="radio" name="geo"> Exact address</label><label class="on"><input type="radio" name="geo" checked> Approximate area</label><label><input type="radio" name="geo"> Town only</label></div><span class="help">Approximate area shows a circle on the map. The exact address is shared after an enquiry.</span></div>
+      </div></div>
+
+      <div class="sec-card" id="e-price"><header><h2><i data-lucide="euro"></i>Price and costs</h2></header><div class="body g3">
+        <div class="f"><label for="p1">Purchase price (€)</label><input id="p1" class="num" value="179,000"></div>
+        <div class="f"><label for="p2">Hausgeld (€ per month)</label><input id="p2" class="num" value="240"><span class="help">Owners' association fee. Apartments only.</span></div>
+        <div class="f"><label for="p3">of which reserve fund (€)</label><input id="p3" class="num" value="45"></div>
+        <div class="f full"><span class="switch on"><i class="t"></i>Price reduced</span><span class="help">Shows a "Price reduced" badge. Previous price €189,000 is kept for your records, not shown publicly.</span></div>
+        <div class="f"><label for="p4">Commission paid by</label><select id="p4"><option>Buyer and seller, equal shares</option><option>Buyer</option><option>Seller</option></select></div>
+        <div class="f"><label for="p5">Buyer's commission</label><input id="p5" value="3.57% incl. VAT"></div>
+        <div class="f"><label for="p6">Commission note shown to buyers</label><input id="p6" value="Due on signing the notarised contract."></div>
+        <p class="help full muted" style="font-size:12.5px">For houses and apartments sold to private buyers, the buyer never pays more than half of the commission.</p>
+      </div></div>
+
+      <div class="sec-card" id="e-facts"><header><h2><i data-lucide="ruler"></i>Facts</h2></header><div class="body g4">
+        <div class="f"><label for="fa1">Living area (m²)</label><input id="fa1" class="num" value="58"></div>
+        <div class="f"><label for="fa2">Rooms</label><input id="fa2" class="num" value="2"></div>
+        <div class="f"><label for="fa3">Bedrooms</label><input id="fa3" class="num" value="1"></div>
+        <div class="f"><label for="fa4">Bathrooms</label><input id="fa4" class="num" value="1"></div>
+        <div class="f"><label for="fa5">Floor</label><input id="fa5" class="num" value="3"></div>
+        <div class="f"><label for="fa6">Floors in building</label><input id="fa6" class="num" value="4"></div>
+        <div class="f"><label for="fa7">Plot area (m²)</label><input id="fa7" class="num" placeholder="Houses and plots only" disabled></div>
+        <div class="f"><label for="fa8">Available from</label><input id="fa8" value="On completion"></div>
+        <div class="f full"><label>Features</label><div class="radios"><label class="on"><input type="checkbox" checked> Fitted kitchen</label><label class="on"><input type="checkbox" checked> Cellar</label><label><input type="checkbox"> Balcony</label><label><input type="checkbox"> Garden</label><label><input type="checkbox"> Lift</label><label><input type="checkbox"> Parking</label><label class="on"><input type="checkbox" checked> Bicycle storage</label></div><span class="help">Each feature shows with its icon on the listing page. Fields that do not apply to the property type are disabled.</span></div>
+      </div></div>
+
+      <div class="sec-card" id="e-desc"><header><h2><i data-lucide="file-text"></i>Description</h2><div class="lang" role="group" aria-label="Language"><button class="on">DE</button><button>EN</button></div></header><div class="body g2">
+        <div class="f full"><label for="d1">About this property</label><textarea id="d1" style="min-height:140px">Ruhige Zweizimmerwohnung im dritten Obergeschoss eines gepflegten Hauses von 1965. Das Wohnzimmer öffnet sich in einen Erker zur baumbestandenen Straße…</textarea><span class="cnt num">412 characters</span></div>
+        <div class="f full"><label for="d2">Location</label><textarea id="d2">St. Johann, nahe Hauptbahnhof und Saarufer…</textarea></div>
+        <p class="help full">German is required. English is optional; without it the English site shows the German text.</p>
+      </div></div>
+
+      <div class="sec-card" id="e-energy"><header><h2><i data-lucide="zap"></i>Energy certificate</h2><span class="muted" style="font-size:12.5px">Required in every advert (§ 87 GEG)</span></header><div class="body g3">
+        <div class="f"><label for="en1">Certificate type</label><select id="en1"><option>Consumption</option><option>Demand</option><option>Not required (listed building)</option></select></div>
+        <div class="f"><label for="en2">Energy value, kWh/(m²a)</label><input id="en2" class="num" value="96"></div>
+        <div class="f"><label>Efficiency class</label><div style="min-height:40px;display:flex;align-items:center;gap:10px"><span class="ec ec-c">C</span><span class="muted" style="font-size:12.5px">Calculated from the value</span></div></div>
+        <div class="f"><label for="en3">Main energy source</label><select id="en3"><option>Natural gas</option><option>Heating oil</option><option>Heat pump</option><option>District heating</option><option>Wood pellets</option></select></div>
+        <div class="f"><label for="en4">Year built</label><input id="en4" class="num" value="1965"></div>
+        <div class="f"><label for="en5">Valid until</label><input id="en5" value="March 2033"></div>
+      </div></div>
+
+      <div class="sec-card" id="e-photos"><header><h2><i data-lucide="image"></i>Photos</h2><span class="muted" style="font-size:12.5px">14 photos. Drag to reorder. The first photo is the cover.</span></header><div class="body">
+        <div class="photos">
+          <div class="photo"><div class="im"><span class="badge b-neutral plain cover">Cover</span><span class="grip"><i data-lucide="grip-vertical"></i></span></div><div class="alt"><input value="Living room with bay window" aria-label="Photo description"></div></div>
+          <div class="photo"><div class="im"><span class="grip"><i data-lucide="grip-vertical"></i></span></div><div class="alt"><input value="Fitted kitchen from 2021" aria-label="Photo description"></div></div>
+          <div class="photo"><div class="im"><span class="grip"><i data-lucide="grip-vertical"></i></span></div><div class="alt"><input value="" placeholder="Describe the photo" aria-invalid="true" aria-label="Photo description"></div></div>
+          <label class="drop"><div><i data-lucide="upload"></i><div style="margin-top:8px;font-weight:600;color:var(--foreground)">Add photos</div><div style="font-size:12.5px">JPG or PNG, optimised automatically</div></div></label>
+        </div>
+        <p class="help" style="margin-top:12px;color:var(--warning)">2 photos need a description before publishing. Descriptions help visually impaired visitors and search engines.</p>
+      </div></div>
+
+      <div class="sec-card" id="e-docs"><header><h2><i data-lucide="file-text"></i>Documents and tours</h2></header><div class="body g2">
+        <div class="f"><label>Floor plan</label><div class="actions"><span class="badge b-neutral plain">grundriss.pdf</span><button class="btn secondary sm"><i data-lucide="upload"></i>Replace</button></div><span class="help">Shown openly on the listing page.</span></div>
+        <div class="f"><label>Full exposé</label><div class="actions"><span class="badge b-neutral plain">expose-4WS-2026-014.pdf</span><button class="btn secondary sm"><i data-lucide="upload"></i>Replace</button></div><span class="switch on" style="margin-top:6px"><i class="t"></i>Send only after an enquiry</span></div>
+        <div class="f full"><label for="t1">360° tour link</label><input id="t1" placeholder="https://my.matterport.com/show/?m=…"><span class="help">Matterport or similar. Leave empty to hide the tour button.</span></div>
+      </div></div>
+    </div>
+    <aside class="checklist card pad">
+      <h2 style="font-size:15px">Ready to publish</h2>
+      <p class="muted" style="margin:2px 0 10px;font-size:13px">Everything a buyer and the law need.</p>
+      <ul>
+        <li><i data-lucide="check" class="ok"></i>Title, type and deal</li>
+        <li><i data-lucide="check" class="ok"></i>Price and costs</li>
+        <li><i data-lucide="check" class="ok"></i>Living area and rooms</li>
+        <li><i data-lucide="check" class="ok"></i>Energy certificate data</li>
+        <li><i data-lucide="check" class="ok"></i>At least 5 photos</li>
+        <li><i data-lucide="circle-alert" class="no"></i><span>Photo descriptions<br><a class="btn link" href="#e-photos" style="font-size:12.5px">2 missing, go to photos</a></span></li>
+        <li><i data-lucide="check" class="ok"></i>Description</li>
+      </ul>
+    </aside>
+  </div>
+  <aside class="notes"><div><b>Listing editor</b><ul>
+    <li>Dedicated route (02-admin-screens: complex record with sub-sections). Sections in fixed order; anchors on the left show a dot per section, warning colour when something is missing.</li>
+    <li>Publish checklist is sticky on desktop and links to the missing field. Moving to Live or later is blocked until it is complete.</li>
+    <li>New fields: hausgeld, reserve_fund, price_reduced (bool) + previous_price, reference_code (auto), geo_precision already exists. Rent listings show cold rent, utilities and warm rent instead of purchase price and Hausgeld.</li>
+    <li>Efficiency class is derived from the energy value, never typed by hand.</li>
+    <li>Leaving with unsaved changes asks for confirmation. Save buttons keep their width while saving.</li>
+  </ul></div></aside>
+</section>
+
+<!-- ================= TESTIMONIALS (expandable editor) ================= -->
+<section class="view" id="v-testimonials" hidden>
+  <div class="ph"><div><h1>Testimonials</h1><p>What clients say about you. Up to three appear on the home page, all on About me.</p></div><button class="btn primary"><i data-lucide="plus"></i>Add testimonial</button></div>
+  <div class="toolbar"><label class="search"><i data-lucide="search"></i><input placeholder="Search testimonials" aria-label="Search testimonials"></label><button class="btn ghost"><i data-lucide="chevrons-up-down"></i>Expand all</button><span class="count">4 testimonials, 3 on the home page</span></div>
+  <div class="card">
+    <div class="xrow open">
+      <div class="xhead"><i data-lucide="grip-vertical" class="handle"></i><div class="t"><b>Thomas R., Saarbrücken</b><span>"We inherited a house as three siblings. Her valuation gave us one figure everyone could accept."</span></div><span class="badge b-live">Shown on site</span><span class="badge b-neutral plain">Home page</span><i data-lucide="chevron-down" class="chev"></i></div>
+      <div class="xbody">
+        <div class="g2">
+          <div class="f full"><label for="q1">Quote</label><textarea id="q1">We inherited a house as three siblings. Her valuation gave us one figure everyone could accept.</textarea><span class="cnt num">96 / 240</span></div>
+          <div class="f"><label for="q2">Name as shown</label><input id="q2" value="Thomas R."><span class="help">First name and initial is enough. Only with the client's permission.</span></div>
+          <div class="f"><label for="q3">Context</label><input id="q3" value="Inherited property, Saarbrücken"><span class="help">What you did for them, and where.</span></div>
+          <div class="f full" style="flex-direction:row;gap:28px;flex-wrap:wrap"><span class="switch on"><i class="t"></i>Shown on site</span><span class="switch on"><i class="t"></i>Show on home page</span></div>
+        </div>
+        <div class="actions" style="margin-top:18px;justify-content:space-between"><button class="btn danger sm"><i data-lucide="trash-2"></i>Delete</button><div class="actions"><button class="btn ghost">Cancel</button><button class="btn primary">Save</button></div></div>
+      </div>
+    </div>
+    <div class="xrow"><div class="xhead"><i data-lucide="grip-vertical" class="handle"></i><div class="t"><b>Sabine K., Völklingen</b><span>"She valued our house in person and explained every figure. No pressure at any point."</span></div><span class="badge b-live">Shown on site</span><span class="badge b-neutral plain">Home page</span><i data-lucide="chevron-down" class="chev"></i></div></div>
+    <div class="xrow"><div class="xhead"><i data-lucide="grip-vertical" class="handle"></i><div class="t"><b>Julia and Mark H., Riegelsberg</b><span>"Always the same person, always reachable. Exactly what we needed as first-time buyers."</span></div><span class="badge b-live">Shown on site</span><span class="badge b-neutral plain">Home page</span><i data-lucide="chevron-down" class="chev"></i></div></div>
+    <div class="xrow"><div class="xhead"><i data-lucide="grip-vertical" class="handle"></i><div class="t"><b>Peter M., Saarlouis</b><span>"Very flexible with appointments, even on a Saturday."</span></div><span class="badge b-draft">Hidden</span><i data-lucide="chevron-down" class="chev"></i></div></div>
+  </div>
+  <aside class="notes"><div><b>Testimonials (the reference expandable editor)</b><ul>
+    <li>All rows collapsed by default; Expand all for long lists. Collapsed row: name and context, quote excerpt, labelled badges. Badges never act as buttons.</li>
+    <li>"Show on home page" is limited to three. Switching on a fourth asks which one to replace.</li>
+    <li>Delete confirmation: "Delete the testimonial from Thomas R.? It disappears from the home page and About me."</li>
+    <li>Only real testimonials given with the client's permission. Invented reviews are unlawful in Germany (UWG).</li>
+  </ul></div></aside>
+</section>
+
+<!-- ================= ARTICLES ================= -->
+<section class="view" id="v-articles" hidden>
+  <div class="ph"><div><h1>Articles</h1><p>Guides for owners and buyers. Published articles appear under Guides and help people find you on Google.</p></div><a class="btn primary" href="#article-edit"><i data-lucide="plus"></i>New article</a></div>
+  <div class="toolbar"><label class="search"><i data-lucide="search"></i><input placeholder="Search articles" aria-label="Search articles"></label><span class="count">3 articles</span></div>
+  <div class="card" style="overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>Article</th><th>Status</th><th>Published</th><th class="r">Views, 30 days</th><th class="r">Actions</th></tr></thead>
+      <tbody>
+        <tr><td><div class="obj"><span class="thumb"></span><div><b>What a house in the Saarland is worth in 2026</b><span>/guides/house-value-saarland-2026</span></div></div></td><td><span class="badge b-live">Published</span></td><td class="muted num">14 Sep 2026</td><td class="r num">412</td><td class="r"><a class="btn secondary sm" href="#article-edit"><i data-lucide="pencil"></i>Edit</a></td></tr>
+        <tr><td><div class="obj"><span class="thumb"></span><div><b>The energy certificate: what sellers must show</b><span>/guides/energy-certificate-sellers</span></div></div></td><td><span class="badge b-live">Published</span></td><td class="muted num">2 Sep 2026</td><td class="r num">287</td><td class="r"><a class="btn secondary sm" href="#article-edit"><i data-lucide="pencil"></i>Edit</a></td></tr>
+        <tr><td><div class="obj"><span class="thumb"></span><div><b>Selling a house you inherited with siblings</b><span>/guides/selling-inherited-house</span></div></div></td><td><span class="badge b-draft">Draft</span></td><td class="muted">Not yet</td><td class="r muted">-</td><td class="r"><a class="btn secondary sm" href="#article-edit"><i data-lucide="pencil"></i>Edit</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes"><div><b>Articles</b><ul><li>Articles have long bodies, so they use a dedicated editor route, not inline expansion.</li><li>The public Guides menu item and the home page section appear only while at least one article is published and the blog module is on.</li></ul></div></aside>
+</section>
+
+<section class="view" id="v-article-edit" hidden>
+  <a class="back" href="#articles"><i data-lucide="arrow-left"></i>Articles</a>
+  <div class="ph"><div><h1>What a house in the Saarland is worth in 2026</h1><p>Published 14 Sep 2026. Last saved 1 hour ago.</p></div><div class="actions"><a class="btn ghost" href="#"><i data-lucide="eye"></i>Preview</a><button class="btn secondary">Save draft</button><button class="btn primary">Save and update site</button></div></div>
+  <div class="g2" style="grid-template-columns:1fr 340px;align-items:start">
+    <div>
+      <div class="sec-card"><div class="body g2">
+        <div class="f full"><label for="a1">Title</label><input id="a1" value="What a house in the Saarland is worth in 2026"><span class="cnt num">45 / 80</span></div>
+        <div class="f full"><label for="a2">Short summary</label><textarea id="a2" style="min-height:70px">How comparable sales, condition and the energy class shape a realistic asking price.</textarea><span class="help">Shown on cards and as the search result description if you leave the SEO description empty.</span></div>
+        <div class="f full"><label>Text</label>
+          <div style="border:1px solid var(--border);border-radius:var(--radius)">
+            <div class="actions" style="gap:4px;padding:6px;border-bottom:1px solid var(--border)"><button class="btn ghost sm" aria-label="Heading">H2</button><button class="btn ghost sm" aria-label="Bold"><b>B</b></button><button class="btn ghost sm" aria-label="Italic"><i>I</i></button><button class="btn ghost sm" aria-label="Bulleted list"><i data-lucide="list"></i></button><button class="btn ghost sm" aria-label="Link"><i data-lucide="link"></i></button><button class="btn ghost sm" aria-label="Image"><i data-lucide="image"></i></button></div>
+            <div style="padding:16px;min-height:220px;font-size:15px;line-height:1.7">Most owners start with an online calculator. It is a reasonable first look, but it cannot see the things that move a price most…<br><br><b>Comparable sales come first</b><br>A valuation starts with what similar properties nearby have actually sold for…</div>
+          </div></div>
+      </div></div>
+    </div>
+    <div>
+      <div class="sec-card"><header><h2>Publishing</h2></header><div class="body" style="display:flex;flex-direction:column;gap:14px">
+        <span class="switch on"><i class="t"></i>Published</span>
+        <div class="f"><label for="a3">Publish date</label><input id="a3" value="14 Sep 2026"></div>
+        <div class="f"><label for="a4">Topic</label><select id="a4"><option>Selling</option><option>Buying</option><option>Inheritance</option><option>Energy</option></select></div>
+      </div></div>
+      <div class="sec-card"><header><h2>Cover photo</h2></header><div class="body"><div class="thumb" style="width:100%;height:150px"></div><div class="f" style="margin-top:10px"><label for="a5">Photo description</label><input id="a5" value="Detached house in the Saarland at dusk"></div><button class="btn secondary sm" style="margin-top:10px"><i data-lucide="upload"></i>Replace</button></div></div>
+      <div class="sec-card"><header><h2>Search engines</h2></header><div class="body" style="display:flex;flex-direction:column;gap:14px">
+        <div class="f"><label for="a6">SEO title</label><input id="a6" value="House value Saarland 2026 | 4 Wände – Saar"><span class="cnt num">43 / 60</span></div>
+        <div class="f"><label for="a7">SEO description</label><textarea id="a7" style="min-height:70px">What is a house in the Saarland worth? How comparable sales, condition and energy class shape the price.</textarea><span class="cnt num">104 / 160</span></div>
+        <div class="f"><label for="a8">Address</label><input id="a8" value="/guides/house-value-saarland-2026"><span class="help">Changing it keeps the old address working through a redirect.</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USERS ================= -->
+<section class="view" id="v-users" hidden>
+  <div class="ph"><div><h1>Users</h1><p>Who can sign in to this admin, and what they can change.</p></div></div>
+  <div class="sec-card"><header><h2><i data-lucide="user-cog"></i>Invite someone</h2></header><div class="body">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr auto;gap:12px;align-items:end">
+      <div class="f"><label for="u1">Email</label><input id="u1" type="email" placeholder="name@example.de"></div>
+      <div class="f"><label for="u2">Role</label><select id="u2"><option>Owner</option><option>Editor</option><option>Developer</option></select></div>
+      <button class="btn primary">Send invitation</button>
+    </div>
+    <p class="help muted" style="margin-top:10px;font-size:12.5px">Owner: everything on the site and users. Editor: listings, inquiries and articles, no settings or users. Developer is only offered to developers.</p>
+  </div></div>
+  <div class="card">
+    <div class="user"><div><b>rutkusmarius@gmail.com</b><div class="bd"><span class="badge b-neutral plain">You</span><span class="badge b-sold plain">Developer</span></div></div><span class="muted num">Signed in today</span><select class="btn secondary" disabled title="You cannot change your own access"><option>Developer</option></select><span class="muted" style="font-size:12.5px">Protected</span></div>
+    <div class="user"><div><b>dorothe.waltner@gmail.com</b><div class="bd"><span class="badge b-neutral plain">Last owner</span></div></div><span class="muted num">Signed in 2 Oct</span><select class="btn secondary"><option>Owner</option><option>Editor</option></select><div class="actions"><button class="btn ghost sm">Revoke access</button><button class="btn ghost icon" aria-label="Delete account dorothe.waltner@gmail.com" title="Delete account"><i data-lucide="trash-2"></i></button></div></div>
+    <div class="user"><div><b>assistenz@example.de</b><div class="bd"><span class="badge b-soon plain">Invited</span></div></div><span class="muted">Not signed in yet</span><select class="btn secondary"><option>Editor</option><option>Owner</option></select><div class="actions"><button class="btn ghost sm">Resend</button><button class="btn ghost icon" aria-label="Delete invitation" title="Delete invitation"><i data-lucide="trash-2"></i></button></div></div>
+  </div>
+  <aside class="notes"><div><b>Users</b><ul><li>Matches the Users page already built (developer/owner/editor). Disabled controls show the reason in a tooltip. Delete requires typing the email.</li></ul></div></aside>
+</section>
+
+<!-- ================= SITE SETTINGS: Business & appearance ================= -->
+<section class="view" id="v-settings" hidden>
+  <div class="ph"><div><h1>Site settings</h1><p>Your business details and the words and photos on each page.</p></div></div>
+  <div class="tabs"><a class="on" href="#settings">Business &amp; appearance</a><a href="#settings-home">Home</a><a href="#settings-home">Properties</a><a href="#settings-home">Selling</a><a href="#settings-home">Valuation</a><a href="#settings-home">Inherited property</a><a href="#settings-home">About me</a><a href="#settings-home">Contact</a></div>
+
+  <div class="sec-card"><header><h2><i data-lucide="house"></i>Business</h2></header><div class="body g3">
+    <div class="f"><label for="s1">Business name</label><input id="s1" value="Immobilienberatung Dorothe Waltner"><span class="help">Used in the footer, emails, the admin and search results.</span></div>
+    <div class="f"><label for="s2">Short name</label><input id="s2" value="4 Wände – Saar"></div>
+    <div class="f"><label for="s3">Owner</label><input id="s3" value="Dorothe Waltner"></div>
+    <div class="f"><label for="s4">Phone</label><input id="s4" class="num" value="0160 4444047"></div>
+    <div class="f"><label for="s5">Email</label><input id="s5" value="dorothe.waltner@gmail.com"></div>
+    <div class="f"><label for="s6">Address</label><input id="s6" value="Kyllbergstraße 140, 66346 Püttlingen"></div>
+    <div class="f"><label for="s7">Region on the site</label><input id="s7" value="im Saarland"><span class="help">With its preposition, as it reads in a sentence.</span></div>
+    <div class="f"><label for="s8">Towns you serve</label><input id="s8" value="Püttlingen, Völklingen, Riegelsberg, Heusweiler, Schwalbach, Saarbrücken, Saarlouis, Schmelz"></div>
+    <div class="f"><label for="s9">Opening hours</label><input id="s9" value="Mon–Fri 09:00–18:00, Sat by appointment"></div>
+  </div></div>
+
+  <div class="sec-card"><header><h2><i data-lucide="shield-check"></i>Licences and legal</h2><span class="muted" style="font-size:12.5px">Shown in the imprint. Required before going live.</span></header><div class="body g3">
+    <div class="f"><label for="lg1">Permit § 34c GewO</label><input id="lg1" placeholder="Issued by, date" aria-invalid="true"><span class="err">Required for the imprint.</span></div>
+    <div class="f"><label for="lg2">Supervisory authority</label><input id="lg2" placeholder="e.g. Landesverwaltungsamt" aria-invalid="true"><span class="err">Required for the imprint.</span></div>
+    <div class="f"><label for="lg3">VAT number</label><input id="lg3" placeholder="DE… or leave empty if Kleinunternehmer"></div>
+  </div></div>
+
+  <div class="sec-card"><header><h2><i data-lucide="image"></i>Brand files</h2><span class="muted" style="font-size:12.5px">PNG with a transparent background or SVG works best.</span></header><div class="body">
+    <div class="brandfiles">
+      <div class="bf"><b>Logo</b><p class="muted" style="font-size:12.5px">For light backgrounds: site header, sign-in.</p><div class="pv">4 Wände – Saar</div><div class="actions"><button class="btn secondary sm"><i data-lucide="upload"></i>Replace</button><button class="btn ghost sm">Download</button></div></div>
+      <div class="bf"><b>Logo for dark backgrounds</b><p class="muted" style="font-size:12.5px">Footer and admin menu.</p><div class="pv dark">4 Wände – Saar</div><div class="actions"><button class="btn secondary sm"><i data-lucide="upload"></i>Replace</button><button class="btn ghost sm">Download</button></div></div>
+      <div class="bf"><b>Site icon</b><p class="muted" style="font-size:12.5px">Browser tab. Square, at least 512 px.</p><div class="pv"><span style="width:56px;height:56px;border-radius:12px;background:#111;color:#fff;display:grid;place-items:center">4</span></div><div class="actions"><button class="btn secondary sm"><i data-lucide="upload"></i>Upload</button></div></div>
+    </div>
+    <div class="g2" style="margin-top:20px;align-items:center">
+      <div class="f"><label for="ls">Logo size</label><input id="ls" type="range" min="60" max="160" value="100" style="min-height:auto;padding:0;border:0"><span class="help">One size everywhere: site, sign-in, admin, maintenance page. 100% by default.</span></div>
+      <div class="f"><label for="pc">Brand colour</label><div style="display:flex;gap:10px;align-items:center"><span style="width:40px;height:40px;border-radius:var(--radius);background:#221D17;border:1px solid var(--border)"></span><input id="pc" value="#221D17" style="max-width:140px"><span class="badge b-live">Contrast 16.8:1</span></div><span class="help">Buttons and dark bands. The colour is rejected if white text on it falls below 4.5:1.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec-card"><div class="body" style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+    <div><b>Maintenance mode</b><p class="muted" style="font-size:13px;margin-top:2px">Visitors see a holding page with your phone and email. You still see the full site.</p></div>
+    <span class="switch"><i class="t"></i>Off</span>
+  </div></div>
+  <div class="actions" style="justify-content:flex-end"><button class="btn primary">Save changes</button></div>
+  <aside class="notes"><div><b>Business &amp; appearance</b><ul>
+    <li>Always the first tab. One coordinated save for this tab. Maintenance is the last card in the same tab, a switch that saves immediately, no message field.</li>
+    <li>Brand colour is the only colour a client may change (01-design-system); the contrast check runs live and blocks saving below 4.5:1.</li>
+    <li>Middle tabs mirror the public menu labels exactly; Contact is last. Detail pages (one listing, one article) never get a Settings tab.</li>
+  </ul></div></aside>
+</section>
+
+<!-- ================= SITE SETTINGS: Home tab ================= -->
+<section class="view" id="v-settings-home" hidden>
+  <div class="ph"><div><h1>Site settings</h1><p>Your business details and the words and photos on each page.</p></div><a class="btn ghost" href="#"><i data-lucide="external-link"></i>View page</a></div>
+  <div class="tabs"><a href="#settings">Business &amp; appearance</a><a class="on" href="#settings-home">Home</a><a href="#settings-home">Properties</a><a href="#settings-home">Selling</a><a href="#settings-home">Valuation</a><a href="#settings-home">Inherited property</a><a href="#settings-home">About me</a><a href="#settings-home">Contact</a></div>
+
+  <h2 style="font-size:15px;font-weight:700;margin:4px 0 12px">Photographs</h2>
+  <div class="media">
+    <div class="mh"><span class="thumb"></span><div><b>Opening photograph</b><span>Currently showing your choice, uploaded 28 Sep</span></div><button class="btn secondary sm">Close<i data-lucide="chevron-up"></i></button></div>
+    <p class="muted" style="padding:0 16px 12px;font-size:13px">The large photo behind the headline. Landscape, at least 2400 px wide. A street or house in your area works better than an interior.</p>
+    <div class="layers">
+      <div class="layer showing"><div class="im"></div><div class="lt">Your choice <span class="badge b-sold plain">Showing</span></div><p>Uploaded by you</p></div>
+      <div class="layer"><div class="im"></div><div class="lt">Studio default</div><p>Set by your developer</p></div>
+      <div class="layer"><div class="im empty"></div><div class="lt">Built-in</div><p>Neutral fallback</p></div>
+    </div>
+    <div class="actions" style="padding:0 16px 16px"><button class="btn secondary sm"><i data-lucide="upload"></i>Upload new</button><button class="btn ghost sm"><i data-lucide="rotate-ccw"></i>Reset to default</button><button class="btn ghost sm">Request as default</button><div class="f" style="flex:1;min-width:220px"><input value="Street of family houses in Püttlingen in the evening" aria-label="Photo description"></div></div>
+  </div>
+  <div class="media"><div class="mh"><span class="thumb"></span><div><b>Portrait</b><span>Currently showing your choice</span></div><button class="btn ghost sm">Edit<i data-lucide="chevron-down"></i></button></div></div>
+
+  <h2 style="font-size:15px;font-weight:700;margin:28px 0 12px">Wording</h2>
+  <div class="card wording">
+    <div class="xrow open">
+      <div class="xhead"><div class="t"><b>Opening</b><span>Your property in the Saarland, valued and sold by a certified expert.</span></div><i data-lucide="chevron-down" class="chev"></i></div>
+      <div class="xbody" style="padding-left:18px">
+        <div class="lang-cols">
+          <div><div class="label" style="margin-bottom:10px">English</div>
+            <div class="f"><label for="w1">Headline</label><textarea id="w1" style="min-height:64px">Your property in the Saarland, valued and sold by a certified expert.</textarea><div class="builtin">Built-in: Your property {region_in}, valued and sold by a certified expert.</div></div>
+            <div class="f" style="margin-top:12px"><label for="w2">Supporting line</label><textarea id="w2" style="min-height:64px">One broker, a few properties at a time, full attention on yours.</textarea><div class="actions" style="justify-content:space-between"><div class="builtin">Built-in: One broker, a few properties at a time…</div><button class="btn ghost sm">Reset</button></div></div>
+          </div>
+          <div><div class="label" style="margin-bottom:10px">German</div>
+            <div class="f"><label for="w3">Headline</label><textarea id="w3" style="min-height:64px">Ihre Immobilie im Saarland, bewertet und verkauft von einer zertifizierten Sachverständigen.</textarea><div class="builtin">Built-in: Ihre Immobilie {region_in}, bewertet und verkauft…</div></div>
+            <div class="f" style="margin-top:12px"><label for="w4">Supporting line</label><textarea id="w4" style="min-height:64px">Eine Maklerin, wenige Objekte gleichzeitig, volle Aufmerksamkeit für Ihres.</textarea><div class="actions" style="justify-content:flex-end"><button class="btn ghost sm">Reset</button></div></div>
+          </div>
+        </div>
+        <div class="actions" style="justify-content:flex-end;margin-top:16px"><button class="btn primary">Save opening</button></div>
+      </div>
+    </div>
+    <div class="xrow"><div class="xhead"><div class="t"><b>Broker introduction</b><span>You speak with me, from the first visit to the notary.</span></div><i data-lucide="chevron-down" class="chev"></i></div></div>
+    <div class="xrow"><div class="xhead"><div class="t"><b>Valuation band</b><span>What is your property worth today?</span></div><i data-lucide="chevron-down" class="chev"></i></div></div>
+  </div>
+  <aside class="notes"><div><b>Page tab (Home)</b><ul>
+    <li>Only the Settings spine: 2–6 anchor fields per page (headline and supporting line per major block) plus media slots. Testimonials, listings and articles are never edited here; they come from Manage.</li>
+    <li>Fixed design copy (button labels, step texts, card microcopy) stays in code and is changed only through a developer request.</li>
+    <li>Media card: collapsed shows thumbnail, label and what is showing. Expanded shows the three layers in fixed order: Your choice, Studio default, Built-in, with a Showing badge. Owner can request a default; the developer approves.</li>
+    <li>Wording: one row per public section, languages side by side, Reset per field, Built-in text quoted under each field, one Save per section.</li>
+  </ul></div></aside>
+</section>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<div class="toast" id="toast" hidden><i data-lucide="check"></i>Changes saved. The site is updated.</div>
+
+<div class="picker" aria-label="Mockup controls">
+  <select id="pg" aria-label="Go to screen">
+    <option value="login">Sign in</option><option value="set-password">Set password</option>
+    <option value="dashboard">Dashboard</option><option value="inquiries">Inquiries</option><option value="inquiry">Inquiry detail</option><option value="analytics">Analytics</option>
+    <option value="listings">Listings</option><option value="listing-edit">Listing editor</option>
+    <option value="articles">Articles</option><option value="article-edit">Article editor</option><option value="testimonials">Testimonials</option>
+    <option value="users">Users</option><option value="settings">Settings: Business</option><option value="settings-home">Settings: Home</option>
+  </select>
+  <label><input type="checkbox" id="nt2"> Notes</label>
+  <button id="ts" style="font:inherit;border:0;border-radius:5px;padding:6px 8px;cursor:pointer">Show toast</button>
+</div>
+
+<script>
+(function(){
+  var authViews=['login','set-password'];
+  var sel=document.getElementById('pg');
+  function show(){
+    var id=(location.hash||'#dashboard').slice(1);
+    if(!document.getElementById('v-'+id)) id='dashboard';
+    var isAuth=authViews.indexOf(id)>-1;
+    document.getElementById('shell').hidden=isAuth;
+    document.querySelectorAll('.view').forEach(function(v){v.hidden=(v.id!=='v-'+id)});
+    document.querySelectorAll('.side a[data-v]').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-v').split(' ').indexOf(id)>-1)});
+    sel.value=id; window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  sel.addEventListener('change',function(){location.hash=sel.value});
+  document.getElementById('nt2').addEventListener('change',function(e){document.body.classList.toggle('show-notes',e.target.checked)});
+  document.getElementById('ts').addEventListener('click',function(){var t=document.getElementById('toast');t.hidden=false;setTimeout(function(){t.hidden=true},2600)});
+  document.querySelectorAll('.xhead').forEach(function(h){h.addEventListener('click',function(){h.parentElement.classList.toggle('open')})});
+  document.querySelectorAll('.switch').forEach(function(s){s.addEventListener('click',function(){s.classList.toggle('on')})});
+  show();
+  if(window.lucide){lucide.createIcons({attrs:{'stroke-width':1.75}})}
+})();
+</script>
+</body>
+</html>
