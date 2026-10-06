@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 import { markInternalBrowser } from "@/lib/analytics/use-page-tracking";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { ExternalLink } from "lucide-react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import type { Locale } from "@/i18n/config";
 import type { VerifiedAdminProfile } from "@/lib/auth/admin-gate.server";
@@ -37,17 +39,25 @@ export function AdminShell({
 
         <AdminSidebar email={profile.email ?? displayName} roleLabel={roleLabel} />
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-4 sm:px-6">
+          <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-4 sm:px-6">
             <div className="flex min-w-0 items-center gap-3">
               <SidebarTrigger
                 aria-label={t("admin.topbar.toggleSidebar")}
                 className="text-foreground md:hidden"
               />
-              <span className="admin-topbar-title truncate text-base font-extrabold">
-                {t("admin.topbar.title", { site: settings.site_name })}
+              <span className="truncate text-base font-semibold">
+                {settings.legal_name || settings.site_name}
               </span>
             </div>
-            <AdminLocaleToggle current={interfaceLocale} />
+            <div className="flex items-center gap-3">
+              <AdminLocaleToggle current={interfaceLocale} />
+              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <a href="/" target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4" />
+                  {t("admin.topbar.viewSite")}
+                </a>
+              </Button>
+            </div>
           </header>
           <main className="min-h-0 flex-1 overflow-y-auto px-4 py-6 md:px-6 md:py-8">
             {children}
