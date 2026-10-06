@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { ImageOff, Pencil } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { StatusChip } from "@/components/admin/ui/StatusChip";
 import { pickLocalized } from "@/lib/listings/format";
+import { cn } from "@/lib/utils";
 import type { PostRow as Row } from "@/lib/posts/types";
 
 interface Props {
@@ -45,13 +45,9 @@ export function PostRow({ row, locale, onEdit, expanded }: Props) {
       </td>
       <td className="border-b border-border px-3.5 py-3 align-middle group-last:border-b-0">
         {row.status === "published" ? (
-            <StatusChip icon="published" tone="active">
-              {t("admin.posts.published")}
-            </StatusChip>
+          <PostStatus tone="published">{t("admin.posts.published")}</PostStatus>
           ) : (
-            <StatusChip icon="draft" tone="muted">
-              {t("admin.posts.draft")}
-            </StatusChip>
+          <PostStatus tone="draft">{t("admin.posts.draft")}</PostStatus>
           )}
       </td>
       <td className="whitespace-nowrap border-b border-border px-3.5 py-3 align-middle text-muted-foreground group-last:border-b-0">
@@ -75,5 +71,19 @@ export function PostRow({ row, locale, onEdit, expanded }: Props) {
       </div>
       </td>
     </tr>
+  );
+}
+
+function PostStatus({ tone, children }: { tone: "published" | "draft"; children: React.ReactNode }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-[9px] py-0.5 text-xs font-semibold",
+        tone === "published" ? "bg-success/10 text-success" : "bg-secondary text-muted-foreground",
+      )}
+    >
+      <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-current" />
+      {children}
+    </span>
   );
 }
