@@ -2157,6 +2157,7 @@
     }
   },
   "brand": {
+    "logoPlaceholder": "Logo",
     "descriptor": "Immobilien"
   },
   "contact": {
