@@ -6,6 +6,7 @@ import {
   TestimonialIdSchema,
   TestimonialInputSchema,
   TestimonialMoveSchema,
+  TestimonialOrderSchema,
 } from "@/lib/validation/testimonials";
 
 import { HOME_TESTIMONIAL_LIMIT, type TestimonialRow } from "./types";
@@ -122,6 +123,24 @@ export const moveTestimonial = createServerFn({ method: "POST" })
         .update({ sort_order: (i + 1) * 10 } as never)
         .eq("id", reordered[i].id);
       if (upErr) throw new Error(`Reorder failed: ${upErr.message}`);
+    }
+    return { ok: true as const };
+  });
+
+/** Persist a full drag-and-drop order (ids top to bottom). */
+export const reorderTestimonials = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => TestimonialOrderSchema.parse(input))
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    await assertEditor(supabase, userId);
+    const ids = Array.from(new Set(data.order));
+    for (let i = 0; i < ids.length; i += 1) {
+      const { error } = await supabase
+        .from("testimonials")
+        .update({ sort_order: (i + 1) * 10 } as never)
+        .eq("id", ids[i]);
+      if (error) throw new Error(`Reorder failed: ${error.message}`);
     }
     return { ok: true as const };
   });

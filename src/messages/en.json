@@ -592,7 +592,17 @@
       "confirmDeleteBody": "The testimonial from {{name}} will be deleted and no longer shown on the website.",
       "homeFull": "Three quotes are already on the home page. Take one off first.",
       "homeCount": "On the home page: {{count}} of 3",
-      "homeLimitError": "The home page shows at most three quotes."
+      "homeLimitError": "The home page shows at most three quotes.",
+      "searchPlaceholder": "Search testimonials",
+      "expandAll": "Expand all",
+      "collapseAll": "Collapse all",
+      "summary": "{{count}} testimonials, {{home}} on the home page",
+      "shownOnSite": "Shown on site",
+      "hidden": "Hidden",
+      "homePage": "Home page",
+      "dragHandle": "Drag to reorder: {{name}}",
+      "noMatches": "No testimonials match this search.",
+      "hintShort": "What clients say about you. Up to three appear on the home page, all on About me."
     },
     "topbar": {
       "signOut": "Sign out",
