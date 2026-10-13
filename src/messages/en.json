@@ -569,7 +569,8 @@
     "common": {
       "close": "Close",
       "edit": "Edit",
-      "saveFailed": "Could not save the new order."
+      "saveFailed": "Could not save the new order.",
+      "loading": "Loading…"
     },
     "testimonials": {
       "title": "Testimonials",

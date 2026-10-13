@@ -569,7 +569,8 @@
     "common": {
       "close": "Schließen",
       "edit": "Bearbeiten",
-      "saveFailed": "Neue Reihenfolge konnte nicht gespeichert werden."
+      "saveFailed": "Neue Reihenfolge konnte nicht gespeichert werden.",
+      "loading": "Wird geladen…"
     },
     "testimonials": {
       "title": "Kundenstimmen",
