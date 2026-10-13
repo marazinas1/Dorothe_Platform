@@ -1,9 +1,13 @@
 import type { LucideIcon } from "lucide-react";
 
+/**
+ * Unframed page header as in the admin reference: h1 + one sentence on the
+ * left, at most one primary action on the right. `icon` is accepted for
+ * call-site compatibility but not rendered (the reference shows no icon).
+ */
 export function AdminPageHeader({
   title,
   description,
-  icon: Icon,
   actions,
 }: {
   title: string;
@@ -14,14 +18,7 @@ export function AdminPageHeader({
   return (
     <header className="admin-page-header">
       <div className="min-w-0">
-        <div className="flex items-center gap-2.5">
-          {Icon && false ? (
-            <span className="admin-page-icon" aria-hidden="true">
-              <Icon className="h-4 w-4" />
-            </span>
-          ) : null}
-          <h1>{title}</h1>
-        </div>
+        <h1>{title}</h1>
         {description ? <p>{description}</p> : null}
       </div>
       {actions ? <div className="admin-page-actions">{actions}</div> : null}
