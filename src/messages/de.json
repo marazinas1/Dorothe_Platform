@@ -45,7 +45,7 @@
     "guide_placeholders": [
       {
         "category": "Verkaufen",
-        "title": "Was ein Haus im Saarland 2026 wert ist",
+        "title": "Was ein Haus {{region_in}} 2026 wert ist",
         "excerpt": "Wie Vergleichsverkäufe, Zustand und Energieklasse einen realistischen Angebotspreis bestimmen."
       },
       {
@@ -84,7 +84,7 @@
     "valuation_cta": "Wertermittlung anfragen",
     "why_kicker": "Warum {{name}}",
     "claim_valuation_title": "Bewertet, nicht geschätzt",
-    "claim_valuation_body": "Ich sehe mir Ihre Immobilie vor Ort an und bewerte sie auf Basis aktueller Vergleichsdaten aus dem Saarland — nicht per Online-Rechner.",
+    "claim_valuation_body": "Ich sehe mir Ihre Immobilie vor Ort an und bewerte sie auf Basis aktueller Vergleichsdaten {{region_in}} — nicht per Online-Rechner.",
     "claim_valuation_evidence": "DEKRA-zertifizierte Sachverständige für Immobilienbewertung",
     "claim_inheritance_title": "Erbimmobilien mit Ruhe geregelt",
     "claim_inheritance_body": "Bei Erbengemeinschaften und Verkehrswertgutachten für das Finanzamt begleite ich Sie durch einen Prozess, der selten einfach ist.",
@@ -104,7 +104,7 @@
       "buy_body": "Alle aktuell verfügbaren Objekte mit vollständigen Angaben, Grundrissen und Energiedaten.",
       "cred_title": "Warum {{agent}}",
       "cred1_title": "Bewertet, nicht geschätzt",
-      "cred1_body": "Wertermittlung vor Ort auf Basis aktueller Vergleichsdaten aus dem Saarland — niemals per Online-Rechner.",
+      "cred1_body": "Wertermittlung vor Ort auf Basis aktueller Vergleichsdaten {{region_in}} — niemals per Online-Rechner.",
       "cred1_tag": "DEKRA-zertifizierte Sachverständige für Immobilienbewertung",
       "cred2_title": "Zahlen sind mein Handwerk",
       "cred2_body": "Preisfindung und Finanzierungsfragen, verständlich und ohne Fachjargon erklärt.",
@@ -1930,7 +1930,7 @@
         },
         {
           "title": "Marktwert aus realen Verkäufen",
-          "body": "Auf Basis aktueller Vergleichsverkäufe in Ihrem Teil des Saarlandes."
+          "body": "Auf Basis aktueller Vergleichsverkäufe in Ihrer Nachbarschaft."
         },
         {
           "title": "Schriftliche Zusammenfassung",
@@ -2013,7 +2013,7 @@
       "form_title": "Bewertung anfordern",
       "form_intro": "Nennen Sie mir das Wichtigste zu Ihrer Immobilie — ich antworte persönlich, in der Regel innerhalb eines Werktages.",
       "proof_title": "Zuletzt verkauft",
-      "proof_body": "Eine Auswahl von Objekten, die ich im Saarland bewertet, vermarktet und verkauft habe.",
+      "proof_body": "Eine Auswahl von Objekten, die ich {{region_in}} bewertet, vermarktet und verkauft habe.",
       "proof_link": "Zum Verkauft-Archiv",
       "question_link": "Zuerst eine Frage stellen",
       "service_details": [
@@ -2140,7 +2140,7 @@
     },
     "inheritance": {
       "title": "Erben & Immobilien",
-      "meta_description": "Geerbte Immobilie im Saarland: Verkehrswertgutachten für das Finanzamt, neutrale Bewertung bei Erbengemeinschaften und Begleitung beim Verkauf.",
+      "meta_description": "Geerbte Immobilie {{region_in}}: Verkehrswertgutachten für das Finanzamt, neutrale Bewertung bei Erbengemeinschaften und Begleitung beim Verkauf.",
       "kicker": "Erbimmobilien",
       "headline": "Eine geerbte Immobilie, in Ruhe geordnet.",
       "intro": "Ein Erbfall bringt Fragen mit sich, auf die sich niemand vorbereitet: Was ist die Immobilie wert? Welche Zahl will das Finanzamt sehen? Und was gilt, wenn mehrere Erben gemeinsam entscheiden müssen? Ich übernehme den Teil, der die Immobilie betrifft — bewerten, einordnen und, wenn Sie sich dafür entscheiden, verkaufen.",
