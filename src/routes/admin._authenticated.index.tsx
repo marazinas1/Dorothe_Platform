@@ -34,7 +34,6 @@ function Dashboard() {
       <AdminPageHeader icon={LayoutDashboard} title={t("admin.pages.dashboard")} description={t("admin.dashboard.subtitle")} />
 
         <section className="space-y-4">
-          <h2 className="admin-section-title">{t("admin.dashboard.needsAttention")}</h2>
           {empty ? <FirstRun locale={locale} /> : <WorkQueue locale={locale} />}
         </section>
 

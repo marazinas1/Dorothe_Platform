@@ -1390,6 +1390,18 @@
         "rooms": "Rooms",
         "year_built": "Year built",
         "condition": "Condition"
+      },
+      "subtitle": "Every message from the site, newest first.",
+      "search": "Search inquiries",
+      "matches_one": "{{count}} match",
+      "matches_other": "{{count}} matches",
+      "noMatches": "No inquiries match.",
+      "tabs": {
+        "all": "All",
+        "unread": "Unread",
+        "seller": "Valuation",
+        "listing": "Listings",
+        "general": "General"
       }
     },
     "dashboard": {
