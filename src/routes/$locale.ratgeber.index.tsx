@@ -3,7 +3,6 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
-import { CtaBand } from "@/components/brand/CtaBand";
 import { PostList } from "@/components/brand/blog/PostList";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
@@ -12,7 +11,7 @@ import { publicPostsQueryOptions } from "@/lib/posts/queries.functions";
 import { pageContentQueryOptions } from "@/lib/pages/queries.functions";
 import { usePageCopy } from "@/lib/pages/use-page-copy";
 import { postViews } from "@/lib/posts/resolve";
-import { formatPostDate } from "@/lib/posts/date";
+import { readingMinutes } from "@/lib/posts/reading-time";
 import { copyVars } from "@/lib/config/site-copy";
 import { getRequestOrigin } from "@/lib/seo/origin.functions";
 import { buildHead } from "@/lib/seo/build-head";
@@ -62,10 +61,12 @@ function BlogIndex() {
         title={copy.text("headline")}
         intro={copy.text("intro")}
         emptyLabel={copy.text("empty")}
-        formatDate={(iso) => formatPostDate(iso, l)}
-        formatTopic={(topic) => (topic ? t(`blog.topics.${topic}`) : null)}
+        metaFor={(post) =>
+          [post.topic ? t(`blog.topics.${post.topic}`) : null, t("blog.read_minutes", { count: readingMinutes(post.body) })]
+            .filter(Boolean)
+            .join(", ")
+        }
       />
-      <CtaBand locale={l} settings={settings} />
     </PublicChrome>
   );
 }

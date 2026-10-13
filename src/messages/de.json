@@ -2178,14 +2178,17 @@
     "detail": {
       "back": "Zurück zu allen Beiträgen",
       "unavailable_title": "Beitrag nicht verfügbar",
-      "unavailable_body": "Dieser Beitrag ist nicht mehr veröffentlicht."
+      "unavailable_body": "Dieser Beitrag ist nicht mehr veröffentlicht.",
+      "valuation_cta": "Bewertung anfragen"
     },
     "topics": {
       "selling": "Verkaufen",
       "buying": "Kaufen",
       "inheritance": "Erben",
       "energy": "Energie"
-    }
+    },
+    "read_minutes": "{{count}} Min. Lesezeit",
+    "byline": "Von {{name}}"
   },
   "cta": {
     "kicker": "Nächster Schritt",

@@ -3,50 +3,58 @@ import { Link } from "@tanstack/react-router";
 import type { Locale } from "@/i18n/config";
 import type { PostView } from "@/lib/posts/types";
 
-/** One article teaser. Presentational only — no data fetching. */
+const META = "text-[11.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground";
+
+/** One article teaser (reference `.art`). `featured` = the wide split lead story. */
 export function PostCard({
   post,
   locale,
-  dateLabel,
-  topicLabel,
+  metaLabel,
+  featured = false,
 }: {
   post: PostView;
   locale: Locale;
-  dateLabel: string | null;
-  topicLabel?: string | null;
+  metaLabel: string | null;
+  featured?: boolean;
 }) {
-  return (
-    <li className="group flex flex-col overflow-hidden rounded-[var(--radius)] bg-card">
+  const img = post.cover ? (
+    <div className={`${featured ? "aspect-[16/10]" : "aspect-[3/2]"} overflow-hidden bg-muted`}>
+      <img src={post.cover} alt={post.coverAlt} loading="lazy" className="h-full w-full object-cover" />
+    </div>
+  ) : (
+    <div className={`${featured ? "aspect-[16/10]" : "aspect-[3/2]"} bg-muted`} aria-hidden />
+  );
+
+  if (featured) {
+    return (
       <Link
         to="/$locale/ratgeber/$slug"
         params={{ locale, slug: post.slug }}
-        className="flex h-full flex-col"
+        className="group grid items-center gap-10 md:grid-cols-2 lg:gap-20"
       >
-        {post.cover ? (
-          <div className="aspect-[16/10] w-full overflow-hidden bg-muted">
-            <img
-              src={post.cover}
-              alt={post.coverAlt}
-              loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-            />
-          </div>
-        ) : null}
-        <div className="flex flex-1 flex-col pt-5">
-          {dateLabel || topicLabel ? (
-            <div className="text-[12px] uppercase tracking-[0.14em] text-muted-foreground">
-              {[topicLabel, dateLabel].filter(Boolean).join(" · ")}
-            </div>
-          ) : null}
-          <h3 className="mt-3 text-[19px] leading-[1.3] font-semibold text-balance">
+        {img}
+        <div>
+          {metaLabel ? <span className={META}>{metaLabel}</span> : null}
+          <h2 className="mt-3.5 text-[clamp(28px,3.2vw,40px)] font-bold leading-[1.15] tracking-[-0.02em] text-balance transition-opacity group-hover:opacity-70">
             {post.title}
-          </h3>
+          </h2>
           {post.excerpt ? (
-            <p className="mt-3 text-[14.5px] leading-[1.62] text-muted-foreground">
-              {post.excerpt}
-            </p>
+            <p className="mt-4 max-w-[56ch] text-[clamp(18px,1.6vw,21px)] leading-[1.55] text-muted-foreground">{post.excerpt}</p>
           ) : null}
         </div>
+      </Link>
+    );
+  }
+
+  return (
+    <li>
+      <Link to="/$locale/ratgeber/$slug" params={{ locale, slug: post.slug }} className="group block">
+        {img}
+        {metaLabel ? <span className={`${META} mt-[18px] block`}>{metaLabel}</span> : null}
+        <h3 className="mt-[18px] text-[22px] font-bold leading-[1.25] tracking-[-0.01em] text-balance transition-opacity group-hover:opacity-70">
+          {post.title}
+        </h3>
+        {post.excerpt ? <p className="mt-2.5 text-[15.5px] leading-[1.62] text-muted-foreground">{post.excerpt}</p> : null}
       </Link>
     </li>
   );

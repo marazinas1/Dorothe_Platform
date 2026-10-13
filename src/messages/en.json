@@ -2178,14 +2178,17 @@
     "detail": {
       "back": "Back to all articles",
       "unavailable_title": "Article unavailable",
-      "unavailable_body": "This article is no longer published."
+      "unavailable_body": "This article is no longer published.",
+      "valuation_cta": "Request a valuation"
     },
     "topics": {
       "selling": "Selling",
       "buying": "Buying",
       "inheritance": "Inheritance",
       "energy": "Energy"
-    }
+    },
+    "read_minutes": "{{count}} min read",
+    "byline": "By {{name}}"
   },
   "cta": {
     "kicker": "Next step",
