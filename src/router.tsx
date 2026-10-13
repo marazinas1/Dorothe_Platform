@@ -5,7 +5,7 @@ import { SUPPORTED_LOCALES, FALLBACK_LOCALE } from "./i18n/config";
 
 /**
  * URL shape: the default language has no prefix in the address bar
- * (dorothe.deerva.com/immobilien), every other language keeps its own
+ * (example.com/immobilien), every other language keeps its own
  * (/de/immobilien). Internally every page still lives under /$locale, so the
  * route tree, links and loaders are unchanged — only the visible URL is
  * rewritten in and out.

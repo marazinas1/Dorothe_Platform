@@ -8,7 +8,6 @@ import {
   type SitemapEntry,
 } from "@/lib/sitemap";
 
-const BASE_URL = "https://dorothe.deerva.com";
 
 /** Statuses that render a public listing page. */
 const PUBLIC_LISTING_STATUSES = ["active", "coming_soon", "reserved", "sold", "rented"];
@@ -37,7 +36,9 @@ export const Route = createFileRoute("/sitemap.xml")({
   staticData: { sitemap: false },
   server: {
     handlers: {
-      GET: async () => {
+      GET: async ({ request }) => {
+        // The clone's own domain: whatever host served this request.
+        const baseUrl = new URL(request.url).origin;
         const router = await getRouterInstance();
         const supabase = await publicClient();
 
@@ -117,7 +118,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         if (entries.length === 0) {
           return new Response(null, { status: 404, headers: { "Cache-Control": "no-store" } });
         }
-        return new Response(sitemapXML(BASE_URL, entries), {
+        return new Response(sitemapXML(baseUrl, entries), {
           headers: { "Content-Type": "application/xml", "Cache-Control": "public, max-age=3600" },
         });
       },

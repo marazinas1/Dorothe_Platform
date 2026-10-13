@@ -82,7 +82,7 @@
     "valuation_title": "Was ist Ihre Immobilie heute wert?",
     "valuation_includes": "Das erhalten Sie",
     "valuation_cta": "Wertermittlung anfragen",
-    "why_kicker": "Warum Dorothe Waltner",
+    "why_kicker": "Warum {{name}}",
     "claim_valuation_title": "Bewertet, nicht geschätzt",
     "claim_valuation_body": "Ich sehe mir Ihre Immobilie vor Ort an und bewerte sie auf Basis aktueller Vergleichsdaten aus dem Saarland — nicht per Online-Rechner.",
     "claim_valuation_evidence": "DEKRA-zertifizierte Sachverständige für Immobilienbewertung",
@@ -545,8 +545,8 @@
     "terms": "AGB",
     "contact": "Kontakt",
     "social": {
-      "facebook": "Dorothe Waltner auf Facebook",
-      "linkedin": "Dorothe Waltner auf LinkedIn"
+      "facebook": "{{name}} auf Facebook",
+      "linkedin": "{{name}} auf LinkedIn"
     },
     "badge": "Plattform entwickelt und betreut von Deerva"
   },

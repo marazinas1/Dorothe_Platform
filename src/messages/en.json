@@ -82,7 +82,7 @@
     "valuation_title": "What is your property worth today?",
     "valuation_includes": "What you receive",
     "valuation_cta": "Request a valuation",
-    "why_kicker": "Why Dorothe Waltner",
+    "why_kicker": "Why {{name}}",
     "claim_valuation_title": "Valued, not estimated",
     "claim_valuation_body": "I view your property in person and value it against current comparable data from the Saarland — not through an online calculator.",
     "claim_valuation_evidence": "DEKRA-certified property valuation expert",
@@ -545,8 +545,8 @@
     "terms": "Terms",
     "contact": "Contact",
     "social": {
-      "facebook": "Dorothe Waltner on Facebook",
-      "linkedin": "Dorothe Waltner on LinkedIn"
+      "facebook": "{{name}} on Facebook",
+      "linkedin": "{{name}} on LinkedIn"
     },
     "badge": "Platform developed and maintained by Deerva"
   },
