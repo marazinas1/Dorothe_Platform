@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { usePermission } from "@/lib/auth/use-permission";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
-import { pickLocalized } from "@/lib/listings/format";
 import {
   adminTestimonialsQueryOptions,
   deleteTestimonial,
@@ -209,4 +208,3 @@ export function TestimonialsPage() {
   );
 }
 
-export { pickLocalized };

@@ -15,7 +15,7 @@ export function AdminPageHeader({
     <header className="admin-page-header">
       <div className="min-w-0">
         <div className="flex items-center gap-2.5">
-          {Icon ? (
+          {Icon && false ? (
             <span className="admin-page-icon" aria-hidden="true">
               <Icon className="h-4 w-4" />
             </span>
