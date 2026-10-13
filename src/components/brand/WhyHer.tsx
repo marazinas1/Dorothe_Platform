@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Reveal } from "@/components/shared/Reveal";
 import type { Locale } from "@/i18n/config";
 import { pickLocalized } from "@/lib/listings/format";
+import { copyVars } from "@/lib/config/site-copy";
 import { SECTION_GAP } from "@/lib/homepage/rhythm";
 import type { SiteSettings } from "@/types/site-settings";
 
@@ -38,7 +39,7 @@ export function WhyHer({ locale, settings }: Props) {
             <ClaimColumn
               icon={Scale}
               title={t("home.claim_valuation_title")}
-              body={t("home.claim_valuation_body")}
+              body={t("home.claim_valuation_body", copyVars(settings, locale))}
               evidence={t("home.claim_valuation_evidence")}
             />
             <ClaimColumn

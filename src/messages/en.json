@@ -45,7 +45,7 @@
     "guide_placeholders": [
       {
         "category": "Selling",
-        "title": "What a house in the Saarland is worth in 2026",
+        "title": "What a house in {{region}} is worth in 2026",
         "excerpt": "How comparable sales, condition and energy class shape a realistic asking price."
       },
       {
@@ -84,7 +84,7 @@
     "valuation_cta": "Request a valuation",
     "why_kicker": "Why {{name}}",
     "claim_valuation_title": "Valued, not estimated",
-    "claim_valuation_body": "I view your property in person and value it against current comparable data from the Saarland — not through an online calculator.",
+    "claim_valuation_body": "I view your property in person and value it against current comparable data from {{region}} — not through an online calculator.",
     "claim_valuation_evidence": "DEKRA-certified property valuation expert",
     "claim_inheritance_title": "Inherited property, handled calmly",
     "claim_inheritance_body": "For communities of heirs and market-value reports for the tax office, I guide you through a process that is rarely simple.",
@@ -104,7 +104,7 @@
       "buy_body": "Every currently available property with full details, floor plans and energy data.",
       "cred_title": "Why {{agent}}",
       "cred1_title": "Valued, not estimated",
-      "cred1_body": "On-site valuation based on current comparable data from the Saarland — never an online calculator.",
+      "cred1_body": "On-site valuation based on current comparable data from {{region}} — never an online calculator.",
       "cred1_tag": "DEKRA-certified property valuer",
       "cred2_title": "Numbers are my craft",
       "cred2_body": "Pricing and financing questions, explained plainly and without jargon.",
@@ -1930,7 +1930,7 @@
         },
         {
           "title": "Market value from real sales",
-          "body": "Based on current comparable sales in your part of the Saarland."
+          "body": "Based on current comparable sales in your neighbourhood."
         },
         {
           "title": "A written summary",
@@ -2013,7 +2013,7 @@
       "form_title": "Request a valuation",
       "form_intro": "Tell me the essentials about your property — I reply personally, usually within one working day.",
       "proof_title": "Recently sold",
-      "proof_body": "A selection of properties I have valued, marketed and sold in the Saarland.",
+      "proof_body": "A selection of properties I have valued, marketed and sold in {{region}}.",
       "proof_link": "Browse the sold archive",
       "question_link": "Ask a question first",
       "service_details": [
@@ -2140,7 +2140,7 @@
     },
     "inheritance": {
       "title": "Inherited property",
-      "meta_description": "Inherited property in the Saarland: market value appraisals for the tax office, neutral valuations for co-heirs, and support through the sale.",
+      "meta_description": "Inherited property in {{region}}: market value appraisals for the tax office, neutral valuations for co-heirs, and support through the sale.",
       "kicker": "Inherited property",
       "headline": "An inherited property, settled calmly.",
       "intro": "An inheritance raises questions nobody prepares for. What is the property worth? Which figure does the tax office want to see? And what applies when several heirs have to decide together? I take on the part that concerns the property — valuing it, putting it in context and, if you decide to, selling it.",

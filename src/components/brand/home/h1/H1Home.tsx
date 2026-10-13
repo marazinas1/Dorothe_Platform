@@ -1,3 +1,4 @@
+import { copyVars } from "@/lib/config/site-copy";
 import type { Step } from "@/components/brand/NumberedSteps";
 import { SoldStrip } from "@/components/brand/SoldStrip";
 import { HomeArticles } from "../HomeArticles";
@@ -35,7 +36,7 @@ export function H1Home(props: HomeTemplateProps) {
       <HomeTestimonials items={testimonials} title={copy.text("testi_title")} locale={locale} tone="paper" />
       <H1Valuation {...props} />
       <SoldStrip locale={locale} items={sold} settings={settings} hidePrice={hideSoldPrice} />
-      {blogOn && posts.length > 0 ? <HomeArticles locale={locale} posts={posts} /> : null}
+      {blogOn && posts.length > 0 ? <HomeArticles locale={locale} posts={posts} vars={copyVars(settings, locale)} /> : null}
     </>
   );
 }
