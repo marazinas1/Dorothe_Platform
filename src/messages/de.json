@@ -1412,7 +1412,10 @@
         "property": "Objekt anlegen",
         "inquiries": "Anfragen prüfen",
         "appointment": "Termin anlegen",
-        "article": "Artikel schreiben"
+        "article": "Artikel schreiben",
+        "newListing": "Neues Objekt",
+        "testimonial": "Stimme hinzufügen",
+        "viewSite": "Website ansehen"
       },
       "queue": {
         "heading": "Braucht Aufmerksamkeit",
@@ -1485,7 +1488,10 @@
         "body": "Sobald das erste Objekt existiert, zeigt diese Seite, was zu tun ist: offene Anfragen, Entwürfe, die noch nicht online gehen können, und veröffentlichte Objekte mit Lücken.",
         "cta": "Erstes Objekt anlegen"
       },
-      "subtitle": "Heutige Aufgaben, letzte Aktivitäten und die wichtigsten Zahlen."
+      "subtitle": "Was Ihre Aufmerksamkeit braucht, dann wie die Website läuft.",
+      "nothingNeeded": "Gerade ist nichts zu tun.",
+      "cannotPublish": "{{title}} kann noch nicht veröffentlicht werden",
+      "missingCount": "{{count}} fehlen"
     },
     "users": {
       "title": "Benutzer",

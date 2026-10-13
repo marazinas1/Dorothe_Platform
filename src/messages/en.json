@@ -1412,7 +1412,10 @@
         "property": "Add property",
         "inquiries": "Review enquiries",
         "appointment": "Add appointment",
-        "article": "Write article"
+        "article": "Write article",
+        "newListing": "New listing",
+        "testimonial": "Add a testimonial",
+        "viewSite": "View the site"
       },
       "queue": {
         "heading": "Needs attention",
@@ -1485,7 +1488,10 @@
         "body": "As soon as the first property exists, this page shows what needs doing: unanswered enquiries, drafts that cannot go live yet and published properties with gaps.",
         "cta": "Create first property"
       },
-      "subtitle": "Today’s work, recent activity and the figures that matter."
+      "subtitle": "What needs your attention, then how the site is doing.",
+      "nothingNeeded": "Nothing needs your attention right now.",
+      "cannotPublish": "{{title}} cannot be published yet",
+      "missingCount": "{{count}} missing"
     },
     "users": {
       "title": "Users",
