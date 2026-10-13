@@ -54,7 +54,11 @@ export function ListingCardCover({
             muted && "grayscale-[60%]",
           )}
         />
-      ) : null}
+      ) : (
+        <span aria-hidden className="absolute inset-0 flex items-center justify-center text-muted-foreground/60">
+          <ListingIcon name="cam" className="size-8" />
+        </span>
+      )}
       {badge ? (
         <span
           className={cn(
