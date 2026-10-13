@@ -4,7 +4,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
-import { WorkQueue } from "@/components/admin/dashboard/WorkQueue";
+import { NeedsAttention } from "@/components/admin/dashboard/NeedsAttention";
+import { DefaultRequestQueue } from "@/components/admin/copy/DefaultRequestQueue";
 import { QuickActions } from "@/components/admin/dashboard/QuickActions";
 import { MetricsPanel } from "@/components/admin/dashboard/MetricsPanel";
 import { PeriodPicker } from "@/components/admin/dashboard/PeriodPicker";
@@ -12,7 +13,6 @@ import { FirstRun } from "@/components/admin/dashboard/FirstRun";
 import { metricsQueryOptions } from "@/lib/dashboard/admin.functions";
 import { DEFAULT_PERIOD, resolvePeriod, type PeriodPreset } from "@/lib/dashboard/period";
 import { AdminPageHeader } from "@/components/admin/ui/AdminPageHeader";
-import { LayoutDashboard } from "lucide-react";
 
 export const Route = createFileRoute("/admin/_authenticated/")({
   staticData: { sitemap: false },
@@ -31,10 +31,11 @@ function Dashboard() {
 
   return (
     <div className="space-y-8">
-      <AdminPageHeader icon={LayoutDashboard} title={t("admin.pages.dashboard")} description={t("admin.dashboard.subtitle")} />
+      <AdminPageHeader title={t("admin.pages.dashboard")} description={t("admin.dashboard.subtitle")} />
 
         <section className="space-y-4">
-          {empty ? <FirstRun locale={locale} /> : <WorkQueue locale={locale} />}
+          <DefaultRequestQueue />
+          {empty ? <FirstRun locale={locale} /> : <NeedsAttention locale={locale} />}
         </section>
 
       <section className="space-y-4">

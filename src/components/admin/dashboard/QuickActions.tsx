@@ -1,33 +1,31 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Building2, CalendarPlus, FilePlus2, MailOpen } from "lucide-react";
+import { ExternalLink, Newspaper, Plus, Quote } from "lucide-react";
 
-import { AdminSection } from "@/components/admin/ui/AdminSection";
+const LINK =
+  "inline-flex items-center gap-2 rounded-[var(--radius)] border border-border bg-card px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted";
 
-const ACTIONS = [
-  { key: "property", to: "/admin/listings/new", icon: Building2 },
-  { key: "inquiries", to: "/admin/inquiries", icon: MailOpen },
-  { key: "appointment", to: "/admin/calendar", icon: CalendarPlus },
-  { key: "article", to: "/admin/posts", icon: FilePlus2 },
-] as const;
-
+/** The most frequent jobs, one click away. */
 export function QuickActions({ locale }: { locale: string }) {
   const { t } = useTranslation();
   return (
-    <AdminSection title={t("admin.dashboard.quick.title")} description={t("admin.dashboard.quick.help")}>
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {ACTIONS.map(({ key, to, icon: Icon }) => (
-          <Link
-            key={key}
-            to={to}
-            params={{ locale }}
-            className="group flex min-h-24 flex-col justify-between rounded-[var(--radius)] border border-border bg-background p-4 transition-colors hover:border-primary/35 hover:bg-muted"
-          >
-            <Icon className="h-5 w-5 text-primary" aria-hidden />
-            <span className="mt-5 text-sm font-semibold">{t(`admin.dashboard.quick.${key}`)}</span>
-          </Link>
-        ))}
-      </div>
-    </AdminSection>
+    <nav aria-label={t("admin.dashboard.quick.title")} className="flex flex-wrap gap-3">
+      <Link to="/admin/listings/new" className={LINK}>
+        <Plus className="h-4 w-4" strokeWidth={1.75} />
+        {t("admin.dashboard.quick.newListing")}
+      </Link>
+      <Link to="/admin/testimonials" className={LINK}>
+        <Quote className="h-4 w-4" strokeWidth={1.75} />
+        {t("admin.dashboard.quick.testimonial")}
+      </Link>
+      <Link to="/admin/posts" className={LINK}>
+        <Newspaper className="h-4 w-4" strokeWidth={1.75} />
+        {t("admin.dashboard.quick.article")}
+      </Link>
+      <a href={`/${locale}`} target="_blank" rel="noreferrer" className={LINK}>
+        <ExternalLink className="h-4 w-4" strokeWidth={1.75} />
+        {t("admin.dashboard.quick.viewSite")}
+      </a>
+    </nav>
   );
 }
