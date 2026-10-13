@@ -1390,6 +1390,18 @@
         "rooms": "Zimmer",
         "year_built": "Baujahr",
         "condition": "Zustand"
+      },
+      "subtitle": "Jede Nachricht von der Website, neueste zuerst.",
+      "search": "Anfragen durchsuchen",
+      "matches_one": "{{count}} Treffer",
+      "matches_other": "{{count}} Treffer",
+      "noMatches": "Keine passenden Anfragen.",
+      "tabs": {
+        "all": "Alle",
+        "unread": "Ungelesen",
+        "seller": "Bewertung",
+        "listing": "Objekte",
+        "general": "Allgemein"
       }
     },
     "dashboard": {

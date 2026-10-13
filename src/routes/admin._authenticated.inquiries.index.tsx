@@ -17,11 +17,10 @@ function InquiriesIndex() {
   const { t } = useTranslation();
   const locale = usePublicLocale();
   const { data } = useSuspenseQuery(adminInquiriesQueryOptions);
-  const unread = data.filter((row) => row.status === "new").length;
 
   return (
     <div className="space-y-6">
-      <AdminPageHeader icon={Inbox} title={t("admin.pages.inquiries")} description={t("admin.inquiries.summary", { total: data.length, unread })} />
+      <AdminPageHeader icon={Inbox} title={t("admin.pages.inquiries")} description={t("admin.inquiries.subtitle")} />
       <InquiriesList rows={data} locale={locale} />
     </div>
   );
