@@ -17,20 +17,19 @@ export function PostCard({
   metaLabel: string | null;
   featured?: boolean;
 }) {
+  // No cover = text-first card (editorial standard); never a grey "missing image" box.
   const img = post.cover ? (
     <div className={`${featured ? "aspect-[16/10]" : "aspect-[3/2]"} overflow-hidden bg-muted`}>
       <img src={post.cover} alt={post.coverAlt} loading="lazy" className="h-full w-full object-cover" />
     </div>
-  ) : (
-    <div className={`${featured ? "aspect-[16/10]" : "aspect-[3/2]"} bg-muted`} aria-hidden />
-  );
+  ) : null;
 
   if (featured) {
     return (
       <Link
         to="/$locale/ratgeber/$slug"
         params={{ locale, slug: post.slug }}
-        className="group grid items-center gap-10 md:grid-cols-2 lg:gap-20"
+        className={`group grid items-center gap-10 lg:gap-20 ${img ? "md:grid-cols-2" : "border-t border-border pt-10"}`}
       >
         {img}
         <div>
