@@ -19,3 +19,5 @@ export const TestimonialMoveSchema = z.object({
   id: z.string().uuid(),
   direction: z.enum(["up", "down"]),
 });
+
+export const TestimonialOrderSchema = z.object({ order: z.array(z.string().uuid()).min(1) });

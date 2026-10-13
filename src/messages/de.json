@@ -592,7 +592,17 @@
       "confirmDeleteBody": "Die Bewertung von {{name}} wird gelöscht und nicht mehr auf der Website gezeigt.",
       "homeFull": "Auf der Startseite stehen bereits drei Stimmen. Nehmen Sie zuerst eine heraus.",
       "homeCount": "Auf der Startseite: {{count}} von 3",
-      "homeLimitError": "Die Startseite zeigt höchstens drei Stimmen."
+      "homeLimitError": "Die Startseite zeigt höchstens drei Stimmen.",
+      "searchPlaceholder": "Stimmen durchsuchen",
+      "expandAll": "Alle aufklappen",
+      "collapseAll": "Alle zuklappen",
+      "summary": "{{count}} Stimmen, {{home}} auf der Startseite",
+      "shownOnSite": "Auf der Website",
+      "hidden": "Ausgeblendet",
+      "homePage": "Startseite",
+      "dragHandle": "Ziehen zum Sortieren: {{name}}",
+      "noMatches": "Keine Stimmen passen zur Suche.",
+      "hintShort": "Was Kunden über Sie sagen. Bis zu drei erscheinen auf der Startseite, alle auf Über mich."
     },
     "topbar": {
       "signOut": "Abmelden",
