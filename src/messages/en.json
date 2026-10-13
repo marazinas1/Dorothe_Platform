@@ -2178,7 +2178,8 @@
     "detail": {
       "back": "Back to all articles",
       "unavailable_title": "Article unavailable",
-      "unavailable_body": "This article is no longer published."
+      "unavailable_body": "This article is no longer published.",
+      "valuation_cta": "Request a valuation"
     },
     "topics": {
       "selling": "Selling",

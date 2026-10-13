@@ -3,7 +3,9 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { PublicChrome } from "@/components/public/PublicChrome";
-import { CtaBand } from "@/components/brand/CtaBand";
+import { PostAuthor } from "@/components/brand/blog/PostAuthor";
+import { ActionLink } from "@/components/brand/ui/ActionButton";
+import { readingMinutes } from "@/lib/posts/reading-time";
 import { PostArticle } from "@/components/brand/blog/PostArticle";
 import type { Locale } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -94,18 +96,41 @@ function PostDetail() {
     <PublicChrome locale={l} settings={settings}>
       <PostArticle
         post={post}
-        dateLabel={formatPostDate(post.publishedAt, l)}
-        backSlot={
-          <Link
-            to="/$locale/ratgeber"
-            params={{ locale: l }}
-            className="text-[14px] text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-          >
-            {t("blog.detail.back")}
-          </Link>
+        crumb={
+          <>
+            <Link to="/$locale/ratgeber" params={{ locale: l }} className="hover:text-foreground">
+              {t("blog.title")}
+            </Link>
+            {post.topic ? (
+              <>
+                <span aria-hidden>/</span>
+                <span>{t(`blog.topics.${post.topic}`)}</span>
+              </>
+            ) : null}
+          </>
+        }
+        byline={[
+          settings.primary_agent_name ? t("blog.byline", { name: settings.primary_agent_name }) : null,
+          formatPostDate(post.publishedAt, l),
+          t("blog.read_minutes", { count: readingMinutes(post.body) }),
+        ]
+          .filter(Boolean)
+          .join(", ")}
+        author={
+          settings.primary_agent_name ? (
+            <PostAuthor
+              name={settings.primary_agent_name}
+              role={settings.primary_agent_role}
+              photo={settings.primary_agent_photo_url}
+              action={
+                <ActionLink locale={l} to="/$locale/immobilienbewertung">
+                  {t("blog.detail.valuation_cta")}
+                </ActionLink>
+              }
+            />
+          ) : null
         }
       />
-      <CtaBand locale={l} settings={settings} />
     </PublicChrome>
   );
 }
