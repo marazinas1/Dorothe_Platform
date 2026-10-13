@@ -70,7 +70,7 @@ export function TestimonialsPage() {
     try {
       await reorderTestimonials({ data: { order: next.map((r) => r.id) } });
     } catch {
-      toast.error(t("admin.common.saveFailed", { defaultValue: "Could not save." }));
+      toast.error(t("admin.common.saveFailed"));
     }
     await refresh();
   }

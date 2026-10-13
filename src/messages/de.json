@@ -568,7 +568,8 @@
   "admin": {
     "common": {
       "close": "Schließen",
-      "edit": "Bearbeiten"
+      "edit": "Bearbeiten",
+      "saveFailed": "Neue Reihenfolge konnte nicht gespeichert werden."
     },
     "testimonials": {
       "title": "Kundenstimmen",
@@ -1393,8 +1394,6 @@
       },
       "subtitle": "Jede Nachricht von der Website, neueste zuerst.",
       "search": "Anfragen durchsuchen",
-      "matches_one": "{{count}} Treffer",
-      "matches_other": "{{count}} Treffer",
       "noMatches": "Keine passenden Anfragen.",
       "tabs": {
         "all": "Alle",
@@ -1402,7 +1401,8 @@
         "seller": "Bewertung",
         "listing": "Objekte",
         "general": "Allgemein"
-      }
+      },
+      "matches": "{{count}} Treffer"
     },
     "dashboard": {
       "needsAttention": "Zu erledigen",
