@@ -568,7 +568,8 @@
   "admin": {
     "common": {
       "close": "Close",
-      "edit": "Edit"
+      "edit": "Edit",
+      "saveFailed": "Could not save the new order."
     },
     "testimonials": {
       "title": "Testimonials",
@@ -1393,8 +1394,6 @@
       },
       "subtitle": "Every message from the site, newest first.",
       "search": "Search inquiries",
-      "matches_one": "{{count}} match",
-      "matches_other": "{{count}} matches",
       "noMatches": "No inquiries match.",
       "tabs": {
         "all": "All",
@@ -1402,7 +1401,8 @@
         "seller": "Valuation",
         "listing": "Listings",
         "general": "General"
-      }
+      },
+      "matches": "{{count}} matches"
     },
     "dashboard": {
       "needsAttention": "Needs attention",
