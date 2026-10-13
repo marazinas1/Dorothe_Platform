@@ -2185,7 +2185,9 @@
       "buying": "Kaufen",
       "inheritance": "Erben",
       "energy": "Energie"
-    }
+    },
+    "read_minutes": "{{count}} Min. Lesezeit",
+    "byline": "Von {{name}}"
   },
   "cta": {
     "kicker": "Nächster Schritt",

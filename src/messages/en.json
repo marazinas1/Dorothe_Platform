@@ -2185,7 +2185,9 @@
       "buying": "Buying",
       "inheritance": "Inheritance",
       "energy": "Energy"
-    }
+    },
+    "read_minutes": "{{count}} min read",
+    "byline": "By {{name}}"
   },
   "cta": {
     "kicker": "Next step",
