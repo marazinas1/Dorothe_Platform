@@ -864,7 +864,6 @@
         "download": "Download",
         "downloadError": "The file could not be downloaded.",
         "remove": "Remove",
-        "removeHelp": "Without a logo a neutral placeholder is shown everywhere.",
         "sectionTitle": "Brand files",
         "sectionHelp": "The logo, dark-background logo and browser icon used throughout the website.",
         "size": "Logo size",

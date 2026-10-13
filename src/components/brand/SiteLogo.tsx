@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
-import { BrandMark } from "@/components/brand/BrandMark";
+import { useTranslation } from "react-i18next";
+
 import { logoSrc } from "@/lib/theme/logo";
 import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/types/site-settings";
@@ -32,7 +33,8 @@ const clampSize = (value: number | null | undefined) =>
 /**
  * Renders the uploaded logo at one shared size throughout public, auth and
  * admin chrome. Over dark backgrounds the dark-background file is used when the
- * client uploaded one.
+ * client uploaded one. Without an upload a neutral placeholder of the same
+ * size is shown, so no client mark ever lives in code.
  */
 export function SiteLogo({
   settings,
@@ -45,14 +47,24 @@ export function SiteLogo({
   const src = logoSrc(tone === "light" ? "mono" : "original", configured);
   const logoSize = clampSize(settings.logo_size);
   const height = `${(BASE_HEIGHT_REM * logoSize) / 100}rem`;
+  const { t } = useTranslation();
   if (!src)
     return (
-      <BrandMark
-        settings={settings}
-        tone={tone}
-        className={cn(interactive && INTERACTIVE_CLASS, className)}
-        style={{ fontSize: `${logoSize / 100}rem` } as CSSProperties}
-      />
+      <span
+        role="img"
+        aria-label={settings.site_name}
+        className={cn(
+          "inline-flex aspect-[3/1] items-center justify-center rounded-[var(--radius)] border border-dashed text-xs font-semibold tracking-[0.16em] uppercase",
+          tone === "light"
+            ? "border-on-media-muted text-on-media-muted"
+            : "border-border text-muted-foreground",
+          interactive && INTERACTIVE_CLASS,
+          className,
+        )}
+        style={{ height } as CSSProperties}
+      >
+        {t("brand.logoPlaceholder")}
+      </span>
     );
 
   return (
