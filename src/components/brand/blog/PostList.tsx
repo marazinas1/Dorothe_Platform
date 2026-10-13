@@ -9,46 +9,40 @@ type Props = {
   title: string;
   intro?: string;
   emptyLabel: string;
-  formatDate: (iso: string | null) => string | null;
-  formatTopic?: (topic: PostView["topic"]) => string | null;
+  metaFor: (post: PostView) => string | null;
 };
 
-/** The article index. Presentational only. */
-export function PostList({
-  posts,
-  locale,
-  title,
-  intro,
-  emptyLabel,
-  formatDate,
-  formatTopic,
-}: Props) {
+/** Guides index per reference: page hero, one lead story, then a three-column grid. */
+export function PostList({ posts, locale, title, intro, emptyLabel, metaFor }: Props) {
+  const [lead, ...rest] = posts;
   return (
-    <section className="py-16 lg:py-20">
-      <div className="mx-auto max-w-[1220px] px-6 lg:px-8">
-        <h1 className="text-section max-w-[40ch] text-balance">{title}</h1>
-        {intro ? (
-          <p className="mt-4 max-w-[62ch] text-[15.5px] leading-[1.66] text-muted-foreground">
-            {intro}
-          </p>
-        ) : null}
-
-        {posts.length === 0 ? (
-          <p className="mt-12 text-[15px] text-muted-foreground">{emptyLabel}</p>
-        ) : (
-          <ul className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                locale={locale}
-                dateLabel={formatDate(post.publishedAt)}
-                topicLabel={formatTopic?.(post.topic) ?? null}
-              />
-            ))}
-          </ul>
-        )}
+    <>
+      <div className="border-b border-border pt-24 pb-16">
+        <div className="mx-auto max-w-[1280px] px-5 md:px-10">
+          <h1 className="text-[clamp(34px,4.4vw,56px)] font-bold leading-[1.06] tracking-[-0.03em] text-balance">{title}</h1>
+          {intro ? (
+            <p className="mt-5 max-w-[56ch] text-[clamp(18px,1.6vw,21px)] leading-[1.55] text-muted-foreground">{intro}</p>
+          ) : null}
+        </div>
       </div>
-    </section>
+      <section className="pt-[88px] pb-[168px]">
+        <div className="mx-auto max-w-[1280px] px-5 md:px-10">
+          {!lead ? (
+            <p className="text-[15.5px] text-muted-foreground">{emptyLabel}</p>
+          ) : (
+            <>
+              <PostCard featured post={lead} locale={locale} metaLabel={metaFor(lead)} />
+              {rest.length > 0 ? (
+                <ul className="mt-24 grid gap-7 md:grid-cols-3">
+                  {rest.map((post) => (
+                    <PostCard key={post.id} post={post} locale={locale} metaLabel={metaFor(post)} />
+                  ))}
+                </ul>
+              ) : null}
+            </>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
