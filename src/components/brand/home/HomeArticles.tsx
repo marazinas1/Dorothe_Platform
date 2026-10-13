@@ -5,7 +5,7 @@ import guideEnergy from "@/assets/placeholders/guide-energy.jpg";
 import guideHomeValue from "@/assets/placeholders/guide-home-value.jpg";
 import guideInheritance from "@/assets/placeholders/guide-inheritance.jpg";
 import type { Locale } from "@/i18n/config";
-import { formatPostDate } from "@/lib/posts/date";
+import { readingMinutes } from "@/lib/posts/reading-time";
 import { postViews } from "@/lib/posts/resolve";
 import type { PostRow } from "@/lib/posts/types";
 import { HomeTextLink } from "./HomeActions";
@@ -35,7 +35,7 @@ export function HomeArticles({ locale, posts }: { locale: Locale; posts: PostRow
       <ul className="mt-10 grid gap-7 md:grid-cols-3">
         {items.length > 0
           ? items.map((post) => (
-              <PostCard key={post.id} post={post} locale={locale} dateLabel={formatPostDate(post.publishedAt, locale)} topicLabel={post.topic ? t(`blog.topics.${post.topic}`) : null} />
+              <PostCard key={post.id} post={post} locale={locale} metaLabel={[post.topic ? t(`blog.topics.${post.topic}`) : null, t("blog.read_minutes", { count: readingMinutes(post.body) })].filter(Boolean).join(", ")} />
             ))
           : placeholders.map((post, index) => (
               <li key={post.title}>
