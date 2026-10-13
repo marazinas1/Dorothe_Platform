@@ -1,3 +1,4 @@
+import { copyVars } from "@/lib/config/site-copy";
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -35,7 +36,7 @@ export const Route = createFileRoute("/$locale/erben")({
       enabledLocales: settings.enabled_locales,
       defaultLocale: settings.default_locale,
       title,
-      description: translate(locale, "pages.inheritance.meta_description"),
+      description: translate(locale, "pages.inheritance.meta_description", copyVars(settings, locale)),
       siteName: settings.site_name,
       ogDefaultImage: settings.og_default_image,
     });

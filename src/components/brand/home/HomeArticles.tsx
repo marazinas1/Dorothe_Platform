@@ -16,10 +16,19 @@ const PLACEHOLDER_IMAGES = [
   guideInheritance,
 ];
 
-export function HomeArticles({ locale, posts }: { locale: Locale; posts: PostRow[] }) {
+export function HomeArticles({
+  locale,
+  posts,
+  vars = {},
+}: {
+  locale: Locale;
+  posts: PostRow[];
+  /** Client words ({{region}} …) for the sample guide titles. */
+  vars?: Record<string, string>;
+}) {
   const { t } = useTranslation();
   const items = postViews(posts, locale).slice(0, 3);
-  const placeholders = t("home.guide_placeholders", { returnObjects: true }) as Array<{
+  const placeholders = t("home.guide_placeholders", { returnObjects: true, ...vars }) as Array<{
     category: string;
     title: string;
     excerpt: string;
