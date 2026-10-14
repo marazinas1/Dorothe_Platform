@@ -38,7 +38,8 @@ function NewListing() {
         initial={{
           ...EMPTY_VALUES,
           // Country comes from configuration, never from code.
-          address_country: settings.address_country ?? settings.country ?? null,
+          // Always the ISO code: the business address field is free text.
+          address_country: settings.country ?? null,
         }}
         locales={settings.enabled_locales}
         status={null}
