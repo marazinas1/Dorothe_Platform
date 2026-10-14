@@ -1,15 +1,12 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
-import { AlertTriangle, ExternalLink, Send, Undo2, ArrowRightLeft } from "lucide-react";
+import { AlertTriangle, ExternalLink, Undo2, ArrowRightLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/admin/ui/StatusChip";
 import type { ListingStatus } from "@/lib/listings/admin-schema";
 import { statusOptionsFor } from "@/lib/listings/status-options";
 import type { Checklist } from "@/lib/listings/publish-checklist";
-import { blockerSummary } from "@/lib/listings/blocker-summary";
-import { scrollToField } from "@/lib/listings/scroll-to-field";
 import { statusLabelKey, statusActionKey } from "@/lib/listings/status-label";
 import { PreviewButton } from "./PreviewButton";
 import { HomePickToggle } from "./HomePickToggle";
@@ -48,17 +45,14 @@ export function StatusBar({
 }) {
   const { t } = useTranslation();
   const { apply, busy, error, setError } = useStatusChange(onChanged);
-  // The blocker list is only revealed once the broker asks to publish, so an
-  // untouched draft is not covered in warnings.
-  const [showBlockers, setShowBlockers] = useState(false);
   const targets = statusOptionsFor(status, dealType);
   const isPublic = status === "active" || status === "coming_soon";
+  // Publishing has a single home: the sticky save bar at the bottom. This bar
+  // keeps only status context and secondary transitions (no duplicate CTA).
   const canPublish = targets.includes("active");
   const canUnpublish = targets.includes("draft");
   const secondary = targets.filter((s) => s !== "active" && s !== "draft");
   const locked = dirty || busy !== null;
-  const blocking = checklist.items.filter((item) => !item.done);
-  const publishBlocked = blocking.length > 0;
 
   return (
     <div className="rounded-[var(--radius)] border border-border bg-card">
@@ -132,37 +126,10 @@ export function StatusBar({
             </Button>
           ) : null}
 
-          {canPublish ? (
-            <Button
-              type="button"
-              size="sm"
-              disabled={locked}
-              onClick={() => {
-                // Never make a call the checklist knows the database rejects —
-                // show what is missing instead.
-                if (publishBlocked) {
-                  setShowBlockers(true);
-                  scrollToField(blocking[0].anchor);
-                  return;
-                }
-                void apply(listingId, "active");
-              }}
-            >
-              <Send className="h-4 w-4" />
-              {t("admin.listings.publish")}
-            </Button>
-          ) : null}
         </div>
       </div>
 
-      {canPublish && publishBlocked && showBlockers ? (
-        <p className="flex items-start gap-2 border-t border-border px-4 py-2 text-xs text-muted-foreground">
-          <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-          <span>
-            {t("admin.listings.publishBlocked")} {blockerSummary(t, blocking)}
-          </span>
-        </p>
-      ) : canPublish && !hasImages ? (
+      {canPublish && !hasImages ? (
         <p className="flex items-start gap-2 border-t border-border px-4 py-2 text-xs text-muted-foreground">
           <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
           {t("admin.listings.noImagesWarning")}
