@@ -33,14 +33,14 @@ const TEXT_FIELDS = [
  * sees follows from this selector without any public-side code change.
  */
 export function LocationSection({ form }: { form: ListingFormApi }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions);
   const { values } = form;
 
   // Stored as an ISO code and defaulted to the site's own country, which is what
   // drives the energy certificate validation.
   const country = values.address_country ?? settings.country;
-  const countryOptions = listingCountryOptions(settings.country, country);
+  const countryOptions = listingCountryOptions(settings.country, country, i18n.language);
   const regionOptions = isGermany(country) ? GERMAN_STATES : null;
   const region = values.address_region ?? "";
 
@@ -57,7 +57,10 @@ export function LocationSection({ form }: { form: ListingFormApi }) {
             </FieldRow>
           ))}
 
-          <FieldRow label={t("admin.listings.fields.address_country")}>
+          <FieldRow
+            label={t("admin.listings.fields.address_country")}
+            help={t("admin.listings.help.address_country")}
+          >
             <Select
               value={country}
               onValueChange={(v) => form.setField("address_country", v)}
@@ -65,10 +68,14 @@ export function LocationSection({ form }: { form: ListingFormApi }) {
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
-                {countryOptions.map((code) => (
-                  <SelectItem key={code} value={code}>
-                    {t(`countries.${code}`, { defaultValue: code })}
+              <SelectContent className="max-h-80">
+                {countryOptions.map(({ code, name }, index) => (
+                  <SelectItem
+                    key={code}
+                    value={code}
+                    className={index === 0 ? "border-b border-border" : undefined}
+                  >
+                    {name}
                   </SelectItem>
                 ))}
               </SelectContent>

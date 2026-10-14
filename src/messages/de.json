@@ -426,7 +426,8 @@
       "sauna": "Sauna",
       "alarm_system": "Alarmanlage",
       "smart_home": "Smart Home",
-      "electric_shutters": "Elektrische Rollläden"
+      "electric_shutters": "Elektrische Rollläden",
+      "fiber_internet": "Glasfaser"
     },
     "rentalStatus": {
       "let": "Vermietet",
@@ -950,7 +951,6 @@
       "saveBeforeStatus": "Bitte zuerst speichern.",
       "sections": {
         "basics": "Grunddaten",
-        "figures": "Preis & Größe",
         "location": "Lage",
         "energy": "Energieausweis",
         "content": "Inhaltsabschnitte",
@@ -960,7 +960,9 @@
         "equipment": "Ausstattung & Merkmale",
         "more": "Weitere Angaben",
         "translated": "Texte",
-        "documents": "Dokumente und Touren"
+        "documents": "Dokumente und Touren",
+        "price": "Preis & Konditionen",
+        "size": "Flächen & Zimmer"
       },
       "fields": {
         "title": "Titel",
@@ -1009,7 +1011,7 @@
         "total_rent": "Warmmiete pro Monat",
         "deposit": "Kaution",
         "heating_costs_included": "Heizkosten in den Nebenkosten enthalten",
-        "commission_free": "Provisionsfrei für Käufer",
+        "commission_free": "Provisionsfrei für den Käufer",
         "commission_value_percent": "Provision (%)",
         "commission_free_rent": "Provisionsfrei für Mieter",
         "slug": "Webadresse (Slug)",
@@ -1041,14 +1043,14 @@
         "commission": "Die Angabe der Provision ist in Deutschland gesetzlich vorgeschrieben.",
         "rental": "Ob aktuell jemand darin wohnt. Unabhängig davon, ob Sie verkaufen oder vermieten.",
         "availability_date": "Leer lassen, wenn das Datum noch nicht feststeht.",
-        "reference_code": "Optional. Ihre eigene Objektnummer, wird auf der öffentlichen Seite angezeigt.",
+        "reference_code": "Ihre eigene Objektnummer, damit Interessenten sie am Telefon nennen können (z. B. „2026-004“). Leer lassen – dann wird beim Speichern automatisch die nächste Nummer vergeben.",
         "more": "Optional – zum Veröffentlichen nicht erforderlich.",
         "translated": "Nur diese Felder brauchen eine Sprache. Bleibt eine Sprache leer, wird die andere angezeigt.",
         "legacyPropertyType": "Dieser Objekttyp wird nicht mehr angeboten. Bitte einen aktuellen Typ wählen.",
         "utilities_cost": "Laufende Kosten, die Mieter zusätzlich zur Kaltmiete zahlen.",
         "total_rent": "Ergibt sich aus Kaltmiete plus Nebenkosten.",
         "deposit": "In der Regel höchstens drei Kaltmieten.",
-        "commission_free": "Einschalten für ein provisionsfreies Angebot. Sonst Provision angeben.",
+        "commission_free": "Einschalten, wenn der Käufer keine Maklerprovision zahlt (z. B. weil der Verkäufer sie trägt). Sonst die Provision unten angeben – in Deutschland ist die Angabe Pflicht.",
         "title": "Das Erste, was Interessenten sehen, z. B. „Helle 3-Zimmer-Wohnung mit Balkon“.",
         "titleOptional": "Optional. Ist das Feld leer, wird der Titel auf {{locale}} gezeigt.",
         "slugFollowsTitle": "Folgt dem Titel, bis das Objekt erstmals veröffentlicht wird.",
@@ -1057,7 +1059,9 @@
         "reserve_fund": "Anteil der Wohnung an der Erhaltungsrücklage der Eigentümergemeinschaft. Wird auf der Objektseite angezeigt.",
         "price_reduced": "Zeigt das Etikett „Preis reduziert\" auf der Objektkarte.",
         "previous_price": "Nur für Ihre eigene Übersicht. Wird nie auf der Website angezeigt.",
-        "custom_features": "Alles, was nicht in der Liste steht, z. B. Wintergarten. Mit Enter oder Komma hinzufügen."
+        "custom_features": "Alles, was nicht in der Liste steht, z. B. Wintergarten. Mit Enter oder Komma hinzufügen.",
+        "size_section": "Flächen in m² und Zimmeranzahl. Es erscheinen nur die Felder, die zu dieser Objektart passen.",
+        "address_country": "Standardmäßig das Land Ihrer Website. Buchstaben tippen, um in der Liste zu springen."
       },
       "energy": {
         "intro": "Pflichtfelder für {{country}}. Ohne sie ist eine Veröffentlichung nicht möglich.",
@@ -1224,7 +1228,8 @@
         "slug_reserved": "Diese Adresse ist reserviert und würde einen Teil der Website verdecken.",
         "slug_normalized": "Wird in der unten gezeigten Kleinschreibung gespeichert.",
         "slug_taken": "Diese Webadresse wird schon von einem anderen Objekt verwendet.",
-        "slug_invalid": "Diese Webadresse ist nicht verwendbar."
+        "slug_invalid": "Diese Webadresse ist nicht verwendbar.",
+        "reference_taken": "Diese Objektnummer wird bereits von einem anderen Objekt verwendet."
       },
       "commissionType": {
         "percent": "Prozent (%)",
@@ -1331,7 +1336,7 @@
         "limitReached": "Die Startseite zeigt höchstens {{count}} Objekte. Bitte zuerst eines entfernen."
       },
       "pageHint": "Ihre Immobilien zum Kauf und zur Miete. Ziehen Sie die Objekte, um die Reihenfolge auf der Website zu ändern.",
-      "referencePending": "Wird beim ersten Speichern vergeben",
+      "referencePending": "Automatisch, z. B. 2026-004",
       "tabs": {
         "label": "Objektstatus",
         "all": "Alle",

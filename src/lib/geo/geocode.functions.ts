@@ -34,7 +34,9 @@ const MIN_GAP_MS = 1100;
 function buildQuery(data: z.output<typeof GeocodeInput>): string {
   const street = [data.street, data.number].filter(Boolean).join(" ");
   const town = [data.zip, data.city].filter(Boolean).join(" ");
-  return [street, town, data.region, data.country].filter(Boolean).join(", ");
+  // An ISO code is passed as a filter instead (see countrycodes), not as text.
+  const country = /^[A-Za-z]{2}$/.test(data.country) ? "" : data.country;
+  return [street, town, data.region, country].filter(Boolean).join(", ");
 }
 
 export const geocodeAddress = createServerFn({ method: "POST" })
@@ -53,6 +55,9 @@ export const geocodeAddress = createServerFn({ method: "POST" })
     url.searchParams.set("format", "jsonv2");
     url.searchParams.set("limit", "1");
     url.searchParams.set("addressdetails", "0");
+    if (/^[A-Za-z]{2}$/.test(data.country)) {
+      url.searchParams.set("countrycodes", data.country.toLowerCase());
+    }
 
     try {
       const response = await fetch(url, {
