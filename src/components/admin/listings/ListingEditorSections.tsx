@@ -10,6 +10,7 @@ import { EquipmentSection } from "./EquipmentSection";
 import { FiguresSection } from "./FiguresSection";
 import { useTranslation } from "react-i18next";
 import { SectionNav, sectionAnchorId } from "./SectionNav";
+import { DocumentsSection } from "./DocumentsSection";
 import { ImageManager } from "./ImageManager";
 import { LocationSection } from "./LocationSection";
 import { MoreDetailsSection } from "./MoreDetailsSection";
@@ -67,6 +68,11 @@ export function ListingEditorSections(props: Props) {
       refresh={props.refreshListing}
       ensureListingId={props.ensureListingId}
     />,
+    <DocumentsSection
+      key="documents"
+      listingId={props.listingId}
+      ensureListingId={props.ensureListingId}
+    />,
   ].filter((node): node is ReactElement => node !== null);
 
   const labelKey: Record<string, string> = {
@@ -78,6 +84,7 @@ export function ListingEditorSections(props: Props) {
     energy: "energy",
     more: "more",
     images: "images",
+    documents: "documents",
   };
   const nav = sections.map((node) => ({
     key: String(node.key),

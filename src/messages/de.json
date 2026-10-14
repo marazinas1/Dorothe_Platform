@@ -951,7 +951,8 @@
         "market": "Kosten, Provision & Vermietung",
         "equipment": "Ausstattung & Merkmale",
         "more": "Weitere Angaben",
-        "translated": "Texte"
+        "translated": "Texte",
+        "documents": "Dokumente und Touren"
       },
       "fields": {
         "title": "Titel",
@@ -1337,7 +1338,25 @@
       "orderSaved": "Reihenfolge gespeichert.",
       "orderSaving": "Reihenfolge wird gespeichert…",
       "orderUnavailable": "Filter zurücksetzen, um die Website-Reihenfolge zu ändern.",
-      "sectionNav": "Formularbereiche"
+      "sectionNav": "Formularbereiche",
+      "docs": {
+        "floorplan": "Grundriss",
+        "floorplanHelp": "PDF, offen auf der Objektseite sichtbar.",
+        "expose": "Vollständiges Exposé",
+        "exposeHelp": "PDF mit allen Angaben zur Immobilie.",
+        "afterEnquiry": "Erst nach einer Anfrage senden",
+        "upload": "PDF hochladen",
+        "replace": "Ersetzen",
+        "uploading": "Wird hochgeladen…",
+        "remove": "Entfernen",
+        "removeTitle": "{{name}} entfernen?",
+        "removeBody": "Die Datei wird gelöscht und verschwindet von der Objektseite.",
+        "tour": "Link zur 360°-Tour",
+        "tourHelp": "Matterport o. Ä. Leer lassen, um den Tour-Button auszublenden.",
+        "tourInvalid": "Geben Sie einen vollständigen Link ein, der mit https:// beginnt.",
+        "not_pdf": "Wählen Sie eine PDF-Datei.",
+        "too_large": "Die Datei ist größer als 20 MB. Wählen Sie ein kleineres PDF."
+      }
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",
