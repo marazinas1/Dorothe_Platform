@@ -191,6 +191,11 @@ export function ListingForm({
         saving={saving}
         autosave={autosave.state}
         onSave={() => void save()}
+        listingId={listingId}
+        status={status}
+        dealType={form.values.deal_type}
+        checklist={checklist}
+        onStatusChanged={refreshListing}
       />
     </form>
   );
