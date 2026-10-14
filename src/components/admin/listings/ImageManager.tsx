@@ -173,7 +173,7 @@ export function ImageManager({
             </button>
           </div>
           {missingAlt > 0 ? (
-            <p role="status" className="mt-3 text-sm text-warning">
+            <p role="status" className="mt-3 text-sm text-muted-foreground">
               {t("admin.listings.images.missingAlt", { count: missingAlt })}
             </p>
           ) : null}
