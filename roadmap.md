@@ -1,8 +1,8 @@
 # Roadmap — active Deerva admin alignment
 
 ## Current mobile listings improvement
-- [ ] Replace the phone listings table with cards while preserving desktop rows and actions.
-- [ ] Verify live listings, search and Edit on phone, tablet and desktop.
+- [x] Replace the phone listings table with cards while preserving desktop rows and actions.
+- [x] Verify live listings, search and Edit on phone, tablet and desktop.
 - [ ] Next agreed task: verify real photo/document uploads and their public display.
 
 - [x] Apply `data-admin-theme="noir"` to admin, auth and portalled controls
