@@ -46,10 +46,24 @@ export function featuresForType(propertyType: string): string[] {
   ).map((f) => f.key);
 }
 
-/** Drop selected features that stop applying when the property type changes. */
+/**
+ * Broker-typed extras ("Wintergarten") share the features array, prefixed so
+ * they never collide with vocabulary keys and render as typed.
+ */
+export const CUSTOM_FEATURE_PREFIX = "custom:";
+
+export function isCustomFeature(value: string): boolean {
+  return value.startsWith(CUSTOM_FEATURE_PREFIX);
+}
+
+export function customFeatureLabel(value: string): string {
+  return value.slice(CUSTOM_FEATURE_PREFIX.length);
+}
+
+/** Drop vocabulary features that stop applying when the type changes; keep extras. */
 export function pruneFeatures(selected: string[], propertyType: string): string[] {
   const allowed = new Set(featuresForType(propertyType));
-  return selected.filter((key) => allowed.has(key));
+  return selected.filter((key) => isCustomFeature(key) || allowed.has(key));
 }
 
 /** Seven standard German-market condition values. Mirrors listings_condition_check. */

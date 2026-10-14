@@ -1,4 +1,8 @@
 import { useTranslation } from "react-i18next";
+import {
+  Bath, BedDouble, Building, CalendarDays, DoorOpen, Hammer, LandPlot, Layers,
+  Maximize2, Ruler, type LucideIcon,
+} from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import type { VisibleField } from "@/lib/listings/field-visibility";
@@ -27,6 +31,20 @@ const STEP: Partial<Record<NumericKey, string>> = {
   rooms: "0.5",
 };
 
+/** Same pictograms the public fact strip uses, so admin and site read alike. */
+const ICONS: Record<NumericKey, LucideIcon> = {
+  living_area: Maximize2,
+  usable_area: Ruler,
+  plot_area: LandPlot,
+  rooms: DoorOpen,
+  bedrooms: BedDouble,
+  bathrooms: Bath,
+  floor: Layers,
+  total_floors: Building,
+  year_built: CalendarDays,
+  year_renovated: Hammer,
+};
+
 /** Numeric fields, rendered in the order given by the caller. */
 export function NumberFields({
   form,
@@ -42,7 +60,7 @@ export function NumberFields({
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {keys.map((key) => (
-        <FieldRow key={key} anchor={key} label={t(areaLabelKey(values.property_type, key))}>
+        <FieldRow key={key} anchor={key} icon={ICONS[key]} label={t(areaLabelKey(values.property_type, key))}>
           <Input
             type="number"
             inputMode="decimal"
