@@ -120,7 +120,7 @@ export function ImageCard({
           <Button
             type="button"
             size="icon"
-            variant="secondary"
+            variant="outline"
             className="size-9"
             disabled={disabled || index === 0}
             onClick={() => onMove(index, -1)}
@@ -131,7 +131,7 @@ export function ImageCard({
           <Button
             type="button"
             size="icon"
-            variant="secondary"
+            variant="outline"
             className="size-9"
             disabled={disabled || index === total - 1}
             onClick={() => onMove(index, 1)}
@@ -143,7 +143,7 @@ export function ImageCard({
             <Button
               type="button"
               size="icon"
-              variant="secondary"
+              variant="outline"
               className="size-9"
               disabled={busy}
               onClick={() => onMakeCover(image)}
@@ -156,7 +156,7 @@ export function ImageCard({
           <Button
             type="button"
             size="icon"
-            variant="secondary"
+            variant="outline"
             className="ml-auto size-9 text-destructive"
             disabled={busy}
             onClick={() => onDelete(image)}

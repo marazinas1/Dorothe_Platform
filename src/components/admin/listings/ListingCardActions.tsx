@@ -78,7 +78,7 @@ export function ListingCardActions({
       <Button
         type="button"
         size="sm"
-        variant="secondary"
+        variant="outline"
         onClick={() => navigate({ to: "/admin/listings/$id", params: { id } })}
       >
         <Pencil className="h-3.5 w-3.5" />

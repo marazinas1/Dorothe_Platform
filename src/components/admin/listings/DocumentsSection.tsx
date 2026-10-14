@@ -80,7 +80,7 @@ function DocField({ type, doc, files, target, onError }: {
       <div className="flex flex-wrap items-center gap-2">
         {doc ? <Badge variant="outline" className="max-w-[16rem] truncate">{doc.filename}</Badge> : null}
         <input ref={input} type="file" accept="application/pdf" hidden onChange={(e) => void pick(e.target.files?.[0])} />
-        <Button type="button" variant="secondary" size="sm" disabled={busy} onClick={() => input.current?.click()}>
+        <Button type="button" variant="outline" size="sm" disabled={busy} onClick={() => input.current?.click()}>
           <Upload aria-hidden strokeWidth={1.75} className="size-4" />
           {busy ? t("admin.listings.docs.uploading") : t(doc ? "admin.listings.docs.replace" : "admin.listings.docs.upload")}
         </Button>
