@@ -1145,10 +1145,10 @@
         "summary_one": "{{count}} Foto. Zum Sortieren ziehen. Das erste Foto ist das Titelbild.",
         "summary_other": "{{count}} Fotos. Zum Sortieren ziehen. Das erste Foto ist das Titelbild.",
         "addMoreMeta": "JPG, PNG oder WebP, automatisch optimiert",
-        "missingAlt_one": "1 Foto braucht vor dem Veröffentlichen eine Beschreibung. Beschreibungen helfen sehbehinderten Besuchern und Suchmaschinen.",
-        "missingAlt_other": "{{count}} Fotos brauchen vor dem Veröffentlichen eine Beschreibung. Beschreibungen helfen sehbehinderten Besuchern und Suchmaschinen.",
+        "missingAlt_one": "1 Foto hat keine Beschreibung. Empfohlen, aber nicht Pflicht: ohne Beschreibung wird der Objekttitel verwendet.",
+        "missingAlt_other": "{{count}} Fotos haben keine Beschreibung. Empfohlen, aber nicht Pflicht: ohne Beschreibung wird der Objekttitel verwendet.",
         "summary": "{{count}} Fotos. Zum Sortieren ziehen. Das erste Foto ist das Titelbild.",
-        "missingAlt": "{{count}} Fotos brauchen vor dem Veröffentlichen eine Beschreibung. Beschreibungen helfen sehbehinderten Besuchern und Suchmaschinen."
+        "missingAlt": "{{count}} Fotos haben keine Beschreibung. Empfohlen, aber nicht Pflicht: ohne Beschreibung wird der Objekttitel verwendet."
       },
       "preview": "Vorschau",
       "publish": "Veröffentlichen",
@@ -1369,7 +1369,7 @@
       "sectionNav": "Formularbereiche",
       "docs": {
         "floorplan": "Grundriss",
-        "floorplanHelp": "PDF, offen auf der Objektseite sichtbar.",
+        "floorplanHelp": "PDF oder Bild (JPG, PNG, WebP), offen auf der Objektseite.",
         "expose": "Vollständiges Exposé",
         "exposeHelp": "PDF mit allen Angaben zur Immobilie.",
         "afterEnquiry": "Erst nach einer Anfrage senden",
@@ -1383,7 +1383,12 @@
         "tourHelp": "Matterport o. Ä. Leer lassen, um den Tour-Button auszublenden.",
         "tourInvalid": "Geben Sie einen vollständigen Link ein, der mit https:// beginnt.",
         "not_pdf": "Wählen Sie eine PDF-Datei.",
-        "too_large": "Die Datei ist größer als 20 MB. Wählen Sie ein kleineres PDF."
+        "too_large": "Die Datei ist größer als 20 MB. Wählen Sie ein kleineres PDF.",
+        "uploadPlan": "Grundriss hochladen",
+        "not_plan": "Wählen Sie eine PDF-, JPG-, PNG- oder WebP-Datei.",
+        "serviceTitle": "Noch kein Grundriss oder keine Visualisierung?",
+        "serviceBody": "Professionellen 2D/3D-Grundriss oder fotorealistische Visualisierung bei StageHomy bestellen.",
+        "serviceCta": "Bei StageHomy anfragen"
       },
       "customFeaturePlaceholder": "z. B. Weinkeller",
       "addCustomFeature": "Hinzufügen",

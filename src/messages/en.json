@@ -1145,10 +1145,10 @@
         "summary_one": "{{count}} photo. Drag to reorder. The first photo is the cover.",
         "summary_other": "{{count}} photos. Drag to reorder. The first photo is the cover.",
         "addMoreMeta": "JPG, PNG or WebP, optimised automatically",
-        "missingAlt_one": "1 photo needs a description before publishing. Descriptions help visually impaired visitors and search engines.",
-        "missingAlt_other": "{{count}} photos need a description before publishing. Descriptions help visually impaired visitors and search engines.",
+        "missingAlt_one": "1 photo has no description. Recommended, not required: without one the listing title is used.",
+        "missingAlt_other": "{{count}} photos have no description. Recommended, not required: without one the listing title is used.",
         "summary": "{{count}} photos. Drag to reorder. The first photo is the cover.",
-        "missingAlt": "{{count}} photos need a description before publishing. Descriptions help visually impaired visitors and search engines."
+        "missingAlt": "{{count}} photos have no description. Recommended, not required: without one the listing title is used."
       },
       "preview": "Preview",
       "publish": "Publish",
@@ -1369,7 +1369,7 @@
       "sectionNav": "Form sections",
       "docs": {
         "floorplan": "Floor plan",
-        "floorplanHelp": "PDF, shown openly on the listing page.",
+        "floorplanHelp": "PDF or image (JPG, PNG, WebP), shown openly on the listing page.",
         "expose": "Full exposé",
         "exposeHelp": "PDF with all details of the property.",
         "afterEnquiry": "Send only after an enquiry",
@@ -1383,7 +1383,12 @@
         "tourHelp": "Matterport or similar. Leave empty to hide the tour button.",
         "tourInvalid": "Enter a full link starting with https://",
         "not_pdf": "Choose a PDF file.",
-        "too_large": "The file is larger than 20 MB. Choose a smaller PDF."
+        "too_large": "The file is larger than 20 MB. Choose a smaller PDF.",
+        "uploadPlan": "Upload plan",
+        "not_plan": "Choose a PDF, JPG, PNG or WebP file.",
+        "serviceTitle": "No floor plan or visualisation yet?",
+        "serviceBody": "Order a professional 2D/3D floor plan or photoreal visualisation from StageHomy.",
+        "serviceCta": "Request from StageHomy"
       },
       "customFeaturePlaceholder": "e.g. Wine cellar",
       "addCustomFeature": "Add",

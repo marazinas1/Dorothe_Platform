@@ -15,6 +15,9 @@ export type AdminDocument = {
   requires_lead: boolean;
 };
 
+/** A floor plan may also be a rendered 2D/3D image, not only a PDF. */
+export const FLOORPLAN_TYPES = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
+const EXT: Record<string, string> = { "application/pdf": "pdf", "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
 const MAX_BYTES = 20 * 1024 * 1024;
 const key = (id: string | null) => ["admin", "listing-files", id] as const;
 
@@ -50,13 +53,15 @@ export function useListingFiles(listingId: string | null) {
   /** Uploads (or replaces) the single document of one type. */
   async function upload(id: string, type: AdminDocType, file: File) {
     if (file.size > MAX_BYTES) throw new Error("too_large");
-    if (file.type !== "application/pdf") throw new Error("not_pdf");
+    const allowed = type === "floorplan" ? FLOORPLAN_TYPES : ["application/pdf"];
+    if (!allowed.includes(file.type)) throw new Error(type === "floorplan" ? "not_plan" : "not_pdf");
+    const ext = EXT[file.type] ?? "pdf";
     const previous = query.data?.documents.filter((d) => d.type === type) ?? [];
     const docId = crypto.randomUUID();
-    const path = documentPath(id, docId, "pdf");
+    const path = documentPath(id, docId, ext);
     const up = await supabase.storage
       .from(DOCUMENTS_BUCKET)
-      .upload(path, file, { contentType: "application/pdf" });
+      .upload(path, file, { contentType: file.type });
     if (up.error) throw new Error(up.error.message);
     const ins = await supabase.from("listing_documents").insert({
       id: docId,
