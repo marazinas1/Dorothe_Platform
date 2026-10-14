@@ -87,10 +87,10 @@ export function BasicsSection({ form }: { form: ListingFormApi }) {
             help={t("admin.listings.help.reference_code")}
           >
             <Input
-              value={values.reference_code ?? t("admin.listings.referencePending")}
-              readOnly
-              aria-readonly
-              className="bg-muted text-muted-foreground"
+              value={values.reference_code ?? ""}
+              maxLength={40}
+              placeholder={t("admin.listings.referencePending")}
+              onChange={(e) => form.setField("reference_code", e.target.value || null)}
             />
           </FieldRow>
         ) : null}

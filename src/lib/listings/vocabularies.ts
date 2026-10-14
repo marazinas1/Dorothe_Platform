@@ -34,6 +34,7 @@ export const LISTING_FEATURES: readonly { key: string; types?: readonly Property
   { key: "sauna", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse"] },
   { key: "alarm_system", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
   { key: "smart_home", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
+  { key: "fiber_internet", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
   { key: "electric_shutters", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse"] },
 ] as const;
 

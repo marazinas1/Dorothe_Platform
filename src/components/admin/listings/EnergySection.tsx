@@ -1,4 +1,4 @@
-import { Zap } from "lucide-react";
+import { Leaf, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -16,6 +16,7 @@ import {
 } from "@/lib/validation/energy";
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow, FormSection } from "./FieldRow";
+import { FIELD_ICONS, SOURCE_ICONS } from "./energy-icons";
 
 type Field =
   | { key: string; kind: "number" }
@@ -135,11 +136,14 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
               key={field.key}
               anchor={`energy_${field.key}`}
               label={t(`admin.listings.energyFields.${field.key}`)}
+              icon={FIELD_ICONS[field.key]}
               className={field.kind === "sources" ? "sm:col-span-2" : undefined}
             >
               {field.kind === "sources" ? (
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                  {ENERGY_SOURCES.map((key) => (
+                  {ENERGY_SOURCES.map((key) => {
+                    const SourceIcon = SOURCE_ICONS[key] ?? Leaf;
+                    return (
                     <label
                       key={key}
                       htmlFor={`energy-source-${key}`}
@@ -150,9 +154,11 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
                         checked={sources.includes(key)}
                         onCheckedChange={(checked) => toggleSource(key, checked === true)}
                       />
+                      <SourceIcon aria-hidden="true" strokeWidth={1.75} className="size-4 shrink-0 text-muted-foreground" />
                       {t(`listings.energySource.${key}`)}
                     </label>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : field.kind === "select" ? (
                 <Select

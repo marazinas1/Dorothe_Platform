@@ -22,6 +22,9 @@ export function parsePublishError(message: string): PublishErrorInfo {
   if (/permission denied|not permitted|insufficient/i.test(message)) {
     return { kind: "permission" };
   }
+  if (/listings_reference_code_unique/i.test(message)) {
+    return { kind: "slug", key: "reference_taken" };
+  }
   const slug = /slug_(taken|reserved|invalid)/i.exec(message);
   if (slug) return { kind: "slug", key: `slug_${slug[1].toLowerCase()}` };
   if (/invalid status|status flow|transition/i.test(message)) {

@@ -426,7 +426,8 @@
       "sauna": "Sauna",
       "alarm_system": "Alarm system",
       "smart_home": "Smart home",
-      "electric_shutters": "Electric shutters"
+      "electric_shutters": "Electric shutters",
+      "fiber_internet": "Fibre internet"
     },
     "rentalStatus": {
       "let": "Let",
@@ -950,7 +951,6 @@
       "saveBeforeStatus": "Save your changes first.",
       "sections": {
         "basics": "Basics",
-        "figures": "Price & size",
         "location": "Location",
         "energy": "Energy certificate",
         "content": "Content sections",
@@ -960,7 +960,9 @@
         "equipment": "Equipment & features",
         "more": "More details",
         "translated": "Texts",
-        "documents": "Documents and tours"
+        "documents": "Documents and tours",
+        "price": "Price & conditions",
+        "size": "Space & rooms"
       },
       "fields": {
         "title": "Title",
@@ -1009,7 +1011,7 @@
         "total_rent": "Total rent per month",
         "deposit": "Deposit",
         "heating_costs_included": "Heating costs included in the additional costs",
-        "commission_free": "No commission for the buyer",
+        "commission_free": "Commission-free for the buyer",
         "commission_value_percent": "Commission (%)",
         "commission_free_rent": "No commission for the tenant",
         "slug": "Web address (slug)",
@@ -1041,14 +1043,14 @@
         "commission": "Stating the commission is legally required in Germany.",
         "rental": "Whether someone lives there right now. Independent of whether you sell or let the property.",
         "availability_date": "Leave empty if the date is not fixed yet.",
-        "reference_code": "Optional. Your own internal number, shown on the public page.",
+        "reference_code": "Your own catalogue number, so buyers can quote it on the phone (e.g. \"2026-004\"). Leave empty and the next number is assigned automatically when you save.",
         "more": "Optional — not required to publish.",
         "translated": "Only these fields need a language. If one language is empty, the other one is shown.",
         "legacyPropertyType": "This property type is no longer offered. Please pick a current one.",
         "utilities_cost": "Nebenkosten — running costs the tenant pays on top of the rent.",
         "total_rent": "Warmmiete — calculated from rent plus additional costs.",
         "deposit": "Usually up to three months of rent, excluding costs.",
-        "commission_free": "Turn this on for a commission-free listing. Otherwise state the commission.",
+        "commission_free": "Turn on if the buyer pays no broker commission (common when the seller pays it). Otherwise enter the commission below — in Germany it must be stated on every listing.",
         "title": "What a visitor sees first, e.g. “Bright three-room flat with balcony”.",
         "titleOptional": "Optional. If empty, the {{locale}} title is shown.",
         "slugFollowsTitle": "Follows the title until the listing goes public for the first time.",
@@ -1057,7 +1059,9 @@
         "reserve_fund": "The unit's share of the owners' maintenance reserve (Erhaltungsrücklage). Shown on the property page.",
         "price_reduced": "Shows a \"Price reduced\" label on the property card.",
         "previous_price": "For your own reference only. Never shown on the website.",
-        "custom_features": "Anything not in the list, e.g. Conservatory. Press Enter or comma to add."
+        "custom_features": "Anything not in the list, e.g. Conservatory. Press Enter or comma to add.",
+        "size_section": "Areas in m² and the number of rooms. Only the fields that fit this property type are shown.",
+        "address_country": "Defaults to your site's country. Type a letter to jump in the list."
       },
       "energy": {
         "intro": "Required fields for {{country}}. Publishing is blocked until they are complete.",
@@ -1224,7 +1228,8 @@
         "slug_reserved": "This address is reserved and would hide part of the site.",
         "slug_normalized": "Will be saved as the lowercase, URL-safe form shown below.",
         "slug_taken": "That web address is already used by another listing.",
-        "slug_invalid": "That web address cannot be used."
+        "slug_invalid": "That web address cannot be used.",
+        "reference_taken": "This reference number is already used by another listing."
       },
       "commissionType": {
         "percent": "Percent (%)",
@@ -1331,7 +1336,7 @@
         "limitReached": "The home page shows at most {{count}} properties. Remove one first."
       },
       "pageHint": "Your properties for sale and rent. Drag to change the order on the site.",
-      "referencePending": "Assigned when the listing is first saved",
+      "referencePending": "Automatic, e.g. 2026-004",
       "tabs": {
         "label": "Listing status",
         "all": "All",

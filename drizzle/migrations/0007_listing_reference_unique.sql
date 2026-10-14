@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS listings_reference_code_unique ON public.listings (lower(btrim(reference_code))) WHERE reference_code IS NOT NULL AND btrim(reference_code) <> '';
