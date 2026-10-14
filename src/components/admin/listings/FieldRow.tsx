@@ -33,7 +33,8 @@ export function FieldRow({
       id={anchor ? fieldAnchorId(anchor) : undefined}
       className={`space-y-1.5 scroll-mt-28 ${className}`}
     >
-      <Label className="admin-label flex items-center gap-1.5 font-medium text-muted-foreground">
+      {/* Fixed label height: rows with and without an icon line up side by side. */}
+      <Label className="admin-label flex min-h-5 items-center gap-1.5 font-medium text-muted-foreground">
         {Icon ? <Icon aria-hidden="true" strokeWidth={1.75} className="size-4 shrink-0" /> : null}
         {label}
       </Label>
