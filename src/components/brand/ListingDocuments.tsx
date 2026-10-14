@@ -37,13 +37,17 @@ export function ListingDocuments({ documents }: Props) {
         {t("listings.detail.sections.documents")}
       </h2>
       <ul className="mt-8 max-w-xl">
-        {documents.map((doc) => (
+        {documents.map((doc) => {
+          // Several plans of one type (one per floor) are numbered, not repeated.
+          const same = documents.filter((d) => d.type === doc.type);
+          const n = same.length > 1 ? ` ${same.indexOf(doc) + 1}` : "";
+          return (
           <li
             key={doc.id}
             className="flex items-baseline justify-between gap-6 border-b border-border py-4"
           >
             <span className="text-sm">
-              {doc.type ? t(`listings.documentType.${doc.type}`) : doc.filename}
+              {doc.type ? `${t(`listings.documentType.${doc.type}`)}${n}` : doc.filename}
             </span>
             {doc.storage_path ? (
               <Button
