@@ -720,14 +720,16 @@
   }
 }
 
-/* Admin button family (broker-admin.html .btn.secondary): one look for secondary and outline. */
-:where([data-admin-theme="noir"]) [data-admin-btn="secondary"] {
+
+/* Admin outline button = broker-admin.html .btn.secondary: card fill, hairline border, darker border on hover. */
+:where([data-admin-theme="noir"]) button.border-input.bg-background,
+:where([data-admin-theme="noir"]) a.border-input.bg-background {
   background: var(--card);
-  color: var(--foreground);
-  border: 1px solid var(--border);
   box-shadow: none;
 }
-:where([data-admin-theme="noir"]) [data-admin-btn="secondary"]:hover {
+:where([data-admin-theme="noir"]) button.border-input.bg-background:hover,
+:where([data-admin-theme="noir"]) a.border-input.bg-background:hover {
   background: var(--card);
+  color: var(--foreground);
   border-color: var(--foreground);
 }
