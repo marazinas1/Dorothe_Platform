@@ -8,7 +8,8 @@ import { ChecklistRail } from "./ChecklistRail";
 import { EnergySection } from "./EnergySection";
 import { EquipmentSection } from "./EquipmentSection";
 import { FiguresSection } from "./FiguresSection";
-import { SectionStep } from "./FieldRow";
+import { useTranslation } from "react-i18next";
+import { SectionNav, sectionAnchorId } from "./SectionNav";
 import { ImageManager } from "./ImageManager";
 import { LocationSection } from "./LocationSection";
 import { MoreDetailsSection } from "./MoreDetailsSection";
@@ -31,6 +32,7 @@ type Props = {
 };
 
 export function ListingEditorSections(props: Props) {
+  const { t } = useTranslation();
   const shape = {
     property_type: props.form.values.property_type,
     deal_type: props.form.values.deal_type,
@@ -67,11 +69,29 @@ export function ListingEditorSections(props: Props) {
     />,
   ].filter((node): node is ReactElement => node !== null);
 
+  const labelKey: Record<string, string> = {
+    basics: "basics",
+    figures: "figures",
+    location: "location",
+    equipment: "equipment",
+    texts: "translated",
+    energy: "energy",
+    more: "more",
+    images: "images",
+  };
+  const nav = sections.map((node) => ({
+    key: String(node.key),
+    label: t(`admin.listings.sections.${labelKey[String(node.key)]}`),
+  }));
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] xl:grid-cols-[11rem_minmax(0,1fr)_18rem]">
+      <SectionNav sections={nav} />
       <div className="space-y-6">
-        {sections.map((node, index) => (
-          <SectionStep key={node.key} value={index + 1}>{node}</SectionStep>
+        {sections.map((node) => (
+          <div key={node.key} id={sectionAnchorId(String(node.key))} className="scroll-mt-24">
+            {node}
+          </div>
         ))}
       </div>
       <ChecklistRail checklist={props.checklist} />

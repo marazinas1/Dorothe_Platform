@@ -154,7 +154,7 @@ export function AdminSidebar({ email, roleLabel }: { email: string; roleLabel: s
   return (
     <Sidebar collapsible="offcanvas" className="[--sidebar-width:15rem]">
       <AdminSidebarHeader />
-      <SidebarContent>
+      <SidebarContent className="gap-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {GROUPS.map((group) => (
           <SidebarGroup key={group.label}>
             <SidebarGroupLabel>{t(`admin.nav.groups.${group.label}`)}</SidebarGroupLabel>

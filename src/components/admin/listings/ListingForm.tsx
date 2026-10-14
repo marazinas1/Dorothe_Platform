@@ -51,7 +51,9 @@ export function ListingForm({
   const form: ListingFormApi = useListingForm(initial);
   // Content language: starts on the site's primary language, never on the
   // language the panel happens to be displayed in.
-  const primaryLocale = locales[0] ?? settings.default_locale ?? FALLBACK_LOCALE;
+  const primaryLocale = settings.default_locale || locales[0] || FALLBACK_LOCALE;
+  // Primary language first everywhere (DE primary for a German broker).
+  const orderedLocales = [primaryLocale, ...locales.filter((l) => l !== primaryLocale)];
   const [lang, setLang] = useState(primaryLocale);
   const [saving, setSaving] = useState(false);
 
