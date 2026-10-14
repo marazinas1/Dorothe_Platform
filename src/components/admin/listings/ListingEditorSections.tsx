@@ -7,7 +7,7 @@ import { BasicsSection } from "./BasicsSection";
 import { ChecklistRail } from "./ChecklistRail";
 import { EnergySection } from "./EnergySection";
 import { EquipmentSection } from "./EquipmentSection";
-import { FiguresSection } from "./FiguresSection";
+import { PriceSection, SizeSection, hasSizeFields } from "./FiguresSection";
 import { useTranslation } from "react-i18next";
 import { SectionNav, sectionAnchorId } from "./SectionNav";
 import { DocumentsSection } from "./DocumentsSection";
@@ -40,7 +40,8 @@ export function ListingEditorSections(props: Props) {
   };
   const sections = [
     <BasicsSection key="basics" form={props.form} />,
-    <FiguresSection key="figures" form={props.form} />,
+    <PriceSection key="price" form={props.form} />,
+    hasSizeFields(shape) ? <SizeSection key="size" form={props.form} /> : null,
     <LocationSection key="location" form={props.form} />,
     <EquipmentSection key="equipment" form={props.form} />,
     <TranslatableBlock
@@ -77,7 +78,8 @@ export function ListingEditorSections(props: Props) {
 
   const labelKey: Record<string, string> = {
     basics: "basics",
-    figures: "figures",
+    price: "price",
+    size: "size",
     location: "location",
     equipment: "equipment",
     texts: "translated",
