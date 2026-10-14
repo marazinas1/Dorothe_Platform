@@ -102,6 +102,22 @@ export function ImageCard({
           </span>
         ) : null}
 
+        {/* Placement: the first five photos fill the top grid on the public
+            page, the rest appear only in the full gallery overlay. */}
+        {!isTarget && index > 0 ? (
+          <span
+            className={`absolute right-1 top-1 rounded-[var(--radius)] px-1.5 py-0.5 text-[10px] font-medium shadow-sm ${
+              index < 5
+                ? "bg-background/85 text-foreground"
+                : "bg-background/60 text-muted-foreground"
+            }`}
+          >
+            {index < 5
+              ? t("admin.listings.images.heroGrid")
+              : t("admin.listings.images.galleryOnly")}
+          </span>
+        ) : null}
+
         {/* Where the photo will land, shown before releasing. */}
         {isTarget ? (
           <span className="absolute inset-x-1 top-1 flex justify-end">
