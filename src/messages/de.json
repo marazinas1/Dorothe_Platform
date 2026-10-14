@@ -1336,7 +1336,8 @@
       "energyExempt": "Ausgenommen",
       "orderSaved": "Reihenfolge gespeichert.",
       "orderSaving": "Reihenfolge wird gespeichert…",
-      "orderUnavailable": "Filter zurücksetzen, um die Website-Reihenfolge zu ändern."
+      "orderUnavailable": "Filter zurücksetzen, um die Website-Reihenfolge zu ändern.",
+      "sectionNav": "Formularbereiche"
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",

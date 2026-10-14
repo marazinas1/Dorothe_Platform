@@ -1336,7 +1336,8 @@
       "energyExempt": "Exempt",
       "orderSaved": "Listing order saved.",
       "orderSaving": "Saving listing order…",
-      "orderUnavailable": "Clear filters to change the site order."
+      "orderUnavailable": "Clear filters to change the site order.",
+      "sectionNav": "Form sections"
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",
