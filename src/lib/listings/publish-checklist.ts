@@ -67,12 +67,9 @@ export function buildPublishChecklist({
         values.property_type,
       ).missing;
 
-  // Commission: entering a figure OR marking the listing commission-free are both
-  // valid answers. An untouched field is not.
-  const commissionAnswered =
-    values.commission_free === true ||
-    (values.commission_value != null && Number(values.commission_value) > 0);
-
+  // Commission is never a publish blocker: disclosure rules differ by market
+  // (mandatory buyer disclosure in DE, seller-paid and unstated elsewhere).
+  // An empty commission simply renders no commission row on the public page.
   const all: ChecklistItem[] = [
     { key: "title", done: hasAnyTranslation(values.title), anchor: "title" },
     { key: "photo", done: imageCount > 0, anchor: "photos" },
@@ -83,12 +80,6 @@ export function buildPublishChecklist({
     },
     { key: "city", done: !!values.address_city?.trim(), anchor: "address_city" },
     {
-      key: "commission",
-      done: commissionAnswered,
-      exempt: !applies(shape, "commission"),
-      anchor: "commission",
-    },
-    {
       key: "energy",
       done: energyMissing.length === 0,
       exempt: energyExempt,
@@ -97,8 +88,8 @@ export function buildPublishChecklist({
     },
   ];
 
-  // A commission item that cannot apply is dropped rather than shown as a dash.
-  const items = all.filter((item) => !(item.exempt && item.key === "commission"));
+  const items = all;
+  void photosMissingAlt;
 
   const outstanding = items.filter((i) => !i.done).length;
   return { items, outstanding, ready: outstanding === 0, energyExempt };
