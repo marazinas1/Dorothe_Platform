@@ -39,7 +39,7 @@ export function AdminShell({
 
         <AdminSidebar email={profile.email ?? displayName} roleLabel={roleLabel} />
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-4 sm:px-6">
+          <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-4 sm:px-6">
             <div className="flex min-w-0 items-center gap-3">
               <SidebarTrigger
                 aria-label={t("admin.topbar.toggleSidebar")}
