@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { FileText, LayoutPanelTop, Rotate3d, Upload, Trash2 } from "lucide-react";
+import { FileText, LayoutPanelTop, Rotate3d, Upload } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
 import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
 import { FLOORPLAN_TYPES, useListingFiles, type AdminDocType, type AdminDocument } from "@/lib/listings/use-listing-files";
+import { DocumentItem } from "./DocumentItem";
 import { FieldRow, FormSection } from "./FieldRow";
 import { PlanServiceHint } from "./PlanServiceHint";
 
@@ -88,15 +88,8 @@ function DocField({ type, docs, files, target, onError }: {
   return (
     <FieldRow icon={multi ? LayoutPanelTop : FileText} label={t(`admin.listings.docs.${type}`)} help={t(`admin.listings.docs.${type}Help`)}>
       {docs.length ? (
-        <ul className="mb-2 space-y-1">
-          {docs.map((d) => (
-            <li key={d.id} className="flex items-center gap-2">
-              <Badge variant="outline" className="max-w-[16rem] truncate">{d.filename}</Badge>
-              <Button type="button" variant="ghost" size="sm" aria-label={`${t("admin.listings.docs.remove")}: ${d.filename}`} onClick={() => setConfirm(d)}>
-                <Trash2 aria-hidden strokeWidth={1.75} className="size-4" />
-              </Button>
-            </li>
-          ))}
+        <ul className="mb-2 space-y-2">
+          {docs.map((d) => <DocumentItem key={d.id} doc={d} onRemove={() => setConfirm(d)} />)}
         </ul>
       ) : null}
       <input ref={input} type="file" multiple={multi} accept={multi ? FLOORPLAN_TYPES.join(",") : "application/pdf"} hidden onChange={(e) => void pick(e.target.files)} />

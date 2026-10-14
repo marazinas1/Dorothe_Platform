@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, ArrowRight, GripVertical, Star, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Download, GripVertical, Star, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { downloadFile } from "@/lib/download";
 import { variantUrl } from "./listing-image-url";
 import { PhotoAltInput } from "./PhotoAltInput";
 
@@ -167,6 +168,19 @@ export function ImageCard({
               title={t("admin.listings.images.makeCover")}
             >
               <Star className="size-4" />
+            </Button>
+          ) : null}
+          {variantUrl(image.variants, "detail") ? (
+            <Button
+              type="button"
+              size="icon"
+              variant="outline"
+              className="ml-auto size-9"
+              onClick={() => void downloadFile(variantUrl(image.variants, "detail")!, `photo-${index + 1}.webp`).catch(() => undefined)}
+              aria-label={t("admin.settings.brand.download")}
+              title={t("admin.settings.brand.download")}
+            >
+              <Download className="size-4" />
             </Button>
           ) : null}
           <Button
