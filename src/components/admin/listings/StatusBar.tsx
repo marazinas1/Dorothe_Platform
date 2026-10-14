@@ -7,8 +7,6 @@ import { StatusChip } from "@/components/admin/ui/StatusChip";
 import type { ListingStatus } from "@/lib/listings/admin-schema";
 import { statusOptionsFor } from "@/lib/listings/status-options";
 import type { Checklist } from "@/lib/listings/publish-checklist";
-import { blockerSummary } from "@/lib/listings/blocker-summary";
-import { scrollToField } from "@/lib/listings/scroll-to-field";
 import { statusLabelKey, statusActionKey } from "@/lib/listings/status-label";
 import { PreviewButton } from "./PreviewButton";
 import { HomePickToggle } from "./HomePickToggle";
