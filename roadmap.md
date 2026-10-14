@@ -3,6 +3,7 @@
 ## Current mobile listings improvement
 - [x] Replace the phone listings table with cards while preserving desktop rows and actions.
 - [x] Verify live listings, search and Edit on phone, tablet and desktop.
+- [x] Listing form package: editable reference, live price grouping, aligned commission, Price/Space split, world country list, fibre feature + icons, energy icons.
 - [ ] Next agreed task: verify real photo/document uploads and their public display.
 
 - [x] Apply `data-admin-theme="noir"` to admin, auth and portalled controls
