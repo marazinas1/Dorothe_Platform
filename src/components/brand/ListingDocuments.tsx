@@ -64,7 +64,8 @@ export function ListingDocuments({ documents }: Props) {
               </span>
             )}
           </li>
-        ))}
+          );
+        })}
       </ul>
     </div>
   );
