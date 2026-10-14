@@ -17,6 +17,7 @@ export interface SiteSettings {
   logo_url: string | null;
   logo_dark_url: string | null;
   favicon_url: string | null;
+  business_card_url: string | null;
   og_default_image: string | null;
   /** Shared logo scale used by public, auth, and admin chrome. */
   logo_size: number;

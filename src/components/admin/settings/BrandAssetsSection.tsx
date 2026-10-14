@@ -15,6 +15,7 @@ type Assets = {
   logo_url: string | null;
   logo_dark_url: string | null;
   favicon_url: string | null;
+  business_card_url: string | null;
   og_default_image: string | null;
   logo_size: number;
 };
@@ -33,6 +34,7 @@ export function BrandAssetsSection() {
     logo_url: data.logo_url,
     logo_dark_url: data.logo_dark_url,
     favicon_url: data.favicon_url,
+    business_card_url: data.business_card_url ?? null,
     og_default_image: data.og_default_image,
     logo_size: data.logo_size ?? 100,
   };
@@ -61,7 +63,7 @@ export function BrandAssetsSection() {
 
   return (
     <div className={`space-y-6 ${saving ? "opacity-70" : ""}`} aria-busy={saving}>
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <BrandAssetField
           kind="logo"
           label={label("logo")}
@@ -87,6 +89,16 @@ export function BrandAssetsSection() {
           downloadName={`${slug}-favicon.webp`}
           onChange={(url) => void set("favicon_url", url)}
           square
+        />
+        <BrandAssetField
+          kind="logo"
+          label={label("businessCard")}
+          help={label("businessCardHelp")}
+          value={current.business_card_url}
+          downloadName={`${slug}-business-card.pdf`}
+          onChange={(url) => void set("business_card_url", url)}
+          document
+          pathForVariant={() => `brand/${data.id}/business-card.pdf`}
         />
       </section>
 

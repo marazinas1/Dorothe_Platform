@@ -1,5 +1,9 @@
 # Roadmap — active Deerva admin alignment
 
+## Approved brand asset installation
+- [ ] Install approved logo, inverse logo, favicon and business card through admin.
+- [ ] Add business card upload/preview/download and verify all four downloads.
+
 ## Current mobile listings improvement
 - [x] Replace the phone listings table with cards while preserving desktop rows and actions.
 - [x] Verify live listings, search and Edit on phone, tablet and desktop.

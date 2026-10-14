@@ -25,6 +25,7 @@ Binding rules. If a request conflicts, say so and propose the compliant version.
 - RLS uses the SQL helpers (`current_user_role()`, `has_role(text[])`, `current_user_has_permission()`, `current_user_is_active()`); no inline role literals.
 - Storage paths start with the owning entity id (`listings/<id>/...`).
 - Business logic lives in server functions under `/lib`, never in components.
+- Business card PDFs are optional site settings assets managed alongside logos; keep their URLs in settings so every clone owns its files.
 
 ## Core / brand boundary
 - CORE: `supabase/migrations`, `/lib`, `/components/admin` (see its AGENTS.md), `/components/ui` (never modified), engines (SEO, i18n, energy validation, images, tokens).
