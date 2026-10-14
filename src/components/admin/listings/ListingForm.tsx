@@ -98,15 +98,8 @@ export function ListingForm({
     }
   }
 
-  // First meaningful edit creates the row. `dirty` only flips on a real value
-  // change, so focusing a field or opening a select changes nothing.
-  useEffect(() => {
-    if (listingId || !form.dirty) return;
-    void ensureListingId().catch((error) => {
-      toast.error(error instanceof Error ? error.message : String(error));
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listingId, form.dirty]);
+  // A new listing is created only on an explicit Save (or a photo drop), never
+  // on a field change: changing a select must not reload the editor.
 
   /** Content-only save. Status is never touched here — publishing is explicit. */
   async function save({ silent = false }: { silent?: boolean } = {}): Promise<boolean> {
