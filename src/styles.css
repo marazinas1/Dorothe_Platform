@@ -400,7 +400,8 @@
   /* Never scroll vertically: an x-scroller would otherwise also scroll on y. */
   overflow-y: hidden;
   overscroll-behavior-x: contain;
-  border-bottom: 1px solid var(--border);
+  /* Bottom line as inset shadow so the active underline can cover it in-box. */
+  box-shadow: inset 0 -1px 0 var(--border);
   scrollbar-width: none;
 }
 
@@ -436,7 +437,7 @@
   position: absolute;
   inset-inline: 0;
   /* Drawn over the row's bottom line, inside the box, so nothing overflows. */
-  bottom: -1px;
+  bottom: 0;
   height: 2px;
   background: var(--primary);
 }
