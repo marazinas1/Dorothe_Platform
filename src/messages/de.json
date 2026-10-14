@@ -1280,7 +1280,13 @@
         "editManually": "Koordinaten manuell eingeben",
         "useAutomatic": "Wieder automatisch suchen",
         "dragHint": "Ziehen Sie den Pin, um die Position anzupassen.",
-        "noAddress": "Ort oder Postleitzahl eingeben, um den Pin zu setzen."
+        "noAddress": "Ort oder Postleitzahl eingeben, um den Pin zu setzen.",
+        "pinAt": "Pin gesetzt bei {{lat}}, {{lng}}",
+        "showMap": "Karte anzeigen",
+        "hideMap": "Karte ausblenden",
+        "gestureWindows": "Strg + Scrollen zum Zoomen der Karte",
+        "gestureMac": "⌘ + Scrollen zum Zoomen der Karte",
+        "gestureMobile": "Karte mit zwei Fingern bewegen"
       },
       "autodraft": {
         "creating": "Neues Objekt wird vorbereitet…",

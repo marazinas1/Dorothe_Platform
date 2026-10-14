@@ -13,7 +13,9 @@ export default function PinMapCanvas({
   lat,
   lng,
   onMove,
+  gestureHelp,
 }: {
+  gestureHelp: { windows: string; mac: string; mobile: string };
   lat: number;
   lng: number;
   onMove: (lat: number, lng: number) => void;
@@ -32,6 +34,13 @@ export default function PinMapCanvas({
       center: [lng, lat],
       zoom: 15,
       attributionControl: { compact: true },
+      // Page scroll passes over the map; zoom needs Ctrl/⌘ + scroll or two fingers.
+      cooperativeGestures: true,
+      locale: {
+        "CooperativeGesturesHandler.WindowsHelpText": gestureHelp.windows,
+        "CooperativeGesturesHandler.MacHelpText": gestureHelp.mac,
+        "CooperativeGesturesHandler.MobileHelpText": gestureHelp.mobile,
+      },
     });
     instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
 
@@ -67,5 +76,5 @@ export default function PinMapCanvas({
     map.current.easeTo({ center: [lng, lat], duration: 400 });
   }, [lat, lng]);
 
-  return <div ref={holder} className="aspect-[16/9] w-full" />;
+  return <div ref={holder} className="h-72 w-full sm:h-80" />;
 }

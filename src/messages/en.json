@@ -1280,7 +1280,13 @@
         "editManually": "Enter coordinates manually",
         "useAutomatic": "Use automatic lookup again",
         "dragHint": "Drag the pin to adjust the exact position.",
-        "noAddress": "Enter a town or postcode to place the pin."
+        "noAddress": "Enter a town or postcode to place the pin.",
+        "pinAt": "Pin set at {{lat}}, {{lng}}",
+        "showMap": "Show map",
+        "hideMap": "Hide map",
+        "gestureWindows": "Use Ctrl + scroll to zoom the map",
+        "gestureMac": "Use ⌘ + scroll to zoom the map",
+        "gestureMobile": "Use two fingers to move the map"
       },
       "autodraft": {
         "creating": "Preparing a new listing…",
