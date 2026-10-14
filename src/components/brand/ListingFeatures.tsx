@@ -30,7 +30,7 @@ export function ListingFeatures({ features }: { features: string[] | null | unde
       {custom.length > 0 ? (
         <div>
           <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-            {t("admin.listings.form.fields.custom_features")}
+            {t("admin.listings.fields.custom_features")}
           </div>
           <ul className="mt-3 flex flex-wrap gap-2">
             {custom.map((label) => (
