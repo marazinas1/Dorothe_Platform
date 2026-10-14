@@ -17,6 +17,7 @@ import {
 import { applies } from "@/lib/listings/field-visibility";
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow, FormSection } from "./FieldRow";
+import { FEATURE_ICONS, FallbackFeatureIcon } from "./feature-icons";
 
 /**
  * Condition, heating and the equipment checklist. The feature list is filtered
@@ -104,7 +105,9 @@ export function EquipmentSection({ form }: { form: ListingFormApi }) {
               {t("admin.listings.fields.features")}
             </legend>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {available.map((key) => (
+              {available.map((key) => {
+                const Icon = FEATURE_ICONS[key] ?? FallbackFeatureIcon;
+                return (
                 <label
                   key={key}
                   htmlFor={`feature-${key}`}
@@ -115,9 +118,11 @@ export function EquipmentSection({ form }: { form: ListingFormApi }) {
                     checked={selected.includes(key)}
                     onCheckedChange={(checked) => toggle(key, checked === true)}
                   />
+                  <Icon aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.75} />
                   {t(`listings.features.${key}`)}
                 </label>
-              ))}
+                );
+              })}
             </div>
           </fieldset>
         ) : null}
