@@ -397,6 +397,9 @@
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
+  /* Never scroll vertically: an x-scroller would otherwise also scroll on y. */
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
   border-bottom: 1px solid var(--border);
   scrollbar-width: none;
 }
@@ -432,6 +435,7 @@
   content: "";
   position: absolute;
   inset-inline: 0;
+  /* Drawn over the row's bottom line, inside the box, so nothing overflows. */
   bottom: -1px;
   height: 2px;
   background: var(--primary);
