@@ -1,4 +1,3 @@
-import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Check, ChevronDown, Minus } from "lucide-react";
 
@@ -14,10 +13,8 @@ import { Button } from "@/components/ui/button";
  */
 export function ChecklistRail({
   checklist,
-  children,
 }: {
   checklist: Checklist;
-  children?: React.ReactNode;
 }) {
   const { t } = useTranslation();
   const { items, outstanding, ready, energyExempt } = checklist;
