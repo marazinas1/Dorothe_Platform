@@ -152,7 +152,11 @@ export function ListingForm({
         void save();
       }}
     >
-      <UnsavedChangesGuard dirty={form.dirty && autosave.state.status !== "saving"} />
+      <UnsavedChangesGuard
+        dirty={form.dirty && autosave.state.status !== "saving"}
+        // The draft-creation hand-over to /listings/<id> is the form's own move.
+        allowNavigation={() => creating.current !== null}
+      />
       <h1 className="font-heading text-2xl">
         {form.values.title?.[lang]?.trim() ||
           Object.values(form.values.title ?? {}).find((v) => v.trim())?.trim() ||
