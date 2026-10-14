@@ -719,3 +719,17 @@
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Admin outline button = broker-admin.html .btn.secondary: card fill, hairline border, darker border on hover. */
+:where([data-admin-theme="noir"]) button.border-input.bg-background,
+:where([data-admin-theme="noir"]) a.border-input.bg-background {
+  background: var(--card);
+  box-shadow: none;
+}
+:where([data-admin-theme="noir"]) button.border-input.bg-background:hover,
+:where([data-admin-theme="noir"]) a.border-input.bg-background:hover {
+  background: var(--card);
+  color: var(--foreground);
+  border-color: var(--foreground);
+}

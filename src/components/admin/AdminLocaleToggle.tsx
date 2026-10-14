@@ -38,7 +38,7 @@ export function AdminLocaleToggle({ current }: { current: Locale }) {
       role="group"
       aria-label={t("admin.topbar.interfaceLanguage")}
       title={t("admin.topbar.interfaceLanguageHint")}
-      className="flex items-center gap-0.5 rounded-[var(--radius)] border border-border p-0.5"
+      className="flex items-center overflow-hidden rounded-[var(--radius)] border border-border"
     >
       {MESSAGE_LOCALES.map((loc) => (
         <Button
@@ -50,9 +50,9 @@ export function AdminLocaleToggle({ current }: { current: Locale }) {
           variant="ghost"
           size="sm"
           className={cn(
-            "admin-label h-7 px-2 font-medium transition-colors disabled:opacity-60",
+            "admin-label h-7 rounded-none px-2.5 font-bold transition-colors disabled:opacity-60",
             loc === current
-              ? "bg-secondary text-secondary-foreground"
+              ? "bg-foreground text-background hover:bg-foreground hover:text-background"
               : "text-muted-foreground hover:text-foreground",
           )}
         >

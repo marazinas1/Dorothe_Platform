@@ -418,7 +418,15 @@
       "attic": "Dachboden",
       "storage_room": "Abstellraum",
       "high_ceilings": "Hohe Decken",
-      "wooden_floors": "Holzdielen"
+      "wooden_floors": "Holzdielen",
+      "photovoltaic": "Photovoltaikanlage",
+      "ev_charging": "Wallbox",
+      "air_conditioning": "Klimaanlage",
+      "swimming_pool": "Pool",
+      "sauna": "Sauna",
+      "alarm_system": "Alarmanlage",
+      "smart_home": "Smart Home",
+      "electric_shutters": "Elektrische Rollläden"
     },
     "rentalStatus": {
       "let": "Vermietet",

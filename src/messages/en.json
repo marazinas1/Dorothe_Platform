@@ -418,7 +418,15 @@
       "attic": "Attic",
       "storage_room": "Storage room",
       "high_ceilings": "High ceilings",
-      "wooden_floors": "Wooden floors"
+      "wooden_floors": "Wooden floors",
+      "photovoltaic": "Solar panels",
+      "ev_charging": "EV charging point",
+      "air_conditioning": "Air conditioning",
+      "swimming_pool": "Swimming pool",
+      "sauna": "Sauna",
+      "alarm_system": "Alarm system",
+      "smart_home": "Smart home",
+      "electric_shutters": "Electric shutters"
     },
     "rentalStatus": {
       "let": "Let",
