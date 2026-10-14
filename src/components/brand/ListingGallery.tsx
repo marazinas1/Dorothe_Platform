@@ -13,7 +13,7 @@ type Props = {
   images: GalleryImage[];
   locale: Locale;
   title: string;
-  hasTour?: boolean;
+  tourUrl?: string | null;
 };
 
 /** Beyond this many images above the fold, the browser decides when to load. */
@@ -25,7 +25,7 @@ const EAGER = 3;
  * complete without JavaScript; the browser lazy-loads everything below the
  * first few. Clicking opens a keyboard-driven full-screen viewer.
  */
-export function ListingGallery({ images, locale, title, hasTour = false }: Props) {
+export function ListingGallery({ images, locale, title, tourUrl = null }: Props) {
   const { t } = useTranslation();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const { photos } = splitListingImages(images);
@@ -89,10 +89,10 @@ export function ListingGallery({ images, locale, title, hasTour = false }: Props
             <ListingIcon name="plan" /> {t("listings.detail.floorplan")}
           </Button>
         ) : null}
-        {hasTour ? (
-          <Button type="button" variant="secondary" size="sm">
+        {tourUrl ? (
+          <a href={tourUrl} target="_blank" rel="noopener noreferrer" className={buttonClass({ variant: "secondary", size: "sm" })}>
             <ListingIcon name="map" /> {t("listings.detail.tour")}
-          </Button>
+          </a>
         ) : null}
         <Button type="button" variant="ghost" size="sm" onClick={() => navigator.share?.({ title, url: window.location.href })}>
           <ListingIcon name="share" /> {t("listings.detail.share")}

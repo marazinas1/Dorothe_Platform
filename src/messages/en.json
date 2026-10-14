@@ -951,7 +951,8 @@
         "market": "Costs, commission & tenancy",
         "equipment": "Equipment & features",
         "more": "More details",
-        "translated": "Texts"
+        "translated": "Texts",
+        "documents": "Documents and tours"
       },
       "fields": {
         "title": "Title",
@@ -1337,7 +1338,25 @@
       "orderSaved": "Listing order saved.",
       "orderSaving": "Saving listing order…",
       "orderUnavailable": "Clear filters to change the site order.",
-      "sectionNav": "Form sections"
+      "sectionNav": "Form sections",
+      "docs": {
+        "floorplan": "Floor plan",
+        "floorplanHelp": "PDF, shown openly on the listing page.",
+        "expose": "Full exposé",
+        "exposeHelp": "PDF with all details of the property.",
+        "afterEnquiry": "Send only after an enquiry",
+        "upload": "Upload PDF",
+        "replace": "Replace",
+        "uploading": "Uploading…",
+        "remove": "Remove",
+        "removeTitle": "Remove {{name}}?",
+        "removeBody": "The file is deleted and disappears from the listing page.",
+        "tour": "360° tour link",
+        "tourHelp": "Matterport or similar. Leave empty to hide the tour button.",
+        "tourInvalid": "Enter a full link starting with https://",
+        "not_pdf": "Choose a PDF file.",
+        "too_large": "The file is larger than 20 MB. Choose a smaller PDF."
+      }
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",

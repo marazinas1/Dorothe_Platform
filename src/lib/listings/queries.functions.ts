@@ -428,3 +428,26 @@ export const signListingDocument = createServerFn({ method: "POST" })
     return signed?.signedUrl ?? null;
   });
 
+
+/** First public 360° tour link of a listing, or null. */
+export const getPublicTourUrl = createServerFn({ method: "GET" })
+  .inputValidator((raw: unknown) => z.object({ listing_id: z.string().uuid() }).parse(raw))
+  .handler(async ({ data }): Promise<string | null> => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows } = await supabaseAdmin
+      .from("listing_tours_public")
+      .select("url")
+      .eq("listing_id", data.listing_id)
+      .order("sort_order")
+      .limit(1);
+    const url = (rows?.[0] as { url?: string } | undefined)?.url ?? null;
+    return url && /^https:\/\//.test(url) ? url : null;
+  });
+
+export function listingTourQueryOptions(listingId: string) {
+  return queryOptions({
+    queryKey: ["listings", "tour", listingId],
+    queryFn: () => getPublicTourUrl({ data: { listing_id: listingId } }),
+    staleTime: 60_000,
+  });
+}
