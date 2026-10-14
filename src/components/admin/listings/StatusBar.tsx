@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "@tanstack/react-router";
-import { AlertTriangle, ExternalLink, Send, Undo2, ArrowRightLeft } from "lucide-react";
+import { AlertTriangle, ExternalLink, Undo2, ArrowRightLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/admin/ui/StatusChip";
