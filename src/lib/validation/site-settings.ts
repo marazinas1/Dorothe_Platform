@@ -72,6 +72,7 @@ export const BrandAssetsSchema = z.object({
   logo_url: nullableUrl,
   logo_dark_url: nullableUrl,
   favicon_url: nullableUrl,
+  business_card_url: nullableUrl,
   og_default_image: nullableUrl,
   logo_size: z.coerce.number().int().min(50).max(150).default(100),
 });

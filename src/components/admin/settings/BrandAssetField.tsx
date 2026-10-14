@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Download, ImageOff, Loader2, Trash2, Upload } from "lucide-react";
+import { Download, Eye, FileText, ImageOff, Loader2, Trash2, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ interface Props {
   dark?: boolean;
   /** Square frame for icon-shaped images such as the browser icon. */
   square?: boolean;
+  document?: boolean;
   /** Optional entity-owned storage path for non-brand photographs. */
   pathForVariant?: (variant: string) => string;
 }
@@ -46,6 +47,7 @@ export function BrandAssetField({
   onChange,
   dark,
   square,
+  document,
   pathForVariant,
 }: Props) {
   const { t } = useTranslation();
@@ -57,6 +59,18 @@ export function BrandAssetField({
     setBusy(true);
     setError(null);
     try {
+      if (document) {
+        if (file.type !== "application/pdf" || file.size > 10 * 1024 * 1024) {
+          throw new Error(t("admin.settings.brand.pdfError"));
+        }
+        const path = pathForVariant?.("document");
+        if (!path) throw new Error("Document storage path missing");
+        const { error: uploadError } = await supabase.storage.from(SITE_ASSETS_BUCKET)
+          .upload(path, file, { contentType: "application/pdf", upsert: true });
+        if (uploadError) throw new Error(uploadError.message);
+        onChange(`${siteAssetUrl(SUPABASE_URL, path)}?v=${Date.now()}`);
+        return;
+      }
       const processed = await processImageFile(file);
       // The largest variant available keeps logos crisp on retina screens.
       const variant = processed.variants.find((v) => v.key === "detail") ?? processed.variants[0];
@@ -93,7 +107,8 @@ export function BrandAssetField({
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept={document ? "application/pdf" : "image/*"}
+        aria-label={label}
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];
@@ -105,7 +120,9 @@ export function BrandAssetField({
       <div
         className={`admin-media-frame h-28 w-full p-4 ${dark ? "bg-primary" : "bg-muted"}`}
       >
-          {value ? (
+          {value && document ? (
+            <FileText className="h-10 w-10 text-muted-foreground" aria-hidden="true" />
+          ) : value ? (
             <img
               src={value}
               alt=""
@@ -122,8 +139,13 @@ export function BrandAssetField({
           ) : (
             <Upload className="h-3.5 w-3.5" />
           )}
-          {value ? t("admin.settings.brand.replace") : t("admin.settings.brand.upload")}
+          {value ? t("admin.settings.brand.replace") : document ? t("admin.settings.brand.uploadPdf") : t("admin.settings.brand.upload")}
         </Button>
+        {value && document ? (
+          <Button size="sm" variant="outline" asChild>
+            <a href={value} target="_blank" rel="noopener noreferrer"><Eye className="h-3.5 w-3.5" />{t("admin.settings.brand.preview")}</a>
+          </Button>
+        ) : null}
         {value ? (
           <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => void download()}>
             <Download className="h-3.5 w-3.5" />

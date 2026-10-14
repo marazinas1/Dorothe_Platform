@@ -1,0 +1,2 @@
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS business_card_url text;
+COMMENT ON COLUMN public.site_settings.business_card_url IS 'Optional business card PDF managed in Business & appearance; uses existing site settings grants and policies.';
