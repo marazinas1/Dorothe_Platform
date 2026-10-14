@@ -1,7 +1,7 @@
 import {
   Armchair, ArrowUpDown, Car, CookingPot, Fence, Flame, Home, Layers,
   Package, ParkingSquare, Sprout, Sun, Toilet, Accessibility, Warehouse,
-  Maximize2, TreeDeciduous, type LucideIcon,
+  Maximize2, TreeDeciduous, PlugZap, AirVent, Waves, ThermometerSun, ShieldCheck, Wifi, Blinds, type LucideIcon,
 } from "lucide-react";
 
 /** Recognition aid next to each equipment label in the listing editor (label always shown). */
@@ -23,5 +23,13 @@ export const FEATURE_ICONS: Record<string, LucideIcon> = {
   storage_room: Package,
   high_ceilings: Maximize2,
   wooden_floors: TreeDeciduous,
+  photovoltaic: Sun,
+  ev_charging: PlugZap,
+  air_conditioning: AirVent,
+  swimming_pool: Waves,
+  sauna: ThermometerSun,
+  alarm_system: ShieldCheck,
+  smart_home: Wifi,
+  electric_shutters: Blinds,
 };
 export const FallbackFeatureIcon = Armchair;

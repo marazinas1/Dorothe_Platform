@@ -27,6 +27,14 @@ export const LISTING_FEATURES: readonly { key: string; types?: readonly Property
   { key: "storage_room", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial", "garage"] },
   { key: "high_ceilings", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
   { key: "wooden_floors", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse"] },
+  { key: "photovoltaic", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse"] },
+  { key: "ev_charging", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
+  { key: "air_conditioning", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
+  { key: "swimming_pool", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse"] },
+  { key: "sauna", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse"] },
+  { key: "alarm_system", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
+  { key: "smart_home", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse", "commercial"] },
+  { key: "electric_shutters", types: ["apartment", "house", "country_house", "villa", "townhouse", "penthouse"] },
 ] as const;
 
 export const FEATURE_KEYS = LISTING_FEATURES.map((f) => f.key);
