@@ -1,4 +1,3 @@
-import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Check, ChevronDown, Minus } from "lucide-react";
 
@@ -14,10 +13,8 @@ import { Button } from "@/components/ui/button";
  */
 export function ChecklistRail({
   checklist,
-  children,
 }: {
   checklist: Checklist;
-  children?: React.ReactNode;
 }) {
   const { t } = useTranslation();
   const { items, outstanding, ready, energyExempt } = checklist;
@@ -44,49 +41,51 @@ export function ChecklistRail({
     </>
   );
 
+  // One calm, full-width summary above the form: progress at a glance, the
+  // outstanding items on demand. No sticky side panel, so nothing scrolls
+  // inside the page or pushes it sideways.
+  const done = items.length - outstanding;
   return (
-    <>
-      {/* Mobile: one collapsed line that says how much is left. */}
-      <details className="rounded-[var(--radius)] border border-border bg-muted/30 p-4 lg:hidden">
-        <summary className="flex cursor-pointer items-center gap-2 text-sm font-medium">
-          <ChevronDown className="h-4 w-4" aria-hidden />
-          {t("admin.listings.checklist.title")}
-          <span className="ml-auto text-xs font-normal text-muted-foreground">
-            {ready
-              ? t("admin.listings.checklist.ready")
-              : t("admin.listings.checklist.remaining", { count: outstanding })}
-          </span>
-        </summary>
-        <div className="mt-3">{body}</div>
-      </details>
-
-      {/* Desktop: one calm control rail — progress first, details on demand, then section jumps. */}
-      <aside className="hidden lg:sticky lg:top-6 lg:grid lg:max-h-[calc(100vh-3rem)] lg:gap-4 lg:self-start lg:overflow-y-auto">
-        <details className="group rounded-[var(--radius)] border border-border bg-card p-4">
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-bold">
-            {t("admin.listings.checklist.title")}
-            <ChevronDown
-              className="ml-auto h-4 w-4 transition-transform group-open:rotate-180"
-              aria-hidden
-            />
-          </summary>
-          <div
-            className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted"
-            role="progressbar"
-            aria-valuemin={0}
-            aria-valuemax={items.length}
-            aria-valuenow={items.length - outstanding}
-          >
-            <div
-              className="h-full bg-primary transition-all"
-              style={{ width: `${((items.length - outstanding) / Math.max(items.length, 1)) * 100}%` }}
-            />
-          </div>
-          <div className="mt-3">{body}</div>
-        </details>
-        {children}
-      </aside>
-    </>
+    <details className="group rounded-[var(--radius)] border border-border bg-card">
+      <summary className="flex cursor-pointer list-none flex-wrap items-center gap-3 px-4 py-3 text-sm font-bold">
+        <span>{t("admin.listings.checklist.title")}</span>
+        <span className="text-xs font-normal text-muted-foreground">
+          {ready
+            ? t("admin.listings.checklist.ready")
+            : t("admin.listings.checklist.remaining", { count: outstanding })}
+        </span>
+        <span
+          className="ml-auto h-1.5 w-24 overflow-hidden rounded-full bg-muted sm:w-40"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={items.length}
+          aria-valuenow={done}
+        >
+          <span
+            className="block h-full bg-primary transition-all"
+            style={{ width: `${(done / Math.max(items.length, 1)) * 100}%` }}
+          />
+        </span>
+        <ChevronDown
+          className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+          aria-hidden
+        />
+      </summary>
+      <div className="border-t border-border px-4 py-3">
+        <ul className="grid gap-1 md:grid-cols-2">
+          {items.map((item) => (
+            <li key={item.key} className="min-w-0">
+              <ChecklistRow item={item} label={labelFor(item, t)} />
+            </li>
+          ))}
+        </ul>
+        {energyExempt ? (
+          <p className="mt-3 text-xs text-muted-foreground">
+            {t("admin.listings.checklist.energyExempt")}
+          </p>
+        ) : null}
+      </div>
+    </details>
   );
 }
 
@@ -103,7 +102,7 @@ function ChecklistRow({ item, label }: { item: ChecklistItem; label: string }) {
       type="button"
       variant="ghost"
       onClick={() => scrollToField(item.anchor)}
-      className="flex h-auto w-full items-start justify-start gap-2 px-1.5 py-1 text-left text-sm hover:bg-muted"
+      className="flex h-auto w-full min-w-0 items-start justify-start gap-2 whitespace-normal break-words px-1.5 py-1 text-left text-sm hover:bg-muted"
     >
       {item.done ? (
         <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
