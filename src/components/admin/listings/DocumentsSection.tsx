@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FileText, Upload, Trash2 } from "lucide-react";
+import { FileText, LayoutPanelTop, Rotate3d, Upload, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
@@ -47,7 +47,7 @@ export function DocumentsSection({ listingId, ensureListingId }: Props) {
           <DocField key={type} type={type} doc={doc(type)} files={files}
             target={async () => listingId ?? (await ensureListingId())} onError={fail} />
         ))}
-        <FieldRow className="sm:col-span-2" label={t("admin.listings.docs.tour")} help={t("admin.listings.docs.tourHelp")}>
+        <FieldRow className="sm:col-span-2" icon={Rotate3d} label={t("admin.listings.docs.tour")} help={t("admin.listings.docs.tourHelp")}>
           <Input type="url" inputMode="url" value={tour} placeholder="https://"
             onChange={(e) => setTour(e.target.value)} onBlur={() => void commitTour()} />
         </FieldRow>
@@ -76,7 +76,7 @@ function DocField({ type, doc, files, target, onError }: {
   }
 
   return (
-    <FieldRow label={t(`admin.listings.docs.${type}`)} help={t(`admin.listings.docs.${type}Help`)}>
+    <FieldRow icon={type === "floorplan" ? LayoutPanelTop : FileText} label={t(`admin.listings.docs.${type}`)} help={t(`admin.listings.docs.${type}Help`)}>
       <div className="flex flex-wrap items-center gap-2">
         {doc ? <Badge variant="outline" className="max-w-[16rem] truncate">{doc.filename}</Badge> : null}
         <input ref={input} type="file" accept="application/pdf" hidden onChange={(e) => void pick(e.target.files?.[0])} />

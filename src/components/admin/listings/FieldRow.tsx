@@ -17,6 +17,7 @@ export function FieldRow({
   children,
   className = "",
   anchor,
+  icon: Icon,
 }: {
   label: string;
   help?: string;
@@ -24,13 +25,16 @@ export function FieldRow({
   children: React.ReactNode;
   className?: string;
   anchor?: string;
+  /** Optional 16 px Lucide icon beside the label; the text always stays. */
+  icon?: LucideIcon;
 }) {
   return (
     <div
       id={anchor ? fieldAnchorId(anchor) : undefined}
       className={`space-y-1.5 scroll-mt-28 ${className}`}
     >
-      <Label className="admin-label font-medium text-muted-foreground">
+      <Label className="admin-label flex items-center gap-1.5 font-medium text-muted-foreground">
+        {Icon ? <Icon aria-hidden="true" strokeWidth={1.75} className="size-4 shrink-0" /> : null}
         {label}
       </Label>
       {children}

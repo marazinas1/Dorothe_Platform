@@ -1015,7 +1015,8 @@
         "slug": "Web address (slug)",
         "reserve_fund": "Maintenance reserve (share)",
         "price_reduced": "Price reduced",
-        "previous_price": "Previous price (internal)"
+        "previous_price": "Previous price (internal)",
+        "custom_features": "Other features"
       },
       "energyFields": {
         "hwb": "HWB (kWh/m²a)",
@@ -1055,7 +1056,8 @@
         "slugWarning": "Changing this breaks existing links. The old address will redirect to the new one.",
         "reserve_fund": "The unit's share of the owners' maintenance reserve (Erhaltungsrücklage). Shown on the property page.",
         "price_reduced": "Shows a \"Price reduced\" label on the property card.",
-        "previous_price": "For your own reference only. Never shown on the website."
+        "previous_price": "For your own reference only. Never shown on the website.",
+        "custom_features": "Anything not in the list, e.g. Conservatory. Press Enter or comma to add."
       },
       "energy": {
         "intro": "Required fields for {{country}}. Publishing is blocked until they are complete.",
@@ -1371,7 +1373,10 @@
         "tourInvalid": "Enter a full link starting with https://",
         "not_pdf": "Choose a PDF file.",
         "too_large": "The file is larger than 20 MB. Choose a smaller PDF."
-      }
+      },
+      "customFeaturePlaceholder": "e.g. Wine cellar",
+      "addCustomFeature": "Add",
+      "removeCustomFeature": "Remove {{name}}"
     },
     "inquiries": {
       "summary": "{{total}} total · {{unread}} new",

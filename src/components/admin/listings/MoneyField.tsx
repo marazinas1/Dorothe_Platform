@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Coins } from "lucide-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { Input } from "@/components/ui/input";
@@ -41,7 +42,7 @@ export function MoneyField({
   const [raw, setRaw] = useState("");
 
   return (
-    <FieldRow label={label} help={help} className={className} anchor={anchor}>
+    <FieldRow label={label} help={help} className={className} anchor={anchor} icon={Coins}>
       <div className="flex items-center gap-2 rounded-md border border-input bg-background pl-3 focus-within:ring-1 focus-within:ring-ring">
         <span className="text-sm text-muted-foreground">{symbol}</span>
         <Input

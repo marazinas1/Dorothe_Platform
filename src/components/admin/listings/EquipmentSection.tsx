@@ -18,6 +18,7 @@ import { applies } from "@/lib/listings/field-visibility";
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow, FormSection } from "./FieldRow";
 import { FEATURE_ICONS, FallbackFeatureIcon } from "./feature-icons";
+import { CustomFeaturesInput } from "./CustomFeaturesInput";
 
 /**
  * Condition, heating and the equipment checklist. The feature list is filtered
@@ -125,6 +126,12 @@ export function EquipmentSection({ form }: { form: ListingFormApi }) {
               })}
             </div>
           </fieldset>
+        ) : null}
+        {available.length > 0 ? (
+          <CustomFeaturesInput
+            selected={selected}
+            onChange={(next) => form.setField("features", next)}
+          />
         ) : null}
       </div>
     </FormSection>

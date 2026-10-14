@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import { ListingIcon } from "@/components/brand/ui/ListingIcon";
+import { customFeatureLabel, isCustomFeature } from "@/lib/listings/vocabularies";
 
 /**
  * Equipment features as a two-column check list (reference: broker-site.html
@@ -16,7 +17,7 @@ export function ListingFeatures({ features }: { features: string[] | null | unde
       {list.map((key) => (
         <li key={key} className="flex items-center gap-3">
           <ListingIcon name="check" className="size-4 shrink-0" />
-          {t(`listings.features.${key}`)}
+          {isCustomFeature(key) ? customFeatureLabel(key) : t(`listings.features.${key}`)}
         </li>
       ))}
     </ul>
