@@ -105,7 +105,7 @@ function ChecklistRow({ item, label }: { item: ChecklistItem; label: string }) {
       type="button"
       variant="ghost"
       onClick={() => scrollToField(item.anchor)}
-      className="flex h-auto w-full items-start justify-start gap-2 px-1.5 py-1 text-left text-sm hover:bg-muted"
+      className="flex h-auto w-full min-w-0 items-start justify-start gap-2 whitespace-normal break-words px-1.5 py-1 text-left text-sm hover:bg-muted"
     >
       {item.done ? (
         <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
