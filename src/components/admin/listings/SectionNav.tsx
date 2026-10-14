@@ -38,7 +38,7 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
       aria-label={t("admin.listings.sectionNav")}
       className="sticky top-14 z-20 -mx-4 border-b border-border bg-background/95 px-4 backdrop-blur md:-mx-6 md:px-6"
     >
-      <ul className="flex gap-1 overflow-x-auto [scrollbar-width:none]">
+      <ul className="flex gap-1 overflow-x-auto overflow-y-hidden [scrollbar-width:none]">
         {sections.map((s) => {
           const isActive = s.key === active;
           return (
