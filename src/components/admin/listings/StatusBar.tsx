@@ -47,17 +47,14 @@ export function StatusBar({
 }) {
   const { t } = useTranslation();
   const { apply, busy, error, setError } = useStatusChange(onChanged);
-  // The blocker list is only revealed once the broker asks to publish, so an
-  // untouched draft is not covered in warnings.
-  const [showBlockers, setShowBlockers] = useState(false);
   const targets = statusOptionsFor(status, dealType);
   const isPublic = status === "active" || status === "coming_soon";
+  // Publishing has a single home: the sticky save bar at the bottom. This bar
+  // keeps only status context and secondary transitions (no duplicate CTA).
   const canPublish = targets.includes("active");
   const canUnpublish = targets.includes("draft");
   const secondary = targets.filter((s) => s !== "active" && s !== "draft");
   const locked = dirty || busy !== null;
-  const blocking = checklist.items.filter((item) => !item.done);
-  const publishBlocked = blocking.length > 0;
 
   return (
     <div className="rounded-[var(--radius)] border border-border bg-card">
