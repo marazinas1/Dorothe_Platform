@@ -68,7 +68,9 @@ export function toListingRow(data: ListingFormParsed): Record<string, any> {
     meta_description: pruneTranslations(data.meta_description),
     deal_type: data.deal_type,
     property_type: data.property_type,
-    // reference_code is assigned by the database on insert and read-only after.
+    // The broker may type their own reference; left empty, the database assigns
+    // the next YYYY-NNN on insert and an existing code is never cleared.
+    ...(data.reference_code ? { reference_code: data.reference_code.trim() } : {}),
     // Empty means "unchanged": the trigger keeps the current slug on update and
     // generates one on insert.
     slug: data.slug,
