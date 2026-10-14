@@ -7,6 +7,7 @@ import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import type { Locale } from "@/i18n/config";
 import {
   listingDocumentsQueryOptions,
+  listingTourQueryOptions,
   relatedCandidatesQueryOptions,
   type PublicListing,
 } from "@/lib/listings/queries.functions";
@@ -61,6 +62,8 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
     listingDocumentsQueryOptions(l.id, documentsEnabled),
   );
 
+  const tour = useSuspenseQuery(listingTourQueryOptions(l.id));
+
   const locationLine =
     l.geo_precision === "hidden"
       ? [l.address_zip, l.address_city].filter(Boolean).join(" ")
@@ -79,6 +82,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
           images={l.images}
           locale={locale}
           title={title}
+          tourUrl={tour.data}
         />
       </section>
 
