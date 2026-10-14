@@ -50,13 +50,16 @@ export function useListingFiles(listingId: string | null) {
   });
   const refresh = () => qc.invalidateQueries({ queryKey: key(listingId) });
 
-  /** Uploads (or replaces) the single document of one type. */
+  /**
+   * Floor plans are a list (one per storey); the exposé is a single document
+   * that a new upload replaces.
+   */
   async function upload(id: string, type: AdminDocType, file: File) {
     if (file.size > MAX_BYTES) throw new Error("too_large");
     const allowed = type === "floorplan" ? FLOORPLAN_TYPES : ["application/pdf"];
     if (!allowed.includes(file.type)) throw new Error(type === "floorplan" ? "not_plan" : "not_pdf");
     const ext = EXT[file.type] ?? "pdf";
-    const previous = query.data?.documents.filter((d) => d.type === type) ?? [];
+    const previous = type === "floorplan" ? [] : (query.data?.documents.filter((d) => d.type === type) ?? []);
     const docId = crypto.randomUUID();
     const path = documentPath(id, docId, ext);
     const up = await supabase.storage

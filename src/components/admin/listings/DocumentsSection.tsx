@@ -39,13 +39,13 @@ export function DocumentsSection({ listingId, ensureListingId }: Props) {
     } catch (e) { fail(e); }
   }
 
-  const doc = (type: AdminDocType) => files.data?.documents.find((d) => d.type === type) ?? null;
+  const docs = (type: AdminDocType) => files.data?.documents.filter((d) => d.type === type) ?? [];
 
   return (
     <FormSection icon={FileText} anchor="documents" title={t("admin.listings.sections.documents")}>
       <div className="grid gap-6 sm:grid-cols-2">
         {(["floorplan", "expose"] as const).map((type) => (
-          <DocField key={type} type={type} doc={doc(type)} files={files}
+          <DocField key={type} type={type} docs={docs(type)} files={files}
             target={async () => listingId ?? (await ensureListingId())} onError={fail} />
         ))}
         <FieldRow className="sm:col-span-2" icon={Rotate3d} label={t("admin.listings.docs.tour")} help={t("admin.listings.docs.tourHelp")}>
@@ -58,9 +58,9 @@ export function DocumentsSection({ listingId, ensureListingId }: Props) {
   );
 }
 
-function DocField({ type, doc, files, target, onError }: {
+function DocField({ type, docs, files, target, onError }: {
   type: AdminDocType;
-  doc: AdminDocument | null;
+  docs: AdminDocument[];
   files: ReturnType<typeof useListingFiles>;
   target: () => Promise<string>;
   onError: (e: unknown) => void;
@@ -68,43 +68,55 @@ function DocField({ type, doc, files, target, onError }: {
   const { t } = useTranslation();
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
-  const [confirm, setConfirm] = useState(false);
+  const [confirm, setConfirm] = useState<AdminDocument | null>(null);
+  const multi = type === "floorplan";
 
-  async function pick(file: File | undefined) {
-    if (!file) return;
+  async function pick(list: FileList | null) {
+    const picked = list ? Array.from(list) : [];
+    if (picked.length === 0) return;
     setBusy(true);
-    try { await files.upload(await target(), type, file); } catch (e) { onError(e); }
+    try {
+      const id = await target();
+      for (const file of picked) await files.upload(id, type, file);
+    } catch (e) { onError(e); }
     finally { setBusy(false); if (input.current) input.current.value = ""; }
   }
 
+  const single = docs[0] ?? null;
+  const label = busy ? "uploading" : multi ? (docs.length ? "addPlan" : "uploadPlan") : single ? "replace" : "upload";
+
   return (
-    <FieldRow icon={type === "floorplan" ? LayoutPanelTop : FileText} label={t(`admin.listings.docs.${type}`)} help={t(`admin.listings.docs.${type}Help`)}>
-      <div className="flex flex-wrap items-center gap-2">
-        {doc ? <Badge variant="outline" className="max-w-[16rem] truncate">{doc.filename}</Badge> : null}
-        <input ref={input} type="file" accept={type === "floorplan" ? FLOORPLAN_TYPES.join(",") : "application/pdf"} hidden onChange={(e) => void pick(e.target.files?.[0])} />
-        <Button type="button" variant="outline" size="sm" disabled={busy} onClick={() => input.current?.click()}>
-          <Upload aria-hidden strokeWidth={1.75} className="size-4" />
-          {busy ? t("admin.listings.docs.uploading") : t(doc ? "admin.listings.docs.replace" : type === "floorplan" ? "admin.listings.docs.uploadPlan" : "admin.listings.docs.upload")}
-        </Button>
-        {doc ? (
-          <Button type="button" variant="ghost" size="sm" aria-label={t("admin.listings.docs.remove")} onClick={() => setConfirm(true)}>
-            <Trash2 aria-hidden strokeWidth={1.75} className="size-4" />
-          </Button>
-        ) : null}
-      </div>
-      {doc && type === "expose" ? (
+    <FieldRow icon={multi ? LayoutPanelTop : FileText} label={t(`admin.listings.docs.${type}`)} help={t(`admin.listings.docs.${type}Help`)}>
+      {docs.length ? (
+        <ul className="mb-2 space-y-1">
+          {docs.map((d) => (
+            <li key={d.id} className="flex items-center gap-2">
+              <Badge variant="outline" className="max-w-[16rem] truncate">{d.filename}</Badge>
+              <Button type="button" variant="ghost" size="sm" aria-label={`${t("admin.listings.docs.remove")}: ${d.filename}`} onClick={() => setConfirm(d)}>
+                <Trash2 aria-hidden strokeWidth={1.75} className="size-4" />
+              </Button>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      <input ref={input} type="file" multiple={multi} accept={multi ? FLOORPLAN_TYPES.join(",") : "application/pdf"} hidden onChange={(e) => void pick(e.target.files)} />
+      <Button type="button" variant="outline" size="sm" disabled={busy} onClick={() => input.current?.click()}>
+        <Upload aria-hidden strokeWidth={1.75} className="size-4" />
+        {t(`admin.listings.docs.${label}`)}
+      </Button>
+      {single && type === "expose" ? (
         <label className="mt-2 flex items-center gap-2 text-sm">
-          <Switch checked={doc.requires_lead}
-            onCheckedChange={(v) => void files.setRequiresLead(doc, v).catch(onError)} />
+          <Switch checked={single.requires_lead}
+            onCheckedChange={(v) => void files.setRequiresLead(single, v).catch(onError)} />
           {t("admin.listings.docs.afterEnquiry")}
         </label>
       ) : null}
-      {doc ? (
-        <ConfirmDialog open={confirm} onOpenChange={setConfirm}
-          title={t("admin.listings.docs.removeTitle", { name: doc.filename })}
+      {confirm ? (
+        <ConfirmDialog open onOpenChange={(o) => !o && setConfirm(null)}
+          title={t("admin.listings.docs.removeTitle", { name: confirm.filename })}
           description={t("admin.listings.docs.removeBody")}
           confirmLabel={t("admin.listings.docs.remove")}
-          onConfirm={() => files.remove(doc).catch(onError)} />
+          onConfirm={() => files.remove(confirm).catch(onError)} />
       ) : null}
     </FieldRow>
   );

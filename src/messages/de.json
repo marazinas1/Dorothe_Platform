@@ -1371,7 +1371,7 @@
       "sectionNav": "Formularbereiche",
       "docs": {
         "floorplan": "Grundriss",
-        "floorplanHelp": "PDF oder Bild (JPG, PNG, WebP), offen auf der Objektseite.",
+        "floorplanHelp": "Eine Datei pro Etage: PDF oder Bild (JPG, PNG, WebP), offen auf der Objektseite.",
         "expose": "Vollständiges Exposé",
         "exposeHelp": "PDF mit allen Angaben zur Immobilie.",
         "afterEnquiry": "Erst nach einer Anfrage senden",
@@ -1387,6 +1387,7 @@
         "not_pdf": "Wählen Sie eine PDF-Datei.",
         "too_large": "Die Datei ist größer als 20 MB. Wählen Sie ein kleineres PDF.",
         "uploadPlan": "Grundriss hochladen",
+        "addPlan": "Weiteren Grundriss hinzufügen",
         "not_plan": "Wählen Sie eine PDF-, JPG-, PNG- oder WebP-Datei.",
         "serviceTitle": "Noch kein Grundriss oder keine Visualisierung?",
         "serviceBody": "Professionellen 2D/3D-Grundriss oder fotorealistische Visualisierung bei StageHomy bestellen.",
