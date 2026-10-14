@@ -33,7 +33,7 @@ function hasAnyTranslation(value: Record<string, string> | undefined): boolean {
   return Object.values(value ?? {}).some((v) => typeof v === "string" && v.trim().length > 0);
 }
 
-/** Photos that still need a description before the listing can go Live. */
+/** Photos without a description; the public site falls back to the title. */
 export function countPhotosMissingAlt(images: { alt_text?: unknown }[]): number {
   return images.filter(
     (image) => !hasAnyTranslation((image.alt_text ?? {}) as Record<string, string>),
@@ -48,7 +48,7 @@ export function buildPublishChecklist({
 }: {
   values: ListingFormValues;
   imageCount: number;
-  /** Photos without a description in any language. */
+  /** Kept for callers; missing descriptions are a soft hint, never a blocker. */
   photosMissingAlt?: number;
   country: Country;
 }): Checklist {
@@ -76,11 +76,6 @@ export function buildPublishChecklist({
   const all: ChecklistItem[] = [
     { key: "title", done: hasAnyTranslation(values.title), anchor: "title" },
     { key: "photo", done: imageCount > 0, anchor: "photos" },
-    {
-      key: "photoAlt",
-      done: photosMissingAlt === 0,
-      anchor: "photos",
-    },
     {
       key: "price",
       done: !!values.price_on_request || (values.price != null && Number(values.price) > 0),

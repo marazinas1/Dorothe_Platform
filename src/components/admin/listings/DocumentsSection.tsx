@@ -8,8 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { ConfirmDialog } from "@/components/admin/ui/ConfirmDialog";
-import { useListingFiles, type AdminDocType, type AdminDocument } from "@/lib/listings/use-listing-files";
+import { FLOORPLAN_TYPES, useListingFiles, type AdminDocType, type AdminDocument } from "@/lib/listings/use-listing-files";
 import { FieldRow, FormSection } from "./FieldRow";
+import { PlanServiceHint } from "./PlanServiceHint";
 
 type Props = { listingId: string | null; ensureListingId: () => Promise<string> };
 
@@ -23,7 +24,7 @@ export function DocumentsSection({ listingId, ensureListingId }: Props) {
 
   const fail = (e: unknown) => {
     const m = e instanceof Error ? e.message : String(e);
-    toast.error(m === "not_pdf" || m === "too_large" ? t(`admin.listings.docs.${m}`) : m);
+    toast.error(["not_pdf", "not_plan", "too_large"].includes(m) ? t(`admin.listings.docs.${m}`) : m);
   };
 
   async function commitTour() {
@@ -51,6 +52,7 @@ export function DocumentsSection({ listingId, ensureListingId }: Props) {
           <Input type="url" inputMode="url" value={tour} placeholder="https://"
             onChange={(e) => setTour(e.target.value)} onBlur={() => void commitTour()} />
         </FieldRow>
+        <PlanServiceHint />
       </div>
     </FormSection>
   );
@@ -79,10 +81,10 @@ function DocField({ type, doc, files, target, onError }: {
     <FieldRow icon={type === "floorplan" ? LayoutPanelTop : FileText} label={t(`admin.listings.docs.${type}`)} help={t(`admin.listings.docs.${type}Help`)}>
       <div className="flex flex-wrap items-center gap-2">
         {doc ? <Badge variant="outline" className="max-w-[16rem] truncate">{doc.filename}</Badge> : null}
-        <input ref={input} type="file" accept="application/pdf" hidden onChange={(e) => void pick(e.target.files?.[0])} />
+        <input ref={input} type="file" accept={type === "floorplan" ? FLOORPLAN_TYPES.join(",") : "application/pdf"} hidden onChange={(e) => void pick(e.target.files?.[0])} />
         <Button type="button" variant="outline" size="sm" disabled={busy} onClick={() => input.current?.click()}>
           <Upload aria-hidden strokeWidth={1.75} className="size-4" />
-          {busy ? t("admin.listings.docs.uploading") : t(doc ? "admin.listings.docs.replace" : "admin.listings.docs.upload")}
+          {busy ? t("admin.listings.docs.uploading") : t(doc ? "admin.listings.docs.replace" : type === "floorplan" ? "admin.listings.docs.uploadPlan" : "admin.listings.docs.upload")}
         </Button>
         {doc ? (
           <Button type="button" variant="ghost" size="sm" aria-label={t("admin.listings.docs.remove")} onClick={() => setConfirm(true)}>

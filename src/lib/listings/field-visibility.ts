@@ -53,15 +53,15 @@ type Matrix = Record<string, Partial<Record<VisibleField, FieldLevel>>>;
 /** Shared by every type unless the type overrides it. */
 const BASE: Record<VisibleField, FieldLevel> = {
   living_area: "open",
-  usable_area: "details",
+  usable_area: "open",
   plot_area: "details",
   rooms: "open",
   bedrooms: "open",
   bathrooms: "open",
   floor: "details",
   total_floors: "details",
-  year_built: "details",
-  year_renovated: "details",
+  year_built: "open",
+  year_renovated: "open",
   condition: "open",
   heating_type: "open",
   features: "open",
