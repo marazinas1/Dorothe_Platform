@@ -128,37 +128,10 @@ export function StatusBar({
             </Button>
           ) : null}
 
-          {canPublish ? (
-            <Button
-              type="button"
-              size="sm"
-              disabled={locked}
-              onClick={() => {
-                // Never make a call the checklist knows the database rejects —
-                // show what is missing instead.
-                if (publishBlocked) {
-                  setShowBlockers(true);
-                  scrollToField(blocking[0].anchor);
-                  return;
-                }
-                void apply(listingId, "active");
-              }}
-            >
-              <Send className="h-4 w-4" />
-              {t("admin.listings.publish")}
-            </Button>
-          ) : null}
         </div>
       </div>
 
-      {canPublish && publishBlocked && showBlockers ? (
-        <p className="flex items-start gap-2 border-t border-border px-4 py-2 text-xs text-muted-foreground">
-          <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-          <span>
-            {t("admin.listings.publishBlocked")} {blockerSummary(t, blocking)}
-          </span>
-        </p>
-      ) : canPublish && !hasImages ? (
+      {canPublish && !hasImages ? (
         <p className="flex items-start gap-2 border-t border-border px-4 py-2 text-xs text-muted-foreground">
           <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
           {t("admin.listings.noImagesWarning")}
