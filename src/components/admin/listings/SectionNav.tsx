@@ -15,8 +15,9 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
   return (
     <nav
       aria-label={t("admin.listings.sectionNav")}
-      className="hidden xl:sticky xl:top-6 xl:block xl:self-start"
+      className="rounded-[var(--radius)] border border-border bg-card p-4"
     >
+      <p className="mb-2 text-sm font-bold">{t("admin.listings.sectionNav")}</p>
       <ul className="grid gap-0.5 border-l border-border">
         {sections.map((s) => (
           <li key={s.key}>
