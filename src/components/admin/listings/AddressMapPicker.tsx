@@ -172,7 +172,7 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
       ) : null}
 
       {lat != null && lng != null && mapOpen ? (
-        <div className="overflow-hidden border-t border-border">
+        <div className="relative isolate z-0 overflow-hidden border-t border-border">
           <ClientOnly fallback={<Skeleton />}>
             <Suspense fallback={<Skeleton />}>
               <PinMapCanvas
