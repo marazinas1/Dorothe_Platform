@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import { buttonVariants } from "@/components/ui/button";
 
 /** Deerva studio service: brokers without a plan can order one from StageHomy. */
-const STAGEHOMY_URL =
-  "https://stagehomy.com/?utm_source=broker-platform&utm_medium=referral&utm_campaign=floorplan-request";
+const STAGEHOMY_URL = "https://stagehomy.com";
 
 export function PlanServiceHint() {
   const { t } = useTranslation();
