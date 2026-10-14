@@ -1,4 +1,7 @@
-import { Zap } from "lucide-react";
+import {
+  BarChart3, CalendarCheck, CalendarDays, CalendarX, Factory, FileText, Flame, Fuel, Gauge,
+  Leaf, Mountain, Sun, Thermometer, TreePine, Wind, Zap, type LucideIcon,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -45,6 +48,33 @@ const DE_FIELDS: Field[] = [
   { key: "certificate_date", kind: "date" },
   { key: "certificate_valid_until", kind: "date" },
 ];
+
+/** Recognition aids beside each label; the text label always stays. */
+const FIELD_ICONS: Record<string, LucideIcon> = {
+  certificate_type: FileText,
+  final_energy: Gauge,
+  hwb: Gauge,
+  eeb: Gauge,
+  fgee: Gauge,
+  energy_source: Flame,
+  efficiency_class: BarChart3,
+  year_built: CalendarDays,
+  certificate_date: CalendarCheck,
+  certificate_valid_until: CalendarX,
+};
+
+const SOURCE_ICONS: Record<string, LucideIcon> = {
+  district_heating: Factory,
+  natural_gas: Flame,
+  lpg: Fuel,
+  heating_oil: Fuel,
+  electricity: Zap,
+  heat_pump: Wind,
+  wood_pellets: TreePine,
+  solar: Sun,
+  geothermal: Mountain,
+  chp: Thermometer,
+};
 
 function fieldsFor(country: Country): Field[] {
   if (country === "AT") return AT_FIELDS;
@@ -135,11 +165,14 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
               key={field.key}
               anchor={`energy_${field.key}`}
               label={t(`admin.listings.energyFields.${field.key}`)}
+              icon={FIELD_ICONS[field.key]}
               className={field.kind === "sources" ? "sm:col-span-2" : undefined}
             >
               {field.kind === "sources" ? (
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                  {ENERGY_SOURCES.map((key) => (
+                  {ENERGY_SOURCES.map((key) => {
+                    const SourceIcon = SOURCE_ICONS[key] ?? Leaf;
+                    return (
                     <label
                       key={key}
                       htmlFor={`energy-source-${key}`}
@@ -150,9 +183,11 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
                         checked={sources.includes(key)}
                         onCheckedChange={(checked) => toggleSource(key, checked === true)}
                       />
+                      <SourceIcon aria-hidden="true" strokeWidth={1.75} className="size-4 shrink-0 text-muted-foreground" />
                       {t(`listings.energySource.${key}`)}
                     </label>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : field.kind === "select" ? (
                 <Select
