@@ -9,15 +9,10 @@ import { pickLocalized, formatPrice } from "@/lib/listings/format";
 import type { AdminListingRow } from "@/lib/listings/admin.functions";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import type { Locale } from "@/i18n/config";
-import { variantUrl } from "./listing-image-url";
+import { primaryThumb } from "./listing-image-url";
 import { ListingCardActions } from "./ListingCardActions";
 import { EnergyChip, ListingStatusBadge, PlainBadge } from "./ListingBadges";
-
-function primaryThumb(row: AdminListingRow): string | null {
-  const sorted = [...(row.images ?? [])].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
-  const primary = sorted.find((i) => i.is_primary) ?? sorted[0];
-  return primary ? variantUrl(primary.variants, "card") : null;
-}
+import { ListingsMobileCards } from "./ListingsMobileCards";
 
 const TH =
   "whitespace-nowrap border-b border-border px-3.5 py-3 text-left text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground";
@@ -44,7 +39,9 @@ export function ListingsTable({
   const draggedId = useRef<string | null>(null);
 
   return (
-    <div className="overflow-x-auto overflow-y-hidden rounded-[var(--radius)] border border-border bg-card">
+    <>
+    <ListingsMobileCards rows={rows} locale={locale} currency={settings.currency} canReorder={canReorder} savingOrder={savingOrder} onMoveStep={onMoveStep} />
+    <div className="hidden overflow-x-auto overflow-y-hidden rounded-[var(--radius)] border border-border bg-card md:block">
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr>
@@ -156,12 +153,13 @@ export function ListingsTable({
           })}
         </tbody>
       </table>
+    </div>
       {rows.length === 0 ? (
         <p className="px-4 py-10 text-center text-sm text-muted-foreground">{t("admin.listings.empty")}</p>
       ) : null}
       <p className="sr-only" aria-live="polite">
         {savingOrder ? t("admin.listings.orderSaving") : ""}
       </p>
-    </div>
+    </>
   );
 }
