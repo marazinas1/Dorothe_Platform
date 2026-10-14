@@ -48,6 +48,20 @@ export function ListingGallery({ images, locale, title, tourUrl = null }: Props)
   }
 
   const visible = list.slice(0, 5);
+  const n = visible.length;
+
+  // The mosaic adapts to how many photos exist, so it never leaves an empty tile.
+  const tile = (i: number) => {
+    if (i === 0) {
+      if (n === 1) return "aspect-[4/3] md:col-span-4 md:row-span-2 md:aspect-auto md:min-h-[500px]";
+      return "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[500px]";
+    }
+    const base = "hidden min-h-[246px] md:block";
+    if (n === 2) return `${base} md:col-span-2 md:row-span-2`;
+    if (n === 3) return `${base} md:col-span-2`;
+    if (n === 4 && i === 1) return `${base} md:col-span-2`;
+    return base;
+  };
 
   return (
     <>
@@ -58,11 +72,7 @@ export function ListingGallery({ images, locale, title, tourUrl = null }: Props)
             type="button"
             onClick={() => setOpenIdx(i)}
             aria-label={i === 0 ? t("listings.detail.gallery_open") : undefined}
-            className={`${buttonClass({ variant: "ghost", className: "group relative h-auto min-h-11 overflow-hidden rounded-media bg-muted p-0" })} ${
-              i === 0
-                ? "aspect-[4/3] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[500px]"
-                : "hidden min-h-[246px] md:block"
-            }`}
+            className={`${buttonClass({ variant: "ghost", className: "group relative h-auto min-h-11 overflow-hidden rounded-media bg-muted p-0" })} ${tile(i)}`}
           >
             <img
               src={pickImageUrl(img.variants, "detail") ?? ""}
