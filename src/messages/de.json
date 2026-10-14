@@ -1125,6 +1125,8 @@
         "coverHint": "Markieren Sie ein Foto als Titelbild — standardmäßig ist es das erste.",
         "makeCover": "Als Titelbild",
         "cover": "Titelbild",
+        "heroGrid": "Top-Raster",
+        "galleryOnly": "Nur Galerie",
         "dismiss": "Ausblenden",
         "dropzoneTitle": "Fotos hierher ziehen oder klicken zum Auswählen",
         "dropzoneMeta": "JPG, PNG oder WebP · Umwandlung in WebP · max. 50",
