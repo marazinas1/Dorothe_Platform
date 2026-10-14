@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { deleteListingImage } from "@/lib/listings/media.functions";
 import { FormSection } from "./FieldRow";
+import { countPhotosMissingAlt } from "@/lib/listings/publish-checklist";
 import { ImageCard, type ImageRecord } from "./ImageCard";
 import { usePhotoReorder } from "@/lib/listings/use-photo-reorder";
 import { useImageOrder } from "./use-image-order";
@@ -42,6 +43,8 @@ export function ImageManager({
     onError: (message) => toast.error(message),
   });
 
+  const missingAlt = countPhotosMissingAlt(ordered);
+
   // The gesture only reports the final position; moveTo owns the reordering.
   const reorder = usePhotoReorder({ onDrop: moveTo });
 
@@ -62,7 +65,11 @@ export function ImageManager({
     <FormSection icon={ImageIcon}
       anchor="photos"
       title={t("admin.listings.sections.images")}
-      description={t("admin.listings.images.uploadHint")}
+      description={
+        ordered.length > 0
+          ? t("admin.listings.images.summary", { count: ordered.length })
+          : t("admin.listings.images.uploadHint")
+      }
     >
       {/* The technical detail is demoted: brokers need one line, not a paragraph. */}
       <details className="mb-4 text-xs text-muted-foreground">
@@ -82,6 +89,7 @@ export function ImageManager({
         }}
       />
 
+      {ordered.length === 0 ? (
       <Button
         type="button"
         variant="outline"
@@ -115,8 +123,7 @@ export function ImageManager({
           {t("admin.listings.images.dropzoneMeta")}
         </span>
       </Button>
-
-
+      ) : null}
 
       <UploadJobs
         jobs={upload.jobs}
@@ -131,10 +138,7 @@ export function ImageManager({
 
       {ordered.length > 0 ? (
         <>
-          <p className="mt-4 text-xs text-muted-foreground">
-            {t("admin.listings.images.coverHint")}
-          </p>
-          <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
             {ordered.map((image, index) => (
               <ImageCard
                 key={image.id}
@@ -152,7 +156,27 @@ export function ImageManager({
                 onDelete={setPendingDelete}
               />
             ))}
+            <button
+              type="button"
+              disabled={upload.busy}
+              onClick={() => inputRef.current?.click()}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                if (e.dataTransfer.files?.length) void upload.upload(e.dataTransfer.files);
+              }}
+              className="flex min-h-[10rem] cursor-pointer flex-col items-center justify-center gap-2 rounded-[var(--radius)] border-2 border-dashed border-border bg-muted/20 p-4 text-center text-muted-foreground transition-colors hover:border-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring disabled:cursor-progress"
+            >
+              {upload.busy ? <Loader2 className="size-6 animate-spin" aria-hidden /> : <Upload className="size-6" strokeWidth={1.75} aria-hidden />}
+              <span className="text-sm font-semibold text-foreground">{t("admin.listings.images.addMore")}</span>
+              <span className="text-xs">{t("admin.listings.images.addMoreMeta")}</span>
+            </button>
           </div>
+          {missingAlt > 0 ? (
+            <p role="status" className="mt-3 text-sm text-warning">
+              {t("admin.listings.images.missingAlt", { count: missingAlt })}
+            </p>
+          ) : null}
         </>
       ) : upload.jobs.length === 0 ? (
         <div className="mt-3 rounded-[var(--radius)] border border-dashed border-border px-6 py-8 text-center text-sm text-muted-foreground">

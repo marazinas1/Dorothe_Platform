@@ -121,48 +121,48 @@ export function ImageCard({
             type="button"
             size="icon"
             variant="secondary"
-            className="h-7 w-7"
+            className="size-9"
             disabled={disabled || index === 0}
             onClick={() => onMove(index, -1)}
             aria-label={t("admin.listings.images.moveLeft")}
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
+            <ArrowLeft className="size-4" />
           </Button>
           <Button
             type="button"
             size="icon"
             variant="secondary"
-            className="h-7 w-7"
+            className="size-9"
             disabled={disabled || index === total - 1}
             onClick={() => onMove(index, 1)}
             aria-label={t("admin.listings.images.moveRight")}
           >
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="size-4" />
           </Button>
           {index !== 0 ? (
             <Button
               type="button"
               size="icon"
               variant="secondary"
-              className="h-7 w-7"
+              className="size-9"
               disabled={busy}
               onClick={() => onMakeCover(image)}
               aria-label={t("admin.listings.images.makeCover")}
               title={t("admin.listings.images.makeCover")}
             >
-              <Star className="h-3.5 w-3.5" />
+              <Star className="size-4" />
             </Button>
           ) : null}
           <Button
             type="button"
             size="icon"
             variant="secondary"
-            className="ml-auto h-7 w-7 text-destructive"
+            className="ml-auto size-9 text-destructive"
             disabled={busy}
             onClick={() => onDelete(image)}
             aria-label={t("admin.listings.images.delete")}
           >
-            <Trash2 className="h-3.5 w-3.5" />
+            <Trash2 className="size-4" />
           </Button>
         </div>
       </div>

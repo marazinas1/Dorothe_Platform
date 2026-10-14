@@ -1127,7 +1127,12 @@
           "placeholder": "Was das Foto zeigt",
           "saved": "Beschreibung gespeichert.",
           "failed": "Die Beschreibung konnte nicht gespeichert werden."
-        }
+        },
+        "summary_one": "{{count}} Foto. Zum Sortieren ziehen. Das erste Foto ist das Titelbild.",
+        "summary_other": "{{count}} Fotos. Zum Sortieren ziehen. Das erste Foto ist das Titelbild.",
+        "addMoreMeta": "JPG, PNG oder WebP, automatisch optimiert",
+        "missingAlt_one": "1 Foto braucht vor dem Veröffentlichen eine Beschreibung. Beschreibungen helfen sehbehinderten Besuchern und Suchmaschinen.",
+        "missingAlt_other": "{{count}} Fotos brauchen vor dem Veröffentlichen eine Beschreibung. Beschreibungen helfen sehbehinderten Besuchern und Suchmaschinen."
       },
       "preview": "Vorschau",
       "publish": "Veröffentlichen",

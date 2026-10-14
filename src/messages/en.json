@@ -1127,7 +1127,12 @@
           "placeholder": "What the photo shows",
           "saved": "Description saved.",
           "failed": "Could not save the description."
-        }
+        },
+        "summary_one": "{{count}} photo. Drag to reorder. The first photo is the cover.",
+        "summary_other": "{{count}} photos. Drag to reorder. The first photo is the cover.",
+        "addMoreMeta": "JPG, PNG or WebP, optimised automatically",
+        "missingAlt_one": "1 photo needs a description before publishing. Descriptions help visually impaired visitors and search engines.",
+        "missingAlt_other": "{{count}} photos need a description before publishing. Descriptions help visually impaired visitors and search engines."
       },
       "preview": "Preview",
       "publish": "Publish",
