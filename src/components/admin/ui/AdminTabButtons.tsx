@@ -20,7 +20,7 @@ export function AdminTabButtons<T extends string | number>({
   onChange: (value: T) => void;
 }) {
   return (
-    <div className="admin-tabs w-max" role="tablist" aria-label={label}>
+    <div className="admin-tabs" role="tablist" aria-label={label}>
       {items.map((item) => (
         <Button
           key={item.id}

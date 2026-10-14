@@ -77,7 +77,7 @@ export function ListingsBrowser({ rows, locale }: { rows: AdminListingRow[]; loc
 
   return (
     <div className="space-y-5">
-      <div className="overflow-x-auto border-b border-border">
+      <div>
         <AdminTabButtons
           label={t("admin.listings.tabs.label")}
           value={filters.tab}

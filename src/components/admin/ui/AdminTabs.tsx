@@ -17,8 +17,8 @@ export interface AdminTabItem {
  */
 export function AdminTabs({ label, items }: { label: string; items: AdminTabItem[] }) {
   return (
-    <nav aria-label={label} className="relative -mb-px w-full overflow-x-auto">
-      <div className="admin-tabs w-max min-w-full">
+    <nav aria-label={label} className="relative w-full">
+      <div className="admin-tabs">
         {items.map((item) => (
           <Link
             key={item.id}

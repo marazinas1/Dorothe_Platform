@@ -89,7 +89,7 @@ export function PostsPage() {
       {rows.length === 0 ? (
         <AdminEmptyState icon={Newspaper} title={t("admin.posts.empty")} />
       ) : (
-        <div className="overflow-x-auto rounded-[var(--radius)] border border-border bg-card">
+        <div className="overflow-x-auto overflow-y-hidden rounded-[var(--radius)] border border-border bg-card">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr>

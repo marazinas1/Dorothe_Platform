@@ -44,7 +44,7 @@ export function ListingsTable({
   const draggedId = useRef<string | null>(null);
 
   return (
-    <div className="overflow-x-auto rounded-[var(--radius)] border border-border bg-card">
+    <div className="overflow-x-auto overflow-y-hidden rounded-[var(--radius)] border border-border bg-card">
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr>
