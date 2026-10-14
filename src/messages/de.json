@@ -1015,7 +1015,8 @@
         "slug": "Webadresse (Slug)",
         "reserve_fund": "Erhaltungsrücklage (Anteil)",
         "price_reduced": "Preis reduziert",
-        "previous_price": "Vorheriger Preis (intern)"
+        "previous_price": "Vorheriger Preis (intern)",
+        "custom_features": "Weitere Merkmale"
       },
       "energyFields": {
         "hwb": "HWB (kWh/m²a)",
@@ -1055,7 +1056,8 @@
         "slugWarning": "Änderung macht bestehende Links ungültig. Die alte Adresse leitet auf die neue weiter.",
         "reserve_fund": "Anteil der Wohnung an der Erhaltungsrücklage der Eigentümergemeinschaft. Wird auf der Objektseite angezeigt.",
         "price_reduced": "Zeigt das Etikett „Preis reduziert\" auf der Objektkarte.",
-        "previous_price": "Nur für Ihre eigene Übersicht. Wird nie auf der Website angezeigt."
+        "previous_price": "Nur für Ihre eigene Übersicht. Wird nie auf der Website angezeigt.",
+        "custom_features": "Alles, was nicht in der Liste steht, z. B. Wintergarten. Mit Enter oder Komma hinzufügen."
       },
       "energy": {
         "intro": "Pflichtfelder für {{country}}. Ohne sie ist eine Veröffentlichung nicht möglich.",
@@ -1371,7 +1373,10 @@
         "tourInvalid": "Geben Sie einen vollständigen Link ein, der mit https:// beginnt.",
         "not_pdf": "Wählen Sie eine PDF-Datei.",
         "too_large": "Die Datei ist größer als 20 MB. Wählen Sie ein kleineres PDF."
-      }
+      },
+      "customFeaturePlaceholder": "z. B. Weinkeller",
+      "addCustomFeature": "Hinzufügen",
+      "removeCustomFeature": "{{name}} entfernen"
     },
     "inquiries": {
       "summary": "{{total}} insgesamt · {{unread}} neu",
