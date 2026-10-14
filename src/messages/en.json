@@ -1387,6 +1387,7 @@
         "not_pdf": "Choose a PDF file.",
         "too_large": "The file is larger than 20 MB. Choose a smaller PDF.",
         "uploadPlan": "Upload plan",
+        "addPlan": "Add another floor plan",
         "not_plan": "Choose a PDF, JPG, PNG or WebP file.",
         "serviceTitle": "No floor plan or visualisation yet?",
         "serviceBody": "Order a professional 2D/3D floor plan or photoreal visualisation from StageHomy.",
