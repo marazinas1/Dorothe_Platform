@@ -32,3 +32,5 @@
   brand identity rather than styling.
 
 Source of truth for admin screens: `docs/broker-book.md` sections 6, 7 and 13 (visual reference `docs/reference/broker-admin.html`).
+
+- Listings use cards below the medium breakpoint and a table above it; both reuse the same filtered records, image selection and action component so mobile never diverges from desktop behavior.
