@@ -10,5 +10,5 @@ export async function downloadFile(url: string, filename: string): Promise<void>
   document.body.appendChild(anchor);
   anchor.click();
   anchor.remove();
-  URL.revokeObjectURL(objectUrl);
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 30_000);
 }
