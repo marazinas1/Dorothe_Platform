@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { GEO_PRECISIONS } from "@/lib/listings/admin-schema";
 import { GERMAN_STATES, isGermany } from "@/lib/listings/vocabularies";
-import { listingCountryOptions } from "@/lib/listings/countries";
+import { countryName, listingCountryOptions } from "@/lib/listings/countries";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow, FormSection } from "./FieldRow";
@@ -66,7 +66,7 @@ export function LocationSection({ form }: { form: ListingFormApi }) {
               onValueChange={(v) => form.setField("address_country", v)}
             >
               <SelectTrigger>
-                <SelectValue />
+                <SelectValue>{countryName(country, i18n.language)}</SelectValue>
               </SelectTrigger>
               <SelectContent className="max-h-80">
                 {countryOptions.map(({ code, name }, index) => (

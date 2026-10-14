@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import { ClientOnly } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Loader2, MapPin, Pencil } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2, MapPin, Pencil } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +28,9 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
   const { values } = form;
   const [status, setStatus] = useState<Status>("idle");
   const [manual, setManual] = useState(false);
+  // The map opens only to place or check the pin, then folds away so the page
+  // scrolls normally again. A saved pin starts folded, shown as a summary line.
+  const [mapOpen, setMapOpen] = useState(false);
 
   const lat = values.geo_lat == null ? null : Number(values.geo_lat);
   const lng = values.geo_lng == null ? null : Number(values.geo_lng);
@@ -53,6 +56,7 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
       if (result.ok) {
         setPoint(Number(result.lat.toFixed(6)), Number(result.lng.toFixed(6)));
         setStatus("found");
+        setMapOpen(true);
         return;
       }
       setStatus(
@@ -149,10 +153,34 @@ export function AddressMapPicker({ form }: { form: ListingFormApi }) {
       ) : null}
 
       {lat != null && lng != null ? (
-        <div className="overflow-hidden border-t border-border">
+        <div className="flex flex-wrap items-center gap-3 border-t border-border px-3 py-2">
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {t("admin.listings.geocode.pinAt", { lat: lat.toFixed(5), lng: lng.toFixed(5) })}
+          </span>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            className="ml-auto"
+            aria-expanded={mapOpen}
+            onClick={() => setMapOpen((open) => !open)}
+          >
+            {mapOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            {mapOpen ? t("admin.listings.geocode.hideMap") : t("admin.listings.geocode.showMap")}
+          </Button>
+        </div>
+      ) : null}
+
+      {lat != null && lng != null && mapOpen ? (
+        <div className="relative isolate z-0 overflow-hidden border-t border-border">
           <ClientOnly fallback={<Skeleton />}>
             <Suspense fallback={<Skeleton />}>
               <PinMapCanvas
+                gestureHelp={{
+                  windows: t("admin.listings.geocode.gestureWindows"),
+                  mac: t("admin.listings.geocode.gestureMac"),
+                  mobile: t("admin.listings.geocode.gestureMobile"),
+                }}
                 lat={lat}
                 lng={lng}
                 onMove={(nextLat, nextLng) => {
