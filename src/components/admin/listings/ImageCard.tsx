@@ -187,7 +187,7 @@ export function ImageCard({
             type="button"
             size="icon"
             variant="outline"
-            className="ml-auto size-9 text-destructive"
+            className="size-9 text-destructive"
             disabled={busy}
             onClick={() => onDelete(image)}
             aria-label={t("admin.listings.images.delete")}
