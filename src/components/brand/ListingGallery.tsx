@@ -90,7 +90,7 @@ export function ListingGallery({ images, locale, title, tourUrl = null }: Props)
           </Button>
         ) : null}
         {tourUrl ? (
-          <a href={tourUrl} target="_blank" rel="noopener noreferrer" className={buttonClass("secondary", "sm")}>
+          <a href={tourUrl} target="_blank" rel="noopener noreferrer" className={buttonClass({ variant: "secondary", size: "sm" })}>
             <ListingIcon name="map" /> {t("listings.detail.tour")}
           </a>
         ) : null}
