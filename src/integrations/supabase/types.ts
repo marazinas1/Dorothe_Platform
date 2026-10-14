@@ -1119,6 +1119,7 @@ export type Database = {
           area_unit: string
           background_color: string | null
           border_color: string | null
+          business_card_url: string | null
           button_style: string | null
           contact_email: string | null
           contact_phone: string | null
@@ -1186,6 +1187,7 @@ export type Database = {
           area_unit?: string
           background_color?: string | null
           border_color?: string | null
+          business_card_url?: string | null
           button_style?: string | null
           contact_email?: string | null
           contact_phone?: string | null
@@ -1253,6 +1255,7 @@ export type Database = {
           area_unit?: string
           background_color?: string | null
           border_color?: string | null
+          business_card_url?: string | null
           button_style?: string | null
           contact_email?: string | null
           contact_phone?: string | null
