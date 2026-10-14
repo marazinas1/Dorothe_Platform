@@ -1,7 +1,4 @@
-import {
-  BarChart3, CalendarCheck, CalendarDays, CalendarX, Factory, FileText, Flame, Fuel, Gauge,
-  Leaf, Mountain, Sun, Thermometer, TreePine, Wind, Zap, type LucideIcon,
-} from "lucide-react";
+import { Leaf, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -19,6 +16,7 @@ import {
 } from "@/lib/validation/energy";
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow, FormSection } from "./FieldRow";
+import { FIELD_ICONS, SOURCE_ICONS } from "./energy-icons";
 
 type Field =
   | { key: string; kind: "number" }
@@ -48,33 +46,6 @@ const DE_FIELDS: Field[] = [
   { key: "certificate_date", kind: "date" },
   { key: "certificate_valid_until", kind: "date" },
 ];
-
-/** Recognition aids beside each label; the text label always stays. */
-const FIELD_ICONS: Record<string, LucideIcon> = {
-  certificate_type: FileText,
-  final_energy: Gauge,
-  hwb: Gauge,
-  eeb: Gauge,
-  fgee: Gauge,
-  energy_source: Flame,
-  efficiency_class: BarChart3,
-  year_built: CalendarDays,
-  certificate_date: CalendarCheck,
-  certificate_valid_until: CalendarX,
-};
-
-const SOURCE_ICONS: Record<string, LucideIcon> = {
-  district_heating: Factory,
-  natural_gas: Flame,
-  lpg: Fuel,
-  heating_oil: Fuel,
-  electricity: Zap,
-  heat_pump: Wind,
-  wood_pellets: TreePine,
-  solar: Sun,
-  geothermal: Mountain,
-  chp: Thermometer,
-};
 
 function fieldsFor(country: Country): Field[] {
   if (country === "AT") return AT_FIELDS;
