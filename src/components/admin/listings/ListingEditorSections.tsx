@@ -92,16 +92,14 @@ export function ListingEditorSections(props: Props) {
   }));
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[11rem_minmax(0,1fr)]">
+    <div className="w-full min-w-0 space-y-6">
+      <ChecklistRail checklist={props.checklist} />
       <SectionNav sections={nav} />
-      <div className="min-w-0 space-y-6">
-        <ChecklistRail checklist={props.checklist} />
-        {sections.map((node) => (
-          <div key={node.key} id={sectionAnchorId(String(node.key))} className="scroll-mt-24">
-            {node}
-          </div>
-        ))}
-      </div>
+      {sections.map((node) => (
+        <div key={node.key} id={sectionAnchorId(String(node.key))} className="scroll-mt-32">
+          {node}
+        </div>
+      ))}
     </div>
   );
 }
