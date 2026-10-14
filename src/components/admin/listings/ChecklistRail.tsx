@@ -1,3 +1,4 @@
+import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Check, ChevronDown, Minus } from "lucide-react";
 
@@ -11,7 +12,13 @@ import { Button } from "@/components/ui/button";
  * focuses it. Sticky on desktop, collapsed into a summary on mobile so it never
  * eats the screen while typing.
  */
-export function ChecklistRail({ checklist }: { checklist: Checklist }) {
+export function ChecklistRail({
+  checklist,
+  children,
+}: {
+  checklist: Checklist;
+  children?: React.ReactNode;
+}) {
   const { t } = useTranslation();
   const { items, outstanding, ready, energyExempt } = checklist;
 
@@ -53,9 +60,31 @@ export function ChecklistRail({ checklist }: { checklist: Checklist }) {
         <div className="mt-3">{body}</div>
       </details>
 
-      <aside className="hidden lg:sticky lg:top-6 lg:block lg:self-start lg:rounded-[var(--radius)] lg:border lg:border-border lg:bg-muted/30 lg:p-4">
-        <h2 className="font-heading text-base">{t("admin.listings.checklist.title")}</h2>
-        {body}
+      {/* Desktop: one calm control rail — progress first, details on demand, then section jumps. */}
+      <aside className="hidden lg:sticky lg:top-6 lg:grid lg:max-h-[calc(100vh-3rem)] lg:gap-4 lg:self-start lg:overflow-y-auto">
+        <details className="group rounded-[var(--radius)] border border-border bg-card p-4">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-bold">
+            {t("admin.listings.checklist.title")}
+            <ChevronDown
+              className="ml-auto h-4 w-4 transition-transform group-open:rotate-180"
+              aria-hidden
+            />
+          </summary>
+          <div
+            className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={items.length}
+            aria-valuenow={items.length - outstanding}
+          >
+            <div
+              className="h-full bg-primary transition-all"
+              style={{ width: `${((items.length - outstanding) / Math.max(items.length, 1)) * 100}%` }}
+            />
+          </div>
+          <div className="mt-3">{body}</div>
+        </details>
+        {children}
       </aside>
     </>
   );
