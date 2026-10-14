@@ -1371,7 +1371,7 @@
       "sectionNav": "Formularbereiche",
       "docs": {
         "floorplan": "Grundriss",
-        "floorplanHelp": "PDF oder Bild (JPG, PNG, WebP), offen auf der Objektseite.",
+        "floorplanHelp": "Eine Datei pro Etage: PDF oder Bild (JPG, PNG, WebP), offen auf der Objektseite.",
         "expose": "Vollständiges Exposé",
         "exposeHelp": "PDF mit allen Angaben zur Immobilie.",
         "afterEnquiry": "Erst nach einer Anfrage senden",
