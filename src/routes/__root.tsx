@@ -178,7 +178,8 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
-      <Toaster />
+      {/* Top so a toast never covers the sticky Save / Publish bar at the bottom. */}
+      <Toaster position="top-right" />
     </QueryClientProvider>
   );
 }
