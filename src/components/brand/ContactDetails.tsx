@@ -1,4 +1,4 @@
-import { Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -34,6 +34,13 @@ export function ContactDetails({ settings, hours }: Props) {
         <DetailRow icon={<Phone className="size-4" />} note={t("pages.contact.phone_note")}>
           <a className="tabular-figures hover:underline" href={`tel:${settings.contact_phone.replace(/\s+/g, "")}`}>
             {settings.contact_phone}
+          </a>
+        </DetailRow>
+      ) : null}
+      {settings.whatsapp && settings.whatsapp.replace(/\D/g, "") ? (
+        <DetailRow icon={<MessageCircle className="size-4" />}>
+          <a className="hover:underline" href={`https://wa.me/${settings.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer">
+            {t("contact.whatsapp")} · <span className="tabular-figures">{settings.whatsapp}</span>
           </a>
         </DetailRow>
       ) : null}

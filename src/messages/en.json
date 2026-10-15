@@ -2228,7 +2228,8 @@
   },
   "contact": {
     "phone": "Call",
-    "email": "Email"
+    "email": "Email",
+    "whatsapp": "WhatsApp"
   },
   "countries": {
     "DE": "Germany",
