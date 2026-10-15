@@ -91,5 +91,5 @@ Blocked outside this work:
 - [ ] F9–F13
 
 ## Listing hierarchy (approved)
-- [ ] Public: semantic feature icons, clean highlight prefixes, floor plans after description
-- [ ] Admin: section order Basics → Photos → Price/Size → Texts → Equipment → Plans/Documents → Location → Energy
+- [x] Public: semantic feature icons, clean highlight prefixes, floor plans after description
+- [x] Admin: section order Basics → Photos → Price/Size → Texts → Equipment → Plans/Documents → Location → Energy
