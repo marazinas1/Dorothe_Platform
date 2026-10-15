@@ -44,7 +44,7 @@ export function ListingAgent({ listingId, listingTitle, settings }: Props) {
               <dl className="mt-6 space-y-2 text-sm">
                 {phone ? (
                   <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <dt className="w-16 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                    <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                       {t("contact.phone")}
                     </dt>
                     <dd>
@@ -59,7 +59,7 @@ export function ListingAgent({ listingId, listingTitle, settings }: Props) {
                 ) : null}
                 {wa ? (
                   <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <dt className="w-16 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                    <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                       {t("share.whatsapp")}
                     </dt>
                     <dd>
@@ -71,11 +71,11 @@ export function ListingAgent({ listingId, listingTitle, settings }: Props) {
                 ) : null}
                 {email ? (
                   <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <dt className="w-16 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                    <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                       {t("contact.email")}
                     </dt>
                     <dd>
-                      <a href={`mailto:${email}`} className="break-all text-foreground hover:underline">
+                      <a href={`mailto:${email}`} className="break-words text-foreground hover:underline">
                         {email}
                       </a>
                     </dd>

@@ -515,8 +515,7 @@
       "photo_too_large": "Each photo must be under 3 MB.",
       "submit": "Request valuation",
       "full_form_link": "Detailed valuation request"
-    },
-    "optional": "Optional"
+    }
   },
   "share": {
     "copy": "Copy link",

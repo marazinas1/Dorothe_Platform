@@ -72,7 +72,7 @@ export function ListingInquiryForm({ listingId, defaultMessage }: Props) {
           <input id="inq-email" name="email" type="email" required autoComplete="email" maxLength={255} className={inputCls} />
         </div>
         <div>
-          <label className={labelCls} htmlFor="inq-phone">{t("inquiry.phone")} <span className="font-normal text-muted-foreground">({t("inquiry.optional")})</span></label>
+          <label className={labelCls} htmlFor="inq-phone">{t("inquiry.phone")}</label>
           <input id="inq-phone" name="phone" type="tel" autoComplete="tel" maxLength={40} className={inputCls} />
         </div>
         <div className="sm:col-span-2">
