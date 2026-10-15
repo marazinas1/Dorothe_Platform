@@ -100,7 +100,7 @@ export function BrandAssetsSection() {
       />
 
       {/* The business card is a print asset, not site chrome, so it sits apart. */}
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section>
         <BrandAssetField
           kind="logo"
           label={label("businessCard")}
