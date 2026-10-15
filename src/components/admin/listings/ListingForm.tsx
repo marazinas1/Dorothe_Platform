@@ -74,28 +74,28 @@ export function ListingForm({
    * Insert the row the first time it is actually needed, then hand over to the
    * editor route under the real id so a refresh lands on the saved draft.
    */
-  async function ensureListingId(): Promise<string> {
+  async function ensureListingId(
+    { open = true }: { open?: boolean } = {},
+): Promise<string> {
     if (listingId) return listingId;
-    if (creating.current) return creating.current;
-    const pending = (async () => {
-      const parsed = ListingFormSchema.parse(form.values);
-      const result = await saveListing({ data: parsed });
-      form.markClean();
-      queryClient.invalidateQueries(adminListingsQueryOptions);
-      await navigate({
-        to: "/admin/listings/$id",
-        params: { id: result.id },
-        replace: true,
-      });
-      return result.id;
-    })();
-    creating.current = pending;
-    try {
-      return await pending;
-    } catch (error) {
-      creating.current = null;
-      throw error;
+    if (!creating.current) {
+      const pending = (async () => {
+        const parsed = ListingFormSchema.parse(form.values);
+        const result = await saveListing({ data: parsed });
+        form.markClean();
+        queryClient.invalidateQueries(adminListingsQueryOptions);
+        return result.id;
+      })();
+      creating.current = pending;
+      pending.catch(() => { creating.current = null; });
     }
+    const id = await creating.current;
+    // Uploads pass open: false and open the editor once their files are stored,
+    // because leaving this route mid-upload would drop the work in flight.
+    if (open) {
+      await navigate({ to: "/admin/listings/$id", params: { id }, replace: true });
+    }
+    return id;
   }
 
   // A new listing is created only on an explicit Save (or a photo drop), never

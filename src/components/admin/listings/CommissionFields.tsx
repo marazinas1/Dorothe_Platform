@@ -61,7 +61,8 @@ export function CommissionFields({
 
       {!free ? (
         <div className="grid gap-4 sm:grid-cols-3">
-          {values.commission_type === "percent" ? (
+          {/* Percent is the market norm, so a figure typed before choosing a type is read as percent. */}
+          {values.commission_type !== "amount" ? (
             <FieldRow
               label={t("admin.listings.fields.commission_value_percent")}
               anchor="commission"
@@ -71,12 +72,13 @@ export function CommissionFields({
                 inputMode="decimal"
                 step="0.01"
                 value={values.commission_value ?? ""}
-                onChange={(e) =>
+                onChange={(e) => {
                   form.setField(
                     "commission_value",
                     e.target.value === "" ? null : Number(e.target.value),
-                  )
-                }
+                  );
+                  if (!values.commission_type) form.setField("commission_type", "percent");
+                }}
               />
             </FieldRow>
           ) : (

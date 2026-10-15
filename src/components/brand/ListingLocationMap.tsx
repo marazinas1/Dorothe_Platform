@@ -42,10 +42,15 @@ export function ListingLocationMap({ listing, locale }: Props) {
   }, [loaded]);
   const points = listingsToPoints([listing], locale);
   const townLine = [listing.address_zip, listing.address_city].filter(Boolean).join(" ");
-  const surroundings = pickLocalized(
-    (listing.content_sections as any)?.surroundings,
-    locale,
-  );
+  // content_sections is an array of { key, items: { [locale]: string[] } }.
+  const section = Array.isArray(listing.content_sections)
+    ? (listing.content_sections as any[]).find((s) => s?.key === "surroundings")
+    : (listing.content_sections as any)?.surroundings;
+  const items = section?.items ?? section;
+  const localized = items?.[locale] ?? items?.de ?? items?.en;
+  const surroundings = Array.isArray(localized)
+    ? localized.filter((v) => typeof v === "string").join("\n\n")
+    : pickLocalized(items, locale);
 
   return (
     <div>

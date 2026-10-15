@@ -93,3 +93,14 @@ Blocked outside this work:
 ## Listing hierarchy (approved)
 - [x] Public: semantic feature icons, clean highlight prefixes, floor plans after description
 - [x] Admin: section order Basics → Photos → Price/Size → Texts → Equipment → Plans/Documents → Location → Energy
+
+## Demo listing test (2026-10-15)
+- [x] Photos dropped on a brand-new listing were lost — fixed
+- [x] Admin-uploaded floor plans now shown on the public page
+- [x] "Location & surroundings" text now shown under Location
+- [x] Commission: typed figure defaults to percent; toasts no longer cover Save/Publish
+- [ ] Public commission figure hidden by database view (needs schema change; migration tool unavailable this session)
+- [ ] Admin section tabs overflow at 1280px and active tab lags while scrolling
+- [ ] Floor plans: optional per-floor label (Ground floor, Upper floor)
+- [ ] Efficiency class suggestion from kWh value
+- [ ] Site default language is EN, so slugs are English on the German site — confirm with owner

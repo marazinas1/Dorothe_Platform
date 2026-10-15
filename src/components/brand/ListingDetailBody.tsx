@@ -7,6 +7,7 @@ import { useFeatureFlag } from "@/hooks/use-feature-flag";
 import type { Locale } from "@/i18n/config";
 import {
   listingDocumentsQueryOptions,
+  listingFloorPlansQueryOptions,
   listingTourQueryOptions,
   relatedCandidatesQueryOptions,
   type PublicListing,
@@ -63,6 +64,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
   );
 
   const tour = useSuspenseQuery(listingTourQueryOptions(l.id));
+  const plans = useSuspenseQuery(listingFloorPlansQueryOptions(l.id));
 
   const locationLine =
     l.geo_precision === "hidden"
@@ -109,7 +111,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
 
           {/* 4. Floor plans, right after the story: buyers check layout next */}
           <section className={GAP}>
-            <ListingFloorPlans images={l.images} locale={locale} />
+            <ListingFloorPlans images={l.images} plans={plans.data} locale={locale} />
           </section>
 
           {/* 5. Price and costs */}
@@ -130,7 +132,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
           {/* 8. Documents */}
           {documentsEnabled ? (
             <section className={GAP}>
-              <ListingDocuments documents={documents.data ?? []} />
+              <ListingDocuments documents={(documents.data ?? []).filter((d) => d.type !== "floorplan")} />
             </section>
           ) : null}
 

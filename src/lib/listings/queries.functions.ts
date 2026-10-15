@@ -451,3 +451,48 @@ export function listingTourQueryOptions(listingId: string) {
     staleTime: 60_000,
   });
 }
+
+export type PublicFloorPlan = { id: string; filename: string; url: string; isPdf: boolean };
+
+/**
+ * Floor plans uploaded in the admin's documents section, signed for display.
+ * Plans are shown openly on the listing page (not lead-gated), so they are
+ * read here regardless of the documents feature flag.
+ */
+export const listPublicFloorPlans = createServerFn({ method: "GET" })
+  .inputValidator((raw: unknown) => z.object({ listing_id: z.string().uuid() }).parse(raw))
+  .handler(async ({ data }): Promise<PublicFloorPlan[]> => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows, error } = await supabaseAdmin
+      .from("listing_documents_public")
+      .select("id, filename, storage_path, requires_lead, created_at")
+      .eq("listing_id", data.listing_id)
+      .eq("type", "floorplan")
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    const { DOCUMENTS_BUCKET } = await import("./media-paths");
+    const out: PublicFloorPlan[] = [];
+    for (const r of (rows ?? []) as any[]) {
+      if (r.requires_lead || !r.storage_path) continue;
+      const { data: signed } = await supabaseAdmin.storage
+        .from(DOCUMENTS_BUCKET)
+        .createSignedUrl(r.storage_path, 3600);
+      if (!signed?.signedUrl) continue;
+      out.push({
+        id: r.id,
+        filename: r.filename,
+        url: signed.signedUrl,
+        isPdf: /\.pdf$/i.test(r.filename ?? r.storage_path),
+      });
+    }
+    return out;
+  });
+
+export function listingFloorPlansQueryOptions(listingId: string) {
+  return queryOptions({
+    queryKey: ["listings", "floorplans", listingId],
+    queryFn: () => listPublicFloorPlans({ data: { listing_id: listingId } }),
+    // Signed links live one hour; refresh well before they expire.
+    staleTime: 30 * 60_000,
+  });
+}
