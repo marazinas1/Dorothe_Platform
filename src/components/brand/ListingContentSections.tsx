@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
@@ -25,7 +26,11 @@ function pickItems(items: unknown, locale: string): string[] {
   const primary = obj[locale];
   const fb = obj.de ?? obj.en ?? Object.values(obj)[0];
   const chosen = Array.isArray(primary) ? primary : Array.isArray(fb) ? fb : [];
-  return chosen.filter((v): v is string => typeof v === "string" && v.trim().length > 0);
+  // Brokers often paste bullets ("- ", "• ", "✓ "); the list supplies its own marker.
+  return chosen
+    .filter((v): v is string => typeof v === "string")
+    .map((v) => v.trim().replace(/^[-–—•*·✓✔]+\s*/u, "").trim())
+    .filter((v) => v.length > 0);
 }
 
 /**
@@ -55,7 +60,7 @@ export function ListingContentSections({ sections, locale }: Props) {
           <ul className="grid max-w-3xl gap-x-8 gap-y-3 sm:grid-cols-2">
             {s.items.map((item, i) => (
               <li key={`${s.key}-${i}`} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
-                <span aria-hidden>✓</span>{item}
+                <Check aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-primary" />{item}
               </li>
             ))}
           </ul>
