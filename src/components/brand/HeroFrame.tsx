@@ -35,7 +35,9 @@ export function HeroFrame({
             className="h-full w-full object-cover"
             fetchPriority="high"
           />
-        ) : null}
+        ) : (
+          <div className="absolute inset-0 bg-hero-fallback" aria-hidden="true" />
+        )}
         {/* Text-protection gradient only — confined to the lower band. */}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-scrim via-scrim-soft to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1400px] px-6 pb-14 lg:px-10 lg:pb-20">
