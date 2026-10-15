@@ -60,18 +60,14 @@ export function ListingStickyRail({ listing, locale, settings }: Props) {
           </div>
         </div>
 
-        <Link
-          to="/$locale/kontakt"
-          params={{ locale }}
-          search={{ intent: "looking", listing: listing.id, title: listing.title[locale] ?? listing.title.de ?? listing.title.en ?? "" }}
-          className={actionButtonClass("primary", "mt-8 w-full")}
-        >
+        <a href="#kontakt" className={actionButtonClass("primary", "mt-8 w-full")}>
           <ListingIcon name="cal" /> {t("listings.detail.book_viewing")}
-        </Link>
+        </a>
         <Link to="/$locale/kontakt" params={{ locale }} search={{ intent: "looking", listing: listing.id, title: listing.title[locale] ?? listing.title.de ?? listing.title.en ?? "" }} className={buttonClass({ variant: "secondary", className: "mt-2 w-full" })}>
           <ListingIcon name="doc" /> {t("listings.detail.request_expose")}
         </Link>
         {settings.contact_phone ? <a href={`tel:${settings.contact_phone.replace(/\s/g, "")}`} className="mt-5 flex items-center justify-center gap-2 text-sm font-semibold"><ListingIcon name="phone" />{settings.contact_phone}</a> : null}
+        {settings.whatsapp ? <a href={`https://wa.me/${settings.whatsapp.replace(/[^\d]/g, "")}`} target="_blank" rel="noopener noreferrer" className="mt-2 flex min-h-11 items-center justify-center text-sm text-muted-foreground hover:text-foreground">{t("share.whatsapp")}</a> : null}
         {listing.reference_code ? (
           <div className="mt-4 text-center text-xs text-muted-foreground">
             {t("listings.detail.reference_short")} {listing.reference_code}
