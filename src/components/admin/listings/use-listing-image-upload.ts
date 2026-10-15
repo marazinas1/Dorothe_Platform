@@ -19,7 +19,7 @@ export type UploadJob = { id: string; name: string; error: string | null };
 
 export function useListingImageUpload(
   listingId: string | null,
-  ensureListingId: () => Promise<string>,
+  ensureListingId: (opts?: { open?: boolean }) => Promise<string>,
   refresh: () => void,
 ) {
   const [busy, setBusy] = useState(false);
@@ -78,8 +78,9 @@ export function useListingImageUpload(
   async function upload(input: FileList | File[]) {
     setBusy(true);
     try {
-      const id = listingId ?? await ensureListingId();
+      const id = listingId ?? await ensureListingId({ open: false });
       for (const file of Array.from(input)) await runJob(id, crypto.randomUUID(), file);
+      if (!listingId) await ensureListingId();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error));
     } finally {
