@@ -15,8 +15,8 @@ export const OUTLINE_REGION_KEYS = [
   "hero",
   "facts",
   "description",
-  "specs",
   "highlights",
+  "specs",
   "surroundings",
   "rest",
 ] as const;
