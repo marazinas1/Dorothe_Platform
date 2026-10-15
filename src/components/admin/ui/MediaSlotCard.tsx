@@ -9,6 +9,7 @@ import { useCurrentUser } from "@/lib/auth/use-permission";
 import type { MediaSource, ResolvedMedia } from "@/lib/media/slots";
 import { cn } from "@/lib/utils";
 
+import { AssetDownloadButton } from "./AssetDownloadButton";
 import { ImageUploadField } from "./ImageUploadField";
 
 type Props = {
@@ -33,6 +34,7 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const m = (k: string) => t(`admin.media.${k}`);
+  const slotName = uploadPath.split("/").slice(-2).join("-").replace(/\.\w+$/, "");
 
   async function run(action: () => void | Promise<void>, done: string) {
     setBusy(true);
@@ -77,54 +79,48 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {tiles.map((tile) => {
               const showing = media.source === tile.key;
+              const name = `${slotName}-${tile.key === "chosen" ? "photo" : tile.key === "default" ? "curated-default" : "fallback"}`;
               return (
-                <div key={tile.key} className={cn("min-w-0 rounded-[var(--radius)] border p-2", showing ? "border-foreground" : "border-border")}>
+                <div key={tile.key} className={cn("flex min-w-0 flex-col rounded-[var(--radius)] border p-2", showing ? "border-foreground" : "border-border")}>
                   <div className="mb-2 flex items-center justify-between gap-2">
                     <span className="admin-label text-muted-foreground">{tile.title}</span>
                     {showing ? <Badge>{m("showing")}</Badge> : null}
                   </div>
                   <Thumb src={tile.url} className={cn("w-full", aspect)} empty={tile.empty} />
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {tile.key === "chosen" ? (
+                      <>
+                        <ImageUploadField path={uploadPath} removable={false} replace={Boolean(media.chosen)} onUploaded={(url) => void run(() => onChoose(url), m("saved"))} />
+                        {media.chosen ? (
+                          <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => void run(() => onChoose(null), m("reset"))}>
+                            <RotateCcw className="h-3.5 w-3.5" />
+                            {m("resetToDefault")}
+                          </Button>
+                        ) : null}
+                      </>
+                    ) : null}
+                    {tile.key === "default" && isDeveloper ? (
+                      <>
+                        <ImageUploadField path={studioPath} removable={false} replace={Boolean(media.studio)} onUploaded={(url) => void run(() => onStudio(url), m("studioSaved"))} />
+                        {media.studio ? (
+                          <Button type="button" size="sm" variant="ghost" disabled={busy} onClick={() => void run(() => onStudio(null), m("studioCleared"))}>
+                            {m("clearStudio")}
+                          </Button>
+                        ) : null}
+                      </>
+                    ) : null}
+                    {tile.url ? <AssetDownloadButton url={tile.url} name={name} /> : null}
+                  </div>
+                  {tile.key === "default" && !isDeveloper ? (
+                    <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+                      <Lock className="h-3 w-3" />
+                      {m("studioLocked")}
+                    </p>
+                  ) : null}
                 </div>
               );
             })}
           </div>
-
-          <div className="flex flex-wrap items-start gap-2">
-            <ImageUploadField
-              path={uploadPath}
-              removable={false}
-              replace={Boolean(media.chosen)}
-              onUploaded={(url) => void run(() => onChoose(url), m("saved"))}
-            />
-            {media.chosen ? (
-              <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => void run(() => onChoose(null), m("reset"))}>
-                <RotateCcw className="h-3.5 w-3.5" />
-                {m("resetToDefault")}
-              </Button>
-            ) : null}
-          </div>
-
-          {isDeveloper ? (
-            <div className="flex flex-wrap items-start gap-2 border-t border-border pt-3">
-              <span className="admin-label self-center text-muted-foreground">{m("studioDefault")}</span>
-              <ImageUploadField
-                path={studioPath}
-                removable={false}
-                replace={Boolean(media.studio)}
-                onUploaded={(url) => void run(() => onStudio(url), m("studioSaved"))}
-              />
-              {media.studio ? (
-                <Button type="button" size="sm" variant="ghost" disabled={busy} onClick={() => void run(() => onStudio(null), m("studioCleared"))}>
-                  {m("clearStudio")}
-                </Button>
-              ) : null}
-            </div>
-          ) : (
-            <p className="flex items-center gap-1 text-xs text-muted-foreground">
-              <Lock className="h-3 w-3" />
-              {m("studioLocked")}
-            </p>
-          )}
         </div>
       ) : null}
     </div>

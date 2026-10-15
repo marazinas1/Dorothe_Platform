@@ -11,6 +11,7 @@ import {
   postCoverPath,
   postImageUrl,
 } from "@/lib/posts/media-paths";
+import { AssetDownloadButton } from "@/components/admin/ui/AssetDownloadButton";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 
@@ -111,6 +112,7 @@ export function CoverUploader({ value, onChange, ensurePostId }: Props) {
               <Trash2 className="h-3.5 w-3.5" />
               {t("admin.posts.coverRemove")}
             </Button>
+            <AssetDownloadButton url={value} name="article-cover" />
           </div>
         </div>
       ) : (
