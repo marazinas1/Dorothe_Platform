@@ -515,7 +515,8 @@
       "photo_too_large": "Jedes Foto muss unter 3 MB liegen.",
       "submit": "Bewertung anfordern",
       "full_form_link": "Ausführliche Wertermittlung anfragen"
-    }
+    },
+    "optional": "Optional"
   },
   "share": {
     "copy": "Link kopieren",
