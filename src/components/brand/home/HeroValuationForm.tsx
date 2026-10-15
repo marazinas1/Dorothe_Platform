@@ -2,6 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/brand/ui/Button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { Locale } from "@/i18n/config";
 
 const TYPES = ["house", "apartment", "multi_family", "land"] as const;
@@ -43,9 +44,18 @@ export function HeroValuationForm({ locale, title }: { locale: Locale; title: st
         </div>
         <div>
           <label htmlFor="hero-type" className="eyebrow mb-2 block text-muted-foreground">{t("home.hero_form_type")}</label>
-          <select id="hero-type" name="type" defaultValue="house" className={field}>
-            {TYPES.map((v) => <option key={v} value={v}>{typeLabel(v)}</option>)}
-          </select>
+          <Select name="type" defaultValue="house">
+            <SelectTrigger id="hero-type" className={`${field} h-11 rounded-sm shadow-none`}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="rounded-sm border-border bg-background text-foreground">
+              {TYPES.map((v) => (
+                <SelectItem key={v} value={v} className="min-h-11 cursor-pointer rounded-sm text-sm focus:bg-secondary focus:text-foreground">
+                  {typeLabel(v)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <Button type="submit" variant="primary">{t("home.hero_form_submit")}</Button>
       </div>
