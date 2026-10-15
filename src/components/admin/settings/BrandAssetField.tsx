@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { downloadFile } from "@/lib/download";
+import { PdfPagePreview } from "./PdfPagePreview";
 import { processImageFile } from "@/lib/images/optimize";
 import {
   SITE_ASSETS_BUCKET,
@@ -117,21 +118,28 @@ export function BrandAssetField({
         }}
       />
 
+      {value && document ? (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <PdfPagePreview url={value} page={1} label={t("admin.settings.brand.cardFront")} />
+          <PdfPagePreview url={value} page={2} label={t("admin.settings.brand.cardBack")} />
+        </div>
+      ) : (
       <div
-        className={`admin-media-frame h-28 w-full p-4 ${dark ? "bg-primary" : "bg-muted"}`}
-      >
-          {value && document ? (
-            <FileText className="h-10 w-10 text-muted-foreground" aria-hidden="true" />
-          ) : value ? (
-            <img
-              src={value}
-              alt=""
-              className={square ? "h-16 w-16 object-contain" : "max-h-20 max-w-full object-contain"}
-            />
-          ) : (
-            <ImageOff className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
-          )}
-      </div>
+          className={`admin-media-frame h-28 w-full p-4 ${dark ? "bg-primary" : "bg-muted"}`}
+        >
+            {value && document ? (
+              <FileText className="h-10 w-10 text-muted-foreground" aria-hidden="true" />
+            ) : value ? (
+              <img
+                src={value}
+                alt=""
+                className={square ? "h-16 w-16 object-contain" : "max-h-20 max-w-full object-contain"}
+              />
+            ) : (
+              <ImageOff className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            )}
+        </div>
+      )}
       <div className="flex min-h-9 flex-wrap items-center gap-2">
         <Button type="button" size="sm" disabled={busy} onClick={() => inputRef.current?.click()}>
           {busy ? (
