@@ -108,8 +108,9 @@ export const ContactSchema = z.object({
   address_country: nullableText(100),
   geo_lat: nullableNumber,
   geo_lng: nullableNumber,
-  opening_hours: jsonRecord,
-  social: jsonRecord,
+  // Older rows store [] — normalise any non-object to an empty record.
+  opening_hours: z.preprocess((v) => (v && typeof v === "object" && !Array.isArray(v) ? v : {}), jsonRecord),
+  social: z.preprocess((v) => (v && typeof v === "object" && !Array.isArray(v) ? v : {}), jsonRecord),
 });
 export type ContactInput = z.infer<typeof ContactSchema>;
 
