@@ -52,7 +52,7 @@ export function DocumentsSection({ listingId, ensureListingId }: Props) {
           <Input type="url" inputMode="url" value={tour} placeholder="https://"
             onChange={(e) => setTour(e.target.value)} onBlur={() => void commitTour()} />
         </FieldRow>
-        <PlanServiceHint />
+        {docs("floorplan").length === 0 ? <PlanServiceHint /> : null}
       </div>
     </FormSection>
   );
