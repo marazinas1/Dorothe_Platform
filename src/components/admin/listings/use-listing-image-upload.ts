@@ -76,10 +76,12 @@ export function useListingImageUpload(
   }
 
   async function upload(input: FileList | File[]) {
+    // Copy first: the input is reset right after the change event, which empties a live FileList.
+    const picked = Array.from(input);
     setBusy(true);
     try {
       const id = listingId ?? await ensureListingId({ open: false });
-      for (const file of Array.from(input)) await runJob(id, crypto.randomUUID(), file);
+      for (const file of picked) await runJob(id, crypto.randomUUID(), file);
       if (!listingId) await ensureListingId();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error));
