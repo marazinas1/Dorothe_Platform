@@ -71,6 +71,7 @@ export function useListingImageUpload(
       refresh();
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
+      console.log("DBG err", message);
       setJobs((old) => old.map((job) => job.id === jobId ? { ...job, error: message } : job));
     }
   }
@@ -78,6 +79,7 @@ export function useListingImageUpload(
   async function upload(input: FileList | File[]) {
     // Copy first: the input is reset right after the change event, which empties a live FileList.
     const picked = Array.from(input);
+    console.log("DBG upload", picked.length, listingId);
     setBusy(true);
     try {
       const id = listingId ?? await ensureListingId({ open: false });
