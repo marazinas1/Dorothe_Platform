@@ -46,14 +46,14 @@ export function AgentIntro({
       <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 lg:gap-16">
         <div className="md:col-span-5">
           <div className="aspect-[4/5] w-full overflow-hidden rounded-media bg-muted">
-            <img
+            {portrait ? <img
               src={portrait}
               alt={name}
               width={1200}
               height={1500}
               loading="eager"
               className="h-full w-full object-cover transition-transform duration-[1000ms] ease-out hover:scale-[1.02]"
-            />
+            /> : null}
           </div>
         </div>
 

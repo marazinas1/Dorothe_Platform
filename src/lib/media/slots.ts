@@ -1,6 +1,3 @@
-import brokerPlaceholder from "@/assets/noir-broker-portrait.jpg";
-import inheritanceHouse from "@/assets/noir-inheritance-house.jpg";
-import sellingHouse from "@/assets/noir-selling-house.jpg";
 import type { SiteSettings } from "@/types/site-settings";
 
 /**
@@ -16,9 +13,6 @@ export const MEDIA_SLOTS = {
 } as const;
 
 export type MediaSlotKey = keyof typeof MEDIA_SLOTS;
-
-/** Built-in portrait used when nobody chose one. */
-export const BUILT_IN_PORTRAIT: string = brokerPlaceholder;
 
 export type MediaSource = "chosen" | "default" | "builtIn";
 
@@ -45,12 +39,9 @@ function ownerChoice(settings: SiteSettings, key: MediaSlotKey): string | null {
   return entry?.mode === "custom" ? clean(entry.url) : null;
 }
 
-/** The home opening has no built-in photograph: an empty slot renders the
- * neutral hero surface, so a fresh clone never shows another client's house. */
-function builtIn(_settings: SiteSettings, key: MediaSlotKey): string | null {
-  if (key === "about:portrait") return BUILT_IN_PORTRAIT;
-  if (key === "selling:hero_photo") return sellingHouse;
-  if (key === "inheritance:hero_photo") return inheritanceHouse;
+/** No slot ships a built-in photograph: an empty slot renders the neutral
+ * surface, so a fresh clone never shows another client's house or face. */
+function builtIn(_settings: SiteSettings, _key: MediaSlotKey): string | null {
   return null;
 }
 
@@ -67,8 +58,8 @@ export function resolveMedia(
 }
 
 /** The agent portrait every public placement shows. */
-export function agentPortrait(settings: SiteSettings): string {
-  return resolveMedia(settings, "about:portrait").url ?? BUILT_IN_PORTRAIT;
+export function agentPortrait(settings: SiteSettings): string | null {
+  return resolveMedia(settings, "about:portrait").url;
 }
 
 /** The portrait only when someone actually provided one (no placeholder). */
