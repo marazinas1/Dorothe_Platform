@@ -20,7 +20,9 @@ export function H1Hero({ locale, copy, media }: HomeTemplateProps) {
           className="absolute inset-0 h-full w-full object-cover"
           fetchPriority="high"
         />
-      ) : null}
+      ) : (
+        <div className="absolute inset-0 bg-hero-fallback" aria-hidden="true" />
+      )}
       <div className="absolute inset-0 bg-scrim" aria-hidden="true" />
       <div className="relative z-10 mx-auto flex min-h-[720px] w-full max-w-[1280px] flex-col justify-end px-5 pb-9 pt-20 md:px-10 lg:min-h-[724px]">
         <div className="max-w-[670px]">
