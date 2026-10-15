@@ -26,7 +26,7 @@ export function ImageManager({
   images: ImageRecord[];
   refresh: () => void;
   /** Creates the draft row on demand; uploads wait for it before attaching. */
-  ensureListingId: () => Promise<string>;
+  ensureListingId: (opts?: { open?: boolean }) => Promise<string>;
 }) {
   const { t } = useTranslation();
   const [dragging, setDragging] = useState(false);

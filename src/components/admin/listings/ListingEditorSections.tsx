@@ -27,7 +27,7 @@ type Props = {
   images: ImageRecord[];
   checklist: ReturnType<typeof import("@/lib/listings/publish-checklist").buildPublishChecklist>;
   setLang: (locale: string) => void;
-  ensureListingId: () => Promise<string>;
+  ensureListingId: (opts?: { open?: boolean }) => Promise<string>;
   refreshListing: () => void;
   onError: (message: string) => void;
 };

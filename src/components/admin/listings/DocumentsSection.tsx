@@ -12,7 +12,7 @@ import { DocumentItem } from "./DocumentItem";
 import { FieldRow, FormSection } from "./FieldRow";
 import { PlanServiceHint } from "./PlanServiceHint";
 
-type Props = { listingId: string | null; ensureListingId: () => Promise<string> };
+type Props = { listingId: string | null; ensureListingId: (opts?: { open?: boolean }) => Promise<string> };
 
 /** Floor plan PDF, full exposé and the 360° tour link (broker-admin.html). */
 export function DocumentsSection({ listingId, ensureListingId }: Props) {
