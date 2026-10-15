@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { ClientOnly } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
@@ -31,6 +31,15 @@ function Skeleton() {
 export function ListingLocationMap({ listing, locale }: Props) {
   const { t } = useTranslation();
   const [loaded, setLoaded] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+  // Load the map once its block nears the viewport; the button stays as a fallback.
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el || loaded || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver((e) => { if (e.some((x) => x.isIntersecting)) setLoaded(true); }, { rootMargin: "200px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [loaded]);
   const points = listingsToPoints([listing], locale);
   const townLine = [listing.address_zip, listing.address_city].filter(Boolean).join(" ");
   const surroundings = pickLocalized(
@@ -64,7 +73,7 @@ export function ListingLocationMap({ listing, locale }: Props) {
       ) : null}
 
       {points.length > 0 ? (
-        <div className="mt-8 overflow-hidden rounded-media border border-border">
+        <div ref={boxRef} className="mt-8 overflow-hidden rounded-media border border-border">
           {loaded ? (
             <ClientOnly fallback={<Skeleton />}>
               <Suspense fallback={<Skeleton />}>

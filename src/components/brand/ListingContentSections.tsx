@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+
 import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
@@ -60,7 +60,7 @@ export function ListingContentSections({ sections, locale }: Props) {
           <ul className="grid max-w-3xl gap-x-8 gap-y-3 sm:grid-cols-2">
             {s.items.map((item, i) => (
               <li key={`${s.key}-${i}`} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
-                <Check aria-hidden strokeWidth={1.75} className="mt-0.5 size-4 shrink-0 text-primary" />{item}
+                <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary" />{item}
               </li>
             ))}
           </ul>
