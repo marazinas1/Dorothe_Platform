@@ -1,5 +1,4 @@
 import brokerPlaceholder from "@/assets/noir-broker-portrait.jpg";
-import homeHouse from "@/assets/noir-home-house.jpg";
 import inheritanceHouse from "@/assets/noir-inheritance-house.jpg";
 import sellingHouse from "@/assets/noir-selling-house.jpg";
 import type { SiteSettings } from "@/types/site-settings";
@@ -46,11 +45,13 @@ function ownerChoice(settings: SiteSettings, key: MediaSlotKey): string | null {
   return entry?.mode === "custom" ? clean(entry.url) : null;
 }
 
-function builtIn(settings: SiteSettings, key: MediaSlotKey): string | null {
+/** The home opening has no built-in photograph: an empty slot renders the
+ * neutral hero surface, so a fresh clone never shows another client's house. */
+function builtIn(_settings: SiteSettings, key: MediaSlotKey): string | null {
   if (key === "about:portrait") return BUILT_IN_PORTRAIT;
   if (key === "selling:hero_photo") return sellingHouse;
   if (key === "inheritance:hero_photo") return inheritanceHouse;
-  return homeHouse;
+  return null;
 }
 
 export function resolveMedia(
