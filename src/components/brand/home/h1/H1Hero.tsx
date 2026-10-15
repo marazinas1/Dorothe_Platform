@@ -27,7 +27,7 @@ export function H1Hero({ locale, copy, media }: HomeTemplateProps) {
       <div className="relative z-10 mx-auto flex min-h-[720px] w-full max-w-[1280px] flex-col justify-end px-5 pb-9 pt-20 md:px-10 lg:min-h-[724px]">
         <div className="max-w-[670px]">
           {kicker ? <div className="eyebrow text-on-media-muted">{kicker}</div> : null}
-          <h1 className="mt-4 max-w-[14ch] text-balance text-[clamp(2.5rem,5.3vw,4.75rem)] font-bold leading-[1.02] hyphens-auto text-on-media">
+          <h1 className="mt-4 max-w-[20ch] text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-bold leading-[1.02] hyphens-auto text-on-media">
             {copy.text("hero_headline")}
           </h1>
           <p className="mt-4 max-w-[56ch] text-[clamp(1rem,1.4vw,1.3125rem)] leading-[1.55] text-on-media-muted">
