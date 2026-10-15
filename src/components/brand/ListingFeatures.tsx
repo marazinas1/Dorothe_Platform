@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { ListingIcon } from "@/components/brand/ui/ListingIcon";
+import { FEATURE_ICONS, FallbackFeatureIcon } from "@/lib/listings/feature-icons";
 import { customFeatureLabel, isCustomFeature } from "@/lib/listings/vocabularies";
 
 /**
@@ -19,12 +19,15 @@ export function ListingFeatures({ features }: { features: string[] | null | unde
     <div className="space-y-8">
       {standard.length > 0 ? (
         <ul aria-label={t("listings.detail.features")} className="grid grid-cols-1 gap-x-10 gap-y-3.5 text-base text-foreground sm:grid-cols-2">
-          {standard.map((key) => (
+          {standard.map((key) => {
+            const Icon = FEATURE_ICONS[key] ?? FallbackFeatureIcon;
+            return (
             <li key={key} className="flex items-center gap-3">
-              <ListingIcon name="check" className="size-4 shrink-0" />
+              <Icon aria-hidden strokeWidth={1.5} className="size-5 shrink-0 text-primary" />
               {t(`listings.features.${key}`)}
             </li>
-          ))}
+            );
+          })}
         </ul>
       ) : null}
       {custom.length > 0 ? (

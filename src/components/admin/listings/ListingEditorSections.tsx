@@ -38,12 +38,19 @@ export function ListingEditorSections(props: Props) {
     property_type: props.form.values.property_type,
     deal_type: props.form.values.deal_type,
   };
+  // Broker workflow, most important first: what it is, how it looks, what it
+  // costs, the story, then supporting detail.
   const sections = [
     <BasicsSection key="basics" form={props.form} />,
+    <ImageManager
+      key="images"
+      listingId={props.listingId}
+      images={props.images}
+      refresh={props.refreshListing}
+      ensureListingId={props.ensureListingId}
+    />,
     <PriceSection key="price" form={props.form} />,
     hasSizeFields(shape) ? <SizeSection key="size" form={props.form} /> : null,
-    <LocationSection key="location" form={props.form} />,
-    <EquipmentSection key="equipment" form={props.form} />,
     <TranslatableBlock
       key="texts"
       form={props.form}
@@ -55,24 +62,19 @@ export function ListingEditorSections(props: Props) {
       publicLocale={props.navLocale}
       onError={props.onError}
     />,
+    <EquipmentSection key="equipment" form={props.form} />,
+    <DocumentsSection
+      key="documents"
+      listingId={props.listingId}
+      ensureListingId={props.ensureListingId}
+    />,
+    <LocationSection key="location" form={props.form} />,
     applies(shape, "energy") ? <EnergySection key="energy" form={props.form} /> : null,
     <MoreDetailsSection
       key="more"
       form={props.form}
       lang={props.lang}
       publishedEver={props.publishedEver}
-    />,
-    <ImageManager
-      key="images"
-      listingId={props.listingId}
-      images={props.images}
-      refresh={props.refreshListing}
-      ensureListingId={props.ensureListingId}
-    />,
-    <DocumentsSection
-      key="documents"
-      listingId={props.listingId}
-      ensureListingId={props.ensureListingId}
     />,
   ].filter((node): node is ReactElement => node !== null);
 

@@ -17,7 +17,7 @@ import {
 import { applies } from "@/lib/listings/field-visibility";
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow, FormSection } from "./FieldRow";
-import { FEATURE_ICONS, FallbackFeatureIcon } from "./feature-icons";
+import { FEATURE_ICONS, FallbackFeatureIcon } from "@/lib/listings/feature-icons";
 import { CustomFeaturesInput } from "./CustomFeaturesInput";
 
 /**

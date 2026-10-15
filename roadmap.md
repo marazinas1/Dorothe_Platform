@@ -89,3 +89,7 @@ Blocked outside this work:
 - [x] F7 Admin shell and sign-in
 - [x] F8 Listing editor: photo descriptions required for Live, reference assigned by the database
 - [ ] F9–F13
+
+## Listing hierarchy (approved)
+- [x] Public: semantic feature icons, clean highlight prefixes, floor plans after description
+- [x] Admin: section order Basics → Photos → Price/Size → Texts → Equipment → Plans/Documents → Location → Energy

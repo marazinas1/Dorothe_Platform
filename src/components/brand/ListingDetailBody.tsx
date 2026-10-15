@@ -107,7 +107,12 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
             <div className="mt-8"><ListingFeatures features={l.features} /></div>
           </section>
 
-          {/* 4. Price and costs */}
+          {/* 4. Floor plans, right after the story: buyers check layout next */}
+          <section className={GAP}>
+            <ListingFloorPlans images={l.images} locale={locale} />
+          </section>
+
+          {/* 5. Price and costs */}
           <section className={GAP}>
             <ListingSpecs listing={l} locale={locale} settings={settings} />
           </section>
@@ -120,11 +125,6 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
               exemption={l.energy_exemption}
               country={settings.country}
             />
-          </section>
-
-          {/* 7. Floor plans and renderings */}
-          <section className={GAP}>
-            <ListingFloorPlans images={l.images} locale={locale} />
           </section>
 
           {/* 8. Documents */}
