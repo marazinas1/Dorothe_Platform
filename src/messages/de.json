@@ -1043,7 +1043,7 @@
         "price_on_request": "Preis ausblenden und „Preis auf Anfrage“ zeigen.",
         "price_period": "Mietzeitraum, z. B. Monat.",
         "content": "Ein Stichpunkt pro Zeile, je Sprache.",
-        "highlights": "Ein Highlight pro Zeile — die drei bis vier Punkte, die im Gedächtnis bleiben sollen.",
+        "highlights": "3–5 kurze Verkaufsargumente, eins pro Zeile — was dieses Objekt besonders macht (z. B. „Wärmepumpe und Energieklasse A+“). Keine Ausstattung: dafür gibt es eine eigene Liste.",
         "surroundings": "Eine Zeile pro Punkt: Einkauf, Schulen, Verkehr, Entfernungen.",
         "meta": "Optional. Bleibt das Feld leer, werden Titel und Beschreibung verwendet.",
         "service_charge": "Monatliche Nebenkosten für Eigentümer — danach fragen Käufer zuerst.",
@@ -1315,7 +1315,7 @@
       "placement": {
         "title": "Erscheint als Überschrift auf dem Foto am Anfang der Detailseite und als Titel auf den Objektkarten.",
         "description": "Erscheint im Block „Beschreibung“ unter den Eckdaten und als erste zwei Zeilen auf den Objektkarten.",
-        "highlights": "Erscheint als eigener Punkte-Block „Highlights“ unter der Objektbeschreibung/Tabelle. Nicht auf den Karten.",
+        "highlights": "Erscheint als kurze Punkteliste direkt nach der Beschreibung. Nicht auf den Karten.",
         "surroundings": "Erscheint als eigener Punkte-Block „Lage & Umgebung“ unter den Highlights. Nicht auf den Karten."
       },
       "outline": {

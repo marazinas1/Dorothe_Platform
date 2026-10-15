@@ -1043,7 +1043,7 @@
         "price_on_request": "Hide the price and show “Price on request” instead.",
         "price_period": "Rental period, e.g. month.",
         "content": "One bullet point per line, per language.",
-        "highlights": "One highlight per line — the three or four things a buyer should remember.",
+        "highlights": "3–5 short selling points, one per line — what makes this home stand out (e.g. “Heat pump and A+ energy class”). Not equipment: that has its own list.",
         "surroundings": "One line per point: shops, schools, transport, distances.",
         "meta": "Optional. Leave empty and the title and description are used instead.",
         "service_charge": "Monthly running costs for the owner — buyers ask for this first.",
@@ -1315,7 +1315,7 @@
       "placement": {
         "title": "Appears as the headline on the photo at the top of the detail page, and as the heading on listing cards.",
         "description": "Appears in the “Description” block below the key facts, and as the first two lines on listing cards.",
-        "highlights": "Appears as its own bulleted “Highlights” block below the specification table. Not shown on cards.",
+        "highlights": "Shown as a short bulleted list right after the description. Not shown on cards.",
         "surroundings": "Appears as its own bulleted “Location & surroundings” block below Highlights. Not shown on cards."
       },
       "outline": {
