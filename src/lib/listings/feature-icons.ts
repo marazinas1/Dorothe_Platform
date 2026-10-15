@@ -4,7 +4,7 @@ import {
   Maximize2, TreeDeciduous, PlugZap, AirVent, Waves, ThermometerSun, ShieldCheck, Blinds, type LucideIcon,
 } from "lucide-react";
 
-/** Recognition aid next to each equipment label in the listing editor (label always shown). */
+/** Recognition aid beside each equipment label, shared by the editor and the public page (label always shown). */
 export const FEATURE_ICONS: Record<string, LucideIcon> = {
   balcony: Fence,
   terrace: Sun,
