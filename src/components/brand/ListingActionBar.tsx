@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "@tanstack/react-router";
 
 import type { Locale } from "@/i18n/config";
 import type { PublicListing } from "@/lib/listings/queries.functions";
@@ -66,15 +65,13 @@ export function ListingActionBar({ listing, locale, settings, contactId }: Props
           </div>
           <div className="truncate font-heading text-xl tabular-figures">{price}</div>
         </div>
-        <Link
-          to="/$locale/kontakt"
-          params={{ locale }}
-          search={{ intent: "looking", listing: listing.id, title: listing.title[locale] ?? listing.title.de ?? listing.title.en ?? "" }}
+        <a
+          href={`#${contactId}`}
           tabIndex={visible ? undefined : -1}
           className={actionButtonClass("primary", "h-11 shrink-0 px-6")}
         >
           {t("listings.detail.contact_agent")}
-        </Link>
+        </a>
       </div>
     </div>
   );
