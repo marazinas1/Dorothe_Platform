@@ -11,6 +11,7 @@ import { payloadEntries, type AdminInquiryDetailView } from "./detail-types";
 import { InquiryWorkflow } from "./InquiryWorkflow";
 import { InquiryStatusBadge, InquiryTypeBadge, formatInquiryDate } from "./InquiryBadges";
 import { SellerPhotos } from "./SellerPhotos";
+import { InquiryReplies } from "./InquiryReplies";
 
 const card = "rounded-[var(--radius)] border border-border bg-card";
 const cardHead = "border-b border-border px-5 py-3.5 text-sm font-bold";
@@ -84,6 +85,8 @@ export function InquiryDetail({ detail, locale }: { detail: AdminInquiryDetailVi
           ) : null}
 
           <SellerPhotos urls={photoUrls} />
+
+          <InquiryReplies inquiry={inquiry} locale={locale} />
 
           {related.length > 0 ? (
             <section className={card}>

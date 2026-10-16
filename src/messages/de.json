@@ -1454,7 +1454,18 @@
         "phone": "Telefon",
         "received_at": "Eingegangen am {{date}}",
         "linked_listing": "Verknüpftes Objekt",
-        "contact": "Kontakt"
+        "contact": "Kontakt",
+        "replies": "Antworten",
+        "reply_label": "Ihre Antwort an {{email}}",
+        "reply_hint": "Wird von der Website-Adresse gesendet. Die Rückantwort kommt in Ihr eigenes Postfach.",
+        "reply_send": "Antwort senden",
+        "reply_sent": "Antwort gesendet.",
+        "reply_error": "Die Antwort konnte nicht gesendet werden. Es wurde nichts verschickt; bitte erneut versuchen.",
+        "reply_suppressed": "Diese Adresse nimmt keine E-Mails der Website mehr an. Bitte antworten Sie aus Ihrem eigenen Postfach.",
+        "reply_sent_at": "Gesendet {{date}}",
+        "reply_confirm_title": "Antwort senden?",
+        "reply_confirm_body": "Die E-Mail geht sofort an {{email}} und kann nicht zurückgeholt werden. Die Anfrage wird danach als beantwortet markiert.",
+        "reply_mail_app": "Im Mailprogramm öffnen"
       },
       "fields": {
         "property_type": "Objektart",
@@ -2328,6 +2339,13 @@
       "about": "Betreff",
       "message": "Nachricht",
       "footnote": "Antworten Sie direkt auf diese E-Mail, um dem Absender zu antworten."
+    },
+    "reply": {
+      "subject": "Antwort auf Ihre Anfrage — {{site}}",
+      "greeting": "Guten Tag {{name}},",
+      "greeting_plain": "Guten Tag,",
+      "reply_hint": "Sie können direkt auf diese E-Mail antworten.",
+      "original": "Ihre ursprüngliche Nachricht:"
     }
   },
   "floorLevels": {

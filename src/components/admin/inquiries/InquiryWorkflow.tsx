@@ -89,7 +89,7 @@ export function InquiryWorkflow({ inquiry }: { inquiry: AdminInquiryRow }) {
         <Button asChild>
           <a href={`mailto:${inquiry.email}`}>
             <Mail className="h-4 w-4" />
-            {t("admin.inquiries.detail.reply")}
+            {t("admin.inquiries.detail.reply_mail_app")}
           </a>
         </Button>
         {inquiry.phone ? (
