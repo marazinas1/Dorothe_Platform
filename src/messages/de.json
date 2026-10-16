@@ -1458,6 +1458,7 @@
         "replies": "Antworten",
         "reply_label": "Ihre Antwort an {{email}}",
         "reply_hint": "Wird von der Website-Adresse gesendet. Die Rückantwort kommt in Ihr eigenes Postfach.",
+        "reply_hint_email": "Die Antwort kommt direkt in Ihr Postfach ({{email}}).",
         "reply_send": "Antwort senden",
         "reply_sent": "Antwort gesendet.",
         "reply_error": "Die Antwort konnte nicht gesendet werden. Es wurde nichts verschickt; bitte erneut versuchen.",

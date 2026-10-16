@@ -13,6 +13,7 @@ import { UnsavedChangesGuard } from "@/components/admin/ui/UnsavedChangesGuard";
 import { inquiryRepliesQueryOptions, sendInquiryReply } from "@/lib/inquiries/reply.functions";
 import type { AdminInquiryRow } from "@/lib/inquiries/types";
 import { formatInquiryDate } from "./InquiryBadges";
+import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
 
 const card = "rounded-[var(--radius)] border border-border bg-card";
 
@@ -22,6 +23,8 @@ export function InquiryReplies({ inquiry, locale }: { inquiry: AdminInquiryRow; 
   const qc = useQueryClient();
   const send = useServerFn(sendInquiryReply);
   const replies = useQuery(inquiryRepliesQueryOptions(inquiry.id));
+  const settings = useQuery(siteSettingsQueryOptions);
+  const ownEmail = (settings.data as { contact_email?: string | null } | undefined)?.contact_email;
   const [body, setBody] = useState("");
   const [confirm, setConfirm] = useState(false);
 
@@ -62,7 +65,7 @@ export function InquiryReplies({ inquiry, locale }: { inquiry: AdminInquiryRow; 
       <div className="space-y-2 border-t border-border p-5">
         <Label htmlFor="inquiry-reply">{t("admin.inquiries.detail.reply_label", { email: inquiry.email })}</Label>
         <Textarea id="inquiry-reply" rows={6} maxLength={8000} value={body} onChange={(e) => setBody(e.target.value)} />
-        <p className="text-xs text-muted-foreground">{t("admin.inquiries.detail.reply_hint")}</p>
+        <p className="text-xs text-muted-foreground">{ownEmail ? t("admin.inquiries.detail.reply_hint_email", { email: ownEmail }) : t("admin.inquiries.detail.reply_hint")}</p>
         <Button type="button" disabled={!body.trim() || mutation.isPending} onClick={() => setConfirm(true)}>
           <Send className="h-4 w-4" />
           {t("admin.inquiries.detail.reply_send")}
