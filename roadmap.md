@@ -50,7 +50,7 @@ Blocked outside this work:
 - [x] Listing energy certificate: GEG scale with live marker, valid-until dates in admin
 - [x] Wave 3: Sold, Selling, Valuation and Inheritance
 - [~] Wave 4: Contact complete; About, Guides, Article and legal chrome remain
-- [ ] Wave 5: desktop/mobile visual parity and final verification
+- [x] Wave 5: desktop/tablet/mobile verification (no overflow, WCAG tap targets, legal page spacing)
 
 ## Current full-site content requirement
 - [ ] Copy all approved HTML demo copy and iconography into EN/DE content fallbacks
@@ -104,3 +104,7 @@ Blocked outside this work:
 - [ ] Floor plans: optional per-floor label (Ground floor, Upper floor)
 - [ ] Efficiency class suggestion from kWh value
 - [ ] Site default language is EN, so slugs are English on the German site — confirm with owner
+
+## Launch blockers (need client input)
+- [ ] Datenschutzerklärung text is empty — waits on lawyer/generator text from the broker
+- [ ] Impressum cites § 5 TMG (replaced by § 5 DDG) — broker/lawyer to confirm wording
