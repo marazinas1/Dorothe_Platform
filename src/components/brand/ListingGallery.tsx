@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { Locale } from "@/i18n/config";
@@ -8,6 +8,7 @@ import { splitListingImages, type GalleryImage } from "@/lib/listings/gallery-im
 import { Button } from "@/components/brand/ui/Button";
 import { buttonClass } from "@/components/brand/ui/Button";
 import { ListingIcon } from "@/components/brand/ui/ListingIcon";
+import { ImageViewer } from "./ImageViewer";
 
 type Props = {
   images: GalleryImage[];
@@ -21,27 +22,13 @@ const EAGER = 3;
 
 /**
  * Detail-page gallery: photographs only — plans and renderings are shown as
- * documents further down. Every image is server-rendered so the page is
- * complete without JavaScript; the browser lazy-loads everything below the
- * first few. Clicking opens a keyboard-driven full-screen viewer.
+ * documents further down. Clicking opens the shared full-screen viewer.
  */
 export function ListingGallery({ images, locale, title, tourUrl = null }: Props) {
   const { t } = useTranslation();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const { photos } = splitListingImages(images);
   const list = photos.filter((i) => pickImageUrl(i.variants, "detail"));
-
-  useEffect(() => {
-    if (openIdx == null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenIdx(null);
-      if (e.key === "ArrowRight") setOpenIdx((i) => (i == null ? i : (i + 1) % list.length));
-      if (e.key === "ArrowLeft")
-        setOpenIdx((i) => (i == null ? i : (i - 1 + list.length) % list.length));
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [openIdx, list.length]);
 
   if (list.length === 0) {
     return <div className="aspect-[16/9] w-full rounded-media bg-muted" />;
@@ -109,73 +96,14 @@ export function ListingGallery({ images, locale, title, tourUrl = null }: Props)
         </Button>
       </div>
 
-      {openIdx != null ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/95 p-4 sm:p-8"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setOpenIdx(null)}
-        >
-          <img
-            src={pickImageUrl(list[openIdx]!.variants, "detail") ?? ""}
-            alt={pickLocalized(list[openIdx]!.alt_text, locale) || title}
-            className="max-h-full max-w-full rounded-media object-contain"
-          />
-          <div
-            className="absolute inset-x-0 bottom-6 flex items-center justify-center gap-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <ViewerButton
-              label={t("listings.detail.gallery_prev")}
-              onClick={() => setOpenIdx((i) => (i == null ? i : (i - 1 + list.length) % list.length))}
-            >
-              ‹
-            </ViewerButton>
-            <span className="tabular-figures text-sm text-background/80">
-              {openIdx + 1} / {list.length}
-            </span>
-            <ViewerButton
-              label={t("listings.detail.gallery_next")}
-              onClick={() => setOpenIdx((i) => (i == null ? i : (i + 1) % list.length))}
-            >
-              ›
-            </ViewerButton>
-          </div>
-          <ViewerButton
-            label={t("listings.detail.gallery_close")}
-            className="absolute right-4 top-4"
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpenIdx(null);
-            }}
-          >
-            ×
-          </ViewerButton>
-        </div>
-      ) : null}
+      <ImageViewer
+        items={list.map((img) => ({
+          src: pickImageUrl(img.variants, "detail") ?? "",
+          alt: pickLocalized(img.alt_text, locale) || title,
+        }))}
+        index={openIdx}
+        onChange={setOpenIdx}
+      />
     </>
-  );
-}
-
-function ViewerButton({
-  label,
-  children,
-  onClick,
-  className = "",
-}: {
-  label: string;
-  children: ReactNode;
-  onClick: (e: React.MouseEvent) => void;
-  className?: string;
-}) {
-  return (
-    <Button
-      type="button"
-      aria-label={label}
-      onClick={onClick}
-      variant="ghost" size="icon" inverse className={`text-xl ${className}`}
-    >
-      {children}
-    </Button>
   );
 }
