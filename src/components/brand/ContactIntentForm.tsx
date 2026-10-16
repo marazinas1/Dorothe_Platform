@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { useState, type InputHTMLAttributes } from "react";
+import { useState } from "react";
+
+import { FormField, FormTextarea } from "@/components/brand/form/FormField";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/brand/ui/Button";
@@ -10,8 +12,6 @@ import { useConsent } from "@/lib/inquiry/use-consent";
 
 export type ContactIntent = "selling" | "looking" | "other";
 type Props = { initialIntent: ContactIntent; listingId?: string; listingTitle?: string; locale: Locale };
-const input = "min-h-11 w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-foreground focus-visible:ring-2 focus-visible:ring-ring";
-const label = "mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground";
 
 export function ContactIntentForm({ initialIntent, listingId, listingTitle, locale }: Props) {
   const { t } = useTranslation();
@@ -57,14 +57,13 @@ export function ContactIntentForm({ initialIntent, listingId, listingTitle, loca
         ))}
       </div>
       {listingTitle ? <p className="mt-6 border-l-2 border-foreground pl-4 text-sm font-semibold">{listingTitle}</p> : null}
-      <div className="mt-7 grid gap-5 sm:grid-cols-2">
-        <Field id="contact-name" name="name" labelText={t("pages.contact.form_name")} autoComplete="name" required />
-        <Field id="contact-email" name="email" type="email" labelText={t("pages.contact.form_email")} autoComplete="email" required />
-        <div><Field id="contact-phone" name="phone" type="tel" labelText={t("pages.contact.form_phone")} autoComplete="tel" /><p className="mt-2 text-xs text-muted-foreground">{t("pages.contact.form_phone_note")}</p></div>
-        <Field id="contact-city" name="city" labelText={t("pages.contact.form_city")} autoComplete="address-level2" />
+      <div className="mt-7 flex max-w-xl flex-col gap-5">
+        <FormField id="contact-name" name="name" label={t("pages.contact.form_name")} autoComplete="name" maxLength={255} />
+        <FormField id="contact-email" name="email" type="email" label={t("pages.contact.form_email")} autoComplete="email" maxLength={255} />
+        <FormField id="contact-phone" name="phone" type="tel" optional label={t("pages.contact.form_phone")} autoComplete="tel" maxLength={50} help={t("pages.contact.form_phone_note")} />
+        <FormField id="contact-city" name="city" optional label={t("pages.contact.form_city")} autoComplete="address-level2" maxLength={255} />
+        <FormTextarea key={`${intent}-${listingTitle ?? ""}`} id="contact-message" name="message" rows={5} maxLength={4000} defaultValue={initialMessage} label={t("pages.contact.form_message")} />
       </div>
-      <label className={`${label} mt-6`} htmlFor="contact-message">{t("pages.contact.form_message")}</label>
-      <textarea key={`${intent}-${listingTitle ?? ""}`} id="contact-message" name="message" required rows={5} maxLength={4000} defaultValue={initialMessage} className={`${input} resize-y`} />
       <div className="mt-5"><ConsentCheckbox id="contact-consent" checked={consent.given} onChange={consent.set} showError={consent.error} /></div>
       {status === "error" ? <p role="alert" className="mt-4 text-sm text-destructive">{t("pages.contact.form_error")}</p> : null}
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -75,6 +74,3 @@ export function ContactIntentForm({ initialIntent, listingId, listingTitle, loca
   );
 }
 
-function Field({ id, labelText, ...props }: InputHTMLAttributes<HTMLInputElement> & { id: string; labelText: string }) {
-  return <div><label className={label} htmlFor={id}>{labelText}</label><input id={id} maxLength={255} className={input} {...props} /></div>;
-}

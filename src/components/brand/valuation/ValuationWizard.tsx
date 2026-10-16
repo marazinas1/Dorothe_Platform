@@ -33,7 +33,7 @@ export function ValuationWizard({ address, type }: { address?: string; type?: st
     const group = formRef.current?.querySelector<HTMLElement>(`[data-step="${step}"]`);
     const fields = Array.from(group?.querySelectorAll<HTMLInputElement>("input,select,textarea") ?? []);
     const bad = fields.find((f) => !f.checkValidity());
-    if (bad) bad.reportValidity();
+    if (bad) { bad.reportValidity(); bad.focus(); }
     return !bad;
   };
   const go = (next: number) => {
