@@ -17,7 +17,7 @@ export function LegalDocument({ title, text }: Props) {
   const paragraphs = legalParagraphs(text);
 
   return (
-    <div className="mx-auto max-w-[820px] px-6 pb-32 lg:px-10">
+    <div className="section-y mx-auto max-w-[820px] px-5 md:px-10">
       <h1 className="font-heading text-4xl md:text-5xl">{title}</h1>
 
       {paragraphs.length === 0 ? (
