@@ -1,5 +1,6 @@
 import { template as inquiryReceived } from './inquiry-received'
 import { template as inquiryNew } from './inquiry-new'
+import { template as inquiryReply } from './inquiry-reply'
 import type { ComponentType } from 'react'
 
 export interface TemplateEntry {
@@ -22,4 +23,5 @@ export interface TemplateEntry {
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'inquiry-received': inquiryReceived,
   'inquiry-new': inquiryNew,
+  'inquiry-reply': inquiryReply,
 }

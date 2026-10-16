@@ -1454,7 +1454,18 @@
         "phone": "Phone",
         "received_at": "Received {{date}}",
         "linked_listing": "Linked listing",
-        "contact": "Contact"
+        "contact": "Contact",
+        "replies": "Reply",
+        "reply_label": "Your reply to {{email}}",
+        "reply_hint": "Sent from the website address. Their answer arrives in your own mailbox.",
+        "reply_send": "Send reply",
+        "reply_sent": "Reply sent.",
+        "reply_error": "The reply could not be sent. Nothing was sent; please try again.",
+        "reply_suppressed": "This address no longer accepts emails from the website. Please reply from your own mailbox.",
+        "reply_sent_at": "Sent {{date}}",
+        "reply_confirm_title": "Send this reply?",
+        "reply_confirm_body": "The email goes to {{email}} straight away and cannot be recalled. The enquiry is then marked as answered.",
+        "reply_mail_app": "Open in mail app"
       },
       "fields": {
         "property_type": "Property type",
@@ -2328,6 +2339,13 @@
       "about": "About",
       "message": "Message",
       "footnote": "Reply directly to this email to answer the sender."
+    },
+    "reply": {
+      "subject": "Reply to your enquiry — {{site}}",
+      "greeting": "Hello {{name}},",
+      "greeting_plain": "Hello,",
+      "reply_hint": "You can answer this email directly.",
+      "original": "Your original message:"
     }
   },
   "floorLevels": {
