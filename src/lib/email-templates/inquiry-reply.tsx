@@ -29,7 +29,7 @@ const loc = (l?: string): Locale => (l === 'de' ? 'de' : 'en')
 
 const InquiryReplyEmail = ({ siteName = 'Website', locale, name, body = '', original, originalDate, signature = {} }: Props) => {
   const l = loc(locale)
-  const t = (k: string, v?: Record<string, string>) => translate(l, `emails.reply.${k}`, v)
+  const t = (k: string, v?: Record<string, string>) => translate(l, k, v)
   const sig = signature
   const company = sig.company && sig.company !== sig.person ? sig.company : undefined
   const website = sig.website?.replace(/^https?:\/\//, '').replace(/\/$/, '')
@@ -39,20 +39,20 @@ const InquiryReplyEmail = ({ siteName = 'Website', locale, name, body = '', orig
       <Preview>{body.slice(0, 120)}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Text style={text}>{name ? t('greeting', { name }) : t('greeting_plain')}</Text>
+          <Text style={text}>{name ? t('emails.reply.greeting', { name }) : t('emails.reply.greeting_plain')}</Text>
           <Text style={text}>{body}</Text>
-          <Text style={{ ...text, margin: '24px 0 4px' }}>{t('sign_off')}</Text>
+          <Text style={{ ...text, margin: '24px 0 4px' }}>{t('emails.reply.sign_off')}</Text>
           <Text style={{ ...text, margin: '0 0 20px' }}>{sig.person || siteName}</Text>
           <Section style={sigBox}>
             {company ? <Text style={sigStrong}>{company}</Text> : null}
             {sig.phone ? (
               <Text style={sigLine}>
-                {t('phone')}: <Link style={link} href={`tel:${sig.phone.replace(/[^+\d]/g, '')}`}>{sig.phone}</Link>
+                {t('emails.reply.phone')}: <Link style={link} href={`tel:${sig.phone.replace(/[^+\d]/g, '')}`}>{sig.phone}</Link>
               </Text>
             ) : null}
             {sig.email ? (
               <Text style={sigLine}>
-                {t('email')}: <Link style={link} href={`mailto:${sig.email}`}>{sig.email}</Link>
+                {t('emails.reply.email')}: <Link style={link} href={`mailto:${sig.email}`}>{sig.email}</Link>
               </Text>
             ) : null}
             {sig.address ? <Text style={sigLine}>{sig.address}</Text> : null}
@@ -65,7 +65,7 @@ const InquiryReplyEmail = ({ siteName = 'Website', locale, name, body = '', orig
           {original ? (
             <Section style={{ marginTop: '28px' }}>
               <Text style={quoteIntro}>
-                {name ? t('quote_intro', { date: originalDate ?? '', name }) : t('quote_intro_plain', { date: originalDate ?? '' })}
+                {name ? t('emails.reply.quote_intro', { date: originalDate ?? '', name }) : t('emails.reply.quote_intro_plain', { date: originalDate ?? '' })}
               </Text>
               <Text style={quote}>{original}</Text>
             </Section>
