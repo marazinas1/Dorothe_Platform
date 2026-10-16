@@ -1480,7 +1480,10 @@
         "listing": "Listings",
         "general": "General"
       },
-      "matches": "{{count}} matches"
+      "matches": "{{count}} matches",
+      "sources": {
+        "public_web": "Website"
+      }
     },
     "dashboard": {
       "needsAttention": "Needs attention",
@@ -1973,11 +1976,13 @@
       "subtitle": "Everyone who contacted you, grouped by email address.",
       "empty": "No clients yet. People appear here after their first enquiry.",
       "search": "Search clients",
-      "matches": "{{count}} clients",
-      "enquiries": "{{count}} enquiries",
       "last": "Last contact",
       "types": "Interests",
-      "other": "Other enquiries from this person"
+      "other": "Other enquiries from this person",
+      "matches_one": "{{count}} client",
+      "matches_other": "{{count}} clients",
+      "enquiries_one": "{{count}} enquiry",
+      "enquiries_other": "{{count}} enquiries"
     }
   },
   "pages": {

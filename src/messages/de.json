@@ -1480,7 +1480,10 @@
         "listing": "Objekte",
         "general": "Allgemein"
       },
-      "matches": "{{count}} Treffer"
+      "matches": "{{count}} Treffer",
+      "sources": {
+        "public_web": "Website"
+      }
     },
     "dashboard": {
       "needsAttention": "Zu erledigen",
@@ -1973,11 +1976,13 @@
       "subtitle": "Alle, die Sie kontaktiert haben, gruppiert nach E-Mail-Adresse.",
       "empty": "Noch keine Kontakte. Personen erscheinen hier nach ihrer ersten Anfrage.",
       "search": "Kontakte suchen",
-      "matches": "{{count}} Kontakte",
-      "enquiries": "{{count}} Anfragen",
       "last": "Letzter Kontakt",
       "types": "Interessen",
-      "other": "Weitere Anfragen dieser Person"
+      "other": "Weitere Anfragen dieser Person",
+      "matches_one": "{{count}} Kontakt",
+      "matches_other": "{{count}} Kontakte",
+      "enquiries_one": "{{count}} Anfrage",
+      "enquiries_other": "{{count}} Anfragen"
     }
   },
   "pages": {
