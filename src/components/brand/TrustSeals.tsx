@@ -18,7 +18,7 @@ export function TrustSeals({ locale, items, title, className }: Props) {
   if (!items || items.length === 0) return null;
 
   return (
-    <section className={cn("mx-auto max-w-[1400px] px-6 lg:px-10", className)}>
+    <section className={cn("mx-auto max-w-[1280px] px-5 md:px-10", className)}>
       <div className="flex flex-col gap-8 border-t border-border/60 pt-10 md:flex-row md:items-center md:gap-14">
         {title ? <p className="eyebrow md:w-48 md:shrink-0">{title}</p> : null}
         <ul className="flex flex-wrap items-center gap-8 md:gap-12">

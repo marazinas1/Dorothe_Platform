@@ -82,7 +82,7 @@ function SellingPage() {
 
       <section
         id="form"
-        className="mx-auto mt-40 max-w-[1400px] px-6 lg:mt-56 lg:px-10"
+        className="mx-auto mt-40 max-w-[1280px] px-5 lg:mt-56 md:px-10"
       >
         <div className="grid grid-cols-1 gap-14 border-t border-border pt-16 md:grid-cols-12 lg:pt-24">
           <div className="md:col-span-4">

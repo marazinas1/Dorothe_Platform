@@ -40,7 +40,7 @@ export function HeroFrame({
         )}
         {/* Text-protection gradient only — confined to the lower band. */}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-scrim via-scrim-soft to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1400px] px-6 pb-14 lg:px-10 lg:pb-20">
+        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1280px] px-5 pb-14 md:px-10 lg:pb-20">
           {children}
         </div>
       </div>

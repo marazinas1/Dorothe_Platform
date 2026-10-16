@@ -24,7 +24,7 @@ export function HomeTestimonials({
   if (tone === "ink") {
     return (
       <section className="bg-primary py-20 text-primary-foreground lg:py-24">
-        <div className="mx-auto max-w-[1240px] px-6 lg:px-8">
+        <div className="mx-auto max-w-[1280px] px-5 md:px-10">
           {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
           <div className="mt-12 grid border-t border-primary-foreground/20 md:grid-cols-3">
             {items.map((item, i) => (

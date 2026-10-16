@@ -22,7 +22,7 @@ export function FeaturedListings({ locale, items, settings }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1400px] px-6 lg:px-10`}>
+    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1280px] px-5 md:px-10`}>
       <div className="mb-16 flex items-end justify-between gap-8">
         <h2 className="text-section max-w-3xl">
           {t("home.featured")}

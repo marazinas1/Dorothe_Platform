@@ -74,7 +74,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
   return (
     <>
       {/* 1. Gallery */}
-      <section className="mx-auto max-w-[1080px] px-6 pt-8 lg:px-8">
+      <section className="mx-auto max-w-[1280px] px-5 pt-8 md:px-10">
         <nav aria-label={t("listings.detail.breadcrumb")} className="mb-7 flex items-center gap-2 text-xs text-muted-foreground">
           <Link to="/$locale/immobilien" params={{ locale }}>{t("admin.nav.properties")}</Link>
           <span aria-hidden>/</span><span>{l.address_city}</span><span aria-hidden>/</span>
@@ -88,7 +88,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         />
       </section>
 
-      <div className="mx-auto mt-12 grid max-w-[1080px] gap-x-14 px-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:px-8">
+      <div className="mx-auto mt-12 grid max-w-[1280px] gap-x-14 px-5 lg:grid-cols-[minmax(0,1fr)_300px] md:px-10">
         <div className="min-w-0">
           <ListingHeroOverlay
             title={title}
@@ -149,7 +149,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         />
       </div>
 
-      <div className="mx-auto max-w-[1080px] px-6 lg:px-8">
+      <div className="mx-auto max-w-[1280px] px-5 md:px-10">
         <section className={GAP}>
           <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
             {t("listings.detail.share")}

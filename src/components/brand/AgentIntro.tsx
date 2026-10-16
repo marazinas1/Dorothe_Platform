@@ -42,7 +42,7 @@ export function AgentIntro({
   const role = eyebrow ?? t("pages.about.kicker");
 
   return (
-    <section className="mx-auto max-w-[1400px] px-6 pt-24 lg:px-10">
+    <section className="mx-auto max-w-[1280px] px-5 pt-24 md:px-10">
       <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12 lg:gap-16">
         <div className="md:col-span-5">
           <div className="aspect-[4/5] w-full overflow-hidden rounded-media bg-muted">

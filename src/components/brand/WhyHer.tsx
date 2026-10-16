@@ -28,7 +28,7 @@ export function WhyHer({ locale, settings }: Props) {
 
   return (
     <div className={SECTION_GAP.major}>
-      <section className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <section className="mx-auto max-w-[1280px] px-5 md:px-10">
         <Reveal>
           <div className="eyebrow text-muted-foreground">{t("home.why_kicker", { name: settings.primary_agent_name || settings.site_name })}</div>
           {intro ? (

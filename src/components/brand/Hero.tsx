@@ -32,7 +32,7 @@ export function Hero({ locale, settings, layout, image, headline, subline }: Pro
 
   if (layout === "split" && image) {
     return (
-      <section className="mx-auto flex max-w-[1400px] flex-col justify-center px-6 pb-14 pt-10 lg:min-h-[calc(100svh-7rem)] lg:px-10 lg:pb-8 lg:pt-6">
+      <section className="mx-auto flex max-w-[1280px] flex-col justify-center px-5 pb-14 pt-10 lg:min-h-[calc(100svh-7rem)] md:px-10 lg:pb-8 lg:pt-6">
         <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-center lg:gap-16">
           <div className="w-full lg:max-w-[560px] lg:-translate-y-6">
             <div className="eyebrow text-muted-foreground">{settings.site_name}</div>
@@ -66,7 +66,7 @@ export function Hero({ locale, settings, layout, image, headline, subline }: Pro
 
 
   return (
-    <section className="mx-auto max-w-[1400px] px-6 pt-32 pb-24 lg:px-10 lg:pt-44 lg:pb-32">
+    <section className="mx-auto max-w-[1280px] px-5 pt-32 pb-24 md:px-10 lg:pt-44 lg:pb-32">
       <div className="eyebrow text-muted-foreground">{settings.site_name}</div>
       <h1 className="text-hero mt-8 max-w-[18ch] text-balance lg:max-w-[20ch]">{title}</h1>
       {subline ? (
