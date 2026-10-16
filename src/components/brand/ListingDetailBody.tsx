@@ -88,7 +88,7 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         />
       </section>
 
-      <div className="mx-auto mt-12 grid max-w-[1280px] gap-x-14 px-5 lg:grid-cols-[minmax(0,1fr)_300px] md:px-10">
+      <div className="mx-auto mt-12 grid max-w-[1280px] gap-x-14 px-5 lg:grid-cols-[minmax(0,1fr)_340px] md:px-10">
         <div className="min-w-0">
           <ListingHeroOverlay
             title={title}
