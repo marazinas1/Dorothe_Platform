@@ -452,7 +452,7 @@ export function listingTourQueryOptions(listingId: string) {
   });
 }
 
-export type PublicFloorPlan = { id: string; filename: string; url: string; isPdf: boolean };
+export type PublicFloorPlan = { id: string; filename: string; url: string; isPdf: boolean; label: string | null };
 
 /**
  * Floor plans uploaded in the admin's documents section, signed for display.
@@ -465,7 +465,7 @@ export const listPublicFloorPlans = createServerFn({ method: "GET" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows, error } = await supabaseAdmin
       .from("listing_documents_public")
-      .select("id, filename, storage_path, requires_lead, created_at")
+      .select("id, filename, storage_path, requires_lead, created_at, label")
       .eq("listing_id", data.listing_id)
       .eq("type", "floorplan")
       .order("created_at", { ascending: true });
@@ -483,6 +483,7 @@ export const listPublicFloorPlans = createServerFn({ method: "GET" })
         filename: r.filename,
         url: signed.signedUrl,
         isPdf: /\.pdf$/i.test(r.filename ?? r.storage_path),
+        label: r.label ?? null,
       });
     }
     return out;

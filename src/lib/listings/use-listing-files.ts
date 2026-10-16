@@ -13,6 +13,7 @@ export type AdminDocument = {
   filename: string;
   storage_path: string;
   requires_lead: boolean;
+  label: string | null;
 };
 
 /** A floor plan may also be a rendered 2D/3D image, not only a PDF. */
@@ -30,7 +31,7 @@ export function useListingFiles(listingId: string | null) {
       const [docs, tours] = await Promise.all([
         supabase
           .from("listing_documents")
-          .select("id, type, filename, storage_path, requires_lead")
+          .select("id, type, filename, storage_path, requires_lead, label")
           .eq("listing_id", listingId!)
           .order("created_at"),
         supabase
@@ -101,6 +102,12 @@ export function useListingFiles(listingId: string | null) {
     await refresh();
   }
 
+  async function setLabel(doc: AdminDocument, label: string | null) {
+    const res = await supabase.from("listing_documents").update({ label: label?.trim() || null }).eq("id", doc.id);
+    if (res.error) throw new Error(res.error.message);
+    await refresh();
+  }
+
   /** One tour link per listing; an empty value removes it. */
   async function saveTour(id: string, url: string) {
     const current = query.data?.tour ?? null;
@@ -119,5 +126,5 @@ export function useListingFiles(listingId: string | null) {
     await refresh();
   }
 
-  return { ...query, upload, remove, setRequiresLead, saveTour };
+  return { ...query, upload, remove, setRequiresLead, setLabel, saveTour };
 }
