@@ -1,5 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
+
+import { adminInquiriesQueryOptions } from "@/lib/inquiries/admin.functions";
+import { relatedInquiries } from "@/lib/inquiries/clients";
+import { inquiryTypeKey } from "@/lib/inquiries/types";
 
 import { pickLocalized } from "@/lib/listings/format";
 import { payloadEntries, type AdminInquiryDetailView } from "./detail-types";
@@ -15,6 +20,8 @@ export function InquiryDetail({ detail, locale }: { detail: AdminInquiryDetailVi
   const { t } = useTranslation();
   const { inquiry, photoUrls } = detail;
   const details = payloadEntries(inquiry.payload);
+  const all = useQuery(adminInquiriesQueryOptions);
+  const related = all.data ? relatedInquiries(all.data, inquiry) : [];
 
   const history = [
     { key: "received", label: t("admin.inquiries.detail.history_received"), at: inquiry.created_at },
@@ -77,6 +84,29 @@ export function InquiryDetail({ detail, locale }: { detail: AdminInquiryDetailVi
           ) : null}
 
           <SellerPhotos urls={photoUrls} />
+
+          {related.length > 0 ? (
+            <section className={card}>
+              <h2 className={cardHead}>{t("admin.clients.other")}</h2>
+              <ul className="divide-y divide-border text-sm">
+                {related.map((r) => (
+                  <li key={r.id}>
+                    <Link
+                      to="/admin/inquiries/$id"
+                      params={{ id: r.id }}
+                      className="flex gap-4 px-5 py-2.5 hover:bg-muted"
+                    >
+                      <span className="w-36 shrink-0 text-muted-foreground tabular-nums">
+                        {formatInquiryDate(r.created_at, locale)}
+                      </span>
+                      <span className="flex-1 truncate">{t(`admin.inquiries.types.${inquiryTypeKey(r.type)}`)}</span>
+                      <span className="text-muted-foreground">{t(`admin.inquiries.status.${r.status}`)}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           <section className={card}>
             <h2 className={cardHead}>{t("admin.inquiries.detail.history")}</h2>

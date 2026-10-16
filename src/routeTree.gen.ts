@@ -37,6 +37,7 @@ import { Route as LocaleRatgeberSlugRouteImport } from './routes/$locale.ratgebe
 import { Route as AdminAuthenticatedIndexRouteImport } from './routes/admin._authenticated.index'
 import { Route as AdminAuthenticatedAnalyticsRouteImport } from './routes/admin._authenticated.analytics'
 import { Route as AdminAuthenticatedCalendarRouteImport } from './routes/admin._authenticated.calendar'
+import { Route as AdminAuthenticatedClientsRouteImport } from './routes/admin._authenticated.clients'
 import { Route as AdminAuthenticatedInquiriesRouteImport } from './routes/admin._authenticated.inquiries'
 import { Route as AdminAuthenticatedListingsRouteImport } from './routes/admin._authenticated.listings'
 import { Route as AdminAuthenticatedPostsRouteImport } from './routes/admin._authenticated.posts'
@@ -197,6 +198,12 @@ const AdminAuthenticatedCalendarRoute =
     path: '/calendar',
     getParentRoute: () => AdminAuthenticatedRoute,
   } as any)
+const AdminAuthenticatedClientsRoute =
+  AdminAuthenticatedClientsRouteImport.update({
+    id: '/clients',
+    path: '/clients',
+    getParentRoute: () => AdminAuthenticatedRoute,
+  } as any)
 const AdminAuthenticatedInquiriesRoute =
   AdminAuthenticatedInquiriesRouteImport.update({
     id: '/inquiries',
@@ -319,6 +326,7 @@ export interface FileRoutesByFullPath {
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/admin/analytics': typeof AdminAuthenticatedAnalyticsRoute
   '/admin/calendar': typeof AdminAuthenticatedCalendarRoute
+  '/admin/clients': typeof AdminAuthenticatedClientsRoute
   '/admin/inquiries': typeof AdminAuthenticatedInquiriesRouteWithChildren
   '/admin/listings': typeof AdminAuthenticatedListingsRouteWithChildren
   '/admin/posts': typeof AdminAuthenticatedPostsRoute
@@ -364,6 +372,7 @@ export interface FileRoutesByTo {
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/admin/analytics': typeof AdminAuthenticatedAnalyticsRoute
   '/admin/calendar': typeof AdminAuthenticatedCalendarRoute
+  '/admin/clients': typeof AdminAuthenticatedClientsRoute
   '/admin/posts': typeof AdminAuthenticatedPostsRoute
   '/admin/testimonials': typeof AdminAuthenticatedTestimonialsRoute
   '/admin/users': typeof AdminAuthenticatedUsersRoute
@@ -408,6 +417,7 @@ export interface FileRoutesById {
   '/$locale/ratgeber/$slug': typeof LocaleRatgeberSlugRoute
   '/admin/_authenticated/analytics': typeof AdminAuthenticatedAnalyticsRoute
   '/admin/_authenticated/calendar': typeof AdminAuthenticatedCalendarRoute
+  '/admin/_authenticated/clients': typeof AdminAuthenticatedClientsRoute
   '/admin/_authenticated/inquiries': typeof AdminAuthenticatedInquiriesRouteWithChildren
   '/admin/_authenticated/listings': typeof AdminAuthenticatedListingsRouteWithChildren
   '/admin/_authenticated/posts': typeof AdminAuthenticatedPostsRoute
@@ -456,6 +466,7 @@ export interface FileRouteTypes {
     | '/$locale/ratgeber/$slug'
     | '/admin/analytics'
     | '/admin/calendar'
+    | '/admin/clients'
     | '/admin/inquiries'
     | '/admin/listings'
     | '/admin/posts'
@@ -501,6 +512,7 @@ export interface FileRouteTypes {
     | '/$locale/ratgeber/$slug'
     | '/admin/analytics'
     | '/admin/calendar'
+    | '/admin/clients'
     | '/admin/posts'
     | '/admin/testimonials'
     | '/admin/users'
@@ -544,6 +556,7 @@ export interface FileRouteTypes {
     | '/$locale/ratgeber/$slug'
     | '/admin/_authenticated/analytics'
     | '/admin/_authenticated/calendar'
+    | '/admin/_authenticated/clients'
     | '/admin/_authenticated/inquiries'
     | '/admin/_authenticated/listings'
     | '/admin/_authenticated/posts'
@@ -776,6 +789,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAuthenticatedCalendarRouteImport
       parentRoute: typeof AdminAuthenticatedRoute
     }
+    '/admin/_authenticated/clients': {
+      id: '/admin/_authenticated/clients'
+      path: '/clients'
+      fullPath: '/admin/clients'
+      preLoaderRoute: typeof AdminAuthenticatedClientsRouteImport
+      parentRoute: typeof AdminAuthenticatedRoute
+    }
     '/admin/_authenticated/inquiries': {
       id: '/admin/_authenticated/inquiries'
       path: '/inquiries'
@@ -995,6 +1015,7 @@ const AdminAuthenticatedSettingsRouteWithChildren =
 interface AdminAuthenticatedRouteChildren {
   AdminAuthenticatedAnalyticsRoute: typeof AdminAuthenticatedAnalyticsRoute
   AdminAuthenticatedCalendarRoute: typeof AdminAuthenticatedCalendarRoute
+  AdminAuthenticatedClientsRoute: typeof AdminAuthenticatedClientsRoute
   AdminAuthenticatedInquiriesRoute: typeof AdminAuthenticatedInquiriesRouteWithChildren
   AdminAuthenticatedListingsRoute: typeof AdminAuthenticatedListingsRouteWithChildren
   AdminAuthenticatedPostsRoute: typeof AdminAuthenticatedPostsRoute
@@ -1007,6 +1028,7 @@ interface AdminAuthenticatedRouteChildren {
 const AdminAuthenticatedRouteChildren: AdminAuthenticatedRouteChildren = {
   AdminAuthenticatedAnalyticsRoute: AdminAuthenticatedAnalyticsRoute,
   AdminAuthenticatedCalendarRoute: AdminAuthenticatedCalendarRoute,
+  AdminAuthenticatedClientsRoute: AdminAuthenticatedClientsRoute,
   AdminAuthenticatedInquiriesRoute:
     AdminAuthenticatedInquiriesRouteWithChildren,
   AdminAuthenticatedListingsRoute: AdminAuthenticatedListingsRouteWithChildren,
