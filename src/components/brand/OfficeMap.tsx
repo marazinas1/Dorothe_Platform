@@ -1,10 +1,10 @@
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { ClientOnly } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import type { MapPoint } from "@/lib/maps/carto";
 import type { SiteSettings } from "@/types/site-settings";
-import { Button } from "@/components/brand/ui/Button";
+import { MapConsentGate } from "@/components/brand/MapConsentGate";
 
 const MapCanvas = lazy(() => import("@/components/brand/MapCanvas"));
 
@@ -20,7 +20,6 @@ function Skeleton() {
  */
 export function OfficeMap({ settings }: { settings: SiteSettings }) {
   const { t } = useTranslation();
-  const [loaded, setLoaded] = useState(false);
   const lat = settings.geo_lat == null ? null : Number(settings.geo_lat);
   const lng = settings.geo_lng == null ? null : Number(settings.geo_lng);
 
@@ -44,7 +43,7 @@ export function OfficeMap({ settings }: { settings: SiteSettings }) {
 
   return (
     <div className="overflow-hidden border border-border">
-      {loaded ? (
+      <MapConsentGate className={CANVAS}>
         <ClientOnly fallback={<Skeleton />}>
           <Suspense fallback={<Skeleton />}>
             <MapCanvas
@@ -55,16 +54,7 @@ export function OfficeMap({ settings }: { settings: SiteSettings }) {
             />
           </Suspense>
         </ClientOnly>
-      ) : (
-        <div className={`${CANVAS} flex flex-col items-center justify-center gap-4 bg-muted px-6 text-center`}>
-          <Button type="button" variant="secondary" onClick={() => setLoaded(true)}>
-            {t("listings.detail.map_load")}
-          </Button>
-          <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
-            {t("listings.detail.map_consent_note")}
-          </p>
-        </div>
-      )}
+      </MapConsentGate>
     </div>
   );
 }
