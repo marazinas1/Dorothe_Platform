@@ -1082,7 +1082,9 @@
           "not_required": "Not required (e.g. building plot)",
           "listed_building": "Listed building",
           "new_build_pending": "New build, certificate pending"
-        }
+        },
+        "classHint": "Based on {{value}} kWh/(m²·a), the GEG scale suggests class {{cls}}. Check it against the certificate.",
+        "classHintUse": "Use {{cls}}"
       },
       "geo": {
         "exact": {

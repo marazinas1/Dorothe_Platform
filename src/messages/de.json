@@ -1082,7 +1082,9 @@
           "not_required": "Nicht erforderlich (z. B. Grundstück)",
           "listed_building": "Denkmalgeschütztes Gebäude",
           "new_build_pending": "Neubau, Ausweis in Vorbereitung"
-        }
+        },
+        "classHint": "Bei {{value}} kWh/(m²·a) ergibt die GEG-Skala Klasse {{cls}}. Bitte mit dem Ausweis abgleichen.",
+        "classHintUse": "{{cls}} übernehmen"
       },
       "geo": {
         "exact": {
