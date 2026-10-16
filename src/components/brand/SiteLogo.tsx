@@ -25,7 +25,7 @@ const INTERACTIVE_CLASS =
 /** The one shared height, scaled by the single size chosen in Site settings. */
 const BASE_HEIGHT_REM = 4;
 const MIN_LOGO_SIZE = 50;
-const MAX_LOGO_SIZE = 150;
+const MAX_LOGO_SIZE = 200;
 
 const clampSize = (value: number | null | undefined) =>
   Math.min(MAX_LOGO_SIZE, Math.max(MIN_LOGO_SIZE, Math.round(value ?? 100)));

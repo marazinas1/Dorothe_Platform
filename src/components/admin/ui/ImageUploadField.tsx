@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Loader2, Trash2, Upload } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
+import { ConfirmRemoveButton } from "@/components/admin/ui/ConfirmRemoveButton";
 
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
