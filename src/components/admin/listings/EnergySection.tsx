@@ -182,7 +182,7 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
                 <EnergyClassHint country={country} finalEnergy={energy.final_energy} current={value}
                   onUse={(cls) => form.setEnergyField("efficiency_class", cls)} />
               ) : null}
-              {field.kind === "select" ? null : field.kind === "date" ? (
+              {field.kind === "select" || field.kind === "sources" ? null : field.kind === "date" ? (
                 <Input
                   type="date"
                   value={typeof value === "string" ? value.slice(0, 10) : ""}
