@@ -14,6 +14,7 @@ import {
   Quote,
   Newspaper,
   CalendarDays,
+  Users,
 } from "lucide-react";
 
 import {
@@ -39,6 +40,7 @@ interface NavItem {
     | "dashboard"
     | "listings"
     | "inquiries"
+    | "clients"
     | "calendar"
     | "users"
     | "selling"
@@ -74,6 +76,7 @@ const GROUPS: NavGroup[] = [
     items: [
       { key: "dashboard", to: "/admin", icon: LayoutDashboard, permission: "inquiry.view.own" },
       { key: "inquiries", to: "/admin/inquiries", icon: Inbox, permission: "inquiry.view.own" },
+      { key: "clients", to: "/admin/clients", icon: Users, permission: "inquiry.view.own" },
       {
         key: "calendar",
         to: "/admin/calendar",

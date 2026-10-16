@@ -53,7 +53,7 @@ export function InquiryWorkflow({ inquiry }: { inquiry: AdminInquiryRow }) {
   const facts: [string, string][] = [
     [t("admin.inquiries.detail.email"), inquiry.email],
     ...(inquiry.phone ? [[t("admin.inquiries.detail.phone"), inquiry.phone] as [string, string]] : []),
-    [t("admin.inquiries.detail.source"), inquiry.source ?? "—"],
+    [t("admin.inquiries.detail.source"), inquiry.source ? t(`admin.inquiries.sources.${inquiry.source}`, { defaultValue: inquiry.source }) : "—"],
     [t("admin.inquiries.detail.locale"), inquiry.locale?.toUpperCase() ?? "—"],
   ];
 

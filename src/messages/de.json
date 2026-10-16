@@ -655,7 +655,8 @@
       "backToSite": "Zurück zur Website",
       "properties": "Immobilien",
       "blog": "Ratgeber",
-      "valuation": "Bewertung"
+      "valuation": "Bewertung",
+      "clients": "Kontakte"
     },
     "pages": {
       "dashboard": "Übersicht",
@@ -663,7 +664,8 @@
       "inquiries": "Anfragen",
       "team": "Team",
       "content": "Startseite",
-      "analytics": "Auswertung"
+      "analytics": "Auswertung",
+      "clients": "Kontakte"
     },
     "analytics": {
       "title": "Auswertung",
@@ -1478,7 +1480,10 @@
         "listing": "Objekte",
         "general": "Allgemein"
       },
-      "matches": "{{count}} Treffer"
+      "matches": "{{count}} Treffer",
+      "sources": {
+        "public_web": "Website"
+      }
     },
     "dashboard": {
       "needsAttention": "Zu erledigen",
@@ -1965,6 +1970,21 @@
           "help": "Das Hausfoto im Auftaktbereich der Seite Erben. Bitte anschließend speichern."
         }
       }
+    },
+    "clients": {
+      "title": "Kontakte",
+      "subtitle": "Alle, die Sie kontaktiert haben, gruppiert nach E-Mail-Adresse.",
+      "empty": "Noch keine Kontakte. Personen erscheinen hier nach ihrer ersten Anfrage.",
+      "search": "Kontakte suchen",
+      "last": "Letzter Kontakt",
+      "types": "Interessen",
+      "other": "Weitere Anfragen dieser Person",
+      "matches_one": "{{count}} Kontakt",
+      "matches_other": "{{count}} Kontakte",
+      "enquiries_one": "{{count}} Anfrage",
+      "enquiries_other": "{{count}} Anfragen",
+      "matches": "{{count}} Kontakte",
+      "enquiries": "{{count}} Anfragen"
     }
   },
   "pages": {
