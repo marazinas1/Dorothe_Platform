@@ -28,7 +28,8 @@ export function LocaleSwitcher({
             key={loc}
             to={target}
             className={cn(
-              "transition-colors duration-300",
+              // The invisible ::after widens the tap area to WCAG 2.5.8 without moving the letters.
+              "relative transition-colors duration-300 after:absolute after:-inset-x-1 after:-inset-y-3 after:content-['']",
               invert
                 ? isActive
                   ? "font-semibold text-on-media underline underline-offset-4 drop-shadow-sm"

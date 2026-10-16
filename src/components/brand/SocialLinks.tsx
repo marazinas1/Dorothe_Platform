@@ -27,7 +27,7 @@ export function SocialLinks({ settings, className }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t("footer.social.facebook", { name: settings.primary_agent_name || settings.site_name })}
-          className="inline-flex text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="relative inline-flex text-muted-foreground after:absolute after:-inset-3 after:content-[''] transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Facebook size={20} strokeWidth={1.5} />
         </a>
@@ -38,7 +38,7 @@ export function SocialLinks({ settings, className }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t("footer.social.linkedin", { name: settings.primary_agent_name || settings.site_name })}
-          className="inline-flex text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="relative inline-flex text-muted-foreground after:absolute after:-inset-3 after:content-[''] transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Linkedin size={20} strokeWidth={1.5} />
         </a>
