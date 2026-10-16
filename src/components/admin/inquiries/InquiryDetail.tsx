@@ -1,111 +1,102 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Mail, MessageCircle, Phone } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { pickLocalized } from "@/lib/listings/format";
 import { payloadEntries, type AdminInquiryDetailView } from "./detail-types";
 import { InquiryWorkflow } from "./InquiryWorkflow";
 import { InquiryStatusBadge, InquiryTypeBadge, formatInquiryDate } from "./InquiryBadges";
 import { SellerPhotos } from "./SellerPhotos";
 
-function waLink(phone: string): string {
-  return `https://wa.me/${phone.replace(/[^\d]/g, "")}`;
-}
+const card = "rounded-[var(--radius)] border border-border bg-card";
+const cardHead = "border-b border-border px-5 py-3.5 text-sm font-bold";
 
-export function InquiryDetail({
-  detail,
-  locale,
-}: {
-  detail: AdminInquiryDetailView;
-  locale: string;
-}) {
+/** Two-column enquiry view: the message and context left, actions right. */
+export function InquiryDetail({ detail, locale }: { detail: AdminInquiryDetailView; locale: string }) {
   const { t } = useTranslation();
   const { inquiry, photoUrls } = detail;
   const details = payloadEntries(inquiry.payload);
 
+  const history = [
+    { key: "received", label: t("admin.inquiries.detail.history_received"), at: inquiry.created_at },
+    { key: "opened", label: t("admin.inquiries.detail.history_opened"), at: inquiry.read_at },
+    {
+      key: "closed",
+      label: t("admin.inquiries.detail.history_closed"),
+      at: inquiry.status === "closed" ? inquiry.handled_at : null,
+    },
+  ].filter((h): h is { key: string; label: string; at: string } => Boolean(h.at));
+
   return (
-    <div className="space-y-8">
-      <div className="flex flex-wrap items-center gap-2">
-        <InquiryTypeBadge type={inquiry.type} />
-        <InquiryStatusBadge status={inquiry.status} />
-        <span className="text-xs text-muted-foreground">
-          {formatInquiryDate(inquiry.created_at, locale)}
-        </span>
-      </div>
-
-      <InquiryWorkflow inquiry={inquiry} locale={locale} />
-
-      <section className="space-y-3 rounded-[var(--radius)] border border-border bg-card p-4">
+    <div className="space-y-6">
+      <header className="space-y-2">
         <h1 className="text-2xl font-extrabold">{inquiry.name || inquiry.email}</h1>
-        <div className="flex flex-wrap gap-2">
-          <Button asChild variant="outline" size="sm">
-            <a href={`mailto:${inquiry.email}`}>
-              <Mail className="h-4 w-4" />
-              {inquiry.email}
-            </a>
-          </Button>
-          {inquiry.phone ? (
-            <>
-              <Button asChild variant="outline" size="sm">
-                <a href={`tel:${inquiry.phone}`}>
-                  <Phone className="h-4 w-4" />
-                  {inquiry.phone}
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="sm">
-                <a href={waLink(inquiry.phone)} target="_blank" rel="noreferrer">
-                  <MessageCircle className="h-4 w-4" />
-                  {t("admin.inquiries.detail.whatsapp")}
-                </a>
-              </Button>
-            </>
-          ) : null}
+        <div className="flex flex-wrap items-center gap-2">
+          <InquiryTypeBadge type={inquiry.type} />
+          <InquiryStatusBadge status={inquiry.status} />
+          <span className="text-sm text-muted-foreground">
+            {t("admin.inquiries.detail.received_at", { date: formatInquiryDate(inquiry.created_at, locale) })}
+          </span>
         </div>
-      </section>
+      </header>
 
-      {inquiry.listing ? (
-        <section className="space-y-1">
-          <h2 className="admin-section-title">{t("admin.inquiries.detail.listing")}</h2>
-          <Link
-            to="/admin/listings/$id"
-            params={{ id: inquiry.listing.id }}
-            className="text-sm underline underline-offset-4"
-          >
-            {pickLocalized(inquiry.listing.title, locale) || inquiry.listing.slug}
-          </Link>
-        </section>
-      ) : null}
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
+        <div className="space-y-4">
+          {inquiry.message ? (
+            <section className={`${card} p-5`} aria-label={t("admin.inquiries.detail.message")}>
+              <p className="whitespace-pre-wrap text-[15px] leading-relaxed">{inquiry.message}</p>
+            </section>
+          ) : null}
 
-      {inquiry.message ? (
-        <section className="space-y-2">
-          <h2 className="admin-section-title">{t("admin.inquiries.detail.message")}</h2>
-          <p className="whitespace-pre-wrap text-sm leading-relaxed">{inquiry.message}</p>
-        </section>
-      ) : null}
+          {inquiry.listing ? (
+            <section className={card}>
+              <h2 className={cardHead}>{t("admin.inquiries.detail.linked_listing")}</h2>
+              <Link
+                to="/admin/listings/$id"
+                params={{ id: inquiry.listing.id }}
+                className="block px-5 py-3.5 text-sm font-semibold underline-offset-4 hover:underline"
+              >
+                {pickLocalized(inquiry.listing.title, locale) || inquiry.listing.slug}
+              </Link>
+            </section>
+          ) : null}
 
-      {details.length > 0 ? (
-        <section className="space-y-2">
-          <h2 className="admin-section-title">{t("admin.inquiries.detail.details")}</h2>
-          <dl className="divide-y divide-border overflow-hidden rounded-[var(--radius)] border border-border text-sm">
-            {details.map(([key, value]) => (
-              <div key={key} className="flex gap-4 px-4 py-2">
-                <dt className="w-1/2 text-muted-foreground">
-                  {t(`admin.inquiries.fields.${key}`, { defaultValue: key })}
-                </dt>
-                <dd className="w-1/2">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-      ) : null}
+          {details.length > 0 ? (
+            <section className={card}>
+              <h2 className={cardHead}>{t("admin.inquiries.detail.details")}</h2>
+              <dl className="divide-y divide-border text-sm">
+                {details.map(([key, value]) => (
+                  <div key={key} className="flex gap-4 px-5 py-2.5">
+                    <dt className="w-1/2 text-muted-foreground">
+                      {t(`admin.inquiries.fields.${key}`, { defaultValue: key })}
+                    </dt>
+                    <dd className="w-1/2">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          ) : null}
 
-      <SellerPhotos urls={photoUrls} />
+          <SellerPhotos urls={photoUrls} />
 
-      <p className="text-xs text-muted-foreground">
-        {t("admin.inquiries.detail.locale")}: {inquiry.locale ?? "—"} ·{" "}
-        {t("admin.inquiries.detail.source")}: {inquiry.source ?? "—"}
-      </p>
+          <section className={card}>
+            <h2 className={cardHead}>{t("admin.inquiries.detail.history")}</h2>
+            <ol className="divide-y divide-border text-sm">
+              {history.map((h) => (
+                <li key={h.key} className="flex gap-4 px-5 py-2.5">
+                  <span className="w-36 shrink-0 text-muted-foreground tabular-nums">
+                    {formatInquiryDate(h.at, locale)}
+                  </span>
+                  <span>{h.label}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </div>
+
+        <aside className="lg:sticky lg:top-6">
+          <InquiryWorkflow inquiry={inquiry} />
+        </aside>
+      </div>
     </div>
   );
 }
