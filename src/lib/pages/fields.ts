@@ -86,8 +86,6 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
       para("proof_body", "pages.selling.proof_body"),
       line("form_title", "pages.selling.form_title", "form"),
       para("form_intro", "pages.selling.form_intro", "form"),
-      line("cta_title", "pages.selling.cta_title", "closing"),
-      para("cta_body", "pages.selling.cta_body", "closing"),
     ],
   },
   {

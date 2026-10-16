@@ -11,7 +11,6 @@ import { ActionLink } from "@/components/brand/ui/ActionButton";
 import { buttonClass } from "@/components/brand/ui/Button";
 import { FeatureGrid } from "@/components/brand/FeatureGrid";
 import { FaqList } from "@/components/brand/FaqList";
-import { DarkActionBand } from "@/components/brand/DarkActionBand";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
