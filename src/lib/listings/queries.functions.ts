@@ -343,7 +343,9 @@ export function relatedCandidatesQueryOptions(input: {
     queryFn: () =>
       listPublicListings({
         data: {
-          deal: input.dealType,
+          // Every deal type: the ranking prefers the same one, but a reader of a
+          // rare rental still sees the broker's other offers rather than nothing.
+          deal: "",
           type: "",
           city: "",
           rooms_min: 0,
@@ -353,7 +355,7 @@ export function relatedCandidatesQueryOptions(input: {
           sort: "newest",
           page: 1,
           onlyStatus: [...PublicSaleStatuses],
-          limit: 12,
+          limit: 24,
         },
       } as any),
     staleTime: 60_000,

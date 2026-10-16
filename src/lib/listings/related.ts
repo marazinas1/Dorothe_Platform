@@ -12,8 +12,8 @@
 // the strongest thing on offer.
 export const RELATED_STATUSES = ["active", "coming_soon"] as const;
 
-/** Below this, the block hides rather than rendering one card beside two gaps. */
-export const RELATED_MIN = 2;
+/** Zero dead ends: one honest alternative beats an empty end of page. */
+export const RELATED_MIN = 1;
 export const RELATED_MAX = 3;
 
 type Candidate = {
@@ -29,8 +29,8 @@ type Candidate = {
 const norm = (v: string | null | undefined) => (v ?? "").trim().toLowerCase();
 
 /**
- * Ranks candidates against the listing being read: same town first, then
- * closest price. The status filter is applied here as well as in the query, so
+ * Ranks candidates against the listing being read: same deal type, then same
+ * town, then closest price; less similar listings fill the remaining places. The status filter is applied here as well as in the query, so
  * a caller that passes a wider list cannot leak a sold listing into the block.
  */
 export function selectRelated<T extends Candidate>(current: Candidate, candidates: T[]): T[] {
@@ -41,8 +41,6 @@ export function selectRelated<T extends Candidate>(current: Candidate, candidate
     (c) =>
       c.id !== current.id &&
       allowed.has(c.status) &&
-      // A buyer and a tenant are not looking for the same thing.
-      c.deal_type === current.deal_type &&
       // A property in another country is not an alternative to this one.
       (!norm(current.address_country) || norm(c.address_country) === norm(current.address_country)) &&
       // A card without a real photograph looks unfinished and erodes trust.
@@ -55,10 +53,14 @@ export function selectRelated<T extends Candidate>(current: Candidate, candidate
       current.price != null && c.price != null
         ? Math.abs(c.price - current.price) / Math.max(current.price, 1)
         : Number.POSITIVE_INFINITY;
-    return { c, sameTown, priceGap };
+    // A buyer and a tenant are not looking for the same thing, so another
+    // deal type only fills places no same-deal listing can.
+    const sameDeal = c.deal_type === current.deal_type;
+    return { c, sameDeal, sameTown, priceGap };
   });
 
   scored.sort((a, b) => {
+    if (a.sameDeal !== b.sameDeal) return a.sameDeal ? -1 : 1;
     if (a.sameTown !== b.sameTown) return a.sameTown ? -1 : 1;
     if (a.priceGap !== b.priceGap) return a.priceGap - b.priceGap;
     return 0;
