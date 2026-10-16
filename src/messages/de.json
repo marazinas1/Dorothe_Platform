@@ -2315,5 +2315,11 @@
     "none": "Nicht angegeben",
     "custom": "Andere…",
     "customPlaceholder": "z. B. Einliegerwohnung"
+  },
+  "form": {
+    "optional": "Optional",
+    "required": "Bitte füllen Sie dieses Feld aus.",
+    "email_invalid": "Geben Sie eine E-Mail-Adresse wie name@beispiel.de ein.",
+    "invalid": "Bitte prüfen Sie diese Eingabe."
   }
 }

@@ -2315,5 +2315,11 @@
     "none": "Not set",
     "custom": "Other…",
     "customPlaceholder": "e.g. Granny flat"
+  },
+  "form": {
+    "optional": "Optional",
+    "required": "Please fill in this field.",
+    "email_invalid": "Enter an email address like name@example.com.",
+    "invalid": "Please check this entry."
   }
 }
