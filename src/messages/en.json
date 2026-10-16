@@ -1458,6 +1458,7 @@
         "replies": "Reply",
         "reply_label": "Your reply to {{email}}",
         "reply_hint": "Sent from the website address. Their answer arrives in your own mailbox.",
+        "reply_hint_email": "Their answer arrives directly in your mailbox ({{email}}).",
         "reply_send": "Send reply",
         "reply_sent": "Reply sent.",
         "reply_error": "The reply could not be sent. Nothing was sent; please try again.",
