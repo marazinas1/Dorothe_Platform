@@ -79,17 +79,12 @@ export function ImageUploadField({ path, onUploaded, removable = true, replace }
           {replace ? t("admin.settings.brand.replace") : t("admin.settings.brand.upload")}
         </Button>
         {removable ? (
-          <Button
-            type="button"
-            size="sm"
-            variant="ghost"
-
+          <ConfirmRemoveButton
+            name={t("admin.confirm.thisImage")}
+            label={t("admin.settings.brand.remove")}
             disabled={busy}
-            onClick={() => onUploaded(null)}
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            {t("admin.settings.brand.remove")}
-          </Button>
+            onConfirm={() => onUploaded(null)}
+          />
         ) : null}
       </div>
       {error ? <p className="text-xs text-destructive">{error}</p> : null}

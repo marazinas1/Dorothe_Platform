@@ -102,16 +102,12 @@ export function CoverUploader({ value, onChange, ensurePostId }: Props) {
               )}
               {t("admin.posts.coverReplace")}
             </Button>
-            <Button
-              type="button"
-              size="sm"
-              variant="ghost"
+            <ConfirmRemoveButton
+              name={t("admin.confirm.articleCover")}
+              label={t("admin.posts.coverRemove")}
               disabled={busy}
-              onClick={() => onChange(null)}
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-              {t("admin.posts.coverRemove")}
-            </Button>
+              onConfirm={() => onChange(null)}
+            />
             <AssetDownloadButton url={value} name="article-cover" />
           </div>
         </div>
