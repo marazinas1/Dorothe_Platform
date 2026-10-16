@@ -109,6 +109,11 @@ export function InquiriesList({ rows, locale }: { rows: AdminInquiryRow[]; local
                   <span className="block truncate text-xs text-muted-foreground">
                     {t(`admin.inquiries.types.${inquiryTypeKey(row.type)}`)}
                   </span>
+                  {q && row.message?.toLowerCase().includes(q) ? (
+                    <span className="block truncate text-xs text-muted-foreground">
+                      ↳ …{row.message.slice(Math.max(0, row.message.toLowerCase().indexOf(q) - 30), row.message.toLowerCase().indexOf(q) + q.length + 30)}…
+                    </span>
+                  ) : null}
                 </span>
                 <span className="truncate text-sm text-muted-foreground">{inquiryPreview(row)}</span>
                 <span className="whitespace-nowrap text-xs text-muted-foreground tabular-nums">
