@@ -42,8 +42,9 @@ export function SiteLogo({
   className,
   interactive = false,
 }: Props) {
-  const configured =
-    tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
+  // On dark chrome only the dark-background file is used: the regular logo is
+  // made for light grounds and turns faint on black, so the placeholder shows.
+  const configured = tone === "light" ? settings.logo_dark_url : settings.logo_url;
   const src = logoSrc(tone === "light" ? "mono" : "original", configured);
   const logoSize = clampSize(settings.logo_size);
   const height = `${(BASE_HEIGHT_REM * logoSize) / 100}rem`;

@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 import { AssetDownloadButton } from "./AssetDownloadButton";
 import { ImageUploadField } from "./ImageUploadField";
+import { ConfirmDialog } from "./ConfirmDialog";
 
 type Props = {
   label: string;
@@ -33,6 +34,7 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
   const isDeveloper = user?.profile?.role === "developer";
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
   const m = (k: string) => t(`admin.media.${k}`);
   const slotName = uploadPath.split("/").slice(-2).join("-").replace(/\.\w+$/, "");
 
@@ -123,6 +125,14 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
           </div>
         </div>
       ) : null}
+      <ConfirmDialog
+        open={confirmReset}
+        onOpenChange={setConfirmReset}
+        title={t("admin.confirm.resetTitle")}
+        description={t("admin.confirm.resetBody")}
+        confirmLabel={t("admin.confirm.resetAction")}
+        onConfirm={() => run(() => onChoose(null), m("reset"))}
+      />
     </div>
   );
 }
