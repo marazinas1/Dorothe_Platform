@@ -3,14 +3,13 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/brand/ui/Button";
 import { ConsentCheckbox } from "@/components/public/ConsentCheckbox";
-import { fileToBase64, numOrNull } from "@/lib/inquiry/file-base64";
+import { numOrNull } from "@/lib/inquiry/file-base64";
+import { pickPhotos, preparePhoto } from "@/lib/inquiry/seller-photos";
 import { submitSellerInquiry } from "@/lib/inquiry/submit.functions";
 import { useConsent } from "@/lib/inquiry/use-consent";
 import { cn } from "@/lib/utils";
 import { ContactStep, DetailsStep, PropertyStep } from "./ValuationSteps";
 
-const MAX_PHOTOS = 4;
-const MAX_BYTES = 3 * 1024 * 1024;
 const STEPS = 3;
 
 /**
@@ -41,10 +40,9 @@ export function ValuationWizard({ address, type }: { address?: string; type?: st
     requestAnimationFrame(() => headingRef.current?.focus());
   };
   const onFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const list = Array.from(e.target.files ?? []).slice(0, MAX_PHOTOS);
-    const big = list.some((f) => f.size > MAX_BYTES);
-    setTooLarge(big);
-    setFiles(big ? [] : list);
+    const { files: list, rejected } = pickPhotos(e.target.files);
+    setTooLarge(rejected);
+    setFiles(list);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +56,7 @@ export function ValuationWizard({ address, type }: { address?: string; type?: st
     const str = (k: string) => String(fd.get(k) ?? "");
     setStatus("submitting");
     try {
-      const photos = await Promise.all(files.map(async (f) => ({ filename: f.name, content_type: f.type || "application/octet-stream", data_base64: await fileToBase64(f) })));
+      const photos = await Promise.all(files.map(preparePhoto));
       await submitSellerInquiry({
         data: {
           name: str("name"), email: str("email"), phone: str("phone"), message: str("message"),

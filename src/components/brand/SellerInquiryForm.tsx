@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ConsentCheckbox } from "@/components/public/ConsentCheckbox";
 import { useConsent } from "@/lib/inquiry/use-consent";
 
+import { pickPhotos, preparePhoto } from "@/lib/inquiry/seller-photos";
 import { submitSellerInquiry } from "@/lib/inquiry/submit.functions";
 import { Button } from "@/components/brand/ui/Button";
 
@@ -12,8 +13,6 @@ const inputCls =
 const labelCls =
   "block text-[11px] uppercase tracking-[0.16em] text-muted-foreground";
 
-const MAX_PHOTOS = 4;
-const MAX_BYTES = 3 * 1024 * 1024;
 
 export function SellerInquiryForm({ defaultAddress, defaultType }: { defaultAddress?: string; defaultType?: string } = {}) {
   const { t } = useTranslation();
@@ -24,12 +23,8 @@ export function SellerInquiryForm({ defaultAddress, defaultType }: { defaultAddr
   const consent = useConsent();
 
   const onFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const list = Array.from(e.target.files ?? []).slice(0, MAX_PHOTOS);
-    if (list.some((f) => f.size > MAX_BYTES)) {
-      setStatus("too_large");
-      return;
-    }
-    setStatus("idle");
+    const { files: list, rejected } = pickPhotos(e.target.files);
+    setStatus(rejected ? "too_large" : "idle");
     setFiles(list);
   };
 
@@ -40,11 +35,7 @@ export function SellerInquiryForm({ defaultAddress, defaultType }: { defaultAddr
     setStatus("submitting");
     try {
       const photos = await Promise.all(
-        files.map(async (f) => ({
-          filename: f.name,
-          content_type: f.type || "application/octet-stream",
-          data_base64: await fileToBase64(f),
-        })),
+        files.map(preparePhoto),
       );
       await submitSellerInquiry({
         data: {
@@ -213,15 +204,3 @@ function numOrNull(v: FormDataEntryValue | null): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = String(reader.result ?? "");
-      const idx = result.indexOf(",");
-      resolve(idx >= 0 ? result.slice(idx + 1) : result);
-    };
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
-  });
-}

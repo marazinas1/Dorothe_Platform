@@ -510,9 +510,9 @@
       "rooms": "Zimmer",
       "year_built": "Baujahr",
       "condition": "Zustand",
-      "photos": "Fotos (optional, bis zu 4)",
+      "photos": "Fotos (bis zu 8)",
       "photos_selected": "{{n}} Foto(s) angehängt",
-      "photo_too_large": "Jedes Foto muss unter 3 MB liegen.",
+      "photo_too_large": "Einige Dateien wurden übersprungen: nur Bilder, höchstens 8, je unter 25 MB. Große Handyfotos werden automatisch verkleinert.",
       "submit": "Bewertung anfordern",
       "full_form_link": "Ausführliche Wertermittlung anfragen"
     }
@@ -2072,8 +2072,8 @@
       }
     },
     "selling": {
-      "title": "Verkaufen",
-      "meta_description": "So läuft der Verkauf Ihrer Immobilie — vom ersten Gespräch über die Vermarktung bis zur Übergabe.",
+      "title": "Immobilie verkaufen",
+      "meta_description": "Haus oder Wohnung verkaufen mit persönlicher Maklerin: kostenlose Marktwertermittlung, professionelle Vermarktung, geprüfte Käufer und Begleitung bis zum Notar.",
       "kicker": "Der Weg zum Verkauf",
       "headline": "In acht Schritten zum richtigen Käufer.",
       "intro": "Ein Immobilienverkauf ist selten eine Bauchentscheidung. Meist steht eine familiäre oder berufliche Veränderung dahinter, und dann muss der Prozess verlässlich sein. Ich begleite Sie ruhig und strukturiert — hier sehen Sie, wie das konkret abläuft.",
@@ -2166,6 +2166,14 @@
         {
           "question": "Was passiert, wenn ich nach der Bewertung nicht verkaufen möchte?",
           "answer": "Dann behalten Sie die schriftliche Bewertung und schulden nichts. Viele Eigentümer nutzen sie für ihre weitere Planung."
+        },
+        {
+          "question": "Wer zahlt die Maklerprovision?",
+          "answer": "Beim Verkauf von Einfamilienhäusern und Wohnungen an private Käufer wird die Provision nach § 656c BGB zu gleichen Teilen zwischen Verkäufer und Käufer geteilt. Die genaue Höhe wird vor Vermarktungsbeginn schriftlich vereinbart."
+        },
+        {
+          "question": "Welche Unterlagen brauche ich?",
+          "answer": "In der Regel einen Grundbuchauszug, Grundrisse, den Energieausweis und bei Wohnungen die Teilungserklärung sowie aktuelle Protokolle der Eigentümerversammlung. Fehlende Unterlagen beschaffe ich mit Ihnen."
         }
       ]
     },
