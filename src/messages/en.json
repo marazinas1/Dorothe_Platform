@@ -655,7 +655,8 @@
       "backToSite": "Back to site",
       "properties": "Properties",
       "blog": "Advice",
-      "valuation": "Valuation"
+      "valuation": "Valuation",
+      "clients": "Clients"
     },
     "pages": {
       "dashboard": "Dashboard",
@@ -663,7 +664,8 @@
       "inquiries": "Inquiries",
       "team": "Team",
       "content": "Home page",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "clients": "Clients"
     },
     "analytics": {
       "title": "Analytics",
@@ -1965,6 +1967,17 @@
           "help": "The house photograph in the opening section of the Inheritance page. Remember to press Save."
         }
       }
+    },
+    "clients": {
+      "title": "Clients",
+      "subtitle": "Everyone who contacted you, grouped by email address.",
+      "empty": "No clients yet. People appear here after their first enquiry.",
+      "search": "Search clients",
+      "matches": "{{count}} clients",
+      "enquiries": "{{count}} enquiries",
+      "last": "Last contact",
+      "types": "Interests",
+      "other": "Other enquiries from this person"
     }
   },
   "pages": {
