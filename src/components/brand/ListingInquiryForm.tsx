@@ -13,10 +13,6 @@ type Props = {
   defaultMessage?: string;
 };
 
-const inputCls =
-  "mt-2 min-h-11 w-full border border-border bg-background px-3 py-2.5 text-base text-foreground outline-none transition-colors duration-150 focus-visible:border-foreground focus-visible:ring-2 focus-visible:ring-ring/30";
-const labelCls =
-  "block text-sm font-medium text-foreground";
 
 /** Listing-specific inquiry form used on the detail page. */
 export function ListingInquiryForm({ listingId, defaultMessage }: Props) {
