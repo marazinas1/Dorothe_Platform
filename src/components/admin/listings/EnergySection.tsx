@@ -17,6 +17,7 @@ import {
 import type { ListingFormApi } from "./listing-form-state";
 import { FieldRow, FormSection } from "./FieldRow";
 import { FIELD_ICONS, SOURCE_ICONS } from "./energy-icons";
+import { EnergyClassHint } from "./EnergyClassHint";
 
 type Field =
   | { key: string; kind: "number" }
@@ -176,7 +177,12 @@ export function EnergySection({ form }: { form: ListingFormApi }) {
                     ))}
                   </SelectContent>
                 </Select>
-              ) : field.kind === "date" ? (
+              ) : null}
+              {field.kind === "select" && field.key === "efficiency_class" ? (
+                <EnergyClassHint country={country} finalEnergy={energy.final_energy} current={value}
+                  onUse={(cls) => form.setEnergyField("efficiency_class", cls)} />
+              ) : null}
+              {field.kind === "select" || field.kind === "sources" ? null : field.kind === "date" ? (
                 <Input
                   type="date"
                   value={typeof value === "string" ? value.slice(0, 10) : ""}

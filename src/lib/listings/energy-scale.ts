@@ -68,3 +68,9 @@ export function energyScale(input: {
     markerLabel,
   };
 }
+
+/** German class implied by a final-energy reading (GEG Anlage 10). DE only. */
+export function suggestGermanEnergyClass(value: unknown): string | null {
+  if (typeof value !== "number" || !Number.isFinite(value) || value < 0) return null;
+  return DE_SCALE[classIndexForValue(value)];
+}
