@@ -37,8 +37,8 @@ export function AreaLinks({ locale, cities, linkable = true, tone = "section" }:
     <section
       className={
         footer
-          ? "mx-auto max-w-[1400px] px-6 lg:px-10"
-          : `mx-auto ${SECTION_GAP.normal} max-w-[1400px] px-6 lg:px-10`
+          ? "mx-auto max-w-[1280px] px-5 md:px-10"
+          : `mx-auto ${SECTION_GAP.normal} max-w-[1280px] px-5 md:px-10`
       }
     >
       <h2 className={footer ? "text-sm text-muted-foreground" : "text-section-sm max-w-3xl"}>

@@ -16,7 +16,7 @@ export function TwoPaths({ locale }: Props) {
   const { t } = useTranslation();
 
   return (
-    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1400px] px-6 lg:px-10`}>
+    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1280px] px-5 md:px-10`}>
       <Reveal className="grid gap-6 md:grid-cols-12 md:gap-8">
         <Link
           to="/$locale/verkaufen"

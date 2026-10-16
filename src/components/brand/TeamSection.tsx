@@ -16,7 +16,7 @@ export function TeamSection({ members }: Props) {
   if (!members || members.length === 0) return null;
 
   return (
-    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1400px] px-6 lg:px-10`}>
+    <section className={`mx-auto ${SECTION_GAP.normal} max-w-[1280px] px-5 md:px-10`}>
       <div className="mb-14 max-w-2xl">
         <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           {t("home.team_kicker")}

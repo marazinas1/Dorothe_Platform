@@ -57,12 +57,12 @@ function ContactPage() {
   return (
     <PublicChrome locale={currentLocale} settings={settings}>
       <section className="border-b border-border">
-        <div className="mx-auto max-w-[1120px] px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-[1280px] px-5 py-16 md:px-10 md:py-24">
           <h1 className="max-w-5xl font-heading text-4xl font-bold leading-[1.06] md:text-6xl">{copy.text("headline")}</h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">{copy.text("form_intro")}</p>
         </div>
       </section>
-      <section className="mx-auto grid max-w-[1120px] gap-14 px-5 py-16 md:px-10 lg:grid-cols-[0.85fr_1.2fr] lg:gap-20 lg:py-20">
+      <section className="mx-auto grid max-w-[1280px] gap-14 px-5 py-16 md:px-10 lg:grid-cols-[0.85fr_1.2fr] lg:gap-20 lg:py-20">
         <ContactDetails settings={settings} hours={hasHours ? configured.weekly : []} />
         <ContactIntentForm initialIntent={search.intent ?? "selling"} listingId={search.listing} listingTitle={search.title} locale={currentLocale} />
       </section>

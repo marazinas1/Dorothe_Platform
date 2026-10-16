@@ -28,7 +28,7 @@ export function TextSection({
   quiet = false,
 }: Props) {
   return (
-    <section className={`mx-auto ${SECTION_GAP[gap]} max-w-[1400px] px-6 lg:px-10`}>
+    <section className={`mx-auto ${SECTION_GAP[gap]} max-w-[1280px] px-5 md:px-10`}>
       <div className="grid grid-cols-1 gap-14 md:grid-cols-12">
         <div className="md:col-span-4">
           <h2 className={`${quiet ? "text-section-sm" : "text-section"} max-w-[18ch] text-balance`}>

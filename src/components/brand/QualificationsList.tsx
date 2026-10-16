@@ -16,7 +16,7 @@ export function QualificationsList({ items, title, note, className }: Props) {
   if (!items || items.length === 0) return null;
 
   return (
-    <section className={cn("mx-auto max-w-[1400px] px-6 lg:px-10", className)}>
+    <section className={cn("mx-auto max-w-[1280px] px-5 md:px-10", className)}>
       <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
         <div className="md:col-span-4">
           <h2 className="font-heading text-3xl leading-[1.1] md:text-4xl">{title}</h2>

@@ -27,7 +27,7 @@ export function ValuationInvite({ locale, offer }: Props) {
 
   return (
     <section className={`${SECTION_GAP.major} border-t border-border`}>
-      <Reveal className="mx-auto grid max-w-[1400px] gap-14 px-6 pt-16 pb-8 md:grid-cols-12 lg:gap-20 lg:px-10 lg:pt-24">
+      <Reveal className="mx-auto grid max-w-[1280px] gap-14 px-5 pt-16 pb-8 md:grid-cols-12 lg:gap-20 md:px-10 lg:pt-24">
         <div className="md:col-span-6">
           <div className="eyebrow text-muted-foreground">{t("home.valuation_kicker")}</div>
           <h2 className="text-section-lg mt-8 max-w-[18ch] text-balance">
