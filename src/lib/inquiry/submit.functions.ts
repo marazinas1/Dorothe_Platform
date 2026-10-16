@@ -1,3 +1,4 @@
+import { MAX_SELLER_PHOTOS } from "@/lib/inquiry/seller-photos";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
@@ -93,7 +94,7 @@ const SellerInquiryInput = z.object({
   rooms: z.number().nullable().optional(),
   year_built: z.number().nullable().optional(),
   condition: z.string().trim().max(200).optional().or(z.literal("")),
-  photos: z.array(SellerPhotoInput).max(4).optional(),
+  photos: z.array(SellerPhotoInput).max(MAX_SELLER_PHOTOS).optional(),
   consent: z.literal(true),
   locale: z.string().trim().max(10).optional(),
   /** Which public entry the owner used; drives the admin inbox label. */

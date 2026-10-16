@@ -510,9 +510,9 @@
       "rooms": "Rooms",
       "year_built": "Year built",
       "condition": "Condition",
-      "photos": "Photos (optional, up to 4)",
+      "photos": "Photos (up to 8)",
       "photos_selected": "{{n}} photo(s) attached",
-      "photo_too_large": "Each photo must be under 3 MB.",
+      "photo_too_large": "Some files were skipped: only images, up to 8, each under 25 MB. Large phone photos are resized automatically.",
       "submit": "Request valuation",
       "full_form_link": "Detailed valuation request"
     }
@@ -2072,8 +2072,8 @@
       }
     },
     "selling": {
-      "title": "Selling",
-      "meta_description": "How selling your property with us works — from the first conversation through marketing to handover.",
+      "title": "Sell your property",
+      "meta_description": "Sell your house or apartment with a personal broker: free market valuation, professional marketing, qualified buyers and support through to the notary.",
       "kicker": "The path to a sale",
       "headline": "Eight steps to the right buyer.",
       "intro": "Selling a property is rarely a snap decision. Usually a family or work change stands behind it, and then the process needs to be dependable. I walk you through it calmly and in a structured way — here is what that actually looks like.",
@@ -2115,7 +2115,7 @@
       "cta_body": "The process begins with an honest valuation. Free, confidential, no obligation.",
       "cta_button": "Request a valuation",
       "steps_title": "How a sale runs",
-      "services_title": "What a mandate includes",
+      "services_title": "What the mandate includes",
       "services_body": "One point of contact from the first valuation to the notary appointment — everything below is part of the mandate, not an extra.",
       "services": [
         "Certified market valuation",
@@ -2166,6 +2166,14 @@
         {
           "question": "What if I decide not to sell after the valuation?",
           "answer": "Then you keep the written valuation and owe nothing. Many owners use it to plan the following years."
+        },
+        {
+          "question": "Who pays the commission?",
+          "answer": "For houses and apartments sold to private buyers, German law (§ 656c BGB) requires the commission to be shared equally between seller and buyer. The exact rate is agreed in writing before marketing starts."
+        },
+        {
+          "question": "Which documents do I need?",
+          "answer": "Typically a land register extract, floor plans, the energy certificate and, for apartments, the declaration of division and recent owners' meeting minutes. I help you obtain anything that is missing."
         }
       ]
     },
