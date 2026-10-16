@@ -110,7 +110,10 @@ export const Route = createFileRoute("/$locale/immobilien/$slug")({
       translate(locale, key, vars),
     );
     const localDesc = pickLocalized(listing.description, locale);
-    const title = `${localTitle} — ${settings.site_name}`;
+    // Search results cut titles near 60 characters; a long listing name keeps
+    // its own words rather than losing them to the site name.
+    const branded = `${localTitle} — ${settings.site_name}`;
+    const title = branded.length > 60 ? localTitle : branded;
     const primary = listing.images.find((i) => i.is_primary) ?? listing.images[0];
     const ogImage =
       pickImageUrl(primary?.variants, "og") ?? pickImageUrl(primary?.variants, "detail");
