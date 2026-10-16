@@ -62,7 +62,7 @@ export function ListingInquiryForm({ listingId, defaultMessage }: Props) {
       <div className="mt-8 flex flex-col gap-5">
         <FormField id="inq-name" name="name" autoComplete="name" maxLength={100} label={t("inquiry.name")} />
         <FormField id="inq-email" name="email" type="email" autoComplete="email" maxLength={255} label={t("inquiry.email")} />
-        <FormField id="inq-phone" name="phone" type="tel" optional autoComplete="tel" maxLength={40} label={t("inquiry.phone")} />
+        <FormField id="inq-phone" name="phone" type="tel" optional autoComplete="tel" maxLength={40} label={t("pages.contact.form_phone")} />
         <FormTextarea id="inq-message" name="message" rows={4} maxLength={2000} defaultValue={defaultMessage ?? t("inquiry.message_default")} label={t("inquiry.message")} />
       </div>
 

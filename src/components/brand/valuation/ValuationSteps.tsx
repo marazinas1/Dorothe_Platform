@@ -61,7 +61,7 @@ export function ContactStep() {
     <div className="flex max-w-xl flex-col gap-5">
       <Field id="val-name" name="name" autoComplete="name" maxLength={100} label={t("inquiry.name")} />
       <Field id="val-email" name="email" type="email" autoComplete="email" maxLength={255} label={t("inquiry.email")} />
-      <Field id="val-phone" name="phone" optional type="tel" autoComplete="tel" maxLength={40} label={t("inquiry.phone")} />
+      <Field id="val-phone" name="phone" optional type="tel" autoComplete="tel" maxLength={40} label={t("pages.contact.form_phone")} />
       <div>
         <FormTextarea id="val-message" name="message" optional rows={3} maxLength={2000} label={t("inquiry.message")} />
       </div>
