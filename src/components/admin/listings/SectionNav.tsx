@@ -15,23 +15,44 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
   const [active, setActive] = useState(sections[0]?.key ?? "");
   const keys = sections.map((s) => s.key).join("|");
 
+  // Active = the last section whose top has passed the sticky bars. Deterministic,
+  // unlike an IntersectionObserver that only reports sections that changed.
   useEffect(() => {
-    const els = keys
-      .split("|")
-      .map((k) => document.getElementById(sectionAnchorId(k)))
-      .filter((el): el is HTMLElement => el !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (visible) setActive(visible.target.id.replace("listing-section-", ""));
-      },
-      { rootMargin: "-120px 0px -60% 0px" },
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    const list = keys.split("|");
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = 160;
+      let current = list[0] ?? "";
+      for (const k of list) {
+        const el = document.getElementById(sectionAnchorId(k));
+        if (el && el.getBoundingClientRect().top <= line) current = k;
+      }
+      // At the page end the last short sections can never reach the line.
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = list[list.length - 1] ?? current;
+      }
+      setActive(current);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, [keys]);
+
+  // Keep the active tab visible inside the horizontally scrolling row.
+  useEffect(() => {
+    document
+      .querySelector(`[data-section-tab="${active}"]`)
+      ?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [active]);
 
   return (
     <nav
@@ -45,8 +66,8 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
             <li key={s.key} className="shrink-0">
               <a
                 href={`#${sectionAnchorId(s.key)}`}
+                data-section-tab={s.key}
                 aria-current={isActive ? "location" : undefined}
-                onClick={() => setActive(s.key)}
                 className={`-mb-px inline-flex min-h-11 items-center border-b-2 px-3 text-sm whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-ring ${
                   isActive
                     ? "border-foreground font-semibold text-foreground"
