@@ -283,6 +283,38 @@ export type Database = {
           },
         ]
       }
+      inquiry_replies: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          inquiry_id: string
+          sent_by: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          inquiry_id: string
+          sent_by: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          inquiry_id?: string
+          sent_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inquiry_replies_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "inquiries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       listing_documents: {
         Row: {
           created_at: string
