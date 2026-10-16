@@ -46,7 +46,7 @@ export const sendInquiryReply = createServerFn({ method: "POST" })
     // RLS confirms the caller may see this enquiry before anything is sent.
     const { data: inq, error } = await supabase
       .from("inquiries")
-      .select("id, name, email, message, locale, status")
+      .select("id, name, email, message, locale, status, created_at")
       .eq("id", data.id)
       .maybeSingle();
     if (error || !inq) throw new Error("Not found");
@@ -54,10 +54,24 @@ export const sendInquiryReply = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: s } = await supabaseAdmin
       .from("site_settings")
-      .select("site_name, contact_email")
+      .select("site_name, legal_name, contact_email, contact_phone, primary_agent_name, address_street, address_zip, address_city")
       .limit(1)
       .maybeSingle();
     const siteName = s?.site_name ?? "Website";
+    const { SITE_URL } = await import("@/lib/email/sender");
+    const locale = inq.locale === "de" ? "de" : "en";
+    const cityLine = [s?.address_zip, s?.address_city].filter(Boolean).join(" ");
+    const signature = {
+      person: s?.primary_agent_name ?? undefined,
+      company: s?.legal_name || siteName,
+      phone: s?.contact_phone ?? undefined,
+      email: s?.contact_email ?? undefined,
+      address: [s?.address_street, cityLine].filter(Boolean).join(", ") || undefined,
+      website: SITE_URL,
+    };
+    const originalDate = new Intl.DateTimeFormat(locale === "de" ? "de-DE" : "en-GB", {
+      day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin",
+    }).format(new Date(inq.created_at));
 
     const { data: saved, error: insErr } = await supabase
       .from("inquiry_replies")
@@ -68,15 +82,17 @@ export const sendInquiryReply = createServerFn({ method: "POST" })
 
     const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
     const result = await sendTemplateEmail("inquiry-reply", inq.email, {
-      fromName: siteName,
+      fromName: s?.primary_agent_name ? `${s.primary_agent_name} · ${siteName}` : siteName,
       replyTo: s?.contact_email ?? undefined,
       idempotencyKey: `inquiry-reply-${saved.id}`,
       templateData: {
         siteName,
-        locale: inq.locale ?? undefined,
+        locale,
         name: inq.name ?? undefined,
         body: data.body,
         original: inq.message ?? undefined,
+        originalDate,
+        signature,
       },
     }).catch(async (e) => {
       await supabaseAdmin.from("inquiry_replies").delete().eq("id", saved.id);
