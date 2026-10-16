@@ -92,7 +92,7 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
                       <>
                         <ImageUploadField path={uploadPath} removable={false} replace={Boolean(media.chosen)} onUploaded={(url) => void run(() => onChoose(url), m("saved"))} />
                         {media.chosen ? (
-                          <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => void run(() => onChoose(null), m("reset"))}>
+                          <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => setConfirmReset(true)}>
                             <RotateCcw className="h-3.5 w-3.5" />
                             {m("resetToDefault")}
                           </Button>
