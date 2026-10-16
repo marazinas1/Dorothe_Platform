@@ -1445,7 +1445,14 @@
         "history": "History",
         "history_received": "Received",
         "history_opened": "First opened",
-        "history_closed": "Closed"
+        "history_closed": "Closed",
+        "reply": "Reply by email",
+        "call": "Call {{phone}}",
+        "email": "Email",
+        "phone": "Phone",
+        "received_at": "Received {{date}}",
+        "linked_listing": "Linked listing",
+        "contact": "Contact"
       },
       "fields": {
         "property_type": "Property type",

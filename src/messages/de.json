@@ -1445,7 +1445,14 @@
         "history": "Verlauf",
         "history_received": "Eingegangen",
         "history_opened": "Zuerst geöffnet",
-        "history_closed": "Abgeschlossen"
+        "history_closed": "Abgeschlossen",
+        "reply": "Per E-Mail antworten",
+        "call": "{{phone}} anrufen",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "received_at": "Eingegangen am {{date}}",
+        "linked_listing": "Verknüpftes Objekt",
+        "contact": "Kontakt"
       },
       "fields": {
         "property_type": "Objektart",
