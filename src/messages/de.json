@@ -2344,8 +2344,11 @@
       "subject": "Antwort auf Ihre Anfrage — {{site}}",
       "greeting": "Guten Tag {{name}},",
       "greeting_plain": "Guten Tag,",
-      "reply_hint": "Sie können direkt auf diese E-Mail antworten.",
-      "original": "Ihre ursprüngliche Nachricht:"
+      "sign_off": "Mit freundlichen Grüßen",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "quote_intro": "Am {{date}} schrieb {{name}}:",
+      "quote_intro_plain": "Am {{date}} schrieben Sie:"
     }
   },
   "floorLevels": {
