@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Download, FileText, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -12,7 +12,7 @@ import type { AdminDocument } from "@/lib/listings/use-listing-files";
 const IMAGE_EXT = /\.(jpe?g|png|webp)$/i;
 
 /** One stored document: preview for image plans, download and remove. */
-export function DocumentItem({ doc, onRemove }: { doc: AdminDocument; onRemove: () => void }) {
+export function DocumentItem({ doc, onRemove, children }: { doc: AdminDocument; onRemove: () => void; children?: ReactNode }) {
   const { t } = useTranslation();
   const isImage = IMAGE_EXT.test(doc.storage_path);
   const [thumb, setThumb] = useState<string | null>(null);
@@ -36,13 +36,16 @@ export function DocumentItem({ doc, onRemove }: { doc: AdminDocument; onRemove: 
   }
 
   return (
-    <li className="flex items-center gap-3 rounded-[var(--radius)] border border-border bg-card p-2">
+    <li className="flex flex-wrap items-center gap-3 rounded-[var(--radius)] border border-border bg-card p-2">
       <a href={thumb ?? undefined} target="_blank" rel="noopener noreferrer"
         className="admin-media-frame size-14 shrink-0 bg-muted" aria-label={doc.filename}>
         {thumb ? <img src={thumb} alt="" className="h-full w-full object-cover" />
           : <FileText aria-hidden strokeWidth={1.75} className="size-5 text-muted-foreground" />}
       </a>
-      <span className="min-w-0 flex-1 truncate text-sm">{doc.filename}</span>
+      <span className="min-w-0 flex-1 space-y-1">
+        <span className="block truncate text-sm">{doc.filename}</span>
+        {children}
+      </span>
       <Button type="button" variant="ghost" size="sm" onClick={() => void download()}
         aria-label={`${t("admin.settings.brand.download")}: ${doc.filename}`} title={t("admin.settings.brand.download")}>
         <Download aria-hidden strokeWidth={1.75} className="size-4" />
