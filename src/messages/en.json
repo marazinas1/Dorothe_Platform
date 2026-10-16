@@ -2292,5 +2292,18 @@
       "message": "Message",
       "footnote": "Reply directly to this email to answer the sender."
     }
+  },
+  "floorLevels": {
+    "basement": "Basement",
+    "ground": "Ground floor",
+    "first": "First floor",
+    "second": "Second floor",
+    "third": "Third floor",
+    "attic": "Attic",
+    "site": "Site plan",
+    "label": "Floor",
+    "none": "Not set",
+    "custom": "Other…",
+    "customPlaceholder": "e.g. Granny flat"
   }
 }

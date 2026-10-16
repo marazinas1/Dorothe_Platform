@@ -11,6 +11,7 @@ import { FLOORPLAN_TYPES, useListingFiles, type AdminDocType, type AdminDocument
 import { DocumentItem } from "./DocumentItem";
 import { FieldRow, FormSection } from "./FieldRow";
 import { PlanServiceHint } from "./PlanServiceHint";
+import { FloorLevelPicker } from "./FloorLevelPicker";
 
 type Props = { listingId: string | null; ensureListingId: (opts?: { open?: boolean }) => Promise<string> };
 
@@ -89,7 +90,14 @@ function DocField({ type, docs, files, target, onError }: {
     <FieldRow icon={multi ? LayoutPanelTop : FileText} label={t(`admin.listings.docs.${type}`)} help={t(`admin.listings.docs.${type}Help`)}>
       {docs.length ? (
         <ul className="mb-2 space-y-2">
-          {docs.map((d) => <DocumentItem key={d.id} doc={d} onRemove={() => setConfirm(d)} />)}
+          {docs.map((d) => (
+            <DocumentItem key={d.id} doc={d} onRemove={() => setConfirm(d)}>
+              {multi ? (
+                <FloorLevelPicker value={d.label} name={d.filename}
+                  onSave={(v) => void files.setLabel(d, v).then(() => toast.success(t("admin.listings.saved"))).catch(onError)} />
+              ) : null}
+            </DocumentItem>
+          ))}
         </ul>
       ) : null}
       <input ref={input} type="file" multiple={multi} accept={multi ? FLOORPLAN_TYPES.join(",") : "application/pdf"} hidden onChange={(e) => void pick(e.target.files)} />

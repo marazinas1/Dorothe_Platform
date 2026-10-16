@@ -6,6 +6,7 @@ import { pickImageUrl } from "@/lib/listings/image";
 import { pickLocalized } from "@/lib/listings/format";
 import { splitListingImages, type GalleryImage } from "@/lib/listings/gallery-images";
 import type { PublicFloorPlan } from "@/lib/listings/queries.functions";
+import { floorLevelText } from "@/lib/listings/floor-levels";
 import { ImageViewer, type ViewerItem } from "./ImageViewer";
 
 type Props = {
@@ -35,7 +36,7 @@ export function ListingFloorPlans({ images, plans = [], locale }: Props) {
   const tiles: Tile[] = [
     ...plans.map((p, i) => ({
       key: p.id,
-      label: `${t("listings.detail.floorplan")}${numbered ? ` ${i + 1}` : ""}`,
+      label: floorLevelText(p.label, t) ?? `${t("listings.detail.floorplan")}${numbered ? ` ${i + 1}` : ""}`,
       src: p.url,
       isPdf: p.isPdf,
     })),

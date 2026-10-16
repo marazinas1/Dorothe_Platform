@@ -2292,5 +2292,18 @@
       "message": "Nachricht",
       "footnote": "Antworten Sie direkt auf diese E-Mail, um dem Absender zu antworten."
     }
+  },
+  "floorLevels": {
+    "basement": "Kellergeschoss",
+    "ground": "Erdgeschoss",
+    "first": "1. Obergeschoss",
+    "second": "2. Obergeschoss",
+    "third": "3. Obergeschoss",
+    "attic": "Dachgeschoss",
+    "site": "Lageplan",
+    "label": "Geschoss",
+    "none": "Nicht angegeben",
+    "custom": "Andere…",
+    "customPlaceholder": "z. B. Einliegerwohnung"
   }
 }

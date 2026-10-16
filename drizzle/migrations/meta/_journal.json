@@ -71,6 +71,13 @@
       "when": 1792137940823,
       "tag": "0009_public_structured_commission",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792138129848,
+      "tag": "0010_floorplan_label",
+      "breakpoints": true
     }
   ]
 }

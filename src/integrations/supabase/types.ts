@@ -289,6 +289,7 @@ export type Database = {
           filename: string
           id: string
           is_public: boolean
+          label: string | null
           listing_id: string
           requires_lead: boolean
           storage_path: string
@@ -299,6 +300,7 @@ export type Database = {
           filename: string
           id?: string
           is_public?: boolean
+          label?: string | null
           listing_id: string
           requires_lead?: boolean
           storage_path: string
@@ -309,6 +311,7 @@ export type Database = {
           filename?: string
           id?: string
           is_public?: boolean
+          label?: string | null
           listing_id?: string
           requires_lead?: boolean
           storage_path?: string
@@ -1407,6 +1410,7 @@ export type Database = {
           filename: string | null
           id: string | null
           is_public: boolean | null
+          label: string | null
           listing_id: string | null
           requires_lead: boolean | null
           storage_path: string | null
