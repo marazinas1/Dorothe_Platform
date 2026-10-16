@@ -83,7 +83,7 @@ function SoldArchive() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1280px] px-5 py-16 md:px-10 lg:py-20">
+      <section className="mx-auto max-w-[1280px] px-5 section-y-tight md:px-10">
         {items.length === 0 ? (
           <div className="py-24 text-center text-sm text-muted-foreground">
             {t("listings.sold_empty")}

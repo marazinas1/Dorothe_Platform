@@ -11,7 +11,6 @@ import { ActionLink } from "@/components/brand/ui/ActionButton";
 import { buttonClass } from "@/components/brand/ui/Button";
 import { FeatureGrid } from "@/components/brand/FeatureGrid";
 import { FaqList } from "@/components/brand/FaqList";
-import { DarkActionBand } from "@/components/brand/DarkActionBand";
 import type { Locale } from "@/i18n/config";
 import { translate } from "@/i18n/config";
 import { siteSettingsQueryOptions } from "@/lib/config/site-settings.functions";
@@ -82,7 +81,7 @@ function SellingPage() {
 
       <section
         id="form"
-        className="mx-auto mt-40 max-w-[1280px] px-5 lg:mt-56 md:px-10"
+        className="mx-auto max-w-[1280px] scroll-mt-28 px-5 md:px-10"
       >
         <div className="grid grid-cols-1 gap-14 border-t border-border pt-16 md:grid-cols-12 lg:pt-24">
           <div className="md:col-span-4">
@@ -100,7 +99,7 @@ function SellingPage() {
         </div>
       </section>
 
-      <div className="pb-32">
+      <div className="section-pb">
         <TextSection
           title={copy.text("proof_title")}
           body={copy.text("proof_body")}
@@ -115,7 +114,7 @@ function SellingPage() {
           </Link>
         </TextSection>
       </div>
-      <DarkActionBand title={copy.text("cta_title")} body={copy.text("cta_body")} action={t("pages.selling.cta_button")} locale={locale as Locale} phone={settings.contact_phone} />
+      {/* No closing action band: the valuation form directly above is the page's one ask. */}
     </PublicChrome>
   );
 }

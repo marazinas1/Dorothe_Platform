@@ -59,7 +59,7 @@ function InheritancePage() {
         image={copy.media("hero_photo")}
       />
 
-      <section className="mx-auto max-w-[1280px] px-5 py-20 md:px-10 lg:py-28">
+      <section className="mx-auto max-w-[1280px] px-5 section-y md:px-10">
         <p className="max-w-3xl text-xl leading-9 text-foreground">{t("pages.inheritance.bridge")}</p>
         <div className="mt-16 grid gap-14 md:grid-cols-2 md:gap-20">
           <div><h2 className="text-section">{copy.text("appraisal_title")}</h2><p className="mt-6 text-base leading-8 text-muted-foreground">{copy.text("appraisal_body")}</p></div>

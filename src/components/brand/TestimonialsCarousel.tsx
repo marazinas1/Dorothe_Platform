@@ -13,7 +13,7 @@ export function TestimonialsCarousel({
 }) {
   if (items.length === 0) return null;
   return (
-    <section className="bg-secondary py-16 lg:py-24">
+    <section className="bg-secondary section-y-tight">
       <div className="mx-auto max-w-[1280px] px-5 md:px-10">
         {title ? <h2 className="text-section max-w-[40ch] text-balance">{title}</h2> : null}
         <ul className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
