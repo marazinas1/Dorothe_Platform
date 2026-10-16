@@ -1982,7 +1982,9 @@
       "matches_one": "{{count}} client",
       "matches_other": "{{count}} clients",
       "enquiries_one": "{{count}} enquiry",
-      "enquiries_other": "{{count}} enquiries"
+      "enquiries_other": "{{count}} enquiries",
+      "matches": "{{count}} clients",
+      "enquiries": "{{count}} enquiries"
     }
   },
   "pages": {
