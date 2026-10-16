@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Loader2, Trash2, Upload } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
+import { ConfirmRemoveButton } from "@/components/admin/ui/ConfirmRemoveButton";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -102,16 +103,12 @@ export function CoverUploader({ value, onChange, ensurePostId }: Props) {
               )}
               {t("admin.posts.coverReplace")}
             </Button>
-            <Button
-              type="button"
-              size="sm"
-              variant="ghost"
+            <ConfirmRemoveButton
+              name={t("admin.confirm.articleCover")}
+              label={t("admin.posts.coverRemove")}
               disabled={busy}
-              onClick={() => onChange(null)}
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-              {t("admin.posts.coverRemove")}
-            </Button>
+              onConfirm={() => onChange(null)}
+            />
             <AssetDownloadButton url={value} name="article-cover" />
           </div>
         </div>

@@ -1906,7 +1906,15 @@
     "confirm": {
       "cancel": "Abbrechen",
       "delete": "Löschen",
-      "untitled": "dieser Eintrag"
+      "untitled": "dieser Eintrag",
+      "removeTitle": "{{name}} entfernen?",
+      "removeBody": "{{name}} verschwindet nach der Bestätigung sofort überall, auch auf der öffentlichen Website. Laden Sie vorher eine Kopie herunter, falls Sie sie noch brauchen.",
+      "removeAction": "Entfernen",
+      "thisImage": "Dieses Bild",
+      "articleCover": "Das Titelbild",
+      "resetTitle": "Zum Standardbild zurückkehren?",
+      "resetBody": "Ihr eigenes Bild wird sofort durch das Standardbild ersetzt, auch auf der öffentlichen Website.",
+      "resetAction": "Standard verwenden"
     },
     "unsaved": {
       "title": "Nicht gespeicherte Änderungen",

@@ -25,7 +25,7 @@ const INTERACTIVE_CLASS =
 /** The one shared height, scaled by the single size chosen in Site settings. */
 const BASE_HEIGHT_REM = 4;
 const MIN_LOGO_SIZE = 50;
-const MAX_LOGO_SIZE = 150;
+const MAX_LOGO_SIZE = 200;
 
 const clampSize = (value: number | null | undefined) =>
   Math.min(MAX_LOGO_SIZE, Math.max(MIN_LOGO_SIZE, Math.round(value ?? 100)));
@@ -42,8 +42,9 @@ export function SiteLogo({
   className,
   interactive = false,
 }: Props) {
-  const configured =
-    tone === "light" ? (settings.logo_dark_url ?? settings.logo_url) : settings.logo_url;
+  // On dark chrome only the dark-background file is used: the regular logo is
+  // made for light grounds and turns faint on black, so the placeholder shows.
+  const configured = tone === "light" ? settings.logo_dark_url : settings.logo_url;
   const src = logoSrc(tone === "light" ? "mono" : "original", configured);
   const logoSize = clampSize(settings.logo_size);
   const height = `${(BASE_HEIGHT_REM * logoSize) / 100}rem`;

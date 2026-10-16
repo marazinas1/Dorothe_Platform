@@ -78,6 +78,13 @@
       "when": 1792138129848,
       "tag": "0010_floorplan_label",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1792139996408,
+      "tag": "0011_logo_size_range_50_200",
+      "breakpoints": true
     }
   ]
 }

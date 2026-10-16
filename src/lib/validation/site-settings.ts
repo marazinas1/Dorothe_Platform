@@ -74,7 +74,7 @@ export const BrandAssetsSchema = z.object({
   favicon_url: nullableUrl,
   business_card_url: nullableUrl,
   og_default_image: nullableUrl,
-  logo_size: z.coerce.number().int().min(50).max(150).default(100),
+  logo_size: z.coerce.number().int().min(50).max(200).default(100),
 });
 export type BrandAssetsInput = z.infer<typeof BrandAssetsSchema>;
 

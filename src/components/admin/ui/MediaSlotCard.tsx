@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 import { AssetDownloadButton } from "./AssetDownloadButton";
 import { ImageUploadField } from "./ImageUploadField";
+import { ConfirmDialog } from "./ConfirmDialog";
 
 type Props = {
   label: string;
@@ -33,6 +34,7 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
   const isDeveloper = user?.profile?.role === "developer";
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
   const m = (k: string) => t(`admin.media.${k}`);
   const slotName = uploadPath.split("/").slice(-2).join("-").replace(/\.\w+$/, "");
 
@@ -92,7 +94,7 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
                       <>
                         <ImageUploadField path={uploadPath} removable={false} replace={Boolean(media.chosen)} onUploaded={(url) => void run(() => onChoose(url), m("saved"))} />
                         {media.chosen ? (
-                          <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => void run(() => onChoose(null), m("reset"))}>
+                          <Button type="button" size="sm" variant="outline" disabled={busy} onClick={() => setConfirmReset(true)}>
                             <RotateCcw className="h-3.5 w-3.5" />
                             {m("resetToDefault")}
                           </Button>
@@ -123,6 +125,14 @@ export function MediaSlotCard({ label, help, aspect, media, uploadPath, studioPa
           </div>
         </div>
       ) : null}
+      <ConfirmDialog
+        open={confirmReset}
+        onOpenChange={setConfirmReset}
+        title={t("admin.confirm.resetTitle")}
+        description={t("admin.confirm.resetBody")}
+        confirmLabel={t("admin.confirm.resetAction")}
+        onConfirm={() => run(() => onChoose(null), m("reset"))}
+      />
     </div>
   );
 }

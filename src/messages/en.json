@@ -1906,7 +1906,15 @@
     "confirm": {
       "cancel": "Cancel",
       "delete": "Delete",
-      "untitled": "this entry"
+      "untitled": "this entry",
+      "removeTitle": "Remove {{name}}?",
+      "removeBody": "{{name}} disappears from every place it is shown, including the public site, as soon as you confirm. Download a copy first if you may need it again.",
+      "removeAction": "Remove",
+      "thisImage": "This image",
+      "articleCover": "The article cover",
+      "resetTitle": "Go back to the default photo?",
+      "resetBody": "Your own photo is replaced by the default straight away, including on the public site.",
+      "resetAction": "Use default"
     },
     "unsaved": {
       "title": "Unsaved changes",
