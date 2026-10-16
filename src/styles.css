@@ -748,3 +748,33 @@
   color: var(--foreground);
   border-color: var(--foreground);
 }
+
+/*
+ * Public section rhythm (broker book §4): 120 px desktop / 72 px mobile for an
+ * independent section, 88 / 56 px for tight sections and tinted bands. Pages
+ * use only these two so every page breathes the same way.
+ */
+@utility section-y {
+  padding-block: 72px;
+  @media (width >= 64rem) {
+    padding-block: 120px;
+  }
+}
+@utility section-y-tight {
+  padding-block: 56px;
+  @media (width >= 64rem) {
+    padding-block: 88px;
+  }
+}
+@utility section-pb {
+  padding-bottom: 72px;
+  @media (width >= 64rem) {
+    padding-bottom: 120px;
+  }
+}
+@utility section-pb-tight {
+  padding-bottom: 56px;
+  @media (width >= 64rem) {
+    padding-bottom: 88px;
+  }
+}

@@ -9,7 +9,7 @@ export function H1SaleProcess({ locale, steps }: { locale: Locale; steps: Step[]
   if (steps.length === 0) return null;
 
   return (
-    <section className="bg-card py-[72px] lg:py-[88px]">
+    <section className="bg-card section-y-tight">
       <div className="mx-auto max-w-[1280px] px-5 md:px-10">
         <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>

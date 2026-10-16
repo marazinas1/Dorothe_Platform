@@ -31,7 +31,7 @@ export function CtaBand({ locale, settings, headingKey, tone = "paper" }: Props)
           : "border-y border-border bg-secondary text-foreground"
       }
     >
-      <div className="mx-auto flex max-w-[1220px] flex-col gap-8 px-6 py-16 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-20">
+      <div className="mx-auto flex max-w-[1220px] flex-col gap-8 px-6 section-y-tight lg:flex-row lg:items-center lg:justify-between lg:px-8">
         <div className="max-w-[42ch]">
           <div
             className={

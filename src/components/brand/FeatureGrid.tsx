@@ -5,7 +5,7 @@ const icons = [Scale, Camera, FileText, Users];
 
 export function FeatureGrid({ title, intro, items }: { title: string; intro?: string; items: Item[] }) {
   return (
-    <section className="bg-card py-20 lg:py-28">
+    <section className="bg-card section-y">
       <div className="mx-auto max-w-[1280px] px-5 md:px-10">
         <h2 className="text-section">{title}</h2>{intro ? <p className="mt-4 text-muted-foreground">{intro}</p> : null}
         <div className="mt-12 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">

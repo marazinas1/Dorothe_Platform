@@ -62,7 +62,7 @@ function ContactPage() {
           <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">{copy.text("form_intro")}</p>
         </div>
       </section>
-      <section className="mx-auto grid max-w-[1280px] gap-14 px-5 py-16 md:px-10 lg:grid-cols-[0.85fr_1.2fr] lg:gap-20 lg:py-20">
+      <section className="mx-auto grid max-w-[1280px] gap-14 px-5 section-y-tight md:px-10 lg:grid-cols-[0.85fr_1.2fr] lg:gap-20">
         <ContactDetails settings={settings} hours={hasHours ? configured.weekly : []} />
         <ContactIntentForm initialIntent={search.intent ?? "selling"} listingId={search.listing} listingTitle={search.title} locale={currentLocale} />
       </section>

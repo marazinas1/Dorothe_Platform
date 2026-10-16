@@ -8,7 +8,7 @@ export function HomeBroker({ copy, media, settings }: HomeTemplateProps) {
   if (!intro && items.length === 0) return null;
 
   return (
-    <section className="mx-auto grid max-w-[1280px] items-start gap-10 px-5 py-[72px] md:px-10 lg:grid-cols-[5fr_6fr] lg:gap-16 lg:py-[104px]">
+    <section className="mx-auto grid max-w-[1280px] items-start gap-10 px-5 section-y md:px-10 lg:grid-cols-[5fr_6fr] lg:gap-16">
       {media.portrait ? (
         <div className="aspect-[4/5] overflow-hidden bg-card lg:aspect-[1/1]">
           <img src={media.portrait} alt={settings.primary_agent_name ?? settings.site_name} className="h-full w-full object-cover" />

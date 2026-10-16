@@ -35,7 +35,7 @@ export function HomeArticles({
   }>;
 
   return (
-    <section className="bg-card py-[72px] lg:py-[88px]">
+    <section className="bg-card section-y-tight">
       <div className="mx-auto max-w-[1280px] px-5 md:px-10">
       <div className="flex items-end justify-between gap-6">
         <h2 className="text-section max-w-[24ch] text-balance">{t("home.guides_title")}</h2>

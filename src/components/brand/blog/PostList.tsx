@@ -25,7 +25,7 @@ export function PostList({ posts, locale, title, intro, emptyLabel, metaFor }: P
           ) : null}
         </div>
       </div>
-      <section className="pt-[88px] pb-[168px]">
+      <section className="section-y">
         <div className="mx-auto max-w-[1280px] px-5 md:px-10">
           {!lead ? (
             <p className="text-[15.5px] text-muted-foreground">{emptyLabel}</p>

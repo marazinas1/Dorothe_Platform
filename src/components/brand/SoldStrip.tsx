@@ -28,7 +28,7 @@ export function SoldStrip({ locale, items, settings, hidePrice = false }: Props)
   const title = t("home.recent_sales");
 
   return (
-    <section className="mx-auto max-w-[1280px] px-5 py-[72px] md:px-10 lg:py-[120px]">
+    <section className="mx-auto max-w-[1280px] px-5 section-y md:px-10">
       <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-section max-w-[24ch] text-balance">{title}</h2>

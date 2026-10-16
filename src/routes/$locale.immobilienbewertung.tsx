@@ -45,7 +45,7 @@ function ValuationPage() {
         <h1 className="max-w-[18ch] font-heading text-5xl font-bold leading-[1.04] md:text-7xl">{copy.text("headline")}</h1>
         <p className="mt-7 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.text("intro")}</p>
       </section>
-      <section className="mx-auto grid max-w-[1280px] gap-14 px-5 py-16 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:py-20">
+      <section className="mx-auto grid max-w-[1280px] gap-14 px-5 section-y-tight md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>
           <h2 className="text-section-sm">{copy.text("deliverables_title")}</h2>
           <div className="mt-5 divide-y divide-border border-y border-border">

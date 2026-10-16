@@ -100,7 +100,7 @@ function SellingPage() {
         </div>
       </section>
 
-      <div className="pb-32">
+      <div className="section-pb">
         <TextSection
           title={copy.text("proof_title")}
           body={copy.text("proof_body")}
