@@ -2344,8 +2344,11 @@
       "subject": "Reply to your enquiry — {{site}}",
       "greeting": "Hello {{name}},",
       "greeting_plain": "Hello,",
-      "reply_hint": "You can answer this email directly.",
-      "original": "Your original message:"
+      "sign_off": "Kind regards,",
+      "phone": "Phone",
+      "email": "Email",
+      "quote_intro": "On {{date}}, {{name}} wrote:",
+      "quote_intro_plain": "On {{date}} you wrote:"
     }
   },
   "floorLevels": {
