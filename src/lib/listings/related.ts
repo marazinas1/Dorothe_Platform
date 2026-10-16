@@ -21,8 +21,12 @@ type Candidate = {
   status: string;
   deal_type: string;
   address_city: string | null;
+  address_country?: string | null;
   price: number | null;
+  images?: { is_floorplan?: boolean | null }[];
 };
+
+const norm = (v: string | null | undefined) => (v ?? "").trim().toLowerCase();
 
 /**
  * Ranks candidates against the listing being read: same town first, then
@@ -38,7 +42,11 @@ export function selectRelated<T extends Candidate>(current: Candidate, candidate
       c.id !== current.id &&
       allowed.has(c.status) &&
       // A buyer and a tenant are not looking for the same thing.
-      c.deal_type === current.deal_type,
+      c.deal_type === current.deal_type &&
+      // A property in another country is not an alternative to this one.
+      (!norm(current.address_country) || norm(c.address_country) === norm(current.address_country)) &&
+      // A card without a real photograph looks unfinished and erodes trust.
+      (c.images ?? []).some((img) => !img.is_floorplan),
   );
 
   const scored = pool.map((c) => {

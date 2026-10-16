@@ -160,9 +160,11 @@ export function ListingDetailBody({ listing, locale, settings, shareUrl, title }
         </section>
 
         {/* 10. Other properties that can actually be enquired about */}
-        <section className={GAP}>
-          <RelatedListings items={relatedItems} locale={locale} settings={settings} />
-        </section>
+        {relatedItems.length > 0 ? (
+          <section className={GAP}>
+            <RelatedListings items={relatedItems} locale={locale} settings={settings} />
+          </section>
+        ) : null}
 
         <section id={CONTACT_ID} className={`${GAP} scroll-mt-28`}>
           <ListingAgent listingId={l.id} listingTitle={title} settings={settings} />
