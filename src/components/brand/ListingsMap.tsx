@@ -8,6 +8,7 @@ import { formatArea, formatPrice } from "@/lib/listings/format";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import type { SiteSettings } from "@/types/site-settings";
 import { Button } from "@/components/brand/ui/Button";
+import { MapConsentGate } from "@/components/brand/MapConsentGate";
 
 const MapCanvas = lazy(() => import("@/components/brand/MapCanvas"));
 
@@ -51,15 +52,17 @@ export function ListingsMap({ items, locale, settings, alwaysOpen = false }: Pro
 
   const map = (
     <div className="overflow-hidden rounded-media border border-border">
-      <ClientOnly fallback={<Skeleton />}>
-        <Suspense fallback={<Skeleton />}>
-          <MapCanvas
-            points={points}
-            interactivePopups
-            className="aspect-[16/9] w-full md:aspect-[21/9]"
-          />
-        </Suspense>
-      </ClientOnly>
+      <MapConsentGate className="aspect-[16/9] w-full md:aspect-[21/9]">
+        <ClientOnly fallback={<Skeleton />}>
+          <Suspense fallback={<Skeleton />}>
+            <MapCanvas
+              points={points}
+              interactivePopups
+              className="aspect-[16/9] w-full md:aspect-[21/9]"
+            />
+          </Suspense>
+        </ClientOnly>
+      </MapConsentGate>
     </div>
   );
 

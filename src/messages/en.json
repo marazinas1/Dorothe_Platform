@@ -285,7 +285,7 @@
       "floorplan": "Floor plan",
       "visualization": "Visualisation (indicative only)",
       "map_load": "Load map",
-      "map_consent_note": "The map is loaded from OpenStreetMap. Your IP address is sent to the map service when you do.",
+      "map_consent_note": "The map is loaded from OpenStreetMap. Your IP address is sent to the map service when you do. Other maps then load directly until you close this tab.",
       "heating_costs": "Heating costs",
       "heating_costs_included": "Included in the additional costs",
       "heating_costs_excluded": "Not included in the additional costs",

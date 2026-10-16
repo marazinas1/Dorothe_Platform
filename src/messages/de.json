@@ -285,7 +285,7 @@
       "floorplan": "Grundriss",
       "visualization": "Visualisierung (unverbindliche Darstellung)",
       "map_load": "Karte laden",
-      "map_consent_note": "Die Karte wird von OpenStreetMap geladen. Dabei wird Ihre IP-Adresse an den Kartendienst übertragen.",
+      "map_consent_note": "Die Karte wird von OpenStreetMap geladen. Dabei wird Ihre IP-Adresse an den Kartendienst übertragen. Weitere Karten laden danach direkt, bis Sie diesen Tab schließen.",
       "heating_costs": "Heizkosten",
       "heating_costs_included": "In den Nebenkosten enthalten",
       "heating_costs_excluded": "Nicht in den Nebenkosten enthalten",

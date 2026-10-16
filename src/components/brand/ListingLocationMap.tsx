@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense } from "react";
 import { ClientOnly } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
@@ -6,7 +6,7 @@ import type { Locale } from "@/i18n/config";
 import { listingsToPoints } from "@/lib/maps/carto";
 import type { PublicListing } from "@/lib/listings/queries.functions";
 import { pickLocalized } from "@/lib/listings/format";
-import { Button } from "@/components/brand/ui/Button";
+import { MapConsentGate } from "@/components/brand/MapConsentGate";
 
 const MapCanvas = lazy(() => import("@/components/brand/MapCanvas"));
 
@@ -23,23 +23,12 @@ function Skeleton() {
 }
 
 /**
- * Location block. The map tiles come from a third party, so nothing is
- * requested until the visitor asks for it: the placeholder occupies exactly the
- * map's height and states where the tiles come from before it loads them.
+ * Location block. The map loads only through MapConsentGate, because the
+ * tiles come from a third party that receives the visitor's IP address.
  * geo_precision still decides whether there is a map at all.
  */
 export function ListingLocationMap({ listing, locale }: Props) {
   const { t } = useTranslation();
-  const [loaded, setLoaded] = useState(false);
-  const boxRef = useRef<HTMLDivElement>(null);
-  // Load the map once its block nears the viewport; the button stays as a fallback.
-  useEffect(() => {
-    const el = boxRef.current;
-    if (!el || loaded || typeof IntersectionObserver === "undefined") return;
-    const io = new IntersectionObserver((e) => { if (e.some((x) => x.isIntersecting)) setLoaded(true); }, { rootMargin: "200px" });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [loaded]);
   const points = listingsToPoints([listing], locale);
   const townLine = [listing.address_zip, listing.address_city].filter(Boolean).join(" ");
   // content_sections is an array of { key, items: { [locale]: string[] } }.
@@ -78,8 +67,8 @@ export function ListingLocationMap({ listing, locale }: Props) {
       ) : null}
 
       {points.length > 0 ? (
-        <div ref={boxRef} className="mt-8 overflow-hidden rounded-media border border-border">
-          {loaded ? (
+        <div className="mt-8 overflow-hidden rounded-media border border-border">
+          <MapConsentGate className={CANVAS}>
             <ClientOnly fallback={<Skeleton />}>
               <Suspense fallback={<Skeleton />}>
                 <MapCanvas
@@ -89,16 +78,7 @@ export function ListingLocationMap({ listing, locale }: Props) {
                 />
               </Suspense>
             </ClientOnly>
-          ) : (
-            <div className={`${CANVAS} flex flex-col items-center justify-center gap-4 bg-muted px-6 text-center`}>
-              <Button type="button" variant="secondary" onClick={() => setLoaded(true)}>
-                {t("listings.detail.map_load")}
-              </Button>
-              <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
-                {t("listings.detail.map_consent_note")}
-              </p>
-            </div>
-          )}
+          </MapConsentGate>
         </div>
       ) : townLine ? (
         <div className="mt-6 text-base">{townLine}</div>
