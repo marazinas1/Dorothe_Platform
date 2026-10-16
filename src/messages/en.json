@@ -4,7 +4,7 @@
   },
   "home": {
     "title": "Real estate {{region_in}}",
-    "description": "Carefully selected houses and apartments {{region_in}}.",
+    "description": "Selling and buying property {{region_in}}: personal guidance, a free valuation and carefully selected houses and apartments.",
     "hero_line": "Your home in good hands",
     "featured": "Available properties",
     "recent_sales": "Recently sold",
@@ -146,7 +146,7 @@
   },
   "listings": {
     "title": "Properties",
-    "description": "Current offerings {{region_in}}.",
+    "description": "Current houses and apartments for sale and rent {{region_in}} – with photos, floor plans, energy data and a direct enquiry.",
     "catalogue_title": "Properties in {{region}}",
     "catalogue_intro": "Each one visited, valued and photographed by me.",
     "results_context": "for sale, {{sort}} first",

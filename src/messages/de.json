@@ -4,7 +4,7 @@
   },
   "home": {
     "title": "Immobilien {{region_in}}",
-    "description": "Sorgfältig ausgewählte Häuser und Wohnungen {{region_in}}.",
+    "description": "Immobilien verkaufen und kaufen {{region_in}}: persönliche Begleitung, kostenlose Wertermittlung und sorgfältig ausgewählte Häuser und Wohnungen.",
     "hero_line": "Ihr Zuhause in guten Händen",
     "featured": "Aktuelle Objekte",
     "recent_sales": "Kürzlich vermittelt",
@@ -146,7 +146,7 @@
   },
   "listings": {
     "title": "Immobilien",
-    "description": "Aktuelle Angebote {{region_in}}.",
+    "description": "Aktuelle Häuser und Wohnungen zum Kauf und zur Miete {{region_in}} – mit Fotos, Grundrissen, Energiedaten und direkter Anfrage.",
     "catalogue_title": "Immobilien im {{region}}",
     "catalogue_intro": "Jedes Objekt von mir besichtigt, bewertet und fotografiert.",
     "results_context": "zum Kauf, {{sort}} zuerst",
