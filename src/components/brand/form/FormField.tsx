@@ -32,7 +32,7 @@ export function useFieldError() {
         e.preventDefault();
         setError(read(e.currentTarget));
       },
-      onInput: (e: React.FormEvent<Control>) => {
+      onChange: (e: React.FormEvent<Control>) => {
         if (error && e.currentTarget.validity.valid) setError(null);
       },
     },

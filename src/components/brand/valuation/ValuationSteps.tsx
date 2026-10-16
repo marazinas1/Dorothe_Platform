@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 
-import { FormField as Field, FormTextarea, fieldInputCls as inputCls, fieldLabelCls } from "@/components/brand/form/FormField";
+import { FieldShell, useFieldError, FormField as Field, FormTextarea, fieldInputCls as inputCls, fieldLabelCls } from "@/components/brand/form/FormField";
 
 export { inputCls };
 const labelCls = fieldLabelCls;
@@ -11,17 +11,7 @@ export function PropertyStep({ address, type }: { address?: string; type?: strin
   const { t } = useTranslation();
   return (
     <div className="flex max-w-xl flex-col gap-5">
-      <div>
-        <label className={labelCls} htmlFor="val-type">{t("inquiry.seller.property_type")}</label>
-        <select id="val-type" name="property_type" required className={inputCls} defaultValue={type ?? ""}>
-          <option value="" disabled>{t("pages.valuation.wizard.choose")}</option>
-          <option value="house">{t("listings.filters.house")}</option>
-          <option value="apartment">{t("listings.filters.apartment")}</option>
-          <option value="multi_family">{t("home.hero_form_multi_family")}</option>
-          <option value="land">{t("listings.filters.land")}</option>
-          <option value="commercial">{t("listings.filters.commercial")}</option>
-        </select>
-      </div>
+      <TypeSelect type={type} />
       <div>
         <Field id="val-street" name="address_street" defaultValue={address} autoComplete="street-address" maxLength={160} label={t("inquiry.seller.address_street")} />
       </div>
@@ -66,5 +56,23 @@ export function ContactStep() {
         <FormTextarea id="val-message" name="message" optional rows={3} maxLength={2000} label={t("inquiry.message")} />
       </div>
     </div>
+  );
+}
+
+function TypeSelect({ type }: { type?: string }) {
+  const { t } = useTranslation();
+  const { error, handlers } = useFieldError();
+  return (
+    <FieldShell id="val-type" label={t("inquiry.seller.property_type")} error={error}>
+      <select id="val-type" name="property_type" required aria-invalid={error ? true : undefined} aria-describedby={error ? "val-type-error" : undefined}
+        className={inputCls} defaultValue={type ?? ""} {...handlers}>
+        <option value="" disabled>{t("pages.valuation.wizard.choose")}</option>
+        <option value="house">{t("listings.filters.house")}</option>
+        <option value="apartment">{t("listings.filters.apartment")}</option>
+        <option value="multi_family">{t("home.hero_form_multi_family")}</option>
+        <option value="land">{t("listings.filters.land")}</option>
+        <option value="commercial">{t("listings.filters.commercial")}</option>
+      </select>
+    </FieldShell>
   );
 }
